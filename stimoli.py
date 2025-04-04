@@ -20,6 +20,7 @@ index = simpledialog.askstring("Input", "Input trial number", parent=application
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 
+
 #Window creation
 winsize = (sizeWidth, sizeHeight) = (1280, 720)
 win_pos_left = 0

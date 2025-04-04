@@ -13,11 +13,12 @@ import random
 # Dialogue window for the tester number
 application_window = tkinter.Tk()
 testernumber = simpledialog.askstring("Input", "Input tester number", parent=application_window)
-#Insert the trial number
+#Insert the trial number of an user
 index = simpledialog.askstring("Input", "Input trial number", parent=application_window)
 
 # Color definitions
 BLACK = (0, 0, 0)
+RED = (255, 0, 0)
 
 #Window creation
 winsize = (sizeWidth, sizeHeight) = (1280, 720)

@@ -18,6 +18,7 @@ index = simpledialog.askstring("Input", "Input trial number", parent=application
 
 # Color definitions
 BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
 
 #Window creation
 winsize = (sizeWidth, sizeHeight) = (1280, 720)
@@ -29,6 +30,7 @@ os.environ['SDL_VIDEO_WINDOW_POS'] = '{0},{1}'.format(win_pos_left, win_pos_top)
 #initialize display for a window
 screen = pygame.display.set_mode(winsize, pygame.FULLSCREEN)
 pygame.display.set_caption("Test")
+
     
 # Used to manage how fast the screen updates. Create an object to manage the time
 clock = pygame.time.Clock()
@@ -58,14 +60,25 @@ s.send(str.encode('<SET ID="ENABLE_SEND_EYE_RIGHT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))
 '''
 
-def verticalMove(speed):
+#Make vertical an horizontal text 
+def prepareVerText(text, font, x, y):
+  for i in text:
+    img = font.render(i, True, WHITE)
+    y = y + 45
+    screen.blit(img, (x, y))
+    pygame.display.flip()
+
+
+
+def verticalMove():
  
   #Starting image position
   x = (sizeWidth / 2) - (300/2)
   y = 0
+  speed = 0.2
 
   #Load and rescale the text image
-  picture = pygame.image.load('Images/text2.png').convert()
+  picture = pygame.image.load('Programs/Images/text2.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
 
   ''' # File to write on
@@ -73,7 +86,7 @@ def verticalMove(speed):
   file1 = open("C:\\Users\\david\\OneDrive\\Desktop\\risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
  
   # Setting the time
-  test_time = 6
+  test_time = 8
   t_end = time.time() + test_time
   wall = False
 
@@ -118,14 +131,16 @@ def verticalMove(speed):
   file1.close()'''
 
 
-def horizontalMove(speed):
+
+def horizontalMove():
  
   #Starting image position
   x = 0
   y = (sizeHeight / 2) - (150/2)
+  speed = 0.2
 
   #Load and rescale the text image
-  picture = pygame.image.load('Images/text1.png').convert()
+  picture = pygame.image.load('Programs/Images/text1.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
 
   '''# File to write on
@@ -133,7 +148,7 @@ def horizontalMove(speed):
   file1 = open("C:\\Users\\david\\OneDrive\\Desktop\\risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
 
   # Setting the time
-  test_time = 6
+  test_time = 8
   t_end = time.time() + test_time
 
   wall = False
@@ -181,16 +196,17 @@ def horizontalMove(speed):
 
 
 
-def concMove(speed):
+def concMove():
  
   diag = math.sqrt((sizeWidth*sizeWidth)+(sizeHeight*sizeHeight))
 
   #Starting image position
   x = 0
   y = 0
+  speed = 0.2
 
   #Load and rescale the text image
-  picture = pygame.image.load('Images/text3.png').convert()
+  picture = pygame.image.load('Programs/Images/text3.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
 
   '''# File to write on
@@ -273,20 +289,124 @@ def concMove(speed):
   file1.close()'''
 
 
+
+#Text scroll from right to left
+def horizontalScroll():
+
+  #Create a font
+  font = pygame.font.SysFont("Arial", 45)
+  #Text to show
+  text = "Verona è un comune italiano di circa 258 000 abitanti, capoluogo dell'omonima provincia in Veneto. Si trova al margine settentrionale della Pianura Padana, lungo il fiume Adige e ai piedi dei monti Lessini."
+  #Get text width and height
+  text_width, text_height = font.size(text)
+
+  #Starting image position and speed
+  x = sizeWidth
+  y = (sizeHeight / 2) - (text_height / 2)
+  speed = 1.4
+
+  '''# File to write on
+  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
+  file1 = open("C:\\Users\\david\\OneDrive\\Desktop\\risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
+
+  while (x > -text_width):
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        sys.exit()
+      if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+        sys.exit()
+
+    '''# Sending data to the server and writing it on the respective file
+    casual_data = s.recv(1024)
+    file1.write(bytes.decode(casual_data))
+    '''
+
+    x = x - (1*speed)
+    screen.fill(BLACK)
+    img = font.render(text, True, WHITE)
+    screen.blit(img, (x, y))
+  
+    pygame.display.flip()
+    clock.tick(150)
+
+  '''# Sending data to the server and writing it on the respective file
+  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
+  time.sleep(0.3)
+  casual_data = s.recv(1024)
+  time.sleep(0.3)
+  file1.write(bytes.decode(casual_data))
+  file1.close()'''
+
+
+
+#Text scroll from bottom to top
+def verticalScroll():
+
+  #Create a font
+  font = pygame.font.SysFont("Arial", 45)
+  #Text to show
+  text = "La Collina delle Croci (in lituano Kryžių Kalnas) è un luogo di pellegrinaggio e meta turistica che si trova nei pressi della città lituana di Šiauliai, lungo la strada E77 che collega Kaliningrad a Riga, in Lettonia."
+  #Get text width and height
+  text_width, text_height = font.size(text)
+
+  #Starting image position
+  x = (sizeWidth / 2) - (text_height / 2)
+  y = sizeHeight
+  speed = 5.5
+
+  '''# File to write on
+  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
+  file1 = open("C:\\Users\\david\\OneDrive\\Desktop\\risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
+
+  while (y > - (text_width + 45*(len(text)-1))):
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        sys.exit()
+      if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+        sys.exit()
+
+    '''# Sending data to the server and writing it on the respective file
+    casual_data = s.recv(1024)
+    file1.write(bytes.decode(casual_data))
+    '''
+    
+    y = y - (1*speed)
+
+    prepareVerText(text, font, x, y)
+    time.sleep(0.02)
+    screen.fill(BLACK)
+    
+
+    '''y = y - (1*speed)
+    screen.fill(BLACK)
+    img = font.render(text, True, WHITE)
+    img = pygame.transform.rotozoom(img, -90, 1)
+    screen.blit(img, (x, y))'''
+
+    pygame.display.flip()
+    clock.tick(150)
+
+  '''# Sending data to the server and writing it on the respective file
+  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
+  time.sleep(0.3)
+  casual_data = s.recv(1024)
+  time.sleep(0.3)
+  file1.write(bytes.decode(casual_data))
+  file1.close()'''
+
+
 def main():
     
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  speed = 0.3
-
   #shuffle the order of the animations
-  tests_list = [horizontalMove, verticalMove, concMove]
+  tests_list = [horizontalMove, verticalMove, concMove, horizontalScroll, verticalScroll]
   random.shuffle(tests_list)
 
   #run the animation after the shuffle
   for funct in tests_list:
-    funct(speed)
+    funct()
 
   pygame.quit()
   '''s.close()'''

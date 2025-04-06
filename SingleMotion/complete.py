@@ -296,7 +296,7 @@ def horizontalScroll():
   #Create a font
   font = pygame.font.SysFont("Arial", 45)
   #Text to show
-  text = "Verona è un comune italiano di circa 258 000 abitanti, capoluogo dell'omonima provincia in Veneto. Si trova al margine settentrionale della Pianura Padana, lungo il fiume Adige e ai piedi dei monti Lessini."
+  text = "Manchester is a city and metropolitan borough of Greater Manchester, England, which had an estimated population of 568,996 in 2022. Greater Manchester is the third-most populous metropolitan area in the United Kingdom, with a population of 2.92 million, and the largest in Northern England. "
   #Get text width and height
   text_width, text_height = font.size(text)
 
@@ -345,7 +345,7 @@ def verticalScroll():
   #Create a font
   font = pygame.font.SysFont("Arial", 45)
   #Text to show
-  text = "La Collina delle Croci (in lituano Kryžių Kalnas) è un luogo di pellegrinaggio e meta turistica che si trova nei pressi della città lituana di Šiauliai, lungo la strada E77 che collega Kaliningrad a Riga, in Lettonia."
+  text = "The Moon is Earth's only natural satellite. It orbits at an average distance of 384399 km (238,854 mi; about 30 times Earth's diameter). The Moon's orbital period (lunar month) and rotation period (lunar day) are synchronized by Earth's gravitational pull at 29.5 Earth days, making the same side of the Moon always face Earth."
   #Get text width and height
   text_width, text_height = font.size(text)
 

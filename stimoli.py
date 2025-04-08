@@ -78,13 +78,12 @@ def verticalMove():
   speed = 0.2
 
   #Load and rescale the text image
-  picture = pygame.image.load('Programs/Images/text2.png').convert()
+  picture = pygame.image.load('movingText/Images/text2.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\david\\OneDrive\\Desktop\\risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")
- 
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")
   # Setting the time
   test_time = 8
   t_end = time.time() + test_time
@@ -140,12 +139,12 @@ def horizontalMove():
   speed = 0.2
 
   #Load and rescale the text image
-  picture = pygame.image.load('Programs/Images/text1.png').convert()
+  picture = pygame.image.load('movingText/Images/text1.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\david\\OneDrive\\Desktop\\risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")
 
   # Setting the time
   test_time = 8
@@ -206,12 +205,12 @@ def concMove():
   speed = 0.2
 
   #Load and rescale the text image
-  picture = pygame.image.load('Programs/Images/text3.png').convert()
+  picture = pygame.image.load('movingText/Images/text3.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\david\\OneDrive\\Desktop\\risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")
 
   # Setting the time
   test_time = 4
@@ -307,7 +306,7 @@ def horizontalScroll():
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\david\\OneDrive\\Desktop\\risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")
 
   while (x > -text_width):
     for event in pygame.event.get():
@@ -344,20 +343,21 @@ def verticalScroll():
   #Create a font
   font = pygame.font.SysFont("Arial", 45)
   #Text to show
-  text = "The Moon is Earth's only natural satellite. It orbits at an average distance of 384399 km (238,854 mi; about 30 times Earth's diameter). The Moon's orbital period (lunar month) and rotation period (lunar day) are synchronized by Earth's gravitational pull at 29.5 Earth days, making the same side of the Moon always face Earth."
+  text = "The Moon is Earth's only natural satellite. It orbits at an average distance of 384399 km (238,854 mi; about 30 times Earth's diameter). The Moon's orbital period "
   #Get text width and height
   text_width, text_height = font.size(text)
 
   #Starting image position
   x = (sizeWidth / 2) - (text_height / 2)
   y = sizeHeight
-  speed = 5.5
+  speed = 25
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\david\\OneDrive\\Desktop\\risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")
 
   while (y > - (text_width + 45*(len(text)-1))):
+  #while (y > - text_width):
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         sys.exit()
@@ -371,16 +371,15 @@ def verticalScroll():
     y = y - (1*speed)
 
     prepareVerText(text, font, x, y)
-    time.sleep(0.02)
+    time.sleep(0.1)
     screen.fill(BLACK)
-    
 
-    y = y - (1*speed)
+    '''y = y - (1*speed)
     screen.fill(BLACK)
     img = font.render(text, True, WHITE)
     img = pygame.transform.rotozoom(img, -90, 1)
-    screen.blit(img, (x, y))
-
+    screen.blit(img, (x, y))'''
+    time.sleep(0.1)
     pygame.display.flip()
     clock.tick(150)
 
@@ -398,13 +397,16 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  #shuffle the order of the animations
+  '''#shuffle the order of the animations
   tests_list = [horizontalMove, verticalMove, concMove, horizontalScroll, verticalScroll]
   random.shuffle(tests_list)
 
   #run the animation after the shuffle
   for funct in tests_list:
     funct()
+  '''
+
+  verticalScroll()
 
   pygame.quit()
   s.close()

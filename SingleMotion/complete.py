@@ -78,7 +78,7 @@ def verticalMove():
   speed = 0.2
 
   #Load and rescale the text image
-  picture = pygame.image.load('Programs/Images/text2.png').convert()
+  picture = pygame.image.load('movingText/Images/text2.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
 
   ''' # File to write on
@@ -140,7 +140,7 @@ def horizontalMove():
   speed = 0.2
 
   #Load and rescale the text image
-  picture = pygame.image.load('Programs/Images/text1.png').convert()
+  picture = pygame.image.load('movingText/Images/text1.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
 
   '''# File to write on
@@ -206,7 +206,7 @@ def concMove():
   speed = 0.2
 
   #Load and rescale the text image
-  picture = pygame.image.load('Programs/Images/text3.png').convert()
+  picture = pygame.image.load('movingText/Images/text3.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
 
   '''# File to write on
@@ -296,7 +296,7 @@ def horizontalScroll():
   #Create a font
   font = pygame.font.SysFont("Arial", 45)
   #Text to show
-  text = "Manchester is a city and metropolitan borough of Greater Manchester, England, which had an estimated population of 568,996 in 2022. Greater Manchester is the third-most populous metropolitan area in the United Kingdom, with a population of 2.92 million, and the largest in Northern England. "
+  text = "Manchester is a city and metropolitan borough of Greater Manchester, England, which had an estimated population of 568,996 in 2022."
   #Get text width and height
   text_width, text_height = font.size(text)
 
@@ -345,14 +345,14 @@ def verticalScroll():
   #Create a font
   font = pygame.font.SysFont("Arial", 45)
   #Text to show
-  text = "The Moon is Earth's only natural satellite. It orbits at an average distance of 384399 km (238,854 mi; about 30 times Earth's diameter). The Moon's orbital period (lunar month) and rotation period (lunar day) are synchronized by Earth's gravitational pull at 29.5 Earth days, making the same side of the Moon always face Earth."
+  text = "The Moon is Earth's only natural satellite. It orbits at an average distance of 384399 km "
   #Get text width and height
   text_width, text_height = font.size(text)
 
   #Starting image position
   x = (sizeWidth / 2) - (text_height / 2)
   y = sizeHeight
-  speed = 5.5
+  speed = 5
 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
@@ -373,15 +373,7 @@ def verticalScroll():
     y = y - (1*speed)
 
     prepareVerText(text, font, x, y)
-    time.sleep(0.02)
     screen.fill(BLACK)
-    
-
-    '''y = y - (1*speed)
-    screen.fill(BLACK)
-    img = font.render(text, True, WHITE)
-    img = pygame.transform.rotozoom(img, -90, 1)
-    screen.blit(img, (x, y))'''
 
     pygame.display.flip()
     clock.tick(150)
@@ -401,12 +393,13 @@ def main():
   pygame.mouse.set_visible(False)
 
   #shuffle the order of the animations
-  tests_list = [horizontalMove, verticalMove, concMove, horizontalScroll, verticalScroll]
+  tests_list = [horizontalMove, verticalMove, concMove]
   random.shuffle(tests_list)
 
   #run the animation after the shuffle
   for funct in tests_list:
     funct()
+
 
   pygame.quit()
   '''s.close()'''

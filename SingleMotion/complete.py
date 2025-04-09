@@ -380,6 +380,9 @@ def verticalScroll():
   file1.close()'''
   time.sleep(0.3)
 
+#Block of text that moves vertically
+def verticalBlock():
+  print("ciao")
 
 def main():
     

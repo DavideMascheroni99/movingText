@@ -87,7 +87,7 @@ def verticalMove():
   file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
 
   # Setting the time
-  test_time = 10
+  test_time = 15
   t_end = time.time() + test_time
   wall = False
 
@@ -151,7 +151,7 @@ def horizontalMove():
   file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
 
   # Setting the time
-  test_time = 10
+  test_time = 15
   t_end = time.time() + test_time
 
   wall = False
@@ -219,7 +219,7 @@ def diagMove():
   file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
 
   # Setting the time
-  test_time = 10
+  test_time = 15
   t_end = time.time() + test_time
 
   wall = False
@@ -280,7 +280,7 @@ def horizontalScroll():
   #Get text width and height
   text_width, text_height = font.size(text)
   # Setting the time
-  test_time = 10
+  test_time = 15
   t_end = time.time() + test_time
 
   #Starting image position and speed
@@ -332,13 +332,13 @@ def verticalScroll():
   text_width, text_height = font.size(text)
 
   # Setting the time
-  test_time = 10
+  test_time = 15
   t_end = time.time() + test_time
 
   #Starting image position
   x = (sizeWidth / 2) - (text_height / 2)
   y = sizeHeight
-  speed = 25
+  speed = 40
 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))

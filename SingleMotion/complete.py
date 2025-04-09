@@ -129,6 +129,7 @@ def verticalMove():
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
+  file1.write("\n\n VerticalMove end \n\n")
   file1.close()'''
   time.sleep(0.3)
 
@@ -194,6 +195,7 @@ def horizontalMove():
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
+  file1.write("\n\n HorizontalMove end\n\n")
   file1.close()'''
   time.sleep(0.3)
  
@@ -265,6 +267,7 @@ def diagMove():
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
+  file1.write("\n\n DiagonalMove end \n\n")
   file1.close()'''
   time.sleep(0.3)
 
@@ -317,7 +320,9 @@ def horizontalScroll():
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
+  file1.write("\n\n Horizontalscroll end \n\n")
   file1.close()'''
+  time.sleep(0.3)
 
 
 
@@ -371,7 +376,9 @@ def verticalScroll():
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
+  file1.write("\n\n Verticalscroll end \n\n")
   file1.close()'''
+  time.sleep(0.3)
 
 
 def main():

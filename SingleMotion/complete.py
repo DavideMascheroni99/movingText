@@ -10,9 +10,9 @@ import random
 
 '''GLOBAL VARIABLES AND CONSTANTS'''
 
-'''# Dialogue window for the tester number
+# Dialogue window for the tester number
 application_window = tkinter.Tk()
-testernumber = simpledialog.askstring("Input", "Input tester number", parent=application_window)
+'''testernumber = simpledialog.askstring("Input", "Input tester number", parent=application_window)
 #Insert the trial number
 index = simpledialog.askstring("Input", "Input trial number", parent=application_window)'''
 
@@ -57,8 +57,8 @@ s.send(str.encode('<SET ID="ENABLE_SEND_PUPIL_LEFT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_PUPIL_RIGHT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_LEFT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_RIGHT" STATE="1" />\r\n'))
-s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))
-'''
+s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))'''
+
 
 #Make vertical an horizontal text 
 def prepareVerText(text, font, x, y):
@@ -69,7 +69,7 @@ def prepareVerText(text, font, x, y):
     pygame.display.flip()
 
 
-
+#Box text horizontal move
 def verticalMove():
  
   #Starting image position
@@ -78,15 +78,16 @@ def verticalMove():
   speed = 0.2
 
   #Load and rescale the text image
-  picture = pygame.image.load('movingText/Images/text2.png').convert()
+  #picture = pygame.image.load('movingText/Images/text2.png').convert()
+  picture = pygame.image.load('Programs/Images/text2.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
 
-  ''' # File to write on
+  '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\david\\OneDrive\\Desktop\\risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
- 
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
+
   # Setting the time
-  test_time = 8
+  test_time = 10
   t_end = time.time() + test_time
   wall = False
 
@@ -101,8 +102,8 @@ def verticalMove():
     casual_data = s.recv(1024)
     file1.write(bytes.decode(casual_data))'''
     
-    while not wall:
-      if (y >= 0 and y < sizeHeight-150):
+    while not wall and time.time() <= t_end:
+      if(y >= 0 and y < sizeHeight-150):
         y = y + (1 * speed)
         screen.fill(BLACK)
         screen.blit(picture, (x,y))
@@ -110,7 +111,7 @@ def verticalMove():
       else:
         wall = True
 
-    while wall:
+    while wall and time.time() <= t_end:
       if(y > 1*speed):
         y = y - (1 * speed)
         screen.fill(BLACK)
@@ -129,9 +130,10 @@ def verticalMove():
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.close()'''
+  time.sleep(0.3)
 
 
-
+#Box text vertical move
 def horizontalMove():
  
   #Starting image position
@@ -140,15 +142,16 @@ def horizontalMove():
   speed = 0.2
 
   #Load and rescale the text image
-  picture = pygame.image.load('movingText/Images/text1.png').convert()
+  #picture = pygame.image.load('movingText/Images/text1.png').convert()
+  picture = pygame.image.load('Programs/Images/text1.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\david\\OneDrive\\Desktop\\risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
 
   # Setting the time
-  test_time = 8
+  test_time = 10
   t_end = time.time() + test_time
 
   wall = False
@@ -164,7 +167,7 @@ def horizontalMove():
     casual_data = s.recv(1024)
     file1.write(bytes.decode(casual_data))'''
 
-    while not wall:
+    while not wall and time.time() <= t_end:
       if (x >= 0 and x < sizeWidth-300):
         x = x + (1 * speed)
         screen.fill(BLACK)
@@ -173,7 +176,7 @@ def horizontalMove():
       else:
         wall = True
 
-    while wall:
+    while wall and time.time() <= t_end:
       if(x > 1*speed):
         x = x - (1 * speed)
         screen.fill(BLACK)
@@ -192,11 +195,12 @@ def horizontalMove():
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.close()'''
+  time.sleep(0.3)
  
 
 
-
-def concMove():
+#Box text that moves in diagonal
+def diagMove():
  
   diag = math.sqrt((sizeWidth*sizeWidth)+(sizeHeight*sizeHeight))
 
@@ -206,15 +210,16 @@ def concMove():
   speed = 0.2
 
   #Load and rescale the text image
-  picture = pygame.image.load('movingText/Images/text3.png').convert()
+  #picture = pygame.image.load('movingText/Images/text3.png').convert()
+  picture = pygame.image.load('Programs/Images/text3.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\david\\OneDrive\\Desktop\\risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
 
   # Setting the time
-  test_time = 4
+  test_time = 10
   t_end = time.time() + test_time
 
   wall = False
@@ -230,25 +235,17 @@ def concMove():
     casual_data = s.recv(1024)
     file1.write(bytes.decode(casual_data))'''
 
-    while not wall:
-      if (x >= 0 and x < sizeWidth-300):
-        x = x + (1 * speed)
+    while not wall and time.time() <= t_end:
+      if (x < sizeWidth - 300):
+        x = x + (1*(sizeWidth/diag) * speed)
+        y = y + (1 *(sizeHeight/diag) * speed)
         screen.fill(BLACK)
         screen.blit(picture, (x,y))
         pygame.display.flip()
       else:
-        wall = True 
+        wall = True
 
-    while wall:
-      if(y < sizeHeight-150):
-        y = y + (1 * speed)
-        screen.fill(BLACK)
-        screen.blit(picture, (x,y))
-        pygame.display.flip()
-      else:
-        wall = False 
-
-    while not wall:
+    while wall and time.time() <= t_end:
       if (x > 1):
         x = x - (1*(sizeWidth/diag) * speed)
         y = y - (1 *(sizeHeight/diag) * speed)
@@ -256,27 +253,9 @@ def concMove():
         screen.blit(picture, (x,y))
         pygame.display.flip()
       else:
-        wall = True
-
-    while wall:
-      if(y < sizeHeight-150):
-        y = y + (1 * speed)
-        screen.fill(BLACK)
-        screen.blit(picture, (x,y))
-        pygame.display.flip()
-      else:
         wall = False
 
-    while not wall:
-      if (x < sizeWidth-300):
-        x = x + (1*(sizeWidth/diag) * speed)
-        y = y - (1 *(sizeHeight/diag) * speed)
-        screen.fill(BLACK)
-        screen.blit(picture, (x,y))
-        pygame.display.flip()
-      else:
-        wall = True
-    
+     
     pygame.display.flip()
     clock.tick(150)
 
@@ -287,6 +266,7 @@ def concMove():
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.close()'''
+  time.sleep(0.3)
 
 
 
@@ -296,9 +276,12 @@ def horizontalScroll():
   #Create a font
   font = pygame.font.SysFont("Arial", 45)
   #Text to show
-  text = "Manchester is a city and metropolitan borough of Greater Manchester, England, which had an estimated population of 568,996 in 2022."
+  text = "Manchester is a city and metropolitan borough of Greater Manchester, England, which had an estimated population of 568,996 in 2022. Greater Manchester is the third-most populous metropolitan area in the United Kingdom, with a population of 2.92 million, and the largest in Northern England. "
   #Get text width and height
   text_width, text_height = font.size(text)
+  # Setting the time
+  test_time = 10
+  t_end = time.time() + test_time
 
   #Starting image position and speed
   x = sizeWidth
@@ -307,9 +290,9 @@ def horizontalScroll():
 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\david\\OneDrive\\Desktop\\risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
 
-  while (x > -text_width):
+  while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         sys.exit()
@@ -318,8 +301,7 @@ def horizontalScroll():
 
     '''# Sending data to the server and writing it on the respective file
     casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))
-    '''
+    file1.write(bytes.decode(casual_data))'''
 
     x = x - (1*speed)
     screen.fill(BLACK)
@@ -345,20 +327,24 @@ def verticalScroll():
   #Create a font
   font = pygame.font.SysFont("Arial", 45)
   #Text to show
-  text = "The Moon is Earth's only natural satellite. It orbits at an average distance of 384399 km "
+  text = "The Moon is Earth's only natural satellite. It orbits at an average distance of 384399 km (238,854 mi; about 30 times Earth's diameter). The Moon's orbital period "
   #Get text width and height
   text_width, text_height = font.size(text)
+
+  # Setting the time
+  test_time = 10
+  t_end = time.time() + test_time
 
   #Starting image position
   x = (sizeWidth / 2) - (text_height / 2)
   y = sizeHeight
-  speed = 5
+  speed = 25
 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\david\\OneDrive\\Desktop\\risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")'''
 
-  while (y > - (text_width + 45*(len(text)-1))):
+  while (y > - (text_width + 45*(len(text)-1))) and time.time() <= t_end:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         sys.exit()
@@ -367,14 +353,15 @@ def verticalScroll():
 
     '''# Sending data to the server and writing it on the respective file
     casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))
-    '''
+    file1.write(bytes.decode(casual_data))'''
     
     y = y - (1*speed)
 
     prepareVerText(text, font, x, y)
+    time.sleep(0.1)
     screen.fill(BLACK)
 
+    time.sleep(0.1)
     pygame.display.flip()
     clock.tick(150)
 
@@ -393,13 +380,13 @@ def main():
   pygame.mouse.set_visible(False)
 
   #shuffle the order of the animations
-  tests_list = [horizontalMove, verticalMove, concMove]
+  tests_list = [horizontalMove, verticalMove, diagMove, horizontalScroll, verticalScroll]
   random.shuffle(tests_list)
 
   #run the animation after the shuffle
   for funct in tests_list:
     funct()
-
+  
 
   pygame.quit()
   '''s.close()'''

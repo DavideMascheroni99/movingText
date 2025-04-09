@@ -374,11 +374,6 @@ def verticalScroll():
     time.sleep(0.1)
     screen.fill(BLACK)
 
-    '''y = y - (1*speed)
-    screen.fill(BLACK)
-    img = font.render(text, True, WHITE)
-    img = pygame.transform.rotozoom(img, -90, 1)
-    screen.blit(img, (x, y))'''
     time.sleep(0.1)
     pygame.display.flip()
     clock.tick(150)

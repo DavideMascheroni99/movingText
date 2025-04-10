@@ -116,11 +116,10 @@ def verticalMove():
       if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
         sys.exit()
   
-    '''# Sending data to the server and writing it on the respective file
-    casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))'''
-    
     while not wall and time.time() <= t_end:
+      '''# Sending data to the server and writing it on the respective file
+      casual_data = s.recv(1024)
+      file1.write(bytes.decode(casual_data))'''
       if(y >= 0 and y < sizeHeight-150):
         y = y + (1 * speed)
         screen.fill(BLACK)
@@ -130,6 +129,9 @@ def verticalMove():
         wall = True
 
     while wall and time.time() <= t_end:
+      '''# Sending data to the server and writing it on the respective file
+      casual_data = s.recv(1024)
+      file1.write(bytes.decode(casual_data))'''
       if(y > 1*speed):
         y = y - (1 * speed)
         screen.fill(BLACK)

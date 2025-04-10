@@ -463,15 +463,13 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  '''#shuffle the order of the animations
+  #shuffle the order of the animations
   tests_list = [horizontalMove, verticalMove, diagMove, horizontalScroll, verticalBlock]
   random.shuffle(tests_list)
 
   #run the animation after the shuffle
   for funct in tests_list:
-    funct()'''
-  
-  diagMove()
+    funct()
 
   pygame.quit()
   '''s.close()'''

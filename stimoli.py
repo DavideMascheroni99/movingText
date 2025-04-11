@@ -83,10 +83,6 @@ def addSeparator(text, n):
 def createVertBlock(x, y, font, nlText, file1):
   for i in range(len(nlText)):
 
-    # Sending data to the server and writing it on the respective file
-    casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))
-
     img = font.render(nlText[i], True, WHITE)
     screen.blit(img, (x, y))
     y = y + 45
@@ -107,7 +103,7 @@ def verticalMove():
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}-VM.txt".format(testernumber, index), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
 
   # Setting the time
   test_time = 15
@@ -158,7 +154,7 @@ def verticalMove():
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
-  file1.write("\n\n VerticalMove end \n\n")
+  file1.write("\n\n VerticalMove END \n\n")
   file1.close()
   time.sleep(0.3)
 
@@ -178,7 +174,7 @@ def horizontalMove():
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file2 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}-HM.txt".format(testernumber, index), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
 
   # Setting the time
   test_time = 15
@@ -197,7 +193,7 @@ def horizontalMove():
 
       # Sending data to the server and writing it on the respective file
       casual_data = s.recv(1024)
-      file2.write(bytes.decode(casual_data))
+      file1.write(bytes.decode(casual_data))
 
       if (x >= 0 and x < sizeWidth-300):
         x = x + (1 * speed)
@@ -211,7 +207,7 @@ def horizontalMove():
 
       # Sending data to the server and writing it on the respective file
       casual_data = s.recv(1024)
-      file2.write(bytes.decode(casual_data))
+      file1.write(bytes.decode(casual_data))
 
       if(x > 1*speed):
         x = x - (1 * speed)
@@ -229,9 +225,9 @@ def horizontalMove():
   time.sleep(0.3)
   casual_data = s.recv(1024)
   time.sleep(0.3)
-  file2.write(bytes.decode(casual_data))
-  file2.write("\n\n HorizontalMove end\n\n")
-  file2.close()
+  file1.write(bytes.decode(casual_data))
+  file1.write("\n\n HorizontalMove end\n\n")
+  file1.close()
   time.sleep(0.3)
  
 
@@ -253,7 +249,7 @@ def diagMove():
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file3 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}-DM.txt".format(testernumber, index), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
 
   # Setting the time
   test_time = 15
@@ -273,7 +269,7 @@ def diagMove():
 
       # Sending data to the server and writing it on the respective file
       casual_data = s.recv(1024)
-      file3.write(bytes.decode(casual_data))
+      file1.write(bytes.decode(casual_data))
 
       if (x < sizeWidth - 300):
         x = x + (1*(sizeWidth/diag) * speed)
@@ -288,7 +284,7 @@ def diagMove():
 
       # Sending data to the server and writing it on the respective file
       casual_data = s.recv(1024)
-      file3.write(bytes.decode(casual_data))
+      file1.write(bytes.decode(casual_data))
 
       if (x > 1):
         x = x - (1*(sizeWidth/diag) * speed)
@@ -308,9 +304,9 @@ def diagMove():
   time.sleep(0.3)
   casual_data = s.recv(1024)
   time.sleep(0.3)
-  file3.write(bytes.decode(casual_data))
-  file3.write("\n\n DiagonalMove end \n\n")
-  file3.close()
+  file1.write(bytes.decode(casual_data))
+  file1.write("\n\n DiagonalMove END \n\n")
+  file1.close()
   time.sleep(0.3)
 
 
@@ -335,7 +331,7 @@ def horizontalScroll():
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file4 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}-HS.txt".format(testernumber, index), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
 
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
@@ -346,7 +342,7 @@ def horizontalScroll():
 
     # Sending data to the server and writing it on the respective file
     casual_data = s.recv(1024)
-    file4.write(bytes.decode(casual_data))
+    file1.write(bytes.decode(casual_data))
 
     x = x - (1*speed)
     screen.fill(BLACK)
@@ -361,9 +357,9 @@ def horizontalScroll():
   time.sleep(0.3)
   casual_data = s.recv(1024)
   time.sleep(0.3)
-  file4.write(bytes.decode(casual_data))
-  file4.write("\n\n Horizontalscroll end \n\n")
-  file4.close()
+  file1.write(bytes.decode(casual_data))
+  file1.write("\n\n Horizontalscroll END \n\n")
+  file1.close()
   time.sleep(0.3)
 
 
@@ -386,14 +382,14 @@ def verticalBlock():
   #Starting image position and speed
   x = sizeWidth/2 - (text_width/(n*2))
   y = sizeHeight
-  speed = 3
+  speed = 0.5
   text = addSeparator(text, n)
   #text with new line
   nlText = text.split("#")
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file5 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}-VB.txt".format(testernumber, index), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
 
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
@@ -401,10 +397,14 @@ def verticalBlock():
         sys.exit()
       if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
         sys.exit()
+    
+     # Sending data to the server and writing it on the respective file
+    casual_data = s.recv(1024)
+    file1.write(bytes.decode(casual_data))
 
     y = y - (1*speed)
     screen.fill(BLACK)
-    createVertBlock(x, y, font, nlText, file5)
+    createVertBlock(x, y, font, nlText, file1)
   
     pygame.display.flip()
     clock.tick(150)
@@ -414,9 +414,9 @@ def verticalBlock():
   time.sleep(0.3)
   casual_data = s.recv(1024)
   time.sleep(0.3)
-  file5.write(bytes.decode(casual_data))
-  file5.write("\n\n Horizontalscroll end \n\n")
-  file5.close()
+  file1.write(bytes.decode(casual_data))
+  file1.write("\n\n VerticalBlock END \n\n")
+  file1.close()
   time.sleep(0.3)
 
 
@@ -490,6 +490,7 @@ def main():
   #run the animation after the shuffle
   for funct in tests_list:
     funct()
+
 
   pygame.quit()
   s.close()

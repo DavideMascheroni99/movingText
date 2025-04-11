@@ -83,10 +83,6 @@ def addSeparator(text, n):
 def createVertBlock(x, y, font, nlText, file1):
   for i in range(len(nlText)):
 
-    # Sending data to the server and writing it on the respective file
-    casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))
-
     img = font.render(nlText[i], True, WHITE)
     screen.blit(img, (x, y))
     y = y + 45
@@ -107,7 +103,7 @@ def verticalMove():
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
 
   # Setting the time
   test_time = 15
@@ -158,7 +154,7 @@ def verticalMove():
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
-  file1.write("\n\n VerticalMove end \n\n")
+  file1.write("\n\n VerticalMove END \n\n")
   file1.close()
   time.sleep(0.3)
 
@@ -178,7 +174,7 @@ def horizontalMove():
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
 
   # Setting the time
   test_time = 15
@@ -253,7 +249,7 @@ def diagMove():
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
 
   # Setting the time
   test_time = 15
@@ -309,7 +305,7 @@ def diagMove():
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
-  file1.write("\n\n DiagonalMove end \n\n")
+  file1.write("\n\n DiagonalMove END \n\n")
   file1.close()
   time.sleep(0.3)
 
@@ -335,7 +331,7 @@ def horizontalScroll():
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
 
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
@@ -362,7 +358,7 @@ def horizontalScroll():
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
-  file1.write("\n\n Horizontalscroll end \n\n")
+  file1.write("\n\n Horizontalscroll END \n\n")
   file1.close()
   time.sleep(0.3)
 
@@ -386,14 +382,14 @@ def verticalBlock():
   #Starting image position and speed
   x = sizeWidth/2 - (text_width/(n*2))
   y = sizeHeight
-  speed = 3
+  speed = 0.5
   text = addSeparator(text, n)
   #text with new line
   nlText = text.split("#")
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
 
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
@@ -401,6 +397,10 @@ def verticalBlock():
         sys.exit()
       if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
         sys.exit()
+    
+     # Sending data to the server and writing it on the respective file
+    casual_data = s.recv(1024)
+    file1.write(bytes.decode(casual_data))
 
     y = y - (1*speed)
     screen.fill(BLACK)
@@ -415,7 +415,7 @@ def verticalBlock():
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
-  file1.write("\n\n Horizontalscroll end \n\n")
+  file1.write("\n\n VerticalBlock END \n\n")
   file1.close()
   time.sleep(0.3)
 
@@ -483,19 +483,13 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  '''#shuffle the order of the animations
+  #shuffle the order of the animations
   tests_list = [horizontalMove, verticalMove, diagMove, horizontalScroll, verticalBlock]
   random.shuffle(tests_list)
 
   #run the animation after the shuffle
   for funct in tests_list:
-    funct()'''
-  
-  #verticalMove()
-  #horizontalMove()
-  #diagMove()
-  #horizontalScroll()
-  verticalBlock()
+    funct()
 
 
   pygame.quit()

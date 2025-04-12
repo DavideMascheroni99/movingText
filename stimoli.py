@@ -1,4 +1,3 @@
-stimoli.py
 import pygame
 import tkinter
 from tkinter import simpledialog

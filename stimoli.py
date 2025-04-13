@@ -75,12 +75,14 @@ def addSeparator(text, n):
     if(i%n == 0) and i != 0:
       if (s[i] == ' '):
         del s[i]
-      s[i] = '#' + s[i]
+        s[i] = '#' + s[i]
+      else:
+        s[i] = '-#' + s[i]
  
   text = ''.join(s)
   return text
 
-def createVertBlock(x, y, font, nlText, file1):
+def createVertBlock(x, y, font, nlText):
   for i in range(len(nlText)):
 
     img = font.render(nlText[i], True, WHITE)
@@ -404,7 +406,7 @@ def verticalBlock():
 
     y = y - (1*speed)
     screen.fill(BLACK)
-    createVertBlock(x, y, font, nlText, file1)
+    createVertBlock(x, y, font, nlText)
   
     pygame.display.flip()
     clock.tick(150)

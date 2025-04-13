@@ -10,12 +10,12 @@ import random
 
 '''GLOBAL VARIABLES AND CONSTANTS'''
 
-# Dialogue window for the tester number
+'''# Dialogue window for the tester number
 application_window = tkinter.Tk()
 testernumber = simpledialog.askstring("Input", "Input tester number", parent=application_window)
 #Insert the trial number
 index = simpledialog.askstring("Input", "Input trial number", parent=application_window)
-
+'''
 # Color definitions
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -38,7 +38,7 @@ clock = pygame.time.Clock()
 
 '''SERVER CONNECTION'''
 
-# Host machine IP
+'''# Host machine IP
 HOST = '127.0.0.1'
 # Gazepoint Port
 PORT = 4242
@@ -57,7 +57,7 @@ s.send(str.encode('<SET ID="ENABLE_SEND_PUPIL_LEFT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_PUPIL_RIGHT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_LEFT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_RIGHT" STATE="1" />\r\n'))
-s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))
+s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))'''
 
 
 #Make vertical an horizontal text 
@@ -68,6 +68,7 @@ def prepareVerText(text, font, x, y):
     screen.blit(img, (x, y))
     pygame.display.flip()
 
+
 #add # every n characters
 def addSeparator(text, n):
   s = list(text)
@@ -75,12 +76,15 @@ def addSeparator(text, n):
     if(i%n == 0) and i != 0:
       if (s[i] == ' '):
         del s[i]
-      s[i] = '#' + s[i]
+        s[i] = '#' + s[i]
+      else:
+        s[i] = '-#' + s[i]
  
   text = ''.join(s)
   return text
 
-def createVertBlock(x, y, font, nlText, file1):
+
+def createVertBlock(x, y, font, nlText):
   for i in range(len(nlText)):
 
     img = font.render(nlText[i], True, WHITE)
@@ -97,13 +101,13 @@ def verticalMove():
   speed = 1
 
   #Load and rescale the text image
-  picture = pygame.image.load('movingText/Images/text2.png').convert()
-  #picture = pygame.image.load('Programs/Images/text2.png').convert()
+  #picture = pygame.image.load('movingText/Images/text2.png').convert()
+  picture = pygame.image.load('Programs/Images/text2.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
 
-  # File to write on
+  '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")'''
 
   # Setting the time
   test_time = 15
@@ -119,9 +123,9 @@ def verticalMove():
   
     while not wall and time.time() <= t_end:
 
-      # Sending data to the server and writing it on the respective file
+      '''# Sending data to the server and writing it on the respective file
       casual_data = s.recv(1024)
-      file1.write(bytes.decode(casual_data))
+      file1.write(bytes.decode(casual_data))'''
 
       if(y >= 0 and y < sizeHeight-150):
         y = y + (1 * speed)
@@ -133,9 +137,9 @@ def verticalMove():
 
     while wall and time.time() <= t_end:
 
-      # Sending data to the server and writing it on the respective file
+      '''# Sending data to the server and writing it on the respective file
       casual_data = s.recv(1024)
-      file1.write(bytes.decode(casual_data))
+      file1.write(bytes.decode(casual_data))'''
 
       if(y > 1*speed):
         y = y - (1 * speed)
@@ -148,7 +152,7 @@ def verticalMove():
     pygame.display.flip()
     clock.tick(150)
 
-  # Sending data to the server and writing it on the respective file
+  '''# Sending data to the server and writing it on the respective file
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
@@ -156,7 +160,7 @@ def verticalMove():
   file1.write(bytes.decode(casual_data))
   file1.write("\n\n VerticalMove END \n\n")
   file1.close()
-  time.sleep(0.3)
+  time.sleep(0.3)'''
 
 
 #Box text vertical move
@@ -171,11 +175,11 @@ def horizontalMove():
   picture = pygame.image.load('movingText/Images/text1.png').convert()
   #picture = pygame.image.load('Programs/Images/text1.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
-
+  '''
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
   file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
-
+  '''
   # Setting the time
   test_time = 15
   t_end = time.time() + test_time
@@ -191,9 +195,9 @@ def horizontalMove():
 
     while not wall and time.time() <= t_end:
 
-      # Sending data to the server and writing it on the respective file
+      '''# Sending data to the server and writing it on the respective file
       casual_data = s.recv(1024)
-      file1.write(bytes.decode(casual_data))
+      file1.write(bytes.decode(casual_data))'''
 
       if (x >= 0 and x < sizeWidth-300):
         x = x + (1 * speed)
@@ -205,9 +209,9 @@ def horizontalMove():
 
     while wall and time.time() <= t_end:
 
-      # Sending data to the server and writing it on the respective file
+      '''# Sending data to the server and writing it on the respective file
       casual_data = s.recv(1024)
-      file1.write(bytes.decode(casual_data))
+      file1.write(bytes.decode(casual_data))'''
 
       if(x > 1*speed):
         x = x - (1 * speed)
@@ -220,7 +224,7 @@ def horizontalMove():
     pygame.display.flip()
     clock.tick(150)
 
-  # Sending data to the server and writing it on the respective file
+  '''# Sending data to the server and writing it on the respective file
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
@@ -228,7 +232,7 @@ def horizontalMove():
   file1.write(bytes.decode(casual_data))
   file1.write("\n\n HorizontalMove end\n\n")
   file1.close()
-  time.sleep(0.3)
+  time.sleep(0.3)'''
  
 
 
@@ -243,13 +247,13 @@ def diagMove():
   speed = 1
 
   #Load and rescale the text image
-  picture = pygame.image.load('movingText/Images/text3.png').convert()
-  #picture = pygame.image.load('Programs/Images/text3.png').convert()
+  #picture = pygame.image.load('movingText/Images/text3.png').convert()
+  picture = pygame.image.load('Programs/Images/text3.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
 
-  # File to write on
+  '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")'''
 
   # Setting the time
   test_time = 15
@@ -267,9 +271,9 @@ def diagMove():
 
     while not wall and time.time() <= t_end:
 
-      # Sending data to the server and writing it on the respective file
+      '''# Sending data to the server and writing it on the respective file
       casual_data = s.recv(1024)
-      file1.write(bytes.decode(casual_data))
+      file1.write(bytes.decode(casual_data))'''
 
       if (x < sizeWidth - 300):
         x = x + (1*(sizeWidth/diag) * speed)
@@ -282,10 +286,10 @@ def diagMove():
 
     while wall and time.time() <= t_end:
 
-      # Sending data to the server and writing it on the respective file
+      '''# Sending data to the server and writing it on the respective file
       casual_data = s.recv(1024)
       file1.write(bytes.decode(casual_data))
-
+      '''
       if (x > 1):
         x = x - (1*(sizeWidth/diag) * speed)
         y = y - (1 *(sizeHeight/diag) * speed)
@@ -299,7 +303,7 @@ def diagMove():
     pygame.display.flip()
     clock.tick(150)
 
-  # Sending data to the server and writing it on the respective file
+  '''# Sending data to the server and writing it on the respective file
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
@@ -307,7 +311,7 @@ def diagMove():
   file1.write(bytes.decode(casual_data))
   file1.write("\n\n DiagonalMove END \n\n")
   file1.close()
-  time.sleep(0.3)
+  time.sleep(0.3)'''
 
 
 
@@ -329,9 +333,9 @@ def horizontalScroll():
   y = (sizeHeight / 2) - (text_height / 2)
   speed = 1.4
 
-  # File to write on
+  '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")'''
 
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
@@ -340,9 +344,9 @@ def horizontalScroll():
       if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
         sys.exit()
 
-    # Sending data to the server and writing it on the respective file
+    '''# Sending data to the server and writing it on the respective file
     casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))
+    file1.write(bytes.decode(casual_data))'''
 
     x = x - (1*speed)
     screen.fill(BLACK)
@@ -352,7 +356,7 @@ def horizontalScroll():
     pygame.display.flip()
     clock.tick(150)
 
-  # Sending data to the server and writing it on the respective file
+  '''# Sending data to the server and writing it on the respective file
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
@@ -360,7 +364,7 @@ def horizontalScroll():
   file1.write(bytes.decode(casual_data))
   file1.write("\n\n Horizontalscroll END \n\n")
   file1.close()
-  time.sleep(0.3)
+  time.sleep(0.3)'''
 
 
 
@@ -387,9 +391,9 @@ def verticalBlock():
   #text with new line
   nlText = text.split("#")
 
-  # File to write on
+  '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")'''
 
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
@@ -398,18 +402,18 @@ def verticalBlock():
       if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
         sys.exit()
     
-     # Sending data to the server and writing it on the respective file
+    '''# Sending data to the server and writing it on the respective file
     casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))
+    file1.write(bytes.decode(casual_data))'''
 
     y = y - (1*speed)
     screen.fill(BLACK)
-    createVertBlock(x, y, font, nlText, file1)
+    createVertBlock(x, y, font, nlText)
   
     pygame.display.flip()
     clock.tick(150)
 
-  # Sending data to the server and writing it on the respective file
+  '''# Sending data to the server and writing it on the respective file
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
@@ -417,7 +421,7 @@ def verticalBlock():
   file1.write(bytes.decode(casual_data))
   file1.write("\n\n VerticalBlock END \n\n")
   file1.close()
-  time.sleep(0.3)
+  time.sleep(0.3)'''
 
 
 
@@ -483,17 +487,19 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  #shuffle the order of the animations
+  '''#shuffle the order of the animations
   tests_list = [horizontalMove, verticalMove, diagMove, horizontalScroll, verticalBlock]
   random.shuffle(tests_list)
 
   #run the animation after the shuffle
   for funct in tests_list:
-    funct()
+    funct()'''
+  
+  verticalBlock()
 
 
   pygame.quit()
-  s.close()
+  '''s.close()'''
 
 if __name__ == "__main__":
     main()

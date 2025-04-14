@@ -98,7 +98,7 @@ def verticalMove():
   #Starting image position
   x = (sizeWidth / 2) - (300/2)
   y = 0
-  speed = 1
+  speed = 0.2
 
   #Load and rescale the text image
   #picture = pygame.image.load('movingText/Images/text2.png').convert()
@@ -169,11 +169,11 @@ def horizontalMove():
   #Starting image position
   x = 0
   y = (sizeHeight / 2) - (150/2)
-  speed = 1
+  speed = 0.2
 
   #Load and rescale the text image
-  picture = pygame.image.load('movingText/Images/text1.png').convert()
-  #picture = pygame.image.load('Programs/Images/text1.png').convert()
+  #picture = pygame.image.load('movingText/Images/text1.png').convert()
+  picture = pygame.image.load('Programs/Images/text1.png').convert()
   picture = pygame.transform.scale(picture, (300, 150))
   '''
   # File to write on
@@ -244,7 +244,7 @@ def diagMove():
   #Starting image position
   x = 0
   y = 0
-  speed = 1
+  speed = 0.2
 
   #Load and rescale the text image
   #picture = pygame.image.load('movingText/Images/text3.png').convert()
@@ -495,7 +495,11 @@ def main():
   for funct in tests_list:
     funct()'''
   
-  verticalBlock()
+  horizontalMove()
+  '''verticalMove()
+  diagMove()
+  horizontalScroll()
+  verticalBlock()'''
 
 
   pygame.quit()

@@ -195,8 +195,8 @@ def horizontalMove():
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.write("\n\n HorizontalMove end\n\n")
-  file1.close()
-  time.sleep(0.3)'''
+  file1.close()'''
+  time.sleep(0.3)
  
 
 
@@ -289,8 +289,8 @@ def verticalMove():
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.write("\n\n VerticalMove END \n\n")
-  file1.close()
-  time.sleep(0.3)'''
+  file1.close()'''
+  time.sleep(0.3)
 
 
 
@@ -385,8 +385,8 @@ def diagMove():
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.write("\n\n DiagonalMove END \n\n")
-  file1.close()
-  time.sleep(0.3)'''
+  file1.close()'''
+  time.sleep(0.3)
 
 
 
@@ -439,8 +439,8 @@ def horizontalScroll():
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.write("\n\n Horizontalscroll END \n\n")
-  file1.close()
-  time.sleep(0.3)'''
+  file1.close()'''
+  time.sleep(0.3)
 
 
 
@@ -464,7 +464,7 @@ def verticalBlock():
   x = sizeWidth/2 - (text_width/(n*2))
   y = sizeHeight
   speed = 0.5
-  text = addSeparator(text, n)
+  text = addSeparator(text, n, len(text))
   #text with new line
   nlText = text.split("#")
 
@@ -497,8 +497,8 @@ def verticalBlock():
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.write("\n\n VerticalBlock END \n\n")
-  file1.close()
-  time.sleep(0.3)'''
+  file1.close()'''
+  time.sleep(0.3)
 
 
 def main():
@@ -506,15 +506,13 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  '''#shuffle the order of the animations
+  #shuffle the order of the animations
   tests_list = [horizontalMove, verticalMove, diagMove, horizontalScroll, verticalBlock]
   random.shuffle(tests_list)
 
   #run the animation after the shuffle
   for funct in tests_list:
-    funct()'''
-  
-  diagMove()
+    funct()
   
   pygame.quit()
   '''s.close()'''
@@ -523,3 +521,7 @@ if __name__ == "__main__":
     main()
 
 
+'''LAB SPEEDS SETTINGS'''
+#horizontalMove(), verticalMove() and diagMove() = 1
+#horizontalScroll() = 1.4
+#verticalBlock() = 0.5

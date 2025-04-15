@@ -141,8 +141,6 @@ def horizontalMove():
     if(line_width > max):
       max = line_width
 
-  char_width = max/n
-
 
   '''
   # File to write on
@@ -165,7 +163,7 @@ def horizontalMove():
       casual_data = s.recv(1024)
       file1.write(bytes.decode(casual_data))'''
 
-      if (x >= 0 and x < sizeWidth - char_width*(n)):
+      if (x >= 0 and x < sizeWidth - max):
         x = x + (1 * speed)
         screen.fill(BLACK)
         createVertBlock(x, y, font, nlText, dim_char)
@@ -200,7 +198,6 @@ def horizontalMove():
   file1.close()
   time.sleep(0.3)'''
  
-
 
 
 #Box text horizontal move
@@ -296,28 +293,46 @@ def verticalMove():
   time.sleep(0.3)'''
 
 
+
 #Box text that moves in diagonal
 def diagMove():
  
   diag = math.sqrt((sizeWidth*sizeWidth)+(sizeHeight*sizeHeight))
 
-  #Starting image position
+  #dimension of a single character
+  dim_char = 30
+  #number of a box lines
+  num_line = 6
+  #Number of characters per line
+  n = 35
+
+  #Create a font
+  font = pygame.font.SysFont("Arial", dim_char)
+  #Text to show
+  text = "Eclipses only occur when the Sun, Earth, and Moon are all in a straight line. Solar eclipses occur at new moon, when the Moon is between the Sun and Earth. In contrast, lunar eclipses occur at full moon, when Earth is between the Sun and Moon. The apparent size of the Moon is roughly the same as that of the Sun, with both being viewed at close to one-half a degree wide. The Sun is much larger than the Moon, but it is the vastly greater distance that gives it the same apparent size as the much closer and much smaller Moon from the perspective of Earth. The variations in apparent size, due to the non-circular orbits, are nearly the same as well, though occurring in different cycles. This makes possible both total (with the Moon appearing larger than the Sun) and annular (with the Moon appearing smaller than the Sun) solar eclipses.[217] In a total eclipse, the Moon completely covers the disc of the Sun and the solar corona becomes visible to the naked eye."
+  # Setting the time
+  test_time = 10
+  t_end = time.time() + test_time
+
+  text = rem_text(text, n, n*num_line)
+  #text with new line
+  nlText = text.split("#")
+  #Maximum text width 
+  max = 0
+  #Get maximum text width and height
+  for ind in range(num_line-1):
+    line_width, line_height = font.size(nlText[ind])
+    if(line_width > max):
+      max = line_width
+
+  #Starting image position and speed
   x = 0
   y = 0
   speed = 0.2
 
-  #Load and rescale the text image
-  #picture = pygame.image.load('movingText/Images/text3.png').convert()
-  picture = pygame.image.load('Programs/Images/text3.png').convert()
-  picture = pygame.transform.scale(picture, (300, 150))
-
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
   file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")'''
-
-  # Setting the time
-  test_time = 10
-  t_end = time.time() + test_time
 
   wall = False
 
@@ -335,11 +350,11 @@ def diagMove():
       casual_data = s.recv(1024)
       file1.write(bytes.decode(casual_data))'''
 
-      if (x < sizeWidth - 300):
+      if (x < sizeWidth - max):
         x = x + (1*(sizeWidth/diag) * speed)
         y = y + (1 *(sizeHeight/diag) * speed)
         screen.fill(BLACK)
-        screen.blit(picture, (x,y))
+        createVertBlock(x, y, font, nlText, dim_char)
         pygame.display.flip()
       else:
         wall = True
@@ -354,7 +369,7 @@ def diagMove():
         x = x - (1*(sizeWidth/diag) * speed)
         y = y - (1 *(sizeHeight/diag) * speed)
         screen.fill(BLACK)
-        screen.blit(picture, (x,y))
+        createVertBlock(x, y, font, nlText, dim_char)
         pygame.display.flip()
       else:
         wall = False
@@ -499,7 +514,7 @@ def main():
   for funct in tests_list:
     funct()'''
   
-  verticalMove()   
+  diagMove()
   
   pygame.quit()
   '''s.close()'''

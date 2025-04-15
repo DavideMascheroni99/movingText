@@ -135,7 +135,7 @@ def horizontalMove():
   #text with new line
   nlText = text.split("#")
   max = 0
-  #Get text width and height
+  #Get maximum text width
   for ind in range(num_line-1):
     line_width, line_height = font.size(nlText[ind])
     if(line_width > max):
@@ -205,24 +205,44 @@ def horizontalMove():
 
 #Box text horizontal move
 def verticalMove():
- 
-  #Starting image position
-  x = (sizeWidth / 2) - (300/2)
+
+  #dimension of a single character
+  dim_char = 30
+  #number of a box lines
+  num_line = 6
+  #Number of characters per line
+  n = 35
+
+  #Create a font
+  font = pygame.font.SysFont("Arial", dim_char)
+  #Text to show
+  text = "Eclipses only occur when the Sun, Earth, and Moon are all in a straight line. Solar eclipses occur at new moon, when the Moon is between the Sun and Earth. In contrast, lunar eclipses occur at full moon, when Earth is between the Sun and Moon. The apparent size of the Moon is roughly the same as that of the Sun, with both being viewed at close to one-half a degree wide. The Sun is much larger than the Moon, but it is the vastly greater distance that gives it the same apparent size as the much closer and much smaller Moon from the perspective of Earth. The variations in apparent size, due to the non-circular orbits, are nearly the same as well, though occurring in different cycles. This makes possible both total (with the Moon appearing larger than the Sun) and annular (with the Moon appearing smaller than the Sun) solar eclipses.[217] In a total eclipse, the Moon completely covers the disc of the Sun and the solar corona becomes visible to the naked eye."
+  # Setting the time
+  test_time = 10
+  t_end = time.time() + test_time
+
+  text = rem_text(text, n, n*num_line)
+  #text with new line
+  nlText = text.split("#")
+  #Maximum text width 
+  max = 0
+  #Get maximum text width and height
+  for ind in range(num_line-1):
+    line_width, line_height = font.size(nlText[ind])
+    if(line_width > max):
+      max = line_width
+
+  char_width = max/n
+
+  #Starting image position and speed
+  x = (sizeWidth / 2) - (char_width*n/2)
   y = 0
   speed = 0.2
-
-  #Load and rescale the text image
-  #picture = pygame.image.load('movingText/Images/text2.png').convert()
-  picture = pygame.image.load('Programs/Images/text2.png').convert()
-  picture = pygame.transform.scale(picture, (300, 150))
-
+ 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
   file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")'''
 
-  # Setting the time
-  test_time = 10
-  t_end = time.time() + test_time
   wall = False
 
   while time.time() <= t_end:
@@ -238,10 +258,12 @@ def verticalMove():
       casual_data = s.recv(1024)
       file1.write(bytes.decode(casual_data))'''
 
-      if(y >= 0 and y < sizeHeight-150):
+      #5*(num_line) is a compensation for the space between each line
+      if(y >= 0 and y < sizeHeight-(line_height*num_line) + 5*(num_line)):
+
         y = y + (1 * speed)
         screen.fill(BLACK)
-        screen.blit(picture, (x,y))
+        createVertBlock(x, y, font, nlText, dim_char)
         pygame.display.flip()
       else:
         wall = True
@@ -255,7 +277,7 @@ def verticalMove():
       if(y > 1*speed):
         y = y - (1 * speed)
         screen.fill(BLACK)
-        screen.blit(picture, (x,y))
+        createVertBlock(x, y, font, nlText, dim_char)
         pygame.display.flip()
       else:
         wall = False
@@ -477,7 +499,7 @@ def main():
   for funct in tests_list:
     funct()'''
   
-  horizontalMove()    
+  verticalMove()   
   
   pygame.quit()
   '''s.close()'''

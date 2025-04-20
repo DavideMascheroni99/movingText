@@ -1,0 +1,27 @@
+Installa il connector pip install mysql-connector-pyton
+
+username: Davide
+psw: = Davideinter99
+
+script per database
+
+create schema indexes;
+use indexes;
+create table rem_index
+(tester_number int primary key,
+index0 varchar(1000),
+index1 varchar(1000),
+index2 varchar(1000),
+index3 varchar(1000),
+index4 varchar(1000),
+index5 varchar(1000),
+index6 varchar(1000),
+index7 varchar(1000),
+index8 varchar(1000),
+index9 varchar(1000),
+index10 varchar(1000),
+index11 varchar(1000),
+index12 varchar(1000),
+index13 varchar(1000),
+index14 varchar(1000)
+)

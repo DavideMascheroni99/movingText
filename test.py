@@ -7,17 +7,20 @@ import sys
 import math
 import time
 import random
+import mysql.connector
+
 
 '''GLOBAL VARIABLES AND CONSTANTS'''
 
-'''# Dialogue window for the tester number
+# Dialogue window for the tester number
 application_window = tkinter.Tk()
-testernumber = simpledialog.askstring("Input", "Input tester number", parent=application_window)
+tester_number = simpledialog.askstring("Input", "Input tester number", parent=application_window)
 #Insert the trial number
-index = simpledialog.askstring("Input", "Input trial number", parent=application_window)
-'''
+trial_number = simpledialog.askstring("Input", "Input trial number", parent=application_window)
 
-#45 texts containing cities description
+
+##45 texts containing cities description of Milan municipality
+text0 = "Rescaldina is a comune that is part of the Metropolitan City of Milan, in the Province of Milan in the Italian region Lombardy, with a population of 14,211 distributed over about 8 km and located about 25 kilometres northwest of Milan. Rescaldina borders the following municipalities: Cislago, Gorla Minore, Gerenzano, Marnate, Uboldo, Castellanza, Legnano and Cerro Maggiore. Except for Legnano and Cerro Maggiore, the other municipalities belong to the Province of Varese."
 text1 = "Sesto San Giovanni, locally referred to as just Sesto, is a comune in the Metropolitan City of Milan, in the Italian region of Lombardy. It was awarded with the honorary title of città (city) by decree of 10 April 1954, signed by President Luigi Einaudi. An unimportant agglomerate of buildings until the 19th century, Sesto San Giovanni grew during the end of the 19th century and in the early 20th century, becoming the site of several industries, including companies such as Falck, Campari, Magneti Marelli and Breda. In that period the population increased rapidly, from 5,000 inhabitants in 1880 to 14,000 in 1911."
 text2 = "Cinisello Balsamo is a comune of about 75,200 inhabitants in the Metropolitan City of Milan, in the Italian region of Lombardy, about 10 kilometres northeast of Milan city center. Cinisello Balsamo borders the following municipalities: Monza, Muggiò, Nova Milanese, Paderno Dugnano, Cusano Milanino, Sesto San Giovanni, Bresso. The current comune was formed in 1928 by the union of Cinisello and Balsamo, and received the honorary title of city through a presidential decree on 17 October 1972."
 text3 = "Legnano is a town and comune municipality in the province of Milan, about 20 kilometres from central Milan. With 60,259, it is the thirteenth-most populous township in Lombardy. Legnano is located in the Alto Milanese and is crossed by the Olona River. The history of Legnano and its municipal area has been traced back to the 1st millennium BC via archaeological evidence. Already in remote times, in fact, the hills that line the Olona had proved to be habitable places. The town was established in 1261. Because of the historic victory of the Lombard League over Frederick Barbarossa at Legnano, it is the only town other than Rome named in the Italian national anthem. Every year the people of Legnano commemorate the battle with Palio di Legnano. In the institutional sphere, on 29 May, the date of the battle of Legnano, it was chosen as the regional holiday of Lombardy."
@@ -54,7 +57,7 @@ text33 = "Cusano Milanino is a town and comune in the Metropolitan City of Milan
 text34 = "Melzo is a comune in the Province of Milan in the Italian region Lombardy, located about 20 kilometres east of Milan. As of 31 December 2004, it had a population of 18,400 and an area of 9.7 square kilometres. Melzo borders the following municipalities: Gorgonzola, Pozzuolo Martesana, Cassina de' Pecchi, Vignate, Truccazzano, Liscate. Melzo received the honorary title of city with a presidential decree on March 14, 1952. It is served by Melzo railway station."
 text35 = "Corbetta is a comune in the Metropolitan City of Milan in the Italian region Lombardy. Corbetta is also home of the Sanctuary of the Madonna of Miracles where according to history, a miracle occurred in 1555, when Jesus emerged from a painting of the Infant and healed a local deaf child. The church became a destination for pilgrimages. The city of Corbetta has a planned layout, which is typical of the towns of the Po Valley, with forested areas and cultivations occupying roughly three-quarters of the municipality's territory."
 text36 = "Melegnano is a comune and town in the Metropolitan City of Milan, Lombardy, northern Italy. The town lies 16 kilometres southeast of the city of Milan. It received the honorary title of city with a presidential decree on 26 August 1959. The town is served by the Melegnano railway station. Melegnano was a stronghold of Milan in the Italian Wars, and known particularly for the Battle of Marignano, a victory over the Swiss in 1515."
-text37 = "Bareggio is a comune in the Metropolitan City of Milan in the Italian region Lombardy, located about 14 kilometres west of Milan. Bareggio borders the following municipalities: Pregnana Milanese, Cornaredo, Sedriano, Cusago, Cisliano."
+text37 = "Bareggio is a comune in the Metropolitan City of Milan in the Italian region Lombardy, located gorgoabout 14 kilometres west of Milan. Bareggio borders the following municipalities: Pregnana Milanese, Cornaredo, Sedriano, Cusago, Cisliano."
 text38 = "Nerviano is a comune in the northwestern part of the Metropolitan City of Milan in the Italian region Lombardy, located about 15 kilometres northwest of downtown Milan. Its territory is crossed by the Olona river and by the Villoresi Canal."
 text39 = "Vimodrone is a comune in the Metropolitan City of Milan in the Italian region of Lombardy. It is located about 14 kilometres northeast of Milan. Vimodrone borders the following municipalities: Cologno Monzese, Cernusco sul Naviglio, Milan, Pioltello and Segrate. The area has historical associations with the Visconti di Modrone family."
 text40 = "Pieve Emanuele is a comune in the Italian region of Lombardy, located about 13 kilometres south of Milan, and about 20 kilometres north of Pavia. Pieve Emanuele borders the following municipalities: Rozzano, Opera, Locate di Triulzi, Basiglio, Lacchiarella, Siziano. It is served by Pieve Emanuele railway station."
@@ -62,11 +65,10 @@ text41 = "Carugate is a comune in the Metropolitan City of Milan in the Italian 
 text42 = "Cerro Maggiore is a comune in the Province of Milan in the Italian region Lombardy, located about 20 kilometres northwest of Milan. On 25 August 1946 Benito Mussolini's corpse was hidden in the town, remaining here until 30 August 1957. The origin of the name derives from Latin cerrus which means cerro, a deciduous tree of the oak family. The adjective 'Maggiore' was inserted in 1862, to better identify the village by distinguishing it from the homonyms, putting them in emphasis is placed on the greater territorial and demographic extension."
 text43 = "Cesate is a comune in the Metropolitan City of Milan in the Italian region Lombardy, located about 17 kilometres northwest of Milan. Cesate borders the following municipalities: Limbiate, Solaro, Caronno Pertusella, Senago, Garbagnate Milanese. The origin of the flag comes from the noble Cixate family. During the Napoleonic era, the municipality was suppressed by a royal decree of 1809, and annexed to Garbagnate Milanese. Cesate regained its autonomy with the Austrian restoration."
 text44 = "Solaro is a comune in the Metropolitan City of Milan in the Italian region Lombardy, located about 15 kilometres northwest of Milan. It has a population of about 14.000. Solaro borders the following municipalities: Saronno, Ceriano Laghetto, Bovisio-Masciago, Limbiate, Caronno Pertusella, Cesate."
-text45 = "Rescaldina is a comune that is part of the Metropolitan City of Milan, in the Province of Milan in the Italian region Lombardy, with a population of 14,211 distributed over about 8 km, and located about 25 kilometres northwest of Milan. Rescaldina borders the following municipalities: Cislago, Gorla Minore, Gerenzano, Marnate, Uboldo, Castellanza, Legnano and Cerro Maggiore. Except for Legnano and Cerro Maggiore, the other municipalities belong to the Province of Varese."
 
 
 #list of texts to select randomly
-allTexts = [text1, text2, text3, text4, text5, text6, text7, text8, text9, text10, text11, text12, text13, text14, text15, text16, text17, text18, text19, text20, text21, text22, text23, text24, text25, text26, text27, text28, text29, text30, text31, text32, text33, text34, text35, text36, text37, text38, text39, text40, text41, text42, text43, text44, text45]
+allTexts = [text0, text1, text2, text3, text4, text5, text6, text7, text8, text9, text10, text11, text12, text13, text14, text15, text16, text17, text18, text19, text20, text21, text22, text23, text24, text25, text26, text27, text28, text29, text30, text31, text32, text33, text34, text35, text36, text37, text38, text39, text40, text41, text42, text43, text44]
 
 
 # Color definitions
@@ -113,6 +115,81 @@ s.send(str.encode('<SET ID="ENABLE_SEND_EYE_RIGHT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))'''
 
 
+
+def db_connection():
+  
+  cnx = mysql.connector.connect(user='root', password='Dadeinter99', host='127.0.0.1', database='indexes')
+  return cnx
+
+
+#Assign the random text
+def random_text():
+  
+  #start the db connection
+  conn = db_connection()
+  testerN_int = int(tester_number)
+  trialN_int = int(trial_number)
+  mycursor = conn.cursor()
+
+
+  #First try
+  if(trialN_int == 1):
+    
+    text = random.sample(allTexts, 5)
+
+    #Execute the query
+    mycursor.execute("SELECT * FROM rem_index WHERE tester_number = %s", (tester_number, ))
+    row = mycursor.fetchone()
+
+    if (row == None):
+      mycursor.execute("INSERT INTO rem_index (tester_number, index0, index1, index2, index3, index4) VALUES (%s, %s, %s, %s, %s, %s)", (tester_number, text[0], text[1], text[2], text[3], text[4]))
+      conn.commit() 
+      return text
+    else:
+      print("There are already data for tester {} during trial {} in the database".format(tester_number, trial_number))
+      return 0
+  
+
+  #Secont try
+  if(trialN_int == 2):
+
+    mycursor.execute("SELECT tester_number, index0, index1, index2, index3, index4 FROM rem_index")
+    myresult = mycursor.fetchone()
+
+    if (myresult == None):
+      print("You can't register the second try without the first one ")
+      return 0
+
+    mycursor.execute("SELECT index5, index6, index7, index8, index9 FROM rem_index WHERE tester_number = %s", (testerN_int, ))
+    myresult = mycursor.fetchone()
+
+    if (myresult[0] != None and myresult[1] != None and myresult[2] != None and myresult[3] != None and myresult[4] != None):
+      print("You already registered the second trial")
+      return 0
+    
+    else:
+      mycursor.execute("SELECT index0, index1, index2, index3, index4 FROM rem_index WHERE tester_number = %s", (testerN_int, ))
+      myresult = mycursor.fetchone()
+
+      #Delete previously used indexes
+      for i in myresult:
+        allTexts.remove(i)
+
+      #Get other 5 random texts without reusing the old ones
+      text = random.sample(allTexts, 5)
+
+      #Execute the query
+      mycursor.execute("UPDATE rem_index SET index5 = %s, index6 = %s, index7 = %s, index8 = %s, index9 = %s WHERE tester_number = %s", (text[0], text[1], text[2], text[3], text[4], testerN_int))
+      conn.commit()
+      return text
+
+  
+  #close the db connection
+  conn.close()
+  
+
+
+
 #find the last point of a block
 def find_last_point(text):
   point = text.rfind('.')
@@ -138,11 +215,11 @@ def addSeparator(text, n, max_lenght):
 
 
 #Finish the block text after the last point
-def rem_text(text, n, max_lenght):
+def rem_text(text, n, max_lenght, num_line):
   txt = addSeparator(text, n, max_lenght)
   s = list(txt)
   point = find_last_point(txt)
-  if (point != -1):
+  if (point != -1 and point > ((num_line-1)*n)):
     point = point + 1
     for i in range(len(txt)):
       if (i == point):
@@ -167,14 +244,14 @@ def horizontalMove():
   #dimension of a single character
   dim_char = 30
   #number of a box lines
-  num_line = 6
+  num_line = 8
   #Number of characters per line
-  n = 35
+  n = 40
 
   #Create a font
   font = pygame.font.SysFont("Arial", dim_char)
   #Text to show
-  text = "Eclipses only occur when the Sun, Earth, and Moon are all in a straight line. Solar eclipses occur at new moon, when the Moon is between the Sun and Earth. In contrast, lunar eclipses occur at full moon, when Earth is between the Sun and Moon. The apparent size of the Moon is roughly the same as that of the Sun, with both being viewed at close to one-half a degree wide. The Sun is much larger than the Moon, but it is the vastly greater distance that gives it the same apparent size as the much closer and much smaller Moon from the perspective of Earth. The variations in apparent size, due to the non-circular orbits, are nearly the same as well, though occurring in different cycles. This makes possible both total (with the Moon appearing larger than the Sun) and annular (with the Moon appearing smaller than the Sun) solar eclipses.[217] In a total eclipse, the Moon completely covers the disc of the Sun and the solar corona becomes visible to the naked eye."
+  text = random.choice(allTexts)
   # Setting the time
   test_time = 10
   t_end = time.time() + test_time
@@ -184,7 +261,7 @@ def horizontalMove():
   y = (sizeHeight / 2) - ((num_line*dim_char)/2)
   speed = 0.2
 
-  text = rem_text(text, n, n*num_line)
+  text = rem_text(text, n, n*num_line, num_line)
   #text with new line
   nlText = text.split("#")
   max = 0
@@ -198,7 +275,7 @@ def horizontalMove():
   '''
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(tester_number, trial_number), "a")
   '''
 
   wall = False
@@ -259,39 +336,35 @@ def verticalMove():
   #dimension of a single character
   dim_char = 30
   #number of a box lines
-  num_line = 6
+  num_line = 8
   #Number of characters per line
-  n = 35
+  n = 40
 
   #Create a font
   font = pygame.font.SysFont("Arial", dim_char)
   #Text to show
-  text = "Eclipses only occur when the Sun, Earth, and Moon are all in a straight line. Solar eclipses occur at new moon, when the Moon is between the Sun and Earth. In contrast, lunar eclipses occur at full moon, when Earth is between the Sun and Moon. The apparent size of the Moon is roughly the same as that of the Sun, with both being viewed at close to one-half a degree wide. The Sun is much larger than the Moon, but it is the vastly greater distance that gives it the same apparent size as the much closer and much smaller Moon from the perspective of Earth. The variations in apparent size, due to the non-circular orbits, are nearly the same as well, though occurring in different cycles. This makes possible both total (with the Moon appearing larger than the Sun) and annular (with the Moon appearing smaller than the Sun) solar eclipses.[217] In a total eclipse, the Moon completely covers the disc of the Sun and the solar corona becomes visible to the naked eye."
+  text = random.choice(allTexts)
   # Setting the time
   test_time = 10
   t_end = time.time() + test_time
 
-  text = rem_text(text, n, n*num_line)
+  text = rem_text(text, n, n*num_line, num_line)
   #text with new line
   nlText = text.split("#")
   #Maximum text width 
   max = 0
-  #Get maximum text width and height
-  for ind in range(num_line-1):
-    line_width, line_height = font.size(nlText[ind])
-    if(line_width > max):
-      max = line_width
+  
+  line_width, line_height = font.size(nlText[0])
 
-  char_width = max/n
 
   #Starting image position and speed
-  x = (sizeWidth / 2) - (char_width*n/2)
+  x = (sizeWidth / 2) - (line_width/2)
   y = 0
   speed = 0.2
  
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")'''
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(tester_number, trial_number), "a")'''
 
   wall = False
 
@@ -355,19 +428,19 @@ def diagMove():
   #dimension of a single character
   dim_char = 30
   #number of a box lines
-  num_line = 6
+  num_line = 8
   #Number of characters per line
-  n = 35
+  n = 40
 
   #Create a font
   font = pygame.font.SysFont("Arial", dim_char)
   #Text to show
-  text = "Eclipses only occur when the Sun, Earth, and Moon are all in a straight line. Solar eclipses occur at new moon, when the Moon is between the Sun and Earth. In contrast, lunar eclipses occur at full moon, when Earth is between the Sun and Moon. The apparent size of the Moon is roughly the same as that of the Sun, with both being viewed at close to one-half a degree wide. The Sun is much larger than the Moon, but it is the vastly greater distance that gives it the same apparent size as the much closer and much smaller Moon from the perspective of Earth. The variations in apparent size, due to the non-circular orbits, are nearly the same as well, though occurring in different cycles. This makes possible both total (with the Moon appearing larger than the Sun) and annular (with the Moon appearing smaller than the Sun) solar eclipses.[217] In a total eclipse, the Moon completely covers the disc of the Sun and the solar corona becomes visible to the naked eye."
+  text = random.choice(allTexts)
   # Setting the time
   test_time = 10
   t_end = time.time() + test_time
 
-  text = rem_text(text, n, n*num_line)
+  text = rem_text(text, n, n*num_line, num_line)
   #text with new line
   nlText = text.split("#")
   #Maximum text width 
@@ -385,7 +458,7 @@ def diagMove():
 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")'''
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(tester_number, trial_number), "a")'''
 
   wall = False
 
@@ -450,7 +523,7 @@ def horizontalScroll():
   #Create a font
   font = pygame.font.SysFont("Arial", dim_char)
   #Text to show
-  text = "Milan is a city in northern Italy, regional capital of Lombardy, the largest city in Italy by urban population and the second-most-populous city proper in Italy after Rome. The city proper has a population of about 1.4 million, while its metropolitan city has 3.25 million residents. The urban area of Milan is the fourth-most-populous in the EU with 6.17 million inhabitants. According to national sources, the population within the wider Milan metropolitan area is estimated between 7.5 million and 8.2 million, making it by far the largest metropolitan area in Italy and one of the largest in the EU. Milan is the economic capital of Italy, one of the economic capitals of Europe and a global financial centre."
+  text = random.choice(allTexts)
   #Get text width and height
   text_width, text_height = font.size(text)
   # Setting the time
@@ -464,7 +537,7 @@ def horizontalScroll():
 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")'''
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(tester_number, trial_number), "a")'''
 
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
@@ -504,7 +577,7 @@ def verticalBlock():
   #Create a font
   font = pygame.font.SysFont("Arial", 45)
   #Text to show
-  text = "Eclipses only occur when the Sun, Earth, and Moon are all in a straight line. Solar eclipses occur at new moon, when the Moon is between the Sun and Earth. In contrast, lunar eclipses occur at full moon, when Earth is between the Sun and Moon. The apparent size of the Moon is roughly the same as that of the Sun, with both being viewed at close to one-half a degree wide. The Sun is much larger than the Moon, but it is the vastly greater distance that gives it the same apparent size as the much closer and much smaller Moon from the perspective of Earth. The variations in apparent size, due to the non-circular orbits, are nearly the same as well, though occurring in different cycles. This makes possible both total (with the Moon appearing larger than the Sun) and annular (with the Moon appearing smaller than the Sun) solar eclipses.[217] In a total eclipse, the Moon completely covers the disc of the Sun and the solar corona becomes visible to the naked eye."
+  text = random.choice(allTexts)
   #Get text width and height
   text_width, text_height = font.size(text)
   # Setting the time
@@ -513,17 +586,19 @@ def verticalBlock():
   n = 30
   t_end = time.time() + test_time
 
-  #Starting image position and speed
-  x = sizeWidth/2 - (text_width/(n*2))
-  y = sizeHeight
-  speed = 0.5
   text = addSeparator(text, n, len(text))
   #text with new line
   nlText = text.split("#")
+  line_width, line_height = font.size(nlText[0])
+   
+  #Starting image position and speed
+  x = sizeWidth/2 - (line_width/2)
+  y = sizeHeight
+  speed = 0.5
 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(testernumber, index), "a")'''
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\Results{}-Trial{}.txt".format(tester_number, trial_number), "a")'''
 
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
@@ -559,14 +634,16 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  #shuffle the order of the animations
+  '''#shuffle the order of the animations
   tests_list = [horizontalMove, verticalMove, diagMove, horizontalScroll, verticalBlock]
   random.shuffle(tests_list)
 
   #run the animation after the shuffle
   for funct in tests_list:
-    funct()
+    funct()'''
   
+  text = random_text()
+
   pygame.quit()
   '''s.close()'''
 

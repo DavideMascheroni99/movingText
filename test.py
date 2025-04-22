@@ -150,10 +150,10 @@ def random_text():
       return 0
   
 
-  #Secont try
+  #Second try
   if(trialN_int == 2):
 
-    mycursor.execute("SELECT tester_number, index0, index1, index2, index3, index4 FROM rem_index")
+    mycursor.execute("SELECT tester_number, index0, index1, index2, index3, index4 FROM rem_index WHERE tester_number = %s", (testerN_int, ))
     myresult = mycursor.fetchone()
 
     if (myresult == None):
@@ -180,6 +180,53 @@ def random_text():
 
       #Execute the query
       mycursor.execute("UPDATE rem_index SET index5 = %s, index6 = %s, index7 = %s, index8 = %s, index9 = %s WHERE tester_number = %s", (text[0], text[1], text[2], text[3], text[4], testerN_int))
+      conn.commit()
+      return text
+    
+
+  #Third try
+  if(trialN_int == 3):
+
+    mycursor.execute("SELECT tester_number, index0, index1, index2, index3, index4 FROM rem_index WHERE tester_number = %s", (testerN_int, ))
+    myresult = mycursor.fetchone()
+
+    if (myresult == None):
+      print("You can't register the third try without the first one")
+      return 0
+    
+    mycursor.execute("SELECT tester_number, index5, index6, index7, index8, index9 FROM rem_index WHERE tester_number = %s", (testerN_int, ))
+    myresult = mycursor.fetchone()
+
+    if (myresult == None):
+      print("You can't register the third try without the second one")
+      return 0
+
+    mycursor.execute("SELECT index10, index11, index12, index13, index14 FROM rem_index WHERE tester_number = %s", (testerN_int, ))
+    myresult = mycursor.fetchone()
+
+    if (myresult[0] != None and myresult[1] != None and myresult[2] != None and myresult[3] != None and myresult[4] != None):
+      print("You already registered the third trial")
+      return 0
+    
+    else:
+      mycursor.execute("SELECT index0, index1, index2, index3, index4 FROM rem_index WHERE tester_number = %s", (testerN_int, ))
+      myresult = mycursor.fetchone()
+
+      mycursor.execute("SELECT index5, index6, index7, index8, index9 FROM rem_index WHERE tester_number = %s", (testerN_int, ))
+      myresult1 = mycursor.fetchone()
+
+      #Delete previously used indexes
+      for i in myresult:
+        allTexts.remove(i)
+      
+      for i in myresult1:
+        allTexts.remove(i)
+
+      #Get other 5 random texts without reusing the old ones
+      text = random.sample(allTexts, 5)
+
+      #Execute the query
+      mycursor.execute("UPDATE rem_index SET index10 = %s, index11 = %s, index12 = %s, index13 = %s, index14 = %s WHERE tester_number = %s", (text[0], text[1], text[2], text[3], text[4], testerN_int))
       conn.commit()
       return text
 
@@ -239,7 +286,7 @@ def createVertBlock(x, y, font, nlText, char_size):
 
 
 #Box text vertical move
-def horizontalMove():
+def horizontalMove(txt):
   
   #dimension of a single character
   dim_char = 30
@@ -251,7 +298,7 @@ def horizontalMove():
   #Create a font
   font = pygame.font.SysFont("Arial", dim_char)
   #Text to show
-  text = random.choice(allTexts)
+  text = txt
   # Setting the time
   test_time = 10
   t_end = time.time() + test_time
@@ -331,7 +378,7 @@ def horizontalMove():
 
 
 #Box text horizontal move
-def verticalMove():
+def verticalMove(txt):
 
   #dimension of a single character
   dim_char = 30
@@ -343,7 +390,7 @@ def verticalMove():
   #Create a font
   font = pygame.font.SysFont("Arial", dim_char)
   #Text to show
-  text = random.choice(allTexts)
+  text = txt
   # Setting the time
   test_time = 10
   t_end = time.time() + test_time
@@ -421,7 +468,7 @@ def verticalMove():
 
 
 #Box text that moves in diagonal
-def diagMove():
+def diagMove(txt):
  
   diag = math.sqrt((sizeWidth*sizeWidth)+(sizeHeight*sizeHeight))
 
@@ -435,7 +482,7 @@ def diagMove():
   #Create a font
   font = pygame.font.SysFont("Arial", dim_char)
   #Text to show
-  text = random.choice(allTexts)
+  text = txt
   # Setting the time
   test_time = 10
   t_end = time.time() + test_time
@@ -517,13 +564,13 @@ def diagMove():
 
 
 #Text scroll from right to left
-def horizontalScroll():
+def horizontalScroll(txt):
 
   dim_char = 45
   #Create a font
   font = pygame.font.SysFont("Arial", dim_char)
   #Text to show
-  text = random.choice(allTexts)
+  text = txt
   #Get text width and height
   text_width, text_height = font.size(text)
   # Setting the time
@@ -571,13 +618,13 @@ def horizontalScroll():
 
 
 #Block of text that moves vertically
-def verticalBlock():
+def verticalBlock(txt):
 
   dim_char = 45
   #Create a font
   font = pygame.font.SysFont("Arial", 45)
   #Text to show
-  text = random.choice(allTexts)
+  text = txt
   #Get text width and height
   text_width, text_height = font.size(text)
   # Setting the time
@@ -634,15 +681,15 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  '''#shuffle the order of the animations
+  #shuffle the order of the animations
   tests_list = [horizontalMove, verticalMove, diagMove, horizontalScroll, verticalBlock]
   random.shuffle(tests_list)
 
-  #run the animation after the shuffle
-  for funct in tests_list:
-    funct()'''
-  
   text = random_text()
+
+  #run the animation after the shuffle
+  for funct, txt in zip(tests_list, text):
+    funct(txt)
 
   pygame.quit()
   '''s.close()'''

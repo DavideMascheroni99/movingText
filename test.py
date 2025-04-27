@@ -81,6 +81,10 @@ def gen_random_text(allTexts):
   text = random.sample(allTexts, glb_var_const.K)
   return text
 
+def rem_used_texts(myresult):
+  for j in range(len(myresult)):
+    glb_var_const.allTexts.remove(myresult[j][0])
+
 
 #Assign the random text
 def random_text():
@@ -97,7 +101,6 @@ def random_text():
   if((sessionN_int > 3 or sessionN_int < 1) or (trialN_int > 3 or trialN_int < 1) or (testerN_int < 1)):
       raise exception.MyException("Invalid input number")
 
-  #First try
   if(sessionN_int == 1 and trialN_int == 1):
     text = gen_random_text(glb_var_const.allTexts)
     #Execute the query
@@ -106,7 +109,7 @@ def random_text():
 
     if (row == None):
       insert_k_texts(mycursor, text, conn)
-    
+      
     else:
       raise exception.MyException("There are already data for tester {} during session {} and trial {} in the database".format(tester_number, session_number, trial_number))
     
@@ -115,9 +118,7 @@ def random_text():
     for i in range (1, trialN_int):
       mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and trial_number = %s", (tester_number, i))
       myresult = mycursor.fetchall()
-      print(len (myresult))
-      for j in range(len(myresult)):
-        glb_var_const.allTexts.remove(myresult[j][0])
+      rem_used_texts(myresult)
     
     text = gen_random_text(glb_var_const.allTexts)
     insert_k_texts(mycursor, text, conn)
@@ -127,34 +128,27 @@ def random_text():
     for i in range(1, sessionN_int):
       mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and session_number = %s", (tester_number, i))
       myresult = mycursor.fetchall()
-      print(len (myresult))
-      for j in range(len(myresult)):
-        glb_var_const.allTexts.remove(myresult[j][0])
+      rem_used_texts(myresult)
 
     text = gen_random_text(glb_var_const.allTexts)
     insert_k_texts(mycursor, text, conn)
 
-  else:
+  if(sessionN_int !=1 and trialN_int != 1):
     #Remove already used texts in previous sessions
     for i in range(1, sessionN_int):
       mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and session_number = %s", (tester_number, i))
       myresult = mycursor.fetchall()
-      print(len (myresult))
-      for j in range(len(myresult)):
-        glb_var_const.allTexts.remove(myresult[j][0])
+      rem_used_texts(myresult)
 
     #Remove already used texts in the previous trials
     for i in range(1, trialN_int):
       mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and trial_number = %s and session_number = %s", (tester_number, i, session_number))
       myresult = mycursor.fetchall()
-      print(len (myresult))
-      for j in range(len(myresult)):
-        glb_var_const.allTexts.remove(myresult[j][0])
+      rem_used_texts(myresult)
 
     text = gen_random_text(glb_var_const.allTexts)
     insert_k_texts(mycursor, text, conn)
 
-  
   #close the db connection
   conn.close()
   return text
@@ -328,8 +322,8 @@ def main():
   #run the animation after the shuffle
   for funct, txt in zip(tests_list, text):
     funct(txt)'''
-
-  text = random_text()
+  
+  text= random_text()
 
   pygame.quit()
   '''s.close()'''

@@ -164,8 +164,6 @@ def addSeparator(text, n, max_lenght):
 
   for i in range(max_lenght):
     if(i%n == 0) and i != 0:
-      if(s[i] == ' '):
-        del(s[i])
       s[i] = '#' + s[i]
       
   text = ''.join(s[0:i])
@@ -313,7 +311,7 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  '''#shuffle the order of the animations
+  #shuffle the order of the animations
   tests_list = [hor_scroll_slow_big, hor_scroll_slow_little, hor_scroll_fast_big, hor_scroll_fast_little, vert_block_slow_little, vert_block_slow_big, vert_block_fast_little, vert_block_fast_big]
   random.shuffle(tests_list)
 
@@ -321,9 +319,7 @@ def main():
 
   #run the animation after the shuffle
   for funct, txt in zip(tests_list, text):
-    funct(txt)'''
-  
-  text= random_text()
+    funct(txt)
 
   pygame.quit()
   '''s.close()'''

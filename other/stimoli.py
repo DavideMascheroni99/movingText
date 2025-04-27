@@ -17,12 +17,12 @@ application_window = tkinter.Tk()
 #Ask the tester number
 tester_number = simpledialog.askstring("Input", "Input tester number", parent=application_window)
 #Ask the session number
-session_number = simpledialog.askstring("Input", "Input tester number", parent=application_window)
+session_number = simpledialog.askstring("Input", "Input session number", parent=application_window)
 #Insert the trial number
 trial_number = simpledialog.askstring("Input", "Input trial number", parent=application_window)
 
 
-##45 texts containing cities description of Milan municipality
+#72 texts containing cities description of Milan municipality
 text0 = "Rescaldina is a comune that is part of the Metropolitan City of Milan, in the Province of Milan in the Italian region Lombardy, with a population of 14,211 distributed over about 8 km and located about 25 kilometres northwest of Milan. Rescaldina borders the following municipalities: Cislago, Gorla Minore, Gerenzano, Marnate, Uboldo, Castellanza, Legnano and Cerro Maggiore. Except for Legnano and Cerro Maggiore, the other municipalities belong to the Province of Varese."
 text1 = "Sesto San Giovanni, locally referred to as just Sesto, is a comune in the Metropolitan City of Milan, in the Italian region of Lombardy. It was awarded with the honorary title of città (city) by decree of 10 April 1954, signed by President Luigi Einaudi. An unimportant agglomerate of buildings until the 19th century, Sesto San Giovanni grew during the end of the 19th century and in the early 20th century, becoming the site of several industries, including companies such as Falck, Campari, Magneti Marelli and Breda. In that period the population increased rapidly, from 5,000 inhabitants in 1880 to 14,000 in 1911."
 text2 = "Cinisello Balsamo is a comune of about 75,200 inhabitants in the Metropolitan City of Milan, in the Italian region of Lombardy, about 10 kilometres northeast of Milan city center. Cinisello Balsamo borders the following municipalities: Monza, Muggiò, Nova Milanese, Paderno Dugnano, Cusano Milanino, Sesto San Giovanni, Bresso. The current comune was formed in 1928 by the union of Cinisello and Balsamo, and received the honorary title of city through a presidential decree on 17 October 1972."
@@ -94,7 +94,6 @@ text67 = "Vaprio d'Adda ( Vàvar in local dialect and in Milanese dialect, Àer 
 text68 = "Lacchiarella is an Italian municipality of 9,140 inhabitants in the metropolitan city of Milan in Lombardy, located south of the regional capital. The name Lacchiarella, in Lombard Laciarèla , means 'small dairy' and this definition must be attributed to the milk production of the area. The municipality of Lacchiarella is located south of Milan in the lower area of ​​the Po Valley . From Cascina Decima, the modern Lombard court of Lacchiarella, passed the Roman road that connected Mediolanum with Ticinum ( Pavia ). Its name derives from Ad Decimum , which recalls its distance in miles from Mediolanum."
 text69 = "Gessate is an Italian municipality of 8,958 inhabitants in the metropolitan city of Milan in Lombardy. Agricultural and industrial center of the Lombard plain east of Milan (21 km), not far from the Adda river . The municipal territory is crossed to the north by the Villoresi canal , while the southern border is marked by the Naviglio . It is part of the Martesana territory . The extreme eastern part is included in the Rio Vallone supramunicipal park."
 text70 = "Inveruno is an Italian municipality of 8,492 inhabitants of the metropolitan city of Milan in Lombardy with patron saint San Martino di Tours. Entrance sign to the municipality of Inveruno coming from Casorezzo The municipal territory has a horizontally elongated shape and borders Arconate and Busto Garolfo to the north , Casorezzo and Ossona to the east , Ossona and Mesero to the south and Cuggiono to the west . The municipality of Inveruno has a single hamlet, Furato . Morphologically, the territory of Inveruno is characterised by the flat environment typical of the Po Valley , mainly suitable for woods or crops. The altitude is around 161 m  above sea level."
-
 text71 = "Bùssero is an Italian municipality of 8,369 inhabitants in the metropolitan city of Milan in Lombardy. The municipality, being bordered by the Martesana canal , is part of the territory of Martesana. The name of the settlement derives from boxwood , an evergreen shrub, which is also the origin of a widespread Lombard surname. The area was populated since Roman times and in 1906 a female sarcophagus from the period was found. Having appeared on the topographies of the plain east of Milan since 852 , about three centuries later Bussero gave its name to a prominent family, which in the Lombard capital founded the hospital of San Barnaba (with Goffredo da Bussero, relative and namesake of the more famous historian , in 1145 ) and of which Pagano, podestà in 1212 , was a member ."
 text72 = "Pozzuolo Martesana is an Italian municipality of 8,796 inhabitants in the metropolitan city of Milan in Lombardy. It is part of the Martesana territory: one of the factories of the Ferrero confectionery group is located there. From an archaeological point of view, the oldest attestations in the territory of Pozzuolo Martesana are referable to a Roman tomb of the imperial age found in the hamlet of Bisentrate and to some burials of the Lombard era, datable to the first half of the 7th century , found in 2011 along the route of the BreBeMi motorway , south of the current town."
 
@@ -111,7 +110,9 @@ TEST_TIME = 10
 LITTLE_CHAR = 30
 BIG_CHAR = 45
 LOW_SPEED = 0.8
-HIGH_SPEED = 1.5
+HIGH_SPEED = 1.4
+#Number of random value to generate per try
+K = 8
 
 
 #Window creation
@@ -161,7 +162,7 @@ def db_connection():
   return cnx
 
 
-#Assign the random text
+'''#Assign the random text
 def random_text():
   
   #start the db connection
@@ -272,6 +273,46 @@ def random_text():
   
   #close the db connection
   conn.close()
+  '''
+
+
+def gen_random_text(allTexts):
+  text = random.sample(allTexts, K)
+  return text
+
+
+#Assign the random text
+def random_text():
+
+  testerN_int = int(tester_number)
+  sessionN_int = int(tester_number)
+  trialN_int = int(trial_number)
+
+  #start the db connection
+  conn = db_connection()
+  mycursor = conn.cursor()
+
+  #First try
+  if(sessionN_int == 1 and trialN_int == 1):
+    
+    text = gen_random_text(allTexts)
+
+    #Execute the query
+    mycursor.execute("SELECT * FROM rem_index WHERE tester_number = %s", (tester_number, ))
+    row = mycursor.fetchone()
+
+    if (row == None):
+      for i, j in zip(range(0,7), text):
+        mycursor.execute("INSERT INTO rem_index (tester_number, session_number, trial_number, index_funct, txt) VALUES (%s, %s, %s, %s, %s)", (tester_number, session_number, trial_number, i, j))
+        conn.commit() 
+      return text
+    else:
+      print("There are already data for tester {} during trial {} in the database".format(tester_number, trial_number))
+      return 0
+  
+  
+  #close the db connection
+  conn.close()
   
 
 #add # every n characters
@@ -318,8 +359,7 @@ def horizontalScroll(txt, speed, dim_char, fname):
 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\T{}-S{}-TRY{}-{}.txt".format(tester_number, session_number, trial_number, fname), "w")'''
-  file1 = open("C:\\Users\\david\\OneDrive\\Desktop\\Test\\T{}-S{}-TRY{}-{}.txt".format(tester_number, session_number, trial_number, fname), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, fname), "w")'''
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
@@ -374,7 +414,7 @@ def verticalBlock(txt, speed, dim_char, fname):
 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\T{}-S{}-TRY{}-{}.txt".format(tester_number, session_number, trial_number, fname), "w")'''
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\T{}-S{}-TRY{}-VB_{}.txt".format(tester_number, session_number, trial_number, fname), "w")'''
 
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
@@ -389,7 +429,7 @@ def verticalBlock(txt, speed, dim_char, fname):
 
     y = y - (1*speed)
     screen.fill(BLACK)
-    createVertBlock(x, y, font, nlText, 45)
+    createVertBlock(x, y, font, nlText, dim_char)
   
     pygame.display.flip()
     clock.tick(150)
@@ -416,26 +456,33 @@ def hor_scroll_fast_little(txt):
 def hor_scroll_fast_big(txt):
   horizontalScroll(txt, HIGH_SPEED, BIG_CHAR, "FA_BIG")
 
+def vert_block_slow_little(txt):
+  verticalBlock(txt, LOW_SPEED, LITTLE_CHAR, "SL_LIT")
+
+def vert_block_slow_big(txt):
+  verticalBlock(txt, LOW_SPEED, BIG_CHAR, "SL_BIG")
+
+def vert_block_fast_little(txt):
+  verticalBlock(txt, HIGH_SPEED, LITTLE_CHAR, "FA_LIT")
+
+def vert_block_fast_big(txt):
+  verticalBlock(txt, HIGH_SPEED, BIG_CHAR, "FA_BIG")
+
 
 def main():
     
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  '''#shuffle the order of the animations
-  tests_list = [horizontalScroll, verticalBlock]
+  #shuffle the order of the animations
+  tests_list = [hor_scroll_slow_big, hor_scroll_slow_little, hor_scroll_fast_big, hor_scroll_fast_little, vert_block_slow_little, vert_block_slow_big, vert_block_fast_little, vert_block_fast_big]
   random.shuffle(tests_list)
 
   text = random_text()
 
   #run the animation after the shuffle
   for funct, txt in zip(tests_list, text):
-    funct(txt)'''
-
-  hor_scroll_slow_big(text0)
-  hor_scroll_slow_little(text1)
-  hor_scroll_fast_big(text2)
-  hor_scroll_fast_little(text3)
+    funct(txt)
 
   pygame.quit()
   '''s.close()'''

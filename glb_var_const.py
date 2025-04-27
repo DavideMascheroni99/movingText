@@ -1,22 +1,5 @@
 
-# Color definitions
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-
-
-#Parameter setting
-TEST_TIME = 10
-LITTLE_CHAR = 30
-BIG_CHAR = 45
-LOW_SPEED = 0.8
-HIGH_SPEED = 1.4
-
-
-#Window creation
-winsize = (sizeWidth, sizeHeight) = (1280, 720)
-win_pos_left = 0
-win_pos_top = 0
-
+'''COSTANTS'''
 
 #72 texts containing cities description of Milan municipality
 text0 = "Rescaldina is a comune that is part of the Metropolitan City of Milan, in the Province of Milan in the Italian region Lombardy, with a population of 14,211 distributed over about 8 km and located about 25 kilometres northwest of Milan. Rescaldina borders the following municipalities: Cislago, Gorla Minore, Gerenzano, Marnate, Uboldo, Castellanza, Legnano and Cerro Maggiore. Except for Legnano and Cerro Maggiore, the other municipalities belong to the Province of Varese."
@@ -96,3 +79,16 @@ text72 = "Pozzuolo Martesana is an Italian municipality of 8,796 inhabitants in 
 
 #list of texts to select randomly
 allTexts = [text0, text1, text2, text3, text4, text5, text6, text7, text8, text9, text10, text11, text12, text13, text14, text15, text16, text17, text18, text19, text20, text21, text22, text23, text24, text25, text26, text27, text28, text29, text30, text31, text32, text33, text34, text35, text36, text37, text38, text39, text40, text41, text42, text43, text44, text45, text46, text47, text48, text49, text50, text51, text52, text53, text54, text55, text56, text57, text58, text59, text60, text61, text62, text63, text64, text65, text66, text67, text68, text69, text70, text71, text72]
+
+# Color definitions
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+
+#Parameter setting
+TEST_TIME = 10
+LITTLE_CHAR = 30
+BIG_CHAR = 45
+LOW_SPEED = 0.8
+HIGH_SPEED = 1.4
+#Number of random value to generate per try
+K = 8

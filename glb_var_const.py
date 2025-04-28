@@ -92,3 +92,5 @@ LOW_SPEED = 0.8
 HIGH_SPEED = 1.4
 #Number of random value to generate per try
 K = 8
+FONT = "Arial"
+TCROSS = 2

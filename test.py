@@ -10,6 +10,7 @@ import random
 import mysql.connector
 import glb_var_const
 import exception
+import datetime
 
 
 # Dialogue window for the tester number
@@ -26,6 +27,8 @@ trial_number = simpledialog.askstring("Input", "Input trial_number", parent=appl
 winsize = (sizeWidth, sizeHeight) = (1280, 720)
 win_pos_left = 0
 win_pos_top = 0
+center_x = sizeWidth // 2
+center_y = sizeHeight // 2
 
 #Set environment variables
 os.environ['SDL_VIDEO_WINDOW_POS'] = '{0},{1}'.format(win_pos_left, win_pos_top)
@@ -60,6 +63,20 @@ s.send(str.encode('<SET ID="ENABLE_SEND_PUPIL_RIGHT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_LEFT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_RIGHT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))'''
+
+
+def draw_fixation_cross(x, y, length=20, width=5, color=pygame.Color(glb_var_const.WHITE)):
+  pygame.draw.line(screen, color, (x, y - length), (x, y + length), width)
+  pygame.draw.line(screen, color, (x - length, y), (x + length, y), width)
+
+#Show white cross for tcross seconds
+def show_white_cross():
+  t_end = time.time() + glb_var_const.TCROSS
+  
+  while time.time() <= t_end:
+    screen.fill(pygame.Color(glb_var_const.BLACK)) 
+    draw_fixation_cross(center_x, center_y)
+    pygame.display.flip()  
 
 
 
@@ -165,7 +182,7 @@ def addSeparator(text, n, max_lenght):
   for i in range(max_lenght):
     if(i%n == 0) and i != 0:
       s[i] = '#' + s[i]
-      
+
   text = ''.join(s[0:i])
   return text
 
@@ -182,8 +199,10 @@ def createVertBlock(x, y, font, nlText, char_size):
 #Text scroll from right to left
 def horizontalScroll(txt, speed, dim_char, fname):
 
+  show_white_cross()
+
   #Create a font
-  font = pygame.font.SysFont("Arial", dim_char)
+  font = pygame.font.SysFont(glb_var_const.FONT, dim_char)
   #Text to show
   text = txt
   #Get text width and height
@@ -196,7 +215,8 @@ def horizontalScroll(txt, speed, dim_char, fname):
 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, fname), "w")'''
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, fname), "w")
+  file1.write(str(datetime.datetime.now())+"\n")'''
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
@@ -230,8 +250,10 @@ def horizontalScroll(txt, speed, dim_char, fname):
 #Block of text that moves vertically
 def verticalBlock(txt, speed, dim_char, fname):
 
+  show_white_cross()
+
   #Create a font
-  font = pygame.font.SysFont("Arial", dim_char)
+  font = pygame.font.SysFont(glb_var_const.FONT, dim_char)
   #Text to show
   text = txt
   #Get text width and height
@@ -251,7 +273,8 @@ def verticalBlock(txt, speed, dim_char, fname):
 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\T{}-S{}-TRY{}-VB_{}.txt".format(tester_number, session_number, trial_number, fname), "w")'''
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Risultati\\T{}-S{}-TRY{}-VB_{}.txt".format(tester_number, session_number, trial_number, fname), "w")
+  file1.write(str(datetime.datetime.now())+"\n")'''
 
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
@@ -311,7 +334,7 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  #shuffle the order of the animations
+  '''#shuffle the order of the animations
   tests_list = [hor_scroll_slow_big, hor_scroll_slow_little, hor_scroll_fast_big, hor_scroll_fast_little, vert_block_slow_little, vert_block_slow_big, vert_block_fast_little, vert_block_fast_big]
   random.shuffle(tests_list)
 
@@ -319,7 +342,10 @@ def main():
 
   #run the animation after the shuffle
   for funct, txt in zip(tests_list, text):
-    funct(txt)
+    funct(txt)'''
+  
+
+  show_white_cross()
 
   pygame.quit()
   '''s.close()'''

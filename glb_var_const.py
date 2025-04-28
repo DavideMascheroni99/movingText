@@ -85,11 +85,11 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
 #Parameter setting
-TEST_TIME = 5
-LITTLE_CHAR = 30
-BIG_CHAR = 45
-LOW_SPEED = 0.8
-HIGH_SPEED = 1.4
+TEST_TIME = 10
+LITTLE_CHAR = 35
+BIG_CHAR = 50
+LOW_SPEED = 1
+HIGH_SPEED = 1.2
 
 #Number of random value to generate per try
 K = 8

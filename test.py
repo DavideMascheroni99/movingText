@@ -22,18 +22,10 @@ session_number = simpledialog.askstring("Input", "Input session_number", parent=
 #Insert the trial number
 trial_number = simpledialog.askstring("Input", "Input trial_number", parent=application_window)
 
-
-#Window creation
-winsize = (sizeWidth, sizeHeight) = (1280, 720)
-win_pos_left = 0
-win_pos_top = 0
-center_x = sizeWidth // 2
-center_y = sizeHeight // 2
-
 #Set environment variables
-os.environ['SDL_VIDEO_WINDOW_POS'] = '{0},{1}'.format(win_pos_left, win_pos_top)
+os.environ['SDL_VIDEO_WINDOW_POS'] = '{0},{1}'.format(glb_var_const.win_pos_left, glb_var_const.win_pos_top)
 #initialize display for a window
-screen = pygame.display.set_mode(winsize, pygame.FULLSCREEN)
+screen = pygame.display.set_mode(glb_var_const.winsize, pygame.FULLSCREEN)
 pygame.display.set_caption("Test")
 
     
@@ -75,7 +67,7 @@ def show_white_cross():
   
   while time.time() <= t_end:
     screen.fill(pygame.Color(glb_var_const.BLACK)) 
-    draw_fixation_cross(center_x, center_y)
+    draw_fixation_cross(glb_var_const.center_x, glb_var_const.center_y)
     pygame.display.flip()  
 
 
@@ -210,8 +202,8 @@ def horizontalScroll(txt, speed, dim_char, fname):
   t_end = time.time() + glb_var_const.TEST_TIME
 
   #Starting image position and speed
-  x = sizeWidth
-  y = (sizeHeight / 2) - (text_height / 2)
+  x = glb_var_const.sizeWidth
+  y = (glb_var_const.sizeHeight / 2) - (text_height / 2)
 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
@@ -268,8 +260,8 @@ def verticalBlock(txt, speed, dim_char, fname):
   line_width, line_height = font.size(nlText[0])
    
   #Starting image position and speed
-  x = sizeWidth/2 - (line_width/2)
-  y = sizeHeight
+  x = glb_var_const.sizeWidth/2 - (line_width/2)
+  y = glb_var_const.sizeHeight
 
   '''# File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))

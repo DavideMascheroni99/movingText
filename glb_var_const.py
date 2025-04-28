@@ -94,3 +94,10 @@ HIGH_SPEED = 1.4
 K = 8
 FONT = "Arial"
 TCROSS = 2
+
+#Window creation
+winsize = (sizeWidth, sizeHeight) = (1280, 720)
+win_pos_left = 0
+win_pos_top = 0
+center_x = sizeWidth // 2
+center_y = sizeHeight // 2

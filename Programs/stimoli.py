@@ -8,8 +8,8 @@ import math
 import time
 import random
 import mysql.connector
-import Programs.glb_var_const as glb_var_const
-import Programs.exception as exception
+import glb_var_const
+import exception
 import datetime
 from pathlib import Path
 
@@ -192,11 +192,12 @@ def horizontalScroll(txt, speed, dim_char, fname):
   y = (glb_var_const.sizeHeight / 2) - (text_height / 2)
 
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
-  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
+  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
+  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Tester{}\\Session{}Trial{}\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}Trial{}\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
   file1.write(str(datetime.datetime.now())+"\n")
 
   while (x > -text_width) and time.time() <= t_end:
@@ -249,12 +250,13 @@ def verticalBlock(txt, speed, dim_char, fname):
   y = glb_var_const.sizeHeight
 
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
-  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
+  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
+  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
  
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Tester{}\\Session{}Trial{}\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}Trial{}\\T{}-S{}-TRY{}-VB_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
   file1.write(str(datetime.datetime.now())+"\n")
 
   while (x > -text_width) and time.time() <= t_end:
@@ -263,7 +265,8 @@ def verticalBlock(txt, speed, dim_char, fname):
         sys.exit()
       if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
         sys.exit()
-    
+
+    clock.tick(150)   
     # Sending data to the server and writing it on the respective file
     casual_data = s.recv(1024)
     file1.write(bytes.decode(casual_data))
@@ -272,7 +275,7 @@ def verticalBlock(txt, speed, dim_char, fname):
     screen.fill(glb_var_const.BLACK)
     createVertBlock(x, y, font, nlText, dim_char)
     pygame.display.flip()
-    clock.tick(150)
+  
 
   # Sending data to the server and writing it on the respective file
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
@@ -285,28 +288,28 @@ def verticalBlock(txt, speed, dim_char, fname):
 
 
 def hor_scroll_slow_little(txt):
-  horizontalScroll(txt, glb_var_const.LOW_SPEED, glb_var_const.LITTLE_CHAR, "SL_LIT")
+  horizontalScroll(txt, glb_var_const.LOW_SPEED_HS, glb_var_const.LITTLE_CHAR, "SL_LIT")
 
 def hor_scroll_slow_big(txt):
-  horizontalScroll(txt, glb_var_const.LOW_SPEED, glb_var_const.BIG_CHAR, "SL_BIG")
+  horizontalScroll(txt, glb_var_const.LOW_SPEED_HS, glb_var_const.BIG_CHAR, "SL_BIG")
 
 def hor_scroll_fast_little(txt):
-  horizontalScroll(txt, glb_var_const.HIGH_SPEED, glb_var_const.LITTLE_CHAR, "FA_LIT")
+  horizontalScroll(txt, glb_var_const.HIGH_SPEED_HS, glb_var_const.LITTLE_CHAR, "FA_LIT")
 
 def hor_scroll_fast_big(txt):
-  horizontalScroll(txt, glb_var_const.HIGH_SPEED, glb_var_const.BIG_CHAR, "FA_BIG")
+  horizontalScroll(txt, glb_var_const.HIGH_SPEED_HS, glb_var_const.BIG_CHAR, "FA_BIG")
 
 def vert_block_slow_little(txt):
-  verticalBlock(txt, glb_var_const.LOW_SPEED, glb_var_const.LITTLE_CHAR, "SL_LIT")
+  verticalBlock(txt, glb_var_const.LOW_SPEED_VB, glb_var_const.LITTLE_CHAR, "SL_LIT")
 
 def vert_block_slow_big(txt):
-  verticalBlock(txt, glb_var_const.LOW_SPEED, glb_var_const.BIG_CHAR, "SL_BIG")
+  verticalBlock(txt, glb_var_const.LOW_SPEED_VB, glb_var_const.BIG_CHAR, "SL_BIG")
 
 def vert_block_fast_little(txt):
-  verticalBlock(txt, glb_var_const.HIGH_SPEED, glb_var_const.LITTLE_CHAR, "FA_LIT")
+  verticalBlock(txt, glb_var_const.HIGH_SPEED_VB, glb_var_const.LITTLE_CHAR, "FA_LIT")
 
 def vert_block_fast_big(txt):
-  verticalBlock(txt, glb_var_const.HIGH_SPEED, glb_var_const.BIG_CHAR, "FA_BIG")
+  verticalBlock(txt, glb_var_const.HIGH_SPEED_VB, glb_var_const.BIG_CHAR, "FA_BIG")
 
 
 def main():
@@ -325,7 +328,8 @@ def main():
     funct(txt)
 
   pygame.quit()
-  '''s.close()'''
+  s.close()
 
 if __name__ == "__main__":
     main()
+

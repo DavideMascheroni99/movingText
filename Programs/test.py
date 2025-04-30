@@ -157,26 +157,24 @@ def random_text():
   return text
 
 
-'''#add # every n characters
-def addSeparator(text):
-  s = list(text)
-  for i in range(len(text)):
-    if(i%glb_var_const.N == 0) and i != 0:
-      s[i] = '#' + s[i]
-  text = ''.join(s[0:i])
-  return text'''
-
-
-#add # every n characters
+#add # every last complete world of a line
 def addSeparator(txt):
   space = 0
   text = list(txt)
-
+  changed = False
+  count = 1
+  #Compute the space of the consecutive N characters
   while (space+glb_var_const.N) < len(text):
     for i in range(space, space + glb_var_const.N):
       if(text[i] == ' '):
         space = i
-    text[space] = text[space] + '#'
+        changed = True
+    #If there aren't spaces in a line add # after N characters
+    if(changed == False):
+      space = count * (glb_var_const.N - 1)
+    changed = False
+    text[space] = '#'
+    count = count + 1
   
   text = ''.join(text)
   return text
@@ -329,7 +327,7 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  #shuffle the order of the animations
+  '''#shuffle the order of the animations
   tests_list = [hor_scroll_slow_big, hor_scroll_slow_little, hor_scroll_fast_big, hor_scroll_fast_little, vert_block_slow_little, vert_block_slow_big, vert_block_fast_little, vert_block_fast_big]
   random.shuffle(tests_list)
 
@@ -337,7 +335,9 @@ def main():
 
   #run the animation after the shuffle
   for funct, txt in zip(tests_list, text):
-    funct(txt)
+    funct(txt)'''
+  
+  vert_block_slow_big(glb_var_const.text73)
 
   pygame.quit()
   '''s.close()'''

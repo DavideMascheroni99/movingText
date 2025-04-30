@@ -12,6 +12,7 @@ import glb_var_const
 import exception
 import datetime
 from pathlib import Path
+import textwrap
 
 
 # Dialogue window for the tester number
@@ -34,7 +35,7 @@ clock = pygame.time.Clock()
 
 '''SERVER CONNECTION'''
 
-# Host machine IP
+'''# Host machine IP
 HOST = '127.0.0.1'
 # Gazepoint Port
 PORT = 4242
@@ -53,7 +54,7 @@ s.send(str.encode('<SET ID="ENABLE_SEND_PUPIL_LEFT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_PUPIL_RIGHT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_LEFT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_RIGHT" STATE="1" />\r\n'))
-s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))
+s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))'''
 
 
 #Create a white cross to display
@@ -75,6 +76,11 @@ def show_white_cross():
 def db_connection():
   cnx = mysql.connector.connect(user='root', password='Dadeinter99', host='127.0.0.1', database='indexes')
   return cnx
+
+
+def check_write_order(myresult):
+  if(len(myresult) == 0): 
+    raise exception.MyException("Wrong write order")
 
 
 #Insert K generated texts in the database
@@ -124,7 +130,9 @@ def random_text():
     for i in range (1, trialN_int):
       mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and trial_number = %s", (tester_number, i))
       myresult = mycursor.fetchall()
+      check_write_order(myresult)
       rem_used_texts(myresult)
+
     text = gen_random_text(glb_var_const.allTexts)
     insert_k_texts(mycursor, text, conn)
 
@@ -133,6 +141,7 @@ def random_text():
     for i in range(1, sessionN_int):
       mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and session_number = %s", (tester_number, i))
       myresult = mycursor.fetchall()
+      check_write_order(myresult)
       rem_used_texts(myresult)
     text = gen_random_text(glb_var_const.allTexts)
     insert_k_texts(mycursor, text, conn)
@@ -142,35 +151,47 @@ def random_text():
     for i in range(1, sessionN_int):
       mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and session_number = %s", (tester_number, i))
       myresult = mycursor.fetchall()
+      check_write_order(myresult)
       rem_used_texts(myresult)
     #Remove already used texts in the previous trials
     for i in range(1, trialN_int):
       mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and trial_number = %s and session_number = %s", (tester_number, i, session_number))
       myresult = mycursor.fetchall()
+      check_write_order(myresult)
       rem_used_texts(myresult)
     text = gen_random_text(glb_var_const.allTexts)
     insert_k_texts(mycursor, text, conn)
 
   #close the db connection
   conn.close()
-  return text
-  
+  #return text
 
-#add # every n characters
-def addSeparator(text, n, max_lenght):
-  s = list(text)
-  ml = len(text)
-  if(max_lenght > ml):
-    max_lenght = ml
-  for i in range(max_lenght):
-    if(i%n == 0) and i != 0:
-      s[i] = '#' + s[i]
-  text = ''.join(s[0:i])
+
+#add # every last complete world of a line
+def add_separator(txt):
+  space = 0
+  text = list(txt)
+  changed = False
+  count = 1
+  #Compute the space of the consecutive N characters
+  while (space+glb_var_const.N) < len(text):
+    for i in range(space, space + glb_var_const.N):
+      if(text[i] == ' '):
+        space = i
+        changed = True
+    #If there aren't spaces in a line add # after N characters
+    if(changed == False):
+      space = count * (glb_var_const.N - 1)
+    changed = False
+    text[space] = '#'
+    count = count + 1
+  
+  text = ''.join(text)
   return text
 
 
 #Create a vertical block of text
-def createVertBlock(x, y, font, nlText, char_size):
+def create_vert_block(x, y, font, nlText, char_size):
   for i in range(len(nlText)):
     img = font.render(nlText[i], True, glb_var_const.WHITE)
     screen.blit(img, (x, y))
@@ -178,7 +199,7 @@ def createVertBlock(x, y, font, nlText, char_size):
 
 
 #Text scroll from right to left
-def horizontalScroll(txt, speed, dim_char, fname):
+def horizontal_scroll(txt, speed, dim_char, fname):
   show_white_cross()
   #Create a font
   font = pygame.font.SysFont(glb_var_const.FONT, dim_char)
@@ -191,14 +212,14 @@ def horizontalScroll(txt, speed, dim_char, fname):
   x = glb_var_const.sizeWidth
   y = (glb_var_const.sizeHeight / 2) - (text_height / 2)
 
-  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
+  '''Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}Trial{}\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
-  file1.write(str(datetime.datetime.now())+"\n")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
+  file1.write(str(datetime.datetime.now())+"\n")'''
 
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
@@ -207,9 +228,9 @@ def horizontalScroll(txt, speed, dim_char, fname):
       if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
         sys.exit()
 
-    # Sending data to the server and writing it on the respective file
+    '''# Sending data to the server and writing it on the respective file
     casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))
+    file1.write(bytes.decode(casual_data))'''
 
     x = x - (1*speed)
     screen.fill(glb_var_const.BLACK)
@@ -219,18 +240,18 @@ def horizontalScroll(txt, speed, dim_char, fname):
     pygame.display.flip()
     clock.tick(150)
 
-  # Sending data to the server and writing it on the respective file
+  '''# Sending data to the server and writing it on the respective file
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.close()
-  time.sleep(0.3)
+  time.sleep(0.3)'''
 
 
 #Block of text that moves vertically
-def verticalBlock(txt, speed, dim_char, fname):
+def vertical_block(txt, speed, dim_char, fname):
   show_white_cross()
   #Create a font
   font = pygame.font.SysFont(glb_var_const.FONT, dim_char)
@@ -238,26 +259,25 @@ def verticalBlock(txt, speed, dim_char, fname):
   text = txt
   #Get text width and height
   text_width, text_height = font.size(text)
-  #Number of characters per line
-  n = 30
   t_end = time.time() + glb_var_const.TEST_TIME
-  text = addSeparator(text, n, len(text))
+  text = add_separator(text)
   #text with new line
   nlText = text.split("#")
+
   line_width, line_height = font.size(nlText[0])
   #Starting image position and speed
   x = glb_var_const.sizeWidth/2 - (line_width/2)
   y = glb_var_const.sizeHeight
 
-  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
+  '''Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
  
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}Trial{}\\T{}-S{}-TRY{}-VB_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
-  file1.write(str(datetime.datetime.now())+"\n")
+  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-VB_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
+  file1.write(str(datetime.datetime.now())+"\n")'''
 
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
@@ -265,51 +285,51 @@ def verticalBlock(txt, speed, dim_char, fname):
         sys.exit()
       if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
         sys.exit()
-
-    clock.tick(150)   
-    # Sending data to the server and writing it on the respective file
+ 
+    '''# Sending data to the server and writing it on the respective file
     casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))
+    file1.write(bytes.decode(casual_data))'''
 
     y = y - (1*speed)
     screen.fill(glb_var_const.BLACK)
-    createVertBlock(x, y, font, nlText, dim_char)
+    create_vert_block(x, y, font, nlText, dim_char)
     pygame.display.flip()
+    clock.tick(150)
   
 
-  # Sending data to the server and writing it on the respective file
+  '''# Sending data to the server and writing it on the respective file
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.close()
-  time.sleep(0.3)
+  time.sleep(0.3)'''
 
 
 def hor_scroll_slow_little(txt):
-  horizontalScroll(txt, glb_var_const.LOW_SPEED_HS, glb_var_const.LITTLE_CHAR, "SL_LIT")
+  horizontal_scroll(txt, glb_var_const.LOW_SPEED_HS, glb_var_const.LITTLE_CHAR, "SL_LIT")
 
 def hor_scroll_slow_big(txt):
-  horizontalScroll(txt, glb_var_const.LOW_SPEED_HS, glb_var_const.BIG_CHAR, "SL_BIG")
+  horizontal_scroll(txt, glb_var_const.LOW_SPEED_HS, glb_var_const.BIG_CHAR, "SL_BIG")
 
 def hor_scroll_fast_little(txt):
-  horizontalScroll(txt, glb_var_const.HIGH_SPEED_HS, glb_var_const.LITTLE_CHAR, "FA_LIT")
+  horizontal_scroll(txt, glb_var_const.HIGH_SPEED_HS, glb_var_const.LITTLE_CHAR, "FA_LIT")
 
 def hor_scroll_fast_big(txt):
-  horizontalScroll(txt, glb_var_const.HIGH_SPEED_HS, glb_var_const.BIG_CHAR, "FA_BIG")
+  horizontal_scroll(txt, glb_var_const.HIGH_SPEED_HS, glb_var_const.BIG_CHAR, "FA_BIG")
 
 def vert_block_slow_little(txt):
-  verticalBlock(txt, glb_var_const.LOW_SPEED_VB, glb_var_const.LITTLE_CHAR, "SL_LIT")
+  vertical_block(txt, glb_var_const.LOW_SPEED_VB, glb_var_const.LITTLE_CHAR, "SL_LIT")
 
 def vert_block_slow_big(txt):
-  verticalBlock(txt, glb_var_const.LOW_SPEED_VB, glb_var_const.BIG_CHAR, "SL_BIG")
+  vertical_block(txt, glb_var_const.LOW_SPEED_VB, glb_var_const.BIG_CHAR, "SL_BIG")
 
 def vert_block_fast_little(txt):
-  verticalBlock(txt, glb_var_const.HIGH_SPEED_VB, glb_var_const.LITTLE_CHAR, "FA_LIT")
+  vertical_block(txt, glb_var_const.HIGH_SPEED_VB, glb_var_const.LITTLE_CHAR, "FA_LIT")
 
 def vert_block_fast_big(txt):
-  verticalBlock(txt, glb_var_const.HIGH_SPEED_VB, glb_var_const.BIG_CHAR, "FA_BIG")
+  vertical_block(txt, glb_var_const.HIGH_SPEED_VB, glb_var_const.BIG_CHAR, "FA_BIG")
 
 
 def main():
@@ -317,7 +337,7 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  #shuffle the order of the animations
+  '''#shuffle the order of the animations
   tests_list = [hor_scroll_slow_big, hor_scroll_slow_little, hor_scroll_fast_big, hor_scroll_fast_little, vert_block_slow_little, vert_block_slow_big, vert_block_fast_little, vert_block_fast_big]
   random.shuffle(tests_list)
 
@@ -325,10 +345,10 @@ def main():
 
   #run the animation after the shuffle
   for funct, txt in zip(tests_list, text):
-    funct(txt)
+    funct(txt)'''
 
   pygame.quit()
-  s.close()
+  '''s.close()'''
 
 if __name__ == "__main__":
     main()

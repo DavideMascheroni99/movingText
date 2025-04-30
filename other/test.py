@@ -8,8 +8,8 @@ import math
 import time
 import random
 import mysql.connector
-import glb_var_const
-import exception
+import Programs.glb_var_const as glb_var_const
+import Programs.exception as exception
 import datetime
 from pathlib import Path
 import textwrap
@@ -78,6 +78,11 @@ def db_connection():
   return cnx
 
 
+def check_write_order(myresult):
+  if(len(myresult) == 0): 
+    raise exception.MyException("Wrong write order")
+
+
 #Insert K generated texts in the database
 def insert_k_texts(mycursor, text, conn):
   for i, j in zip(range(0,8), text):
@@ -125,7 +130,9 @@ def random_text():
     for i in range (1, trialN_int):
       mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and trial_number = %s", (tester_number, i))
       myresult = mycursor.fetchall()
+      check_write_order(myresult)
       rem_used_texts(myresult)
+
     text = gen_random_text(glb_var_const.allTexts)
     insert_k_texts(mycursor, text, conn)
 
@@ -134,6 +141,7 @@ def random_text():
     for i in range(1, sessionN_int):
       mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and session_number = %s", (tester_number, i))
       myresult = mycursor.fetchall()
+      check_write_order(myresult)
       rem_used_texts(myresult)
     text = gen_random_text(glb_var_const.allTexts)
     insert_k_texts(mycursor, text, conn)
@@ -143,22 +151,24 @@ def random_text():
     for i in range(1, sessionN_int):
       mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and session_number = %s", (tester_number, i))
       myresult = mycursor.fetchall()
+      check_write_order(myresult)
       rem_used_texts(myresult)
     #Remove already used texts in the previous trials
     for i in range(1, trialN_int):
       mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and trial_number = %s and session_number = %s", (tester_number, i, session_number))
       myresult = mycursor.fetchall()
+      check_write_order(myresult)
       rem_used_texts(myresult)
     text = gen_random_text(glb_var_const.allTexts)
     insert_k_texts(mycursor, text, conn)
 
   #close the db connection
   conn.close()
-  return text
+  #return text
 
 
 #add # every last complete world of a line
-def addSeparator(txt):
+def add_separator(txt):
   space = 0
   text = list(txt)
   changed = False
@@ -181,7 +191,7 @@ def addSeparator(txt):
 
 
 #Create a vertical block of text
-def createVertBlock(x, y, font, nlText, char_size):
+def create_vert_block(x, y, font, nlText, char_size):
   for i in range(len(nlText)):
     img = font.render(nlText[i], True, glb_var_const.WHITE)
     screen.blit(img, (x, y))
@@ -189,7 +199,7 @@ def createVertBlock(x, y, font, nlText, char_size):
 
 
 #Text scroll from right to left
-def horizontalScroll(txt, speed, dim_char, fname):
+def horizontal_scroll(txt, speed, dim_char, fname):
   show_white_cross()
   #Create a font
   font = pygame.font.SysFont(glb_var_const.FONT, dim_char)
@@ -241,7 +251,7 @@ def horizontalScroll(txt, speed, dim_char, fname):
 
 
 #Block of text that moves vertically
-def verticalBlock(txt, speed, dim_char, fname):
+def vertical_block(txt, speed, dim_char, fname):
   show_white_cross()
   #Create a font
   font = pygame.font.SysFont(glb_var_const.FONT, dim_char)
@@ -250,7 +260,7 @@ def verticalBlock(txt, speed, dim_char, fname):
   #Get text width and height
   text_width, text_height = font.size(text)
   t_end = time.time() + glb_var_const.TEST_TIME
-  text = addSeparator(text)
+  text = add_separator(text)
   #text with new line
   nlText = text.split("#")
 
@@ -282,7 +292,7 @@ def verticalBlock(txt, speed, dim_char, fname):
 
     y = y - (1*speed)
     screen.fill(glb_var_const.BLACK)
-    createVertBlock(x, y, font, nlText, dim_char)
+    create_vert_block(x, y, font, nlText, dim_char)
     pygame.display.flip()
     clock.tick(150)
   
@@ -298,28 +308,28 @@ def verticalBlock(txt, speed, dim_char, fname):
 
 
 def hor_scroll_slow_little(txt):
-  horizontalScroll(txt, glb_var_const.LOW_SPEED_HS, glb_var_const.LITTLE_CHAR, "SL_LIT")
+  horizontal_scroll(txt, glb_var_const.LOW_SPEED_HS, glb_var_const.LITTLE_CHAR, "SL_LIT")
 
 def hor_scroll_slow_big(txt):
-  horizontalScroll(txt, glb_var_const.LOW_SPEED_HS, glb_var_const.BIG_CHAR, "SL_BIG")
+  horizontal_scroll(txt, glb_var_const.LOW_SPEED_HS, glb_var_const.BIG_CHAR, "SL_BIG")
 
 def hor_scroll_fast_little(txt):
-  horizontalScroll(txt, glb_var_const.HIGH_SPEED_HS, glb_var_const.LITTLE_CHAR, "FA_LIT")
+  horizontal_scroll(txt, glb_var_const.HIGH_SPEED_HS, glb_var_const.LITTLE_CHAR, "FA_LIT")
 
 def hor_scroll_fast_big(txt):
-  horizontalScroll(txt, glb_var_const.HIGH_SPEED_HS, glb_var_const.BIG_CHAR, "FA_BIG")
+  horizontal_scroll(txt, glb_var_const.HIGH_SPEED_HS, glb_var_const.BIG_CHAR, "FA_BIG")
 
 def vert_block_slow_little(txt):
-  verticalBlock(txt, glb_var_const.LOW_SPEED_VB, glb_var_const.LITTLE_CHAR, "SL_LIT")
+  vertical_block(txt, glb_var_const.LOW_SPEED_VB, glb_var_const.LITTLE_CHAR, "SL_LIT")
 
 def vert_block_slow_big(txt):
-  verticalBlock(txt, glb_var_const.LOW_SPEED_VB, glb_var_const.BIG_CHAR, "SL_BIG")
+  vertical_block(txt, glb_var_const.LOW_SPEED_VB, glb_var_const.BIG_CHAR, "SL_BIG")
 
 def vert_block_fast_little(txt):
-  verticalBlock(txt, glb_var_const.HIGH_SPEED_VB, glb_var_const.LITTLE_CHAR, "FA_LIT")
+  vertical_block(txt, glb_var_const.HIGH_SPEED_VB, glb_var_const.LITTLE_CHAR, "FA_LIT")
 
 def vert_block_fast_big(txt):
-  verticalBlock(txt, glb_var_const.HIGH_SPEED_VB, glb_var_const.BIG_CHAR, "FA_BIG")
+  vertical_block(txt, glb_var_const.HIGH_SPEED_VB, glb_var_const.BIG_CHAR, "FA_BIG")
 
 
 def main():
@@ -337,7 +347,7 @@ def main():
   for funct, txt in zip(tests_list, text):
     funct(txt)'''
   
-  vert_block_slow_big(glb_var_const.text73)
+  random_text()
 
   pygame.quit()
   '''s.close()'''

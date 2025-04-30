@@ -12,6 +12,7 @@ import glb_var_const
 import exception
 import datetime
 from pathlib import Path
+import textwrap
 
 
 # Dialogue window for the tester number
@@ -34,7 +35,7 @@ clock = pygame.time.Clock()
 
 '''SERVER CONNECTION'''
 
-# Host machine IP
+'''# Host machine IP
 HOST = '127.0.0.1'
 # Gazepoint Port
 PORT = 4242
@@ -53,7 +54,7 @@ s.send(str.encode('<SET ID="ENABLE_SEND_PUPIL_LEFT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_PUPIL_RIGHT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_LEFT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_RIGHT" STATE="1" />\r\n'))
-s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))
+s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))'''
 
 
 #Create a white cross to display
@@ -154,18 +155,30 @@ def random_text():
   #close the db connection
   conn.close()
   return text
-  
 
-#add # every n characters
-def addSeparator(text, n, max_lenght):
+
+'''#add # every n characters
+def addSeparator(text):
   s = list(text)
-  ml = len(text)
-  if(max_lenght > ml):
-    max_lenght = ml
-  for i in range(max_lenght):
-    if(i%n == 0) and i != 0:
+  for i in range(len(text)):
+    if(i%glb_var_const.N == 0) and i != 0:
       s[i] = '#' + s[i]
   text = ''.join(s[0:i])
+  return text'''
+
+
+#add # every n characters
+def addSeparator(txt):
+  space = 0
+  text = list(txt)
+
+  while (space+glb_var_const.N) < len(text):
+    for i in range(space, space + glb_var_const.N):
+      if(text[i] == ' '):
+        space = i
+    text[space] = text[space] + '#'
+  
+  text = ''.join(text)
   return text
 
 
@@ -191,14 +204,14 @@ def horizontalScroll(txt, speed, dim_char, fname):
   x = glb_var_const.sizeWidth
   y = (glb_var_const.sizeHeight / 2) - (text_height / 2)
 
-  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
+  '''Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
   file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}Trial{}\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
-  file1.write(str(datetime.datetime.now())+"\n")
+  file1.write(str(datetime.datetime.now())+"\n")'''
 
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
@@ -207,9 +220,9 @@ def horizontalScroll(txt, speed, dim_char, fname):
       if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
         sys.exit()
 
-    # Sending data to the server and writing it on the respective file
+    '''# Sending data to the server and writing it on the respective file
     casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))
+    file1.write(bytes.decode(casual_data))'''
 
     x = x - (1*speed)
     screen.fill(glb_var_const.BLACK)
@@ -219,14 +232,14 @@ def horizontalScroll(txt, speed, dim_char, fname):
     pygame.display.flip()
     clock.tick(150)
 
-  # Sending data to the server and writing it on the respective file
+  '''# Sending data to the server and writing it on the respective file
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.close()
-  time.sleep(0.3)
+  time.sleep(0.3)'''
 
 
 #Block of text that moves vertically
@@ -238,18 +251,17 @@ def verticalBlock(txt, speed, dim_char, fname):
   text = txt
   #Get text width and height
   text_width, text_height = font.size(text)
-  #Number of characters per line
-  n = 30
   t_end = time.time() + glb_var_const.TEST_TIME
-  text = addSeparator(text, n, len(text))
+  text = addSeparator(text)
   #text with new line
   nlText = text.split("#")
+
   line_width, line_height = font.size(nlText[0])
   #Starting image position and speed
   x = glb_var_const.sizeWidth/2 - (line_width/2)
   y = glb_var_const.sizeHeight
 
-  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
+  '''Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
  
@@ -257,7 +269,7 @@ def verticalBlock(txt, speed, dim_char, fname):
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
   file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}Trial{}\\T{}-S{}-TRY{}-VB_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
-  file1.write(str(datetime.datetime.now())+"\n")
+  file1.write(str(datetime.datetime.now())+"\n")'''
 
   while (x > -text_width) and time.time() <= t_end:
     for event in pygame.event.get():
@@ -265,26 +277,26 @@ def verticalBlock(txt, speed, dim_char, fname):
         sys.exit()
       if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
         sys.exit()
-
-    clock.tick(150)   
-    # Sending data to the server and writing it on the respective file
+ 
+    '''# Sending data to the server and writing it on the respective file
     casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))
+    file1.write(bytes.decode(casual_data))'''
 
     y = y - (1*speed)
     screen.fill(glb_var_const.BLACK)
     createVertBlock(x, y, font, nlText, dim_char)
     pygame.display.flip()
+    clock.tick(150)
   
 
-  # Sending data to the server and writing it on the respective file
+  '''# Sending data to the server and writing it on the respective file
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.close()
-  time.sleep(0.3)
+  time.sleep(0.3)'''
 
 
 def hor_scroll_slow_little(txt):
@@ -328,7 +340,7 @@ def main():
     funct(txt)
 
   pygame.quit()
-  s.close()
+  '''s.close()'''
 
 if __name__ == "__main__":
     main()

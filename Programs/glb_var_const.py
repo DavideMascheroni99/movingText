@@ -90,10 +90,10 @@ LITTLE_CHAR = 35
 BIG_CHAR = 50
 #Speed fo Horizontal scroll
 LOW_SPEED_HS = 1.6
-HIGH_SPEED_HS = 2
+HIGH_SPEED_HS = 2.1
 #Speed for vertical block
 LOW_SPEED_VB = 0.5
-HIGH_SPEED_VB = 0.8
+HIGH_SPEED_VB = 0.9
 
 #Number of random value to generate per try
 K = 8

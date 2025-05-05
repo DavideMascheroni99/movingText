@@ -92,7 +92,7 @@ LOW_SPEED_HS = 2
 HIGH_SPEED_HS = 3
 #Speed for vertical block
 LOW_SPEED_VB = 0.6
-HIGH_SPEED_VB = 0.8
+HIGH_SPEED_VB = 0.3
 
 #Number of random value to generate per try
 K = 8

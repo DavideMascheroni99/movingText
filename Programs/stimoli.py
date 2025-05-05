@@ -232,7 +232,7 @@ def horizontal_scroll(txt, speed, dim_char, fname):
     casual_data = s.recv(1024)
     file1.write(bytes.decode(casual_data))
 
-    x = x - (1*speed)
+    x = x - speed
     screen.fill(glb_var_const.BLACK)
     img = font.render(text, True, glb_var_const.WHITE)
     screen.blit(img, (x, y))
@@ -290,7 +290,7 @@ def vertical_block(txt, speed, dim_char, fname):
     casual_data = s.recv(1024)
     file1.write(bytes.decode(casual_data))
 
-    y = y - (1*speed)
+    y = y - speed
     screen.fill(glb_var_const.BLACK)
     create_vert_block(x, y, font, nlText, dim_char)
     pygame.display.flip()
@@ -347,9 +347,10 @@ def main():
   for funct, txt in zip(tests_list, text):
     funct(txt)'''
   
-  hor_scroll_fast_big(glb_var_const.allTexts[0])
-  hor_scroll_slow_big(glb_var_const.allTexts[0])
-
+  vert_block_fast_big(glb_var_const.allTexts[0])
+  vert_block_slow_big(glb_var_const.allTexts[0])
+  '''hor_scroll_fast_big(glb_var_const.allTexts[0])
+  hor_scroll_fast_little(glb_var_const.allTexts[0])'''
 
   pygame.quit()
   s.close()

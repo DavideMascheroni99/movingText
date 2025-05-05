@@ -164,7 +164,7 @@ def random_text():
 
   #close the db connection
   conn.close()
-  #return text
+  return text
 
 
 #add # every last complete world of a line
@@ -346,6 +346,7 @@ def main():
   #run the animation after the shuffle
   for funct, txt in zip(tests_list, text):
     funct(txt)
+
 
   pygame.quit()
   s.close()

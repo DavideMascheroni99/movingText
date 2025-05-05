@@ -337,7 +337,7 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  #shuffle the order of the animations
+  '''#shuffle the order of the animations
   tests_list = [hor_scroll_slow_big, hor_scroll_slow_little, hor_scroll_fast_big, hor_scroll_fast_little, vert_block_slow_little, vert_block_slow_big, vert_block_fast_little, vert_block_fast_big]
   random.shuffle(tests_list)
 
@@ -345,7 +345,10 @@ def main():
 
   #run the animation after the shuffle
   for funct, txt in zip(tests_list, text):
-    funct(txt)
+    funct(txt)'''
+  
+  hor_scroll_fast_big(glb_var_const.allTexts[0])
+  hor_scroll_slow_big(glb_var_const.allTexts[0])
 
 
   pygame.quit()

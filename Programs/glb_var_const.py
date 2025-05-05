@@ -88,8 +88,8 @@ N = 30
 LITTLE_CHAR = 35
 BIG_CHAR = 50
 #Speed fo Horizontal scroll
-LOW_SPEED_HS = 1.6
-HIGH_SPEED_HS = 2.0
+LOW_SPEED_HS = 2
+HIGH_SPEED_HS = 3
 #Speed for vertical block
 LOW_SPEED_VB = 0.6
 HIGH_SPEED_VB = 0.8

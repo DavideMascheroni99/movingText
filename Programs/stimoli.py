@@ -35,8 +35,6 @@ clock = pygame.time.Clock()
 
 '''SERVER CONNECTION'''
 
-#ciaooooo
-
 # Host machine IP
 HOST = '127.0.0.1'
 # Gazepoint Port

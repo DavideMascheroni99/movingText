@@ -8,8 +8,8 @@ import math
 import time
 import random
 import mysql.connector
-import Programs.glb_var_const as glb_var_const
-import Programs.exception as exception
+import glb_var_const
+import exception
 import datetime
 from pathlib import Path
 import textwrap
@@ -164,7 +164,7 @@ def random_text():
 
   #close the db connection
   conn.close()
-  #return text
+  return text
 
 
 #add # every last complete world of a line
@@ -221,7 +221,7 @@ def horizontal_scroll(txt, speed, dim_char, fname):
   file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
   file1.write(str(datetime.datetime.now())+"\n")'''
 
-  while (x > -text_width) and time.time() <= t_end:
+  while time.time() <= t_end:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         sys.exit()
@@ -232,7 +232,8 @@ def horizontal_scroll(txt, speed, dim_char, fname):
     casual_data = s.recv(1024)
     file1.write(bytes.decode(casual_data))'''
 
-    x = x - (1*speed)
+    x = x - speed
+  
     screen.fill(glb_var_const.BLACK)
     img = font.render(text, True, glb_var_const.WHITE)
     screen.blit(img, (x, y))
@@ -279,7 +280,7 @@ def vertical_block(txt, speed, dim_char, fname):
   file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-VB_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
   file1.write(str(datetime.datetime.now())+"\n")'''
 
-  while (x > -text_width) and time.time() <= t_end:
+  while time.time() <= t_end:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         sys.exit()
@@ -290,7 +291,7 @@ def vertical_block(txt, speed, dim_char, fname):
     casual_data = s.recv(1024)
     file1.write(bytes.decode(casual_data))'''
 
-    y = y - (1*speed)
+    y = y - speed
     screen.fill(glb_var_const.BLACK)
     create_vert_block(x, y, font, nlText, dim_char)
     pygame.display.flip()
@@ -347,7 +348,8 @@ def main():
   for funct, txt in zip(tests_list, text):
     funct(txt)'''
   
-  random_text()
+  hor_scroll_fast_big(glb_var_const.allTexts[0])
+  vert_block_fast_big(glb_var_const.allTexts[0])
 
   pygame.quit()
   '''s.close()'''

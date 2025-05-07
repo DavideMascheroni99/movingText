@@ -8,8 +8,8 @@ import math
 import time
 import random
 import mysql.connector
-import glb_var_const
-import exception
+import Programs.glb_var_const as glb_var_const
+import Programs.exception as exception
 import datetime
 from pathlib import Path
 import textwrap

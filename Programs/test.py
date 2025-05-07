@@ -205,6 +205,18 @@ def create_vert_block(x, y, font, nlText, char_size):
     y = y + char_size
 
 
+#Find the longest line in the text
+def long_line(nlText, font):
+  max = 0
+  index = 0
+  for i in nlText:
+    line_width, line_height = font.size(i)
+    if(line_width > max):
+      max = line_width
+      index = i
+  return index
+
+
 #Text scroll from right to left
 def horizontal_scroll(txt, speed, dim_char, fname):
   show_white_cross()
@@ -271,8 +283,8 @@ def vertical_block(txt, speed, dim_char, fname):
   text = add_separator(text)
   #text with new line
   nlText = text.split("#")
-
-  line_width, line_height = font.size(nlText[0])
+  index = long_line(nlText, font)
+  line_width, line_height = font.size(index)
   #Starting image position and speed
   x = glb_var_const.sizeWidth/2 - (line_width/2)
   y = glb_var_const.sizeHeight
@@ -345,7 +357,7 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  #shuffle the order of the animations
+  '''#shuffle the order of the animations
   tests_list = [hor_scroll_slow_big, hor_scroll_slow_little, hor_scroll_fast_big, hor_scroll_fast_little, vert_block_slow_little, vert_block_slow_big, vert_block_fast_little, vert_block_fast_big]
   random.shuffle(tests_list)
 
@@ -353,7 +365,9 @@ def main():
 
   #run the animation after the shuffle
   for funct, txt in zip(tests_list, text):
-    funct(txt)
+    funct(txt)'''
+  
+  vert_block_fast_big(glb_var_const.allTexts[0])
 
   pygame.quit()
   '''s.close()'''

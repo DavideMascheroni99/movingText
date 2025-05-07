@@ -137,11 +137,18 @@ def random_text():
     insert_k_texts(mycursor, text, conn)
 
   if(sessionN_int !=1 and trialN_int == 1):
+    
+    #Check correct order
+    for i in range(1, sessionN_int):
+      for j in range(1, 4):
+        mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and session_number = %s and trial_number = %s", (tester_number, i, str(j)))
+        myresult = mycursor.fetchall()
+        check_write_order(myresult)
+
     #Remove already used texts in previous sessions
     for i in range(1, sessionN_int):
       mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and session_number = %s", (tester_number, i))
       myresult = mycursor.fetchall()
-      check_write_order(myresult)
       rem_used_texts(myresult)
     text = gen_random_text(glb_var_const.allTexts)
     insert_k_texts(mycursor, text, conn)
@@ -338,7 +345,7 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  '''#shuffle the order of the animations
+  #shuffle the order of the animations
   tests_list = [hor_scroll_slow_big, hor_scroll_slow_little, hor_scroll_fast_big, hor_scroll_fast_little, vert_block_slow_little, vert_block_slow_big, vert_block_fast_little, vert_block_fast_big]
   random.shuffle(tests_list)
 
@@ -346,10 +353,7 @@ def main():
 
   #run the animation after the shuffle
   for funct, txt in zip(tests_list, text):
-    funct(txt)'''
-  
-  hor_scroll_fast_big(glb_var_const.allTexts[0])
-  vert_block_fast_big(glb_var_const.allTexts[0])
+    funct(txt)
 
   pygame.quit()
   '''s.close()'''

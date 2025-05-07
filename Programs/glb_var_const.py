@@ -85,8 +85,8 @@ WHITE = (255, 255, 255)
 TEST_TIME = 10
 #Number of characters per line
 N = 40
-LITTLE_CHAR = 30
-BIG_CHAR = 40
+LITTLE_CHAR = 35
+BIG_CHAR = 45
 #Speed fo Horizontal scroll
 LOW_SPEED_HS = 1
 HIGH_SPEED_HS = 0.5

@@ -8,8 +8,8 @@ import math
 import time
 import random
 import mysql.connector
-import Programs.glb_var_const as glb_var_const
-import Programs.exception as exception
+import glb_var_const
+import exception
 import datetime
 from pathlib import Path
 import textwrap
@@ -293,7 +293,6 @@ def vertical_block(txt, speed, dim_char, fname):
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
  
-
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
   file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-VB_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")

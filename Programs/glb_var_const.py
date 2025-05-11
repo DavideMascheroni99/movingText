@@ -107,3 +107,6 @@ win_pos_left = 0
 win_pos_top = 0
 center_x = sizeWidth // 2
 center_y = sizeHeight // 2
+
+
+

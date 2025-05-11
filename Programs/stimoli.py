@@ -218,12 +218,10 @@ def long_line(nlText, font):
 
 
 #Text scroll from right to left
-def horizontal_scroll(txt, speed, dim_char, fname):
+def horizontal_scroll(text, speed, dim_char, fname):
   show_white_cross()
   #Create a font
   font = pygame.font.SysFont(glb_var_const.FONT, dim_char)
-  #Text to show
-  text = txt
   #Get text width and height
   text_width, text_height = font.size(text)
   t_end = time.time() + glb_var_const.TEST_TIME
@@ -271,12 +269,10 @@ def horizontal_scroll(txt, speed, dim_char, fname):
 
 
 #Block of text that moves vertically
-def vertical_block(txt, speed, dim_char, fname):
+def vertical_block(text, speed, dim_char, fname):
   show_white_cross()
   #Create a font
   font = pygame.font.SysFont(glb_var_const.FONT, dim_char)
-  #Text to show
-  text = txt
   #Get text width and height
   text_width, text_height = font.size(text)
   t_end = time.time() + glb_var_const.TEST_TIME

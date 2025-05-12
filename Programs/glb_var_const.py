@@ -95,6 +95,10 @@ HIGH_SPEED_HS = 0.5
 LOW_SPEED_VB = 0.6
 HIGH_SPEED_VB = 0.8
 
+#Value used for the speed experiments
+STARTING_SPEED = 0.1
+FACTOR = 0.05
+
 #Number of random value to generate per try
 K = 8
 FONT = "Arial"

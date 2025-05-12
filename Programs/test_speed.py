@@ -18,10 +18,6 @@ from pathlib import Path
 application_window = tkinter.Tk()
 #Ask the tester number
 tester_number = simpledialog.askstring("Input", "Input tester_number", parent=application_window)
-#Ask the session number
-session_number = simpledialog.askstring("Input", "Input session_number", parent=application_window)
-#Insert the trial number
-trial_number = simpledialog.askstring("Input", "Input trial_number", parent=application_window)
 
 #Set environment variables
 os.environ['SDL_VIDEO_WINDOW_POS'] = '{0},{1}'.format(glb_var_const.win_pos_left, glb_var_const.win_pos_top)
@@ -31,30 +27,6 @@ pygame.display.set_caption("Test")
 
 # Used to manage how fast the screen updates. Create an object to manage the time
 clock = pygame.time.Clock()
-
-'''SERVER CONNECTION'''
-
-'''# Host machine IP
-HOST = '127.0.0.1'
-# Gazepoint Port
-PORT = 4242
-ADDRESS = (HOST, PORT)
-
-# Connection
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(ADDRESS)
-
-# Communication and server requests for the eye-tracker
-s.send(str.encode('<SET ID="ENABLE_SEND_POG_FIX" STATE="1" />\r\n'))
-s.send(str.encode('<SET ID="ENABLE_SEND_POG_LEFT" STATE="1" />\r\n'))
-s.send(str.encode('<SET ID="ENABLE_SEND_POG_RIGHT" STATE="1" />\r\n'))
-s.send(str.encode('<SET ID="ENABLE_SEND_POG_BEST" STATE="1" />\r\n'))
-s.send(str.encode('<SET ID="ENABLE_SEND_PUPIL_LEFT" STATE="1" />\r\n'))
-s.send(str.encode('<SET ID="ENABLE_SEND_PUPIL_RIGHT" STATE="1" />\r\n'))
-s.send(str.encode('<SET ID="ENABLE_SEND_EYE_LEFT" STATE="1" />\r\n'))
-s.send(str.encode('<SET ID="ENABLE_SEND_EYE_RIGHT" STATE="1" />\r\n'))
-s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))'''
-
 
 # Wrap text into lines that fit a given width, no leading spaces
 def wrap_text(text, font, max_width):
@@ -139,9 +111,8 @@ def horizontal_scroll(text, speed, dim_char, fname):
 
 
 def hor_scroll_big():
-  speed = 0.4
-  factor = 0.2
   fname = "HS-BIG"
+  speed = glb_var_const.STARTING_SPEED
   while True:
     text = random.choice(glb_var_const.allTexts)
     result = horizontal_scroll(text, speed, glb_var_const.BIG_CHAR, fname)
@@ -149,11 +120,11 @@ def hor_scroll_big():
     if result == "done":
       # If the time runs out (after 10 seconds), save the previous speed - 0.1
       with open("Files\\speed_log.txt", "a") as file:
-        file.write("{} : {} \n".format(fname, speed-factor))
+        file.write("{} : {} \n".format(fname, speed-glb_var_const.FACTOR))
 
     if result == "restart":
          # Increase speed by 0.1 when restarted
-        speed += factor
+        speed += glb_var_const.FACTOR
         # Restart the scroll
         continue
     else:
@@ -162,9 +133,8 @@ def hor_scroll_big():
   
 
 def hor_scroll_little():
-  speed = 0.4
-  factor = 0.2
   fname = "HS-LITTLE"
+  speed = glb_var_const.STARTING_SPEED
   while True:
     text = random.choice(glb_var_const.allTexts)
     result = horizontal_scroll(text, speed, glb_var_const.LITTLE_CHAR, fname)
@@ -172,18 +142,17 @@ def hor_scroll_little():
     if result == "done":
       # If the time runs out (after 10 seconds), save the previous speed - 0.1
       with open("Files\\speed_log.txt", "a") as file:
-        file.write("{} : {} \n".format(fname, speed-factor))
+        file.write("{} : {} \n".format(fname, speed-glb_var_const.FACTOR))
 
     if result == "restart":
          # Increase speed by 0.1 when restarted
-        speed += factor
+        speed += glb_var_const.FACTOR
         # Restart the scroll
         continue
     else:
         # Exit after 10 seconds
         break   
-
-
+    
 
 #Block of text that moves vertically
 def vertical_block(text, speed, dim_char, fname):
@@ -195,23 +164,73 @@ def vertical_block(text, speed, dim_char, fname):
   text_width = glb_var_const.screen_width * 2 // 3
   text_surface = render_text_surface(text, font, glb_var_const.WHITE, text_width)
   text_rect = text_surface.get_rect(centerx=glb_var_const.screen_width // 2)
-  text_rect.y = glb_var_const.screen_height
+  y_pos = float(glb_var_const.screen_height)
+  text_rect.y = int(y_pos)
+
 
   while time.time() <= t_end:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         sys.exit()
-      if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-        sys.exit()
+      if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_ESCAPE:
+          sys.exit()
+        if event.key == pygame.K_a:
+          return "restart"
     
-    text_rect.y -= speed
+    y_pos -= speed
+    text_rect.y = int(y_pos)
 
     screen.fill(glb_var_const.BLACK)
     screen.blit(text_surface, text_rect)
     pygame.display.flip()
     clock.tick(150)
-  
+  return "done"
 
+
+def vert_block_big():
+  fname = "VB-BIG"
+  speed = glb_var_const.STARTING_SPEED
+  while True:
+    text = random.choice(glb_var_const.allTexts)
+    result = vertical_block(text, speed, glb_var_const.BIG_CHAR, fname)
+
+    if result == "done":
+      # If the time runs out (after 10 seconds), save the previous speed - 0.1
+      with open("Files\\speed_log.txt", "a") as file:
+        file.write("{} : {} \n".format(fname, speed-glb_var_const.FACTOR))
+
+    if result == "restart":
+         # Increase speed by 0.1 when restarted
+        speed += glb_var_const.FACTOR
+        # Restart the scroll
+        continue
+    else:
+        # Exit after 10 seconds
+        break 
+    
+
+def vert_block_little():
+  fname = "VB-LITTLE"
+  speed = glb_var_const.STARTING_SPEED
+  while True:
+    text = random.choice(glb_var_const.allTexts)
+    result = vertical_block(text, speed, glb_var_const.LITTLE_CHAR, fname)
+
+    if result == "done":
+      # If the time runs out (after 10 seconds), save the previous speed - 0.1
+      with open("Files\\speed_log.txt", "a") as file:
+        file.write("{} : {} \n".format(fname, speed-glb_var_const.FACTOR))
+
+    if result == "restart":
+         # Increase speed by 0.1 when restarted
+        speed += glb_var_const.FACTOR
+        # Restart the scroll
+        continue
+    else:
+        # Exit after 10 seconds
+        break   
+  
 
 
 def main():
@@ -219,8 +238,14 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  hor_scroll_big()
-  hor_scroll_little()
+  with open("Files\\speed_log.txt", "a") as file:
+      file.write("Tester : {}\n".format(tester_number))
+
+  tests_list = [hor_scroll_big, hor_scroll_little, vert_block_big, vert_block_little]
+  random.shuffle(tests_list)
+
+  for function in tests_list:
+     function()
 
   pygame.quit()
   '''s.close()'''

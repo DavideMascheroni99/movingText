@@ -271,7 +271,9 @@ def vertical_block(text, speed, dim_char, fname):
   text_width = glb_var_const.screen_width * 2 // 3
   text_surface = render_text_surface(text, font, glb_var_const.WHITE, text_width)
   text_rect = text_surface.get_rect(centerx=glb_var_const.screen_width // 2)
-  text_rect.y = glb_var_const.screen_height
+  
+  y_pos = float(glb_var_const.screen_height)
+  text_rect.y = int(y_pos)
 
   '''Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
@@ -293,7 +295,8 @@ def vertical_block(text, speed, dim_char, fname):
     casual_data = s.recv(1024)
     file1.write(bytes.decode(casual_data))'''
     
-    text_rect.y -= speed
+    y_pos -= speed
+    text_rect.y = int(y_pos)
 
     screen.fill(glb_var_const.BLACK)
     screen.blit(text_surface, text_rect)

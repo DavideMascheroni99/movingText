@@ -87,8 +87,7 @@ TEST_TIME = 10
 N = 40
 #Font size
 LITTLE_CHAR = 30
-BIG_CHAR = 60
-
+BIG_CHAR = 45
 #Speed fo Horizontal scroll
 LOW_SPEED_HS = 1
 HIGH_SPEED_HS = 0.5
@@ -102,7 +101,7 @@ FONT = "Arial"
 TCROSS = 2
 
 #Window creation
-winsize = (sizeWidth, sizeHeight) = (1280, 720)
+winsize = (sizeWidth, sizeHeight) = (1920, 1080)
 win_pos_left = 0
 win_pos_top = 0
 center_x = sizeWidth // 2

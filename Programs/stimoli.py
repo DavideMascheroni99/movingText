@@ -4,7 +4,6 @@ from tkinter import simpledialog
 import os
 import socket
 import sys
-import math
 import time
 import random
 import mysql.connector
@@ -12,7 +11,7 @@ import glb_var_const
 import exception
 import datetime
 from pathlib import Path
-import textwrap
+
 
 
 # Dialogue window for the tester number
@@ -35,7 +34,7 @@ clock = pygame.time.Clock()
 
 '''SERVER CONNECTION'''
 
-# Host machine IP
+'''# Host machine IP
 HOST = '127.0.0.1'
 # Gazepoint Port
 PORT = 4242
@@ -54,9 +53,45 @@ s.send(str.encode('<SET ID="ENABLE_SEND_PUPIL_LEFT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_PUPIL_RIGHT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_LEFT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_RIGHT" STATE="1" />\r\n'))
-s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))
+s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))'''
 
 
+# Wrap text into lines that fit a given width, no leading spaces
+def wrap_text(text, font, max_width):
+  words = text.split(' ')
+  lines = []
+  current_line = ''
+  for word in words:
+    test_line = current_line + word + ' '
+    if font.size(test_line)[0] <= max_width:
+      current_line = test_line
+    else:
+      if current_line:  # Ensure non-empty lines
+        lines.append(current_line.strip())  # Remove leading/trailing spaces
+      current_line = word + ' '  # Start a new line with the word
+  if current_line:  # Append the last line
+    lines.append(current_line.strip())
+  return lines
+
+
+# Render all lines into one surface
+def render_text_surface(text, font, color, width, line_spacing=6):
+  lines = wrap_text(text, font, width)
+  line_height = font.get_height()
+  total_height = len(lines) * line_height + (len(lines) - 1) * line_spacing
+
+  surface = pygame.Surface((width, total_height), pygame.SRCALPHA)
+  surface = surface.convert_alpha()
+
+  y = 0
+  for line in lines:
+    rendered = font.render(line, True, color)
+    surface.blit(rendered, (0, y))  # Align text to the left (no padding)
+    y += line_height + line_spacing
+
+  return surface
+
+  
 #Create a white cross to display
 def draw_fixation_cross(x, y, length=20, width=5, color=pygame.Color(glb_var_const.WHITE)):
   pygame.draw.line(screen, color, (x, y - length), (x, y + length), width)
@@ -78,6 +113,7 @@ def db_connection():
   return cnx
 
 
+#Used to check if the data are correctly collected in the database
 def check_write_order(myresult):
   if(len(myresult) == 0): 
     raise exception.MyException("Wrong write order")
@@ -174,49 +210,6 @@ def random_text():
   return text
 
 
-#add # every last complete world of a line
-def add_separator(txt):
-  space = 0
-  text = list(txt)
-  changed = False
-  count = 1
-  #Compute the space of the consecutive N characters
-  while (space+glb_var_const.N) < len(text):
-    for i in range(space, space + glb_var_const.N):
-      if(text[i] == ' '):
-        space = i
-        changed = True
-    #If there aren't spaces in a line add # after N characters
-    if(changed == False):
-      space = count * (glb_var_const.N - 1)
-    changed = False
-    text[space] = '#'
-    count = count + 1
-  
-  text = ''.join(text)
-  return text
-
-
-#Create a vertical block of text
-def create_vert_block(x, y, font, nlText, char_size):
-  for i in range(len(nlText)):
-    img = font.render(nlText[i], True, glb_var_const.WHITE)
-    screen.blit(img, (x, y))
-    y = y + char_size
-
-
-#Find the longest line in the text
-def long_line(nlText, font):
-  max = 0
-  index = 0
-  for i in nlText:
-    line_width, line_height = font.size(i)
-    if(line_width > max):
-      max = line_width
-      index = i
-  return index
-
-
 #Text scroll from right to left
 def horizontal_scroll(text, speed, dim_char, fname):
   show_white_cross()
@@ -226,17 +219,17 @@ def horizontal_scroll(text, speed, dim_char, fname):
   text_width, text_height = font.size(text)
   t_end = time.time() + glb_var_const.TEST_TIME
   #Starting image position and speed
-  x = glb_var_const.sizeWidth
-  y = (glb_var_const.sizeHeight / 2) - (text_height / 2)
+  x = glb_var_const.screen_width
+  y = (glb_var_const.screen_height / 2) - (text_height / 2)
 
-  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
+  '''Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
   file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
-  file1.write(str(datetime.datetime.now())+"\n")
+  file1.write(str(datetime.datetime.now())+"\n")'''
 
   while time.time() <= t_end:
     for event in pygame.event.get():
@@ -245,9 +238,9 @@ def horizontal_scroll(text, speed, dim_char, fname):
       if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
         sys.exit()
 
-    # Sending data to the server and writing it on the respective file
+    '''# Sending data to the server and writing it on the respective file
     casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))
+    file1.write(bytes.decode(casual_data))'''
 
     x = x - speed
   
@@ -258,43 +251,36 @@ def horizontal_scroll(text, speed, dim_char, fname):
     pygame.display.flip()
     clock.tick(150)
 
-  # Sending data to the server and writing it on the respective file
+  '''# Sending data to the server and writing it on the respective file
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.close()
-  time.sleep(0.3)
+  time.sleep(0.3)'''
 
 
 #Block of text that moves vertically
 def vertical_block(text, speed, dim_char, fname):
   show_white_cross()
+  t_end = time.time() + glb_var_const.TEST_TIME
   #Create a font
   font = pygame.font.SysFont(glb_var_const.FONT, dim_char)
-  #Get text width and height
-  text_width, text_height = font.size(text)
-  t_end = time.time() + glb_var_const.TEST_TIME
-  text = add_separator(text)
-  #text with new line
-  nlText = text.split("#")
-  index = long_line(nlText, font)
+  
+  text_width = glb_var_const.screen_width * 2 // 3
+  text_surface = render_text_surface(text, font, glb_var_const.WHITE, text_width)
+  text_rect = text_surface.get_rect(centerx=glb_var_const.screen_width // 2)
+  text_rect.y = glb_var_const.screen_height
 
-  line_width, line_height = font.size(index)
-  #Starting image position and speed
-  x = glb_var_const.sizeWidth/2 - (line_width/2)
-  y = glb_var_const.sizeHeight
-
-  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
+  '''Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
   Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
  
-
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
   file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-VB_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
-  file1.write(str(datetime.datetime.now())+"\n")
+  file1.write(str(datetime.datetime.now())+"\n")'''
 
   while time.time() <= t_end:
     for event in pygame.event.get():
@@ -303,25 +289,26 @@ def vertical_block(text, speed, dim_char, fname):
       if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
         sys.exit()
  
-    # Sending data to the server and writing it on the respective file
+    '''# Sending data to the server and writing it on the respective file
     casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))
+    file1.write(bytes.decode(casual_data))'''
+    
+    text_rect.y -= speed
 
-    y = y - speed
     screen.fill(glb_var_const.BLACK)
-    create_vert_block(x, y, font, nlText, dim_char)
+    screen.blit(text_surface, text_rect)
     pygame.display.flip()
     clock.tick(150)
   
 
-  # Sending data to the server and writing it on the respective file
+  '''# Sending data to the server and writing it on the respective file
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.close()
-  time.sleep(0.3)
+  time.sleep(0.3)'''
 
 
 def hor_scroll_slow_little(txt):
@@ -354,7 +341,7 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  #shuffle the order of the animations
+  '''#shuffle the order of the animations
   tests_list = [hor_scroll_slow_big, hor_scroll_slow_little, hor_scroll_fast_big, hor_scroll_fast_little, vert_block_slow_little, vert_block_slow_big, vert_block_fast_little, vert_block_fast_big]
   random.shuffle(tests_list)
 
@@ -362,10 +349,14 @@ def main():
 
   #run the animation after the shuffle
   for funct, txt in zip(tests_list, text):
-    funct(txt)
+    funct(txt)'''
   
+  vert_block_fast_big(glb_var_const.allTexts[0])
+  vert_block_fast_little(glb_var_const.allTexts[0])
+
+
   pygame.quit()
-  s.close()
+  '''s.close()'''
 
 if __name__ == "__main__":
     main()

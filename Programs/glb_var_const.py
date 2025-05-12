@@ -1,3 +1,5 @@
+import os
+
 '''COSTANTS'''
 
 #72 texts containing cities description of Milan municipality
@@ -83,8 +85,6 @@ WHITE = (255, 255, 255)
 
 #Parameter setting
 TEST_TIME = 10
-#Number of characters per line
-N = 40
 #Font size
 LITTLE_CHAR = 30
 BIG_CHAR = 45
@@ -93,19 +93,32 @@ LOW_SPEED_HS = 1
 HIGH_SPEED_HS = 0.5
 #Speed for vertical block
 LOW_SPEED_VB = 0.6
-HIGH_SPEED_VB = 0.3
+HIGH_SPEED_VB = 0.8
 
 #Number of random value to generate per try
 K = 8
 FONT = "Arial"
 TCROSS = 2
 
+#Ask screen resolution
+if os.name == 'nt':  # Windows
+    import ctypes
+    user32 = ctypes.windll.user32
+    screen_width = user32.GetSystemMetrics(0)
+    screen_height = user32.GetSystemMetrics(1)
+else:  # macOS or Linux
+    import tkinter as tk
+    root = tk.Tk()
+    root.withdraw()
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
+
 #Window creation
-winsize = (sizeWidth, sizeHeight) = (1920, 1080)
+winsize = (screen_width, screen_height)
 win_pos_left = 0
 win_pos_top = 0
-center_x = sizeWidth // 2
-center_y = sizeHeight // 2
+center_x = screen_width// 2
+center_y = screen_height // 2
 
 
 

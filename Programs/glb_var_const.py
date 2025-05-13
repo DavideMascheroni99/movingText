@@ -84,10 +84,10 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
 #Parameter setting
-TEST_TIME = 10
+TEST_TIME = 40
 #Font size
 LITTLE_CHAR = 30
-BIG_CHAR = 45
+BIG_CHAR = 60
 #Speed fo Horizontal scroll
 LOW_SPEED_HS = 1
 HIGH_SPEED_HS = 0.5
@@ -97,8 +97,8 @@ HIGH_SPEED_VB = 0.8
 
 #Value used for the speed experiments
 STARTING_SPEED_VB = 0.1
-STARTING_SPEED_HS = 0.9
-FACTOR = 0.05
+STARTING_SPEED_HS = 1.1
+FACTOR = 0.1
 
 #Number of random value to generate per try
 K = 8

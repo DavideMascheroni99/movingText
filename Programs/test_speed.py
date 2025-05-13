@@ -112,14 +112,14 @@ def horizontal_scroll(text, speed, dim_char, fname):
 
 def hor_scroll_big():
   fname = "HS-BIG"
-  speed = glb_var_const.STARTING_SPEED
+  speed = glb_var_const.STARTING_SPEED_HS
   while True:
     text = random.choice(glb_var_const.allTexts)
     result = horizontal_scroll(text, speed, glb_var_const.BIG_CHAR, fname)
 
     if result == "done":
       # If the time runs out (after 10 seconds), save the previous speed - 0.1
-      with open("Files\\speed_log.txt", "a") as file:
+      with open("movingText\\Files\\speed_log.txt", "a") as file:
         file.write("{} : {} \n".format(fname, speed-glb_var_const.FACTOR))
 
     if result == "restart":
@@ -134,14 +134,14 @@ def hor_scroll_big():
 
 def hor_scroll_little():
   fname = "HS-LITTLE"
-  speed = glb_var_const.STARTING_SPEED
+  speed = glb_var_const.STARTING_SPEED_HS
   while True:
     text = random.choice(glb_var_const.allTexts)
     result = horizontal_scroll(text, speed, glb_var_const.LITTLE_CHAR, fname)
 
     if result == "done":
       # If the time runs out (after 10 seconds), save the previous speed - 0.1
-      with open("Files\\speed_log.txt", "a") as file:
+      with open("movingText\\Files\\speed_log.txt", "a") as file:
         file.write("{} : {} \n".format(fname, speed-glb_var_const.FACTOR))
 
     if result == "restart":
@@ -190,14 +190,14 @@ def vertical_block(text, speed, dim_char, fname):
 
 def vert_block_big():
   fname = "VB-BIG"
-  speed = glb_var_const.STARTING_SPEED
+  speed = glb_var_const.STARTING_SPEED_VB
   while True:
     text = random.choice(glb_var_const.allTexts)
     result = vertical_block(text, speed, glb_var_const.BIG_CHAR, fname)
 
     if result == "done":
       # If the time runs out (after 10 seconds), save the previous speed - 0.1
-      with open("Files\\speed_log.txt", "a") as file:
+      with open("movingText\\Files\\speed_log.txt", "a") as file:
         file.write("{} : {} \n".format(fname, speed-glb_var_const.FACTOR))
 
     if result == "restart":
@@ -212,14 +212,14 @@ def vert_block_big():
 
 def vert_block_little():
   fname = "VB-LITTLE"
-  speed = glb_var_const.STARTING_SPEED
+  speed = glb_var_const.STARTING_SPEED_VB
   while True:
     text = random.choice(glb_var_const.allTexts)
     result = vertical_block(text, speed, glb_var_const.LITTLE_CHAR, fname)
 
     if result == "done":
       # If the time runs out (after 10 seconds), save the previous speed - 0.1
-      with open("Files\\speed_log.txt", "a") as file:
+      with open("movingText\\Files\\speed_log.txt", "a") as file:
         file.write("{} : {} \n".format(fname, speed-glb_var_const.FACTOR))
 
     if result == "restart":
@@ -238,7 +238,7 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  with open("Files\\speed_log.txt", "a") as file:
+  with open("movingText\\Files\\speed_log.txt", "a") as file:
       file.write("Tester : {}\n".format(tester_number))
 
   tests_list = [hor_scroll_big, hor_scroll_little, vert_block_big, vert_block_little]

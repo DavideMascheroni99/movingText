@@ -2,15 +2,10 @@ import pygame
 import tkinter
 from tkinter import simpledialog
 import os
-import socket
 import sys
 import time
 import random
-import mysql.connector
 import glb_var_const
-import exception
-import datetime
-from pathlib import Path
 
 # Dialogue window for the tester number
 application_window = tkinter.Tk()

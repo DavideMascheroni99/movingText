@@ -12,8 +12,6 @@ import exception
 import datetime
 from pathlib import Path
 
-
-
 # Dialogue window for the tester number
 application_window = tkinter.Tk()
 #Ask the tester number

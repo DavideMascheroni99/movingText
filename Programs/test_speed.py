@@ -11,6 +11,8 @@ import glb_var_const
 application_window = tkinter.Tk()
 #Ask the tester number
 tester_number = simpledialog.askstring("Input", "Input tester_number", parent=application_window)
+#Ask the full name
+tester_name = simpledialog.askstring("Input", "Input your full name", parent=application_window)
 
 #Set environment variables
 os.environ['SDL_VIDEO_WINDOW_POS'] = '{0},{1}'.format(glb_var_const.win_pos_left, glb_var_const.win_pos_top)
@@ -76,7 +78,7 @@ def horizontal_scroll(text, speed, dim_char, fname):
     show_white_cross()
     font = pygame.font.SysFont(glb_var_const.FONT, dim_char)
     text_width, text_height = font.size(text)
-    t_end = time.time() + glb_var_const.TEST_TIME
+    t_end = time.time() + glb_var_const.T_SPEED_TIME
 
     x = glb_var_const.screen_width
     y = (glb_var_const.screen_height / 2) - (text_height / 2)
@@ -89,7 +91,11 @@ def horizontal_scroll(text, speed, dim_char, fname):
                 if event.key == pygame.K_ESCAPE:
                     sys.exit()
                 if event.key == pygame.K_a:
-                    return "restart"
+                    return "nextSpeed"
+                if event.key == pygame.K_q:
+                    return "prevSpeed"
+                if event.key == pygame.K_s:
+                    return "done"
 
         x -= speed
 
@@ -100,7 +106,6 @@ def horizontal_scroll(text, speed, dim_char, fname):
         pygame.display.flip()
         clock.tick(150)
 
-    return "done"
 
 
 def hor_scroll_big():
@@ -111,18 +116,22 @@ def hor_scroll_big():
     result = horizontal_scroll(text, speed, glb_var_const.BIG_CHAR, fname)
 
     if result == "done":
-      # If the time runs out (after 10 seconds), save the previous speed - 0.1
-      with open("movingText\\Files\\speed_log.txt", "a") as file:
-        file.write("{} : {} \n".format(fname, speed-glb_var_const.FACTOR))
+      with open("Files\\speed_log.txt", "a") as file:
+        file.write("{} : {} \n".format(fname, speed))
+        break
 
-    if result == "restart":
-         # Increase speed by 0.1 when restarted
+    if result == "nextSpeed":
+         # Increase speed by factor when restarted
         speed += glb_var_const.FACTOR
         # Restart the scroll
         continue
-    else:
-        # Exit after 10 seconds
-        break 
+    
+    if result == "prevSpeed":
+         # Decrease speed by factor when restarted
+        speed -= glb_var_const.FACTOR
+        # Restart the scroll
+        continue
+  
   
 
 def hor_scroll_little():
@@ -133,24 +142,27 @@ def hor_scroll_little():
     result = horizontal_scroll(text, speed, glb_var_const.LITTLE_CHAR, fname)
 
     if result == "done":
-      # If the time runs out (after 10 seconds), save the previous speed - 0.1
-      with open("movingText\\Files\\speed_log.txt", "a") as file:
-        file.write("{} : {} \n".format(fname, speed-glb_var_const.FACTOR))
+      with open("Files\\speed_log.txt", "a") as file:
+        file.write("{} : {} \n".format(fname, speed))
+        break
 
-    if result == "restart":
-         # Increase speed by 0.1 when restarted
+    if result == "nextSpeed":
+         # Increase speed by factor when restarted
         speed += glb_var_const.FACTOR
         # Restart the scroll
         continue
-    else:
-        # Exit after 10 seconds
-        break   
+    
+    if result == "prevSpeed":
+         # Decrease speed by factor when restarted
+        speed -= glb_var_const.FACTOR
+        # Restart the scroll
+        continue  
     
 
 #Block of text that moves vertically
 def vertical_block(text, speed, dim_char, fname):
   show_white_cross()
-  t_end = time.time() + glb_var_const.TEST_TIME
+  t_end = time.time() + glb_var_const.T_SPEED_TIME
   #Create a font
   font = pygame.font.SysFont(glb_var_const.FONT, dim_char)
   
@@ -169,7 +181,11 @@ def vertical_block(text, speed, dim_char, fname):
         if event.key == pygame.K_ESCAPE:
           sys.exit()
         if event.key == pygame.K_a:
-          return "restart"
+          return "nextSpeed"
+        if event.key == pygame.K_q:
+          return "prevSpeed"
+        if event.key == pygame.K_s:
+          return "done"
     
     y_pos -= speed
     text_rect.y = int(y_pos)
@@ -178,7 +194,6 @@ def vertical_block(text, speed, dim_char, fname):
     screen.blit(text_surface, text_rect)
     pygame.display.flip()
     clock.tick(150)
-  return "done"
 
 
 def vert_block_big():
@@ -189,18 +204,20 @@ def vert_block_big():
     result = vertical_block(text, speed, glb_var_const.BIG_CHAR, fname)
 
     if result == "done":
-      # If the time runs out (after 10 seconds), save the previous speed - 0.1
-      with open("movingText\\Files\\speed_log.txt", "a") as file:
-        file.write("{} : {} \n".format(fname, speed-glb_var_const.FACTOR))
+      with open("Files\\speed_log.txt", "a") as file:
+        file.write("{} : {} \n".format(fname, speed))
+        break
 
-    if result == "restart":
-         # Increase speed by 0.1 when restarted
+    if result == "nextSpeed":
+         # Increase speed by factor when restarted
         speed += glb_var_const.FACTOR
         # Restart the scroll
         continue
-    else:
-        # Exit after 10 seconds
-        break 
+    if result == "prevSpeed":
+         # Decrease speed by factor when restarted
+        speed -= glb_var_const.FACTOR
+        # Restart the scroll
+        continue
     
 
 def vert_block_little():
@@ -211,19 +228,21 @@ def vert_block_little():
     result = vertical_block(text, speed, glb_var_const.LITTLE_CHAR, fname)
 
     if result == "done":
-      # If the time runs out (after 10 seconds), save the previous speed - 0.1
-      with open("movingText\\Files\\speed_log.txt", "a") as file:
-        file.write("{} : {} \n".format(fname, speed-glb_var_const.FACTOR))
+      with open("Files\\speed_log.txt", "a") as file:
+        file.write("{} : {} \n".format(fname, speed))
+        break
 
-    if result == "restart":
-         # Increase speed by 0.1 when restarted
+    if result == "nextSpeed":
+         # Increase speed by factor when restarted
         speed += glb_var_const.FACTOR
         # Restart the scroll
         continue
-    else:
-        # Exit after 10 seconds
-        break   
-  
+    
+    if result == "prevSpeed":
+         # Increase speed by factor when restarted
+        speed -= glb_var_const.FACTOR
+        # Restart the scroll
+        continue
 
 
 def main():
@@ -231,8 +250,8 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  with open("movingText\\Files\\speed_log.txt", "a") as file:
-      file.write("Tester : {}\n".format(tester_number))
+  with open("Files\\speed_log.txt", "a") as file:
+      file.write("Tester : {},  Tester_Name : {}\n".format(tester_number, tester_name))
 
   tests_list = [hor_scroll_big, hor_scroll_little, vert_block_big, vert_block_little]
   random.shuffle(tests_list)
@@ -241,7 +260,6 @@ def main():
      function()
 
   pygame.quit()
-  '''s.close()'''
 
 if __name__ == "__main__":
     main()

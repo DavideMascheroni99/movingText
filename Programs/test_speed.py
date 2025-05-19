@@ -116,7 +116,7 @@ def hor_scroll_big():
     result = horizontal_scroll(text, speed, glb_var_const.BIG_CHAR, fname)
 
     if result == "done":
-      with open("Files\\speed_log.txt", "a") as file:
+      with open("movingText\\Files\\speed_log.txt", "a") as file:
         file.write("{} : {} \n".format(fname, speed))
         break
 
@@ -129,6 +129,8 @@ def hor_scroll_big():
     if result == "prevSpeed":
          # Decrease speed by factor when restarted
         speed -= glb_var_const.FACTOR
+        if(speed <= 0):
+           speed = glb_var_const.FACTOR
         # Restart the scroll
         continue
   
@@ -142,7 +144,7 @@ def hor_scroll_little():
     result = horizontal_scroll(text, speed, glb_var_const.LITTLE_CHAR, fname)
 
     if result == "done":
-      with open("Files\\speed_log.txt", "a") as file:
+      with open("movingText\\Files\\speed_log.txt", "a") as file:
         file.write("{} : {} \n".format(fname, speed))
         break
 
@@ -155,6 +157,8 @@ def hor_scroll_little():
     if result == "prevSpeed":
          # Decrease speed by factor when restarted
         speed -= glb_var_const.FACTOR
+        if(speed <= 0):
+           speed = glb_var_const.FACTOR
         # Restart the scroll
         continue  
     
@@ -204,7 +208,7 @@ def vert_block_big():
     result = vertical_block(text, speed, glb_var_const.BIG_CHAR, fname)
 
     if result == "done":
-      with open("Files\\speed_log.txt", "a") as file:
+      with open("movingText\\Files\\speed_log.txt", "a") as file:
         file.write("{} : {} \n".format(fname, speed))
         break
 
@@ -216,6 +220,8 @@ def vert_block_big():
     if result == "prevSpeed":
          # Decrease speed by factor when restarted
         speed -= glb_var_const.FACTOR
+        if(speed <= 0):
+           speed = glb_var_const.FACTOR
         # Restart the scroll
         continue
     
@@ -228,7 +234,7 @@ def vert_block_little():
     result = vertical_block(text, speed, glb_var_const.LITTLE_CHAR, fname)
 
     if result == "done":
-      with open("Files\\speed_log.txt", "a") as file:
+      with open("movingText\\Files\\speed_log.txt", "a") as file:
         file.write("{} : {} \n".format(fname, speed))
         break
 
@@ -241,6 +247,8 @@ def vert_block_little():
     if result == "prevSpeed":
          # Increase speed by factor when restarted
         speed -= glb_var_const.FACTOR
+        if(speed <= 0):
+           speed = glb_var_const.FACTOR
         # Restart the scroll
         continue
 
@@ -250,7 +258,7 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  with open("Files\\speed_log.txt", "a") as file:
+  with open("movingText\\Files\\speed_log.txt", "a") as file:
       file.write("Tester : {},  Tester_Name : {}\n".format(tester_number, tester_name))
 
   tests_list = [hor_scroll_big, hor_scroll_little, vert_block_big, vert_block_little]

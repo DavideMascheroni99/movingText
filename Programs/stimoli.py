@@ -315,28 +315,28 @@ def vertical_block(text, speed, dim_char, fname):
 
 
 def hor_scroll_slow_little(txt):
-  horizontal_scroll(txt, glb_var_const.LOW_SPEED_HS, glb_var_const.LITTLE_CHAR, "SL_LIT")
+  horizontal_scroll(txt, glb_var_const.LOW_SPEED_HS_LIT, glb_var_const.LITTLE_CHAR, "SL_LIT")
 
 def hor_scroll_slow_big(txt):
-  horizontal_scroll(txt, glb_var_const.LOW_SPEED_HS, glb_var_const.BIG_CHAR, "SL_BIG")
+  horizontal_scroll(txt, glb_var_const.LOW_SPEED_HS_BIG, glb_var_const.BIG_CHAR, "SL_BIG")
 
 def hor_scroll_fast_little(txt):
-  horizontal_scroll(txt, glb_var_const.HIGH_SPEED_HS, glb_var_const.LITTLE_CHAR, "FA_LIT")
+  horizontal_scroll(txt, glb_var_const.HIGH_SPEED_HS_LIT, glb_var_const.LITTLE_CHAR, "FA_LIT")
 
 def hor_scroll_fast_big(txt):
-  horizontal_scroll(txt, glb_var_const.HIGH_SPEED_HS, glb_var_const.BIG_CHAR, "FA_BIG")
+  horizontal_scroll(txt, glb_var_const.HIGH_SPEED_HS_BIG, glb_var_const.BIG_CHAR, "FA_BIG")
 
 def vert_block_slow_little(txt):
-  vertical_block(txt, glb_var_const.LOW_SPEED_VB, glb_var_const.LITTLE_CHAR, "SL_LIT")
+  vertical_block(txt, glb_var_const.LOW_SPEED_VB_LIT, glb_var_const.LITTLE_CHAR, "SL_LIT")
 
 def vert_block_slow_big(txt):
-  vertical_block(txt, glb_var_const.LOW_SPEED_VB, glb_var_const.BIG_CHAR, "SL_BIG")
+  vertical_block(txt, glb_var_const.LOW_SPEED_VB_BIG, glb_var_const.BIG_CHAR, "SL_BIG")
 
 def vert_block_fast_little(txt):
-  vertical_block(txt, glb_var_const.HIGH_SPEED_VB, glb_var_const.LITTLE_CHAR, "FA_LIT")
+  vertical_block(txt, glb_var_const.HIGH_SPEED_VB_LIT, glb_var_const.LITTLE_CHAR, "FA_LIT")
 
 def vert_block_fast_big(txt):
-  vertical_block(txt, glb_var_const.HIGH_SPEED_VB, glb_var_const.BIG_CHAR, "FA_BIG")
+  vertical_block(txt, glb_var_const.HIGH_SPEED_VB_BIG, glb_var_const.BIG_CHAR, "FA_BIG")
 
 
 def main():
@@ -344,7 +344,7 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
-  #shuffle the order of the animations
+  ''' #shuffle the order of the animations
   tests_list = [hor_scroll_slow_big, hor_scroll_slow_little, hor_scroll_fast_big, hor_scroll_fast_little, vert_block_slow_little, vert_block_slow_big, vert_block_fast_little, vert_block_fast_big]
   random.shuffle(tests_list)
 
@@ -352,9 +352,18 @@ def main():
 
   #run the animation after the shuffle
   for funct, txt in zip(tests_list, text):
-    funct(txt)
-
-
+    funct(txt)'''
+  
+  '''vert_block_fast_big(glb_var_const.allTexts[0])
+  vert_block_slow_big(glb_var_const.allTexts[0])'''
+  '''hor_scroll_fast_little(glb_var_const.allTexts[0])
+  hor_scroll_slow_little(glb_var_const.allTexts[0])'''
+  '''hor_scroll_fast_big(glb_var_const.allTexts[0])
+  hor_scroll_slow_big(glb_var_const.allTexts[0])'''
+  '''vert_block_fast_little(glb_var_const.allTexts[0])
+  vert_block_slow_little(glb_var_const.allTexts[0])
+  '''
+  
   pygame.quit()
   s.close()
 

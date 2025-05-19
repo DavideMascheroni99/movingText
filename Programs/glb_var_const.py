@@ -85,15 +85,24 @@ WHITE = (255, 255, 255)
 
 #Parameter setting
 TEST_TIME = 10
-#Font size
+
+#Font sizes
 LITTLE_CHAR = 30
 BIG_CHAR = 60
-#Speed fo Horizontal scroll
-LOW_SPEED_HS = 1
-HIGH_SPEED_HS = 0.5
-#Speed for vertical block
-LOW_SPEED_VB = 0.6
-HIGH_SPEED_VB = 0.8
+
+#Speeds fo Horizontal scroll
+LOW_SPEED_HS_LIT = 1.7
+HIGH_SPEED_HS_LIT = 0.85
+
+LOW_SPEED_HS_BIG = 1.7
+HIGH_SPEED_HS_BIG = 0.85
+
+#Speeds for vertical block
+LOW_SPEED_VB_LIT = 0.4
+HIGH_SPEED_VB_LIT = 0.2
+
+LOW_SPEED_VB_BIG = 0.3
+HIGH_SPEED_VB_BIG = 0.6
 
 #Value used for the speed experiments
 T_SPEED_TIME = 10 * 500

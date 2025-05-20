@@ -222,13 +222,13 @@ def horizontal_scroll(text, speed, dim_char, fname):
   x = glb_var_const.screen_width
   y = (glb_var_const.screen_height / 2) - (text_height / 2)
 
-  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
-  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
-  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
+  Path("movingText\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
+  Path("movingText\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
+  Path("movingText\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
 
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
+  file1 = open("movingText\\Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
   file1.write(str(datetime.datetime.now())+"\n")
 
   while time.time() <= t_end:
@@ -275,13 +275,13 @@ def vertical_block(text, speed, dim_char, fname):
   y_pos = float(glb_var_const.screen_height)
   text_rect.y = int(y_pos)
 
-  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
-  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
-  Path("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
+  Path("movingText\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
+  Path("movingText\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
+  Path("movingText\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
  
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("C:\\Users\\Davide Mascheroni\\Desktop\\Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-VB_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
+  file1 = open("movingText\\Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-VB_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
   file1.write(str(datetime.datetime.now())+"\n")
 
   while time.time() <= t_end:

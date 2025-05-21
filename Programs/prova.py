@@ -229,8 +229,8 @@ def horizontal_scroll(text, speed, dim_char, fname):
   # File to write on
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
   file1 = open("movingText\\Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
-  file1.write(str(datetime.datetime.now())+"\n")'''
-
+  file1.write(str(datetime.datetime.now())+"\n")
+'''
   while time.time() <= t_end:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
@@ -275,7 +275,7 @@ def vertical_block(text, speed, dim_char, fname):
   y_pos = float(glb_var_const.screen_height)
   text_rect.y = int(y_pos)
 
-  ''' Path("movingText\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
+  '''Path("movingText\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
   Path("movingText\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
   Path("movingText\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
  
@@ -283,7 +283,7 @@ def vertical_block(text, speed, dim_char, fname):
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
   file1 = open("movingText\\Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-VB_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
   file1.write(str(datetime.datetime.now())+"\n")
-  '''
+'''
   while time.time() <= t_end:
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
@@ -304,7 +304,7 @@ def vertical_block(text, speed, dim_char, fname):
     clock.tick(150)
   
 
-  '''# Sending data to the server and writing it on the respective file
+  ''' # Sending data to the server and writing it on the respective file
   s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
@@ -352,10 +352,9 @@ def main():
 
   #run the animation after the shuffle
   for funct, txt in zip(tests_list, text):
-    funct(txt)
-  '''
-
-  hor_scroll_fast_little(glb_var_const.allTexts[51])
+    funct(txt)'''
+  vert_block_fast_little(glb_var_const.allTexts[4])
+  
   
   pygame.quit()
   '''s.close()'''

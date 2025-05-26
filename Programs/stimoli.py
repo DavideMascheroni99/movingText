@@ -99,12 +99,35 @@ def draw_fixation_cross(x, y, length=20, width=5, color=pygame.Color(glb_var_con
 
 
 #Show white cross for tcross seconds
-def show_white_cross():
+def show_white_cross(fname):
+  Path("movingText\\Cross\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
+  Path("movingText\\Cross\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
+  Path("movingText\\Cross\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
+
+  # File to write on
+  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
+  file1 = open("movingText\\Cross\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
+  file1.write(str(datetime.datetime.now())+"\n")
+
   t_end = time.time() + glb_var_const.TCROSS
   while time.time() <= t_end:
+
+    # Sending data to the server and writing it on the respective file
+    casual_data = s.recv(1024)
+    file1.write(bytes.decode(casual_data))
+
     screen.fill(pygame.Color(glb_var_const.BLACK)) 
     draw_fixation_cross(glb_var_const.center_x, glb_var_const.center_y)
-    pygame.display.flip()  
+    pygame.display.flip() 
+
+  # Sending data to the server and writing it on the respective file
+  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
+  time.sleep(0.3)
+  casual_data = s.recv(1024)
+  time.sleep(0.3)
+  file1.write(bytes.decode(casual_data))
+  file1.close()
+  time.sleep(0.3) 
 
 
 #Connect to the database
@@ -212,7 +235,7 @@ def random_text():
 
 #Text scroll from right to left
 def horizontal_scroll(text, speed, dim_char, fname):
-  show_white_cross()
+  show_white_cross(fname)
   #Create a font
   font = pygame.font.SysFont(glb_var_const.FONT, dim_char)
   #Get text width and height
@@ -263,7 +286,7 @@ def horizontal_scroll(text, speed, dim_char, fname):
 
 #Block of text that moves vertically
 def vertical_block(text, speed, dim_char, fname):
-  show_white_cross()
+  show_white_cross(fname)
   t_end = time.time() + glb_var_const.TEST_TIME
   #Create a font
   font = pygame.font.SysFont(glb_var_const.FONT, dim_char)

@@ -73,7 +73,6 @@ def wrap_text(text, font, max_width):
     lines.append(current_line.strip())
   return lines
 
-
 # Render all lines into one surface
 def render_text_surface(text, font, color, width, line_spacing=6):
   lines = wrap_text(text, font, width)

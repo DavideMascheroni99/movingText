@@ -89,7 +89,6 @@ def render_text_surface(text, font, color, width, line_spacing=6):
     y += line_height + line_spacing
 
   return surface
-
   
 #Create a white cross to display
 def draw_fixation_cross(x, y, length=20, width=5, color=pygame.Color(glb_var_const.WHITE)):

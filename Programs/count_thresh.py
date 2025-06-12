@@ -22,7 +22,6 @@ total = 0
 total_hs = 0
 total_vb = 0
 
-
 # Iterate over testers, sessions, and trials
 for tester in range(1, total_testers_int + 1):
     for session in range(1, 4):  # Sessions 1 to 3

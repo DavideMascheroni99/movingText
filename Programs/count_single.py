@@ -18,7 +18,7 @@ animname = ["VB", "HS"]
 for fname in filenames:
     for anim_name in animname:
         file_path = os.path.join(
-            #"movingText",
+            "movingText",
             "Results",
             f"Tester{tester_number}",
             f"Session{session_number}",

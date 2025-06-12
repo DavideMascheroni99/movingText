@@ -18,7 +18,10 @@ thresh_number_int = int(thresh_number)
 filenames = ["SL_LIT", "SL_BIG", "FA_LIT", "FA_BIG"]
 animname = ["VB", "HS"]
 
-i = 0
+total = 0
+total_hs = 0
+total_vb = 0
+
 
 # Iterate over testers, sessions, and trials
 for tester in range(1, total_testers_int + 1):
@@ -46,5 +49,12 @@ for tester in range(1, total_testers_int + 1):
                         count = data.count(word)
                         if(count > thresh_number_int):
                             print(f"{word} occurred {count} times in {file_path}.")
-                            i += 1
-print(i)
+                            total += 1
+                            if(anim_name == 'HS'):
+                                total_hs += 1
+                            if(anim_name == 'VB'):
+                                total_vb += 1
+
+print("Total number of files that exceed the threshold:", total)
+print("Total number of HS type file that exceed the threshold:", total_hs)
+print("Total number of VB type file that exceed the threshold:", total_vb)

@@ -17,6 +17,7 @@ for tester in range(1, total_testers + 1):
                 for anim_name in animname:
                     # Input .txt file path
                     txt_file = os.path.join(
+                        #"movingText",
                         "Results",
                         f"Tester{tester}",
                         f"Session{session}",
@@ -29,6 +30,7 @@ for tester in range(1, total_testers + 1):
 
                     # Output directory and file
                     output_dir = os.path.join(
+                        #"movingText",
                         "Results_csv",
                         f"Tester{tester}",
                         f"Session{session}",

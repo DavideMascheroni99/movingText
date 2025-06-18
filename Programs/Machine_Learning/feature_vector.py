@@ -1,6 +1,7 @@
-import pandas as pd
+'''import pandas as pd
 import ml_constants
 from IPython.display import display
+import duckdb
 
 
 #Load all csv files
@@ -60,6 +61,63 @@ def fixation_number(all_dfs):
 
 
 
+#All the fixation with its duration in each file
+def all_fixations(all_dfs):
+
+   fix_duration_vector = []  # Stores the final feature vector per file
+
+   # Loop through all DataFrames in the dictionary
+   for key, df in all_dfs.items():
+        # SQL query using DuckDB to get max FPOGD per FPOGID
+        result = duckdb.query("""
+            SELECT FPOGID, MAX(FPOGD) as max_FPOGD
+            FROM df
+            GROUP BY FPOGID
+            ORDER BY FPOGID
+        """).to_df()
+
+        # Optional: flatten max_FPOGD column into a single list/vector if needed
+        max_fpogd_vector = result['max_FPOGD'].tolist()
+
+        # Store in the feature vector list
+        fix_duration_vector.append({
+            'file_key': key,
+            'FPOGID': result['FPOGID'].tolist(),
+            'max_FPOGD': max_fpogd_vector
+        })
+
+        print(f"File: {key}")
+        print(result)
+
+
+#Minimun fixation duration that join with the feature vector
+def min_fixation_duration():
+
+    min_fixation_data = []
+
+    for item in fix_duration_vector:
+        file_key = item['file_key']
+        max_fpogd = item['max_FPOGD']
+
+        #Check if empty
+        if max_fpogd: 
+            min_duration = min(max_fpogd)
+        else:
+            min_duration = None 
+
+        min_fixation_data.append({
+            'file_key': file_key,
+            'min_fixation_duration': min_duration
+        })
+
+    # Create pandas DataFrame
+    min_fixation_df = pd.DataFrame(min_fixation_data)
+
+    feature_df = feature_df.merge(min_fixation_df, on='file_key', how='left')
+    display(feature_df)
+
+
+
 def main():
     all_dfs = load_csv()
     fixation_number(all_dfs)
@@ -67,3 +125,4 @@ def main():
 if __name__ == "__main__":
     main()
 
+'''

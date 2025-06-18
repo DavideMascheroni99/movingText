@@ -380,3 +380,41 @@ feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Fea
 
 
 
+'''DIFFERENCE BETWEEN TWO CONSECUTIVE FPOGS VECTOR'''
+#FPOGS is the starting time of the fixation POG in seconds since the system initialization or calibration. 
+#I used this time to compute the difference between two consecutive fixations in the same file
+fpogs_diff_vector = []
+
+# Loop through all DataFrames in the dictionary
+for key, df in all_dfs.items():
+    # Query using DuckDB
+    result = duckdb.query("""
+        SELECT FPOGID, FPOGS 
+        FROM df
+        GROUP BY FPOGID, FPOGS
+        ORDER BY FPOGID
+    """).to_df()
+
+    # Extract FPOGID and FPOGS lists
+    fpogid_vector = result['FPOGID'].tolist()
+    fpogs_vector = result['FPOGS'].tolist()
+
+    # Iterate through consecutive pairs
+    for i in range(len(fpogs_vector) - 1):
+        diff = fpogs_vector[i + 1] - fpogs_vector[i]
+        fpogid_pair = (fpogid_vector[i], fpogid_vector[i + 1])
+        
+        # Add row to list
+        fpogs_diff_vector.append({
+            'file_key': key,
+            'FPOGID_pair': fpogid_pair,
+            'FPOGS_difference': diff
+        })
+
+# Create a final DataFrame
+fpogs_diff_df = pd.DataFrame(fpogs_diff_vector)
+
+# Display the DataFrame
+display(fpogs_diff_df)
+
+

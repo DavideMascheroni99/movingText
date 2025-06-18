@@ -3,11 +3,17 @@ import numpy as np
 import duckdb
 import ml_constants
 from IPython.display import display
+from scipy.stats import gmean
+from scipy.stats import median_abs_deviation
+from scipy.stats import skew
+from scipy.stats import iqr
+from scipy.stats import kurtosis
+
+
 
 
 
 '''LOAD ALL CSV'''
-
 all_dfs = {}
 
 for tester in range(1, ml_constants.total_testers+1):
@@ -60,7 +66,6 @@ display(feature_df)
 
 
 '''OBTAIN THE DURATION FOR EVERY FPOID IN A FILE'''
-
 fix_duration_vector = []  # Stores the final feature vector per file
 # Loop through all DataFrames in the dictionary
 for key, df in all_dfs.items():
@@ -89,7 +94,6 @@ for key, df in all_dfs.items():
 
 
 '''MINIIMUM FIXATION DURATION(F1)'''
-#Minimun fixation duration that join with the feature vector
 min_fixation_data = []
 
 for item in fix_duration_vector:
@@ -119,7 +123,6 @@ feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Fea
 
 
 '''MAXIMUM FIXATION DURATION (F2)'''
-
 max_fixation_data = []
 
 for item in fix_duration_vector:
@@ -175,3 +178,205 @@ display(feature_df)
 #Overwrite the csv 
 feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
 
+
+
+'''GEOMETRIC MEAN FOR FIXATION DURATION (F4)'''
+geom_mean_fixation_data = []
+
+for item in fix_duration_vector:
+    file_key = item['file_key']
+    max_fpogd = item['max_FPOGD']
+
+    #Check if empty
+    if max_fpogd: 
+        geom_mean_duration = gmean(max_fpogd)
+    else:
+        geom_mean_duration = None 
+
+    geom_mean_fixation_data.append({
+        'file_key': file_key,
+        'f4': geom_mean_duration
+    })
+
+# Create pandas DataFrame
+geom_mean_fixation_df = pd.DataFrame(geom_mean_fixation_data)
+
+feature_df = feature_df.merge(geom_mean_fixation_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
+
+
+
+'''MEDIAN FOR FIXATION DURATION (F5)'''
+median_fixation_data = []
+
+for item in fix_duration_vector:
+    file_key = item['file_key']
+    max_fpogd = item['max_FPOGD']
+
+    #Check if empty
+    if max_fpogd: 
+        median_duration = np.median(max_fpogd)
+    else:
+        median_duration = None 
+
+    median_fixation_data.append({
+        'file_key': file_key,
+        'f5': median_duration
+    })
+
+# Create pandas DataFrame
+median_fixation_df = pd.DataFrame(median_fixation_data)
+
+feature_df = feature_df.merge(median_fixation_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
+
+
+
+'''STD FOR FIXATION DURATION (F6)'''
+std_fixation_data = []
+
+for item in fix_duration_vector:
+    file_key = item['file_key']
+    max_fpogd = item['max_FPOGD']
+
+    #Check if empty
+    if max_fpogd: 
+        std_duration = np.std(max_fpogd)
+    else:
+        std_duration = None 
+
+    std_fixation_data.append({
+        'file_key': file_key,
+        'f6': std_duration
+    })
+
+# Create pandas DataFrame
+std_fixation_df = pd.DataFrame(std_fixation_data)
+
+feature_df = feature_df.merge(std_fixation_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
+
+
+
+'''MEDIAN ABSOLUTE DEVIATION FOR FIXATION DURATION (F7)'''
+mad_fixation_data = []
+
+for item in fix_duration_vector:
+    file_key = item['file_key']
+    max_fpogd = item['max_FPOGD']
+
+    #Check if empty
+    if max_fpogd: 
+        mad_duration = median_abs_deviation(max_fpogd, scale=1)
+    else:
+        mad_duration = None 
+
+    mad_fixation_data.append({
+        'file_key': file_key,
+        'f7': mad_duration
+    })
+
+# Create pandas DataFrame
+mad_fixation_df = pd.DataFrame(mad_fixation_data)
+
+feature_df = feature_df.merge(mad_fixation_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
+
+
+
+'''SKEWNESS FOR FIXATION DURATION (F8)'''
+skew_fixation_data = []
+
+for item in fix_duration_vector:
+    file_key = item['file_key']
+    max_fpogd = item['max_FPOGD']
+
+    #Check if empty
+    if max_fpogd: 
+        skew_duration = skew(max_fpogd)
+    else:
+        skew_duration = None 
+
+    skew_fixation_data.append({
+        'file_key': file_key,
+        'f8': skew_duration
+    })
+
+# Create pandas DataFrame
+skew_fixation_df = pd.DataFrame(skew_fixation_data)
+
+feature_df = feature_df.merge(skew_fixation_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
+
+
+
+'''IQR FOR FIXATION DURATION (F9)'''
+iqr_fixation_data = []
+
+for item in fix_duration_vector:
+    file_key = item['file_key']
+    max_fpogd = item['max_FPOGD']
+
+    #Check if empty
+    if max_fpogd: 
+        iqr_duration = iqr(max_fpogd)
+    else:
+        iqr_duration = None 
+
+    iqr_fixation_data.append({
+        'file_key': file_key,
+        'f9': iqr_duration
+    })
+
+# Create pandas DataFrame
+iqr_fixation_df = pd.DataFrame(iqr_fixation_data)
+
+feature_df = feature_df.merge(iqr_fixation_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
+
+
+
+'''IQR FOR FIXATION DURATION (F10)'''
+kurt_fixation_data = []
+
+for item in fix_duration_vector:
+    file_key = item['file_key']
+    max_fpogd = item['max_FPOGD']
+
+    #Check if empty
+    if max_fpogd: 
+        kurt_duration = kurtosis(max_fpogd)
+    else:
+        kurt_duration = None 
+
+    kurt_fixation_data.append({
+        'file_key': file_key,
+        'f10': kurt_duration
+    })
+
+# Create pandas DataFrame
+kurt_fixation_df = pd.DataFrame(kurt_fixation_data)
+
+feature_df = feature_df.merge(kurt_fixation_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)

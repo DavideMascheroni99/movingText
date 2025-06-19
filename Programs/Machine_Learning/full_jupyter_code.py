@@ -62,7 +62,7 @@ display(feature_df)
 
 
 
-'''OBTAIN THE DURATION FOR EVERY FPOID IN A FILE'''
+'''OBTAIN THE DURATION FOR EVERY FPOGID IN A FILE'''
 fix_duration_vector = []  # Stores the final feature vector per file
 # Loop through all DataFrames in the dictionary
 for key, df in all_dfs.items():
@@ -380,7 +380,7 @@ feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Fea
 
 
 
-'''DIFFERENCE BETWEEN TWO CONSECUTIVE FPOGS VECTOR'''
+'''OBTAIN THE DIFFERENCE BETWEEN CONSECUTIVE FIXATIONS DURATION FOR EVERY FPOGID IN A FILE'''
 #FPOGS is the starting time of the fixation POG in seconds since the system initialization or calibration. 
 #I used this time to compute the difference between two consecutive fixations in the same file
 fpogs_diff_vector = []
@@ -395,26 +395,331 @@ for key, df in all_dfs.items():
         ORDER BY FPOGID
     """).to_df()
 
-    # Extract FPOGID and FPOGS lists
+    # Extract vectors
     fpogid_vector = result['FPOGID'].tolist()
     fpogs_vector = result['FPOGS'].tolist()
 
-    # Iterate through consecutive pairs
+    # Build list of consecutive FPOGID pairs 
+    fpogid_pairs = []
+    for i in range(len(fpogid_vector) - 1):
+        pair = (fpogid_vector[i], fpogid_vector[i + 1])
+        fpogid_pairs.append(pair)
+
+    # Build list of consecutive FPOGS difference 
+    fpogs_differences = []
     for i in range(len(fpogs_vector) - 1):
         diff = fpogs_vector[i + 1] - fpogs_vector[i]
-        fpogid_pair = (fpogid_vector[i], fpogid_vector[i + 1])
-        
-        # Add row to list
-        fpogs_diff_vector.append({
-            'file_key': key,
-            'FPOGID_pair': fpogid_pair,
-            'FPOGS_difference': diff
-        })
+        fpogs_differences.append(diff)
 
-# Create a final DataFrame
-fpogs_diff_df = pd.DataFrame(fpogs_diff_vector)
+    # Append result 
+    fpogs_diff_vector.append({
+        'file_key': key,
+        'FPOGID_pairs': fpogid_pairs,
+        'FPOGS_differences': fpogs_differences
+    })
+
+# Create the DataFrame
+fpogs_diff_vector_df = pd.DataFrame(fpogs_diff_vector)
 
 # Display the DataFrame
-display(fpogs_diff_df)
+display(fpogs_diff_vector_df)
 
 
+
+'''MINIMUM FOR DIFFERENCE BETWEEN CONSECUTIVE FIXATIONS(F11)'''
+#Minimum difference between consecutive fixations that join with feature vector
+min_diff_data = []
+
+for item in fpogs_diff_vector:
+    file_key = item['file_key']
+    differences = item['FPOGS_differences']
+
+    #Check if the list is empty
+    if differences:  
+        min_diff = np.min(differences)
+    else:
+        min_diff = None
+
+    min_diff_data.append({
+        'file_key': file_key,
+        'f11': min_diff
+    })
+
+# Create DataFrame from min differences
+min_diff_df = pd.DataFrame(min_diff_data)
+
+feature_df = feature_df.merge(min_diff_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
+
+
+
+'''MAXIMUM FOR DIFFERENCE BETWEEN CONSECUTIVE FIXATIONS(F12)'''
+#Maximum difference between consecutive fixations that join with feature vector
+max_diff_data = []
+
+for item in fpogs_diff_vector:
+    file_key = item['file_key']
+    differences = item['FPOGS_differences']
+
+    #Check if the list is empty
+    if differences:  
+        max_diff = np.max(differences)
+    else:
+        max_diff = None
+
+    max_diff_data.append({
+        'file_key': file_key,
+        'f12': max_diff
+    })
+
+# Create the DataFrame 
+max_diff_df = pd.DataFrame(max_diff_data)
+
+feature_df = feature_df.merge(max_diff_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
+
+
+
+'''ARITHMETIC MEAN FOR DIFFERENCE BETWEEN CONSECUTIVE FIXATIONS(F13)'''
+#Arithmetic mean between consecutive fixations that join with feature vector
+mean_diff_data = []
+
+for item in fpogs_diff_vector:
+    file_key = item['file_key']
+    differences = item['FPOGS_differences']
+
+    #Check if the list is empty
+    if differences:  
+        mean_diff = np.mean(differences)
+    else:
+        mean_diff = None
+
+    mean_diff_data.append({
+        'file_key': file_key,
+        'f13': mean_diff
+    })
+
+# Create the DataFrame 
+mean_diff_df = pd.DataFrame(mean_diff_data)
+
+feature_df = feature_df.merge(mean_diff_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
+
+
+
+'''GEOMETRIC MEAN FOR DIFFERENCE BETWEEN CONSECUTIVE FIXATIONS(F14)'''
+#Geometric mean between consecutive fixations that join with feature vector
+gmean_diff_data = []
+
+for item in fpogs_diff_vector:
+    file_key = item['file_key']
+    differences = item['FPOGS_differences']
+
+    #Check if the list is empty
+    if differences:  
+        gmean_diff = gmean(differences)
+    else:
+        gmean_diff = None
+
+    gmean_diff_data.append({
+        'file_key': file_key,
+        'f14': gmean_diff
+    })
+
+# Create the DataFrame 
+gmean_diff_df = pd.DataFrame(gmean_diff_data)
+
+feature_df = feature_df.merge(gmean_diff_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
+
+
+
+'''MEDIAN FOR DIFFERENCE BETWEEN CONSECUTIVE FIXATIONS(F15)'''
+#Median between consecutive fixations that join with feature vector
+median_diff_data = []
+
+for item in fpogs_diff_vector:
+    file_key = item['file_key']
+    differences = item['FPOGS_differences']
+
+    #Check if the list is empty
+    if differences:  
+        median_diff = np.median(differences)
+    else:
+        median_diff = None
+
+    median_diff_data.append({
+        'file_key': file_key,
+        'f15': median_diff
+    })
+
+# Create the DataFrame 
+median_diff_df = pd.DataFrame(median_diff_data)
+
+feature_df = feature_df.merge(median_diff_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
+
+
+
+'''STD FOR DIFFERENCE BETWEEN CONSECUTIVE FIXATIONS(F16)'''
+#STD between consecutive fixations that join with feature vector
+std_diff_data = []
+
+for item in fpogs_diff_vector:
+    file_key = item['file_key']
+    differences = item['FPOGS_differences']
+
+    #Check if the list is empty
+    if differences:  
+        std_diff = np.std(differences)
+    else:
+        std_diff = None
+
+    std_diff_data.append({
+        'file_key': file_key,
+        'f16': std_diff
+    })
+
+# Create the DataFrame 
+std_diff_df = pd.DataFrame(std_diff_data)
+
+feature_df = feature_df.merge(std_diff_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
+
+
+
+'''MAD FOR DIFFERENCE BETWEEN CONSECUTIVE FIXATIONS(F17)'''
+#MAD between consecutive fixations that join with feature vector
+mad_diff_data = []
+
+for item in fpogs_diff_vector:
+    file_key = item['file_key']
+    differences = item['FPOGS_differences']
+
+    #Check if the list is empty
+    if differences:  
+        mad_diff = median_abs_deviation(differences, scale=1)
+    else:
+        mad_diff = None
+
+    mad_diff_data.append({
+        'file_key': file_key,
+        'f17': mad_diff
+    })
+
+# Create the DataFrame 
+mad_diff_df = pd.DataFrame(mad_diff_data)
+
+feature_df = feature_df.merge(mad_diff_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
+
+
+
+'''SKEWNESS FOR DIFFERENCE BETWEEN CONSECUTIVE FIXATIONS(F18)'''
+#Skewness between consecutive fixations that join with feature vector
+skew_diff_data = []
+
+for item in fpogs_diff_vector:
+    file_key = item['file_key']
+    differences = item['FPOGS_differences']
+
+    #Check if the list is empty
+    if differences:  
+        skew_diff = skew(differences)
+    else:
+        skew_diff = None
+
+    skew_diff_data.append({
+        'file_key': file_key,
+        'f18': skew_diff
+    })
+
+# Create the DataFrame 
+skew_diff_df = pd.DataFrame(skew_diff_data)
+
+feature_df = feature_df.merge(skew_diff_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
+
+
+
+'''IQR FOR DIFFERENCE BETWEEN CONSECUTIVE FIXATIONS(F19)'''
+#Interquartile range between consecutive fixations that join with feature vector
+iqr_diff_data = []
+
+for item in fpogs_diff_vector:
+    file_key = item['file_key']
+    differences = item['FPOGS_differences']
+
+    #Check if the list is empty
+    if differences:  
+        iqr_diff = iqr(differences)
+    else:
+        iqr_diff = None
+
+    iqr_diff_data.append({
+        'file_key': file_key,
+        'f19': iqr_diff
+    })
+
+# Create the DataFrame 
+iqr_diff_df = pd.DataFrame(iqr_diff_data)
+
+feature_df = feature_df.merge(iqr_diff_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)
+
+
+
+'''KURTOSIS FOR DIFFERENCE BETWEEN CONSECUTIVE FIXATIONS(F20)'''
+#Kurtosis between consecutive fixations that join with feature vector
+kurt_diff_data = []
+
+for item in fpogs_diff_vector:
+    file_key = item['file_key']
+    differences = item['FPOGS_differences']
+
+    #Check if the list is empty
+    if differences:  
+        kurt_diff = kurtosis(differences)
+    else:
+        kurt_diff = None
+
+    kurt_diff_data.append({
+        'file_key': file_key,
+        'f20': kurt_diff
+    })
+
+# Create the DataFrame 
+kurt_diff_df = pd.DataFrame(kurt_diff_data)
+
+feature_df = feature_df.merge(kurt_diff_df, on='file_key', how='left')
+display(feature_df)
+
+#Overwrite the csv 
+feature_df.to_csv(r'C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv', index=False)

@@ -7,7 +7,7 @@ from pathlib import Path
 filenames = ["SL_LIT", "SL_BIG", "FA_LIT", "FA_BIG"]
 animname = ["VB", "HS"]
 
-total_testers = 33
+total_testers = 34
 
 # Iterate over testers, sessions, and trials
 for tester in range(1, total_testers + 1):

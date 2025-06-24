@@ -73,14 +73,13 @@ f61 = kurtosis ratio between left and right pupil diameter
 f62 = Minimum difference between left and right pupil diameter
 f63 = Maximum difference between left and right pupil diameter
 f64 = Arithmetic mean difference between left and right pupil diameter
-f65 = Geometric mean difference between left and right pupil diameter
-f66 = Median difference between left and right pupil diameter
-f67 = Standard deviation difference between left and right pupil diameter
-f68 = Median absolute deviation difference between left and right pupil diameter
-f69 = Skewness difference between left and right pupil diameter
-f70 = Interquartile range difference between left and right pupil diameter
-f71 = kurtosis difference between left and right pupil diameter
+f65 = Median difference between left and right pupil diameter
+f66 = Standard deviation difference between left and right pupil diameter
+f67 = Median absolute deviation difference between left and right pupil diameter
+f68 = Skewness difference between left and right pupil diameter
+f69 = Interquartile range difference between left and right pupil diameter
+f70 = kurtosis difference between left and right pupil diameter
 
-f72 = Number of blinks
+f71 = Number of blinks
 
-f73 = Blink mean duration
+f72 = Blink mean duration

@@ -1,0 +1,86 @@
+Reference for every considered feature
+
+f0 = Number of fixations
+
+f1 = Minimum fixation duration
+f2 = Maximum fixation duration
+f3 = Arithmetic mean fixation duration
+f4 = Geometric mean fixation duration
+f5 = Median fixation duration
+f6 = Standard deviation fixation duration
+f7 = Median absolute deviation fixation duration
+f8 = Skewness fixation duration
+f9 = Interquartile range fixation duration
+f10 = kurtosis fixation duration
+
+f11 = Minimum distance between consecutive fixations
+f12 = Maximum distance between consecutive fixations
+f13 = Arithmetic mean distance between consecutive fixations
+f14 = Geometric mean distance between consecutive fixations
+f15 = Median distance between consecutive fixations
+f16 = Standard deviation distance between consecutive fixations
+f17 = Median absolute deviation distance between consecutive fixations
+f18 = Skewness distance between consecutive fixations
+f19 = Interquartile range distance between consecutive fixations
+f20 = kurtosis distance between consecutive fixations
+
+f21 = Minimum saccade speed
+f22 = Maximum saccade speed
+f23 = Arithmetic mean saccade speed
+f24 = Geometric mean saccade speed
+f25 = Median saccade speed
+f26 = Standard deviation saccade speed
+f27 = Median absolute deviation saccade speed
+f28 = Skewness saccade speed
+f29 = Interquartile range saccade speed
+f30 = kurtosis saccade speed
+
+f31 = scanpath lenght
+
+f32 = Minimum left pupil diameter
+f33 = Maximum left pupil diameter
+f34 = Arithmetic mean left pupil diameter
+f35 = Geometric mean left pupil diameter
+f36 = Median left pupil diameter
+f37 = Standard deviation left pupil diameter
+f38 = Median absolute deviation left pupil diameter
+f39 = Skewness left pupil diameter
+f40 = Interquartile range left pupil diameter
+f41 = kurtosis left pupil diameter
+
+f42 = Minimum right pupil diameter
+f43 = Maximum right pupil diameter
+f44 = Arithmetic mean right pupil diameter
+f45 = Geometric mean right pupil diameter
+f46 = Median right pupil diameter
+f47 = Standard deviation right pupil diameter
+f48 = Median absolute deviation right pupil diameter
+f49 = Skewness right pupil diameter
+f50 = Interquartile range right pupil diameter
+f51 = kurtosis right pupil diameter
+
+f52 = Minimum ratio between left and right pupil diameter
+f53 = Maximum ratio between left and right pupil diameter
+f54 = Arithmetic mean ratio between left and right pupil diameter
+f55 = Geometric mean ratio between left and right pupil diameter
+f56 = Median ratio between left and right pupil diameter
+f57 = Standard deviation ratio between left and right pupil diameter
+f58 = Median absolute deviation ratio between left and right pupil diameter
+f59 = Skewness ratio between left and right pupil diameter
+f60 = Interquartile range ratio between left and right pupil diameter
+f61 = kurtosis ratio between left and right pupil diameter
+
+f62 = Minimum difference between left and right pupil diameter
+f63 = Maximum difference between left and right pupil diameter
+f64 = Arithmetic mean difference between left and right pupil diameter
+f65 = Geometric mean difference between left and right pupil diameter
+f66 = Median difference between left and right pupil diameter
+f67 = Standard deviation difference between left and right pupil diameter
+f68 = Median absolute deviation difference between left and right pupil diameter
+f69 = Skewness difference between left and right pupil diameter
+f70 = Interquartile range difference between left and right pupil diameter
+f71 = kurtosis difference between left and right pupil diameter
+
+f72 = Number of blinks
+
+f73 = Blink mean duration

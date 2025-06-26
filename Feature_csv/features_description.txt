@@ -83,3 +83,14 @@ f70 = kurtosis difference between left and right pupil diameter
 f71 = Number of blinks
 
 f72 = Blink mean duration
+f73 = Blink min duration
+f74 = Blink max duration
+
+f75 = Total distance in absolute value in the ascending direction
+f76 = Total distance in absolute value in the descending direction
+f77 = Total distance in absolute value in the right direction
+f78 = Total distance in absolute value in the left direction 
+f79 = Number of movements in the ascending direction
+f80 = Number of movements in the ascending direction
+f81 = Number of movements in the ascending direction
+f82 = Number of movements in the ascending direction

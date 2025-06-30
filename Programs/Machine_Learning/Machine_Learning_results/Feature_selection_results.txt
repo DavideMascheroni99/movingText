@@ -1,0 +1,93 @@
+Results for random split (80-20) with stratification and feature selection
+
+Naivy Bayes Results
+Best params: {'feature_selection__k': 60, 'scaler': MinMaxScaler()}
+Best number of features selected (k): 60
+Best cross-validation accuracy: 0.6266672558029928
+Best scaler: MinMaxScaler()
+Train set accuracy: 0.6977753662506783
+Test set accuracy: 0.6594360086767896
+
+KNN
+Best params: {'feature_selection__k': 60, 'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance', 'scaler': StandardScaler()}
+Best number of features selected (k): 60
+Best cross-validation accuracy: 0.7140435371745021
+Best scaler: StandardScaler()
+Train set accuracy: 1.0
+Test set accuracy: 0.7418655097613883
+
+Logistic Regression
+Best params: {'feature_selection__k': 70, 'logreg__C': 1, 'scaler': StandardScaler()}
+Best cross-validation accuracy: 0.698845292800754
+Best scaler: StandardScaler()
+Train set accuracy: 0.8952794357026587
+Test set accuracy: 0.7396963123644251
+
+NUsvc
+Best params: {'feature_selection__k': 70, 'scaler': StandardScaler(), 'svc__gamma': 'scale', 'svc__kernel': 'rbf', 'svc__nu': 0.25}
+Best cross-validation accuracy: 0.7639654766112878
+Best scaler: StandardScaler()
+Train set accuracy: 0.9712425393380358
+Test set accuracy: 0.7809110629067245
+
+Random Forest
+Best params: {'feature_selection__k': 70, 'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': StandardScaler()}
+Best cross-validation accuracy: 0.7721088134794393
+Best scaler: StandardScaler()
+Train set accuracy: 1.0
+Test set accuracy: 0.7917570498915402
+
+SVC
+Best params: {'feature_selection__k': 70, 'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}
+Best cross-validation accuracy: 0.7818604925179686
+Best scaler: StandardScaler()
+Train set accuracy: 0.9929462832338578
+Test set accuracy: 0.806941431670282
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+Results for session and feature selection
+
+Naivy Bayes
+Best params: {'feature_selection__k': 70, 'scaler': MinMaxScaler()}
+Best number of features selected (k): 70
+Best cross-validation accuracy: 0.5846672871102839
+Best scaler: MinMaxScaler()
+Train set accuracy: 0.7044270833333334
+Test set accuracy: 0.5716145833333334
+
+KNN
+Best params: {'feature_selection__k': 70, 'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}
+Best number of features selected (k): 70
+Best cross-validation accuracy: 0.688865857269766
+Best scaler: StandardScaler()
+Train set accuracy: 1.0
+Test set accuracy: 0.64453125
+
+Logistic Regression
+Best params: {'feature_selection__k': 70, 'logreg__C': 1, 'scaler': StandardScaler()}
+Best cross-validation accuracy: 0.6764774313634248
+Best scaler: StandardScaler()
+Train set accuracy: 0.919921875
+Test set accuracy: 0.6783854166666666
+
+NUsvc
+Best params: {'feature_selection__k': 60, 'scaler': StandardScaler(), 'svc__gamma': 'scale', 'svc__kernel': 'rbf', 'svc__nu': 0.25}
+Best cross-validation accuracy: 0.7428740640467024
+Best scaler: StandardScaler()
+Train set accuracy: 0.97265625
+Test set accuracy: 0.6979166666666666
+
+Random Forest
+Best params: {'feature_selection__k': 70, 'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}
+Best cross-validation accuracy: 0.7318393333051313
+Best scaler: MinMaxScaler()
+Train set accuracy: 1.0
+Test set accuracy: 0.6432291666666666
+
+SVC
+Best params: {'feature_selection__k': 70, 'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}
+Best cross-validation accuracy: 0.7500465332712889
+Best scaler: StandardScaler()
+Train set accuracy: 0.99609375
+Test set accuracy: 0.6979166666666666

@@ -1,0 +1,99 @@
+Identification with 80-20 split with stratification using standard scaler and minmax
+
+Naivy Bayes
+Best params: {'scaler': MinMaxScaler()}
+Best cross-validation accuracy: 0.6131156474608224
+Best scaler: MinMaxScaler()
+Train set accuracy: 0.6972327726532827
+Test set accuracy: 0.6442516268980477
+
+KNN
+Best params: {'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance', 'scaler': StandardScaler()}
+Best cross-validation accuracy: 0.6988232001885235
+Best scaler: StandardScaler()
+Train set accuracy: 1.0
+Test set accuracy: 0.7266811279826464
+
+Logistic Regression
+Best params: {'logreg__C': 1, 'scaler': StandardScaler()}
+Best cross-validation accuracy: 0.7096912925650997
+Best scaler: StandardScaler()
+Train set accuracy: 0.9186109603906674
+Test set accuracy: 0.7245119305856833
+
+NUsvc
+Best params: {'scaler': StandardScaler(), 'svc__gamma': 'scale', 'svc__kernel': 'rbf', 'svc__nu': 0.25}
+Best cross-validation accuracy: 0.7596117591610698
+Best scaler: StandardScaler()
+Train set accuracy: 0.9744981009224091
+Test set accuracy: 0.7787418655097614
+
+Random Forest
+Best params: {'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': StandardScaler()}
+Best cross-validation accuracy: 0.7721088134794393
+Best scaler: StandardScaler()
+Train set accuracy: 1.0
+Test set accuracy: 0.8047722342733189
+
+SVC
+Best params: {'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}
+Best cross-validation accuracy: 0.7813111228938376
+Best scaler: StandardScaler()
+Train set accuracy: 1.0
+Test set accuracy: 0.7830802603036876
+
+MLP
+Best params: {'mlp__activation': 'relu', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100, 50), 'mlp__learning_rate_init': 0.01, 'mlp__solver': 'adam', 'scaler': StandardScaler()}
+Best cross-validation accuracy: 0.7272663818266423
+Best scaler: StandardScaler()
+Train set accuracy: 1.0
+Test set accuracy: 0.6692708333333334
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+Identification with S1 and S2 as train and s3 as test set. I used standard scaler and minmax as scaler.
+
+Naivy Bayes
+Best params: {'scaler': MinMaxScaler()}
+Best cross-validation accuracy: 0.5677503278480478
+Best scaler: MinMaxScaler()
+Train set accuracy: 0.7037760416666666
+Test set accuracy: 0.5651041666666666
+
+KNN
+Best params: {'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}
+Best cross-validation accuracy: 0.6843182875756165
+Best scaler: StandardScaler()
+Train set accuracy: 1.0
+Test set accuracy: 0.63671875
+
+Logistic Regression
+Best params: {'logreg__C': 1, 'scaler': StandardScaler()}
+Best cross-validation accuracy: 0.669315537882313
+Best scaler: StandardScaler()
+Train set accuracy: 0.943359375
+Test set accuracy: 0.6966145833333334
+
+NUsvc
+Best params: {'scaler': StandardScaler(), 'svc__gamma': 'scale', 'svc__kernel': 'rbf', 'svc__nu': 0.25}
+Best cross-validation accuracy: 0.7253119844325056
+Best scaler: StandardScaler()
+Train set accuracy: 0.9837239583333334
+Test set accuracy: 0.6783854166666666
+
+Random Forest
+Best params: {'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}
+Best cross-validation accuracy: 0.7318372181564363
+Best scaler: MinMaxScaler()
+Train set accuracy: 1.0
+Test set accuracy: 0.6614583333333334
+
+SVC
+Best params: {'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}
+Best cross-validation accuracy: 0.7324802233597022
+Best scaler: StandardScaler()
+Train set accuracy: 0.9986979166666666
+Test set accuracy: 0.671875
+
+MLP
+

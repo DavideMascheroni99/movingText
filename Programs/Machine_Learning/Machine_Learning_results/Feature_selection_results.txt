@@ -44,6 +44,9 @@ Best scaler: StandardScaler()
 Train set accuracy: 0.9929462832338578
 Test set accuracy: 0.806941431670282
 
+MLP
+
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 Results for session and feature selection
@@ -91,3 +94,5 @@ Best cross-validation accuracy: 0.7500465332712889
 Best scaler: StandardScaler()
 Train set accuracy: 0.99609375
 Test set accuracy: 0.6979166666666666
+
+MLP

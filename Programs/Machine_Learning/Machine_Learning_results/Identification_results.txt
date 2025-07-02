@@ -96,4 +96,8 @@ Train set accuracy: 0.9986979166666666
 Test set accuracy: 0.671875
 
 MLP
-
+Best params: {'mlp__activation': 'relu', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100, 50), 'mlp__learning_rate_init': 0.01, 'mlp__solver': 'adam', 'scaler': StandardScaler()}
+Best cross-validation accuracy: 0.7272663818266423
+Best scaler: StandardScaler()
+Train set accuracy: 1.0
+Test set accuracy: 0.6692708333333334

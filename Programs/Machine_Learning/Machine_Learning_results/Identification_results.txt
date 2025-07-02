@@ -43,11 +43,11 @@ Train set accuracy: 1.0
 Test set accuracy: 0.7830802603036876
 
 MLP
-Best params: {'mlp__activation': 'relu', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100, 50), 'mlp__learning_rate_init': 0.01, 'mlp__solver': 'adam', 'scaler': StandardScaler()}
-Best cross-validation accuracy: 0.7272663818266423
+Best params: {'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}
+Best cross-validation accuracy: 0.7851110521974786
 Best scaler: StandardScaler()
 Train set accuracy: 1.0
-Test set accuracy: 0.6692708333333334
+Test set accuracy: 0.7787418655097614
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 

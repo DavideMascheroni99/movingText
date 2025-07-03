@@ -12,25 +12,26 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.feature_selection import SelectKBest, f_classif
 import warnings
+import matplotlib.pyplot as plt
 from sklearn.utils.multiclass import type_of_target
 
-#disable an unexpected warning on the new pandas version
+# disable an unexpected warning on the new pandas version
 warnings.filterwarnings(
     "ignore",
     message="The number of unique classes is greater than 50% of the number of samples."
 )
 
 '''LOAD THE DATASET'''
-#csv_path of the PC in the lab
-#csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv" 
+# csv_path of the PC in the lab
+# csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
 csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
 dataset = pd.read_csv(csv_path)
 
-#Extract the tester id and the session id from file_key
+# Extract the tester id and the session id from file_key
 dataset['person_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])
 dataset['session_id'] = dataset['file_key'].apply(lambda x: x.split('_')[1])
 
-#The X are the whole rows composed by the whole columns, while the labels are the id of the persons
+# The X are the whole rows composed by the whole columns, while the labels are the id of the persons
 X = dataset.loc[:, 'f0':'f82']
 y = dataset['person_id']
 
@@ -190,6 +191,43 @@ def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, titl
         else:
             df = pd.DataFrame([results])
             df.to_csv(results_path, mode='a', header=False, index=False)
+    
+    return grid_search
+
+'''PLOT THE K BEST VALUES WITH ITS F-SCORE'''
+
+def plot_top_features(grid_search, X_train, model_name, split_name, save_dir):
+
+    feature_names = X_train.columns
+
+    selector = grid_search.best_estimator_.named_steps['feature_selection']
+    support_mask = selector.get_support()
+    scores = selector.scores_
+
+    selected_features = feature_names[support_mask]
+    selected_scores = scores[support_mask]
+
+    sorted_idx = selected_scores.argsort()[::-1]
+    sorted_features = selected_features[sorted_idx]
+    sorted_scores = selected_scores[sorted_idx]
+
+    k = grid_search.best_params_['feature_selection__k']
+
+    plt.figure(figsize=(12, max(6, k * 0.3)))
+    plt.barh(sorted_features[:k][::-1], sorted_scores[:k][::-1], color='skyblue')
+    plt.xlabel('ANOVA F-score')
+    plt.title(f'Top {k} Features for {model_name} ({split_name} split)')
+    plt.tight_layout()
+    plt.subplots_adjust(left=0.3)
+    plt.yticks(fontsize=9)
+
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+
+    save_path = os.path.join(save_dir, f"{model_name.lower().replace(' ', '_')}_{split_name.replace(' ', '_').replace('/', '-')}.png")
+    plt.savefig(save_path)
+
+
 
 '''RUN THE MODELS'''
 
@@ -203,20 +241,25 @@ model_list = [
     ("MLP", get_mlp_pipeline)
 ]
 
-#Result file path
-#results_file = #csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_fs_results.csv" 
-results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_fs_results.csv"
+# Result file path
+# results_file = #csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_resultstor.csv"
+results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_results.csv"
 
-#If i rerun the code I want to delete the previous results file
+#best_features_dir = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_KBest"
+best_features_dir = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_KBest"
+
+# If i rerun the code I want to delete the previous results file
 if os.path.exists(results_file):
     os.remove(results_file)  
 
 # 1. Random Split (80/20)
 for model_name, model_fn in model_list:
     pipeline, param_grid = model_fn()
-    run_grid_search(X_train_rand, y_train_rand, X_test_rand, y_test_rand, pipeline, param_grid, model_name + " (80/20)", results_path=results_file)
+    gs = run_grid_search(X_train_rand, y_train_rand, X_test_rand, y_test_rand, pipeline, param_grid, model_name + " (80/20)", results_path=results_file)
+    plot_top_features(gs, X_train_rand, model_name, "80/20", best_features_dir)
 
 # 2. Session Split (S1+S2 → train, S3 → test)
 for model_name, model_fn in model_list:
     pipeline, param_grid = model_fn()
-    run_grid_search(X_train_sess, y_train_sess, X_test_sess, y_test_sess, pipeline, param_grid, model_name + " (S1+S2 vs S3)", results_path=results_file)
+    gs = run_grid_search(X_train_sess, y_train_sess, X_test_sess, y_test_sess, pipeline, param_grid, model_name + " (S1+S2 vs S3)", results_path=results_file)
+    plot_top_features(gs, X_train_sess, model_name, "S1+S2_vs_S3", best_features_dir)

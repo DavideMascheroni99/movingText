@@ -208,12 +208,11 @@ for anim in animation_names:
     y_test_sess = test_subset['tester_id']
     
     # 1. Random Split (80/20)
-for model_name, model_fn in model_list:
-    pipeline, param_grid = model_fn()
-    run_grid_search(X_train_rand, y_train_rand, X_test_rand, y_test_rand, pipeline, param_grid, model_name + " (80/20)", animation_name=anim, results_path=results_file)
+    for model_name, model_fn in model_list:
+        pipeline, param_grid = model_fn()
+        run_grid_search(X_train_rand, y_train_rand, X_test_rand, y_test_rand, pipeline, param_grid, model_name + " (80/20)", animation_name=anim, results_path=results_file)
 
-# 2. Session Split (S1+S2 → train, S3 → test)
-for model_name, model_fn in model_list:
-    pipeline, param_grid = model_fn()
-    run_grid_search(X_train_sess, y_train_sess, X_test_sess, y_test_sess, pipeline, param_grid, model_name + " (S1+S2 vs S3)", animation_name=anim, results_path=results_file)
-
+    # 2. Session Split (S1+S2 → train, S3 → test)
+    for model_name, model_fn in model_list:
+        pipeline, param_grid = model_fn()
+        run_grid_search(X_train_sess, y_train_sess, X_test_sess, y_test_sess, pipeline, param_grid, model_name + " (S1+S2 vs S3)", animation_name=anim, results_path=results_file)

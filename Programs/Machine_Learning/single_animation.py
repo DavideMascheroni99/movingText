@@ -125,7 +125,7 @@ def get_mlp_pipeline():
 
 '''GRID SEARCH FUNCTION'''
 
-def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, title, results_path=None):
+def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, title, animation_name=None, results_path=None):
     print(f"\n=== {title} ===")
     grid_search = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1, verbose=0)
     grid_search.fit(X_train, y_train)
@@ -142,6 +142,7 @@ def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, titl
     
     if results_path:
         results = {
+            'Animation': animation_name,
             'Model': title,
             'Best Parameters': str(best_params),
             'Best CV Accuracy': best_cv_score,
@@ -154,6 +155,7 @@ def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, titl
         else:
             df = pd.DataFrame([results])
             df.to_csv(results_path, mode='a', header=False, index=False)
+
 
 '''RUN THE MODELS FOR EACH ANIMATION'''
 
@@ -205,22 +207,13 @@ for anim in animation_names:
     X_test_sess = test_subset.loc[:, 'f0':'f82']
     y_test_sess = test_subset['tester_id']
     
-    # Write a separator row with the animation name in the CSV file
-    sep_df = pd.DataFrame([{
-        'Model': f'Animation: {anim}',
-        'Best Parameters': '',
-        'Best CV Accuracy': '',
-        'Train Accuracy': '',
-        'Test Accuracy': ''
-    }])
-    sep_df.to_csv(results_file, mode='a', header=not os.path.exists(results_file), index=False)
-    
     # 1. Random Split (80/20)
-    for model_name, model_fn in model_list:
-        pipeline, param_grid = model_fn()
-        run_grid_search(X_train_rand, y_train_rand, X_test_rand, y_test_rand, pipeline, param_grid, model_name + " (80/20)", results_path=results_file)
-    
-    # 2. Session Split (S1+S2 → train, S3 → test)
-    for model_name, model_fn in model_list:
-        pipeline, param_grid = model_fn()
-        run_grid_search(X_train_sess, y_train_sess, X_test_sess, y_test_sess, pipeline, param_grid, model_name + " (S1+S2 vs S3)", results_path=results_file)
+for model_name, model_fn in model_list:
+    pipeline, param_grid = model_fn()
+    run_grid_search(X_train_rand, y_train_rand, X_test_rand, y_test_rand, pipeline, param_grid, model_name + " (80/20)", animation_name=anim, results_path=results_file)
+
+# 2. Session Split (S1+S2 → train, S3 → test)
+for model_name, model_fn in model_list:
+    pipeline, param_grid = model_fn()
+    run_grid_search(X_train_sess, y_train_sess, X_test_sess, y_test_sess, pipeline, param_grid, model_name + " (S1+S2 vs S3)", animation_name=anim, results_path=results_file)
+

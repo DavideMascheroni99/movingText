@@ -146,10 +146,12 @@ def get_mlp_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
+        ('feature_selection', SelectKBest(score_func=f_classif)),
         ('mlp' , MLPClassifier(max_iter=2000, random_state = 0))
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler()],
+        'feature_selection__k': [30, 40, 50, 60, 70],
         'mlp__hidden_layer_sizes': [(100,), (100, 50), (150, 100, 50)],
         'mlp__activation': ['tanh', 'relu'],
         'mlp__alpha':  [0.0001, 0.001, 0.01],

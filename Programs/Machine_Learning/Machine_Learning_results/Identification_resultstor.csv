@@ -1,4 +1,2 @@
 Model,Best Parameters,Best CV Accuracy,Train Accuracy,Test Accuracy
 Naive Bayes (80/20),"{'feature_selection__k': 60, 'scaler': MinMaxScaler()}",0.6266672558029928,0.6977753662506783,0.6594360086767896
-KNN (80/20),"{'feature_selection__k': 60, 'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.7140435371745021,1.0,0.7418655097613883
-Logistic Regression (80/20),"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': StandardScaler()}",0.698845292800754,0.8952794357026587,0.7396963123644251

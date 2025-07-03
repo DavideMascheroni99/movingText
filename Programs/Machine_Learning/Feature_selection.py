@@ -147,7 +147,7 @@ def get_mlp_pipeline():
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
         ('feature_selection', SelectKBest(score_func=f_classif)),
-        ('mlp' , MLPClassifier(max_iter=2000, random_state = 0))
+        ('mlp' , MLPClassifier(max_iter=3000, random_state = 0))
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler()],

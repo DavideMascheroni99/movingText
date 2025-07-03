@@ -130,16 +130,16 @@ def get_mlp_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
-        ('mlp', MLPClassifier(max_iter=500, early_stopping=True, n_iter_no_change=10, validation_fraction=0.1, random_state=0))
+        ('mlp' , MLPClassifier(max_iter=2000, random_state = 0))
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler()],
-        'mlp__hidden_layer_sizes': [(100,), (100, 50)],
-        'mlp__activation': ['relu'],
-        'mlp__alpha': [0.0001, 0.001],
-        'mlp__learning_rate_init': [0.001, 0.005],
+        'mlp__hidden_layer_sizes': [(100,), (100, 50), (150, 100, 50)],
+        'mlp__activation': ['tanh', 'relu'],
+        'mlp__alpha':  [0.0001, 0.001, 0.01],
+        'mlp__learning_rate_init': [0.001, 0.01],
         'mlp__solver': ['adam']
-    }
+        }
     return pipeline, param_grid
 
 '''GRID SEARCH FUNCTION'''

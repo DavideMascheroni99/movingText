@@ -13,7 +13,6 @@ import datetime
 from pathlib import Path
 
 
-
 # Dialogue window for the tester number
 application_window = tkinter.Tk()
 #Ask the tester number
@@ -34,7 +33,7 @@ clock = pygame.time.Clock()
 
 '''SERVER CONNECTION'''
 
-# Host machine IP
+'''# Host machine IP
 HOST = '127.0.0.1'
 # Gazepoint Port
 PORT = 4242
@@ -54,7 +53,7 @@ s.send(str.encode('<SET ID="ENABLE_SEND_PUPIL_RIGHT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_LEFT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_RIGHT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))
-
+'''
 
 # Wrap text into lines that fit a given width, no leading spaces
 def wrap_text(text, font, max_width):
@@ -74,21 +73,29 @@ def wrap_text(text, font, max_width):
   return lines
 
 # Render all lines into one surface
-def render_text_surface(text, font, color, width, line_spacing=6):
-  lines = wrap_text(text, font, width)
-  line_height = font.get_height()
-  total_height = len(lines) * line_height + (len(lines) - 1) * line_spacing
+def render_text_surface(text, font, color, max_width, max_height, line_spacing=6, padding=5):
+    lines = wrap_text(text, font, max_width)
+    line_height = font.get_height()
 
-  surface = pygame.Surface((width, total_height), pygame.SRCALPHA)
-  surface = surface.convert_alpha()
+    total_text_height = len(lines) * line_height + (len(lines) - 1) * line_spacing + 2 * padding
 
-  y = 0
-  for line in lines:
-    rendered = font.render(line, True, color)
-    surface.blit(rendered, (0, y))  # Align text to the left (no padding)
-    y += line_height + line_spacing
+    # Truncate lines until text fits vertically
+    while total_text_height > max_height and lines:
+        lines.pop()
+        total_text_height = len(lines) * line_height + (len(lines) - 1) * line_spacing + 2 * padding
 
-  return surface
+    surface = pygame.Surface((max_width, total_text_height), pygame.SRCALPHA)
+    surface = surface.convert_alpha()
+
+    y = padding
+    for line in lines:
+        rendered = font.render(line, True, color)
+        surface.blit(rendered, (0, y))
+        y += line_height + line_spacing
+
+    return surface
+
+
   
 #Create a white cross to display
 def draw_fixation_cross(x, y, length=20, width=5, color=pygame.Color(glb_var_const.WHITE)):
@@ -98,34 +105,34 @@ def draw_fixation_cross(x, y, length=20, width=5, color=pygame.Color(glb_var_con
 
 #Show white cross for tcross seconds
 def show_white_cross(fname, type):
-  Path("movingText\\Cross_Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
-  Path("movingText\\Cross_Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
-  Path("movingText\\Cross_Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
+  Path("movingText\\Cross_Static_Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
+  Path("movingText\\Cross_Static_Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
+  Path("movingText\\Cross_Static_Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
 
   # File to write on
-  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("movingText\\Cross_Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-{}_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, type, fname), "w")
-  file1.write(str(datetime.datetime.now())+"\n")
+  '''s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
+  file1 = open("movingText\\Cross_Static_Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-{}_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, type, fname), "w")
+  file1.write(str(datetime.datetime.now())+"\n")'''
 
   t_end = time.time() + glb_var_const.TCROSS
   while time.time() <= t_end:
 
     # Sending data to the server and writing it on the respective file
-    casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))
+    '''casual_data = s.recv(1024)
+    file1.write(bytes.decode(casual_data))'''
 
     screen.fill(pygame.Color(glb_var_const.BLACK)) 
     draw_fixation_cross(glb_var_const.center_x, glb_var_const.center_y)
     pygame.display.flip() 
 
   # Sending data to the server and writing it on the respective file
-  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
+  '''s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.close()
-  time.sleep(0.3) 
+  time.sleep(0.3) '''
 
 
 #Connect to the database
@@ -143,8 +150,8 @@ def check_write_order(myresult):
 #Insert K generated texts in the database
 def insert_k_texts(mycursor, text, conn):
   for i, j in zip(range(0,8), text):
-    mycursor.execute("USE indexes")
-    mycursor.execute("INSERT INTO rem_index (tester_number, session_number, trial_number, index_funct, txt) VALUES (%s, %s, %s, %s, %s)", (tester_number, session_number, trial_number, i, j))
+    mycursor.execute("USE Static")
+    mycursor.execute("INSERT INTO rem_static (tester_number, session_number, trial_number, index_funct, txt) VALUES (%s, %s, %s, %s, %s)", (tester_number, session_number, trial_number, i, j))
     conn.commit()
 
 
@@ -176,8 +183,8 @@ def random_text():
   if(sessionN_int == 1 and trialN_int == 1):
     text = gen_random_text(glb_var_const.allTexts)
     #Execute the query
-    mycursor.execute("USE indexes")
-    mycursor.execute("SELECT * FROM rem_index WHERE tester_number = %s", (tester_number, ))
+    mycursor.execute("USE Static")
+    mycursor.execute("SELECT * FROM rem_static WHERE tester_number = %s", (tester_number, ))
     row = mycursor.fetchone()
     if (row == None):
       insert_k_texts(mycursor, text, conn)
@@ -187,8 +194,8 @@ def random_text():
   if(sessionN_int == 1 and trialN_int != 1):
     #Remove already used texts in previous trials
     for i in range (1, trialN_int):
-      mycursor.execute("USE indexes")
-      mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and trial_number = %s", (tester_number, i))
+      mycursor.execute("USE Static")
+      mycursor.execute("SELECT txt FROM rem_static WHERE tester_number = %s and trial_number = %s", (tester_number, i))
       myresult = mycursor.fetchall()
       check_write_order(myresult)
       rem_used_texts(myresult)
@@ -201,15 +208,15 @@ def random_text():
     #Check correct order
     for i in range(1, sessionN_int):
       for j in range(1, 4):
-        mycursor.execute("USE indexes")
-        mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and session_number = %s and trial_number = %s", (tester_number, i, str(j)))
+        mycursor.execute("USE Static")
+        mycursor.execute("SELECT txt FROM rem_static WHERE tester_number = %s and session_number = %s and trial_number = %s", (tester_number, i, str(j)))
         myresult = mycursor.fetchall()
         check_write_order(myresult)
 
     #Remove already used texts in previous sessions
     for i in range(1, sessionN_int):
-      mycursor.execute("USE indexes")
-      mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and session_number = %s", (tester_number, i))
+      mycursor.execute("USE Static")
+      mycursor.execute("SELECT txt FROM rem_static WHERE tester_number = %s and session_number = %s", (tester_number, i))
       myresult = mycursor.fetchall()
       rem_used_texts(myresult)
     text = gen_random_text(glb_var_const.allTexts)
@@ -218,15 +225,15 @@ def random_text():
   if(sessionN_int !=1 and trialN_int != 1):
     #Remove already used texts in previous sessions
     for i in range(1, sessionN_int):
-      mycursor.execute("USE indexes")
-      mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and session_number = %s", (tester_number, i))
+      mycursor.execute("USE Static")
+      mycursor.execute("SELECT txt FROM rem_static WHERE tester_number = %s and session_number = %s", (tester_number, i))
       myresult = mycursor.fetchall()
       check_write_order(myresult)
       rem_used_texts(myresult)
     #Remove already used texts in the previous trials
     for i in range(1, trialN_int):
-      mycursor.execute("USE indexes")
-      mycursor.execute("SELECT txt FROM rem_index WHERE tester_number = %s and trial_number = %s and session_number = %s", (tester_number, i, session_number))
+      mycursor.execute("USE Static")
+      mycursor.execute("SELECT txt FROM rem_static WHERE tester_number = %s and trial_number = %s and session_number = %s", (tester_number, i, session_number))
       myresult = mycursor.fetchall()
       check_write_order(myresult)
       rem_used_texts(myresult)
@@ -238,79 +245,30 @@ def random_text():
   return text
 
 
-#Text scroll from right to left
-def horizontal_scroll(text, speed, dim_char, fname):
-  show_white_cross(fname, "HS")
-  #Create a font
-  font = pygame.font.SysFont(glb_var_const.FONT, dim_char)
-  #Get text width and height
-  text_width, text_height = font.size(text)
-  t_end = time.time() + glb_var_const.TEST_TIME
-  #Starting image position and speed
-  x = glb_var_const.screen_width
-  y = (glb_var_const.screen_height / 2) - (text_height / 2)
-
-  Path("movingText\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
-  Path("movingText\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
-  Path("movingText\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
-
-  # File to write on
-  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("movingText\\Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-HS_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
-  file1.write(str(datetime.datetime.now())+"\n")
-
-  while time.time() <= t_end:
-    for event in pygame.event.get():
-      if event.type == pygame.QUIT:
-        sys.exit()
-      if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-        sys.exit()
-
-    # Sending data to the server and writing it on the respective file
-    casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))
-
-    x = x - speed
-  
-    screen.fill(glb_var_const.BLACK)
-    img = font.render(text, True, glb_var_const.WHITE)
-    screen.blit(img, (x, y))
-  
-    pygame.display.flip()
-    clock.tick(150)
-
-  # Sending data to the server and writing it on the respective file
-  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
-  time.sleep(0.3)
-  casual_data = s.recv(1024)
-  time.sleep(0.3)
-  file1.write(bytes.decode(casual_data))
-  file1.close()
-  time.sleep(0.3)
-
-
 #Block of text that moves vertically
-def vertical_block(text, speed, dim_char, fname):
-  show_white_cross(fname, "VB")
+def static_block(text, dim_char, fname):
+  show_white_cross(fname, "ST")
   t_end = time.time() + glb_var_const.TEST_TIME
   #Create a font
   font = pygame.font.SysFont(glb_var_const.FONT, dim_char)
   
   text_width = glb_var_const.screen_width * 2 // 3
-  text_surface = render_text_surface(text, font, glb_var_const.WHITE, text_width)
-  text_rect = text_surface.get_rect(centerx=glb_var_const.screen_width // 2)
-  
-  y_pos = float(glb_var_const.screen_height)
-  text_rect.y = int(y_pos)
+  text_height = glb_var_const.screen_height - 2 * 5  # 5 pixels padding top & bottom
+  text_surface = render_text_surface(text, font, glb_var_const.WHITE, text_width, text_height, padding=5)
 
-  Path("movingText\\Results\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
-  Path("movingText\\Results\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
-  Path("movingText\\Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
+  text_rect = text_surface.get_rect(center=(
+      glb_var_const.screen_width // 2,
+      glb_var_const.screen_height // 2
+    ))
+
+  Path("movingText\\Results_Static\\Tester{}".format(tester_number)).mkdir(parents=True, exist_ok=True)
+  Path("movingText\\Results_Static\\Tester{}\\Session{}".format(tester_number, session_number)).mkdir(parents=True, exist_ok=True)
+  Path("movingText\\Results_Static\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
  
   # File to write on
-  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
-  file1 = open("movingText\\Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-VB_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
-  file1.write(str(datetime.datetime.now())+"\n")
+  '''s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
+  file1 = open("movingText\\Results_Static\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-ST_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
+  file1.write(str(datetime.datetime.now())+"\n")'''
   
   while time.time() <= t_end:
     for event in pygame.event.get():
@@ -320,11 +278,8 @@ def vertical_block(text, speed, dim_char, fname):
         sys.exit()
  
     # Sending data to the server and writing it on the respective file
-    casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))
-    
-    y_pos -= speed
-    text_rect.y = int(y_pos)
+    '''casual_data = s.recv(1024)
+    file1.write(bytes.decode(casual_data))'''
 
     screen.fill(glb_var_const.BLACK)
     screen.blit(text_surface, text_rect)
@@ -333,38 +288,19 @@ def vertical_block(text, speed, dim_char, fname):
   
 
   # Sending data to the server and writing it on the respective file
-  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
+  '''s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.close()
-  time.sleep(0.3)
+  time.sleep(0.3)'''
 
+def static_block_little(txt):
+  static_block(txt, glb_var_const.LITTLE_CHAR, "LIT")
 
-def hor_scroll_slow_little(txt):
-  horizontal_scroll(txt, glb_var_const.LOW_SPEED_HS_LIT, glb_var_const.LITTLE_CHAR, "SL_LIT")
-
-def hor_scroll_slow_big(txt):
-  horizontal_scroll(txt, glb_var_const.LOW_SPEED_HS_BIG, glb_var_const.BIG_CHAR, "SL_BIG")
-
-def hor_scroll_fast_little(txt):
-  horizontal_scroll(txt, glb_var_const.HIGH_SPEED_HS_LIT, glb_var_const.LITTLE_CHAR, "FA_LIT")
-
-def hor_scroll_fast_big(txt):
-  horizontal_scroll(txt, glb_var_const.HIGH_SPEED_HS_BIG, glb_var_const.BIG_CHAR, "FA_BIG")
-
-def vert_block_slow_little(txt):
-  vertical_block(txt, glb_var_const.LOW_SPEED_VB_LIT, glb_var_const.LITTLE_CHAR, "SL_LIT")
-
-def vert_block_slow_big(txt):
-  vertical_block(txt, glb_var_const.LOW_SPEED_VB_BIG, glb_var_const.BIG_CHAR, "SL_BIG")
-
-def vert_block_fast_little(txt):
-  vertical_block(txt, glb_var_const.HIGH_SPEED_VB_LIT, glb_var_const.LITTLE_CHAR, "FA_LIT")
-
-def vert_block_fast_big(txt):
-  vertical_block(txt, glb_var_const.HIGH_SPEED_VB_BIG, glb_var_const.BIG_CHAR, "FA_BIG")
+def static_block_big(txt):
+  static_block(txt, glb_var_const.BIG_CHAR, "BIG")
 
 
 def main():
@@ -372,8 +308,9 @@ def main():
   pygame.init()
   pygame.mouse.set_visible(False)
 
+
   #shuffle the order of the animations
-  tests_list = [hor_scroll_slow_big, hor_scroll_slow_little, hor_scroll_fast_big, hor_scroll_fast_little, vert_block_slow_little, vert_block_slow_big, vert_block_fast_little, vert_block_fast_big]
+  tests_list = [static_block_little, static_block_big]
   random.shuffle(tests_list)
 
   text = random_text()
@@ -384,7 +321,7 @@ def main():
   
   
   pygame.quit()
-  s.close()
+  '''s.close()'''
 
 if __name__ == "__main__":
     main()

@@ -5,10 +5,25 @@ psw: = Davideinter99
 
 script per database
 
+Moving text
+
 create schema indexes;
 use indexes;
-use indexes;
 create table rem_index
+(tester_number int,
+session_number int,
+trial_number int,
+index_funct int,
+txt varchar(3000),
+primary key(tester_number, session_number, trial_number, index_funct)
+)
+
+
+Static text
+
+create schema static;
+use static;
+create table rem_static
 (tester_number int,
 session_number int,
 trial_number int,

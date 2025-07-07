@@ -194,8 +194,9 @@ for anim in animation_names:
     y = subset['tester_id']
     
     # 1) Random stratified 80/20 split
+    dataset['strat'] = dataset['person_id'] + '_' + dataset['session_id']
     X_train_rand, X_test_rand, y_train_rand, y_test_rand = train_test_split(
-        X, y, test_size=0.2, random_state=0, stratify=y
+        X, y, test_size=0.2, stratify=dataset['strat']
     )
     
     # 2) Session split (S1 + S2 for train, S3 for test)

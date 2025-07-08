@@ -33,7 +33,7 @@ clock = pygame.time.Clock()
 
 '''SERVER CONNECTION'''
 
-'''# Host machine IP
+# Host machine IP
 HOST = '127.0.0.1'
 # Gazepoint Port
 PORT = 4242
@@ -53,7 +53,7 @@ s.send(str.encode('<SET ID="ENABLE_SEND_PUPIL_RIGHT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_LEFT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_EYE_RIGHT" STATE="1" />\r\n'))
 s.send(str.encode('<SET ID="ENABLE_SEND_BLINK" STATE="1" />\r\n'))
-'''
+
 
 # Wrap text into lines that fit a given width, no leading spaces
 def wrap_text(text, font, max_width):
@@ -110,29 +110,29 @@ def show_white_cross(fname, type):
   Path("movingText\\Cross_Static_Results\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
 
   # File to write on
-  '''s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
+  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
   file1 = open("movingText\\Cross_Static_Results\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-{}_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, type, fname), "w")
-  file1.write(str(datetime.datetime.now())+"\n")'''
+  file1.write(str(datetime.datetime.now())+"\n")
 
   t_end = time.time() + glb_var_const.TCROSS
   while time.time() <= t_end:
 
     # Sending data to the server and writing it on the respective file
-    '''casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))'''
+    casual_data = s.recv(1024)
+    file1.write(bytes.decode(casual_data))
 
     screen.fill(pygame.Color(glb_var_const.BLACK)) 
     draw_fixation_cross(glb_var_const.center_x, glb_var_const.center_y)
     pygame.display.flip() 
 
   # Sending data to the server and writing it on the respective file
-  '''s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
+  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.close()
-  time.sleep(0.3) '''
+  time.sleep(0.3) 
 
 
 #Connect to the database
@@ -266,9 +266,9 @@ def static_block(text, dim_char, fname):
   Path("movingText\\Results_Static\\Tester{}\\Session{}\\Trial{}".format(tester_number, session_number, trial_number)).mkdir(parents=True, exist_ok=True)
  
   # File to write on
-  '''s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
+  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="1" />\r\n'))
   file1 = open("movingText\\Results_Static\\Tester{}\\Session{}\\Trial{}\\T{}-S{}-TRY{}-ST_{}.txt".format(tester_number, session_number, trial_number, tester_number, session_number, trial_number, fname), "w")
-  file1.write(str(datetime.datetime.now())+"\n")'''
+  file1.write(str(datetime.datetime.now())+"\n")
   
   while time.time() <= t_end:
     for event in pygame.event.get():
@@ -278,8 +278,8 @@ def static_block(text, dim_char, fname):
         sys.exit()
  
     # Sending data to the server and writing it on the respective file
-    '''casual_data = s.recv(1024)
-    file1.write(bytes.decode(casual_data))'''
+    casual_data = s.recv(1024)
+    file1.write(bytes.decode(casual_data))
 
     screen.fill(glb_var_const.BLACK)
     screen.blit(text_surface, text_rect)
@@ -288,13 +288,13 @@ def static_block(text, dim_char, fname):
   
 
   # Sending data to the server and writing it on the respective file
-  '''s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
+  s.send(str.encode('<SET ID="ENABLE_SEND_DATA" STATE="0" />\r\n'))
   time.sleep(0.3)
   casual_data = s.recv(1024)
   time.sleep(0.3)
   file1.write(bytes.decode(casual_data))
   file1.close()
-  time.sleep(0.3)'''
+  time.sleep(0.3)
 
 def static_block_little(txt):
   static_block(txt, glb_var_const.LITTLE_CHAR, "LIT")
@@ -321,7 +321,7 @@ def main():
   
   
   pygame.quit()
-  '''s.close()'''
+  s.close()
 
 if __name__ == "__main__":
     main()

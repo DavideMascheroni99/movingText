@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, RobustScaler
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
@@ -59,7 +59,7 @@ def get_nb_pipeline():
         ('nb', GaussianNB())
     ])
     param_grid = {
-        'scaler': [MinMaxScaler(), StandardScaler()],
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
         'feature_selection__k': [30, 40, 50, 60, 70]
         }
     return pipeline, param_grid
@@ -72,7 +72,7 @@ def get_knn_pipeline():
         ('knn', KNeighborsClassifier())
     ])
     param_grid = {
-        'scaler': [MinMaxScaler(), StandardScaler()],
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'knn__n_neighbors': [3, 5, 7, 9, 11],
         'knn__weights': ['uniform', 'distance'],
@@ -88,7 +88,7 @@ def get_logreg_pipeline():
         ('logreg', LogisticRegression(max_iter=1000, random_state=0))
     ])
     param_grid = {
-        'scaler': [MinMaxScaler(), StandardScaler()],
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'logreg__C': [0.001, 0.01, 0.1, 1, 10, 100]
     }
@@ -102,7 +102,7 @@ def get_nusvc_pipeline():
         ('nusvc', NuSVC())
     ])
     param_grid = {
-        'scaler': [MinMaxScaler(), StandardScaler()],
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'nusvc__nu': [0.25, 0.5, 0.75],
         'nusvc__kernel': ['rbf', 'poly', 'sigmoid'],
@@ -118,7 +118,7 @@ def get_rf_pipeline():
         ('rf', RandomForestClassifier(random_state=0))
     ])
     param_grid = {
-        'scaler': [MinMaxScaler(), StandardScaler()],
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'rf__n_estimators': [20, 30, 50, 100, 200],
         'rf__max_features': ['sqrt'],
@@ -134,7 +134,7 @@ def get_svc_pipeline():
         ('svc', SVC())
     ])
     param_grid = {
-        'scaler': [MinMaxScaler(), StandardScaler()],
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'svc__C': [0.001, 0.01, 0.1, 1, 10, 100],
         'svc__gamma': [0.001, 0.01, 0.1, 1, 10, 100],
@@ -150,7 +150,7 @@ def get_mlp_pipeline():
         ('mlp' , MLPClassifier(max_iter=3000, random_state = 0))
     ])
     param_grid = {
-        'scaler': [MinMaxScaler(), StandardScaler()],
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'mlp__hidden_layer_sizes': [(100,), (100, 50), (150, 100, 50)],
         'mlp__activation': ['tanh', 'relu'],

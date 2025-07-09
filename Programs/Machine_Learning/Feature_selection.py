@@ -10,9 +10,10 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import NuSVC, SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
-from sklearn.feature_selection import SelectKBest, f_classif, RFE, SelectFromModel
+from sklearn.feature_selection import SelectKBest, f_classif
 import warnings
 import matplotlib.pyplot as plt
+from sklearn.utils.multiclass import type_of_target
 
 # disable an unexpected warning on the new pandas version
 warnings.filterwarnings(
@@ -83,11 +84,12 @@ def get_logreg_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
-        ('feature_selection', RFE(LogisticRegression(max_iter=1000, random_state=0), n_features_to_select=50)),
+        ('feature_selection', SelectKBest(score_func=f_classif)),
         ('logreg', LogisticRegression(max_iter=1000, random_state=0))
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
+        'feature_selection__k': [30, 40, 50, 60, 70],
         'logreg__C': [0.001, 0.01, 0.1, 1, 10, 100]
     }
     return pipeline, param_grid
@@ -112,11 +114,12 @@ def get_rf_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
-        ('feature_selection', SelectFromModel(RandomForestClassifier(n_estimators=100, random_state=0))),
+        ('feature_selection', SelectKBest(score_func=f_classif)),
         ('rf', RandomForestClassifier(random_state=0))
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
+        'feature_selection__k': [30, 40, 50, 60, 70],
         'rf__n_estimators': [20, 30, 50, 100, 200],
         'rf__max_features': ['sqrt'],
         'rf__max_depth': [5, 10, 20, 30]

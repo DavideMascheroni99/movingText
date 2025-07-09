@@ -11,7 +11,6 @@ from sklearn.svm import NuSVC, SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 import warnings
-from sklearn.utils.multiclass import type_of_target
 import numpy as np
 
 #disable an unexpected warning on the new pandas version
@@ -125,7 +124,7 @@ def get_mlp_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
-        ('mlp' , MLPClassifier(max_iter=2000, random_state = 0))
+        ('mlp' , MLPClassifier(max_iter=3000, random_state = 0))
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
@@ -195,8 +194,10 @@ if os.path.exists(results_file):
 for model_name, model_fn in model_list:
     best_cv_scores, train_scores, test_scores = [], [], []
     best_param_list = []
+    #repeat the random split num_seed times
+    num_seed = 5
 
-    for i in range(10):
+    for i in range(num_seed):
         # Random split (80/20) with stratification
         X_train_rand, X_test_rand, y_train_rand, y_test_rand = train_test_split(
             X, y, test_size=0.2, random_state=i, stratify=y

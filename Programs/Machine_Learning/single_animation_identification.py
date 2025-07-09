@@ -11,7 +11,6 @@ from sklearn.svm import NuSVC, SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 import warnings
-from sklearn.utils.multiclass import type_of_target
 
 # disable an unexpected warning on the new pandas version
 warnings.filterwarnings(

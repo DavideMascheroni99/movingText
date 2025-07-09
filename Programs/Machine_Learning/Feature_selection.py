@@ -60,7 +60,7 @@ def get_nb_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection__k': [30, 40, 50, 60, 70]
+        'feature_selection__k': [30, 40, 50, 60, 70, 80]
         }
     return pipeline, param_grid
 
@@ -73,7 +73,7 @@ def get_knn_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection__k': [30, 40, 50, 60, 70],
+        'feature_selection__k': [30, 40, 50, 60, 70, 80],
         'knn__n_neighbors': [3, 5, 7, 9, 11],
         'knn__weights': ['uniform', 'distance'],
         'knn__metric': ['minkowski', 'euclidean', 'manhattan']
@@ -89,7 +89,7 @@ def get_logreg_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection__k': [30, 40, 50, 60, 70],
+        'feature_selection__k': [30, 40, 50, 60, 70, 80],
         'logreg__C': [0.001, 0.01, 0.1, 1, 10, 100]
     }
     return pipeline, param_grid
@@ -103,7 +103,7 @@ def get_nusvc_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection__k': [30, 40, 50, 60, 70],
+        'feature_selection__k': [30, 40, 50, 60, 70, 80],
         'nusvc__nu': [0.25, 0.5, 0.75],
         'nusvc__kernel': ['rbf', 'poly', 'sigmoid'],
         'nusvc__gamma': ['scale', 'auto']
@@ -119,7 +119,7 @@ def get_rf_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection__k': [30, 40, 50, 60, 70],
+        'feature_selection__k': [30, 40, 50, 60, 70, 80],
         'rf__n_estimators': [20, 30, 50, 100, 200],
         'rf__max_features': ['sqrt'],
         'rf__max_depth': [5, 10, 20, 30]
@@ -135,7 +135,7 @@ def get_svc_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection__k': [30, 40, 50, 60, 70],
+        'feature_selection__k': [30, 40, 50, 60, 70, 80],
         'svc__C': [0.001, 0.01, 0.1, 1, 10, 100],
         'svc__gamma': [0.001, 0.01, 0.1, 1, 10, 100],
         'svc__kernel': ['rbf', 'poly']

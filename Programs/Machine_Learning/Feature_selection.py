@@ -13,9 +13,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.feature_selection import SelectKBest, f_classif
 import warnings
 import matplotlib.pyplot as plt
-from sklearn.feature_selection import mutual_info_classif, SelectFromModel
-from sklearn.svm import LinearSVC
-
+from sklearn.utils.multiclass import type_of_target
 
 # disable an unexpected warning on the new pandas version
 warnings.filterwarnings(
@@ -62,7 +60,6 @@ def get_nb_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection': [SelectKBest(score_func=f_classif), SelectKBest(score_func=mutual_info_classif)],
         'feature_selection__k': [30, 40, 50, 60, 70]
         }
     return pipeline, param_grid
@@ -76,7 +73,6 @@ def get_knn_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection': [SelectKBest(score_func=f_classif), SelectKBest(score_func=mutual_info_classif)],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'knn__n_neighbors': [3, 5, 7, 9, 11],
         'knn__weights': ['uniform', 'distance'],
@@ -93,7 +89,6 @@ def get_logreg_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection': [SelectKBest(score_func=f_classif), SelectFromModel(LinearSVC(penalty='l1', dual=False, max_iter=2000))],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'logreg__C': [0.001, 0.01, 0.1, 1, 10, 100]
     }
@@ -103,19 +98,17 @@ def get_nusvc_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
-        ('feature_selection', SelectFromModel(LinearSVC(penalty='l1', dual=False, max_iter=2000))),
+        ('feature_selection', SelectKBest(score_func=f_classif)),
         ('nusvc', NuSVC())
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection': [SelectKBest(score_func=f_classif), SelectFromModel(LinearSVC(penalty='l1', dual=False, max_iter=2000))],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'nusvc__nu': [0.25, 0.5, 0.75],
         'nusvc__kernel': ['rbf', 'poly', 'sigmoid'],
         'nusvc__gamma': ['scale', 'auto']
     }
     return pipeline, param_grid
-
 
 def get_rf_pipeline():
     pipeline = Pipeline([
@@ -126,7 +119,6 @@ def get_rf_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection': [SelectKBest(score_func=f_classif), SelectFromModel(RandomForestClassifier(n_estimators=100, random_state=0))],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'rf__n_estimators': [20, 30, 50, 100, 200],
         'rf__max_features': ['sqrt'],
@@ -143,7 +135,6 @@ def get_svc_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection': [SelectKBest(score_func=f_classif), SelectKBest(score_func=mutual_info_classif)],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'svc__C': [0.001, 0.01, 0.1, 1, 10, 100],
         'svc__gamma': [0.001, 0.01, 0.1, 1, 10, 100],
@@ -160,7 +151,6 @@ def get_mlp_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection': [SelectKBest(score_func=f_classif), SelectKBest(score_func=mutual_info_classif)],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'mlp__hidden_layer_sizes': [(100,), (100, 50), (150, 100, 50)],
         'mlp__activation': ['tanh', 'relu'],
@@ -181,16 +171,8 @@ def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, titl
     best_cv_score = grid_search.best_score_
     train_score = grid_search.best_estimator_.score(X_train, y_train)
     test_score = grid_search.best_estimator_.score(X_test, y_test)
-
-    # Get the name of the feature selection method used
-    selector = grid_search.best_estimator_.named_steps['feature_selection']
-    if hasattr(selector, 'score_func'):
-        feature_selector_name = selector.score_func.__name__
-    else:
-        feature_selector_name = selector.__class__.__name__
-
+    
     print("Best parameters:", best_params)
-    print("Feature Selector:", feature_selector_name)
     print("Best CV accuracy:", best_cv_score)
     print("Train accuracy:", train_score)
     print("Test accuracy:", test_score)
@@ -198,7 +180,6 @@ def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, titl
     if results_path:
         results = {
             'Model': title,
-            'Feature Selector': feature_selector_name,
             'Best Parameters': str(best_params),
             'Best CV Accuracy': best_cv_score,
             'Train Accuracy': train_score,
@@ -213,69 +194,39 @@ def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, titl
     
     return grid_search
 
-
 '''PLOT THE K BEST VALUES WITH ITS F-SCORE'''
 
 def plot_top_features(grid_search, X_train, model_name, split_name, save_dir):
+
     feature_names = X_train.columns
 
     selector = grid_search.best_estimator_.named_steps['feature_selection']
+    support_mask = selector.get_support()
+    scores = selector.scores_
 
-    # Handle SelectKBest
-    if hasattr(selector, 'scores_'):
-        support_mask = selector.get_support()
-        scores = selector.scores_
+    selected_features = feature_names[support_mask]
+    selected_scores = scores[support_mask]
 
-        selected_features = feature_names[support_mask]
-        selected_scores = scores[support_mask]
+    sorted_idx = selected_scores.argsort()[::-1]
+    sorted_features = selected_features[sorted_idx]
+    sorted_scores = selected_scores[sorted_idx]
 
-        sorted_idx = selected_scores.argsort()[::-1]
-        sorted_features = selected_features[sorted_idx]
-        sorted_scores = selected_scores[sorted_idx]
+    k = grid_search.best_params_['feature_selection__k']
 
-        k = len(sorted_features)
-
-        plt.figure(figsize=(12, max(6, k * 0.3)))
-        plt.barh(sorted_features[:k][::-1], sorted_scores[:k][::-1], color='skyblue')
-        plt.xlabel('Score')
-        plt.title(f'Top {k} Features for {model_name} ({split_name} split)')
-        plt.tight_layout()
-        plt.subplots_adjust(left=0.3)
-        plt.yticks(fontsize=9)
-
-    # Handle SelectFromModel
-    elif hasattr(selector, 'estimator_'):
-        support_mask = selector.get_support()
-        importances = selector.estimator_.coef_ if hasattr(selector.estimator_, "coef_") else selector.estimator_.feature_importances_
-        if importances.ndim > 1:
-            importances = importances[0]
-
-        selected_features = feature_names[support_mask]
-        selected_scores = importances[support_mask]
-
-        sorted_idx = selected_scores.argsort()[::-1]
-        sorted_features = selected_features[sorted_idx]
-        sorted_scores = selected_scores[sorted_idx]
-
-        k = len(sorted_features)
-
-        plt.figure(figsize=(12, max(6, k * 0.3)))
-        plt.barh(sorted_features[:k][::-1], sorted_scores[:k][::-1], color='salmon')
-        plt.xlabel('Importance')
-        plt.title(f'Top {k} Features for {model_name} ({split_name} split)')
-        plt.tight_layout()
-        plt.subplots_adjust(left=0.3)
-        plt.yticks(fontsize=9)
-
-    else:
-        print(f"Feature selector type not supported for plotting in {model_name} ({split_name})")
-        return
+    plt.figure(figsize=(12, max(6, k * 0.3)))
+    plt.barh(sorted_features[:k][::-1], sorted_scores[:k][::-1], color='skyblue')
+    plt.xlabel('ANOVA F-score')
+    plt.title(f'Top {k} Features for {model_name} ({split_name} split)')
+    plt.tight_layout()
+    plt.subplots_adjust(left=0.3)
+    plt.yticks(fontsize=9)
 
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
 
     save_path = os.path.join(save_dir, f"{model_name.lower().replace(' ', '_')}_{split_name.replace(' ', '_').replace('/', '-')}.png")
     plt.savefig(save_path)
+
 
 
 '''RUN THE MODELS'''

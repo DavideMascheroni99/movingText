@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
@@ -13,27 +14,22 @@ from sklearn.neural_network import MLPClassifier
 import warnings
 from sklearn.utils.multiclass import type_of_target
 
-#disable an unexpected warning on the new pandas version
 warnings.filterwarnings(
     "ignore",
     message="The number of unique classes is greater than 50% of the number of samples."
 )
 
 '''LOAD THE DATASET'''
-#csv_path of the PC in the lab
-#csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv" 
 csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
 dataset = pd.read_csv(csv_path)
 
-#Extract the tester id and the session id from file_key
 dataset['person_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])
 dataset['session_id'] = dataset['file_key'].apply(lambda x: x.split('_')[1])
 
-#The X are the whole rows composed by the whole columns, while the labels are the id of the persons
 X = dataset.loc[:, 'f0':'f82']
 y = dataset['person_id']
 
-# Session split (S1+S2 for training, S3 for test)
+# Session split
 train_subset = dataset[dataset['session_id'].isin(['S1', 'S2'])]
 test_subset = dataset[dataset['session_id'] == 'S3']
 X_train_sess = train_subset.loc[:, 'f0':'f82']
@@ -41,8 +37,7 @@ y_train_sess = train_subset['person_id']
 X_test_sess = test_subset.loc[:, 'f0':'f82']
 y_test_sess = test_subset['person_id']
 
-'''DEFINITION OF EACH PIPELINE WITH THEIR RESPECTIVE PARAMETER GRID'''
-
+'''PIPELINES'''
 def get_nb_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
@@ -124,7 +119,7 @@ def get_mlp_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
-        ('mlp' , MLPClassifier(max_iter=2000, random_state = 0))
+        ('mlp' , MLPClassifier(max_iter=2000, random_state=0))
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
@@ -133,46 +128,36 @@ def get_mlp_pipeline():
         'mlp__alpha':  [0.0001, 0.001, 0.01],
         'mlp__learning_rate_init': [0.001, 0.01],
         'mlp__solver': ['adam']
-        }
+    }
     return pipeline, param_grid
 
-'''GRID SEARCH FUNCTION'''
-
+'''GRID SEARCH'''
 def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, title):
-    print(f"\n=== {title} ===")
     grid_search = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1, verbose=0)
     grid_search.fit(X_train, y_train)
-    
+
     best_params = grid_search.best_params_
     best_cv_score = grid_search.best_score_
     train_score = grid_search.best_estimator_.score(X_train, y_train)
     test_score = grid_search.best_estimator_.score(X_test, y_test)
-    
-    print("Best parameters:", best_params)
-    print("Best CV accuracy:", best_cv_score)
-    print("Train accuracy:", train_score)
-    print("Test accuracy:", test_score)
 
     return title, best_params, best_cv_score, train_score, test_score
 
 def write_results(title, best_params, best_cv_score, train_score, test_score, results_path):
-    if results_path:
-        results = {
-            'Model': title,
-            'Best Parameters': str(best_params),
-            'Best CV Accuracy': best_cv_score,
-            'Train Accuracy': train_score,
-            'Test Accuracy': test_score
-        }
-        if not os.path.exists(results_path):
-            df = pd.DataFrame([results])
-            df.to_csv(results_path, index=False)
-        else:
-            df = pd.DataFrame([results])
-            df.to_csv(results_path, mode='a', header=False, index=False)
+    results = {
+        'Model': title,
+        'Best Parameters': str(best_params),
+        'Best CV Accuracy': best_cv_score,
+        'Train Accuracy': train_score,
+        'Test Accuracy': test_score
+    }
+    df = pd.DataFrame([results])
+    if not os.path.exists(results_path):
+        df.to_csv(results_path, index=False)
+    else:
+        df.to_csv(results_path, mode='a', header=False, index=False)
 
-'''RUN THE MODELS'''
-
+'''RUN'''
 model_list = [
     ("Naive Bayes", get_nb_pipeline),
     ("KNN", get_knn_pipeline),
@@ -183,31 +168,45 @@ model_list = [
     ("MLP", get_mlp_pipeline)
 ]
 
-#Result file path
-#results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_results.csv" 
 results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_results.csv"
 
-#If i rerun the code I want to delete the previous results file
+# Delete previous results file if it exists
 if os.path.exists(results_file):
-    os.remove(results_file)  
+    os.remove(results_file)
 
+# 1. RANDOM SPLIT (80/20, mean results over 10 runs)
+for model_name, model_fn in model_list:
+    cv_scores, train_scores, test_scores = [], [], []
+    best_params_list = []
+    best_test_score = -1
+    best_params_final = None
 
-
-for i in range(10):
-    # Random split (80/20) with stratification
-    X_train_rand, X_test_rand, y_train_rand, y_test_rand = train_test_split(
-        X, y, test_size=0.2, random_state=i, stratify=y
-    )
-    # 1. Random Split (80/20)
-    for model_name, model_fn in model_list:
+    for i in range(10):
+        X_train_rand, X_test_rand, y_train_rand, y_test_rand = train_test_split(
+            X, y, test_size=0.2, random_state=i, stratify=y
+        )
         pipeline, param_grid = model_fn()
-        title, best_params, best_cv_score, train_score, test_score = run_grid_search(X_train_rand, y_train_rand, X_test_rand, y_test_rand, pipeline, param_grid, model_name + " (80/20)")
-    
-write_results(title, best_params, best_cv_score, train_score, test_score, results_file)
+        title, best_params, cv, train, test = run_grid_search(X_train_rand, y_train_rand, X_test_rand, y_test_rand, pipeline, param_grid, model_name + " (80/20)")
 
+        cv_scores.append(cv)
+        train_scores.append(train)
+        test_scores.append(test)
 
-# 2. Session Split (S1+S2 → train, S3 → test)
+        if test > best_test_score:
+            best_test_score = test
+            best_params_final = best_params
+
+    mean_cv = np.mean(cv_scores)
+    mean_train = np.mean(train_scores)
+    mean_test = np.mean(test_scores)
+
+    write_results(title, best_params_final, mean_cv, mean_train, mean_test, results_file)
+
+# 2. SESSION SPLIT (S1+S2 vs S3) — only once
 for model_name, model_fn in model_list:
     pipeline, param_grid = model_fn()
-    title, best_params, best_cv_score, train_score, test_score = run_grid_search(X_train_sess, y_train_sess, X_test_sess, y_test_sess, pipeline, param_grid, model_name + " (S1+S2 vs S3)")
-    write_results(title, best_params, best_cv_score, train_score, test_score, results_file) 
+    title, best_params, best_cv_score, train_score, test_score = run_grid_search(
+        X_train_sess, y_train_sess, X_test_sess, y_test_sess,
+        pipeline, param_grid, model_name + " (S1+S2 vs S3)"
+    )
+    write_results(title, best_params, best_cv_score, train_score, test_score, results_file)

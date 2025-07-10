@@ -212,16 +212,16 @@ for model_name, model_fn in model_list:
         test_scores.append(test_score)
         best_param_list.append((best_params, best_cv_score))
 
-    # compute mean scores and best parameters from the best run
+    #Compute mean scores and best parameters from the best run
     mean_cv = np.mean(best_cv_scores)
     mean_train = np.mean(train_scores)
     mean_test = np.mean(test_scores)
     best_params = max(best_param_list, key=lambda x: x[1])[0]
 
-    # Write only the mean results after 10 runs
+    #Write only the mean results after num_seed runs
     write_results(model_name + " (80/20)", best_params, mean_cv, mean_train, mean_test, results_file)
 
-# Perform session split only once
+#Session split
 for model_name, model_fn in model_list:
     pipeline, param_grid = model_fn()
     best_params, best_cv_score, train_score, test_score = run_grid_search(

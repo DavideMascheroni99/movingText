@@ -13,6 +13,7 @@ from sklearn.neural_network import MLPClassifier
 import warnings
 import numpy as np
 from sklearn.feature_selection import SelectKBest, f_classif
+import matplotlib.pyplot as plt
 
 #disable an unexpected warning on the new pandas version
 warnings.filterwarnings(
@@ -59,6 +60,7 @@ def get_knn_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
+        ('feature_selection', SelectKBest(score_func=f_classif)),
         ('knn', KNeighborsClassifier())
     ])
     param_grid = {
@@ -167,7 +169,7 @@ def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, titl
     print("Train accuracy:", train_score)
     print("Test accuracy:", test_score)
 
-    return best_params, best_cv_score, train_score, test_score
+    return best_params, best_cv_score, train_score, test_score, grid_search
 
 '''WRITE RESULTS FUNCTION'''
 
@@ -185,6 +187,39 @@ def write_results(title, best_params, best_cv_score, train_score, test_score, re
     else:
         df.to_csv(results_path, mode='a', header=False, index=False)
 
+'''PLOT THE K BEST VALUES WITH ITS F-SCORE'''
+
+def plot_top_features(grid_search, X_train, model_name, split_name, save_dir):
+
+    feature_names = X_train.columns
+
+    selector = grid_search.best_estimator_.named_steps['feature_selection']
+    support_mask = selector.get_support()
+    scores = selector.scores_
+
+    selected_features = feature_names[support_mask]
+    selected_scores = scores[support_mask]
+
+    sorted_idx = selected_scores.argsort()[::-1]
+    sorted_features = selected_features[sorted_idx]
+    sorted_scores = selected_scores[sorted_idx]
+
+    k = grid_search.best_params_['feature_selection__k']
+
+    plt.figure(figsize=(12, max(6, k * 0.3)))
+    plt.barh(sorted_features[:k][::-1], sorted_scores[:k][::-1], color='skyblue')
+    plt.xlabel('ANOVA F-score')
+    plt.title(f'Top {k} Features for {model_name} ({split_name} split)')
+    plt.tight_layout()
+    plt.subplots_adjust(left=0.3)
+    plt.yticks(fontsize=9)
+
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+
+    save_path = os.path.join(save_dir, f"{model_name.lower().replace(' ', '_')}_{split_name.replace(' ', '_').replace('/', '-')}.png")
+    plt.savefig(save_path)
+
 '''RUN THE MODELS'''
 
 model_list = [
@@ -198,16 +233,18 @@ model_list = [
 ]
 
 #Result file path
-results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_results.csv" 
-#results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_results.csv"
+results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_results_fs.csv"
 
-#If i rerun the code I want to delete the previous results file
+best_features_dir = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_KBest"
+
+# If i rerun the code I want to delete the previous results file
 if os.path.exists(results_file):
-    os.remove(results_file)
+    os.remove(results_file)  
 
 for model_name, model_fn in model_list:
     best_cv_scores, train_scores, test_scores = [], [], []
     best_param_list = []
+    best_grid_searches = []
     #repeat the random split num_seed times
     num_seed = 5
 
@@ -218,27 +255,31 @@ for model_name, model_fn in model_list:
         )
 
         pipeline, param_grid = model_fn()
-        best_params, best_cv_score, train_score, test_score = run_grid_search(
+        best_params, best_cv_score, train_score, test_score, grid_search = run_grid_search(
             X_train_rand, y_train_rand, X_test_rand, y_test_rand, pipeline, param_grid, model_name + f" (80/20 Run {i+1})")
 
         best_cv_scores.append(best_cv_score)
         train_scores.append(train_score)
         test_scores.append(test_score)
         best_param_list.append((best_params, best_cv_score))
+        best_grid_searches.append(grid_search)
 
     #Compute mean scores and best parameters from the best run
     mean_cv = np.mean(best_cv_scores)
     mean_train = np.mean(train_scores)
     mean_test = np.mean(test_scores)
     best_params = max(best_param_list, key=lambda x: x[1])[0]
+    best_grid_search = best_grid_searches[best_cv_scores.index(max(best_cv_scores))]
 
     #Write only the mean results after num_seed runs
     write_results(model_name + " (80/20)", best_params, mean_cv, mean_train, mean_test, results_file)
 
+    #Plot the features for the best random split run
+    plot_top_features(best_grid_search, X, model_name, "80/20", best_features_dir)
+
 #Session split
 for model_name, model_fn in model_list:
     pipeline, param_grid = model_fn()
-    best_params, best_cv_score, train_score, test_score = run_grid_search(
+    best_params, best_cv_score, train_score, test_score, _ = run_grid_search(
         X_train_sess, y_train_sess, X_test_sess, y_test_sess, pipeline, param_grid, model_name + " (S1+S2 vs S3)")
     write_results(model_name + " (S1+S2 vs S3)", best_params, best_cv_score, train_score, test_score, results_file)
-

@@ -21,8 +21,8 @@ warnings.filterwarnings(
 
 '''LOAD THE DATASET'''
 # csv_path of the PC in the lab
-csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
-#csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
+#csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
+csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
 dataset = pd.read_csv(csv_path)
 
 #Obtain the animation name from the file key
@@ -36,7 +36,10 @@ def get_nb_pipeline():
         ('scaler', MinMaxScaler()),
         ('nb', GaussianNB())
     ])
-    param_grid = {'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()]}
+    param_grid = {
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
+        'nb__var_smoothing': [1e-9, 1e-8, 1e-7]  # increase smoothing to reduce overfitting
+    }
     return pipeline, param_grid
 
 def get_knn_pipeline():
@@ -47,9 +50,9 @@ def get_knn_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'knn__n_neighbors': [3, 5, 7, 9, 11],
-        'knn__weights': ['uniform', 'distance'],
-        'knn__metric': ['minkowski', 'euclidean', 'manhattan']
+        'knn__n_neighbors': [3, 5],               # fewer neighbors to avoid overfitting
+        'knn__weights': ['uniform'],               # simpler weights
+        'knn__metric': ['minkowski']               # restrict metric for consistency
     }
     return pipeline, param_grid
 
@@ -57,11 +60,11 @@ def get_logreg_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
-        ('logreg', LogisticRegression(max_iter=1000, random_state=0))
+        ('logreg', LogisticRegression(max_iter=1000, random_state=0, penalty='l2', solver='lbfgs'))
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'logreg__C': [0.001, 0.01, 0.1, 1, 10, 100]
+        'logreg__C': [0.01, 0.1, 1],              # stronger regularization (smaller C)
     }
     return pipeline, param_grid
 
@@ -73,9 +76,9 @@ def get_nusvc_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'nusvc__nu': [0.25, 0.5, 0.75],
-        'nusvc__kernel': ['rbf', 'poly', 'sigmoid'],
-        'nusvc__gamma': ['scale', 'auto']
+        'nusvc__nu': [0.25, 0.5],                 # smaller nu to control support vectors
+        'nusvc__kernel': ['rbf'],                  # focus on 'rbf' kernel for better generalization
+        'nusvc__gamma': ['scale']
     }
     return pipeline, param_grid
 
@@ -87,9 +90,11 @@ def get_rf_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'rf__n_estimators': [20, 30, 50, 100, 200],
+        'rf__n_estimators': [50, 100],             # moderate number of trees
         'rf__max_features': ['sqrt'],
-        'rf__max_depth': [5, 10, 20, 30]
+        'rf__max_depth': [5, 10],                   # shallower trees to reduce overfitting
+        'rf__min_samples_split': [5, 10],           # increase min samples per split to regularize
+        'rf__min_samples_leaf': [2, 4]               # min samples per leaf
     }
     return pipeline, param_grid
 
@@ -101,9 +106,9 @@ def get_svc_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'svc__C': [0.001, 0.01, 0.1, 1, 10, 100],
-        'svc__gamma': [0.001, 0.01, 0.1, 1, 10, 100],
-        'svc__kernel': ['rbf', 'poly']
+        'svc__C': [0.01, 0.1, 1],                  # stronger regularization (smaller C)
+        'svc__gamma': ['scale'],
+        'svc__kernel': ['rbf']                      # restrict to 'rbf' for better generalization
     }
     return pipeline, param_grid
 
@@ -111,16 +116,16 @@ def get_mlp_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
-        ('mlp' , MLPClassifier(max_iter=2000, random_state = 0))
+        ('mlp' , MLPClassifier(max_iter=2000, random_state=0, early_stopping=True))
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'mlp__hidden_layer_sizes': [(100,), (100, 50), (150, 100, 50)],
-        'mlp__activation': ['tanh', 'relu'],
-        'mlp__alpha':  [0.0001, 0.001, 0.01],
-        'mlp__learning_rate_init': [0.001, 0.01],
+        'mlp__hidden_layer_sizes': [(50,), (100,)],  # simpler networks
+        'mlp__activation': ['relu'],                  # prefer relu for better convergence
+        'mlp__alpha': [0.001, 0.01, 0.1],             # stronger L2 regularization
+        'mlp__learning_rate_init': [0.001],
         'mlp__solver': ['adam']
-        }
+    }
     return pipeline, param_grid
 
 '''GRID SEARCH FUNCTION'''
@@ -172,12 +177,9 @@ model_list = [
 ]
 
 # Result file path
-results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Single_feature_results.csv"
+#results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Single_feature_results.csv"
 # results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Single_feature_results.csv"
 
-# Delete previous results file if exists
-if os.path.exists(results_file):
-    os.remove(results_file)
 
 # Get all unique animations in the dataset
 animation_names = dataset['anim_name'].unique()
@@ -199,35 +201,7 @@ for anim in animation_names:
     X_test_sess = test_subset.loc[:, 'f0':'f82']
     y_test_sess = test_subset['tester_id']
 
-    for model_name, model_fn in model_list:
-        best_cv_scores, train_scores, test_scores = [], [], []
-        best_param_list = []
-        num_seed = 5
+print(f"\n[Animation: {animation_name}]")
+print(f"S1+S2 train size: {len(X_train_sess)}, S3 test size: {len(X_test_sess)}")
 
-        for i in range(num_seed):
-            X_train_rand, X_test_rand, y_train_rand, y_test_rand = train_test_split(
-                X, y, test_size=0.2, random_state=i, stratify=y
-            )
-
-            pipeline, param_grid = model_fn()
-            best_params, best_cv_score, train_score, test_score = run_grid_search(
-                X_train_rand, y_train_rand, X_test_rand, y_test_rand, pipeline, param_grid, model_name + f" (80/20 Run {i+1})")
-
-            best_cv_scores.append(best_cv_score)
-            train_scores.append(train_score)
-            test_scores.append(test_score)
-            best_param_list.append((best_params, best_cv_score))
-
-        mean_cv = np.mean(best_cv_scores)
-        mean_train = np.mean(train_scores)
-        mean_test = np.mean(test_scores)
-        best_params = max(best_param_list, key=lambda x: x[1])[0]
-
-        write_results(model_name + " (80/20)", best_params, mean_cv, mean_train, mean_test, results_file)
-
-    for model_name, model_fn in model_list:
-        pipeline, param_grid = model_fn()
-        best_params, best_cv_score, train_score, test_score = run_grid_search(
-            X_train_sess, y_train_sess, X_test_sess, y_test_sess, pipeline, param_grid, model_name + " (S1+S2 vs S3)")
-
-        write_results(model_name + " (S1+S2 vs S3)", best_params, best_cv_score, train_score, test_score, results_file)
+    

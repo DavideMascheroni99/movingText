@@ -147,6 +147,7 @@ def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, titl
 def write_results(title, best_params, best_cv_score, train_score, test_score, results_path):
     results = {
         'Model': title,
+        'Animation': animation_name,
         'Best Parameters': str(best_params),
         'Best CV Accuracy': best_cv_score,
         'Train Accuracy': train_score,
@@ -182,6 +183,7 @@ if os.path.exists(results_file):
 animation_names = dataset['anim_name'].unique()
 
 for anim in animation_names:
+    animation_name = anim
     subset = dataset[dataset['anim_name'] == anim].copy()
     subset['tester_id'] = subset['file_key'].apply(lambda x: x.split('_')[0])
     subset['session_id'] = subset['file_key'].apply(lambda x: x.split('_')[1])

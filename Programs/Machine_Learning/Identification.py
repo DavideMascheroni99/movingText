@@ -198,10 +198,28 @@ for model_name, model_fn in model_list:
     num_seed = 5
 
     for i in range(num_seed):
-        # Random split (80/20) with stratification
-        X_train_rand, X_test_rand, y_train_rand, y_test_rand = train_test_split(
-            X, y, test_size=0.2, random_state=i, stratify=y
-        )
+        # Split each person’s samples 80/20 randomly, then combine
+        X_train_list, X_test_list = [], []
+        y_train_list, y_test_list = [], []
+
+        for person in dataset['person_id'].unique():
+            person_data = dataset[dataset['person_id'] == person]
+            X_person = person_data.loc[:, 'f0':'f82'].values
+            y_person = person_data['person_id'].values
+
+            X_tr, X_te, y_tr, y_te = train_test_split(
+                X_person, y_person, test_size=0.2, random_state=i, stratify=None
+            )
+
+            X_train_list.append(X_tr)
+            y_train_list.append(y_tr)
+            X_test_list.append(X_te)
+            y_test_list.append(y_te)
+
+        X_train_rand = np.vstack(X_train_list)
+        y_train_rand = np.concatenate(y_train_list)
+        X_test_rand = np.vstack(X_test_list)
+        y_test_rand = np.concatenate(y_test_list)
 
         pipeline, param_grid = model_fn()
         best_params, best_cv_score, train_score, test_score = run_grid_search(

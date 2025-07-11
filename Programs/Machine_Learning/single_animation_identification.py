@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
@@ -124,37 +125,38 @@ def get_mlp_pipeline():
 
 '''GRID SEARCH FUNCTION'''
 
-def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, title, animation_name=None, results_path=None):
+def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, title):
     print(f"\n=== {title} ===")
     grid_search = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1, verbose=0)
     grid_search.fit(X_train, y_train)
-    
+
     best_params = grid_search.best_params_
     best_cv_score = grid_search.best_score_
     train_score = grid_search.best_estimator_.score(X_train, y_train)
     test_score = grid_search.best_estimator_.score(X_test, y_test)
-    
+
     print("Best parameters:", best_params)
     print("Best CV accuracy:", best_cv_score)
     print("Train accuracy:", train_score)
     print("Test accuracy:", test_score)
-    
-    if results_path:
-        results = {
-            'Animation': animation_name,
-            'Model': title,
-            'Best Parameters': str(best_params),
-            'Best CV Accuracy': best_cv_score,
-            'Train Accuracy': train_score,
-            'Test Accuracy': test_score
-        }
-        if not os.path.exists(results_path):
-            df = pd.DataFrame([results])
-            df.to_csv(results_path, index=False)
-        else:
-            df = pd.DataFrame([results])
-            df.to_csv(results_path, mode='a', header=False, index=False)
 
+    return best_params, best_cv_score, train_score, test_score
+
+'''WRITE RESULTS FUNCTION'''
+
+def write_results(title, best_params, best_cv_score, train_score, test_score, results_path):
+    results = {
+        'Model': title,
+        'Best Parameters': str(best_params),
+        'Best CV Accuracy': best_cv_score,
+        'Train Accuracy': train_score,
+        'Test Accuracy': test_score
+    }
+    df = pd.DataFrame([results])
+    if not os.path.exists(results_path):
+        df.to_csv(results_path, index=False)
+    else:
+        df.to_csv(results_path, mode='a', header=False, index=False)
 
 '''RUN THE MODELS FOR EACH ANIMATION'''
 
@@ -180,38 +182,50 @@ if os.path.exists(results_file):
 animation_names = dataset['anim_name'].unique()
 
 for anim in animation_names:
-    
-    # Filter dataset by animation
     subset = dataset[dataset['anim_name'] == anim].copy()
-    
-    # Extract tester_id and session_id again for this subset
     subset['tester_id'] = subset['file_key'].apply(lambda x: x.split('_')[0])
     subset['session_id'] = subset['file_key'].apply(lambda x: x.split('_')[1])
-    
-    # Features and labels
+
     X = subset.loc[:, 'f0':'f82']
     y = subset['tester_id']
-    
-    # 1) Random stratified 80/20 split
-    X_train_rand, X_test_rand, y_train_rand, y_test_rand = train_test_split(
-        X, y, test_size=0.2, random_state=0, stratify=y
-    )
-    
-    # 2) Session split (S1 + S2 for train, S3 for test)
+
     train_subset = subset[subset['session_id'].isin(['S1', 'S2'])]
     test_subset = subset[subset['session_id'] == 'S3']
-    
+
     X_train_sess = train_subset.loc[:, 'f0':'f82']
     y_train_sess = train_subset['tester_id']
     X_test_sess = test_subset.loc[:, 'f0':'f82']
     y_test_sess = test_subset['tester_id']
-    
-    # 1. Random Split (80/20)
-    for model_name, model_fn in model_list:
-        pipeline, param_grid = model_fn()
-        run_grid_search(X_train_rand, y_train_rand, X_test_rand, y_test_rand, pipeline, param_grid, model_name + " (80/20)", animation_name=anim, results_path=results_file)
 
-    # 2. Session Split (S1+S2 → train, S3 → test)
+    for model_name, model_fn in model_list:
+        best_cv_scores, train_scores, test_scores = [], [], []
+        best_param_list = []
+        num_seed = 5
+
+        for i in range(num_seed):
+            X_train_rand, X_test_rand, y_train_rand, y_test_rand = train_test_split(
+                X, y, test_size=0.2, random_state=i, stratify=y
+            )
+
+            pipeline, param_grid = model_fn()
+            best_params, best_cv_score, train_score, test_score = run_grid_search(
+                X_train_rand, y_train_rand, X_test_rand, y_test_rand, pipeline, param_grid, model_name + f" (80/20 Run {i+1})")
+
+            best_cv_scores.append(best_cv_score)
+            train_scores.append(train_score)
+            test_scores.append(test_score)
+            best_param_list.append((best_params, best_cv_score))
+
+        mean_cv = np.mean(best_cv_scores)
+        mean_train = np.mean(train_scores)
+        mean_test = np.mean(test_scores)
+        best_params = max(best_param_list, key=lambda x: x[1])[0]
+
+        write_results(model_name + " (80/20)", best_params, mean_cv, mean_train, mean_test, results_file)
+
     for model_name, model_fn in model_list:
         pipeline, param_grid = model_fn()
-        run_grid_search(X_train_sess, y_train_sess, X_test_sess, y_test_sess, pipeline, param_grid, model_name + " (S1+S2 vs S3)", animation_name=anim, results_path=results_file)
+        best_params, best_cv_score, train_score, test_score = run_grid_search(
+            X_train_sess, y_train_sess, X_test_sess, y_test_sess, pipeline, param_grid, model_name + " (S1+S2 vs S3)")
+
+        write_results(model_name + " (S1+S2 vs S3)", best_params, best_cv_score, train_score, test_score, results_file)

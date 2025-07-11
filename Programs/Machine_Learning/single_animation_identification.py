@@ -191,31 +191,21 @@ for anim in animation_names:
     # Features and labels
     X = subset.loc[:, 'f0':'f82']
     y = subset['tester_id']
-
-    # Ensure random split keeps unique testers between train and test
-    unique_testers = y.unique()
-    train_ids, test_ids = train_test_split(unique_testers, test_size=0.2, random_state=0)
-    train_mask = subset['tester_id'].isin(train_ids)
-    test_mask = subset['tester_id'].isin(test_ids)
-
-    X_train_rand = X[train_mask]
-    y_train_rand = y[train_mask]
-    X_test_rand = X[test_mask]
-    y_test_rand = y[test_mask]
-
+    
+    # 1) Random stratified 80/20 split
+    X_train_rand, X_test_rand, y_train_rand, y_test_rand = train_test_split(
+        X, y, test_size=0.2, random_state=0, stratify=y
+    )
+    
     # 2) Session split (S1 + S2 for train, S3 for test)
     train_subset = subset[subset['session_id'].isin(['S1', 'S2'])]
     test_subset = subset[subset['session_id'] == 'S3']
-
-    # Ensure no overlap in testers
-    train_ids_sess = set(train_subset['tester_id'].unique())
-    test_subset = test_subset[~test_subset['tester_id'].isin(train_ids_sess)]
-
+    
     X_train_sess = train_subset.loc[:, 'f0':'f82']
     y_train_sess = train_subset['tester_id']
     X_test_sess = test_subset.loc[:, 'f0':'f82']
     y_test_sess = test_subset['tester_id']
-
+    
     # 1. Random Split (80/20)
     for model_name, model_fn in model_list:
         pipeline, param_grid = model_fn()

@@ -23,15 +23,15 @@ warnings.filterwarnings(
 )
 
 # Load dataset
-csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv" 
+csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
 dataset = pd.read_csv(csv_path)
 
 dataset['person_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])
 dataset['session_id'] = dataset['file_key'].apply(lambda x: x.split('_')[1])
 
-#List that contains f0 to f82
+# List that contains f0 to f82
 features_cols = [f'f{i}' for i in range(83)]
-#Get all the different person number
+# Get all the different person number
 people = dataset['person_id'].unique()
 NUM_TRIALS = 10
 
@@ -207,125 +207,53 @@ def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_t
 
     return grid, grid.best_score_, train_accuracy, test_accuracy, grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc
 
-# Plot and save top features
-def plot_top_features(grid_search, X_train, model_name, split_name, save_dir):
-    feature_names = X_train.columns
-    selector = grid_search.best_estimator_.named_steps['feature_selection']
-    support_mask = selector.get_support()
-    scores = selector.scores_
-    selected_features = feature_names[support_mask]
-    selected_scores = scores[support_mask]
-    sorted_idx = selected_scores.argsort()[::-1]
-    sorted_features = selected_features[sorted_idx]
-    sorted_scores = selected_scores[sorted_idx]
-    k = grid_search.best_params_['feature_selection__k']
-
-    plt.figure(figsize=(12, max(6, k//2)))
-    plt.barh(sorted_features, sorted_scores)
-    plt.xlabel('ANOVA F-value')
-    plt.title(f'Top {k} features for {model_name} ({split_name} split)')
-    plt.gca().invert_yaxis()
-
-    if not os.path.exists(save_dir):
-        os.makedirs(save_dir)
-    plt.savefig(os.path.join(save_dir, f'{model_name}_{split_name}_top_features.png'))
-    plt.close()
-
-
-def run_verification(split_type, results_path, roc_save_path=None, feature_plot_dir=None):
+def run_verification(split_type, results_path):
     classifiers = get_classifiers_with_grid()
     roc_data = []
 
-    for person in people:
-        person_data = dataset[dataset['person_id'] == person]
+    for name, pipeline, param_grid in classifiers:
+        print(f"\n=== {name} ===")
+        person_test_accuracies, person_train_scores, person_cv_scores = [], [], []
+        precisions, recalls, specificities = [], [], []
 
-        # To store metrics per model
-        model_results = {}
+        for person in people:
+            person_data = dataset[dataset['person_id'] == person]
+            X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, split_type, 0)
+            grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, fpr, tpr, roc_auc = train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_test)
 
-        for name, pipeline, param_grid in classifiers:
-            trial_test_accs = []
-            trial_train_accs = []
-            trial_cv_scores = []
-            trial_precisions = []
-            trial_recalls = []
-            trial_specificities = []
-            trial_aucs = []
+            person_test_accuracies.append(test_acc)
+            person_train_scores.append(train_acc)
+            person_cv_scores.append(best_cv)
+            precisions.append(precision)
+            recalls.append(recall)
+            specificities.append(specificity)
 
-            # Store feature plot and ROC data for best trial later
-            best_grid = None
-            best_fpr = None
-            best_tpr = None
-            best_auc = None
-            best_test_acc = -np.inf
+            # Save ROC curve data for first person for plotting
+            if person == people[0]:
+                roc_data.append((name, fpr, tpr, roc_auc))
 
-            for trial_seed in range(NUM_TRIALS):
-                X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, split_type, trial_seed)
-                grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, fpr, tpr, roc_auc = train_and_evaluate_model(
-                    pipeline, param_grid, X_train, y_train, X_test, y_test
-                )
+        # Save average results
+        avg_test = np.mean(person_test_accuracies)
+        avg_train = np.mean(person_train_scores)
+        avg_cv = np.mean(person_cv_scores)
+        avg_precision = np.mean(precisions)
+        avg_recall = np.mean(recalls)
+        avg_specificity = np.mean(specificities)
+        k = best_params.get('feature_selection__k', 'N/A')
 
-                trial_test_accs.append(test_acc)
-                trial_train_accs.append(train_acc)
-                trial_cv_scores.append(best_cv)
-                trial_precisions.append(precision)
-                trial_recalls.append(recall)
-                trial_specificities.append(specificity)
-                trial_aucs.append(roc_auc)
-
-                # Keep track of best trial to plot later
-                if test_acc > best_test_acc:
-                    best_test_acc = test_acc
-                    best_grid = grid
-                    best_fpr = fpr
-                    best_tpr = tpr
-                    best_auc = roc_auc
-                    best_params_for_model = best_params
-
-            # Compute average metrics over all trials for this model and person
-            avg_test = np.mean(trial_test_accs)
-            avg_train = np.mean(trial_train_accs)
-            avg_cv = np.mean(trial_cv_scores)
-            avg_precision = np.mean(trial_precisions)
-            avg_recall = np.mean(trial_recalls)
-            avg_specificity = np.mean(trial_specificities)
-            avg_auc = np.mean(trial_aucs)
-
-            model_results[name] = {
-                "avg_test": avg_test,
-                "avg_train": avg_train,
-                "avg_cv": avg_cv,
-                "avg_precision": avg_precision,
-                "avg_recall": avg_recall,
-                "avg_specificity": avg_specificity,
-                "avg_auc": avg_auc,
-                "best_grid": best_grid,
-                "best_fpr": best_fpr,
-                "best_tpr": best_tpr,
-                "best_auc": best_auc,
-                "best_params": best_params_for_model
-            }
-
-        # Identify best model for the person by highest avg_test accuracy
-        best_model_name = max(model_results, key=lambda m: model_results[m]["avg_test"])
-        best_model_info = model_results[best_model_name]
-
-        # Save results to CSV for all models
-        for model_name, metrics in model_results.items():
-            k = metrics["best_params"].get('feature_selection__k', 'N/A')
+        if results_path:
             split_label = "(S1+S2 vs S3)" if split_type == "session" else "(80/20)"
-            model_with_split = f"{model_name} {split_label}"
-
+            model_with_split = f"{name} {split_label}"
             result = pd.DataFrame([{
                 "Model": model_with_split,
-                "Best Parameters": str(metrics["best_params"]),
-                "Best CV Accuracy": metrics["avg_cv"],
-                "Train Accuracy": metrics["avg_train"],
-                "Test Accuracy": metrics["avg_test"],
+                "Best Parameters": str(best_params),
+                "Best CV Accuracy": avg_cv,
+                "Train Accuracy": avg_train,
+                "Test Accuracy": avg_test,
                 "Selected k": k,
-                "Precision": metrics["avg_precision"],
-                "Recall": metrics["avg_recall"],
-                "Specificity": metrics["avg_specificity"],
-                "AUC": metrics["avg_auc"]
+                "Precision": avg_precision,
+                "Recall": avg_recall,
+                "Specificity": avg_specificity
             }])
 
             if not os.path.exists(results_path):
@@ -333,34 +261,15 @@ def run_verification(split_type, results_path, roc_save_path=None, feature_plot_
             else:
                 result.to_csv(results_path, mode='a', header=False, index=False)
 
-        # Plot top features only for best model
-        if feature_plot_dir and best_model_info["best_grid"] is not None:
-            plot_top_features(best_model_info["best_grid"], X_train, best_model_name, split_type, feature_plot_dir)
 
-        # Store ROC data only for best model (session split)
-        if split_type == 'session' and best_model_info["best_fpr"] is not None:
-            roc_data.append((best_model_name, best_model_info["best_fpr"], best_model_info["best_tpr"], best_model_info["best_auc"]))
-
-    # Create the ROC curve plot for the session split
-    if split_type == 'session' and roc_save_path and len(roc_data) > 0:
-        plt.figure(figsize=(10, 8))
-        for name, fpr, tpr, auc_score in roc_data:
-            plt.plot(fpr, tpr, label=f'{name} (AUC = {auc_score:.2f})')
-        plt.plot([0, 1], [0, 1], 'k--', label='Random Chance')
-        plt.xlabel('False Positive Rate')
-        plt.ylabel('True Positive Rate')
-        plt.title('ROC Curve (Session Split)')
-        plt.legend(loc='lower right')
-        plt.grid(True)
-        plt.savefig(roc_save_path)
-        plt.close()
-
+# File paths
 results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
-roc_output_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\roc_verification_ss.png"
-feature_plot_dir = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_KBest"
 
+# Remove old results file if exists
 if os.path.exists(results_file):
     os.remove(results_file)
 
-run_verification(split_type='random', results_path=results_file, feature_plot_dir=feature_plot_dir)
-run_verification(split_type='session', results_path=results_file, roc_save_path=roc_output_path, feature_plot_dir=feature_plot_dir)
+# Run verification for random split
+run_verification(split_type='random', results_path=results_file)
+# Run verification for session split, save ROC curve
+run_verification(split_type='session', results_path=results_file)

@@ -228,10 +228,6 @@ def run_verification(split_type, results_path):
             recalls.append(recall)
             specificities.append(specificity)
 
-            # Save ROC curve data for first person for plotting
-            if person == people[0]:
-                roc_data.append((name, fpr, tpr, roc_auc))
-
         # Save average results
         avg_test = np.mean(person_test_accuracies)
         avg_train = np.mean(person_train_scores)

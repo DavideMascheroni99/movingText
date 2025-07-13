@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, RobustScaler
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
@@ -23,13 +23,15 @@ warnings.filterwarnings(
 )
 
 # Load dataset
-csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
+csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv" 
 dataset = pd.read_csv(csv_path)
 
 dataset['person_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])
 dataset['session_id'] = dataset['file_key'].apply(lambda x: x.split('_')[1])
 
+#List that contains f0 to f82
 features_cols = [f'f{i}' for i in range(83)]
+#Get all the different person number
 people = dataset['person_id'].unique()
 NUM_TRIALS = 10
 
@@ -43,7 +45,7 @@ def get_classifiers_with_grid():
         ('clf', GaussianNB())
     ])
     nb_params = {
-        'scaler': [MinMaxScaler(), StandardScaler()],
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
         'feature_selection__k': [30, 40, 50, 60, 70]
     }
 
@@ -55,7 +57,7 @@ def get_classifiers_with_grid():
         ('clf', KNeighborsClassifier())
     ])
     knn_params = {
-        'scaler': [MinMaxScaler(), StandardScaler()],
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'clf__n_neighbors': [3, 5, 7, 9, 11],
         'clf__weights': ['uniform', 'distance'],
@@ -70,7 +72,7 @@ def get_classifiers_with_grid():
         ('clf', LogisticRegression(max_iter=1000, random_state=0))
     ])
     logreg_params = {
-        'scaler': [StandardScaler(), MinMaxScaler()],
+        'scaler': [StandardScaler(), MinMaxScaler(), RobustScaler()],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'clf__C': [0.001, 0.01, 0.1, 1, 10, 100]
     }
@@ -83,7 +85,7 @@ def get_classifiers_with_grid():
         ('clf', NuSVC(probability=True))
     ])
     nusvc_params = {
-        'scaler': [MinMaxScaler(), StandardScaler()],
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'clf__nu': [0.25, 0.5, 0.75],
         'clf__kernel': ['rbf', 'poly', 'sigmoid'],
@@ -98,7 +100,7 @@ def get_classifiers_with_grid():
         ('clf', RandomForestClassifier(random_state=0))
     ])
     rf_params = {
-        'scaler': [MinMaxScaler(), StandardScaler()],
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'clf__n_estimators': [20, 30, 50, 100, 200],
         'clf__max_features': ['sqrt'],
@@ -113,7 +115,7 @@ def get_classifiers_with_grid():
         ('clf', SVC(probability=True))
     ])
     svc_params = {
-        'scaler': [MinMaxScaler(), StandardScaler()],
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'clf__C': [0.001, 0.01, 0.1, 1, 10, 100],
         'clf__gamma': [0.001, 0.01, 0.1, 1, 10, 100],
@@ -125,10 +127,10 @@ def get_classifiers_with_grid():
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
         ('feature_selection', SelectKBest(score_func=f_classif)),
-        ('clf', MLPClassifier(max_iter=2000, random_state=0))
+        ('clf', MLPClassifier(max_iter=3000, random_state=0))
     ])
     mlp_params = {
-        'scaler': [MinMaxScaler(), StandardScaler()],
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
         'feature_selection__k': [30, 40, 50, 60, 70],
         'clf__hidden_layer_sizes': [(100,), (100, 50), (150, 100, 50)],
         'clf__activation': ['tanh', 'relu'],
@@ -149,25 +151,30 @@ def get_classifiers_with_grid():
     ]
 
 # Prepare data for a single person
-def prepare_train_test_data(person_data, split_type, trial):
+def prepare_train_test_data(person_data, split_type, seed):
     if split_type == 'session':
         train_data = person_data[person_data['session_id'].isin(['S1', 'S2'])]
         test_data = person_data[person_data['session_id'] == 'S3']
     elif split_type == 'random':
-        train_data, test_data = train_test_split(person_data, test_size=0.2, stratify=person_data['session_id'], random_state=trial)
+        train_data, test_data = train_test_split(person_data, test_size=0.2, stratify=person_data['session_id'], random_state=seed)
     else:
         raise ValueError(f"Unknown split_type: {split_type}")
 
     impostors = dataset[dataset['person_id'] != person_data['person_id'].iloc[0]]
-    impostors_shuffled = impostors.sample(frac=1, random_state=trial).reset_index(drop=True)
+    impostors_shuffled = impostors.sample(frac=1, random_state=seed).reset_index(drop=True)
+
+    # Balance impostor samples to match genuine samples
     impostor_train = impostors_shuffled.iloc[:len(train_data)]
     impostor_test = impostors_shuffled.iloc[len(train_data):len(train_data)+len(test_data)]
 
+    # Make balanced train and test sets with equal genuine and impostor samples
     train_combined = pd.concat([train_data, impostor_train])
     test_combined = pd.concat([test_data, impostor_test])
-
+    
+    # I extract only the 83 features leaving the file key out cause possible leaking
     X_train = train_combined[features_cols]
     X_test = test_combined[features_cols]
+    # Label as 1 the data of the current person and with zero the others
     y_train = np.array([1] * len(train_data) + [0] * len(impostor_train))
     y_test = np.array([1] * len(test_data) + [0] * len(impostor_test))
 
@@ -178,18 +185,27 @@ def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_t
     grid = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
     grid.fit(X_train, y_train)
 
+    # Compute train and test accuracy
+    train_accuracy = grid.best_estimator_.score(X_train, y_train)
+    test_accuracy = grid.best_estimator_.score(X_test, y_test)
+
+    # Use the best model of grid search to make prediction on the test set
     y_pred = grid.best_estimator_.predict(X_test)
+    # Get the probability a sample belongs to class 1
     y_score = grid.best_estimator_.predict_proba(X_test)[:, 1]
 
-    precision = precision_score(y_test, y_pred, zero_division=0)
-    recall = recall_score(y_test, y_pred)
+    # Get the confusion matrix 
     tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
-    specificity = tn / (tn + fp)
+
+    # Compute precision, recall and specificity. Check also that denominator is greater than zero
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0
+    specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
 
     fpr, tpr, _ = roc_curve(y_test, y_score)
     roc_auc = auc(fpr, tpr)
 
-    return grid, grid.best_score_, grid.best_estimator_.score(X_train, y_train), grid.best_estimator_.score(X_test, y_test), grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc
+    return grid, grid.best_score_, train_accuracy, test_accuracy, grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc
 
 # Plot and save top features
 def plot_top_features(grid_search, X_train, model_name, split_name, save_dir):
@@ -204,61 +220,112 @@ def plot_top_features(grid_search, X_train, model_name, split_name, save_dir):
     sorted_scores = selected_scores[sorted_idx]
     k = grid_search.best_params_['feature_selection__k']
 
-    plt.figure(figsize=(12, max(6, k * 0.3)))
-    plt.barh(sorted_features[:k][::-1], sorted_scores[:k][::-1], color='skyblue')
-    plt.xlabel('ANOVA F-score')
-    plt.title(f'Top {k} Features for {model_name} ({split_name} split)')
-    plt.tight_layout()
-    plt.subplots_adjust(left=0.3)
-    plt.yticks(fontsize=9)
+    plt.figure(figsize=(12, max(6, k//2)))
+    plt.barh(sorted_features, sorted_scores)
+    plt.xlabel('ANOVA F-value')
+    plt.title(f'Top {k} features for {model_name} ({split_name} split)')
+    plt.gca().invert_yaxis()
 
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
-
-    save_path = os.path.join(save_dir, f"{model_name.lower().replace(' ', '_')}_{split_name.replace(' ', '_').replace('/', '-')}_top_features.png")
-    plt.savefig(save_path)
+    plt.savefig(os.path.join(save_dir, f'{model_name}_{split_name}_top_features.png'))
     plt.close()
 
-# Run full evaluation and save results including k and plots
+
 def run_verification(split_type, results_path, roc_save_path=None, feature_plot_dir=None):
     classifiers = get_classifiers_with_grid()
     roc_data = []
 
-    for name, pipeline, param_grid in classifiers:
-        print(f"\n=== {name} ===")
-        person_accuracies, person_train_scores, person_cv_scores = [], [], []
+    for person in people:
+        person_data = dataset[dataset['person_id'] == person]
 
-        for person in people:
-            person_data = dataset[dataset['person_id'] == person]
-            X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, split_type, 0)
-            grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, fpr, tpr, roc_auc = train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_test)
+        # To store metrics per model
+        model_results = {}
 
-            person_accuracies.append(test_acc)
-            person_train_scores.append(train_acc)
-            person_cv_scores.append(best_cv)
+        for name, pipeline, param_grid in classifiers:
+            trial_test_accs = []
+            trial_train_accs = []
+            trial_cv_scores = []
+            trial_precisions = []
+            trial_recalls = []
+            trial_specificities = []
+            trial_aucs = []
 
-            if feature_plot_dir:
-                plot_top_features(grid, X_train, name, split_type, feature_plot_dir)
+            # Store feature plot and ROC data for best trial later
+            best_grid = None
+            best_fpr = None
+            best_tpr = None
+            best_auc = None
+            best_test_acc = -np.inf
 
-            if split_type == 'session':
-                roc_data.append((name, fpr, tpr, roc_auc))
+            for trial_seed in range(NUM_TRIALS):
+                X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, split_type, trial_seed)
+                grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, fpr, tpr, roc_auc = train_and_evaluate_model(
+                    pipeline, param_grid, X_train, y_train, X_test, y_test
+                )
 
-        # Save average results
-        avg_test = np.mean(person_accuracies)
-        avg_train = np.mean(person_train_scores)
-        avg_cv = np.mean(person_cv_scores)
-        k = best_params.get('feature_selection__k', 'N/A')
+                trial_test_accs.append(test_acc)
+                trial_train_accs.append(train_acc)
+                trial_cv_scores.append(best_cv)
+                trial_precisions.append(precision)
+                trial_recalls.append(recall)
+                trial_specificities.append(specificity)
+                trial_aucs.append(roc_auc)
 
-        if results_path:
+                # Keep track of best trial to plot later
+                if test_acc > best_test_acc:
+                    best_test_acc = test_acc
+                    best_grid = grid
+                    best_fpr = fpr
+                    best_tpr = tpr
+                    best_auc = roc_auc
+                    best_params_for_model = best_params
+
+            # Compute average metrics over all trials for this model and person
+            avg_test = np.mean(trial_test_accs)
+            avg_train = np.mean(trial_train_accs)
+            avg_cv = np.mean(trial_cv_scores)
+            avg_precision = np.mean(trial_precisions)
+            avg_recall = np.mean(trial_recalls)
+            avg_specificity = np.mean(trial_specificities)
+            avg_auc = np.mean(trial_aucs)
+
+            model_results[name] = {
+                "avg_test": avg_test,
+                "avg_train": avg_train,
+                "avg_cv": avg_cv,
+                "avg_precision": avg_precision,
+                "avg_recall": avg_recall,
+                "avg_specificity": avg_specificity,
+                "avg_auc": avg_auc,
+                "best_grid": best_grid,
+                "best_fpr": best_fpr,
+                "best_tpr": best_tpr,
+                "best_auc": best_auc,
+                "best_params": best_params_for_model
+            }
+
+        # Identify best model for the person by highest avg_test accuracy
+        best_model_name = max(model_results, key=lambda m: model_results[m]["avg_test"])
+        best_model_info = model_results[best_model_name]
+
+        # Save results to CSV for all models
+        for model_name, metrics in model_results.items():
+            k = metrics["best_params"].get('feature_selection__k', 'N/A')
             split_label = "(S1+S2 vs S3)" if split_type == "session" else "(80/20)"
-            model_with_split = f"{name} {split_label}"
+            model_with_split = f"{model_name} {split_label}"
+
             result = pd.DataFrame([{
                 "Model": model_with_split,
-                "Best Parameters": str(best_params),
-                "Best CV Accuracy": avg_cv,
-                "Train Accuracy": avg_train,
-                "Test Accuracy": avg_test,
-                "Selected k": k
+                "Best Parameters": str(metrics["best_params"]),
+                "Best CV Accuracy": metrics["avg_cv"],
+                "Train Accuracy": metrics["avg_train"],
+                "Test Accuracy": metrics["avg_test"],
+                "Selected k": k,
+                "Precision": metrics["avg_precision"],
+                "Recall": metrics["avg_recall"],
+                "Specificity": metrics["avg_specificity"],
+                "AUC": metrics["avg_auc"]
             }])
 
             if not os.path.exists(results_path):
@@ -266,7 +333,16 @@ def run_verification(split_type, results_path, roc_save_path=None, feature_plot_
             else:
                 result.to_csv(results_path, mode='a', header=False, index=False)
 
-    if split_type == 'session' and roc_save_path:
+        # Plot top features only for best model
+        if feature_plot_dir and best_model_info["best_grid"] is not None:
+            plot_top_features(best_model_info["best_grid"], X_train, best_model_name, split_type, feature_plot_dir)
+
+        # Store ROC data only for best model (session split)
+        if split_type == 'session' and best_model_info["best_fpr"] is not None:
+            roc_data.append((best_model_name, best_model_info["best_fpr"], best_model_info["best_tpr"], best_model_info["best_auc"]))
+
+    # Create the ROC curve plot for the session split
+    if split_type == 'session' and roc_save_path and len(roc_data) > 0:
         plt.figure(figsize=(10, 8))
         for name, fpr, tpr, auc_score in roc_data:
             plt.plot(fpr, tpr, label=f'{name} (AUC = {auc_score:.2f})')
@@ -279,10 +355,9 @@ def run_verification(split_type, results_path, roc_save_path=None, feature_plot_
         plt.savefig(roc_save_path)
         plt.close()
 
-# Paths
-results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
-roc_output_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\roc_verification_ss.png"
-feature_plot_dir = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Feature_Plots"
+results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
+roc_output_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\roc_verification_ss.png"
+feature_plot_dir = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_KBest"
 
 if os.path.exists(results_file):
     os.remove(results_file)

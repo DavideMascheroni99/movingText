@@ -220,6 +220,7 @@ def compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, spec
 
 
 def run_random_split(person_data, pipeline, param_grid):
+    # Dictionary that maps each key to a list. The goal is to collect multiple accuracy values for each unique parameter combination
     param_accumulator = defaultdict(list)
     test_scores, train_scores, cv_scores = [], [], []
     precisions, recalls, specificities = [], [], []
@@ -237,8 +238,9 @@ def run_random_split(person_data, pipeline, param_grid):
         recalls.append(recall)
         specificities.append(specificity)
 
-        # Save param -> accuracy for global best
+        # Create an hashtable with the sorted key value returned by grid.best_params_.items()
         params_tuple = tuple(sorted(grid.best_params_.items()))
+        # Using the parameter tuple as the key, append the current test accuracy to the list associated with that parameter set.
         param_accumulator[params_tuple].append(test_acc)
 
     return test_scores, train_scores, cv_scores, precisions, recalls, specificities, param_accumulator, best_params
@@ -249,7 +251,9 @@ def run_session_split(person_data, pipeline, param_grid):
     grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, *_ = train_and_evaluate_model(
         pipeline, param_grid, X_train, y_train, X_test, y_test
     )
-
+    
+    # Return a none because in this case the best parameters are obtained only for one iteration. No need for further computations.
+    # I also return the single elements inside a list for code consistency in the run_verification function
     return [test_acc], [train_acc], [best_cv], [precision], [recall], [specificity], None, best_params
 
 

@@ -207,9 +207,19 @@ def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_t
 
     return grid, grid.best_score_, train_accuracy, test_accuracy, grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc
 
+def compute_mean(person_test_scores, person_train_scores, person_cv_scores, precisions, recalls, specificities, best_params):
+    # Save average results
+        avg_test = np.mean(person_test_scores)
+        avg_train = np.mean(person_train_scores)
+        avg_cv = np.mean(person_cv_scores)
+        avg_precision = np.mean(precisions)
+        avg_recall = np.mean(recalls)
+        avg_specificity = np.mean(specificities)
+        k = best_params.get('feature_selection__k', 'N/A')
+        return avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, k
+
 def run_verification(split_type, results_path):
     classifiers = get_classifiers_with_grid()
-    roc_data = []
 
     for name, pipeline, param_grid in classifiers:
         print(f"\n=== {name} ===")
@@ -218,24 +228,52 @@ def run_verification(split_type, results_path):
 
         for person in people:
             person_data = dataset[dataset['person_id'] == person]
-            X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, split_type, 0)
-            grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, fpr, tpr, roc_auc = train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_test)
 
-            person_test_accuracies.append(test_acc)
-            person_train_scores.append(train_acc)
-            person_cv_scores.append(best_cv)
-            precisions.append(precision)
-            recalls.append(recall)
-            specificities.append(specificity)
+            test_scores, train_scores, cv_scores = [], [], []
+            person_precisions, person_recalls, person_specificities = [], [], []
 
-        # Save average results
-        avg_test = np.mean(person_test_accuracies)
-        avg_train = np.mean(person_train_scores)
-        avg_cv = np.mean(person_cv_scores)
-        avg_precision = np.mean(precisions)
-        avg_recall = np.mean(recalls)
-        avg_specificity = np.mean(specificities)
-        k = best_params.get('feature_selection__k', 'N/A')
+            if split_type == 'random':
+                for seed in range(NUM_TRIALS):
+                    X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, split_type, seed)
+                    grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, fpr, tpr, roc_auc = train_and_evaluate_model(
+                        pipeline, param_grid, X_train, y_train, X_test, y_test
+                    )
+
+                    test_scores.append(test_acc)
+                    train_scores.append(train_acc)
+                    cv_scores.append(best_cv)
+                    person_precisions.append(precision)
+                    person_recalls.append(recall)
+                    person_specificities.append(specificity)
+
+                avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, _ = compute_mean(
+                    test_scores, train_scores, cv_scores, person_precisions, person_recalls, person_specificities, best_params
+                )
+
+            elif split_type == 'session':
+                X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, split_type, seed=0)
+                grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, fpr, tpr, roc_auc = train_and_evaluate_model(
+                    pipeline, param_grid, X_train, y_train, X_test, y_test
+                )
+
+                avg_test, avg_train, avg_cv = test_acc, train_acc, best_cv
+                avg_precision, avg_recall, avg_specificity = precision, recall, specificity
+
+            person_test_accuracies.append(avg_test)
+            person_train_scores.append(avg_train)
+            person_cv_scores.append(avg_cv)
+            precisions.append(avg_precision)
+            recalls.append(avg_recall)
+            specificities.append(avg_specificity)
+
+        # Average across all people
+        final_test = np.mean(person_test_accuracies)
+        final_train = np.mean(person_train_scores)
+        final_cv = np.mean(person_cv_scores)
+        final_precision = np.mean(precisions)
+        final_recall = np.mean(recalls)
+        final_specificity = np.mean(specificities)
+        selected_k = best_params.get('feature_selection__k', 'N/A')
 
         if results_path:
             split_label = "(S1+S2 vs S3)" if split_type == "session" else "(80/20)"
@@ -243,13 +281,13 @@ def run_verification(split_type, results_path):
             result = pd.DataFrame([{
                 "Model": model_with_split,
                 "Best Parameters": str(best_params),
-                "Best CV Accuracy": avg_cv,
-                "Train Accuracy": avg_train,
-                "Test Accuracy": avg_test,
-                "Selected k": k,
-                "Precision": avg_precision,
-                "Recall": avg_recall,
-                "Specificity": avg_specificity
+                "Best CV Accuracy": final_cv,
+                "Train Accuracy": final_train,
+                "Test Accuracy": final_test,
+                "Selected k": selected_k,
+                "Precision": final_precision,
+                "Recall": final_recall,
+                "Specificity": final_specificity
             }])
 
             if not os.path.exists(results_path):

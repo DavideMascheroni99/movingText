@@ -246,7 +246,7 @@ for model_name, model_fn in model_list:
     best_param_list = []
     best_grid_searches = []
     #repeat the random split num_seed times
-    num_seed = 5
+    num_seed = 10
 
     for i in range(num_seed):
         # Random split (80/20) with stratification

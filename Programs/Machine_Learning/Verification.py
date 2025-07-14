@@ -208,7 +208,6 @@ def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_t
 
     return grid, grid.best_score_, train_accuracy, test_accuracy, grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc
 
-
 def compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params=None):
     avg_test = np.mean(test_scores)
     avg_train = np.mean(train_scores)
@@ -282,54 +281,75 @@ def run_verification(split_type, results_path):
 
     for name, pipeline, param_grid in classifiers:
         print(f"\n=== {name} ===")
-        all_test, all_train, all_cv = [], [], []
-        all_precisions, all_recalls, all_specificities = [], [], []
-        param_accumulator_total = defaultdict(list)
-        last_best_params = None
 
-        for person in people:
-            person_data = dataset[dataset['person_id'] == person]
+        if split_type == "random":
+            # Collect seed-level means
+            seed_metrics = []
+            param_accumulator_total = defaultdict(list)
 
-            if split_type == "random":
-                test_scores, train_scores, cv_scores, precisions, recalls, specificities, param_accumulator, best_params = run_random_split(
-                    person_data, pipeline, param_grid
-                )
+            for seed in range(NUM_TRIALS):
+                test_scores, train_scores, cv_scores = [], [], []
+                precisions, recalls, specificities = [], [], []
 
-                # Accumulate all param sets
-                for p, accs in param_accumulator.items():
-                    param_accumulator_total[p].extend(accs)
+                for person in people:
+                    person_data = dataset[dataset['person_id'] == person]
+                    X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, "random", seed)
+                    grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, *_ = train_and_evaluate_model(
+                        pipeline, param_grid, X_train, y_train, X_test, y_test
+                    )
 
-            elif split_type == "session":
+                    test_scores.append(test_acc)
+                    train_scores.append(train_acc)
+                    cv_scores.append(best_cv)
+                    precisions.append(precision)
+                    recalls.append(recall)
+                    specificities.append(specificity)
+
+                    params_tuple = tuple(sorted(grid.best_params_.items()))
+                    param_accumulator_total[params_tuple].append(test_acc)
+
+                # Mean across people for this seed
+                seed_metric = compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities)
+                seed_metrics.append(seed_metric)
+
+            # Mean across all seeds
+            final_metrics = tuple(np.mean([np.array(seed_metric[:6]) for seed_metric in seed_metrics], axis=0))
+            selected_k = seed_metrics[0][6]  # take k from first seed (they're usually same or ignored here)
+            final_metrics += (selected_k,)
+
+            # Best parameters overall (based on all seed-person combos)
+            avg_param_performance = {k: np.mean(v) for k, v in param_accumulator_total.items()}
+            best_param_tuple = max(avg_param_performance.items(), key=lambda x: x[1])[0]
+            best_params = dict(best_param_tuple)
+
+        elif split_type == "session":
+            all_test, all_train, all_cv = [], [], []
+            all_precisions, all_recalls, all_specificities = [], [], []
+            last_best_params = None
+
+            for person in people:
+                person_data = dataset[dataset['person_id'] == person]
                 test_scores, train_scores, cv_scores, precisions, recalls, specificities, _, best_params = run_session_split(
                     person_data, pipeline, param_grid
                 )
 
-            # Compute per-person average (random: over seeds, session: just one value)
-            avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, _ = compute_mean(
-                test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params
-            )
+                avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, _ = compute_mean(
+                    test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params
+                )
 
-            # Accumulate across people
-            all_test.append(avg_test)
-            all_train.append(avg_train)
-            all_cv.append(avg_cv)
-            all_precisions.append(avg_precision)
-            all_recalls.append(avg_recall)
-            all_specificities.append(avg_specificity)
-            last_best_params = best_params
+                all_test.append(avg_test)
+                all_train.append(avg_train)
+                all_cv.append(avg_cv)
+                all_precisions.append(avg_precision)
+                all_recalls.append(avg_recall)
+                all_specificities.append(avg_specificity)
+                last_best_params = best_params
 
-        # Global average across all people
-        final_metrics = compute_mean(all_test, all_train, all_cv, all_precisions, all_recalls, all_specificities)
-
-        if split_type == "random":
-            avg_param_performance = {k: np.mean(v) for k, v in param_accumulator_total.items()}
-            best_param_tuple = max(avg_param_performance.items(), key=lambda x: x[1])[0]
-            best_params = dict(best_param_tuple)
-        else:
+            final_metrics = compute_mean(all_test, all_train, all_cv, all_precisions, all_recalls, all_specificities)
             best_params = last_best_params
 
+        # Save results
         save_results(results_path, name, split_type, best_params, final_metrics)
-
 
 # File paths
 results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"

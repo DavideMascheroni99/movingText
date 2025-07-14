@@ -13,8 +13,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import NuSVC, SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import precision_score, recall_score, confusion_matrix, roc_curve, auc
+from sklearn.metrics import confusion_matrix, roc_curve, auc
 from sklearn.feature_selection import SelectKBest, f_classif
+from collections import defaultdict
 
 # disable an unexpected warning on the new pandas version
 warnings.filterwarnings(
@@ -207,113 +208,127 @@ def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_t
 
     return grid, grid.best_score_, train_accuracy, test_accuracy, grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc
 
-def compute_mean(person_test_scores, person_train_scores, person_cv_scores, precisions, recalls, specificities, best_params):
-    # Save average results
-        avg_test = np.mean(person_test_scores)
-        avg_train = np.mean(person_train_scores)
-        avg_cv = np.mean(person_cv_scores)
-        avg_precision = np.mean(precisions)
-        avg_recall = np.mean(recalls)
-        avg_specificity = np.mean(specificities)
-        k = best_params.get('feature_selection__k', 'N/A')
-        return avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, k
+
+def compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params=None):
+    avg_test = np.mean(test_scores)
+    avg_train = np.mean(train_scores)
+    avg_cv = np.mean(cv_scores)
+    avg_precision = np.mean(precisions)
+    avg_recall = np.mean(recalls)
+    avg_specificity = np.mean(specificities)
+    k = best_params.get('feature_selection__k', 'N/A') if best_params else 'N/A'
+    return avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, k
+
+
+def run_random_split(person_data, pipeline, param_grid):
+    param_accumulator = defaultdict(list)
+    test_scores, train_scores, cv_scores = [], [], []
+    precisions, recalls, specificities = [], [], []
+
+    for seed in range(NUM_TRIALS):
+        X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, "random", seed)
+        grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, *_ = train_and_evaluate_model(
+            pipeline, param_grid, X_train, y_train, X_test, y_test
+        )
+
+        test_scores.append(test_acc)
+        train_scores.append(train_acc)
+        cv_scores.append(best_cv)
+        precisions.append(precision)
+        recalls.append(recall)
+        specificities.append(specificity)
+
+        # Save param -> accuracy for global best
+        params_tuple = tuple(sorted(grid.best_params_.items()))
+        param_accumulator[params_tuple].append(test_acc)
+
+    return test_scores, train_scores, cv_scores, precisions, recalls, specificities, param_accumulator, best_params
+
+
+def run_session_split(person_data, pipeline, param_grid):
+    X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, "session", seed=0)
+    grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, *_ = train_and_evaluate_model(
+        pipeline, param_grid, X_train, y_train, X_test, y_test
+    )
+
+    return [test_acc], [train_acc], [best_cv], [precision], [recall], [specificity], None, best_params
+
+
+def save_results(results_path, name, split_type, best_params, final_metrics):
+    split_label = "(S1+S2 vs S3)" if split_type == "session" else "(80/20)"
+    model_with_split = f"{name} {split_label}"
+    final_test, final_train, final_cv, final_precision, final_recall, final_specificity, selected_k = final_metrics
+
+    result = pd.DataFrame([{
+        "Model": model_with_split,
+        "Best Parameters": str(best_params),
+        "Best CV Accuracy": final_cv,
+        "Train Accuracy": final_train,
+        "Test Accuracy": final_test,
+        "Selected k": selected_k,
+        "Precision": final_precision,
+        "Recall": final_recall,
+        "Specificity": final_specificity
+    }])
+
+    if not os.path.exists(results_path):
+        result.to_csv(results_path, index=False)
+    else:
+        result.to_csv(results_path, mode='a', header=False, index=False)
+
 
 def run_verification(split_type, results_path):
     classifiers = get_classifiers_with_grid()
 
     for name, pipeline, param_grid in classifiers:
         print(f"\n=== {name} ===")
-        
-        # Liste per memorizzare le medie per ogni seed
-        seed_test_accuracies, seed_train_scores, seed_cv_scores = [], [], []
-        seed_precisions, seed_recalls, seed_specificities = [], [], []
+        all_test, all_train, all_cv = [], [], []
+        all_precisions, all_recalls, all_specificities = [], [], []
+        param_accumulator_total = defaultdict(list)
+        last_best_params = None
 
-        if split_type == 'random':
-            for seed in range(NUM_TRIALS):
-                test_scores, train_scores, cv_scores = [], [], []
-                precisions, recalls, specificities = [], [], []
+        for person in people:
+            person_data = dataset[dataset['person_id'] == person]
 
-                for person in people:
-                    person_data = dataset[dataset['person_id'] == person]
-                    X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, split_type, seed)
-
-                    grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, fpr, tpr, roc_auc = train_and_evaluate_model(
-                        pipeline, param_grid, X_train, y_train, X_test, y_test
-                    )
-
-                    test_scores.append(test_acc)
-                    train_scores.append(train_acc)
-                    cv_scores.append(best_cv)
-                    precisions.append(precision)
-                    recalls.append(recall)
-                    specificities.append(specificity)
-
-                # Media delle metriche di tutte le persone in questa iterazione (seed)
-                seed_test_accuracies.append(np.mean(test_scores))
-                seed_train_scores.append(np.mean(train_scores))
-                seed_cv_scores.append(np.mean(cv_scores))
-                seed_precisions.append(np.mean(precisions))
-                seed_recalls.append(np.mean(recalls))
-                seed_specificities.append(np.mean(specificities))
-
-            # Media finale su tutti i seed
-            final_test = np.mean(seed_test_accuracies)
-            final_train = np.mean(seed_train_scores)
-            final_cv = np.mean(seed_cv_scores)
-            final_precision = np.mean(seed_precisions)
-            final_recall = np.mean(seed_recalls)
-            final_specificity = np.mean(seed_specificities)
-            selected_k = best_params.get('feature_selection__k', 'N/A')  # solo l'ultimo usato
-
-        elif split_type == 'session':
-            # Session split viene valutato una volta sola per ogni persona
-            test_scores, train_scores, cv_scores = [], [], []
-            precisions, recalls, specificities = [], [], []
-
-            for person in people:
-                person_data = dataset[dataset['person_id'] == person]
-                X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, split_type, seed=0)
-
-                grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, fpr, tpr, roc_auc = train_and_evaluate_model(
-                    pipeline, param_grid, X_train, y_train, X_test, y_test
+            if split_type == "random":
+                test_scores, train_scores, cv_scores, precisions, recalls, specificities, param_accumulator, best_params = run_random_split(
+                    person_data, pipeline, param_grid
                 )
 
-                test_scores.append(test_acc)
-                train_scores.append(train_acc)
-                cv_scores.append(best_cv)
-                precisions.append(precision)
-                recalls.append(recall)
-                specificities.append(specificity)
+                # Accumulate all param sets
+                for p, accs in param_accumulator.items():
+                    param_accumulator_total[p].extend(accs)
 
-            final_test = np.mean(test_scores)
-            final_train = np.mean(train_scores)
-            final_cv = np.mean(cv_scores)
-            final_precision = np.mean(precisions)
-            final_recall = np.mean(recalls)
-            final_specificity = np.mean(specificities)
-            selected_k = best_params.get('feature_selection__k', 'N/A')
+            elif split_type == "session":
+                test_scores, train_scores, cv_scores, precisions, recalls, specificities, _, best_params = run_session_split(
+                    person_data, pipeline, param_grid
+                )
 
-        # Salvataggio risultati
-        if results_path:
-            split_label = "(S1+S2 vs S3)" if split_type == "session" else "(80/20)"
-            model_with_split = f"{name} {split_label}"
-            result = pd.DataFrame([{
-                "Model": model_with_split,
-                "Best Parameters": str(best_params),
-                "Best CV Accuracy": final_cv,
-                "Train Accuracy": final_train,
-                "Test Accuracy": final_test,
-                "Selected k": selected_k,
-                "Precision": final_precision,
-                "Recall": final_recall,
-                "Specificity": final_specificity
-            }])
+            # Compute per-person average (random: over seeds, session: just one value)
+            avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, _ = compute_mean(
+                test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params
+            )
 
-            if not os.path.exists(results_path):
-                result.to_csv(results_path, index=False)
-            else:
-                result.to_csv(results_path, mode='a', header=False, index=False)
+            # Accumulate across people
+            all_test.append(avg_test)
+            all_train.append(avg_train)
+            all_cv.append(avg_cv)
+            all_precisions.append(avg_precision)
+            all_recalls.append(avg_recall)
+            all_specificities.append(avg_specificity)
+            last_best_params = best_params
 
+        # Global average across all people
+        final_metrics = compute_mean(all_test, all_train, all_cv, all_precisions, all_recalls, all_specificities)
+
+        if split_type == "random":
+            avg_param_performance = {k: np.mean(v) for k, v in param_accumulator_total.items()}
+            best_param_tuple = max(avg_param_performance.items(), key=lambda x: x[1])[0]
+            best_params = dict(best_param_tuple)
+        else:
+            best_params = last_best_params
+
+        save_results(results_path, name, split_type, best_params, final_metrics)
 
 
 # File paths

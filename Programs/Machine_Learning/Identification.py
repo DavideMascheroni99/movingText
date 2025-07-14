@@ -195,7 +195,7 @@ for model_name, model_fn in model_list:
     best_cv_scores, train_scores, test_scores = [], [], []
     best_param_list = []
     #repeat the random split num_seed times
-    num_seed = 5
+    num_seed = 10
 
     for i in range(num_seed):
         # Random split (80/20) with stratification

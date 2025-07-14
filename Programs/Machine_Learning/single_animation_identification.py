@@ -202,7 +202,7 @@ for anim in animation_names:
     for model_name, model_fn in model_list:
         best_cv_scores, train_scores, test_scores = [], [], []
         best_param_list = []
-        num_seed = 5
+        num_seed = 10
 
         for i in range(num_seed):
             X_train_rand, X_test_rand, y_train_rand, y_test_rand = train_test_split(

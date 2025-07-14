@@ -201,15 +201,46 @@ def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_t
     precision = tp / (tp + fp) if (tp + fp) > 0 else 0
     recall = tp / (tp + fn) if (tp + fn) > 0 else 0
     specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
-
+    
     fpr, tpr, _ = roc_curve(y_test, y_score)
     roc_auc = auc(fpr, tpr)
 
     return grid, grid.best_score_, train_accuracy, test_accuracy, grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc
 
+def compute_mean_scores(test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params):
+    avg_test = np.mean(test_scores)
+    avg_train = np.mean(train_scores)
+    avg_cv = np.mean(cv_scores)
+    avg_precision = np.mean(precisions)
+    avg_recall = np.mean(recalls)
+    avg_specificity = np.mean(specificities)
+    k = best_params.get('feature_selection__k', 'N/A')
+    return avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, k
+
+def append_results_to_csv(results_path, model_name, best_params, final_scores, split_type):
+    final_test, final_train, final_cv, final_precision, final_recall, final_specificity, selected_k = final_scores
+    split_label = "(S1+S2 vs S3)" if split_type == "session" else "(80/20)"
+    model_with_split = f"{model_name} {split_label}"
+
+    result = pd.DataFrame([{
+        "Model": model_with_split,
+        "Best Parameters": str(best_params),
+        "Best CV Accuracy": final_cv,
+        "Train Accuracy": final_train,
+        "Test Accuracy": final_test,
+        "Selected k": selected_k,
+        "Precision": final_precision,
+        "Recall": final_recall,
+        "Specificity": final_specificity
+    }])
+
+    if not os.path.exists(results_path):
+        result.to_csv(results_path, index=False)
+    else:
+        result.to_csv(results_path, mode='a', header=False, index=False)
+
 def run_verification(split_type, results_path):
     classifiers = get_classifiers_with_grid()
-    roc_data = []
 
     for name, pipeline, param_grid in classifiers:
         print(f"\n=== {name} ===")
@@ -218,44 +249,58 @@ def run_verification(split_type, results_path):
 
         for person in people:
             person_data = dataset[dataset['person_id'] == person]
-            X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, split_type, 0)
-            grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, fpr, tpr, roc_auc = train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_test)
 
-            person_test_accuracies.append(test_acc)
-            person_train_scores.append(train_acc)
-            person_cv_scores.append(best_cv)
-            precisions.append(precision)
-            recalls.append(recall)
-            specificities.append(specificity)
+            test_scores, train_scores, cv_scores = [], [], []
+            person_precisions, person_recalls, person_specificities = [], [], []
 
-        # Save average results
-        avg_test = np.mean(person_test_accuracies)
-        avg_train = np.mean(person_train_scores)
-        avg_cv = np.mean(person_cv_scores)
-        avg_precision = np.mean(precisions)
-        avg_recall = np.mean(recalls)
-        avg_specificity = np.mean(specificities)
-        k = best_params.get('feature_selection__k', 'N/A')
+            if split_type == 'random':
+                for seed in range(NUM_TRIALS):
+                    X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, split_type, seed)
+                    grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, _, _, _ = train_and_evaluate_model(
+                        pipeline, param_grid, X_train, y_train, X_test, y_test
+                    )
+
+                    test_scores.append(test_acc)
+                    train_scores.append(train_acc)
+                    cv_scores.append(best_cv)
+                    person_precisions.append(precision)
+                    person_recalls.append(recall)
+                    person_specificities.append(specificity)
+
+                avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, _ = compute_mean_scores(
+                    test_scores, train_scores, cv_scores,
+                    person_precisions, person_recalls, person_specificities,
+                    best_params
+                )
+
+            elif split_type == 'session':
+                X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, split_type, seed=0)
+                grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, _, _, _ = train_and_evaluate_model(
+                    pipeline, param_grid, X_train, y_train, X_test, y_test
+                )
+
+                avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, _ = compute_mean_scores(
+                    [test_acc], [train_acc], [best_cv],
+                    [precision], [recall], [specificity],
+                    best_params
+                )
+
+            person_test_accuracies.append(avg_test)
+            person_train_scores.append(avg_train)
+            person_cv_scores.append(avg_cv)
+            precisions.append(avg_precision)
+            recalls.append(avg_recall)
+            specificities.append(avg_specificity)
+
+        # Compute final average scores across all people
+        final_scores = compute_mean_scores(
+            person_test_accuracies, person_train_scores, person_cv_scores,
+            precisions, recalls, specificities,
+            best_params
+        )
 
         if results_path:
-            split_label = "(S1+S2 vs S3)" if split_type == "session" else "(80/20)"
-            model_with_split = f"{name} {split_label}"
-            result = pd.DataFrame([{
-                "Model": model_with_split,
-                "Best Parameters": str(best_params),
-                "Best CV Accuracy": avg_cv,
-                "Train Accuracy": avg_train,
-                "Test Accuracy": avg_test,
-                "Selected k": k,
-                "Precision": avg_precision,
-                "Recall": avg_recall,
-                "Specificity": avg_specificity
-            }])
-
-            if not os.path.exists(results_path):
-                result.to_csv(results_path, index=False)
-            else:
-                result.to_csv(results_path, mode='a', header=False, index=False)
+            append_results_to_csv(results_path, name, best_params, final_scores, split_type)
 
 
 # File paths

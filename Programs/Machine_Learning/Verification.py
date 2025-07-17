@@ -154,12 +154,18 @@ def get_classifiers_with_grid():
 # Prepare data for a single person
 def prepare_train_test_data(person_data, split_type, seed):
     if split_type == 'session':
+        # S1 and S2 in train while S3 on test
         train_data = person_data[person_data['session_id'].isin(['S1', 'S2'])]
         test_data = person_data[person_data['session_id'] == 'S3']
-
+        
+        # Create impostors for the current person
         impostors = dataset[dataset['person_id'] != person_data['person_id'].iloc[0]]
+
+        # Randomly selects impostor samples to match the number of genuine training samples
         impostors_train = impostors.sample(n=len(train_data), random_state=seed)
-        impostors_test = impostors.drop(impostors_train.index).sample(n=len(test_data), random_state=seed)
+        # Does the same thing after removing the samples used for the train
+        remaining_impostors = impostors.drop(impostors_train.index)
+        impostors_test = remaining_impostors.sample(n=len(test_data), random_state=seed)
 
         train_combined = pd.concat([train_data, impostors_train])
         test_combined = pd.concat([test_data, impostors_test])
@@ -177,13 +183,15 @@ def prepare_train_test_data(person_data, split_type, seed):
         
         # Label genuine and impostor samples
         genuine = person_data.copy()
-        genuine['label'] = 1
+        genuine['y'] = 1
+        # Shuffle the impostors (frac=1) and reset the old row indexes
         impostors = impostors.sample(frac=1, random_state=seed).reset_index(drop=True)
-        impostors['label'] = 0
+        impostors['y'] = 0
 
-        # Balance impostors to match genuine size approximately (optional)
+        # Balance impostors to match genuine size approximately 
         num_genuine = len(genuine)
-        impostors_balanced = impostors.iloc[:num_genuine*2]  # you can tweak this ratio
+        impostors_balanced = impostors.sample(n=num_genuine, random_state=seed)
+
 
         # Combine genuine and impostor samples
         combined = pd.concat([genuine, impostors_balanced]).reset_index(drop=True)
@@ -192,14 +200,14 @@ def prepare_train_test_data(person_data, split_type, seed):
         train_combined, test_combined = train_test_split(
             combined,
             test_size=0.2,
-            stratify=combined['label'],
+            stratify=combined['y'],
             random_state=seed
         )
 
         X_train = train_combined[features_cols]
-        y_train = train_combined['label'].values
+        y_train = train_combined['y'].values
         X_test = test_combined[features_cols]
-        y_test = test_combined['label'].values
+        y_test = test_combined['y'].values
 
         return X_train, y_train, X_test, y_test
 
@@ -285,6 +293,7 @@ def run_session_split(person_data, pipeline, param_grid):
 def save_results(results_path, name, split_type, best_params, final_metrics):
     split_label = "(S1+S2 vs S3)" if split_type == "session" else "(80/20)"
     model_with_split = f"{name} {split_label}"
+    # Unpack the final metrics into single variables
     final_test, final_train, final_cv, final_precision, final_recall, final_specificity, selected_k = final_metrics
 
     result = pd.DataFrame([{

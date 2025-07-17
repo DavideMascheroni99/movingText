@@ -156,30 +156,55 @@ def prepare_train_test_data(person_data, split_type, seed):
     if split_type == 'session':
         train_data = person_data[person_data['session_id'].isin(['S1', 'S2'])]
         test_data = person_data[person_data['session_id'] == 'S3']
+
+        impostors = dataset[dataset['person_id'] != person_data['person_id'].iloc[0]]
+        impostors_train = impostors.sample(n=len(train_data), random_state=seed)
+        impostors_test = impostors.drop(impostors_train.index).sample(n=len(test_data), random_state=seed)
+
+        train_combined = pd.concat([train_data, impostors_train])
+        test_combined = pd.concat([test_data, impostors_test])
+
+        X_train = train_combined[features_cols]
+        y_train = np.array([1] * len(train_data) + [0] * len(impostors_train))
+        X_test = test_combined[features_cols]
+        y_test = np.array([1] * len(test_data) + [0] * len(impostors_test))
+
+        return X_train, y_train, X_test, y_test
+
     elif split_type == 'random':
-        train_data, test_data = train_test_split(person_data, test_size=0.2, stratify=person_data['session_id'], random_state=seed)
+        # Create impostors for the current person
+        impostors = dataset[dataset['person_id'] != person_data['person_id'].iloc[0]]
+        
+        # Label genuine and impostor samples
+        genuine = person_data.copy()
+        genuine['label'] = 1
+        impostors = impostors.sample(frac=1, random_state=seed).reset_index(drop=True)
+        impostors['label'] = 0
+
+        # Balance impostors to match genuine size approximately (optional)
+        num_genuine = len(genuine)
+        impostors_balanced = impostors.iloc[:num_genuine*2]  # you can tweak this ratio
+
+        # Combine genuine and impostor samples
+        combined = pd.concat([genuine, impostors_balanced]).reset_index(drop=True)
+
+        # Stratify by the label column
+        train_combined, test_combined = train_test_split(
+            combined,
+            test_size=0.2,
+            stratify=combined['label'],
+            random_state=seed
+        )
+
+        X_train = train_combined[features_cols]
+        y_train = train_combined['label'].values
+        X_test = test_combined[features_cols]
+        y_test = test_combined['label'].values
+
+        return X_train, y_train, X_test, y_test
+
     else:
         raise ValueError(f"Unknown split_type: {split_type}")
-
-    impostors = dataset[dataset['person_id'] != person_data['person_id'].iloc[0]]
-    impostors_shuffled = impostors.sample(frac=1, random_state=seed).reset_index(drop=True)
-
-    # Balance impostor samples to match genuine samples
-    impostor_train = impostors_shuffled.iloc[:len(train_data)]
-    impostor_test = impostors_shuffled.iloc[len(train_data):len(train_data)+len(test_data)]
-
-    # Make balanced train and test sets with equal genuine and impostor samples
-    train_combined = pd.concat([train_data, impostor_train])
-    test_combined = pd.concat([test_data, impostor_test])
-    
-    # I extract only the 83 features leaving the file key out cause possible leaking
-    X_train = train_combined[features_cols]
-    X_test = test_combined[features_cols]
-    # Label as 1 the data of the current person and with zero the others
-    y_train = np.array([1] * len(train_data) + [0] * len(impostor_train))
-    y_test = np.array([1] * len(test_data) + [0] * len(impostor_test))
-
-    return X_train, y_train, X_test, y_test
 
 # Train and evaluate a model
 def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_test):
@@ -280,80 +305,94 @@ def save_results(results_path, name, split_type, best_params, final_metrics):
         result.to_csv(results_path, mode='a', header=False, index=False)
 
 
-def run_verification(split_type, results_path):
-    classifiers = get_classifiers_with_grid()
+def evaluate_with_random_split(classifiers):
+    results = []
 
     for name, pipeline, param_grid in classifiers:
         print(f"\n=== {name} ===")
+        seed_metrics = []
+        param_accumulator_total = defaultdict(list)
+        best_params_example = None
 
-        if split_type == "random":
-            # Collect seed-level means
-            seed_metrics = []
-            param_accumulator_total = defaultdict(list)
+        for person in people:
+            person_data = dataset[dataset['person_id'] == person]
 
-            for seed in range(NUM_TRIALS):
-                test_scores, train_scores, cv_scores = [], [], []
-                precisions, recalls, specificities = [], [], []
+            test_scores, train_scores, cv_scores, precisions, recalls, specificities, param_accumulator, best_params = run_random_split(
+                person_data, pipeline, param_grid
+            )
 
-                for person in people:
-                    person_data = dataset[dataset['person_id'] == person]
-                    X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, "random", seed)
-                    grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, *_ = train_and_evaluate_model(
-                        pipeline, param_grid, X_train, y_train, X_test, y_test
-                    )
+            per_person_mean = compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params)
+            seed_metrics.append(per_person_mean)
 
-                    test_scores.append(test_acc)
-                    train_scores.append(train_acc)
-                    cv_scores.append(best_cv)
-                    precisions.append(precision)
-                    recalls.append(recall)
-                    specificities.append(specificity)
+            for param, scores in param_accumulator.items():
+                param_accumulator_total[param].extend(scores)
 
-                    params_tuple = tuple(sorted(grid.best_params_.items()))
-                    param_accumulator_total[params_tuple].append(test_acc)
+            if best_params_example is None:
+                best_params_example = best_params
 
-                # Mean across people for this seed
-                seed_metric = compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities)
-                seed_metrics.append(seed_metric)
+        final_metrics = tuple(np.mean([np.array(metric[:6]) for metric in seed_metrics], axis=0))
+        selected_k = best_params_example.get('feature_selection__k', 'N/A') if best_params_example else 'N/A'
+        final_metrics += (selected_k,)
 
-            # Mean across all seeds
-            final_metrics = tuple(np.mean([np.array(seed_metric[:6]) for seed_metric in seed_metrics], axis=0))
-            selected_k = seed_metrics[0][6]  # take k from first seed (they're usually same or ignored here)
-            final_metrics += (selected_k,)
+        avg_param_performance = {k: np.mean(v) for k, v in param_accumulator_total.items()}
+        best_param_tuple = max(avg_param_performance.items(), key=lambda x: x[1])[0]
+        best_params = dict(best_param_tuple)
 
-            # Best parameters overall (based on all seed-person combos)
-            avg_param_performance = {k: np.mean(v) for k, v in param_accumulator_total.items()}
-            best_param_tuple = max(avg_param_performance.items(), key=lambda x: x[1])[0]
-            best_params = dict(best_param_tuple)
+        results.append((name, best_params, final_metrics))
 
-        elif split_type == "session":
-            all_test, all_train, all_cv = [], [], []
-            all_precisions, all_recalls, all_specificities = [], [], []
-            last_best_params = None
+    return results
 
-            for person in people:
-                person_data = dataset[dataset['person_id'] == person]
-                test_scores, train_scores, cv_scores, precisions, recalls, specificities, _, best_params = run_session_split(
-                    person_data, pipeline, param_grid
-                )
 
-                avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, _ = compute_mean(
-                    test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params
-                )
+def evaluate_with_session_split(classifiers):
+    results = []
 
-                all_test.append(avg_test)
-                all_train.append(avg_train)
-                all_cv.append(avg_cv)
-                all_precisions.append(avg_precision)
-                all_recalls.append(avg_recall)
-                all_specificities.append(avg_specificity)
-                last_best_params = best_params
+    for name, pipeline, param_grid in classifiers:
+        print(f"\n=== {name} ===")
+        all_test, all_train, all_cv = [], [], []
+        all_precisions, all_recalls, all_specificities = [], [], []
+        last_best_params = None
 
-            final_metrics = compute_mean(all_test, all_train, all_cv, all_precisions, all_recalls, all_specificities)
-            best_params = last_best_params
+        for person in people:
+            person_data = dataset[dataset['person_id'] == person]
+            test_scores, train_scores, cv_scores, precisions, recalls, specificities, _, best_params = run_session_split(
+                person_data, pipeline, param_grid
+            )
 
-        # Save results
-        save_results(results_path, name, split_type, best_params, final_metrics)
+            avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, _ = compute_mean(
+                test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params
+            )
+
+            all_test.append(avg_test)
+            all_train.append(avg_train)
+            all_cv.append(avg_cv)
+            all_precisions.append(avg_precision)
+            all_recalls.append(avg_recall)
+            all_specificities.append(avg_specificity)
+            last_best_params = best_params
+
+        final_metrics = compute_mean(all_test, all_train, all_cv, all_precisions, all_recalls, all_specificities)
+        best_params = last_best_params
+
+        results.append((name, best_params, final_metrics))
+
+    return results
+
+
+def run_verification(split_type, results_path):
+    classifiers = get_classifiers_with_grid()
+
+    if split_type == "random":
+        for name, best_params, final_metrics in evaluate_with_random_split(classifiers):
+            save_results(results_path, name, split_type, best_params, final_metrics)
+
+    elif split_type == "session":
+        for name, best_params, final_metrics in evaluate_with_session_split(classifiers):
+            save_results(results_path, name, split_type, best_params, final_metrics)
+
+    else:
+        raise ValueError(f"Unknown split_type: {split_type}")
+
+
 
 # File paths
 results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"

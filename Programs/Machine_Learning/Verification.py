@@ -2,7 +2,6 @@ import os
 import pandas as pd
 import numpy as np
 import warnings
-import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
@@ -24,7 +23,9 @@ warnings.filterwarnings(
 )
 
 # Load dataset
-csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
+csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
+
+#csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
 dataset = pd.read_csv(csv_path)
 
 dataset['person_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])
@@ -220,8 +221,8 @@ def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_t
     grid.fit(X_train, y_train)
 
     # Compute train and test accuracy
-    train_accuracy = grid.best_estimator_.score(X_train, y_train)
-    test_accuracy = grid.best_estimator_.score(X_test, y_test)
+    train_accuracy = round(grid.best_estimator_.score(X_train, y_train), 4)
+    test_accuracy = round(grid.best_estimator_.score(X_test, y_test), 4)
 
     # Use the best model of grid search to make prediction on the test set
     y_pred = grid.best_estimator_.predict(X_test)
@@ -232,24 +233,26 @@ def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_t
     tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
 
     # Compute precision, recall and specificity. Check also that denominator is greater than zero
-    precision = tp / (tp + fp) if (tp + fp) > 0 else 0
-    recall = tp / (tp + fn) if (tp + fn) > 0 else 0
-    specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
+    precision = round(tp / (tp + fp), 4) if (tp + fp) > 0 else 0
+    recall = round(tp / (tp + fn), 4) if (tp + fn) > 0 else 0
+    specificity = round(tn / (tn + fp), 4) if (tn + fp) > 0 else 0
 
     fpr, tpr, _ = roc_curve(y_test, y_score)
-    roc_auc = auc(fpr, tpr)
+    roc_auc = round(auc(fpr, tpr), 4)
 
-    return grid, grid.best_score_, train_accuracy, test_accuracy, grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc
+    return grid, round(grid.best_score_, 4), train_accuracy, test_accuracy, grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc
+
 
 def compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params=None):
-    avg_test = np.mean(test_scores)
-    avg_train = np.mean(train_scores)
-    avg_cv = np.mean(cv_scores)
-    avg_precision = np.mean(precisions)
-    avg_recall = np.mean(recalls)
-    avg_specificity = np.mean(specificities)
+    avg_test = round(np.mean(test_scores), 4)
+    avg_train = round(np.mean(train_scores), 4)
+    avg_cv = round(np.mean(cv_scores), 4)
+    avg_precision = round(np.mean(precisions), 4)
+    avg_recall = round(np.mean(recalls), 4)
+    avg_specificity = round(np.mean(specificities), 4)
     k = best_params.get('feature_selection__k', 'N/A') if best_params else 'N/A'
     return avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, k
+
 
 
 def run_random_split(person_data, pipeline, param_grid):
@@ -404,7 +407,8 @@ def run_verification(split_type, results_path):
 
 
 # File paths
-results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
+#results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
+results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
 
 # Remove old results file if exists
 if os.path.exists(results_file):

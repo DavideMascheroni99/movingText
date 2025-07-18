@@ -150,7 +150,7 @@ for key, df in all_dfs.items():
     ratio_rows.append(row)
 features.append(pd.DataFrame(ratio_rows))
 
-# f62–f71: difference LPD - RPD (no gmean)
+# f62–f70: difference LPD - RPD (no gmean)
 diff_rows = []
 for key, df in all_dfs.items():
     diff = duckdb.query("SELECT LPD - RPD AS D FROM df WHERE LPV = '1' AND RPV = '1'").to_df()['D'].tolist()
@@ -159,6 +159,17 @@ for key, df in all_dfs.items():
         row[f'f{62+i}'] = func(diff) if len(diff) > 0 else 0
     diff_rows.append(row)
 features.append(pd.DataFrame(diff_rows))
+
+# f71: Number of blinks
+f71_rows = []
+for key, df in all_dfs.items():
+    result = duckdb.query("""
+        SELECT COUNT(DISTINCT BKID) AS BKID_COUNT
+        FROM df
+        WHERE CAST(BKID AS INTEGER) > 0
+    """).to_df()
+    f71_rows.append({'file_key': key, 'f71': result['BKID_COUNT'][0]})
+features.append(pd.DataFrame(f71_rows))
 
 # f72–f74: blink duration
 blink_rows = []

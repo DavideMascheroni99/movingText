@@ -131,9 +131,9 @@ def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, titl
     grid_search.fit(X_train, y_train)
 
     best_params = grid_search.best_params_
-    best_cv_score = grid_search.best_score_
-    train_score = grid_search.best_estimator_.score(X_train, y_train)
-    test_score = grid_search.best_estimator_.score(X_test, y_test)
+    best_cv_score = round(grid_search.best_score_, 4)
+    train_score = round(grid_search.best_estimator_.score(X_train, y_train), 4)
+    test_score = round(grid_search.best_estimator_.score(X_test, y_test), 4)
 
     print("Best parameters:", best_params)
     print("Best CV accuracy:", best_cv_score)

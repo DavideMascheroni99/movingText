@@ -24,7 +24,6 @@ warnings.filterwarnings(
 
 # Load dataset
 csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
-
 #csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
 dataset = pd.read_csv(csv_path)
 
@@ -152,6 +151,7 @@ def get_classifiers_with_grid():
         ("MLP", mlp_pipeline, mlp_params),
     ]
 
+# V
 # Prepare data for a single person
 def prepare_train_test_data(person_data, split_type, seed):
     if split_type == 'session':
@@ -215,6 +215,7 @@ def prepare_train_test_data(person_data, split_type, seed):
     else:
         raise ValueError(f"Unknown split_type: {split_type}")
 
+#V
 # Train and evaluate a model
 def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_test):
     grid = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
@@ -239,10 +240,10 @@ def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_t
 
     fpr, tpr, _ = roc_curve(y_test, y_score)
     roc_auc = round(auc(fpr, tpr), 4)
-
+    
     return grid, round(grid.best_score_, 4), train_accuracy, test_accuracy, grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc
 
-
+# V
 def compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params=None):
     avg_test = round(np.mean(test_scores), 4)
     avg_train = round(np.mean(train_scores), 4)
@@ -250,11 +251,13 @@ def compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, spec
     avg_precision = round(np.mean(precisions), 4)
     avg_recall = round(np.mean(recalls), 4)
     avg_specificity = round(np.mean(specificities), 4)
+    # Get the k with the best associated accuracy
     k = best_params.get('feature_selection__k', 'N/A') if best_params else 'N/A'
+
     return avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, k
 
 
-
+# V
 def run_random_split(person_data, pipeline, param_grid):
     # Dictionary that maps each key to a list. The goal is to collect multiple accuracy values for each unique parameter combination
     param_accumulator = defaultdict(list)
@@ -296,27 +299,25 @@ def run_session_split(person_data, pipeline, param_grid):
 def save_results(results_path, name, split_type, best_params, final_metrics):
     split_label = "(S1+S2 vs S3)" if split_type == "session" else "(80/20)"
     model_with_split = f"{name} {split_label}"
-    # Unpack the final metrics into single variables
     final_test, final_train, final_cv, final_precision, final_recall, final_specificity, selected_k = final_metrics
 
     result = pd.DataFrame([{
         "Model": model_with_split,
         "Best Parameters": str(best_params),
-        "Best CV Accuracy": final_cv,
-        "Train Accuracy": final_train,
-        "Test Accuracy": final_test,
+        "Best CV Accuracy": round(final_cv, 4),
+        "Train Accuracy": round(final_train, 4),
+        "Test Accuracy": round(final_test, 4),
         "Selected k": selected_k,
-        "Precision": final_precision,
-        "Recall": final_recall,
-        "Specificity": final_specificity
+        "Precision": round(final_precision, 4),
+        "Recall": round(final_recall, 4),
+        "Specificity": round(final_specificity, 4)
     }])
 
-    if not os.path.exists(results_path):
-        result.to_csv(results_path, index=False)
-    else:
-        result.to_csv(results_path, mode='a', header=False, index=False)
+    file_exists = os.path.exists(results_path)
+    result.to_csv(results_path, mode='a', header=not file_exists, index=False)
 
 
+# V
 def evaluate_with_random_split(classifiers):
     results = []
 
@@ -325,7 +326,7 @@ def evaluate_with_random_split(classifiers):
         seed_metrics = []
         param_accumulator_total = defaultdict(list)
         best_params_example = None
-
+        
         for person in people:
             person_data = dataset[dataset['person_id'] == person]
 
@@ -391,10 +392,12 @@ def evaluate_with_session_split(classifiers):
 
 
 def run_verification(split_type, results_path):
+
     classifiers = get_classifiers_with_grid()
 
     if split_type == "random":
         for name, best_params, final_metrics in evaluate_with_random_split(classifiers):
+            print(results_path, name, split_type, best_params, final_metrics)
             save_results(results_path, name, split_type, best_params, final_metrics)
 
     elif split_type == "session":
@@ -405,16 +408,18 @@ def run_verification(split_type, results_path):
         raise ValueError(f"Unknown split_type: {split_type}")
 
 
-
 # File paths
 #results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
 results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
+os.makedirs(os.path.dirname(results_file), exist_ok=True)
 
 # Remove old results file if exists
 if os.path.exists(results_file):
     os.remove(results_file)
 
-# Run verification for random split
-run_verification(split_type='random', results_path=results_file)
-# Run verification for session split, save ROC curve
-run_verification(split_type='session', results_path=results_file)
+def main():
+    run_verification("random", results_file)
+    run_verification("session", results_file)
+    
+if __name__ == "__main__":
+    main()

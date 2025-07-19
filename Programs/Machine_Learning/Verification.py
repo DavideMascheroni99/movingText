@@ -248,19 +248,18 @@ def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_t
     return grid, cv_accuracy, train_accuracy, test_accuracy, grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc, eer
 
 def compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, best_params=None):
-    avg_test = round(np.mean(test_scores), 4)
-    avg_train = round(np.mean(train_scores), 4)
-    avg_cv = round(np.mean(cv_scores), 4)
-    avg_precision = round(np.mean(precisions), 4)
-    avg_recall = round(np.mean(recalls), 4)
-    avg_specificity = round(np.mean(specificities), 4)
-    avg_auc = round(np.mean(roc_aucs), 4)
-    avg_eer = round(np.mean(eers), 4)
-
-    # Get the k with the best associated accuracy
+    avg_test = np.mean(test_scores)
+    avg_train = np.mean(train_scores)
+    avg_cv = np.mean(cv_scores)
+    avg_precision = np.mean(precisions)
+    avg_recall = np.mean(recalls)
+    avg_specificity = np.mean(specificities)
+    avg_auc = np.mean(roc_aucs)
+    avg_eer = np.mean(eers)
     k = best_params.get('feature_selection__k', 'N/A') if best_params else 'N/A'
 
     return avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, avg_auc, avg_eer, k, best_params
+
 
 
 def run_random_split(person_data, pipeline, param_grid):

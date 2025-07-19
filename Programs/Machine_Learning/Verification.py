@@ -219,6 +219,8 @@ def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_t
     grid = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
     grid.fit(X_train, y_train)
 
+    cv_accuracy = round(grid.best_score_, 4)
+
     # Compute train and test accuracy
     train_accuracy = round(grid.best_estimator_.score(X_train, y_train), 4)
     test_accuracy = round(grid.best_estimator_.score(X_test, y_test), 4)
@@ -237,21 +239,28 @@ def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_t
     specificity = round(tn / (tn + fp), 4) if (tn + fp) > 0 else 0
 
     fpr, tpr, _ = roc_curve(y_test, y_score)
+    # Compute EER
+    fnr = 1 - tpr
+    eer = round(fpr[np.nanargmin(np.absolute((fnr - fpr)))], 4)
+
     roc_auc = round(auc(fpr, tpr), 4)
     
-    return grid, round(grid.best_score_, 4), train_accuracy, test_accuracy, grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc
+    return grid, cv_accuracy, train_accuracy, test_accuracy, grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc, eer
 
-def compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params=None):
+def compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, best_params=None):
     avg_test = round(np.mean(test_scores), 4)
     avg_train = round(np.mean(train_scores), 4)
     avg_cv = round(np.mean(cv_scores), 4)
     avg_precision = round(np.mean(precisions), 4)
     avg_recall = round(np.mean(recalls), 4)
     avg_specificity = round(np.mean(specificities), 4)
+    avg_auc = round(np.mean(roc_aucs), 4)
+    avg_eer = round(np.mean(eers), 4)
+
     # Get the k with the best associated accuracy
     k = best_params.get('feature_selection__k', 'N/A') if best_params else 'N/A'
 
-    return avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, k
+    return avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, avg_auc, avg_eer, k, best_params
 
 
 def run_random_split(person_data, pipeline, param_grid):
@@ -259,10 +268,11 @@ def run_random_split(person_data, pipeline, param_grid):
     param_accumulator = defaultdict(list)
     test_scores, train_scores, cv_scores = [], [], []
     precisions, recalls, specificities = [], [], []
+    roc_aucs, eers = [], []
 
     for seed in range(NUM_TRIALS):
         X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, "random", seed)
-        grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, *_ = train_and_evaluate_model(
+        grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, _, _, roc_auc, eer  = train_and_evaluate_model(
             pipeline, param_grid, X_train, y_train, X_test, y_test
         )
 
@@ -272,30 +282,33 @@ def run_random_split(person_data, pipeline, param_grid):
         precisions.append(precision)
         recalls.append(recall)
         specificities.append(specificity)
+        roc_aucs.append(roc_auc)
+        eers.append(eer)
 
         # Create an hashtable with the sorted key value returned by grid.best_params_.items()
         params_tuple = tuple(sorted(grid.best_params_.items()))
         # Using the parameter tuple as the key, append the current test accuracy to the list associated with that parameter set.
         param_accumulator[params_tuple].append(test_acc)
 
-    return test_scores, train_scores, cv_scores, precisions, recalls, specificities, param_accumulator, best_params
+    return test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, param_accumulator, best_params
 
 
 def run_session_split(person_data, pipeline, param_grid):
     X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, "session", seed=0)
-    grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, *_ = train_and_evaluate_model(
+    grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, fpr, tpr, roc_auc, eer = train_and_evaluate_model(
         pipeline, param_grid, X_train, y_train, X_test, y_test
     )
     
     # Return a none because in this case the best parameters are obtained only for one iteration. No need for further computations.
     # I also return the single elements inside a list for code consistency in the run_verification function
-    return [test_acc], [train_acc], [best_cv], [precision], [recall], [specificity], None, best_params
-
+    return [test_acc], [train_acc], [best_cv], [precision], [recall], [specificity], [roc_auc], [eer], None, best_params
 
 def save_results(results_path, name, split_type, best_params, final_metrics):
     split_label = "(S1+S2 vs S3)" if split_type == "session" else "(80/20)"
     model_with_split = f"{name} {split_label}"
-    final_test, final_train, final_cv, final_precision, final_recall, final_specificity, selected_k = final_metrics
+    
+    # Unpack final metrics
+    final_test, final_train, final_cv, final_precision, final_recall, final_specificity, final_roc_auc, final_eer, selected_k = final_metrics
 
     result = pd.DataFrame([{
         "Model": model_with_split,
@@ -306,7 +319,9 @@ def save_results(results_path, name, split_type, best_params, final_metrics):
         "Selected k": selected_k,
         "Precision": round(final_precision, 4),
         "Recall": round(final_recall, 4),
-        "Specificity": round(final_specificity, 4)
+        "Specificity": round(final_specificity, 4),
+        "Roc Auc": round(final_roc_auc, 4),
+        "EER": round(final_eer, 4)
     }])
 
     file_exists = os.path.exists(results_path)
@@ -325,11 +340,11 @@ def evaluate_with_random_split(classifiers):
         for person in people:
             person_data = dataset[dataset['person_id'] == person]
 
-            test_scores, train_scores, cv_scores, precisions, recalls, specificities, param_accumulator, best_params = run_random_split(
+            test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, param_accumulator, best_params = run_random_split(
                 person_data, pipeline, param_grid
             )
 
-            per_person_mean = compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params)
+            per_person_mean = compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, best_params)            
             seed_metrics.append(per_person_mean)
 
             for param, scores in param_accumulator.items():
@@ -338,7 +353,7 @@ def evaluate_with_random_split(classifiers):
             if best_params_example is None:
                 best_params_example = best_params
 
-        final_metrics = tuple(np.mean([np.array(metric[:6]) for metric in seed_metrics], axis=0))
+        final_metrics = tuple(np.mean([np.array(metric[:8]) for metric in seed_metrics], axis=0))
         selected_k = best_params_example.get('feature_selection__k', 'N/A') if best_params_example else 'N/A'
         final_metrics += (selected_k,)
 
@@ -358,16 +373,15 @@ def evaluate_with_session_split(classifiers):
         print(f"\n=== {name} ===")
         all_test, all_train, all_cv = [], [], []
         all_precisions, all_recalls, all_specificities = [], [], []
+        all_auc, all_eer = [], []
         last_best_params = None
 
         for person in people:
             person_data = dataset[dataset['person_id'] == person]
-            test_scores, train_scores, cv_scores, precisions, recalls, specificities, _, best_params = run_session_split(
-                person_data, pipeline, param_grid
-            )
+            test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, _, best_params = run_session_split(person_data, pipeline, param_grid)
 
-            avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, _ = compute_mean(
-                test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params
+            avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, avg_auc, avg_eer = compute_mean(
+                test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, best_params
             )
 
             all_test.append(avg_test)
@@ -376,9 +390,16 @@ def evaluate_with_session_split(classifiers):
             all_precisions.append(avg_precision)
             all_recalls.append(avg_recall)
             all_specificities.append(avg_specificity)
+            all_auc.append(avg_auc)
+            all_eer.append(avg_eer)
             last_best_params = best_params
 
-        final_metrics = compute_mean(all_test, all_train, all_cv, all_precisions, all_recalls, all_specificities)
+        final_metrics = compute_mean(
+            all_test, all_train, all_cv,
+            all_precisions, all_recalls, all_specificities,
+            all_auc, all_eer,
+            best_params=last_best_params
+        )
         best_params = last_best_params
 
         results.append((name, best_params, final_metrics))
@@ -392,7 +413,6 @@ def run_verification(split_type, results_path):
 
     if split_type == "random":
         for name, best_params, final_metrics in evaluate_with_random_split(classifiers):
-            print(results_path, name, split_type, best_params, final_metrics)
             save_results(results_path, name, split_type, best_params, final_metrics)
 
     elif split_type == "session":

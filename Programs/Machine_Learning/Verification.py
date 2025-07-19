@@ -151,7 +151,6 @@ def get_classifiers_with_grid():
         ("MLP", mlp_pipeline, mlp_params),
     ]
 
-# V
 # Prepare data for a single person
 def prepare_train_test_data(person_data, split_type, seed):
     if split_type == 'session':
@@ -215,7 +214,6 @@ def prepare_train_test_data(person_data, split_type, seed):
     else:
         raise ValueError(f"Unknown split_type: {split_type}")
 
-#V
 # Train and evaluate a model
 def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_test):
     grid = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
@@ -243,7 +241,6 @@ def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_t
     
     return grid, round(grid.best_score_, 4), train_accuracy, test_accuracy, grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc
 
-# V
 def compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params=None):
     avg_test = round(np.mean(test_scores), 4)
     avg_train = round(np.mean(train_scores), 4)
@@ -257,7 +254,6 @@ def compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, spec
     return avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, k
 
 
-# V
 def run_random_split(person_data, pipeline, param_grid):
     # Dictionary that maps each key to a list. The goal is to collect multiple accuracy values for each unique parameter combination
     param_accumulator = defaultdict(list)
@@ -317,7 +313,6 @@ def save_results(results_path, name, split_type, best_params, final_metrics):
     result.to_csv(results_path, mode='a', header=not file_exists, index=False)
 
 
-# V
 def evaluate_with_random_split(classifiers):
     results = []
 

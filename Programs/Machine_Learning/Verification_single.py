@@ -15,9 +15,6 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import confusion_matrix, roc_curve, auc
 from sklearn.feature_selection import SelectKBest, f_classif
 from collections import defaultdict
-import matplotlib.pyplot as plt
-from sklearn.metrics import roc_curve, auc
-from scipy import interp
 
 # disable an unexpected warning on the new pandas version
 warnings.filterwarnings(
@@ -199,7 +196,7 @@ def prepare_train_test_data(person_data, split_type, seed):
         # Combine genuine and impostor samples
         combined = pd.concat([genuine, impostors_balanced]).reset_index(drop=True)
 
-        # Stratify on label 1 and 0 to have a balanced distribution
+        # Stratify by the label column
         train_combined, test_combined = train_test_split(
             combined,
             test_size=0.2,
@@ -216,62 +213,45 @@ def prepare_train_test_data(person_data, split_type, seed):
 
     else:
         raise ValueError(f"Unknown split_type: {split_type}")
-    
 
+# Train and evaluate a model
 def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_test):
     grid = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
     grid.fit(X_train, y_train)
 
-    # Use the best estimator fitted by GridSearchCV
-    best_model = grid.best_estimator_
-
-    cv_accuracy = grid.best_score_
-
     # Compute train and test accuracy
-    train_accuracy = best_model.score(X_train, y_train)
-    test_accuracy = best_model.score(X_test, y_test)
+    train_accuracy = round(grid.best_estimator_.score(X_train, y_train), 4)
+    test_accuracy = round(grid.best_estimator_.score(X_test, y_test), 4)
 
-    # Use the best model to make prediction on the test set
-    y_pred = best_model.predict(X_test)
-
+    # Use the best model of grid search to make prediction on the test set
+    y_pred = grid.best_estimator_.predict(X_test)
     # Get the probability a sample belongs to class 1
-    if hasattr(best_model, "predict_proba"):
-        y_score = best_model.predict_proba(X_test)[:, 1]
-    else:
-        y_score = best_model.decision_function(X_test)
+    y_score = grid.best_estimator_.predict_proba(X_test)[:, 1]
 
     # Get the confusion matrix 
     tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
 
     # Compute precision, recall and specificity. Check also that denominator is greater than zero
-    precision = tp / (tp + fp) if (tp + fp) > 0 else 0
-    recall = tp / (tp + fn) if (tp + fn) > 0 else 0
-    specificity = tn / (tn + fp) if (tn + fp) > 0 else 0
+    precision = round(tp / (tp + fp), 4) if (tp + fp) > 0 else 0
+    recall = round(tp / (tp + fn), 4) if (tp + fn) > 0 else 0
+    specificity = round(tn / (tn + fp), 4) if (tn + fp) > 0 else 0
 
     fpr, tpr, _ = roc_curve(y_test, y_score)
-
-    # Compute EER
-    fnr = 1 - tpr
-    eer = fpr[np.nanargmin(np.absolute((fnr - fpr)))]
-
-    roc_auc = auc(fpr, tpr)
+    roc_auc = round(auc(fpr, tpr), 4)
     
-    return grid, cv_accuracy, train_accuracy, test_accuracy, grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc, eer
+    return grid, round(grid.best_score_, 4), train_accuracy, test_accuracy, grid.best_params_, precision, recall, specificity, fpr, tpr, roc_auc
 
-
-def compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, best_params=None):
-    avg_test = np.mean(test_scores)
-    avg_train = np.mean(train_scores)
-    avg_cv = np.mean(cv_scores)
-    avg_precision = np.mean(precisions)
-    avg_recall = np.mean(recalls)
-    avg_specificity = np.mean(specificities)
-    avg_auc = np.mean(roc_aucs)
-    avg_eer = np.mean(eers)
+def compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params=None):
+    avg_test = round(np.mean(test_scores), 4)
+    avg_train = round(np.mean(train_scores), 4)
+    avg_cv = round(np.mean(cv_scores), 4)
+    avg_precision = round(np.mean(precisions), 4)
+    avg_recall = round(np.mean(recalls), 4)
+    avg_specificity = round(np.mean(specificities), 4)
+    # Get the k with the best associated accuracy
     k = best_params.get('feature_selection__k', 'N/A') if best_params else 'N/A'
 
-    return avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, avg_auc, avg_eer, k, best_params
-
+    return avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, k
 
 
 def run_random_split(person_data, pipeline, param_grid):
@@ -279,11 +259,10 @@ def run_random_split(person_data, pipeline, param_grid):
     param_accumulator = defaultdict(list)
     test_scores, train_scores, cv_scores = [], [], []
     precisions, recalls, specificities = [], [], []
-    roc_aucs, eers = [], []
 
     for seed in range(NUM_TRIALS):
         X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, "random", seed)
-        grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, _, _, roc_auc, eer  = train_and_evaluate_model(
+        grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, *_ = train_and_evaluate_model(
             pipeline, param_grid, X_train, y_train, X_test, y_test
         )
 
@@ -293,33 +272,30 @@ def run_random_split(person_data, pipeline, param_grid):
         precisions.append(precision)
         recalls.append(recall)
         specificities.append(specificity)
-        roc_aucs.append(roc_auc)
-        eers.append(eer)
 
         # Create an hashtable with the sorted key value returned by grid.best_params_.items()
         params_tuple = tuple(sorted(grid.best_params_.items()))
         # Using the parameter tuple as the key, append the current test accuracy to the list associated with that parameter set.
         param_accumulator[params_tuple].append(test_acc)
 
-    return test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, param_accumulator, best_params
+    return test_scores, train_scores, cv_scores, precisions, recalls, specificities, param_accumulator, best_params
 
 
 def run_session_split(person_data, pipeline, param_grid):
     X_train, y_train, X_test, y_test = prepare_train_test_data(person_data, "session", seed=0)
-    grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, fpr, tpr, roc_auc, eer = train_and_evaluate_model(
+    grid, best_cv, train_acc, test_acc, best_params, precision, recall, specificity, *_ = train_and_evaluate_model(
         pipeline, param_grid, X_train, y_train, X_test, y_test
     )
     
     # Return a none because in this case the best parameters are obtained only for one iteration. No need for further computations.
     # I also return the single elements inside a list for code consistency in the run_verification function
-    return [test_acc], [train_acc], [best_cv], [precision], [recall], [specificity], [roc_auc], [eer], None, best_params
+    return [test_acc], [train_acc], [best_cv], [precision], [recall], [specificity], None, best_params
+
 
 def save_results(results_path, name, split_type, best_params, final_metrics):
     split_label = "(S1+S2 vs S3)" if split_type == "session" else "(80/20)"
     model_with_split = f"{name} {split_label}"
-    
-    # Unpack final metrics
-    final_test, final_train, final_cv, final_precision, final_recall, final_specificity, final_roc_auc, final_eer, selected_k = final_metrics
+    final_test, final_train, final_cv, final_precision, final_recall, final_specificity, selected_k = final_metrics
 
     result = pd.DataFrame([{
         "Model": model_with_split,
@@ -330,107 +306,11 @@ def save_results(results_path, name, split_type, best_params, final_metrics):
         "Selected k": selected_k,
         "Precision": round(final_precision, 4),
         "Recall": round(final_recall, 4),
-        "Specificity": round(final_specificity, 4),
-        "Roc Auc": round(final_roc_auc, 4),
-        "EER": round(final_eer, 4)
+        "Specificity": round(final_specificity, 4)
     }])
 
     file_exists = os.path.exists(results_path)
     result.to_csv(results_path, mode='a', header=not file_exists, index=False)
-
-
-# Save the Roc curve of session split of every classifier
-def plot_roc_curves_session(roc_data, filename):
-
-    plt.figure(figsize=(10, 8))
-    colors = plt.cm.get_cmap('tab10', len(roc_data)) 
-
-    for idx, (name, person_dict) in enumerate(roc_data.items()):
-        all_fpr = np.linspace(0, 1, 100)
-        tpr_list = []
-        aucs = []
-
-        for person, (fpr, tpr, roc_auc) in person_dict.items():
-            interp_tpr = np.interp(all_fpr, fpr, tpr)
-            interp_tpr[0] = 0.0
-            tpr_list.append(interp_tpr)
-            aucs.append(roc_auc)
-
-        mean_tpr = np.mean(tpr_list, axis=0)
-        mean_auc = np.mean(aucs)
-        mean_tpr[-1] = 1.0
-
-        plt.plot(
-            all_fpr,
-            mean_tpr,
-            label=f"{name} (AUC = {mean_auc:.4f})",
-            color=colors(idx)
-        )
-
-    plt.plot([0, 1], [0, 1], 'k--', label='Random Guess')
-    plt.xlim([0.0, 1.0])
-    plt.ylim([0.0, 1.05])
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('ROC Curves - Session Split')
-    plt.legend(loc='lower right', fontsize=10)
-    plt.grid(True)
-    plt.tight_layout()
-    plt.savefig(filename)
-    plt.close()
-
-
-
-# Save in a png the k best parameters
-def save_best_params_per_model_split(results, k, save_dir):
-    # Organize results by split and classifier
-    organized = defaultdict(lambda: defaultdict(list))
-    for entry in results:
-        split = entry['split_type']
-        clf = entry['classifier']
-        params = entry['params']
-        organized[split][clf].append(params)
-
-    if not os.path.exists(save_dir):
-        os.makedirs(save_dir)
-
-    for split_type, classifiers in organized.items():
-        # Sanitize split string: replace slashes with dashes
-        sanitized_split = split_type.replace('/', '-')
-        for clf_name, param_list in classifiers.items():
-            # Limit to top k
-            top_params = param_list[:k]
-
-            # Prepare rows for the table
-            rows = []
-            for i, params in enumerate(top_params):
-                param_str = ', '.join(f"{key}={val}" for key, val in params.items())
-                rows.append([f"Rank {i+1}", param_str])
-
-            df = pd.DataFrame(rows, columns=['Rank', 'Parameters'])
-
-            fig_height = max(2, 0.5 * len(df))
-            fig, ax = plt.subplots(figsize=(10, fig_height))
-            ax.axis('off')
-
-            table = ax.table(cellText=df.values,
-                             colLabels=df.columns,
-                             cellLoc='left',
-                             loc='center')
-
-            table.auto_set_font_size(False)
-            table.set_fontsize(10)
-            table.auto_set_column_width(col=list(range(len(df.columns))))
-
-            plt.title(f"Top {k} Best Parameters for {clf_name} ({split_type})",
-                      fontsize=14)
-            plt.tight_layout()
-            plt.subplots_adjust(left=0.2)
-
-            filename = f"{clf_name.lower()}_{sanitized_split}.png"
-            save_path = os.path.join(save_dir, filename)
-            plt.savefig(save_path, dpi=300)
-            plt.close()
 
 
 def evaluate_with_random_split(classifiers):
@@ -445,11 +325,11 @@ def evaluate_with_random_split(classifiers):
         for person in people:
             person_data = dataset[dataset['person_id'] == person]
 
-            test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, param_accumulator, best_params = run_random_split(
+            test_scores, train_scores, cv_scores, precisions, recalls, specificities, param_accumulator, best_params = run_random_split(
                 person_data, pipeline, param_grid
             )
 
-            per_person_mean = compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, best_params)            
+            per_person_mean = compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params)
             seed_metrics.append(per_person_mean)
 
             for param, scores in param_accumulator.items():
@@ -458,7 +338,7 @@ def evaluate_with_random_split(classifiers):
             if best_params_example is None:
                 best_params_example = best_params
 
-        final_metrics = tuple(np.mean([np.array(metric[:8]) for metric in seed_metrics], axis=0))
+        final_metrics = tuple(np.mean([np.array(metric[:6]) for metric in seed_metrics], axis=0))
         selected_k = best_params_example.get('feature_selection__k', 'N/A') if best_params_example else 'N/A'
         final_metrics += (selected_k,)
 
@@ -473,22 +353,21 @@ def evaluate_with_random_split(classifiers):
 
 def evaluate_with_session_split(classifiers):
     results = []
-    roc_data = defaultdict(lambda: defaultdict(tuple))  # roc_data[classifier][person] = (fpr, tpr, roc_auc)
 
     for name, pipeline, param_grid in classifiers:
         print(f"\n=== {name} ===")
         all_test, all_train, all_cv = [], [], []
         all_precisions, all_recalls, all_specificities = [], [], []
-        all_auc, all_eer = [], []
         last_best_params = None
 
         for person in people:
             person_data = dataset[dataset['person_id'] == person]
+            test_scores, train_scores, cv_scores, precisions, recalls, specificities, _, best_params = run_session_split(
+                person_data, pipeline, param_grid
+            )
 
-            test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, _, best_params, fpr, tpr, roc_auc = run_session_split(person_data, pipeline, param_grid, return_roc=True)
-
-            avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, avg_auc, avg_eer = compute_mean(
-                test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, best_params
+            avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, _ = compute_mean(
+                test_scores, train_scores, cv_scores, precisions, recalls, specificities, best_params
             )
 
             all_test.append(avg_test)
@@ -497,72 +376,45 @@ def evaluate_with_session_split(classifiers):
             all_precisions.append(avg_precision)
             all_recalls.append(avg_recall)
             all_specificities.append(avg_specificity)
-            all_auc.append(avg_auc)
-            all_eer.append(avg_eer)
             last_best_params = best_params
 
-            # Save ROC data for this person and classifier
-            roc_data[name][person] = (fpr, tpr, roc_auc)
-
-        final_metrics = compute_mean(
-            all_test, all_train, all_cv,
-            all_precisions, all_recalls, all_specificities,
-            all_auc, all_eer,
-            best_params=last_best_params
-        )
+        final_metrics = compute_mean(all_test, all_train, all_cv, all_precisions, all_recalls, all_specificities)
         best_params = last_best_params
 
         results.append((name, best_params, final_metrics))
 
-    return results, roc_data
+    return results
 
-def run_verification(split_type, results_path, roc_path, best_par_path):
+
+def run_verification(split_type, results_path):
+
     classifiers = get_classifiers_with_grid()
-    all_results = []
-    model_to_k = {}
 
     if split_type == "random":
         for name, best_params, final_metrics in evaluate_with_random_split(classifiers):
+            print(results_path, name, split_type, best_params, final_metrics)
             save_results(results_path, name, split_type, best_params, final_metrics)
-            selected_k = final_metrics[-1]
-            model_to_k[name] = selected_k
-            all_results.append({'split_type': split_type, 'classifier': name, 'params': best_params})
 
     elif split_type == "session":
-        results, roc_data = evaluate_with_session_split(classifiers)
-        for name, best_params, final_metrics in results:
+        for name, best_params, final_metrics in evaluate_with_session_split(classifiers):
             save_results(results_path, name, split_type, best_params, final_metrics)
-            selected_k = final_metrics[-1]
-            model_to_k[name] = selected_k
-            all_results.append({'split_type': split_type, 'classifier': name, 'params': best_params})
-
-        if roc_path:
-            plot_roc_curves_session(roc_data, roc_path)
 
     else:
         raise ValueError(f"Unknown split_type: {split_type}")
-
-    for clf_name in model_to_k:
-        results_for_clf = [r for r in all_results if r['classifier'] == clf_name and r['split_type'] == split_type]
-        save_best_params_per_model_split(results_for_clf, model_to_k[clf_name], best_par_path)
 
 
 # File paths
 #results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
 results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
-#roc_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Roc_Curves\roc_curve_ss_Verification.png"
-roc_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Roc_Curves\roc_curve_ss_Verification.png"
-#best_par_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_KBest"
-best_par_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_KBest"
-
+os.makedirs(os.path.dirname(results_file), exist_ok=True)
 
 # Remove old results file if exists
 if os.path.exists(results_file):
     os.remove(results_file)
 
 def main():
-    run_verification("random", results_file, roc_path, best_par_path)
-    run_verification("session", results_file, roc_path, best_par_path)
-
+    run_verification("random", results_file)
+    run_verification("session", results_file)
+    
 if __name__ == "__main__":
     main()

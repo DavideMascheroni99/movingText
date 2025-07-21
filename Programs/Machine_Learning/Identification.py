@@ -144,7 +144,7 @@ def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, titl
     grid_search.fit(X_train, y_train)
 
     best_params = grid_search.best_params_
-    best_cv_score = round(best_cv_score, 4)
+    best_cv_score = round(grid_search.best_score_, 4)
     train_score = round(grid_search.best_estimator_.score(X_train, y_train), 4)
     test_score = round(grid_search.best_estimator_.score(X_test, y_test), 4)
     
@@ -185,8 +185,8 @@ model_list = [
 ]
 
 #Result file path
-#results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_results.csv" 
-results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_results.csv"
+results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_results.csv" 
+#results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_results.csv"
 
 #If i rerun the code I want to delete the previous results file
 if os.path.exists(results_file):

@@ -26,8 +26,8 @@ warnings.filterwarnings(
 )
 
 # Load dataset
-csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
-#csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
+#csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
+csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
 dataset = pd.read_csv(csv_path)
 
 dataset['person_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])
@@ -154,7 +154,7 @@ def get_classifiers_with_grid():
         ("MLP", mlp_pipeline, mlp_params),
     ]
 
-# Prepare data for a single person
+# Prepare data for a single person. The parameter person data contains all the samples related to the current person
 def prepare_train_test_data(person_data, split_type, seed):
     if split_type == 'session':
         # S1 and S2 in train while S3 on test
@@ -234,7 +234,7 @@ def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_t
     # Use the best model to make prediction on the test set
     y_pred = best_model.predict(X_test)
 
-    # Get the probability a sample belongs to class 1
+    # Get the probability a sample belongs to class 1. Right now all classifiers have predict proba, but I add this to be flexible on future classifiers implementation
     if hasattr(best_model, "predict_proba"):
         y_score = best_model.predict_proba(X_test)[:, 1]
     else:
@@ -548,12 +548,12 @@ def run_verification(split_type, results_path, roc_path, best_par_path):
 
 
 # File paths
-#results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
-results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
-#roc_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Roc_Curves\roc_curve_ss_Verification.png"
-roc_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Roc_Curves\roc_curve_ss_Verification.png"
-#best_par_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_KBest"
-best_par_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_KBest"
+results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
+#results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
+roc_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Roc_Curves\roc_curve_ss_Verification.png"
+#roc_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Roc_Curves\roc_curve_ss_Verification.png"
+best_par_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_KBest"
+#best_par_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_KBest"
 
 
 # Remove old results file if exists

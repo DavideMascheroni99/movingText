@@ -160,9 +160,9 @@ def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, titl
     grid_search.fit(X_train, y_train)
 
     best_params = grid_search.best_params_
-    best_cv_score = round(grid_search.best_score_, 4)
-    train_score = round(grid_search.best_estimator_.score(X_train, y_train), 4)
-    test_score = round(grid_search.best_estimator_.score(X_test, y_test), 4)
+    best_cv_score = grid_search.best_score_
+    train_score = grid_search.best_estimator_.score(X_train, y_train)
+    test_score = grid_search.best_estimator_.score(X_test, y_test)
 
     print("Best parameters:", best_params)
     print("Best CV accuracy:", best_cv_score)
@@ -177,9 +177,9 @@ def write_results(title, best_params, best_cv_score, train_score, test_score, re
     results = {
         'Model': title,
         'Best Parameters': str(best_params),
-        'Best CV Accuracy': best_cv_score,
-        'Train Accuracy': train_score,
-        'Test Accuracy': test_score
+        'Best CV Accuracy': round(best_cv_score, 4),
+        'Train Accuracy': round(train_score, 4),
+        'Test Accuracy': round(test_score, 4)
     }
     df = pd.DataFrame([results])
     if not os.path.exists(results_path):

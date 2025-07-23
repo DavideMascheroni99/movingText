@@ -17,7 +17,6 @@ from sklearn.feature_selection import SelectKBest, f_classif
 from collections import defaultdict
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, auc
-from scipy import interp
 
 # disable an unexpected warning on the new pandas version
 warnings.filterwarnings(

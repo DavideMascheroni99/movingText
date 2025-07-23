@@ -119,69 +119,86 @@ animation_names = dataset['anim_name'].unique()
 dataset['tester_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])
 dataset['session_id'] = dataset['file_key'].apply(lambda x: x.split('_')[1])
 
-feature_cols = dataset.loc[:, 'f0':'f71'].columns
+feature_cols = list(dataset.loc[:, 'f0':'f71'].columns)
+
+# Extract tester_id and session_id once
+dataset['tester_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])
+dataset['session_id'] = dataset['file_key'].apply(lambda x: x.split('_')[1])
+
+animation_names = dataset['anim_name'].unique()
+
+# --- PART 1: RANDOM SPLIT PER ANIMATION (as before) ---
+for anim in animation_names:
+    print(f"\n=== Animation: {anim} ===")
+    subset = dataset[dataset['anim_name'] == anim]
+    X = subset.loc[:, feature_cols]
+    y = subset['tester_id']
+
+    for model_name, model_fn in model_list:
+        print(f"\n--- {model_name} ---")
+        
+        best_cv_scores, train_scores, test_scores = [], [], []
+        best_param_list = []
+        num_seed = 10
+
+        for seed in range(num_seed):
+            X_train, X_test, y_train, y_test = train_test_split(
+                X, y, test_size=0.2, stratify=y, random_state=seed
+            )
+            pipeline, param_grid = model_fn()
+            best_params, best_cv_score, train_score, test_score = run_grid_search(
+                X_train, y_train, X_test, y_test,
+                pipeline, param_grid,
+                f"{model_name} (Random split run {seed+1} - {anim})"
+            )
+            best_cv_scores.append(best_cv_score)
+            train_scores.append(train_score)
+            test_scores.append(test_score)
+            best_param_list.append((best_params, best_cv_score))
+
+        mean_cv = np.mean(best_cv_scores)
+        mean_train = np.mean(train_scores)
+        mean_test = np.mean(test_scores)
+        best_params = max(best_param_list, key=lambda x: x[1])[0]
+
+        write_results(
+            f"{model_name} (Random split mean - {anim})",
+            best_params, mean_cv, mean_train, mean_test,
+            results_file, animation_name=anim
+        )
+
+# --- PART 2: SESSION-BASED TRAINING (train on all S1+S2, test on each animation S3) ---
+
+print("\n=== Session-based training on all animations combined ===")
+
+# Prepare train data for S1+S2 across all animations
+train_data = dataset[dataset['session_id'].isin(['S1', 'S2'])]
+X_train_all = train_data.loc[:, feature_cols]
+y_train_all = train_data['tester_id']
 
 for model_name, model_fn in model_list:
-    print(f"\n=== {model_name} ===")
-
-    best_cv_scores, train_scores, test_scores = [], [], []
-    best_param_list = []
-    X = dataset.loc[:, feature_cols]
-    y = dataset['tester_id']
+    print(f"\n--- {model_name} ---")
 
     pipeline, param_grid = model_fn()
-
-    for seed in range(num_seed):
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=0.2, stratify=y, random_state=seed
-        )
-        best_params, best_cv_score, train_score, test_score = run_grid_search(
-            X_train, y_train, X_test, y_test,
-            pipeline, param_grid,
-            model_name + f" (Random split run {seed+1})"
-        )
-        best_cv_scores.append(best_cv_score)
-        train_scores.append(train_score)
-        test_scores.append(test_score)
-        best_param_list.append((best_params, best_cv_score))
-
-    # Aggregate results over num_seed runs
-    mean_cv = np.mean(best_cv_scores)
-    mean_train = np.mean(train_scores)
-    mean_test = np.mean(test_scores)
-    best_params = max(best_param_list, key=lambda x: x[1])[0]
-
-    write_results(f"{model_name} (Random 80/20 splits)",
-                  best_params, mean_cv, mean_train, mean_test,
-                  results_file, animation_name="ALL")
-
-    # --- TRAIN ON ALL S1+S2, TEST ON EACH ANIMATION'S S3 ---
-    print(f"\n→ Training on combined sessions S1 + S2, testing on S3 per animation...")
-
-    combined_train = dataset[dataset['session_id'].isin(['S1', 'S2'])].copy()
-    X_train_combined = combined_train.loc[:, feature_cols]
-    y_train_combined = combined_train['tester_id']
-
-    pipeline, param_grid = model_fn()
-
     best_params, best_cv_score, train_score, _ = run_grid_search(
-        X_train_combined, y_train_combined, X_train_combined, y_train_combined,
+        X_train_all, y_train_all, X_train_all, y_train_all,
         pipeline, param_grid,
-        model_name + " (Combined S1+S2)"
+        model_name + " (All S1+S2 training)"
     )
-
     pipeline.set_params(**best_params)
-    pipeline.fit(X_train_combined, y_train_combined)
+    pipeline.fit(X_train_all, y_train_all)
 
     for anim in animation_names:
-        test_anim = dataset[(dataset['anim_name'] == anim) & (dataset['session_id'] == 'S3')].copy()
-
-        X_test_anim = test_anim.loc[:, feature_cols]
-        y_test_anim = test_anim['tester_id']
-
-        test_score = pipeline.score(X_test_anim, y_test_anim)
-        print(f"{model_name} Test Accuracy on animation {anim} (S3): {test_score:.4f}")
-
-        write_results(f"{model_name} (Combined S1+S2 → {anim}_S3)",
-                      best_params, best_cv_score, train_score, test_score,
-                      results_file, animation_name=anim)
+        test_subset = dataset[(dataset['anim_name'] == anim) & (dataset['session_id'] == 'S3')]
+        if test_subset.empty:
+            print(f"Skipping animation {anim} — no S3 data.")
+            continue
+        X_test_sess = test_subset.loc[:, feature_cols]
+        y_test_sess = test_subset['tester_id']
+        test_score = pipeline.score(X_test_sess, y_test_sess)
+        print(f"{model_name} Test accuracy on animation {anim} (S3): {test_score:.4f}")
+        write_results(
+            f"{model_name} (S1+S2 → {anim}_S3)",
+            best_params, best_cv_score, train_score, test_score,
+            results_file, animation_name=anim
+        )

@@ -124,39 +124,60 @@ y_train_all = dataset[dataset['session_id'].isin(['S1', 'S2'])]['tester_id']
 
 # Loop through models
 for model_name, model_fn in model_list:
-    print(f"\nTraining {model_name} on ALL animations (Sessions S1 + S2)...")
-
-    # Get pipeline and parameter grid
+    print(f"\n=== {model_name} ===")
+    
+    # --- RANDOM TRAIN-TEST SPLIT ---
+    print(f"→ Running random train-test split...")
+    
+    # Random 80/20 split across all data
+    X = dataset.loc[:, 'f0':'f71']
+    y = dataset['tester_id']
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
+    
     pipeline, param_grid = model_fn()
+    
+    # Run grid search
+    best_params, best_cv_score, train_score, test_score = run_grid_search(
+        X_train, y_train, X_test, y_test,
+        pipeline, param_grid,
+        model_name + " (Random split)"
+    )
 
-    # Run grid search using CV on training set
+    # Save random split results
+    write_results(f"{model_name} (Random split)",
+                  best_params, best_cv_score, train_score, test_score,
+                  results_file, animation_name="ALL")
+
+    # --- SESSION-BASED TRAINING (S1+S2 → S3 per animation) ---
+    print(f"\n→ Training on sessions S1 + S2, testing on S3 for each animation...")
+
+    X_train_all = dataset[dataset['session_id'].isin(['S1', 'S2'])].loc[:, 'f0':'f71']
+    y_train_all = dataset[dataset['session_id'].isin(['S1', 'S2'])]['tester_id']
+
+    # Get a fresh model
+    pipeline, param_grid = model_fn()
+    
     best_params, best_cv_score, train_score, _ = run_grid_search(
         X_train_all, y_train_all, X_train_all, y_train_all,
         pipeline, param_grid,
         model_name + " (ALL S1+S2)"
     )
 
-    # Fit the best model on the full training set
     pipeline.set_params(**best_params)
     pipeline.fit(X_train_all, y_train_all)
 
-    # Now test each animation's S3 subset
     for anim in animation_names:
-        animation_name = anim
         test_subset = dataset[(dataset['anim_name'] == anim) & (dataset['session_id'] == 'S3')]
-
         if test_subset.empty:
-            print(f"Skipping animation {animation_name} — no S3 data available.")
+            print(f"Skipping animation {anim} — no S3 data.")
             continue
 
         X_test_sess = test_subset.loc[:, 'f0':'f71']
         y_test_sess = test_subset['tester_id']
-
-        # Evaluate the model on this animation's S3
         test_score = pipeline.score(X_test_sess, y_test_sess)
 
-        print(f"{model_name} Test Accuracy on animation {animation_name}: {test_score:.4f}")
+        print(f"{model_name} Test Accuracy on animation {anim}: {test_score:.4f}")
 
-        # Save result
-        write_results(f"{model_name} (ALL S1+S2 → {animation_name}_S3)",
-                      best_params, best_cv_score, train_score, test_score, results_file, animation_name)
+        write_results(f"{model_name} (ALL S1+S2 → {anim}_S3)",
+                      best_params, best_cv_score, train_score, test_score,
+                      results_file, animation_name=anim)

@@ -58,7 +58,7 @@ def get_logreg_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
-        ('logreg', LogisticRegression(max_iter=1000, random_state=0))
+        ('logreg', LogisticRegression(max_iter=5000, random_state=0))
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
@@ -66,7 +66,7 @@ def get_logreg_pipeline():
     }
     return pipeline, param_grid
 
-def get_nusvc_pipeline():
+'''def get_nusvc_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
@@ -78,7 +78,7 @@ def get_nusvc_pipeline():
         'nusvc__kernel': ['rbf', 'poly', 'sigmoid'],
         'nusvc__gamma': ['scale', 'auto']
     }
-    return pipeline, param_grid
+    return pipeline, param_grid'''
 
 def get_rf_pipeline():
     pipeline = Pipeline([
@@ -166,7 +166,7 @@ model_list = [
     ("Naive Bayes", get_nb_pipeline),
     ("KNN", get_knn_pipeline),
     ("Logistic Regression", get_logreg_pipeline),
-    ("NuSVC", get_nusvc_pipeline),
+    #("NuSVC", get_nusvc_pipeline),
     ("Random Forest", get_rf_pipeline),
     ("SVC", get_svc_pipeline),
     ("MLP", get_mlp_pipeline)
@@ -203,7 +203,7 @@ for anim in animation_names:
     for model_name, model_fn in model_list:
         best_cv_scores, train_scores, test_scores = [], [], []
         best_param_list = []
-        num_seed = 10
+        num_seed = 1
 
         for i in range(num_seed):
             X_train_rand, X_test_rand, y_train_rand, y_test_rand = train_test_split(

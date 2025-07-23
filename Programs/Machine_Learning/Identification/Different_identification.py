@@ -33,29 +33,32 @@ dataset['anim_name'] = dataset['file_key'].apply(lambda x: '_'.join(x.split('_')
 
 def get_rf_pipeline():
     pipeline = Pipeline([
-        ('preprocessing', MinMaxScaler()),
+        ('scaler', StandardScaler()), 
         ('clf', RandomForestClassifier())
     ])
     param_grid = {
-                 'preprocessing__scaler': [StandardScaler(), RobustScaler(), MinMaxScaler()],
-                  'clf__n_estimators': [700],
-                  'clf__criterion': ['gini', 'log_loss'],
-                  'clf__max_depth': [5,9],
-                  'clf__random_state': [0]}
+        'scaler': [StandardScaler(), RobustScaler(), MinMaxScaler()],  
+        'clf__n_estimators': [700],
+        'clf__criterion': ['gini', 'log_loss'],
+        'clf__max_depth': [5, 9],
+        'clf__random_state': [0]
+    }
     return pipeline, param_grid
+
 
 def get_svc_pipeline():
     pipeline = Pipeline([
-        ('preprocessing', MinMaxScaler()),
+        ('scaler', StandardScaler()),  # placeholder
         ('clf', SVC())
     ])
     param_grid = {
-                   'preprocessing__scaler': [StandardScaler(), RobustScaler(), MinMaxScaler()],
-                   'clf__C': [0.1, 1, 10, 100],
-                   'clf__gamma': [1, 0.1, 0.01],
-                   'clf__kernel': ['rbf', 'sigmoid']}
-
+        'scaler': [StandardScaler(), RobustScaler(), MinMaxScaler()],
+        'clf__C': [0.1, 1, 10, 100],
+        'clf__gamma': [1, 0.1, 0.01],
+        'clf__kernel': ['rbf', 'sigmoid']
+    }
     return pipeline, param_grid
+
 
 '''GRID SEARCH FUNCTION'''
 

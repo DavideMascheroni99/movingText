@@ -1,0 +1,33 @@
+Model,Animation,Best Parameters,Best CV Accuracy,Train Accuracy,Test Accuracy
+Random Forest (Random split mean - VB_SL_LIT),VB_SL_LIT,"{'clf__criterion': 'gini', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': StandardScaler()}",0.7267,1.0,0.7413
+SVC (Random split mean - VB_SL_LIT),VB_SL_LIT,"{'clf__C': 10, 'clf__gamma': 0.01, 'clf__kernel': 'rbf', 'scaler': StandardScaler()}",0.635,0.9948,0.6159
+Random Forest (Random split mean - HS_SL_LIT),HS_SL_LIT,"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': StandardScaler()}",0.5663,0.9996,0.6444
+SVC (Random split mean - HS_SL_LIT),HS_SL_LIT,"{'clf__C': 10, 'clf__gamma': 0.01, 'clf__kernel': 'rbf', 'scaler': StandardScaler()}",0.4964,0.9929,0.5667
+Random Forest (Random split mean - VB_SL_BIG),VB_SL_BIG,"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': StandardScaler()}",0.7595,0.9996,0.773
+SVC (Random split mean - VB_SL_BIG),VB_SL_BIG,"{'clf__C': 10, 'clf__gamma': 0.01, 'clf__kernel': 'rbf', 'scaler': StandardScaler()}",0.6841,0.9869,0.6952
+Random Forest (Random split mean - HS_SL_BIG),HS_SL_BIG,"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': StandardScaler()}",0.6055,1.0,0.6397
+SVC (Random split mean - HS_SL_BIG),HS_SL_BIG,"{'clf__C': 100, 'clf__gamma': 0.1, 'clf__kernel': 'rbf', 'scaler': MinMaxScaler()}",0.5286,0.9611,0.5476
+Random Forest (Random split mean - VB_FA_LIT),VB_FA_LIT,"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': StandardScaler()}",0.7845,1.0,0.7476
+SVC (Random split mean - VB_FA_LIT),VB_FA_LIT,"{'clf__C': 10, 'clf__gamma': 0.01, 'clf__kernel': 'rbf', 'scaler': StandardScaler()}",0.6944,1.0,0.727
+Random Forest (Random split mean - HS_FA_LIT),HS_FA_LIT,"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': StandardScaler()}",0.5719,0.9996,0.5746
+SVC (Random split mean - HS_FA_LIT),HS_FA_LIT,"{'clf__C': 100, 'clf__gamma': 0.1, 'clf__kernel': 'rbf', 'scaler': MinMaxScaler()}",0.5051,0.9714,0.5762
+Random Forest (Random split mean - VB_FA_BIG),VB_FA_BIG,"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': StandardScaler()}",0.7725,1.0,0.7889
+SVC (Random split mean - VB_FA_BIG),VB_FA_BIG,"{'clf__C': 10, 'clf__gamma': 0.01, 'clf__kernel': 'rbf', 'scaler': StandardScaler()}",0.6618,1.0,0.6825
+Random Forest (Random split mean - HS_FA_BIG),HS_FA_BIG,"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': RobustScaler()}",0.6198,1.0,0.673
+SVC (Random split mean - HS_FA_BIG),HS_FA_BIG,"{'clf__C': 10, 'clf__gamma': 0.01, 'clf__kernel': 'rbf', 'scaler': StandardScaler()}",0.5618,0.9909,0.6048
+Random Forest (S1+S2 → VB_SL_LIT_S3),VB_SL_LIT,"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': RobustScaler()}",0.6875,1.0,0.5429
+Random Forest (S1+S2 → HS_SL_LIT_S3),HS_SL_LIT,"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': RobustScaler()}",0.6875,1.0,0.5333
+Random Forest (S1+S2 → VB_SL_BIG_S3),VB_SL_BIG,"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': RobustScaler()}",0.6875,1.0,0.6
+Random Forest (S1+S2 → HS_SL_BIG_S3),HS_SL_BIG,"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': RobustScaler()}",0.6875,1.0,0.4381
+Random Forest (S1+S2 → VB_FA_LIT_S3),VB_FA_LIT,"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': RobustScaler()}",0.6875,1.0,0.6
+Random Forest (S1+S2 → HS_FA_LIT_S3),HS_FA_LIT,"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': RobustScaler()}",0.6875,1.0,0.5524
+Random Forest (S1+S2 → VB_FA_BIG_S3),VB_FA_BIG,"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': RobustScaler()}",0.6875,1.0,0.6286
+Random Forest (S1+S2 → HS_FA_BIG_S3),HS_FA_BIG,"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': RobustScaler()}",0.6875,1.0,0.4952
+SVC (S1+S2 → VB_SL_LIT_S3),VB_SL_LIT,"{'clf__C': 10, 'clf__gamma': 0.01, 'clf__kernel': 'rbf', 'scaler': StandardScaler()}",0.6661,0.9893,0.5429
+SVC (S1+S2 → HS_SL_LIT_S3),HS_SL_LIT,"{'clf__C': 10, 'clf__gamma': 0.01, 'clf__kernel': 'rbf', 'scaler': StandardScaler()}",0.6661,0.9893,0.5619
+SVC (S1+S2 → VB_SL_BIG_S3),VB_SL_BIG,"{'clf__C': 10, 'clf__gamma': 0.01, 'clf__kernel': 'rbf', 'scaler': StandardScaler()}",0.6661,0.9893,0.7048
+SVC (S1+S2 → HS_SL_BIG_S3),HS_SL_BIG,"{'clf__C': 10, 'clf__gamma': 0.01, 'clf__kernel': 'rbf', 'scaler': StandardScaler()}",0.6661,0.9893,0.5048
+SVC (S1+S2 → VB_FA_LIT_S3),VB_FA_LIT,"{'clf__C': 10, 'clf__gamma': 0.01, 'clf__kernel': 'rbf', 'scaler': StandardScaler()}",0.6661,0.9893,0.6762
+SVC (S1+S2 → HS_FA_LIT_S3),HS_FA_LIT,"{'clf__C': 10, 'clf__gamma': 0.01, 'clf__kernel': 'rbf', 'scaler': StandardScaler()}",0.6661,0.9893,0.6476
+SVC (S1+S2 → VB_FA_BIG_S3),VB_FA_BIG,"{'clf__C': 10, 'clf__gamma': 0.01, 'clf__kernel': 'rbf', 'scaler': StandardScaler()}",0.6661,0.9893,0.5905
+SVC (S1+S2 → HS_FA_BIG_S3),HS_FA_BIG,"{'clf__C': 10, 'clf__gamma': 0.01, 'clf__kernel': 'rbf', 'scaler': StandardScaler()}",0.6661,0.9893,0.4952

@@ -28,38 +28,102 @@ dataset = pd.read_csv(csv_path)
 #Obtain the animation name from the file key
 dataset['anim_name'] = dataset['file_key'].apply(lambda x: '_'.join(x.split('_')[-3:]))
 
-num_seed = 3
+num_seed = 10
 
 '''DEFINITION OF EACH PIPELINE WITH THEIR RESPECTIVE PARAMETER GRID'''
 
-def get_rf_pipeline():
+def get_nb_pipeline():
     pipeline = Pipeline([
-        ('scaler', StandardScaler()), 
-        ('clf', RandomForestClassifier())
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', MinMaxScaler()),
+        ('nb', GaussianNB())
+    ])
+    param_grid = {'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()]}
+    return pipeline, param_grid
+
+def get_knn_pipeline():
+    pipeline = Pipeline([
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', MinMaxScaler()),
+        ('knn', KNeighborsClassifier())
     ])
     param_grid = {
-        'scaler': [StandardScaler(), RobustScaler(), MinMaxScaler()],  
-        'clf__n_estimators': [700],
-        'clf__criterion': ['gini', 'log_loss'],
-        'clf__max_depth': [5, 9],
-        'clf__random_state': [0]
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
+        'knn__n_neighbors': [3, 5, 7, 9, 11],
+        'knn__weights': ['uniform', 'distance'],
+        'knn__metric': ['minkowski', 'euclidean', 'manhattan']
     }
     return pipeline, param_grid
 
+def get_logreg_pipeline():
+    pipeline = Pipeline([
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', MinMaxScaler()),
+        ('logreg', LogisticRegression(max_iter=1000, random_state=0))
+    ])
+    param_grid = {
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
+        'logreg__C': [0.001, 0.01, 0.1, 1, 10, 100]
+    }
+    return pipeline, param_grid
+
+def get_nusvc_pipeline():
+    pipeline = Pipeline([
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', MinMaxScaler()),
+        ('nusvc', NuSVC())
+    ])
+    param_grid = {
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
+        'nusvc__nu': [0.25, 0.5, 0.75],
+        'nusvc__kernel': ['rbf', 'poly', 'sigmoid'],
+        'nusvc__gamma': ['scale', 'auto']
+    }
+    return pipeline, param_grid
+
+def get_rf_pipeline():
+    pipeline = Pipeline([
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', MinMaxScaler()),
+        ('rf', RandomForestClassifier(random_state=0))
+    ])
+    param_grid = {
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
+        'rf__n_estimators': [20, 30, 50, 100, 200],
+        'rf__max_features': ['sqrt'],
+        'rf__max_depth': [5, 10, 20, 30]
+    }
+    return pipeline, param_grid
 
 def get_svc_pipeline():
     pipeline = Pipeline([
-        ('scaler', StandardScaler()),  # placeholder
-        ('clf', SVC())
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', MinMaxScaler()),
+        ('svc', SVC())
     ])
     param_grid = {
-        'scaler': [StandardScaler(), RobustScaler(), MinMaxScaler()],
-        'clf__C': [0.1, 1, 10, 100],
-        'clf__gamma': [1, 0.1, 0.01],
-        'clf__kernel': ['rbf', 'sigmoid']
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
+        'svc__C': [0.001, 0.01, 0.1, 1, 10, 100],
+        'svc__gamma': [0.001, 0.01, 0.1, 1, 10, 100],
+        'svc__kernel': ['rbf', 'poly']
     }
     return pipeline, param_grid
 
+def get_mlp_pipeline():
+    pipeline = Pipeline([
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', MinMaxScaler()),
+        ('mlp' , MLPClassifier(max_iter=2000, random_state = 0))
+    ])
+    param_grid = {
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
+        'mlp__hidden_layer_sizes': [(100,), (100, 50), (150, 100, 50)],
+        'mlp__activation': ['tanh', 'relu'],
+        'mlp__alpha':  [0.0001, 0.001, 0.01],
+        'mlp__learning_rate_init': [0.001, 0.01],
+        'mlp__solver': ['adam']
+        }
+    return pipeline, param_grid
 
 '''GRID SEARCH FUNCTION'''
 
@@ -101,8 +165,13 @@ def write_results(title, best_params, best_cv_score, train_score, test_score, re
 
 # --- Model definitions ---
 model_list = [
+    ("Naive Bayes", get_nb_pipeline),
+    ("KNN", get_knn_pipeline),
+    ("Logistic Regression", get_logreg_pipeline),
+    ("NuSVC", get_nusvc_pipeline),
     ("Random Forest", get_rf_pipeline),
-    ("SVC", get_svc_pipeline)
+    ("SVC", get_svc_pipeline),
+    ("MLP", get_mlp_pipeline)
 ]
 
 # --- Results file path ---
@@ -139,7 +208,7 @@ for anim in animation_names:
         
         best_cv_scores, train_scores, test_scores = [], [], []
         best_param_list = []
-        num_seed = 10
+
 
         for seed in range(num_seed):
             X_train, X_test, y_train, y_test = train_test_split(

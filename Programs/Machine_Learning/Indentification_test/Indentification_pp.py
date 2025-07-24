@@ -21,8 +21,7 @@ warnings.filterwarnings(
 
 '''LOAD THE DATASET'''
 #csv_path of the PC in the lab
-#csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector_pp.csv" 
-csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector_pp.csv"
+csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector_pp.csv" 
 dataset = pd.read_csv(csv_path)
 
 #Extract the tester id and the session id from file_key
@@ -45,6 +44,7 @@ y_test_sess = test_subset['person_id']
 
 def get_rf_pipeline():
     pipeline = Pipeline([
+        ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', StandardScaler()), 
         ('clf', RandomForestClassifier())
     ])
@@ -60,7 +60,8 @@ def get_rf_pipeline():
 
 def get_svc_pipeline():
     pipeline = Pipeline([
-        ('scaler', StandardScaler()),  # placeholder
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', StandardScaler()), 
         ('clf', SVC())
     ])
     param_grid = {
@@ -115,8 +116,7 @@ model_list = [
 ]
 
 #Result file path
-#results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Identification_test\Identification_results_pp.csv" 
-results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Identification_test\Identification_results_pp.csv"
+results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Indentification_test\Identification_results_pp.csv" 
 
 #If i rerun the code I want to delete the previous results file
 if os.path.exists(results_file):
@@ -126,7 +126,7 @@ for model_name, model_fn in model_list:
     best_cv_scores, train_scores, test_scores = [], [], []
     best_param_list = []
     #repeat the random split num_seed times
-    num_seed = 3
+    num_seed = 10
 
     for i in range(num_seed):
         # Random split (80/20) with stratification

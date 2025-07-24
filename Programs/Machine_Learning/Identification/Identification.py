@@ -43,7 +43,7 @@ y_test_sess = test_subset['person_id']
 
 '''DEFINITION OF EACH PIPELINE WITH THEIR RESPECTIVE PARAMETER GRID'''
 
-'''def get_nb_pipeline():
+def get_nb_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
@@ -90,7 +90,7 @@ def get_nusvc_pipeline():
         'nusvc__kernel': ['rbf', 'poly', 'sigmoid'],
         'nusvc__gamma': ['scale', 'auto']
     }
-    return pipeline, param_grid'''
+    return pipeline, param_grid
 
 def get_rf_pipeline():
     pipeline = Pipeline([
@@ -120,7 +120,7 @@ def get_svc_pipeline():
     }
     return pipeline, param_grid
 
-'''def get_mlp_pipeline():
+def get_mlp_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
@@ -134,7 +134,7 @@ def get_svc_pipeline():
         'mlp__learning_rate_init': [0.001, 0.01],
         'mlp__solver': ['adam']
         }
-    return pipeline, param_grid'''
+    return pipeline, param_grid
 
 '''GRID SEARCH FUNCTION'''
 
@@ -174,13 +174,13 @@ def write_results(title, best_params, best_cv_score, train_score, test_score, re
 '''RUN THE MODELS'''
 
 model_list = [
-    #("Naive Bayes", get_nb_pipeline),
-    #("KNN", get_knn_pipeline),
-    #("Logistic Regression", get_logreg_pipeline),
-    #("NuSVC", get_nusvc_pipeline),
+    ("Naive Bayes", get_nb_pipeline),
+    ("KNN", get_knn_pipeline),
+    ("Logistic Regression", get_logreg_pipeline),
+    ("NuSVC", get_nusvc_pipeline),
     ("Random Forest", get_rf_pipeline),
-    ("SVC", get_svc_pipeline)
-    #("MLP", get_mlp_pipeline)
+    ("SVC", get_svc_pipeline),
+    ("MLP", get_mlp_pipeline)
 ]
 
 #Result file path

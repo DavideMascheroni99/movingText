@@ -188,7 +188,7 @@ animation_names = dataset['anim_name'].unique()
 dataset['tester_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])
 dataset['session_id'] = dataset['file_key'].apply(lambda x: x.split('_')[1])
 
-feature_cols = list(dataset.loc[:, 'f0':'f71'].columns)
+feature_cols = list(dataset.loc[:, 'f0':'f82'].columns)
 
 # Extract tester_id and session_id once
 dataset['tester_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])

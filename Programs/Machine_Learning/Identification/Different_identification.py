@@ -115,15 +115,10 @@ if os.path.exists(results_file):
 # Get all unique animations
 animation_names = dataset['anim_name'].unique()
 
-# Extract tester_id and session_id (if not already extracted)
 dataset['tester_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])
 dataset['session_id'] = dataset['file_key'].apply(lambda x: x.split('_')[1])
 
 feature_cols = list(dataset.loc[:, 'f0':'f71'].columns)
-
-# Extract tester_id and session_id once
-dataset['tester_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])
-dataset['session_id'] = dataset['file_key'].apply(lambda x: x.split('_')[1])
 
 animation_names = dataset['anim_name'].unique()
 

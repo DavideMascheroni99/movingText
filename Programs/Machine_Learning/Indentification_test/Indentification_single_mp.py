@@ -71,10 +71,6 @@ def run_grid_search(X_train, y_train, pipeline, param_grid, title):
     best_cv_score = grid_search.best_score_
     train_score = grid_search.best_estimator_.score(X_train, y_train)
 
-    print("Best parameters:", best_params)
-    print("Best CV accuracy:", best_cv_score)
-    print("Train accuracy:", train_score)
-
     return grid_search.best_estimator_, best_params, best_cv_score, train_score
 
 '''WRITE RESULTS FUNCTION'''
@@ -150,3 +146,37 @@ for anim in animation_names:
         test_score = model.score(X_test_sess, y_test_sess)
 
         write_results(model_name + " (S1+S2 vs S3)", model_data['params'], model_data['cv_score'], model_data['train_score'], test_score, results_file, anim)
+
+    X = subset.loc[:, 'f0':'f71']
+    y = subset['tester_id']
+
+    # Perform random split
+    for model_name, model_fn in model_list:
+        best_cv_scores, train_scores, test_scores = [], [], []
+        best_param_list = []
+        num_seed = 3
+
+        for i in range(num_seed):
+            X_train_rand, X_test_rand, y_train_rand, y_test_rand = train_test_split(
+                X, y, test_size=0.2, random_state=i, stratify=y
+            )
+
+            pipeline, param_grid = model_fn()
+            best_params, best_cv_score, train_score, test_score = run_grid_search(
+                X_train_rand, y_train_rand, X_test_rand, y_test_rand,
+                pipeline, param_grid,
+                model_name + f" (80/20 Run {i+1})"
+            )
+
+            best_cv_scores.append(best_cv_score)
+            train_scores.append(train_score)
+            test_scores.append(test_score)
+            best_param_list.append((best_params, best_cv_score))
+
+        mean_cv = np.mean(best_cv_scores)
+        mean_train = np.mean(train_scores)
+        mean_test = np.mean(test_scores)
+        best_params = max(best_param_list, key=lambda x: x[1])[0]
+
+        write_results(model_name + " (80/20)", best_params, mean_cv, mean_train, mean_test, results_file, anim)
+

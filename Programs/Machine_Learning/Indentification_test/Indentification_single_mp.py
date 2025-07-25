@@ -25,7 +25,7 @@ csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_cs
 
 dataset = pd.read_csv(csv_path)
 
-#Obtain the animation name from the file key
+# Obtain the animation name from the file key
 dataset['anim_name'] = dataset['file_key'].apply(lambda x: '_'.join(x.split('_')[-3:]))
 
 '''DEFINITION OF EACH PIPELINE WITH THEIR RESPECTIVE PARAMETER GRID'''
@@ -62,7 +62,7 @@ def get_svc_pipeline():
 
 '''GRID SEARCH FUNCTION'''
 
-def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, title):
+def run_grid_search(X_train, y_train, pipeline, param_grid, title):
     print(f"\n=== {title} ===")
     grid_search = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1, verbose=0)
     grid_search.fit(X_train, y_train)
@@ -70,14 +70,12 @@ def run_grid_search(X_train, y_train, X_test, y_test, pipeline, param_grid, titl
     best_params = grid_search.best_params_
     best_cv_score = grid_search.best_score_
     train_score = grid_search.best_estimator_.score(X_train, y_train)
-    test_score = grid_search.best_estimator_.score(X_test, y_test)
 
     print("Best parameters:", best_params)
     print("Best CV accuracy:", best_cv_score)
     print("Train accuracy:", train_score)
-    print("Test accuracy:", test_score)
 
-    return best_params, best_cv_score, train_score, test_score
+    return grid_search.best_estimator_, best_params, best_cv_score, train_score
 
 '''WRITE RESULTS FUNCTION'''
 
@@ -113,62 +111,42 @@ if os.path.exists(results_file):
 # Get all unique animations in the dataset
 animation_names = dataset['anim_name'].unique()
 
+dataset['tester_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])
+dataset['session_id'] = dataset['file_key'].apply(lambda x: x.split('_')[1])
+
 # Put every animation's first two sessions in the train
 train_subset = dataset[dataset['session_id'].isin(['S1', 'S2'])]
 
 X_train_sess = train_subset.loc[:, 'f0':'f71']
 y_train_sess = train_subset['tester_id']
 
+# Fit the models only once on the full S1+S2 dataset
+best_models = {}
+for model_name, model_fn in model_list:
+    pipeline, param_grid = model_fn()
+    best_model, best_params, best_cv_score, train_score = run_grid_search(
+        X_train_sess, y_train_sess, pipeline, param_grid, model_name + " (S1+S2)"
+    )
+    best_models[model_name] = {
+        'estimator': best_model,
+        'params': best_params,
+        'cv_score': best_cv_score,
+        'train_score': train_score
+    }
+
+# Test on S3 separately for each animation
 for anim in animation_names:
 
     # Subset with all the data for a single animation
     subset = dataset[dataset['anim_name'] == anim].copy()
-    # Test subset contains only the S3 data for every animations
+    # Test subset contains only the S3 data for every animation
     test_subset = subset[subset['session_id'] == 'S3']
-
-    subset['tester_id'] = subset['file_key'].apply(lambda x: x.split('_')[0])
-    subset['session_id'] = subset['file_key'].apply(lambda x: x.split('_')[1])
 
     X_test_sess = test_subset.loc[:, 'f0':'f71']
     y_test_sess = test_subset['tester_id']
 
-    '''# Extract from the subset the tester and the session id
-    subset['tester_id'] = subset['file_key'].apply(lambda x: x.split('_')[0])
-    subset['session_id'] = subset['file_key'].apply(lambda x: x.split('_')[1])
+    for model_name, model_data in best_models.items():
+        model = model_data['estimator']
+        test_score = model.score(X_test_sess, y_test_sess)
 
-    X = subset.loc[:, 'f0':'f82']
-    y = subset['tester_id']'''
-
-
-    '''for model_name, model_fn in model_list:
-        best_cv_scores, train_scores, test_scores = [], [], []
-        best_param_list = []
-        num_seed = 10
-
-        for i in range(num_seed):
-            X_train_rand, X_test_rand, y_train_rand, y_test_rand = train_test_split(
-                X, y, test_size=0.2, random_state=i, stratify=y
-            )
-
-            pipeline, param_grid = model_fn()
-            best_params, best_cv_score, train_score, test_score = run_grid_search(
-                X_train_rand, y_train_rand, X_test_rand, y_test_rand, pipeline, param_grid, model_name + f" (80/20 Run {i+1})")
-
-            best_cv_scores.append(best_cv_score)
-            train_scores.append(train_score)
-            test_scores.append(test_score)
-            best_param_list.append((best_params, best_cv_score))
-
-        mean_cv = np.mean(best_cv_scores)
-        mean_train = np.mean(train_scores)
-        mean_test = np.mean(test_scores)
-        best_params = max(best_param_list, key=lambda x: x[1])[0]
-
-        write_results(model_name + " (80/20)", best_params, mean_cv, mean_train, mean_test, results_file, anim)'''
-
-    for model_name, model_fn in model_list:
-        pipeline, param_grid = model_fn()
-        best_params, best_cv_score, train_score, test_score = run_grid_search(
-            X_train_sess, y_train_sess, X_test_sess, y_test_sess, pipeline, param_grid, model_name + " (S1+S2 vs S3)")
-
-        write_results(model_name + " (S1+S2 vs S3)", best_params, best_cv_score, train_score, test_score, results_file, anim)
+        write_results(model_name + " (S1+S2 vs S3)", model_data['params'], model_data['cv_score'], model_data['train_score'], test_score, results_file, anim)

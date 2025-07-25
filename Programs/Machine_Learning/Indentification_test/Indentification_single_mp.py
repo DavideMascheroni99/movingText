@@ -90,7 +90,7 @@ def write_results(title, best_params, best_cv_score, train_score, test_score, re
     else:
         df.to_csv(results_path, mode='a', header=False, index=False)
 
-'''RUN THE MODELS FOR EACH ANIMATION'''
+'''LIST OF ALL MODELS'''
 
 model_list = [
     ("Random Forest", get_rf_pipeline),
@@ -104,6 +104,8 @@ results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Progra
 if os.path.exists(results_file):
     os.remove(results_file)
 
+'''PREPARE THE SPLITS'''
+
 # Get all unique animations in the dataset
 animation_names = dataset['anim_name'].unique()
 
@@ -116,6 +118,8 @@ train_subset = dataset[dataset['session_id'].isin(['S1', 'S2'])]
 X_train_sess = train_subset.loc[:, 'f0':'f71']
 y_train_sess = train_subset['tester_id']
 
+'''FIT THE MODELS AND WRITE RESULTS'''
+
 # Fit the models only once on the full S1+S2 dataset
 best_models = {}
 for model_name, model_fn in model_list:
@@ -123,6 +127,7 @@ for model_name, model_fn in model_list:
     best_model, best_params, best_cv_score, train_score = run_grid_search(
         X_train_sess, y_train_sess, pipeline, param_grid, model_name + " (S1+S2)"
     )
+    # Save the best model for every classifier
     best_models[model_name] = {
         'estimator': best_model,
         'params': best_params,
@@ -142,11 +147,13 @@ for anim in animation_names:
     y_test_sess = test_subset['tester_id']
 
     for model_name, model_data in best_models.items():
+        # Take the best model for every classifier to test
         model = model_data['estimator']
         test_score = model.score(X_test_sess, y_test_sess)
 
         write_results(model_name + " (S1+S2 vs S3)", model_data['params'], model_data['cv_score'], model_data['train_score'], test_score, results_file, anim)
-
+    
+    # In X all the data for a single animation and on y its label
     X = subset.loc[:, 'f0':'f71']
     y = subset['tester_id']
 
@@ -154,8 +161,9 @@ for anim in animation_names:
     for model_name, model_fn in model_list:
         best_cv_scores, train_scores, test_scores = [], [], []
         best_param_list = []
-        num_seed = 3
-
+        num_seed = 10
+        
+        # Repeat random split num_seed different times
         for i in range(num_seed):
             X_train_rand, X_test_rand, y_train_rand, y_test_rand = train_test_split(
                 X, y, test_size=0.2, random_state=i, stratify=y

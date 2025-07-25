@@ -162,11 +162,9 @@ for anim in animation_names:
             )
 
             pipeline, param_grid = model_fn()
-            best_params, best_cv_score, train_score, test_score = run_grid_search(
-                X_train_rand, y_train_rand, X_test_rand, y_test_rand,
-                pipeline, param_grid,
-                model_name + f" (80/20 Run {i+1})"
-            )
+            best_model, best_params, best_cv_score, train_score = run_grid_search(X_train_rand, y_train_rand, pipeline, param_grid, model_name + f" (80/20 Run {i+1})")
+
+            test_score = best_model.score(X_test_rand, y_test_rand)
 
             best_cv_scores.append(best_cv_score)
             train_scores.append(train_score)

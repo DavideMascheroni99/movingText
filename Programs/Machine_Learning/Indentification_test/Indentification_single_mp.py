@@ -126,6 +126,9 @@ for anim in animation_names:
     # Test subset contains only the S3 data for every animations
     test_subset = subset[subset['session_id'] == 'S3']
 
+    subset['tester_id'] = subset['file_key'].apply(lambda x: x.split('_')[0])
+    subset['session_id'] = subset['file_key'].apply(lambda x: x.split('_')[1])
+
     X_test_sess = test_subset.loc[:, 'f0':'f71']
     y_test_sess = test_subset['tester_id']
 

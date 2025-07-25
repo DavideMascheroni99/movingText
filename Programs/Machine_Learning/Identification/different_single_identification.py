@@ -166,7 +166,7 @@ model_list = [
 ]
 
 # Result file path
-results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Indentification_test\Identification_single_mp.csv" 
+results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Indentification_test\Identification_single_different.csv" 
 
 # Delete previous results file if exists
 if os.path.exists(results_file):
@@ -183,7 +183,7 @@ dataset['session_id'] = dataset['file_key'].apply(lambda x: x.split('_')[1])
 # Put every animation's first two sessions in the train
 train_subset = dataset[dataset['session_id'].isin(['S1', 'S2'])]
 
-X_train_sess = train_subset.loc[:, 'f0':'f71']
+X_train_sess = train_subset.loc[:, 'f0':'f82']
 y_train_sess = train_subset['tester_id']
 
 '''FIT THE MODELS AND WRITE RESULTS'''
@@ -211,7 +211,7 @@ for anim in animation_names:
     # Test subset contains only the S3 data for every animation
     test_subset = subset[subset['session_id'] == 'S3']
 
-    X_test_sess = test_subset.loc[:, 'f0':'f71']
+    X_test_sess = test_subset.loc[:, 'f0':'f82']
     y_test_sess = test_subset['tester_id']
 
     for model_name, model_data in best_models.items():
@@ -222,7 +222,7 @@ for anim in animation_names:
         write_results(model_name + " (S1+S2 vs S3)", model_data['params'], model_data['cv_score'], model_data['train_score'], test_score, results_file, anim)
     
     # In X all the data for a single animation and on y its label
-    X = subset.loc[:, 'f0':'f71']
+    X = subset.loc[:, 'f0':'f82']
     y = subset['tester_id']
 
     # Perform random split

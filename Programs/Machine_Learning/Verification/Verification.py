@@ -52,7 +52,7 @@ def get_classifiers_with_grid():
         'feature_selection__k': [30, 40, 50, 60, 70]
     }
 
-    # K-Nearest Neighbors
+    '''# K-Nearest Neighbors
     knn_pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
@@ -140,17 +140,17 @@ def get_classifiers_with_grid():
         'clf__alpha': [0.0001, 0.001, 0.01],
         'clf__learning_rate_init': [0.001, 0.01],
         'clf__solver': ['adam']
-    }
+    }'''
 
     # Return a list of tuples (name, pipeline, param_grid)
     return [
         ("Naive Bayes", nb_pipeline, nb_params),
-        ("KNN", knn_pipeline, knn_params),
-        ("Logistic Regression", logreg_pipeline, logreg_params),
-        ("NuSVC", nusvc_pipeline, nusvc_params),
-        ("Random Forest", rf_pipeline, rf_params),
-        ("SVC", svc_pipeline, svc_params),
-        ("MLP", mlp_pipeline, mlp_params),
+        #("KNN", knn_pipeline, knn_params),
+        #("Logistic Regression", logreg_pipeline, logreg_params),
+        #("NuSVC", nusvc_pipeline, nusvc_params),
+        #("Random Forest", rf_pipeline, rf_params),
+        #("SVC", svc_pipeline, svc_params),
+        #("MLP", mlp_pipeline, mlp_params),
     ]
 
 # Prepare data for a single person. The parameter person data contains all the samples related to the current person
@@ -338,7 +338,7 @@ def save_results(results_path, name, split_type, best_params, final_metrics):
     result.to_csv(results_path, mode='a', header=not file_exists, index=False)
 
 
-# Save the Roc curve of session split of every classifier
+'''# Save the Roc curve of session split of every classifier
 def plot_roc_curves_session(roc_data, filename):
 
     plt.figure(figsize=(10, 8))
@@ -377,10 +377,10 @@ def plot_roc_curves_session(roc_data, filename):
     plt.tight_layout()
     plt.savefig(filename)
     plt.close()
+'''
 
 
-
-# Save in a png the k best parameters
+'''# Save in a png the k best parameters
 def save_best_params_per_model_split(results, k, save_dir):
     # Organize results by split and classifier
     organized = defaultdict(lambda: defaultdict(list))
@@ -429,7 +429,7 @@ def save_best_params_per_model_split(results, k, save_dir):
             filename = f"{clf_name.lower()}_{sanitized_split}.png"
             save_path = os.path.join(save_dir, filename)
             plt.savefig(save_path, dpi=300)
-            plt.close()
+            plt.close()'''
 
 
 def evaluate_with_random_split(classifiers):
@@ -535,15 +535,15 @@ def run_verification(split_type, results_path, roc_path, best_par_path):
             model_to_k[name] = selected_k
             all_results.append({'split_type': split_type, 'classifier': name, 'params': best_params})
 
-        if roc_path:
-            plot_roc_curves_session(roc_data, roc_path)
+        '''if roc_path:
+            plot_roc_curves_session(roc_data, roc_path)'''
 
     else:
         raise ValueError(f"Unknown split_type: {split_type}")
 
     for clf_name in model_to_k:
         results_for_clf = [r for r in all_results if r['classifier'] == clf_name and r['split_type'] == split_type]
-        save_best_params_per_model_split(results_for_clf, model_to_k[clf_name], best_par_path)
+        #save_best_params_per_model_split(results_for_clf, model_to_k[clf_name], best_par_path)
 
 
 # File paths

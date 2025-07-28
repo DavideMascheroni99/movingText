@@ -38,7 +38,6 @@ features_cols = [f'f{i}' for i in range(83)]
 people = dataset['person_id'].unique()
 NUM_TRIALS = 10
 
-# Define models and hyperparameter grids
 def get_classifiers_with_grid():
     # Naive Bayes
     nb_pipeline = Pipeline([
@@ -52,7 +51,7 @@ def get_classifiers_with_grid():
         'feature_selection__k': [30, 40, 50, 60, 70]
     }
 
-    '''# K-Nearest Neighbors
+    # K-Nearest Neighbors
     knn_pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
@@ -140,17 +139,17 @@ def get_classifiers_with_grid():
         'clf__alpha': [0.0001, 0.001, 0.01],
         'clf__learning_rate_init': [0.001, 0.01],
         'clf__solver': ['adam']
-    }'''
+    }
 
     # Return a list of tuples (name, pipeline, param_grid)
     return [
         ("Naive Bayes", nb_pipeline, nb_params),
-        #("KNN", knn_pipeline, knn_params),
-        #("Logistic Regression", logreg_pipeline, logreg_params),
-        #("NuSVC", nusvc_pipeline, nusvc_params),
-        #("Random Forest", rf_pipeline, rf_params),
-        #("SVC", svc_pipeline, svc_params),
-        #("MLP", mlp_pipeline, mlp_params),
+        ("KNN", knn_pipeline, knn_params),
+        ("Logistic Regression", logreg_pipeline, logreg_params),
+        ("NuSVC", nusvc_pipeline, nusvc_params),
+        ("Random Forest", rf_pipeline, rf_params),
+        ("SVC", svc_pipeline, svc_params),
+        ("MLP", mlp_pipeline, mlp_params),
     ]
 
 # Prepare data for a single person. The parameter person data contains all the samples related to the current person
@@ -269,7 +268,7 @@ def compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, spec
     avg_eer = np.mean(eers)
     k = best_params.get('feature_selection__k', 'N/A') if best_params else 'N/A'
 
-    return avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, avg_auc, avg_eer, k, best_params
+    return avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, avg_auc, avg_eer, k
 
 
 
@@ -338,100 +337,6 @@ def save_results(results_path, name, split_type, best_params, final_metrics):
     result.to_csv(results_path, mode='a', header=not file_exists, index=False)
 
 
-'''# Save the Roc curve of session split of every classifier
-def plot_roc_curves_session(roc_data, filename):
-
-    plt.figure(figsize=(10, 8))
-    colors = plt.cm.get_cmap('tab10', len(roc_data)) 
-
-    for idx, (name, person_dict) in enumerate(roc_data.items()):
-        all_fpr = np.linspace(0, 1, 100)
-        tpr_list = []
-        aucs = []
-
-        for person, (fpr, tpr, roc_auc) in person_dict.items():
-            interp_tpr = np.interp(all_fpr, fpr, tpr)
-            interp_tpr[0] = 0.0
-            tpr_list.append(interp_tpr)
-            aucs.append(roc_auc)
-
-        mean_tpr = np.mean(tpr_list, axis=0)
-        mean_auc = np.mean(aucs)
-        mean_tpr[-1] = 1.0
-
-        plt.plot(
-            all_fpr,
-            mean_tpr,
-            label=f"{name} (AUC = {mean_auc:.4f})",
-            color=colors(idx)
-        )
-
-    plt.plot([0, 1], [0, 1], 'k--', label='Random Guess')
-    plt.xlim([0.0, 1.0])
-    plt.ylim([0.0, 1.05])
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('ROC Curves - Session Split')
-    plt.legend(loc='lower right', fontsize=10)
-    plt.grid(True)
-    plt.tight_layout()
-    plt.savefig(filename)
-    plt.close()
-'''
-
-
-'''# Save in a png the k best parameters
-def save_best_params_per_model_split(results, k, save_dir):
-    # Organize results by split and classifier
-    organized = defaultdict(lambda: defaultdict(list))
-    for entry in results:
-        split = entry['split_type']
-        clf = entry['classifier']
-        params = entry['params']
-        organized[split][clf].append(params)
-
-    if not os.path.exists(save_dir):
-        os.makedirs(save_dir)
-
-    for split_type, classifiers in organized.items():
-        # Sanitize split string: replace slashes with dashes
-        sanitized_split = split_type.replace('/', '-')
-        for clf_name, param_list in classifiers.items():
-            # Limit to top k
-            top_params = param_list[:k]
-
-            # Prepare rows for the table
-            rows = []
-            for i, params in enumerate(top_params):
-                param_str = ', '.join(f"{key}={val}" for key, val in params.items())
-                rows.append([f"Rank {i+1}", param_str])
-
-            df = pd.DataFrame(rows, columns=['Rank', 'Parameters'])
-
-            fig_height = max(2, 0.5 * len(df))
-            fig, ax = plt.subplots(figsize=(10, fig_height))
-            ax.axis('off')
-
-            table = ax.table(cellText=df.values,
-                             colLabels=df.columns,
-                             cellLoc='left',
-                             loc='center')
-
-            table.auto_set_font_size(False)
-            table.set_fontsize(10)
-            table.auto_set_column_width(col=list(range(len(df.columns))))
-
-            plt.title(f"Top {k} Best Parameters for {clf_name} ({split_type})",
-                      fontsize=14)
-            plt.tight_layout()
-            plt.subplots_adjust(left=0.2)
-
-            filename = f"{clf_name.lower()}_{sanitized_split}.png"
-            save_path = os.path.join(save_dir, filename)
-            plt.savefig(save_path, dpi=300)
-            plt.close()'''
-
-
 def evaluate_with_random_split(classifiers):
     results = []
 
@@ -472,7 +377,6 @@ def evaluate_with_random_split(classifiers):
 
 def evaluate_with_session_split(classifiers):
     results = []
-    roc_data = defaultdict(lambda: defaultdict(tuple))  # roc_data[classifier][person] = (fpr, tpr, roc_auc)
 
     for name, pipeline, param_grid in classifiers:
         print(f"\n=== {name} ===")
@@ -484,11 +388,12 @@ def evaluate_with_session_split(classifiers):
         for person in people:
             person_data = dataset[dataset['person_id'] == person]
 
-            test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, _, best_params, fpr, tpr, roc_auc = run_session_split(person_data, pipeline, param_grid, return_roc=True)
+            test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, _, best_params = run_session_split(person_data, pipeline, param_grid)
 
-            avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, avg_auc, avg_eer = compute_mean(
+            avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, avg_auc, avg_eer, k= compute_mean(
                 test_scores, train_scores, cv_scores, precisions, recalls, specificities, roc_aucs, eers, best_params
             )
+
 
             all_test.append(avg_test)
             all_train.append(avg_train)
@@ -500,9 +405,6 @@ def evaluate_with_session_split(classifiers):
             all_eer.append(avg_eer)
             last_best_params = best_params
 
-            # Save ROC data for this person and classifier
-            roc_data[name][person] = (fpr, tpr, roc_auc)
-
         final_metrics = compute_mean(
             all_test, all_train, all_cv,
             all_precisions, all_recalls, all_specificities,
@@ -513,55 +415,34 @@ def evaluate_with_session_split(classifiers):
 
         results.append((name, best_params, final_metrics))
 
-    return results, roc_data
+    return results
 
-def run_verification(split_type, results_path, roc_path, best_par_path):
+def run_verification(split_type, results_path):
     classifiers = get_classifiers_with_grid()
-    all_results = []
-    model_to_k = {}
 
     if split_type == "random":
         for name, best_params, final_metrics in evaluate_with_random_split(classifiers):
             save_results(results_path, name, split_type, best_params, final_metrics)
-            selected_k = final_metrics[-1]
-            model_to_k[name] = selected_k
-            all_results.append({'split_type': split_type, 'classifier': name, 'params': best_params})
 
     elif split_type == "session":
-        results, roc_data = evaluate_with_session_split(classifiers)
+        results = evaluate_with_session_split(classifiers)
         for name, best_params, final_metrics in results:
             save_results(results_path, name, split_type, best_params, final_metrics)
-            selected_k = final_metrics[-1]
-            model_to_k[name] = selected_k
-            all_results.append({'split_type': split_type, 'classifier': name, 'params': best_params})
-
-        '''if roc_path:
-            plot_roc_curves_session(roc_data, roc_path)'''
 
     else:
         raise ValueError(f"Unknown split_type: {split_type}")
 
-    for clf_name in model_to_k:
-        results_for_clf = [r for r in all_results if r['classifier'] == clf_name and r['split_type'] == split_type]
-        #save_best_params_per_model_split(results_for_clf, model_to_k[clf_name], best_par_path)
-
-
 # File paths
 results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
 #results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
-roc_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Roc_Curves\roc_curve_ss_Verification.png"
-#roc_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Roc_Curves\roc_curve_ss_Verification.png"
-best_par_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_KBest"
-#best_par_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_KBest"
-
 
 # Remove old results file if exists
 if os.path.exists(results_file):
     os.remove(results_file)
 
 def main():
-    run_verification("random", results_file, roc_path, best_par_path)
-    run_verification("session", results_file, roc_path, best_par_path)
+    run_verification("random", results_file)
+    run_verification("session", results_file)
 
 if __name__ == "__main__":
     main()

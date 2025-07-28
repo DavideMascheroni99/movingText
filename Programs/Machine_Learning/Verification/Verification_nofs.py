@@ -420,8 +420,8 @@ def run_verification(split_type, results_path):
         raise ValueError(f"Unknown split_type: {split_type}")
 
 # File paths
-results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
-#results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_results.csv"
+results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_results_nofs.csv"
+#results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_results_nofs.csv"
 
 # Remove old results file if exists
 if os.path.exists(results_file):

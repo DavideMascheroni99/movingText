@@ -182,7 +182,7 @@ if os.path.exists(results_file):
 # Get all unique animations in the dataset
 animation_names = dataset['anim_name'].unique()
 
-'''RANDOM SPLIT TRAINING (GLOBAL TRAIN) AND TEST PER ANIMATION'''
+'''RANDOM SPLIT TRAINING'''
 
 num_seed = 10
 
@@ -217,36 +217,40 @@ for model_name, model_fn in model_list:
 
         pipeline, param_grid = model_fn()
         best_params, best_cv_score, train_score, _ = run_grid_search(
-            X_train_total, y_train_total, X_train_total, y_train_total,
-            pipeline, param_grid, model_name + f" (Global 80/20 Train Iter {i+1})"
+            X_train_total, y_train_total,
+            X_train_total, y_train_total,
+            pipeline, param_grid, model_name + f" (80/20 Run {i+1})"
         )
 
         best_cv_scores.append(best_cv_score)
         train_scores.append(train_score)
         best_param_list.append((best_params, best_cv_score))
 
-    # Compute means over num seed trials
+    # Compute mean results over the 10 runs
     mean_cv = np.mean(best_cv_scores)
     mean_train = np.mean(train_scores)
 
-    # Use best parameters across all runs (based on CV score)
+    # Get best parameter setting across all runs
     best_params = max(best_param_list, key=lambda x: x[1])[0]
 
-    # Fit model once using best params and full training data
+    # Fit the model with best params on the full training set
     pipeline.set_params(**best_params)
     pipeline.fit(X_train_total, y_train_total)
 
-    # Evaluate on each animation’s test set
+    # Evaluate on each animation's test set individually
     for anim_name, (X_test_anim, y_test_anim) in animation_test_sets.items():
+        animation_name = anim_name  
         test_score = pipeline.score(X_test_anim, y_test_anim)
+
         write_results(
-            model_name + f" (Global 80/20 Test on {anim_name})",
+            model_name + " (80/20)", 
             best_params,
             mean_cv,
             mean_train,
             test_score,
             results_file
         )
+
 
 '''SPLIT S1+S2 vs S3 PER ANIMATION'''
 

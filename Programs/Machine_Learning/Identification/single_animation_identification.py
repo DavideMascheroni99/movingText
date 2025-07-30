@@ -161,8 +161,6 @@ def write_results(title, best_params, best_cv_score, train_score, test_score, re
 
 '''RUN THE MODELS FOR EACH ANIMATION'''
 
-'''RUN THE MODELS FOR EACH ANIMATION'''
-
 model_list = [
     ("Naive Bayes", get_nb_pipeline),
     ("KNN", get_knn_pipeline),
@@ -184,68 +182,71 @@ if os.path.exists(results_file):
 # Get all unique animations in the dataset
 animation_names = dataset['anim_name'].unique()
 
-'''RANDOM SPLIT TRAINING'''
+'''RANDOM SPLIT TRAINING (GLOBAL TRAIN) AND TEST PER ANIMATION'''
 
 num_seed = 10
 
-for i in range(num_seed):
+for model_name, model_fn in model_list:
+    best_cv_scores, train_scores, test_scores = [], [], []
+    best_param_list = []
 
-    X_train_total_list, y_train_total_list = [], []
-    animation_test_sets = {}  # Dictionary to store test sets per animation
+    for i in range(num_seed):
 
-    for anim in animation_names:
-        animation_name = anim
-        subset = dataset[dataset['anim_name'] == anim].copy()
-        subset['tester_id'] = subset['file_key'].apply(lambda x: x.split('_')[0])
-        subset['session_id'] = subset['file_key'].apply(lambda x: x.split('_')[1])
-        
-        # All data and all labels related to the single animation
-        X = subset.loc[:, 'f0':'f82']
-        y = subset['tester_id']
+        X_train_total_list, y_train_total_list = [], []
+        animation_test_sets = {}
 
-        # Random stratified 80/20 split per animation
-        X_train_anim, X_test_anim, y_train_anim, y_test_anim = train_test_split(
-            X, y, test_size=0.2, random_state=i, stratify=y
-        )
+        for anim in animation_names:
+            animation_name = anim
+            subset = dataset[dataset['anim_name'] == anim].copy()
+            subset['tester_id'] = subset['file_key'].apply(lambda x: x.split('_')[0])
+            subset['session_id'] = subset['file_key'].apply(lambda x: x.split('_')[1])
 
-        # Accumulate training data globally
-        X_train_total_list.append(X_train_anim)
-        y_train_total_list.append(y_train_anim)
+            X = subset.loc[:, 'f0':'f82']
+            y = subset['tester_id']
 
-        # Store test set specific to this animation
-        animation_test_sets[anim] = (X_test_anim, y_test_anim)
+            X_train_anim, X_test_anim, y_train_anim, y_test_anim = train_test_split(
+                X, y, test_size=0.2, random_state=i, stratify=y
+            )
 
-    # Concatenate all training data into global set
-    X_train_total = pd.concat(X_train_total_list, axis=0)
-    y_train_total = pd.concat(y_train_total_list, axis=0)
+            X_train_total_list.append(X_train_anim)
+            y_train_total_list.append(y_train_anim)
+            animation_test_sets[anim] = (X_test_anim, y_test_anim)
 
-    # Train once and evaluate on each animation's test set
-    for model_name, model_fn in model_list:
+        X_train_total = pd.concat(X_train_total_list, axis=0)
+        y_train_total = pd.concat(y_train_total_list, axis=0)
+
         pipeline, param_grid = model_fn()
         best_params, best_cv_score, train_score, _ = run_grid_search(
             X_train_total, y_train_total, X_train_total, y_train_total,
-            pipeline, param_grid, model_name + f" (80/20)"
+            pipeline, param_grid, model_name + f" (Global 80/20 Train Iter {i+1})"
         )
 
-        for anim_name, (X_test_anim, y_test_anim) in animation_test_sets.items():
-            # Set the best parameters on the pipeline
-            pipeline.set_params(**best_params)
+        best_cv_scores.append(best_cv_score)
+        train_scores.append(train_score)
+        best_param_list.append((best_params, best_cv_score))
 
-            # Fit the pipeline on the global training data
-            pipeline.fit(X_train_total, y_train_total)
+    # Compute means over num seed trials
+    mean_cv = np.mean(best_cv_scores)
+    mean_train = np.mean(train_scores)
 
-            # Evaluate on the specific animation test set
-            test_score = pipeline.score(X_test_anim, y_test_anim)
+    # Use best parameters across all runs (based on CV score)
+    best_params = max(best_param_list, key=lambda x: x[1])[0]
 
+    # Fit model once using best params and full training data
+    pipeline.set_params(**best_params)
+    pipeline.fit(X_train_total, y_train_total)
 
-            write_results(
-                model_name + f" (80/20)",
-                best_params,
-                best_cv_score,
-                train_score,
-                test_score,
-                results_file
-            )
+    # Evaluate on each animation’s test set
+    for anim_name, (X_test_anim, y_test_anim) in animation_test_sets.items():
+        test_score = pipeline.score(X_test_anim, y_test_anim)
+        write_results(
+            model_name + f" (Global 80/20 Test on {anim_name})",
+            best_params,
+            mean_cv,
+            mean_train,
+            test_score,
+            results_file
+        )
 
 '''SPLIT S1+S2 vs S3 PER ANIMATION'''
 

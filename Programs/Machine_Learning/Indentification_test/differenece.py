@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Path al file
-PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Indentification_test\Identification_single_different.csv" 
+PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_learning_results\Identification_single_results.csv" 
 
 # Carica
 df = pd.read_csv(PATH)

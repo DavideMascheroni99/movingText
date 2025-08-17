@@ -20,8 +20,9 @@ warnings.filterwarnings(
 )
 
 '''LOAD THE DATASET'''
-# csv_path of the PC in the lab
 csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
+#csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
+
 dataset = pd.read_csv(csv_path)
 
 # Obtain the animation name from the file key
@@ -38,7 +39,7 @@ def get_nb_pipeline():
     param_grid = {'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()]}
     return pipeline, param_grid
 
-'''def get_knn_pipeline():
+def get_knn_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
@@ -120,7 +121,7 @@ def get_mlp_pipeline():
         'mlp__learning_rate_init': [0.001, 0.01],
         'mlp__solver': ['adam']
         }
-    return pipeline, param_grid'''
+    return pipeline, param_grid
 
 '''GRID SEARCH FUNCTION'''
 
@@ -175,16 +176,17 @@ def write_results(title, best_params, best_cv_score, train_score, test_score, re
 
 model_list = [
     ("Naive Bayes", get_nb_pipeline),
-    #("KNN", get_knn_pipeline),
-    #("Logistic Regression", get_logreg_pipeline),
-    #("NuSVC", get_nusvc_pipeline),
-    #("Random Forest", get_rf_pipeline),
-    #("SVC", get_svc_pipeline),
-    #("MLP", get_mlp_pipeline)
+    ("KNN", get_knn_pipeline),
+    ("Logistic Regression", get_logreg_pipeline),
+    ("NuSVC", get_nusvc_pipeline),
+    ("Random Forest", get_rf_pipeline),
+    ("SVC", get_svc_pipeline),
+    ("MLP", get_mlp_pipeline)
 ]
 
 # Result file path
 results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results.csv"
+#results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results.csv"
 
 # Delete previous results file if exists
 if os.path.exists(results_file):

@@ -22,8 +22,8 @@ warnings.filterwarnings(
 )
 
 '''LOAD THE DATASET'''
-#csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
-csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
+csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
+#csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
 
 dataset = pd.read_csv(csv_path)
 
@@ -59,7 +59,7 @@ def get_logreg_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
-        ('logreg', LogisticRegression(max_iter=1000, random_state=0))
+        ('logreg', LogisticRegression(max_iter=2000, random_state=0))
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
@@ -113,7 +113,7 @@ def get_mlp_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
-        ('mlp' , MLPClassifier(max_iter=2000, random_state = 0))
+        ('mlp' , MLPClassifier(max_iter=3000, random_state = 0))
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
@@ -182,8 +182,8 @@ model_list = [
 ]
 
 # Result file path
-#results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results.csv"
-results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results.csv"
+results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results.csv"
+#results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results.csv"
 
 # Delete previous results file if exists
 if os.path.exists(results_file):

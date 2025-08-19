@@ -12,6 +12,8 @@ from sklearn.svm import NuSVC, SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 import warnings
+from collections import defaultdict
+
 
 # disable an unexpected warning on the new pandas version
 warnings.filterwarnings(
@@ -20,8 +22,8 @@ warnings.filterwarnings(
 )
 
 '''LOAD THE DATASET'''
-csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
-#csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
+#csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
+csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
 
 dataset = pd.read_csv(csv_path)
 
@@ -148,11 +150,6 @@ def run_grid_search(X, y, pipeline, param_grid, title, seed=0):
     train_score = grid_search.best_estimator_.score(X_train, y_train)
     val_score = grid_search.best_estimator_.score(X_val, y_val)
 
-    print("Best parameters:", best_params)
-    print("Best CV accuracy:", best_cv_score)
-    print("Train accuracy:", train_score)
-    print("Validation accuracy:", val_score)
-
     return best_params, best_cv_score, train_score, val_score, grid_search.best_estimator_
 
 '''WRITE RESULTS FUNCTION'''
@@ -185,8 +182,8 @@ model_list = [
 ]
 
 # Result file path
-results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results.csv"
-#results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results.csv"
+#results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results.csv"
+results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results.csv"
 
 # Delete previous results file if exists
 if os.path.exists(results_file):
@@ -201,17 +198,17 @@ num_seed = 10
 
 for model_name, model_fn in model_list:
     best_cv_scores, train_scores, best_param_list = [], [], []
-
-    # To avoid unnecessary re-fits, store best estimators per seed
     best_estimators_per_seed = []
 
-    for i in range(num_seed):
+    # Collect test scores per animation over all seeds
+    animation_scores = defaultdict(list)
 
+
+    for i in range(num_seed):
         X_train_total_list, y_train_total_list = [], []
         animation_test_sets = {}
 
         for anim in animation_names:
-            animation_name = anim
             subset = dataset[dataset['anim_name'] == anim].copy()
             subset['tester_id'] = subset['file_key'].apply(lambda x: x.split('_')[0])
             subset['session_id'] = subset['file_key'].apply(lambda x: x.split('_')[1])
@@ -225,6 +222,8 @@ for model_name, model_fn in model_list:
 
             X_train_total_list.append(X_train_anim)
             y_train_total_list.append(y_train_anim)
+
+            # store the test set for this iteration
             animation_test_sets[anim] = (X_test_anim, y_test_anim)
 
         X_train_total = pd.concat(X_train_total_list, axis=0)
@@ -239,33 +238,27 @@ for model_name, model_fn in model_list:
         best_param_list.append((best_params, best_cv_score))
         best_estimators_per_seed.append(best_estimator)
 
-    # Compute mean results over the 10 runs
+        # Collect the test score for each animation
+        for anim_name, (X_test_anim, y_test_anim) in animation_test_sets.items():
+            test_score = best_estimator.score(X_test_anim, y_test_anim)
+            animation_scores[anim_name].append(test_score)
+
+    # Compute the mean after num iter iterations
     mean_cv = np.mean(best_cv_scores)
     mean_train = np.mean(train_scores)
-
-    # Get best parameter setting across all runs
     best_params = max(best_param_list, key=lambda x: x[1])[0]
 
-    # Use the best estimator with those parameters
-    best_estimator = None
-    for est, (params, _) in zip(best_estimators_per_seed, best_param_list):
-        if params == best_params:
-            best_estimator = est
-            break
-
-    # Evaluate on each animation's test set individually
-    for anim_name, (X_test_anim, y_test_anim) in animation_test_sets.items():
-        animation_name = anim_name  
-        test_score = best_estimator.score(X_test_anim, y_test_anim)
-
+    # Write averaged results per animation
+    for anim_name, scores in animation_scores.items():
+        mean_test = np.mean(scores)
         write_results(
             model_name + " (80/20)", 
             best_params,
             mean_cv,
             mean_train,
-            test_score,
+            mean_test,    
             results_file,
-            anim_name 
+            anim_name
         )
 
 '''SPLIT S1+S2 vs S3 PER ANIMATION'''

@@ -224,7 +224,7 @@ def write_results(model, split_name, best_params, best_cv_acc, train_acc, test_a
     else:
         df.to_csv(results_path, mode='a', header=False, index=False)
 
-
+#results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results.csv"
 results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results.csv"
 if os.path.exists(results_file):
     os.remove(results_file)
@@ -233,57 +233,57 @@ animation_names = dataset['anim_name'].unique()
 features_cols = [f'f{i}' for i in range(83)]
 
 '''RANDOM SPLIT VERIFICATION'''
-num_seed = 10
+num_seed = 10  # same as identification
 
 for model_name, model_fn in model_list:
     for anim in animation_names:
         subset = dataset[dataset['anim_name'] == anim]
-        X = pd.DataFrame(subset[features_cols], columns=features_cols)
+        X = subset[features_cols]
         y = subset['tester_id']
 
         metrics_all = []
-        best_params_all = []
-        test_acc_all = []
         cv_acc_all = []
+        train_acc_all = []
+        test_acc_all = []
+        best_params_all = []
 
         for seed in range(num_seed):
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, test_size=0.2, stratify=y, random_state=seed
             )
-            X_train = pd.DataFrame(X_train, columns=features_cols)
-            X_test = pd.DataFrame(X_test, columns=features_cols)
 
             pipeline, param_grid = model_fn()
             grid = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
             grid.fit(X_train, y_train)
             best_model = grid.best_estimator_
 
-            impostors = generate_impostors(X_test, y_test, seed)
-            metrics = evaluate_verification(best_model, X_test, y_test, impostors)
-            metrics_all.append(metrics)
-            best_params_all.append(grid.best_params_)
-            cv_acc_all.append(grid.best_score_)
-
-            # Compute test accuracy for this seed
+            train_acc = best_model.score(X_train, y_train)
             preds = best_model.predict(X_test)
             test_acc = accuracy_score(y_test, preds)
+
+            impostors = generate_impostors(X_test, y_test, seed)
+            metrics = evaluate_verification(best_model, X_test, y_test, impostors)
+
+            metrics_all.append(metrics)
+            cv_acc_all.append(grid.best_score_)
+            train_acc_all.append(train_acc)
             test_acc_all.append(test_acc)
+            best_params_all.append(grid.best_params_)
 
-        # Select the seed with highest test accuracy
-        best_index = np.argmax(test_acc_all)
-        best_metrics = metrics_all[best_index]
-        best_params = best_params_all[best_index]
-        best_cv_acc = cv_acc_all[best_index]
-        test_acc = test_acc_all[best_index]
+        # Take the average across all seeds instead of picking the best one
+        mean_metrics = np.mean(metrics_all, axis=0)
+        mean_cv_acc = np.mean(cv_acc_all)
+        mean_train_acc = np.mean(train_acc_all)
+        mean_test_acc = np.mean(test_acc_all)
 
-        # Compute train accuracy on the full training set used in the best seed
-        best_model = model_fn()[0].fit(X_train, y_train)
-        train_acc = best_model.score(X_train, y_train)
-        selected_k = best_params.get('feature_selection__k', None)
+        # Select parameters from the seed with the highest test accuracy
+        best_idx = np.argmax(test_acc_all)
+        best_params = best_params_all[best_idx]
 
-        write_results(model_name, "Random 80/20", best_params, best_cv_acc, train_acc,
-              test_acc=test_acc, metrics=best_metrics,
-              results_path=results_file, anim_name=anim)
+        write_results(model_name, "Random 80/20", best_params,
+                      mean_cv_acc, mean_train_acc, mean_test_acc,
+                      mean_metrics, results_file, anim)
+
 
 
 

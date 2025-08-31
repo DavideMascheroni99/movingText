@@ -6,6 +6,7 @@ BASE_PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Results_c
 #Lab Path
 #OUT_PATH = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
 OUT_PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
+FIVE_OUT_PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector_5sec.csv"
 #Lab Path
 #FIX_VECTOR_PATH = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\fixation_vector.csv"
 FIX_VECTOR_PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\fixation_vector.csv"

@@ -43,8 +43,8 @@ def get_nb_pipeline():
     ])
     param_grid = {'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()]}
     return pipeline, param_grid
-
-'''def get_knn_pipeline():
+'''
+def get_knn_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
@@ -218,114 +218,117 @@ def write_results(model, split_name, best_params, best_cv_acc, train_acc, test_a
     else:
         df.to_csv(results_path, mode='a', header=False, index=False)
 
-#results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results.csv"
-results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results.csv"
-if os.path.exists(results_file):
-    os.remove(results_file)
+# ------------------- TRAIN AND EVALUATE FUNCTION -------------------
+def train_and_evaluate_per_person(X_train_total, y_train_total, animation_test_sets, model_fn, split_name, results_file, num_seed=10):
+    for anim_name, (X_test_anim, y_test_anim) in animation_test_sets.items():
+        per_person_metrics = []
+        per_person_scores = []
 
-'''TRAIN AND EVALUATE FUNCTION'''
-def train_and_evaluate(X_train, y_train, test_sets, model_fn, split_name, results_file, num_seed=1):
+        for person in people:
+            # select only samples for this animation and person
+            person_mask = (X_train_total.index.isin(dataset[(dataset['tester_id']==person) & (dataset['anim_name']==anim_name)].index))
+            X_train_person = X_train_total.loc[person_mask]
+            y_train_person = y_train_total.loc[person_mask]
 
-    animation_scores = defaultdict(list)
-    animation_metrics = defaultdict(list)
+            if len(X_train_person) == 0:
+                continue
 
-    best_cv_scores, train_scores, best_param_list = [], [], []
+            pipeline, param_grid = model_fn()
+            grid = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
+            grid.fit(X_train_person, y_train_person)
+            best_model = grid.best_estimator_
 
-    for seed in range(num_seed):
-        # Train model
-        pipeline, param_grid = model_fn()
-        grid = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
-        grid.fit(X_train, y_train)
-        best_model = grid.best_estimator_
-
-        best_cv_scores.append(grid.best_score_)
-        train_scores.append(best_model.score(X_train, y_train))
-        best_param_list.append((grid.best_params_, grid.best_score_))
-
-        # Evaluate per-animation test sets
-        for anim, (X_test, y_test) in test_sets.items():
-            # Direct evaluation on test set
-            y_pred = best_model.predict(X_test)
+            y_pred = best_model.predict(X_test_anim)
             if hasattr(best_model, "predict_proba"):
-                y_score = best_model.predict_proba(X_test)[:, 1]
+                y_score = best_model.predict_proba(X_test_anim)[:, 1]
             else:
-                y_score = best_model.decision_function(X_test)
+                y_score = best_model.decision_function(X_test_anim)
 
-            test_acc = accuracy_score(y_test, y_pred)
-            prec = precision_score(y_test, y_pred)
-            rec = recall_score(y_test, y_pred)
-            tn, fp, fn, tp = confusion_matrix(y_test, y_pred).ravel()
+            test_acc = accuracy_score(y_test_anim, y_pred)
+            prec = precision_score(y_test_anim, y_pred)
+            rec = recall_score(y_test_anim, y_pred)
+            tn, fp, fn, tp = confusion_matrix(y_test_anim, y_pred).ravel()
             spec = tn / (tn + fp)
-            fpr, tpr, _ = roc_curve(y_test, y_score)
+            roc_auc = roc_auc_score(y_test_anim, y_score)
+            fpr, tpr, _ = roc_curve(y_test_anim, y_score)
             fnr = 1 - tpr
             eer_index = np.nanargmin(np.abs(fnr - fpr))
             eer = fpr[eer_index]
-            auc_score = roc_auc_score(y_test, y_score)
 
-            animation_scores[anim].append(test_acc)
-            animation_metrics[anim].append((prec, rec, spec, auc_score, eer))
+            per_person_metrics.append((prec, rec, spec, roc_auc, eer))
+            per_person_scores.append(test_acc)
 
-    mean_cv = np.mean(best_cv_scores)
-    mean_train = np.mean(train_scores)
-    best_params = max(best_param_list, key=lambda x: x[1])[0]
+        # average over all persons for this animation
+        mean_test = np.mean(per_person_scores)
+        mean_metrics = np.mean(per_person_metrics, axis=0)
+        best_params = grid.best_params_
 
-    for anim in test_sets.keys():
-        mean_test = np.mean(animation_scores[anim])
-        mean_metrics = np.mean(animation_metrics[anim], axis=0)
         write_results(
             model_name,
             split_name,
             best_params,
-            mean_cv,
-            mean_train,
+            grid.best_score_,
+            best_model.score(X_train_total, y_train_total),
             mean_test,
             mean_metrics,
             results_file,
-            anim
+            anim_name
         )
 
-'''RANDOM SPLIT VERIFICATION'''
+# ------------------- FILE PATH -------------------
+results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results.csv"
+if os.path.exists(results_file):
+    os.remove(results_file)
+
+# ------------------- RANDOM SPLIT PER ANIMATION (10 seeds) -------------------
 num_seed = 10
 for model_name, model_fn in model_list:
-    animation_test_sets = {}
-    X_train_total_list, y_train_total_list = [], []
-
     for anim in animation_names:
-        subset = dataset[dataset['anim_name'] == anim].copy()
-        X_train_anim_list, y_train_anim_list = [], []
 
-        for person in subset['tester_id'].unique():
-            person_data = subset[subset['tester_id'] == person]
-            X_train_p, y_train_p, X_test_p, y_test_p = prepare_train_test_data(person_data, 'random', seed=0)
+        # Dictionary to accumulate per-person results over seeds
+        per_animation_metrics = []
 
-            X_train_anim_list.append(X_train_p)
-            y_train_anim_list.append(pd.Series(y_train_p))
-            animation_test_sets[(anim, person)] = (X_test_p, y_test_p)
+        for person in dataset['tester_id'].unique():
+            person_data = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == anim)]
+            if len(person_data) == 0:
+                continue
 
-        X_train_total_list.append(pd.concat(X_train_anim_list))
-        y_train_total_list.append(pd.concat(y_train_anim_list))
+            # Accumulate metrics over seeds
+            per_person_test_acc = []
+            per_person_metrics = []
 
-    X_train_total = pd.concat(X_train_total_list)
-    y_train_total = pd.concat(y_train_total_list)
+            for seed in range(num_seed):
+                X_train_p, y_train_p, X_test_p, y_test_p = prepare_train_test_data(person_data, 'random', seed=seed)
+                animation_test_sets = {anim: (X_test_p, y_test_p)}
 
-    train_and_evaluate(X_train_total, y_train_total, animation_test_sets,
-                       model_fn, "Random 80/20", results_file, num_seed=num_seed)
+                # Train and evaluate
+                train_and_evaluate_per_person(
+                    X_train_p,
+                    pd.Series(y_train_p),
+                    animation_test_sets,
+                    model_fn,
+                    "Random 80/20",
+                    results_file,
+                    num_seed=num_seed
+                )
 
-'''SESSION SPLIT VERIFICATION'''
-X_train_sess_list, y_train_sess_list = [], []
-
-animation_test_sets = {}
-for person in people:
-    person_data = dataset[dataset['tester_id'] == person]
-    X_train_p, y_train_p, X_test_p, y_test_p = prepare_train_test_data(person_data, 'session', seed=0)
-
-    X_train_sess_list.append(X_train_p)
-    y_train_sess_list.append(pd.Series(y_train_p))
-    animation_test_sets[person] = (X_test_p, y_test_p)
-
-X_train_sess = pd.concat(X_train_sess_list)
-y_train_sess = pd.concat(y_train_sess_list)
-
+# ------------------- SESSION SPLIT PER ANIMATION -------------------
 for model_name, model_fn in model_list:
-    train_and_evaluate(X_train_sess, y_train_sess, animation_test_sets,
-                       model_fn, "S1+S2 vs S3", results_file, num_seed=1)
+    for anim in animation_names:
+        for person in dataset['tester_id'].unique():
+            person_data = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == anim)]
+            if len(person_data) == 0:
+                continue
+
+            X_train_p, y_train_p, X_test_p, y_test_p = prepare_train_test_data(person_data, 'session', seed=0)
+            animation_test_sets = {anim: (X_test_p, y_test_p)}
+
+            train_and_evaluate_per_person(
+                X_train_p,
+                pd.Series(y_train_p),
+                animation_test_sets,
+                model_fn,
+                "S1+S2 vs S3",
+                results_file,
+                num_seed=1
+            )

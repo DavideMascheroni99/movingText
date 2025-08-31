@@ -6,6 +6,8 @@ from scipy.spatial import distance
 import duckdb
 import fv_constant
 
+n_lines=750
+
 # Statistical functions
 stat_funcs = [np.min, np.max, np.mean, gmean, np.median, np.std,
               lambda x: median_abs_deviation(x, scale=1), skew, iqr, kurtosis]
@@ -13,7 +15,7 @@ diff_funcs = [np.min, np.max, np.mean, np.median, np.std,
               lambda x: median_abs_deviation(x, scale=1), skew, iqr, kurtosis]  # No gmean
 
 # Function to trim CSV files: first 750 rows
-def trim_csv(file_path, n_lines=750):
+def trim_csv(file_path, n_lines):
     df = pd.read_csv(file_path)
     if df.empty:
         return None
@@ -39,7 +41,7 @@ all_dfs = {}
 for path, key in expected:
     if not os.path.isfile(path):
         continue
-    df = trim_csv(path, n_lines=750)
+    df = trim_csv(path, n_lines)
     if df is None or df.empty:
         continue
     all_dfs[key] = df

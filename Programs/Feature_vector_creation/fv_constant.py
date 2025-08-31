@@ -10,6 +10,7 @@ FIVE_OUT_PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Featu
 #Lab Path
 #FIX_VECTOR_PATH = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\fixation_vector.csv"
 FIX_VECTOR_PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\fixation_vector.csv"
+FIX_VECTOR_PATH_FIVE = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\fixation_vector.csv"
 
 filenames = ["SL_LIT", "SL_BIG", "FA_LIT", "FA_BIG"]
 animnames = ["VB", "HS"]

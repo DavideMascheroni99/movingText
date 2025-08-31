@@ -12,16 +12,12 @@ stat_funcs = [np.min, np.max, np.mean, gmean, np.median, np.std,
 diff_funcs = [np.min, np.max, np.mean, np.median, np.std,
               lambda x: median_abs_deviation(x, scale=1), skew, iqr, kurtosis]  # No gmean
 
-# Function to trim CSV files
-def trim_csv(file_path, start_pattern="<REC FPOGX=", n_lines=750):
-    with open(file_path, "r") as f:
-        lines = f.readlines()
-    start_idx = next((i for i, line in enumerate(lines) if line.startswith(start_pattern)), None)
-    if start_idx is None:
+# Function to trim CSV files: first 750 rows
+def trim_csv(file_path, n_lines=750):
+    df = pd.read_csv(file_path)
+    if df.empty:
         return None
-    trimmed_lines = lines[start_idx:start_idx + n_lines]
-    from io import StringIO
-    return pd.read_csv(StringIO("".join(trimmed_lines)))
+    return df.head(n_lines)
 
 # Prepare file paths
 expected = []
@@ -43,7 +39,7 @@ all_dfs = {}
 for path, key in expected:
     if not os.path.isfile(path):
         continue
-    df = trim_csv(path)
+    df = trim_csv(path, n_lines=750)
     if df is None or df.empty:
         continue
     all_dfs[key] = df
@@ -65,9 +61,9 @@ for path, key in expected:
     })
 
 # Overwrite fixation vector file if it exists
-if os.path.exists(fv_constant.FIX_VECTOR_PATH):
-    os.remove(fv_constant.FIX_VECTOR_PATH)
-pd.DataFrame(fpogs_vector).to_csv(fv_constant.FIX_VECTOR_PATH, index=False)
+if os.path.exists(fv_constant.FIX_VECTOR_PATH_FIVE):
+    os.remove(fv_constant.FIX_VECTOR_PATH_FIVE)
+pd.DataFrame(fpogs_vector).to_csv(fv_constant.FIX_VECTOR_PATH_FIVE, index=False)
 
 # --------------------- Feature Extraction ---------------------
 features = []
@@ -87,7 +83,7 @@ f1_rows = []
 for d in fpogs_vector:
     row = {'file_key': d['file_key']}
     for i, func in enumerate(stat_funcs):
-        row[f'f{i+1}'] = func(d['FPOGD']) if len(d['FPOGD']) > 0 else 0
+        row[f'f{i+1}'] = func(d['FPOGD']) if d['FPOGD'] else 0
     f1_rows.append(row)
 features.append(pd.DataFrame(f1_rows))
 
@@ -206,7 +202,7 @@ final = features[0]
 for df in features[1:]:
     final = final.merge(df, on='file_key')
 
-# Overwrite output file if it exists
+# Save final CSV
 if os.path.exists(fv_constant.FIVE_OUT_PATH):
     os.remove(fv_constant.FIVE_OUT_PATH)
 

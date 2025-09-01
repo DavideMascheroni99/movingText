@@ -1,5 +1,0 @@
-Model,Best Parameters,Best CV Accuracy,Train Accuracy,Test Accuracy
-Random Forest (80/20),"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': StandardScaler()}",0.7817,0.9989,0.7817
-SVC (80/20),"{'clf__C': 10, 'clf__gamma': 1, 'clf__kernel': 'rbf', 'scaler': MinMaxScaler()}",0.7651,0.9867,0.7805
-Random Forest (S1+S2 vs S3),"{'clf__criterion': 'log_loss', 'clf__max_depth': 9, 'clf__n_estimators': 700, 'clf__random_state': 0, 'scaler': MinMaxScaler()}",0.7261,0.9992,0.5293
-SVC (S1+S2 vs S3),"{'clf__C': 100, 'clf__gamma': 0.1, 'clf__kernel': 'rbf', 'scaler': MinMaxScaler()}",0.7215,0.9799,0.6127

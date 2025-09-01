@@ -180,7 +180,6 @@ def prepare_train_test_data(person_data, split_type, seed):
         num_genuine = len(genuine)
         impostors_balanced = impostors.sample(n=num_genuine, random_state=seed)
 
-
         # Combine genuine and impostor samples
         combined = pd.concat([genuine, impostors_balanced]).reset_index(drop=True)
 
@@ -202,7 +201,7 @@ def prepare_train_test_data(person_data, split_type, seed):
     else:
         raise ValueError(f"Unknown split_type: {split_type}")
     
-
+    
 def train_and_evaluate_model(pipeline, param_grid, X_train, y_train, X_test, y_test):
     grid = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
     grid.fit(X_train, y_train)

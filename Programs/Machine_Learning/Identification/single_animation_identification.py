@@ -128,12 +128,7 @@ def get_mlp_pipeline():
 '''GRID SEARCH FUNCTION'''
 
 def run_grid_search(X, y, pipeline, param_grid, title, seed=0):
-    # Split into train and evaluation set
-    X_train, X_val, y_train, y_val = train_test_split(
-        X, y, test_size=0.2, random_state=seed, stratify=y
-    )
 
-    # Grid search on the TRAIN split only
     grid_search = GridSearchCV(
         pipeline,
         param_grid,
@@ -142,15 +137,14 @@ def run_grid_search(X, y, pipeline, param_grid, title, seed=0):
         n_jobs=-1,
         verbose=0
     )
-    grid_search.fit(X_train, y_train)
+    grid_search.fit(X, y)
 
-    # Extract results
     best_params = grid_search.best_params_
     best_cv_score = grid_search.best_score_
-    train_score = grid_search.best_estimator_.score(X_train, y_train)
-    val_score = grid_search.best_estimator_.score(X_val, y_val)
+    train_score = grid_search.best_estimator_.score(X, y)
 
-    return best_params, best_cv_score, train_score, val_score, grid_search.best_estimator_
+    return best_params, best_cv_score, train_score, None, grid_search.best_estimator_
+
 
 '''WRITE RESULTS FUNCTION'''
 
@@ -203,11 +197,10 @@ for model_name, model_fn in model_list:
     # Collect test scores per animation over all seeds
     animation_scores = defaultdict(list)
 
-
     for i in range(num_seed):
         X_train_total_list, y_train_total_list = [], []
         animation_test_sets = {}
-
+    
         for anim in animation_names:
             subset = dataset[dataset['anim_name'] == anim].copy()
             subset['tester_id'] = subset['file_key'].apply(lambda x: x.split('_')[0])

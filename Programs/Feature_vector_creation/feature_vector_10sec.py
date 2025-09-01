@@ -45,6 +45,7 @@ for path, key in expected:
     if df is None or df.empty:
         continue
     all_dfs[key] = df
+    duckdb.register('df', df)
     result = duckdb.query("""
         SELECT AVG(FPOGX) AS FPOGX, AVG(FPOGY) AS FPOGY,
                MAX(FPOGS) AS FPOGS, MAX(FPOGD) AS FPOGD, FPOGID
@@ -73,6 +74,7 @@ features = []
 # f0: number of fixations
 f0_rows = []
 for key, df in all_dfs.items():
+    duckdb.register('df', df)
     result = duckdb.query("""
         SELECT COUNT(DISTINCT FPOGID) AS number_of_fixations
         FROM df
@@ -126,6 +128,7 @@ features.append(pd.DataFrame(f31_rows))
 # f32–f41: LPD stats
 lpd_rows = []
 for key, df in all_dfs.items():
+    duckdb.register('df', df)
     lpd = duckdb.query("SELECT LPD FROM df WHERE LPV = '1'").to_df()['LPD'].tolist()
     row = {'file_key': key}
     for i, func in enumerate(stat_funcs):
@@ -136,6 +139,7 @@ features.append(pd.DataFrame(lpd_rows))
 # f42–f51: RPD stats
 rpd_rows = []
 for key, df in all_dfs.items():
+    duckdb.register('df', df)
     rpd = duckdb.query("SELECT RPD FROM df WHERE RPV = '1'").to_df()['RPD'].tolist()
     row = {'file_key': key}
     for i, func in enumerate(stat_funcs):
@@ -146,6 +150,7 @@ features.append(pd.DataFrame(rpd_rows))
 # f52–f61: ratio LPD/RPD
 ratio_rows = []
 for key, df in all_dfs.items():
+    duckdb.register('df', df)
     ratio = duckdb.query("SELECT LPD/RPD AS R FROM df WHERE LPV = '1' AND RPV = '1'").to_df()['R'].tolist()
     row = {'file_key': key}
     for i, func in enumerate(stat_funcs):
@@ -156,6 +161,7 @@ features.append(pd.DataFrame(ratio_rows))
 # f62–f70: difference LPD - RPD
 diff_rows = []
 for key, df in all_dfs.items():
+    duckdb.register('df', df)
     diff = duckdb.query("SELECT LPD - RPD AS D FROM df WHERE LPV = '1' AND RPV = '1'").to_df()['D'].tolist()
     row = {'file_key': key}
     for i, func in enumerate(diff_funcs):
@@ -166,6 +172,7 @@ features.append(pd.DataFrame(diff_rows))
 # f71: number of blinks
 f71_rows = []
 for key, df in all_dfs.items():
+    duckdb.register('df', df)
     result = duckdb.query("SELECT COUNT(DISTINCT BKID) AS BKID_COUNT FROM df WHERE CAST(BKID AS INTEGER) > 0").to_df()
     f71_rows.append({'file_key': key, 'f71': result['BKID_COUNT'][0]})
 features.append(pd.DataFrame(f71_rows))
@@ -173,6 +180,7 @@ features.append(pd.DataFrame(f71_rows))
 # f72–f74: blink duration
 blink_rows = []
 for key, df in all_dfs.items():
+    duckdb.register('df', df)
     bkdur = duckdb.query("SELECT BKDUR FROM df WHERE BKDUR IS NOT NULL AND BKDUR != 0").to_df()['BKDUR'].tolist()
     row = {'file_key': key}
     row['f72'] = np.mean(bkdur) if bkdur else 0

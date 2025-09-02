@@ -6,70 +6,163 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, RobustScaler
 from sklearn.naive_bayes import GaussianNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import NuSVC, SVC
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import roc_auc_score, accuracy_score, precision_score, recall_score, confusion_matrix, roc_curve
-import warnings
 
-warnings.filterwarnings(
-    "ignore",
-    message="The number of unique classes is greater than 50% of the number of samples."
-)
+def load_dataset(csv_path):
+    dataset = pd.read_csv(csv_path)
+    # Get all the animation names
+    dataset['anim_name'] = dataset['file_key'].apply(lambda x: '_'.join(x.split('_')[-3:]))
+    # Get all the tester names
+    dataset['tester_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])
+    # Get all the session names
+    dataset['session_id'] = dataset['file_key'].apply(lambda x: x.split('_')[1])
+    return dataset
 
-'''LOAD DATASET'''
-csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
-dataset = pd.read_csv(csv_path)
+def get_feature_columns():
+    return [f'f{i}' for i in range(83)]
 
-# Extract animation name, tester id and session id
-dataset['anim_name'] = dataset['file_key'].apply(lambda x: '_'.join(x.split('_')[-3:]))
-dataset['tester_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])
-dataset['session_id'] = dataset['file_key'].apply(lambda x: x.split('_')[1])
+def get_unique_animations(dataset):
+    return dataset['anim_name'].unique()
 
-features_cols = [f'f{i}' for i in range(83)]
-animation_names = dataset['anim_name'].unique()
-people = dataset['tester_id'].unique()
+def get_unique_people(dataset):
+    return dataset['tester_id'].unique()
 
 '''PIPELINE DEFINITION'''
-def get_nb_pipeline():
-    pipeline = Pipeline([
+def get_classifiers_with_grid():
+    # Naive Bayes
+    nb_pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
-        ('nb', GaussianNB())
+        ('clf', GaussianNB())
     ])
-    param_grid = {'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()]}
-    return pipeline, param_grid
+    nb_params = {
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()]
+    }
 
-model_list = [
-    ("Naive Bayes", get_nb_pipeline),
-]
+    # K-Nearest Neighbors
+    knn_pipeline = Pipeline([
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', MinMaxScaler()),
+        ('clf', KNeighborsClassifier())
+    ])
+    knn_params = {
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
+        'clf__n_neighbors': [3, 5, 7, 9, 11],
+        'clf__weights': ['uniform', 'distance'],
+        'clf__metric': ['minkowski', 'euclidean', 'manhattan']
+    }
 
-'''Prepare train and test data for a single person using session split only'''
-def prepare_train_test_data(person_data, seed):
+    # Logistic Regression
+    logreg_pipeline = Pipeline([
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', StandardScaler()),
+        ('clf', LogisticRegression(max_iter=1000, random_state=0))
+    ])
+    logreg_params = {
+        'scaler': [StandardScaler(), MinMaxScaler(), RobustScaler()],
+        'clf__C': [0.001, 0.01, 0.1, 1, 10, 100]
+    }
+    
+    # NuSVC
+    nusvc_pipeline = Pipeline([
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', MinMaxScaler()),
+        ('clf', NuSVC(probability=True))
+    ])
+    nusvc_params = {
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
+        'clf__nu': [0.25, 0.5, 0.75],
+        'clf__kernel': ['rbf', 'poly', 'sigmoid'],
+        'clf__gamma': ['scale', 'auto']
+    }
+
+    # Random Forest
+    rf_pipeline = Pipeline([
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', MinMaxScaler()),
+        ('clf', RandomForestClassifier(random_state=0))
+    ])
+    rf_params = {
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
+        'clf__n_estimators': [20, 30, 50, 100, 200],
+        'clf__max_features': ['sqrt'],
+        'clf__max_depth': [5, 10, 20, 30]
+    }
+
+    # SVC
+    svc_pipeline = Pipeline([
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', MinMaxScaler()),
+        ('clf', SVC(probability=True))
+    ])
+    svc_params = {
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
+        'clf__C': [0.001, 0.01, 0.1, 1, 10, 100],
+        'clf__gamma': [0.001, 0.01, 0.1, 1, 10, 100],
+        'clf__kernel': ['rbf', 'poly']
+    }
+
+    # MLP Classifier
+    mlp_pipeline = Pipeline([
+        ('imputer', SimpleImputer(strategy='mean')),
+        ('scaler', MinMaxScaler()),
+        ('clf', MLPClassifier(max_iter=3000, random_state=0))
+    ])
+    mlp_params = {
+        'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
+        'clf__hidden_layer_sizes': [(100,), (100, 50), (150, 100, 50)],
+        'clf__activation': ['tanh', 'relu'],
+        'clf__alpha': [0.0001, 0.001, 0.01],
+        'clf__learning_rate_init': [0.001, 0.01],
+        'clf__solver': ['adam']
+    }
+    
+
+    # Return a list of tuples (name, pipeline, param_grid)
+    return [
+        ("Naive Bayes", nb_pipeline, nb_params),
+        ("KNN", knn_pipeline, knn_params),
+        ("Logistic Regression", logreg_pipeline, logreg_params),
+        ("NuSVC", nusvc_pipeline, nusvc_params),
+        ("Random Forest", rf_pipeline, rf_params),
+        ("SVC", svc_pipeline, svc_params),
+        ("MLP", mlp_pipeline, mlp_params),
+    ]
+
+'''PREPARE THE DATA FOR VERIFICATION'''
+def prepare_train_test_data(dataset, person_data, seed, features_cols):
+    # Get the id of the current genuine person
     tester_id = person_data['tester_id'].iloc[0]
 
-    # Genuine samples
     train_genuine = person_data[person_data['session_id'].isin(['S1', 'S2'])]
     test_genuine = person_data[person_data['session_id'] == 'S3']
-
-    # Impostor pools: same sessions, other testers
+    
+    # Subset of S1 and S2 of all impostors
     impostors_train_pool = dataset[
-        (dataset['tester_id'] != tester_id) &
+        (dataset['tester_id'] != tester_id) & 
         (dataset['session_id'].isin(['S1', 'S2']))
     ]
+    # Subset of S3 of all impostors
     impostors_test_pool = dataset[
-        (dataset['tester_id'] != tester_id) &
+        (dataset['tester_id'] != tester_id) & 
         (dataset['session_id'] == 'S3')
     ]
 
-    # Sample impostors with same number as genuine
+    # Sample from impostor S1 and S2 random data with the same lenght as the genuine training set 
     impostors_train = impostors_train_pool.sample(
-        n=len(train_genuine), random_state=seed,
-        replace=len(impostors_train_pool) < len(train_genuine)
+        n=len(train_genuine), random_state=seed
     )
+    # Sample from impostor S3 random data with the same lenght as the genuine test set 
     impostors_test = impostors_test_pool.sample(
-        n=len(test_genuine), random_state=seed,
-        replace=len(impostors_test_pool) < len(test_genuine)
+        n=len(test_genuine), random_state=seed
     )
-
-    # Combine genuine + impostors
+    
+    # Label genuine with 1 and impostors with 0
     X_train = pd.concat([train_genuine[features_cols], impostors_train[features_cols]])
     y_train = np.array([1] * len(train_genuine) + [0] * len(impostors_train))
     X_test = pd.concat([test_genuine[features_cols], impostors_test[features_cols]])
@@ -77,11 +170,11 @@ def prepare_train_test_data(person_data, seed):
 
     return X_train, y_train, X_test, y_test
 
-'''RESULT WRITING'''
+'''WRITE RESULTS'''
 def write_results(model, split_name, best_params, best_cv_acc, train_acc, test_acc, metrics, results_path, anim_name):
     precision, recall, spec, roc_auc, eer = metrics
     row = {
-        'Model': f"{model} ({split_name})",
+        'Model': f"{model}",
         'Animation': anim_name,
         'Best Parameters': best_params,
         'Best CV Accuracy': round(best_cv_acc, 4),
@@ -99,175 +192,144 @@ def write_results(model, split_name, best_params, best_cv_acc, train_acc, test_a
     else:
         df.to_csv(results_path, mode='a', header=False, index=False)
 
-# ------------------- TRAIN AND EVALUATE FUNCTION -------------------
-def train_and_evaluate_per_person(X_train_total, y_train_total, animation_test_sets, model_fn, split_name, results_file, num_seed=20):
-    for anim_name, (X_test_anim, y_test_anim) in animation_test_sets.items():
-        per_person_metrics = []
-        per_person_scores = []
+'''EVALUATE THE MODEL'''
+def compute_eer(y_true, y_score):
+    fpr, tpr, _ = roc_curve(y_true, y_score)
+    fnr = 1 - tpr
+    eer_index = np.nanargmin(np.abs(fnr - fpr))
+    return fpr[eer_index]
 
-        for person in people:
-            # select only samples for this animation and person
-            person_mask = (X_train_total.index.isin(dataset[(dataset['tester_id']==person) & (dataset['anim_name']==anim_name)].index))
-            X_train_person = X_train_total.loc[person_mask]
-            y_train_person = y_train_total.loc[person_mask]
+def evaluate_model(model, X, y):
+    y_pred = model.predict(X)
+    
+    # Some models don’t have predict_proba
+    if hasattr(model, "predict_proba"):
+        y_score = model.predict_proba(X)[:, 1]
+    else:
+        y_score = model.decision_function(X)
 
-            if len(X_train_person) == 0:
-                continue
+    test_acc = accuracy_score(y, y_pred)
+    prec = precision_score(y, y_pred)
+    rec = recall_score(y, y_pred)
+    tn, fp, fn, tp = confusion_matrix(y, y_pred).ravel()
+    spec = tn / (tn + fp)
+    roc_auc = roc_auc_score(y, y_score)
+    eer = compute_eer(y, y_score)
 
-            pipeline, param_grid = model_fn()
-            grid = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
-            grid.fit(X_train_person, y_train_person)
-            best_model = grid.best_estimator_
+    # Return individual metrics
+    return test_acc, prec, rec, spec, roc_auc, eer
 
-            y_pred = best_model.predict(X_test_anim)
-            if hasattr(best_model, "predict_proba"):
-                y_score = best_model.predict_proba(X_test_anim)[:, 1]
-            else:
-                y_score = best_model.decision_function(X_test_anim)
 
-            test_acc = accuracy_score(y_test_anim, y_pred)
-            prec = precision_score(y_test_anim, y_pred)
-            rec = recall_score(y_test_anim, y_pred)
-            tn, fp, fn, tp = confusion_matrix(y_test_anim, y_pred).ravel()
-            spec = tn / (tn + fp)
-            roc_auc = roc_auc_score(y_test_anim, y_score)
-            fpr, tpr, _ = roc_curve(y_test_anim, y_score)
-            fnr = 1 - tpr
-            eer_index = np.nanargmin(np.abs(fnr - fpr))
-            eer = fpr[eer_index]
+'''TRAIN THE MODEL'''
+def train_best_model(dataset, animation, pipeline, param_grid, features_cols, num_seed):
+    best_avg_test_acc = -np.inf
+    best_seed = None
 
-            per_person_metrics.append((prec, rec, spec, roc_auc, eer))
-            per_person_scores.append(test_acc)
+    # Find the best seed without GridSearchCV to reduce computation load
+    for seed in range(num_seed):
+        test_accs = []
+        for person in dataset['tester_id'].unique():
+            person_data = dataset[
+                (dataset['tester_id'] == person) &
+                (dataset['anim_name'] == animation)
+            ]
+            X_train_p, y_train_p, X_test_p, y_test_p = prepare_train_test_data(
+                dataset, person_data, seed, features_cols
+            )
 
-        # average over all persons for this animation
-        mean_test = np.mean(per_person_scores)
-        mean_metrics = np.mean(per_person_metrics, axis=0)
-        best_params = grid.best_params_
+            # Train pipeline with default parameters only to reduce computation time
+            pipeline.fit(X_train_p, y_train_p)
+            y_pred = pipeline.predict(X_test_p)
+            test_accs.append(accuracy_score(y_test_p, y_pred))
 
-        write_results(
-            model_name,
-            split_name,
-            best_params,
-            grid.best_score_,
-            best_model.score(X_train_total, y_train_total),
-            mean_test,
-            mean_metrics,
-            results_file,
-            anim_name
+        avg_test_acc = np.mean(test_accs)
+        if avg_test_acc > best_avg_test_acc:
+            best_avg_test_acc = avg_test_acc
+            best_seed = seed
+
+    # Train final GridSearchCV model on the best seed 
+    X_train_all, y_train_all = [], []
+    for person in dataset['tester_id'].unique():
+        person_data = dataset[
+            (dataset['tester_id'] == person) &
+            (dataset['anim_name'] == animation)
+        ]
+        X_train_p, y_train_p, _, _ = prepare_train_test_data(
+            dataset, person_data, best_seed, features_cols
         )
 
-# ------------------- FILE PATH -------------------
-results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results.csv"
-if os.path.exists(results_file):
-    os.remove(results_file)
+        # Combine all the different tester train sets into a single train test
+        X_train_all.append(X_train_p)
+        y_train_all.append(y_train_p)
+    
+    # Train only the best model with hyperparameter tuning
+    best_model = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
+    best_model.fit(pd.concat(X_train_all), np.concatenate(y_train_all))
 
-# ------------------- SESSION SPLIT PER ANIMATION -------------------
-num_seed = 3
-for model_name, model_fn in model_list:
-    for anim in animation_names:
-        best_model_overall = None
-        best_avg_test_acc = -np.inf
-        best_X_train_overall = None
-        best_y_train_overall = None
-        best_seed = None
+    return best_model, X_train_all, y_train_all, best_model.best_params_, best_avg_test_acc
 
-        # Train 20 different S1+S2 splits
-        for seed in range(num_seed):
-            all_person_train = []
-            all_person_y_train = []
-            all_person_test_acc = []
 
-            # Prepare training data for all persons for this animation
-            for person in dataset['tester_id'].unique():
-                person_data = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == anim)]
-                if len(person_data) == 0:
-                    continue
+def test_best_model(dataset, animation, best_model, features_cols, num_seed):
+    metrics_accum = []
 
-                X_train_p, y_train_p, X_test_p, y_test_p = prepare_train_test_data(person_data, seed=seed)
-                all_person_train.append(X_train_p)
-                all_person_y_train.append(y_train_p)
+    for seed in range(num_seed):
+        all_X_test, all_y_test = [], []
+        for person in dataset['tester_id'].unique():
+            person_data = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == animation)]
 
-                # Train temporary model per person to compute test accuracy
-                pipeline, param_grid = model_fn()
-                grid = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
-                grid.fit(X_train_p, y_train_p)
-                y_pred = grid.best_estimator_.predict(X_test_p)
-                test_acc = accuracy_score(y_test_p, y_pred)
-                all_person_test_acc.append(test_acc)
+            _, _, X_test_p, y_test_p = prepare_train_test_data(dataset, person_data, seed, features_cols)
+            all_X_test.append(X_test_p)
+            all_y_test.append(y_test_p)
 
-            # Aggregate train data across persons
-            X_train_total = pd.concat(all_person_train)
-            y_train_total = pd.Series(np.concatenate(all_person_y_train))
+        X_test_total = pd.concat(all_X_test)
+        y_test_total = np.concatenate(all_y_test)
 
-            # Compute average test accuracy for this iteration
-            avg_test_acc = np.mean(all_person_test_acc)
+        test_acc, prec, rec, spec, roc_auc, eer = evaluate_model(best_model, X_test_total, y_test_total)
+        metrics_accum.append((test_acc, prec, rec, spec, roc_auc, eer))
 
-            # Train on full train set with GridSearchCV
-            pipeline, param_grid = model_fn()
-            grid = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
-            grid.fit(X_train_total, y_train_total)
 
-            # Update best model if average test accuracy is higher
-            if avg_test_acc > best_avg_test_acc:
-                best_avg_test_acc = avg_test_acc
-                best_model_overall = grid.best_estimator_
-                best_X_train_overall = X_train_total
-                best_y_train_overall = y_train_total
-                best_params_overall = grid.best_params_
-                best_seed = seed
+    # Average over all seeds
+    avg_metrics = np.mean(metrics_accum, axis=0)
+    return avg_metrics 
 
-        # Evaluate the best model on 20 different S3 test sets
-        metrics_accum = []
-        for seed in range(num_seed):
-            all_person_test = []
-            all_person_y_test = []
 
-            for person in dataset['tester_id'].unique():
-                person_data = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == anim)]
-                if len(person_data) == 0:
-                    continue
+'''EXECUTE THE FUNCTIONS'''
 
-                _, _, X_test_p, y_test_p = prepare_train_test_data(person_data, seed=seed)
-                all_person_test.append(X_test_p)
-                all_person_y_test.append(y_test_p)
+#csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
+csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
 
-            X_test_total = pd.concat(all_person_test)
-            y_test_total = np.concatenate(all_person_y_test)
+#results_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results.csv"
+results_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results.csv"
 
-            # Evaluate best model
-            y_pred = best_model_overall.predict(X_test_total)
-            if hasattr(best_model_overall, "predict_proba"):
-                y_score = best_model_overall.predict_proba(X_test_total)[:, 1]
-            else:
-                y_score = best_model_overall.decision_function(X_test_total)
+# Delete existing results file if it exists
+if os.path.exists(results_path):
+    os.remove(results_path)
 
-            test_acc = accuracy_score(y_test_total, y_pred)
-            prec = precision_score(y_test_total, y_pred)
-            rec = recall_score(y_test_total, y_pred)
-            tn, fp, fn, tp = confusion_matrix(y_test_total, y_pred).ravel()
-            spec = tn / (tn + fp)
-            roc_auc = roc_auc_score(y_test_total, y_score)
-            fpr, tpr, _ = roc_curve(y_test_total, y_score)
-            fnr = 1 - tpr
-            eer_index = np.nanargmin(np.abs(fnr - fpr))
-            eer = fpr[eer_index]
+dataset = load_dataset(csv_path)
+features_cols = get_feature_columns()
+num_seed = 20
 
-            metrics_accum.append((test_acc, prec, rec, spec, roc_auc, eer))
-
-        # Average metrics across 20 S3 test sets
-        avg_metrics = np.mean(metrics_accum, axis=0)
-        test_acc_avg, prec_avg, rec_avg, spec_avg, roc_auc_avg, eer_avg = avg_metrics
-
-        write_results(
-            model_name,
-            f"S1+S2 vs S3",
-            best_params_overall,                  
-            best_avg_test_acc,
-            best_model_overall.score(best_X_train_overall, best_y_train_overall),
-            test_acc_avg,                          
-            (prec_avg, rec_avg, spec_avg, roc_auc_avg, eer_avg),  
-            results_file,
-            anim
+for clf_name, clf_pipeline, clf_params in get_classifiers_with_grid():
+    for animation in get_unique_animations(dataset):
+        # Train the best model
+        best_model, X_train_all, y_train_all, best_params, best_cv_acc = train_best_model(
+            dataset, animation, clf_pipeline, clf_params, features_cols, num_seed
         )
 
+        # Test the best model across all seeds and get average metrics
+        test_acc, precision, recall, spec, roc_auc, eer = test_best_model(
+            dataset, animation, best_model, features_cols, num_seed
+        )
+
+        write_results(
+            model=clf_name,
+            split_name="Final",
+            best_params=best_params,
+            best_cv_acc=best_cv_acc,
+            train_acc=best_model.score(pd.concat(X_train_all), np.concatenate(y_train_all)),
+            test_acc=test_acc,
+            metrics=(precision, recall, spec, roc_auc, eer),
+            results_path=results_path,
+            anim_name=animation
+        )
 

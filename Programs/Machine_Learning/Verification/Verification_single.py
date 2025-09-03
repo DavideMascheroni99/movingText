@@ -44,7 +44,7 @@ def get_classifiers_with_grid():
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()]
     }
 
-    # K-Nearest Neighbors
+    '''# K-Nearest Neighbors
     knn_pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
@@ -121,17 +121,17 @@ def get_classifiers_with_grid():
         'clf__learning_rate_init': [0.001, 0.01],
         'clf__solver': ['adam']
     }
-    
+    '''
 
     # Return a list of tuples (name, pipeline, param_grid)
     return [
         ("Naive Bayes", nb_pipeline, nb_params),
-        ("KNN", knn_pipeline, knn_params),
-        ("Logistic Regression", logreg_pipeline, logreg_params),
-        ("NuSVC", nusvc_pipeline, nusvc_params),
-        ("Random Forest", rf_pipeline, rf_params),
-        ("SVC", svc_pipeline, svc_params),
-        ("MLP", mlp_pipeline, mlp_params),
+        #("KNN", knn_pipeline, knn_params),
+        #("Logistic Regression", logreg_pipeline, logreg_params),
+        #("NuSVC", nusvc_pipeline, nusvc_params),
+        #("Random Forest", rf_pipeline, rf_params),
+        #("SVC", svc_pipeline, svc_params),
+        #("MLP", mlp_pipeline, mlp_params),
     ]
 
 '''PREPARE THE DATA FOR VERIFICATION'''
@@ -276,7 +276,7 @@ def test_best_model(dataset, animation, best_model, features_cols, num_seed):
         all_X_test, all_y_test = [], []
         for person in dataset['tester_id'].unique():
             person_data = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == animation)]
-
+    
             _, _, X_test_p, y_test_p = prepare_train_test_data(dataset, person_data, seed, features_cols)
             all_X_test.append(X_test_p)
             all_y_test.append(y_test_p)
@@ -292,14 +292,13 @@ def test_best_model(dataset, animation, best_model, features_cols, num_seed):
     avg_metrics = np.mean(metrics_accum, axis=0)
     return avg_metrics 
 
-
 '''EXECUTE THE FUNCTIONS'''
 
-#csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
-csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
+csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
+#csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
 
-#results_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results.csv"
-results_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results.csv"
+results_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results.csv"
+#results_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results.csv"
 
 # Delete existing results file if it exists
 if os.path.exists(results_path):

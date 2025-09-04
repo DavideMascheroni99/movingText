@@ -1,0 +1,113 @@
+Model,Animation,Best Parameters,Best CV Accuracy,Train Accuracy,Test Accuracy
+Naive Bayes (80/20),VB_SL_LIT,{'scaler': MinMaxScaler()},0.5906,0.6723,0.573
+Naive Bayes (80/20),HS_SL_LIT,{'scaler': MinMaxScaler()},0.5906,0.6723,0.5286
+Naive Bayes (80/20),VB_SL_BIG,{'scaler': MinMaxScaler()},0.5906,0.6723,0.6222
+Naive Bayes (80/20),HS_SL_BIG,{'scaler': MinMaxScaler()},0.5906,0.6723,0.5714
+Naive Bayes (80/20),VB_FA_LIT,{'scaler': MinMaxScaler()},0.5906,0.6723,0.6349
+Naive Bayes (80/20),HS_FA_LIT,{'scaler': MinMaxScaler()},0.5906,0.6723,0.5698
+Naive Bayes (80/20),VB_FA_BIG,{'scaler': MinMaxScaler()},0.5906,0.6723,0.6079
+Naive Bayes (80/20),HS_FA_BIG,{'scaler': MinMaxScaler()},0.5906,0.6723,0.5651
+KNN (80/20),VB_SL_LIT,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6559,1.0,0.7302
+KNN (80/20),HS_SL_LIT,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6559,1.0,0.6365
+KNN (80/20),VB_SL_BIG,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6559,1.0,0.7492
+KNN (80/20),HS_SL_BIG,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6559,1.0,0.6206
+KNN (80/20),VB_FA_LIT,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6559,1.0,0.7206
+KNN (80/20),HS_FA_LIT,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6559,1.0,0.619
+KNN (80/20),VB_FA_BIG,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6559,1.0,0.7222
+KNN (80/20),HS_FA_BIG,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6559,1.0,0.6587
+Logistic Regression (80/20),VB_SL_LIT,"{'logreg__C': 1, 'scaler': RobustScaler()}",0.6801,0.909,0.6571
+Logistic Regression (80/20),HS_SL_LIT,"{'logreg__C': 1, 'scaler': RobustScaler()}",0.6801,0.909,0.619
+Logistic Regression (80/20),VB_SL_BIG,"{'logreg__C': 1, 'scaler': RobustScaler()}",0.6801,0.909,0.7556
+Logistic Regression (80/20),HS_SL_BIG,"{'logreg__C': 1, 'scaler': RobustScaler()}",0.6801,0.909,0.6286
+Logistic Regression (80/20),VB_FA_LIT,"{'logreg__C': 1, 'scaler': RobustScaler()}",0.6801,0.909,0.7794
+Logistic Regression (80/20),HS_FA_LIT,"{'logreg__C': 1, 'scaler': RobustScaler()}",0.6801,0.909,0.6349
+Logistic Regression (80/20),VB_FA_BIG,"{'logreg__C': 1, 'scaler': RobustScaler()}",0.6801,0.909,0.754
+Logistic Regression (80/20),HS_FA_BIG,"{'logreg__C': 1, 'scaler': RobustScaler()}",0.6801,0.909,0.6714
+NuSVC (80/20),VB_SL_LIT,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7164,0.9762,0.7333
+NuSVC (80/20),HS_SL_LIT,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7164,0.9762,0.6667
+NuSVC (80/20),VB_SL_BIG,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7164,0.9762,0.7841
+NuSVC (80/20),HS_SL_BIG,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7164,0.9762,0.6571
+NuSVC (80/20),VB_FA_LIT,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7164,0.9762,0.7952
+NuSVC (80/20),HS_FA_LIT,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7164,0.9762,0.7111
+NuSVC (80/20),VB_FA_BIG,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7164,0.9762,0.781
+NuSVC (80/20),HS_FA_BIG,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7164,0.9762,0.7111
+Random Forest (80/20),VB_SL_LIT,"{'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.7682,1.0,0.7238
+Random Forest (80/20),HS_SL_LIT,"{'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.7682,1.0,0.6921
+Random Forest (80/20),VB_SL_BIG,"{'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.7682,1.0,0.7873
+Random Forest (80/20),HS_SL_BIG,"{'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.7682,1.0,0.6952
+Random Forest (80/20),VB_FA_LIT,"{'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.7682,1.0,0.7603
+Random Forest (80/20),HS_FA_LIT,"{'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.7682,1.0,0.6698
+Random Forest (80/20),VB_FA_BIG,"{'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.7682,1.0,0.7381
+Random Forest (80/20),HS_FA_BIG,"{'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.7682,1.0,0.7254
+SVC (80/20),VB_SL_LIT,"{'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.7336,0.9911,0.7429
+SVC (80/20),HS_SL_LIT,"{'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.7336,0.9911,0.7
+SVC (80/20),VB_SL_BIG,"{'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.7336,0.9911,0.7952
+SVC (80/20),HS_SL_BIG,"{'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.7336,0.9911,0.6683
+SVC (80/20),VB_FA_LIT,"{'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.7336,0.9911,0.8
+SVC (80/20),HS_FA_LIT,"{'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.7336,0.9911,0.7079
+SVC (80/20),VB_FA_BIG,"{'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.7336,0.9911,0.7571
+SVC (80/20),HS_FA_BIG,"{'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.7336,0.9911,0.7286
+MLP (80/20),VB_SL_LIT,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.745,1.0,0.7476
+MLP (80/20),HS_SL_LIT,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.745,1.0,0.6984
+MLP (80/20),VB_SL_BIG,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.745,1.0,0.8063
+MLP (80/20),HS_SL_BIG,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.745,1.0,0.6778
+MLP (80/20),VB_FA_LIT,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.745,1.0,0.7937
+MLP (80/20),HS_FA_LIT,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.745,1.0,0.6937
+MLP (80/20),VB_FA_BIG,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.745,1.0,0.7651
+MLP (80/20),HS_FA_BIG,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.745,1.0,0.6937
+Naive Bayes (S1+S2 vs S3),VB_SL_LIT,{'scaler': MinMaxScaler()},0.5577,0.6869,0.4667
+Naive Bayes (S1+S2 vs S3),HS_SL_LIT,{'scaler': MinMaxScaler()},0.5577,0.6869,0.4857
+Naive Bayes (S1+S2 vs S3),VB_SL_BIG,{'scaler': MinMaxScaler()},0.5577,0.6869,0.5619
+Naive Bayes (S1+S2 vs S3),HS_SL_BIG,{'scaler': MinMaxScaler()},0.5577,0.6869,0.5238
+Naive Bayes (S1+S2 vs S3),VB_FA_LIT,{'scaler': MinMaxScaler()},0.5577,0.6869,0.6286
+Naive Bayes (S1+S2 vs S3),HS_FA_LIT,{'scaler': MinMaxScaler()},0.5577,0.6869,0.5429
+Naive Bayes (S1+S2 vs S3),VB_FA_BIG,{'scaler': MinMaxScaler()},0.5577,0.6869,0.5238
+Naive Bayes (S1+S2 vs S3),HS_FA_BIG,{'scaler': MinMaxScaler()},0.5577,0.6869,0.4762
+KNN (S1+S2 vs S3),VB_SL_LIT,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6768,1.0,0.619
+KNN (S1+S2 vs S3),HS_SL_LIT,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6768,1.0,0.5714
+KNN (S1+S2 vs S3),VB_SL_BIG,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6768,1.0,0.6762
+KNN (S1+S2 vs S3),HS_SL_BIG,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6768,1.0,0.5048
+KNN (S1+S2 vs S3),VB_FA_LIT,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6768,1.0,0.7048
+KNN (S1+S2 vs S3),HS_FA_LIT,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6768,1.0,0.5714
+KNN (S1+S2 vs S3),VB_FA_BIG,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6768,1.0,0.6762
+KNN (S1+S2 vs S3),HS_FA_BIG,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",0.6768,1.0,0.4762
+Logistic Regression (S1+S2 vs S3),VB_SL_LIT,"{'logreg__C': 1, 'scaler': StandardScaler()}",0.6577,0.9381,0.5429
+Logistic Regression (S1+S2 vs S3),HS_SL_LIT,"{'logreg__C': 1, 'scaler': StandardScaler()}",0.6577,0.9381,0.6476
+Logistic Regression (S1+S2 vs S3),VB_SL_BIG,"{'logreg__C': 1, 'scaler': StandardScaler()}",0.6577,0.9381,0.6381
+Logistic Regression (S1+S2 vs S3),HS_SL_BIG,"{'logreg__C': 1, 'scaler': StandardScaler()}",0.6577,0.9381,0.5905
+Logistic Regression (S1+S2 vs S3),VB_FA_LIT,"{'logreg__C': 1, 'scaler': StandardScaler()}",0.6577,0.9381,0.7714
+Logistic Regression (S1+S2 vs S3),HS_FA_LIT,"{'logreg__C': 1, 'scaler': StandardScaler()}",0.6577,0.9381,0.6762
+Logistic Regression (S1+S2 vs S3),VB_FA_BIG,"{'logreg__C': 1, 'scaler': StandardScaler()}",0.6577,0.9381,0.7714
+Logistic Regression (S1+S2 vs S3),HS_FA_BIG,"{'logreg__C': 1, 'scaler': StandardScaler()}",0.6577,0.9381,0.581
+NuSVC (S1+S2 vs S3),VB_SL_LIT,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7161,0.9833,0.6381
+NuSVC (S1+S2 vs S3),HS_SL_LIT,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7161,0.9833,0.6095
+NuSVC (S1+S2 vs S3),VB_SL_BIG,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7161,0.9833,0.6952
+NuSVC (S1+S2 vs S3),HS_SL_BIG,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7161,0.9833,0.5619
+NuSVC (S1+S2 vs S3),VB_FA_LIT,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7161,0.9833,0.7143
+NuSVC (S1+S2 vs S3),HS_FA_LIT,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7161,0.9833,0.6952
+NuSVC (S1+S2 vs S3),VB_FA_BIG,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7161,0.9833,0.6571
+NuSVC (S1+S2 vs S3),HS_FA_BIG,"{'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",0.7161,0.9833,0.5524
+Random Forest (S1+S2 vs S3),VB_SL_LIT,"{'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.725,1.0,0.5714
+Random Forest (S1+S2 vs S3),HS_SL_LIT,"{'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.725,1.0,0.6
+Random Forest (S1+S2 vs S3),VB_SL_BIG,"{'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.725,1.0,0.6762
+Random Forest (S1+S2 vs S3),HS_SL_BIG,"{'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.725,1.0,0.5238
+Random Forest (S1+S2 vs S3),VB_FA_LIT,"{'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.725,1.0,0.6762
+Random Forest (S1+S2 vs S3),HS_FA_LIT,"{'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.725,1.0,0.6286
+Random Forest (S1+S2 vs S3),VB_FA_BIG,"{'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.725,1.0,0.7048
+Random Forest (S1+S2 vs S3),HS_FA_BIG,"{'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.725,1.0,0.5524
+SVC (S1+S2 vs S3),VB_SL_LIT,"{'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.722,0.9982,0.6381
+SVC (S1+S2 vs S3),HS_SL_LIT,"{'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.722,0.9982,0.5905
+SVC (S1+S2 vs S3),VB_SL_BIG,"{'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.722,0.9982,0.7048
+SVC (S1+S2 vs S3),HS_SL_BIG,"{'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.722,0.9982,0.5143
+SVC (S1+S2 vs S3),VB_FA_LIT,"{'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.722,0.9982,0.7238
+SVC (S1+S2 vs S3),HS_FA_LIT,"{'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.722,0.9982,0.6762
+SVC (S1+S2 vs S3),VB_FA_BIG,"{'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.722,0.9982,0.7048
+SVC (S1+S2 vs S3),HS_FA_BIG,"{'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",0.722,0.9982,0.5429
+MLP (S1+S2 vs S3),VB_SL_LIT,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.0001, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.7298,1.0,0.619
+MLP (S1+S2 vs S3),HS_SL_LIT,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.0001, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.7298,1.0,0.6095
+MLP (S1+S2 vs S3),VB_SL_BIG,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.0001, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.7298,1.0,0.7429
+MLP (S1+S2 vs S3),HS_SL_BIG,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.0001, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.7298,1.0,0.6
+MLP (S1+S2 vs S3),VB_FA_LIT,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.0001, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.7298,1.0,0.7048
+MLP (S1+S2 vs S3),HS_FA_LIT,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.0001, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.7298,1.0,0.6762
+MLP (S1+S2 vs S3),VB_FA_BIG,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.0001, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.7298,1.0,0.7524
+MLP (S1+S2 vs S3),HS_FA_BIG,"{'mlp__activation': 'tanh', 'mlp__alpha': 0.0001, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",0.7298,1.0,0.619

@@ -271,7 +271,6 @@ def compute_mean(test_scores, train_scores, cv_scores, precisions, recalls, spec
     return avg_test, avg_train, avg_cv, avg_precision, avg_recall, avg_specificity, avg_auc, avg_eer, k
 
 
-
 def run_random_split(person_data, pipeline, param_grid):
     # Dictionary that maps each key to a list. The goal is to collect multiple accuracy values for each unique parameter combination
     param_accumulator = defaultdict(list)

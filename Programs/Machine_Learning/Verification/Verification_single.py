@@ -236,7 +236,7 @@ def train_best_model(dataset, animation, pipeline, param_grid, features_cols, nu
             X_train_p, y_train_p, X_test_p, y_test_p = prepare_train_test_data(
                 dataset, person_data, seed, features_cols
             )
-
+    
             # Train pipeline with default parameters only to reduce computation time
             pipeline.fit(X_train_p, y_train_p)
             y_pred = pipeline.predict(X_test_p)
@@ -265,7 +265,7 @@ def train_best_model(dataset, animation, pipeline, param_grid, features_cols, nu
     # Train only the best model with hyperparameter tuning
     best_model = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
     best_model.fit(pd.concat(X_train_all), np.concatenate(y_train_all))
-
+      
     return best_model, X_train_all, y_train_all, best_model.best_params_, best_avg_test_acc
 
 
@@ -276,7 +276,7 @@ def test_best_model(dataset, animation, best_model, features_cols, num_seed):
         all_X_test, all_y_test = [], []
         for person in dataset['tester_id'].unique():
             person_data = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == animation)]
-    
+        
             _, _, X_test_p, y_test_p = prepare_train_test_data(dataset, person_data, seed, features_cols)
             all_X_test.append(X_test_p)
             all_y_test.append(y_test_p)

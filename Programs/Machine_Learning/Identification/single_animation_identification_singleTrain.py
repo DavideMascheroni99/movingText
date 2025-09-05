@@ -43,7 +43,7 @@ def get_nb_pipeline():
         ('nb', GaussianNB())
     ])
     param_grid = {'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-                  'feature_selection__k': [20, 30, 40, 50, 60, 70]}
+                  'feature_selection__k': [3030, 40, 50, 60, 70]}
     return pipeline, param_grid
 
 '''

@@ -7,4 +7,11 @@ Naive Bayes (80/20),VB_FA_LIT,"{'feature_selection__k': 50, 'scaler': MinMaxScal
 Naive Bayes (80/20),HS_FA_LIT,"{'feature_selection__k': 30, 'scaler': MinMaxScaler()}",30,0.5295,0.875,0.573
 Naive Bayes (80/20),VB_FA_BIG,"{'feature_selection__k': 60, 'scaler': MinMaxScaler()}",60,0.6909,0.9798,0.7603
 Naive Bayes (80/20),HS_FA_BIG,"{'feature_selection__k': 40, 'scaler': MinMaxScaler()}",40,0.5833,0.9321,0.6444
-KNN (80/20),VB_SL_LIT,"{'feature_selection__k': 60, 'knn__metric': 'manhattan', 'knn__n_neighbors': 3, 'knn__weights': 'distance', 'scaler': RobustScaler()}",60,0.6914,1.0,0.7
+Naive Bayes (S1+S2 vs S3),VB_SL_LIT,"{'feature_selection__k': 50, 'scaler': MinMaxScaler()}",50,0.6333,0.9667,0.5619
+Naive Bayes (S1+S2 vs S3),HS_SL_LIT,"{'feature_selection__k': 30, 'scaler': MinMaxScaler()}",30,0.4476,0.8571,0.4095
+Naive Bayes (S1+S2 vs S3),VB_SL_BIG,"{'feature_selection__k': 40, 'scaler': MinMaxScaler()}",40,0.5762,0.9619,0.6476
+Naive Bayes (S1+S2 vs S3),HS_SL_BIG,"{'feature_selection__k': 40, 'scaler': MinMaxScaler()}",40,0.4714,0.8952,0.4952
+Naive Bayes (S1+S2 vs S3),VB_FA_LIT,"{'feature_selection__k': 60, 'scaler': MinMaxScaler()}",60,0.6619,0.9857,0.6095
+Naive Bayes (S1+S2 vs S3),HS_FA_LIT,"{'feature_selection__k': 30, 'scaler': StandardScaler()}",30,0.4381,0.8762,0.5238
+Naive Bayes (S1+S2 vs S3),VB_FA_BIG,"{'feature_selection__k': 60, 'scaler': MinMaxScaler()}",60,0.5857,0.9857,0.6952
+Naive Bayes (S1+S2 vs S3),HS_FA_BIG,"{'feature_selection__k': 40, 'scaler': MinMaxScaler()}",40,0.5095,0.9571,0.4762

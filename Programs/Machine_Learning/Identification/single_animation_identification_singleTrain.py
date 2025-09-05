@@ -23,8 +23,8 @@ warnings.filterwarnings(
 )
 
 '''LOAD THE DATASET'''
-#csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
-csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
+csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
+#csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
 
 dataset = pd.read_csv(csv_path)
 
@@ -46,7 +46,7 @@ def get_nb_pipeline():
                   'feature_selection__k': [20, 30, 40, 50, 60, 70]}
     return pipeline, param_grid
 
-'''
+
 def get_knn_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
@@ -141,7 +141,7 @@ def get_mlp_pipeline():
         'mlp__learning_rate_init': [0.001, 0.01],
         'mlp__solver': ['adam']
         }
-    return pipeline, param_grid'''
+    return pipeline, param_grid
 
 '''GRID SEARCH FUNCTION'''
 
@@ -220,25 +220,25 @@ def save_selected_features(model_name, animation_name, best_k, selector, columns
 
 model_list = [
     ("Naive Bayes", get_nb_pipeline),
-    #("KNN", get_knn_pipeline),
-    #("Logistic Regression", get_logreg_pipeline),
-    #("NuSVC", get_nusvc_pipeline),
-    #("Random Forest", get_rf_pipeline),
-    #("SVC", get_svc_pipeline),
-    #("MLP", get_mlp_pipeline)
+    ("KNN", get_knn_pipeline),
+    ("Logistic Regression", get_logreg_pipeline),
+    ("NuSVC", get_nusvc_pipeline),
+    ("Random Forest", get_rf_pipeline),
+    ("SVC", get_svc_pipeline),
+    ("MLP", get_mlp_pipeline)
 ]
 
 # Csv containing the best k feature with their csv score
-#selected_features_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
-selected_features_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
+selected_features_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
+#selected_features_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
 
 # Delete previous file if exists
 if os.path.exists(selected_features_file):
     os.remove(selected_features_file)
 
 # Result file path
-#results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
-results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
+results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
+#results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
 
 # Delete previous results file if exists
 if os.path.exists(results_file):

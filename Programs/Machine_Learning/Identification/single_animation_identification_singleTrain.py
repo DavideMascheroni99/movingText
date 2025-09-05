@@ -35,15 +35,15 @@ def append_to_csv(df, file_path):
 '''CONSTANTS'''
 num_seed = 10
 
-#csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
-csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
+csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
+#csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
 
-#selected_features_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
-selected_features_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
+selected_features_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
+#selected_features_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
 delete_file_if_exists(selected_features_file)
 
-#results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
-results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
+results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
+#results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
 delete_file_if_exists(results_file)
 
 '''LOAD THE DATASET'''
@@ -69,7 +69,7 @@ def get_nb_pipeline():
     return pipeline, param_grid
 
 
-'''def get_knn_pipeline():
+def get_knn_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
@@ -165,7 +165,7 @@ def get_mlp_pipeline():
         'mlp__learning_rate_init': [0.001, 0.01],
         'mlp__solver': ['adam']
         }
-    return pipeline, param_grid'''
+    return pipeline, param_grid
 
 '''GRID SEARCH FUNCTION'''
 
@@ -227,12 +227,12 @@ def save_selected_features(model_name, animation_name, best_k, selector, columns
 
 model_list = [
     ("Naive Bayes", get_nb_pipeline),
-    #("KNN", get_knn_pipeline),
-    #("Logistic Regression", get_logreg_pipeline),
-    #("NuSVC", get_nusvc_pipeline),
-    #("Random Forest", get_rf_pipeline),
-    #("SVC", get_svc_pipeline),
-    #("MLP", get_mlp_pipeline)
+    ("KNN", get_knn_pipeline),
+    ("Logistic Regression", get_logreg_pipeline),
+    ("NuSVC", get_nusvc_pipeline),
+    ("Random Forest", get_rf_pipeline),
+    ("SVC", get_svc_pipeline),
+    ("MLP", get_mlp_pipeline)
 ]
 
 # Get all unique animations in the dataset

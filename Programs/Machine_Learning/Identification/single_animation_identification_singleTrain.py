@@ -43,7 +43,7 @@ def get_nb_pipeline():
         ('nb', GaussianNB())
     ])
     param_grid = {'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-                  'feature_selection__k': [3030, 40, 50, 60, 70]}
+                  'feature_selection__k': [20, 30, 40, 50, 60, 70]}
     return pipeline, param_grid
 
 '''
@@ -184,6 +184,38 @@ def write_results(title, best_params, best_cv_score, train_score, test_score, re
         df.to_csv(results_path, mode='a', header=False, index=False)
 
 
+'''BEST K FEATURES'''
+def save_selected_features(model_name, animation_name, best_k, selector, columns, results_path):
+    # Get F-scores
+    f_scores = selector.scores_
+    features = np.array(columns)
+    
+    # Replace NaN with -inf to avoid selection issues
+    f_scores = np.nan_to_num(f_scores, nan=-np.inf)
+    
+    # Get indices of top-k F-scores
+    top_indices = np.argsort(f_scores)[-best_k:][::-1]  # descending order
+    
+    selected_features = features[top_indices]
+    selected_f_scores = f_scores[top_indices]
+    
+    # Create DataFrame
+    df = pd.DataFrame({
+        'Model': model_name,
+        'Animation': animation_name,
+        'Best K': best_k,
+        'Feature': selected_features,
+        'F-score': np.round(selected_f_scores, 4)
+    })
+    
+    # Append to CSV
+    if not os.path.exists(results_path):
+        df.to_csv(results_path, index=False)
+    else:
+        df.to_csv(results_path, mode='a', header=False, index=False)
+
+
+
 '''RUN THE MODELS FOR EACH ANIMATION'''
 
 model_list = [
@@ -195,6 +227,14 @@ model_list = [
     #("SVC", get_svc_pipeline),
     #("MLP", get_mlp_pipeline)
 ]
+
+# Csv containing the best k feature with their csv score
+#selected_features_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
+selected_features_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
+
+# Delete previous file if exists
+if os.path.exists(selected_features_file):
+    os.remove(selected_features_file)
 
 # Result file path
 #results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
@@ -252,6 +292,16 @@ for model_name, model_fn in model_list:
             anim
         )
 
+        save_selected_features(
+            model_name + " (80/20)",
+            anim,
+            best_params['feature_selection__k'],
+            best_estimator.named_steps['feature_selection'],
+            X.columns,
+            selected_features_file
+        )
+
+
 '''SPLIT S1+S2 vs S3 PER ANIMATION'''
 
 for model_name, model_fn in model_list:
@@ -282,3 +332,13 @@ for model_name, model_fn in model_list:
             results_file,
             anim
         )
+
+        save_selected_features(
+            model_name + " (S1+S2 vs S3)",
+            anim,
+            best_params['feature_selection__k'],
+            best_estimator.named_steps['feature_selection'],
+            X_train_sess.columns,
+            selected_features_file
+        )
+

@@ -1,0 +1,17 @@
+Model,Animation,Best Parameters,Best CV Accuracy,Train Accuracy,Test Accuracy
+Naive Bayes (80/20),VB_SL_LIT,{'scaler': MinMaxScaler()},0.594,0.9774,0.6778
+Naive Bayes (80/20),HS_SL_LIT,{'scaler': MinMaxScaler()},0.4428,0.9266,0.5508
+Naive Bayes (80/20),VB_SL_BIG,{'scaler': MinMaxScaler()},0.614,0.9937,0.6667
+Naive Bayes (80/20),HS_SL_BIG,{'scaler': MinMaxScaler()},0.4715,0.9226,0.5492
+Naive Bayes (80/20),VB_FA_LIT,{'scaler': MinMaxScaler()},0.6432,0.9873,0.6794
+Naive Bayes (80/20),HS_FA_LIT,{'scaler': MinMaxScaler()},0.4713,0.956,0.5889
+Naive Bayes (80/20),VB_FA_BIG,{'scaler': MinMaxScaler()},0.6023,0.9913,0.6794
+Naive Bayes (80/20),HS_FA_BIG,{'scaler': MinMaxScaler()},0.5211,0.9627,0.5762
+Naive Bayes (S1+S2 vs S3),VB_SL_LIT,{'scaler': MinMaxScaler()},0.6143,0.981,0.5905
+Naive Bayes (S1+S2 vs S3),HS_SL_LIT,{'scaler': MinMaxScaler()},0.3905,0.9571,0.3714
+Naive Bayes (S1+S2 vs S3),VB_SL_BIG,{'scaler': MinMaxScaler()},0.5381,1.0,0.581
+Naive Bayes (S1+S2 vs S3),HS_SL_BIG,{'scaler': MinMaxScaler()},0.3952,0.9667,0.4762
+Naive Bayes (S1+S2 vs S3),VB_FA_LIT,{'scaler': MinMaxScaler()},0.5905,0.9952,0.581
+Naive Bayes (S1+S2 vs S3),HS_FA_LIT,{'scaler': MinMaxScaler()},0.3905,0.9905,0.4571
+Naive Bayes (S1+S2 vs S3),VB_FA_BIG,{'scaler': MinMaxScaler()},0.4952,1.0,0.5619
+Naive Bayes (S1+S2 vs S3),HS_FA_BIG,{'scaler': MinMaxScaler()},0.481,0.9905,0.5238

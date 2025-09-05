@@ -43,10 +43,11 @@ def get_nb_pipeline():
         ('nb', GaussianNB())
     ])
     param_grid = {'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-                  'feature_selection__k': [30, 40, 50, 60, 70]}
+                  'feature_selection__k': [20, 30, 40, 50, 60, 70]}
     return pipeline, param_grid
 
-'''def get_knn_pipeline():
+'''
+def get_knn_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
@@ -55,7 +56,7 @@ def get_nb_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection__k': [30, 40, 50, 60, 70],
+        'feature_selection__k': [20, 30, 40, 50, 60, 70],
         'knn__n_neighbors': [3, 5, 7, 9, 11],
         'knn__weights': ['uniform', 'distance'],
         'knn__metric': ['minkowski', 'euclidean', 'manhattan']
@@ -71,7 +72,7 @@ def get_logreg_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection__k': [30, 40, 50, 60, 70],
+        'feature_selection__k': [20, 30, 40, 50, 60, 70],
         'logreg__C': [0.001, 0.01, 0.1, 1, 10, 100]
     }
     return pipeline, param_grid
@@ -85,7 +86,7 @@ def get_nusvc_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection__k': [30, 40, 50, 60, 70],
+        'feature_selection__k': [20, 30, 40, 50, 60, 70],
         'nusvc__nu': [0.25, 0.5, 0.75],
         'nusvc__kernel': ['rbf', 'poly', 'sigmoid'],
         'nusvc__gamma': ['scale', 'auto']
@@ -101,7 +102,7 @@ def get_rf_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection__k': [30, 40, 50, 60, 70],
+        'feature_selection__k': [20, 30, 40, 50, 60, 70],
         'rf__n_estimators': [20, 30, 50, 100, 200],
         'rf__max_features': ['sqrt'],
         'rf__max_depth': [5, 10, 20, 30]
@@ -117,7 +118,7 @@ def get_svc_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection__k': [30, 40, 50, 60, 70],
+        'feature_selection__k': [20, 30, 40, 50, 60, 70],
         'svc__C': [0.001, 0.01, 0.1, 1, 10, 100],
         'svc__gamma': [0.001, 0.01, 0.1, 1, 10, 100],
         'svc__kernel': ['rbf', 'poly']
@@ -133,7 +134,7 @@ def get_mlp_pipeline():
     ])
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
-        'feature_selection__k': [30, 40, 50, 60, 70],
+        'feature_selection__k': [20, 30, 40, 50, 60, 70],
         'mlp__hidden_layer_sizes': [(100,), (100, 50), (150, 100, 50)],
         'mlp__activation': ['tanh', 'relu'],
         'mlp__alpha':  [0.0001, 0.001, 0.01],
@@ -165,10 +166,13 @@ def run_grid_search(X, y, pipeline, param_grid, title, seed=0):
 '''WRITE RESULTS FUNCTION'''
 
 def write_results(title, best_params, best_cv_score, train_score, test_score, results_path, animation_name):
+    # Excract k
+    best_k = best_params.get('feature_selection__k', None)  
     results = {
         'Model': title,
         'Animation': animation_name,
         'Best Parameters': str(best_params),
+        'Best K': best_k, 
         'Best CV Accuracy': round(best_cv_score, 4),
         'Train Accuracy': round(train_score, 4),
         'Test Accuracy': round(test_score, 4)
@@ -178,6 +182,7 @@ def write_results(title, best_params, best_cv_score, train_score, test_score, re
         df.to_csv(results_path, index=False)
     else:
         df.to_csv(results_path, mode='a', header=False, index=False)
+
 
 '''RUN THE MODELS FOR EACH ANIMATION'''
 

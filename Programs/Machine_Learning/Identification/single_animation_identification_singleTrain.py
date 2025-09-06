@@ -13,6 +13,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.feature_selection import SelectKBest, f_classif
 import warnings
+from collections import defaultdict
+
 
 # disable an unexpected warning on the new pandas version
 warnings.filterwarnings(
@@ -278,17 +280,36 @@ def evaluate_model_on_seed(df_anim, model_fn, split_type, seed):
 
 def aggregate_seeds(df_anim, model_fn, split_type, num_seed=10):
     all_results = []
-    for seed in range(num_seed):
-        result = evaluate_model_on_seed(df_anim, model_fn, split_type, seed)
-        all_results.append(result)
+    param_cv_dict = defaultdict(list)
+    param_estimator_dict = {}
 
-    # Select the best parameters and best estimator based on cv score (x[1])
-    best_params, _, _, _, best_estimator = max(all_results, key=lambda x: x[1])
+    for seed in range(num_seed):
+        best_params, best_cv_score, train_score, test_score, best_estimator = evaluate_model_on_seed(df_anim, model_fn, split_type, seed)
+        all_results.append((best_params, best_cv_score, train_score, test_score, best_estimator))
+
+        # Convert params dict to a tuple key for aggregation
+        param_key = tuple(sorted(best_params.items()))
+        param_cv_dict[param_key].append(best_cv_score)
+
+        # Keep one estimator per param combo
+        if param_key not in param_estimator_dict:
+            param_estimator_dict[param_key] = best_estimator
+
+    # Compute mean CV per parameter combination
+    mean_cv_per_param = {k: np.mean(v) for k, v in param_cv_dict.items()}
+
+    # Select parameters with highest mean CV
+    best_param_key = max(mean_cv_per_param, key=mean_cv_per_param.get)
+    best_params = dict(best_param_key)
+    best_estimator = param_estimator_dict[best_param_key]
+
+    # Average scores
     mean_cv = np.mean([x[1] for x in all_results])
     mean_train = np.mean([x[2] for x in all_results])
     mean_test = np.mean([x[3] for x in all_results])
 
     return best_params, mean_cv, mean_train, mean_test, best_estimator
+
 
 
 def process_model_split(model_name, anim, df_anim, model_fn, split_label, results_file, selected_features_file):
@@ -297,6 +318,7 @@ def process_model_split(model_name, anim, df_anim, model_fn, split_label, result
 
     write_results(f"{model_name} ({split_label})", best_params, mean_cv, mean_train, mean_test, results_file, anim)
     save_selected_features(f"{model_name} ({split_label})", anim, best_params['feature_selection__k'], best_estimator.named_steps['feature_selection'], df_anim.loc[:, 'f0':'f82'].columns, selected_features_file)
+
 
 
 for model_name, model_fn in model_list:

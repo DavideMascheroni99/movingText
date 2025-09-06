@@ -21,9 +21,32 @@ warnings.filterwarnings(
     message="The number of unique classes is greater than 50% of the number of samples."
 )
 
-'''LOAD THE DATASET'''
+# Delete the file if already exists
+def delete_file_if_exists(file_path):
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
+# Create the csv if doesn't exists, otherwhise append to the existing one
+def append_to_csv(df, file_path):
+    if not os.path.exists(file_path):
+        df.to_csv(file_path, index=False)
+    else:
+        df.to_csv(file_path, mode='a', header=False, index=False)
+
+
+'''CONSTANTS'''
+num_seed = 10
+
 #csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
 csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
+
+#selected_features_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_ft.csv"
+selected_features_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_ft.csv"
+delete_file_if_exists(selected_features_file)
+
+#results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_ft.csv"
+results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_ft.csv"
+delete_file_if_exists(results_file)
 
 dataset = pd.read_csv(csv_path)
 
@@ -43,7 +66,7 @@ def get_nb_pipeline():
                   'feature_selection__k': [20, 30, 40, 50, 60, 70]}
     return pipeline, param_grid
 
-def get_knn_pipeline():
+'''def get_knn_pipeline():
     pipeline = Pipeline([
         ('imputer', SimpleImputer(strategy='mean')),
         ('scaler', MinMaxScaler()),
@@ -80,13 +103,15 @@ def get_nusvc_pipeline():
         ('feature_selection', SelectKBest(score_func=f_classif)),
         ('nusvc', NuSVC())
     ])
+    
     param_grid = {
         'scaler': [MinMaxScaler(), StandardScaler(), RobustScaler()],
         'feature_selection__k': [20, 30, 40, 50, 60, 70],
-        'nusvc__nu': [0.25, 0.5, 0.75],
-        'nusvc__kernel': ['rbf', 'poly', 'sigmoid'],
-        'nusvc__gamma': ['scale', 'auto']
+        'nusvc__nu': [0.25, 0.5, 0.75],             
+        'nusvc__kernel': ['rbf'],                  
+        'nusvc__gamma': ['scale', 'auto']                 
     }
+    
     return pipeline, param_grid
 
 def get_rf_pipeline():
@@ -137,32 +162,29 @@ def get_mlp_pipeline():
         'mlp__learning_rate_init': [0.001, 0.01],
         'mlp__solver': ['adam']
         }
-    return pipeline, param_grid
+    return pipeline, param_grid'''
 
 '''GRID SEARCH FUNCTION'''
 
-def run_grid_search(X, y, pipeline, param_grid, title, seed=0):
-
-    grid_search = GridSearchCV(
-        pipeline,
-        param_grid,
-        cv=5,
-        scoring='accuracy',
-        n_jobs=-1,
-        verbose=0
-    )
+def run_grid_search(X, y, pipeline, param_grid):
+    
+    grid_search = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy', n_jobs=-1, verbose=0)
     grid_search.fit(X, y)
 
     best_params = grid_search.best_params_
     best_cv_score = grid_search.best_score_
     train_score = grid_search.best_estimator_.score(X, y)
 
-    return best_params, best_cv_score, train_score, None, grid_search.best_estimator_
+    return best_params, best_cv_score, train_score, grid_search.best_estimator_
+
 
 '''WRITE RESULTS FUNCTION'''
 
+from collections import defaultdict
+
+'''WRITE RESULTS FUNCTION'''
 def write_results(title, best_params, best_cv_score, train_score, test_score, results_path, animation_name):
-    # Excract k
+    # Extract k
     best_k = best_params.get('feature_selection__k', None)  
     results = {
         'Model': title,
@@ -174,10 +196,8 @@ def write_results(title, best_params, best_cv_score, train_score, test_score, re
         'Test Accuracy': round(test_score, 4)
     }
     df = pd.DataFrame([results])
-    if not os.path.exists(results_path):
-        df.to_csv(results_path, index=False)
-    else:
-        df.to_csv(results_path, mode='a', header=False, index=False)
+    append_to_csv(df, results_path)
+
 
 '''BEST K FEATURES'''
 def save_selected_features(model_name, animation_name, best_k, selector, columns, results_path):
@@ -188,8 +208,8 @@ def save_selected_features(model_name, animation_name, best_k, selector, columns
     # Replace NaN with -inf to avoid selection issues
     f_scores = np.nan_to_num(f_scores, nan=-np.inf)
     
-    # Get indices of top-k F-scores
-    top_indices = np.argsort(f_scores)[-best_k:][::-1]  # descending order
+    # Get indices of top-k F-scores in descending order
+    top_indices = np.argsort(f_scores)[-best_k:][::-1]
     
     selected_features = features[top_indices]
     selected_f_scores = f_scores[top_indices]
@@ -203,14 +223,131 @@ def save_selected_features(model_name, animation_name, best_k, selector, columns
         'F-score': np.round(selected_f_scores, 4)
     })
     
-    # Append to CSV
-    if not os.path.exists(results_path):
-        df.to_csv(results_path, index=False)
+    append_to_csv(df, results_path)
+
+
+'''DATA SPLITTING FUNCTION'''
+
+# Return X_train, X_test, y_train, y_test depending on split type
+def split_dataset_global(df, split_type, seed):
+    
+    if split_type == "80/20":
+        X_train_list, y_train_list = [], []
+        animation_test_sets = {}
+
+        for anim in animation_names:
+            subset = df[df['anim_name'] == anim].copy()
+            subset['tester_id'] = subset['file_key'].apply(lambda x: x.split('_')[0])
+            subset['session_id'] = subset['file_key'].apply(lambda x: x.split('_')[1])
+
+            X = subset.loc[:, 'f0':'f82']
+            y = subset['tester_id']
+
+            X_train_anim, X_test_anim, y_train_anim, y_test_anim = train_test_split(
+                X, y, test_size=0.2, random_state=seed, stratify=y
+            )
+
+            X_train_list.append(X_train_anim)
+            y_train_list.append(y_train_anim)
+            animation_test_sets[anim] = (X_test_anim, y_test_anim)
+
+        X_train = pd.concat(X_train_list, axis=0)
+        y_train = pd.concat(y_train_list, axis=0)
+        return X_train, y_train, animation_test_sets
+
+    elif split_type == "S1+S2 vs S3":
+        df_total = df.copy()
+        df_total['tester_id'] = df_total['file_key'].apply(lambda x: x.split('_')[0])
+        df_total['session_id'] = df_total['file_key'].apply(lambda x: x.split('_')[1])
+
+        train_subset = df_total[df_total['session_id'].isin(['S1', 'S2'])]
+        X_train = train_subset.loc[:, 'f0':'f82']
+        y_train = train_subset['tester_id']
+
+        animation_test_sets = {}
+        for anim in animation_names:
+            df_anim = df_total[df_total['anim_name'] == anim]
+            test_subset = df_anim[df_anim['session_id'] == 'S3']
+            if not test_subset.empty:
+                X_test = test_subset.loc[:, 'f0':'f82']
+                y_test = test_subset['tester_id']
+                animation_test_sets[anim] = (X_test, y_test)
+
+        return X_train, y_train, animation_test_sets
+
     else:
-        df.to_csv(results_path, mode='a', header=False, index=False)
+        raise ValueError(f"Unknown split_type: {split_type}")
 
-'''RUN THE MODELS FOR EACH ANIMATION'''
 
+'''EVALUATE MODEL FOR ONE SEED'''
+def evaluate_global_model_on_seed(df, model_fn, split_type, seed):
+    # Perform a global split for this seed
+    X_train, y_train, animation_test_sets = split_dataset_global(df, split_type, seed)
+
+    # Run GridSearch
+    pipeline, param_grid = model_fn()
+    best_params, best_cv_score, train_score, best_estimator = run_grid_search(X_train, y_train, pipeline, param_grid)
+
+    # Evaluate on per-animation test sets
+    animation_scores = {}
+    for anim_name, (X_test, y_test) in animation_test_sets.items():
+        animation_scores[anim_name] = best_estimator.score(X_test, y_test)
+
+    return best_params, best_cv_score, train_score, animation_scores, best_estimator
+
+
+'''AGGREGATE RESULTS OVER MULTIPLE SEEDS'''
+def aggregate_global_seeds(df, model_fn, split_type, num_seed=10):
+
+    all_results = []
+    all_animation_scores = defaultdict(list)
+
+    # Store CV scores for each unique parameter combination
+    param_cv_dict = defaultdict(list)
+    param_estimator_dict = {}
+
+    for seed in range(num_seed):
+        best_params, best_cv_score, train_score, animation_scores, best_estimator = evaluate_global_model_on_seed(df, model_fn, split_type, seed)
+
+        all_results.append((best_params, best_cv_score, train_score, animation_scores, best_estimator))
+
+        # Convert params dict to a tuple key for aggregation
+        param_key = tuple(sorted(best_params.items()))
+        param_cv_dict[param_key].append(best_cv_score)
+
+        # Store one estimator per param combo
+        if param_key not in param_estimator_dict:
+            param_estimator_dict[param_key] = best_estimator
+
+        for anim, score in animation_scores.items():
+            all_animation_scores[anim].append(score)
+
+    # Compute mean CV per parameter combination
+    mean_cv_per_param = {k: np.mean(v) for k, v in param_cv_dict.items()}
+
+    # Select parameters with highest mean CV
+    best_param_key = max(mean_cv_per_param, key=mean_cv_per_param.get)
+    best_params = dict(best_param_key)
+    best_estimator = param_estimator_dict[best_param_key]
+
+    # Average scores
+    mean_cv = np.mean([x[1] for x in all_results])
+    mean_train = np.mean([x[2] for x in all_results])
+    mean_animation_scores = {anim: np.mean(scores) for anim, scores in all_animation_scores.items()}
+
+    return best_params, mean_cv, mean_train, mean_animation_scores, best_estimator
+
+
+
+'''PROCESS AND SAVE RESULTS FOR A SPLIT'''
+def process_global_model(model_name, df, model_fn, split_type, results_file, selected_features_file):
+    best_params, mean_cv, mean_train, mean_animation_scores, best_estimator = aggregate_global_seeds(df, model_fn, split_type, num_seed=num_seed)
+
+    for anim_name, mean_test in mean_animation_scores.items():
+        write_results(f"{model_name} ({split_type})", best_params, mean_cv, mean_train, mean_test, results_file, anim_name)
+        save_selected_features(f"{model_name} ({split_type})", anim_name, best_params['feature_selection__k'], best_estimator.named_steps['feature_selection'], df.loc[:, 'f0':'f82'].columns, selected_features_file)
+
+'''RUN ALL MODELS'''
 model_list = [
     ("Naive Bayes", get_nb_pipeline),
     #("KNN", get_knn_pipeline),
@@ -221,150 +358,10 @@ model_list = [
     #("MLP", get_mlp_pipeline)
 ]
 
-# Csv containing the best k feature with their csv score
-#selected_features_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_ft.csv"
-selected_features_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_ft.csv"
-
-# Delete previous file if exists
-if os.path.exists(selected_features_file):
-    os.remove(selected_features_file)
-
-# Result file path
-#results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_ft.csv"
-results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_ft.csv"
-
-# Delete previous results file if exists
-if os.path.exists(results_file):
-    os.remove(results_file)
-
-# Get all unique animations in the dataset
 animation_names = dataset['anim_name'].unique()
 
-'''RANDOM SPLIT TRAINING'''
-
-num_seed = 10
-
 for model_name, model_fn in model_list:
-    best_cv_scores, train_scores, best_param_list = [], [], []
-    best_estimators_per_seed = []
-
-    # Collect test scores per animation over all seeds
-    animation_scores = defaultdict(list)
-
-    for i in range(num_seed):
-        X_train_total_list, y_train_total_list = [], []
-        animation_test_sets = {}
-    
-        for anim in animation_names:
-            subset = dataset[dataset['anim_name'] == anim].copy()
-            subset['tester_id'] = subset['file_key'].apply(lambda x: x.split('_')[0])
-            subset['session_id'] = subset['file_key'].apply(lambda x: x.split('_')[1])
-
-            X = subset.loc[:, 'f0':'f82']
-            y = subset['tester_id']
-
-            X_train_anim, X_test_anim, y_train_anim, y_test_anim = train_test_split(
-                X, y, test_size=0.2, random_state=i, stratify=y
-            )
-
-            X_train_total_list.append(X_train_anim)
-            y_train_total_list.append(y_train_anim)
-
-            # store the test set for this iteration
-            animation_test_sets[anim] = (X_test_anim, y_test_anim)
-
-        X_train_total = pd.concat(X_train_total_list, axis=0)
-        y_train_total = pd.concat(y_train_total_list, axis=0)
-
-        pipeline, param_grid = model_fn()
-        best_params, best_cv_score, train_score, val_score, best_estimator = run_grid_search(
-            X_train_total, y_train_total, pipeline, param_grid, model_name + f" (80/20 Run {i+1})", seed=i)
-
-        best_cv_scores.append(best_cv_score)
-        train_scores.append(train_score)
-        best_param_list.append((best_params, best_cv_score))
-        best_estimators_per_seed.append(best_estimator)
-
-        # Collect the test score for each animation
-        for anim_name, (X_test_anim, y_test_anim) in animation_test_sets.items():
-            test_score = best_estimator.score(X_test_anim, y_test_anim)
-            animation_scores[anim_name].append(test_score)
-
-    # Compute the mean after num iter iterations
-    mean_cv = np.mean(best_cv_scores)
-    mean_train = np.mean(train_scores)
-    best_params = max(best_param_list, key=lambda x: x[1])[0]
-
-    # Write averaged results per animation
-    for anim_name, scores in animation_scores.items():
-        mean_test = np.mean(scores)
-        write_results(
-            model_name + " (80/20)", 
-            best_params,
-            mean_cv,
-            mean_train,
-            mean_test,    
-            results_file,
-            anim_name
-        )
-
-        save_selected_features(
-            model_name + " (80/20)",
-            anim,
-            best_params['feature_selection__k'],
-            best_estimator.named_steps['feature_selection'],
-            X.columns,
-            selected_features_file
-        )
-
-'''SPLIT S1+S2 vs S3 PER ANIMATION'''
-
-df_total = dataset.copy()
-df_total['tester_id'] = df_total['file_key'].apply(lambda x: x.split('_')[0])
-df_total['session_id'] = df_total['file_key'].apply(lambda x: x.split('_')[1])
-
-# Training set: S1+S2 from all animations
-train_subset = df_total[df_total['session_id'].isin(['S1', 'S2'])]
-X_train_sess = train_subset.loc[:, 'f0':'f82']
-y_train_sess = train_subset['tester_id']
-
-# Build dict of per-animation test sets (S3)
-animation_test_sets = {}
-for anim in animation_names:
-    df_anim = df_total[df_total['anim_name'] == anim]
-    test_subset = df_anim[df_anim['session_id'] == 'S3']
-    if not test_subset.empty:
-        X_test_sess = test_subset.loc[:, 'f0':'f82']
-        y_test_sess = test_subset['tester_id']
-        animation_test_sets[anim] = (X_test_sess, y_test_sess)
-
-# Train + evaluate
-for model_name, model_fn in model_list:
-    pipeline, param_grid = model_fn()
-    best_params, best_cv_score, train_score, val_score, best_estimator = run_grid_search(
-        X_train_sess, y_train_sess, pipeline, param_grid, model_name + " (S1+S2 vs S3)"
-    )
-
-    # Test per animation
-    for anim_name, (X_test_sess, y_test_sess) in animation_test_sets.items():
-        test_score = best_estimator.score(X_test_sess, y_test_sess)
-
-        write_results(
-            model_name + " (S1+S2 vs S3)",
-            best_params,
-            best_cv_score,
-            train_score,
-            test_score,
-            results_file,
-            anim_name 
-        )
-
-        save_selected_features(
-            model_name + " (S1+S2 vs S3)",
-            anim,
-            best_params['feature_selection__k'],
-            best_estimator.named_steps['feature_selection'],
-            X_train_sess.columns,
-            selected_features_file
-        )
-        
+    # Random 80/20 split
+    process_global_model(model_name, dataset, model_fn, "80/20", results_file, selected_features_file)
+    # Session split
+    process_global_model(model_name, dataset, model_fn, "S1+S2 vs S3", results_file, selected_features_file)

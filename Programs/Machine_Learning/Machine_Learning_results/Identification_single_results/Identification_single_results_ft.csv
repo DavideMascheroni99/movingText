@@ -15,3 +15,99 @@ Naive Bayes (S1+S2 vs S3),VB_FA_LIT,"{'feature_selection__k': 70, 'scaler': MinM
 Naive Bayes (S1+S2 vs S3),HS_FA_LIT,"{'feature_selection__k': 70, 'scaler': MinMaxScaler()}",70,0.5714,0.6851,0.5333
 Naive Bayes (S1+S2 vs S3),VB_FA_BIG,"{'feature_selection__k': 70, 'scaler': MinMaxScaler()}",70,0.5714,0.6851,0.5714
 Naive Bayes (S1+S2 vs S3),HS_FA_BIG,"{'feature_selection__k': 70, 'scaler': MinMaxScaler()}",70,0.5714,0.6851,0.4857
+KNN (80/20),VB_SL_LIT,"{'feature_selection__k': 50, 'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",50,0.6836,1.0,0.6984
+KNN (80/20),HS_SL_LIT,"{'feature_selection__k': 50, 'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",50,0.6836,1.0,0.654
+KNN (80/20),VB_SL_BIG,"{'feature_selection__k': 50, 'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",50,0.6836,1.0,0.7476
+KNN (80/20),HS_SL_BIG,"{'feature_selection__k': 50, 'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",50,0.6836,1.0,0.6254
+KNN (80/20),VB_FA_LIT,"{'feature_selection__k': 50, 'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",50,0.6836,1.0,0.6873
+KNN (80/20),HS_FA_LIT,"{'feature_selection__k': 50, 'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",50,0.6836,1.0,0.6127
+KNN (80/20),VB_FA_BIG,"{'feature_selection__k': 50, 'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",50,0.6836,1.0,0.6889
+KNN (80/20),HS_FA_BIG,"{'feature_selection__k': 50, 'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': StandardScaler()}",50,0.6836,1.0,0.6571
+KNN (S1+S2 vs S3),VB_SL_LIT,"{'feature_selection__k': 70, 'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'distance', 'scaler': StandardScaler()}",70,0.6792,1.0,0.6286
+KNN (S1+S2 vs S3),HS_SL_LIT,"{'feature_selection__k': 70, 'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'distance', 'scaler': StandardScaler()}",70,0.6792,1.0,0.5429
+KNN (S1+S2 vs S3),VB_SL_BIG,"{'feature_selection__k': 70, 'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'distance', 'scaler': StandardScaler()}",70,0.6792,1.0,0.6857
+KNN (S1+S2 vs S3),HS_SL_BIG,"{'feature_selection__k': 70, 'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'distance', 'scaler': StandardScaler()}",70,0.6792,1.0,0.5238
+KNN (S1+S2 vs S3),VB_FA_LIT,"{'feature_selection__k': 70, 'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'distance', 'scaler': StandardScaler()}",70,0.6792,1.0,0.6762
+KNN (S1+S2 vs S3),HS_FA_LIT,"{'feature_selection__k': 70, 'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'distance', 'scaler': StandardScaler()}",70,0.6792,1.0,0.5905
+KNN (S1+S2 vs S3),VB_FA_BIG,"{'feature_selection__k': 70, 'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'distance', 'scaler': StandardScaler()}",70,0.6792,1.0,0.6952
+KNN (S1+S2 vs S3),HS_FA_BIG,"{'feature_selection__k': 70, 'knn__metric': 'manhattan', 'knn__n_neighbors': 9, 'knn__weights': 'distance', 'scaler': StandardScaler()}",70,0.6792,1.0,0.5143
+Logistic Regression (80/20),VB_SL_LIT,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': StandardScaler()}",70,0.6775,0.8774,0.6778
+Logistic Regression (80/20),HS_SL_LIT,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': StandardScaler()}",70,0.6775,0.8774,0.6016
+Logistic Regression (80/20),VB_SL_BIG,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': StandardScaler()}",70,0.6775,0.8774,0.7349
+Logistic Regression (80/20),HS_SL_BIG,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': StandardScaler()}",70,0.6775,0.8774,0.6222
+Logistic Regression (80/20),VB_FA_LIT,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': StandardScaler()}",70,0.6775,0.8774,0.7778
+Logistic Regression (80/20),HS_FA_LIT,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': StandardScaler()}",70,0.6775,0.8774,0.627
+Logistic Regression (80/20),VB_FA_BIG,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': StandardScaler()}",70,0.6775,0.8774,0.7317
+Logistic Regression (80/20),HS_FA_BIG,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': StandardScaler()}",70,0.6775,0.8774,0.6762
+Logistic Regression (S1+S2 vs S3),VB_SL_LIT,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': RobustScaler()}",70,0.6649,0.9071,0.5714
+Logistic Regression (S1+S2 vs S3),HS_SL_LIT,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': RobustScaler()}",70,0.6649,0.9071,0.6286
+Logistic Regression (S1+S2 vs S3),VB_SL_BIG,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': RobustScaler()}",70,0.6649,0.9071,0.6857
+Logistic Regression (S1+S2 vs S3),HS_SL_BIG,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': RobustScaler()}",70,0.6649,0.9071,0.581
+Logistic Regression (S1+S2 vs S3),VB_FA_LIT,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': RobustScaler()}",70,0.6649,0.9071,0.7524
+Logistic Regression (S1+S2 vs S3),HS_FA_LIT,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': RobustScaler()}",70,0.6649,0.9071,0.6571
+Logistic Regression (S1+S2 vs S3),VB_FA_BIG,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': RobustScaler()}",70,0.6649,0.9071,0.7524
+Logistic Regression (S1+S2 vs S3),HS_FA_BIG,"{'feature_selection__k': 70, 'logreg__C': 1, 'scaler': RobustScaler()}",70,0.6649,0.9071,0.5714
+NuSVC (80/20),VB_SL_LIT,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7301,0.9538,0.7127
+NuSVC (80/20),HS_SL_LIT,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7301,0.9538,0.6683
+NuSVC (80/20),VB_SL_BIG,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7301,0.9538,0.7952
+NuSVC (80/20),HS_SL_BIG,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7301,0.9538,0.6317
+NuSVC (80/20),VB_FA_LIT,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7301,0.9538,0.7825
+NuSVC (80/20),HS_FA_LIT,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7301,0.9538,0.7079
+NuSVC (80/20),VB_FA_BIG,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7301,0.9538,0.7571
+NuSVC (80/20),HS_FA_BIG,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7301,0.9538,0.7159
+NuSVC (S1+S2 vs S3),VB_SL_LIT,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7274,0.9708,0.5905
+NuSVC (S1+S2 vs S3),HS_SL_LIT,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7274,0.9708,0.6095
+NuSVC (S1+S2 vs S3),VB_SL_BIG,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7274,0.9708,0.6381
+NuSVC (S1+S2 vs S3),HS_SL_BIG,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7274,0.9708,0.5714
+NuSVC (S1+S2 vs S3),VB_FA_LIT,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7274,0.9708,0.7524
+NuSVC (S1+S2 vs S3),HS_FA_LIT,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7274,0.9708,0.6952
+NuSVC (S1+S2 vs S3),VB_FA_BIG,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7274,0.9708,0.7238
+NuSVC (S1+S2 vs S3),HS_FA_BIG,"{'feature_selection__k': 60, 'nusvc__gamma': 'scale', 'nusvc__kernel': 'rbf', 'nusvc__nu': 0.25, 'scaler': StandardScaler()}",60,0.7274,0.9708,0.5905
+Random Forest (80/20),VB_SL_LIT,"{'feature_selection__k': 70, 'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 100, 'scaler': RobustScaler()}",70,0.7583,1.0,0.7143
+Random Forest (80/20),HS_SL_LIT,"{'feature_selection__k': 70, 'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 100, 'scaler': RobustScaler()}",70,0.7583,1.0,0.6841
+Random Forest (80/20),VB_SL_BIG,"{'feature_selection__k': 70, 'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 100, 'scaler': RobustScaler()}",70,0.7583,1.0,0.7762
+Random Forest (80/20),HS_SL_BIG,"{'feature_selection__k': 70, 'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 100, 'scaler': RobustScaler()}",70,0.7583,1.0,0.681
+Random Forest (80/20),VB_FA_LIT,"{'feature_selection__k': 70, 'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 100, 'scaler': RobustScaler()}",70,0.7583,1.0,0.746
+Random Forest (80/20),HS_FA_LIT,"{'feature_selection__k': 70, 'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 100, 'scaler': RobustScaler()}",70,0.7583,1.0,0.6603
+Random Forest (80/20),VB_FA_BIG,"{'feature_selection__k': 70, 'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 100, 'scaler': RobustScaler()}",70,0.7583,1.0,0.7111
+Random Forest (80/20),HS_FA_BIG,"{'feature_selection__k': 70, 'rf__max_depth': 30, 'rf__max_features': 'sqrt', 'rf__n_estimators': 100, 'scaler': RobustScaler()}",70,0.7583,1.0,0.7143
+Random Forest (S1+S2 vs S3),VB_SL_LIT,"{'feature_selection__k': 70, 'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",70,0.7208,1.0,0.5524
+Random Forest (S1+S2 vs S3),HS_SL_LIT,"{'feature_selection__k': 70, 'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",70,0.7208,1.0,0.581
+Random Forest (S1+S2 vs S3),VB_SL_BIG,"{'feature_selection__k': 70, 'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",70,0.7208,1.0,0.6476
+Random Forest (S1+S2 vs S3),HS_SL_BIG,"{'feature_selection__k': 70, 'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",70,0.7208,1.0,0.5143
+Random Forest (S1+S2 vs S3),VB_FA_LIT,"{'feature_selection__k': 70, 'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",70,0.7208,1.0,0.6381
+Random Forest (S1+S2 vs S3),HS_FA_LIT,"{'feature_selection__k': 70, 'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",70,0.7208,1.0,0.6
+Random Forest (S1+S2 vs S3),VB_FA_BIG,"{'feature_selection__k': 70, 'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",70,0.7208,1.0,0.7143
+Random Forest (S1+S2 vs S3),HS_FA_BIG,"{'feature_selection__k': 70, 'rf__max_depth': 20, 'rf__max_features': 'sqrt', 'rf__n_estimators': 200, 'scaler': MinMaxScaler()}",70,0.7208,1.0,0.5524
+SVC (80/20),VB_SL_LIT,"{'feature_selection__k': 50, 'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",50,0.7432,0.9878,0.7603
+SVC (80/20),HS_SL_LIT,"{'feature_selection__k': 50, 'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",50,0.7432,0.9878,0.6841
+SVC (80/20),VB_SL_BIG,"{'feature_selection__k': 50, 'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",50,0.7432,0.9878,0.7984
+SVC (80/20),HS_SL_BIG,"{'feature_selection__k': 50, 'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",50,0.7432,0.9878,0.6683
+SVC (80/20),VB_FA_LIT,"{'feature_selection__k': 50, 'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",50,0.7432,0.9878,0.7905
+SVC (80/20),HS_FA_LIT,"{'feature_selection__k': 50, 'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",50,0.7432,0.9878,0.7111
+SVC (80/20),VB_FA_BIG,"{'feature_selection__k': 50, 'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",50,0.7432,0.9878,0.7714
+SVC (80/20),HS_FA_BIG,"{'feature_selection__k': 50, 'scaler': StandardScaler(), 'svc__C': 100, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",50,0.7432,0.9878,0.7444
+SVC (S1+S2 vs S3),VB_SL_LIT,"{'feature_selection__k': 60, 'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",60,0.7345,0.9893,0.6
+SVC (S1+S2 vs S3),HS_SL_LIT,"{'feature_selection__k': 60, 'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",60,0.7345,0.9893,0.6
+SVC (S1+S2 vs S3),VB_SL_BIG,"{'feature_selection__k': 60, 'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",60,0.7345,0.9893,0.7238
+SVC (S1+S2 vs S3),HS_SL_BIG,"{'feature_selection__k': 60, 'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",60,0.7345,0.9893,0.5429
+SVC (S1+S2 vs S3),VB_FA_LIT,"{'feature_selection__k': 60, 'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",60,0.7345,0.9893,0.7429
+SVC (S1+S2 vs S3),HS_FA_LIT,"{'feature_selection__k': 60, 'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",60,0.7345,0.9893,0.7143
+SVC (S1+S2 vs S3),VB_FA_BIG,"{'feature_selection__k': 60, 'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",60,0.7345,0.9893,0.7143
+SVC (S1+S2 vs S3),HS_FA_BIG,"{'feature_selection__k': 60, 'scaler': StandardScaler(), 'svc__C': 10, 'svc__gamma': 0.01, 'svc__kernel': 'rbf'}",60,0.7345,0.9893,0.6
+MLP (80/20),VB_SL_LIT,"{'feature_selection__k': 60, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': RobustScaler()}",60,0.7425,1.0,0.719
+MLP (80/20),HS_SL_LIT,"{'feature_selection__k': 60, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': RobustScaler()}",60,0.7425,1.0,0.6873
+MLP (80/20),VB_SL_BIG,"{'feature_selection__k': 60, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': RobustScaler()}",60,0.7425,1.0,0.7889
+MLP (80/20),HS_SL_BIG,"{'feature_selection__k': 60, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': RobustScaler()}",60,0.7425,1.0,0.6714
+MLP (80/20),VB_FA_LIT,"{'feature_selection__k': 60, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': RobustScaler()}",60,0.7425,1.0,0.7651
+MLP (80/20),HS_FA_LIT,"{'feature_selection__k': 60, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': RobustScaler()}",60,0.7425,1.0,0.7254
+MLP (80/20),VB_FA_BIG,"{'feature_selection__k': 60, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': RobustScaler()}",60,0.7425,1.0,0.7635
+MLP (80/20),HS_FA_BIG,"{'feature_selection__k': 60, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (100,), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': RobustScaler()}",60,0.7425,1.0,0.7349
+MLP (S1+S2 vs S3),VB_SL_LIT,"{'feature_selection__k': 70, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",70,0.7298,1.0,0.6571
+MLP (S1+S2 vs S3),HS_SL_LIT,"{'feature_selection__k': 70, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",70,0.7298,1.0,0.6571
+MLP (S1+S2 vs S3),VB_SL_BIG,"{'feature_selection__k': 70, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",70,0.7298,1.0,0.7429
+MLP (S1+S2 vs S3),HS_SL_BIG,"{'feature_selection__k': 70, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",70,0.7298,1.0,0.6286
+MLP (S1+S2 vs S3),VB_FA_LIT,"{'feature_selection__k': 70, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",70,0.7298,1.0,0.7143
+MLP (S1+S2 vs S3),HS_FA_LIT,"{'feature_selection__k': 70, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",70,0.7298,1.0,0.7238
+MLP (S1+S2 vs S3),VB_FA_BIG,"{'feature_selection__k': 70, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",70,0.7298,1.0,0.7238
+MLP (S1+S2 vs S3),HS_FA_BIG,"{'feature_selection__k': 70, 'mlp__activation': 'tanh', 'mlp__alpha': 0.01, 'mlp__hidden_layer_sizes': (150, 100, 50), 'mlp__learning_rate_init': 0.001, 'mlp__solver': 'adam', 'scaler': StandardScaler()}",70,0.7298,1.0,0.5619

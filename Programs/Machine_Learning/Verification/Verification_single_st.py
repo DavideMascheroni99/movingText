@@ -34,21 +34,21 @@ num_seed = 20
 roc_data_dict = {}
 
 
-#csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
-csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
+csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
+#csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
 
-#results_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\Verification_single_results_st.csv"
-results_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\Verification_single_results_st.csv"
+results_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\Verification_single_results_st.csv"
+#results_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\Verification_single_results_st.csv"
 delete_file_if_exists(results_path)
 
-#best_k_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
-best_k_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
+best_k_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
+#best_k_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
 
-#best_params_file_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
-best_params_file_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
+best_params_file_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
+#best_params_file_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
 
-#roc_save_path =  r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\best_animation_roc_curves_st.png"
-roc_save_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\best_animation_roc_curves_st.png"
+roc_save_path =  r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\best_animation_roc_curves_st.png"
+#roc_save_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\best_animation_roc_curves_st.png"
 delete_file_if_exists(roc_save_path)
 
 def load_dataset(csv_path):
@@ -109,6 +109,7 @@ def parse_best_params(params_str):
     except Exception as e:
         print(f"Error parsing params: {params_str} -> {e}")
         return None
+
 
 # Read from the previous identification file the best parameters 
 def load_best_params_from_file(csv_path):
@@ -209,24 +210,52 @@ def get_classifiers():
                 ('scaler', MinMaxScaler()),
                 ('knn', KNeighborsClassifier())
             ])
+        ),
+        (
+            "Logistic Regression",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('logreg', LogisticRegression(max_iter=1000, random_state=0))
+            ])
+        ),
+        (
+            "NuSVC",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('nusvc', NuSVC())
+            ])
+        ),
+        (
+            "Random Forest",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('rf', RandomForestClassifier(random_state=0))
+            ])
+        ),
+        (
+            "SVC",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('svc', SVC())
+            ])
+        ),
+        (
+            "MLP",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('mlp', MLPClassifier(max_iter=4000, random_state=0))
+            ])
         )
     ]
 
 
 def update_roc_data(clf_name, animation, y_true, y_score, eer):
-    """
-    Update the global ROC dictionary with the best animation per classifier.
-
-    Parameters:
-        clf_name: str - classifier name
-        animation: str - animation name
-        y_true: array-like - true labels
-        y_score: array-like - predicted scores
-        eer: float - Equal Error Rate of this classifier-animation
-    """
-    from sklearn.metrics import roc_auc_score
-    import numpy as np
-
+  
     if clf_name not in roc_data_dict or eer < roc_data_dict[clf_name]['eer']:
         roc_data_dict[clf_name] = {
             'animation': animation,
@@ -236,15 +265,9 @@ def update_roc_data(clf_name, animation, y_true, y_score, eer):
             'eer': eer
         }
 
-
-
+# Train classifier, evaluate metrics, and collect ROC data for the best animation per classifier
 def train_and_evaluate(dataset, animation, clf_name, clf_pipeline, features_cols, best_params, num_seed, results_path):
-    """
-    Train classifier, evaluate metrics, and collect ROC data for the best animation per classifier.
-    
-    Returns:
-        roc_info: dict with keys 'animation', 'y_true', 'y_score', 'auc', 'eer'
-    """
+   
     tester_metrics = []
     y_true_all = []
     y_score_all = []
@@ -295,8 +318,7 @@ def train_and_evaluate(dataset, animation, clf_name, clf_pipeline, features_cols
 
     return roc_info
 
-
-
+# Save the roc plot as a png
 def save_roc_curves(roc_data_dict, save_path):
     import matplotlib.pyplot as plt
     from sklearn.metrics import roc_curve
@@ -327,15 +349,13 @@ def save_roc_curves(roc_data_dict, save_path):
     plt.close()
 
 
-
-
 '''EXECUTION'''
 
 dataset = load_dataset(csv_path)
 best_k_features = load_best_k_features(best_k_file)
 best_params_all = load_best_params_from_file(best_params_file_path)
 
-roc_data_dict = {}  # now keyed by animation
+roc_data_dict = {} 
 
 for animation in dataset['anim_name'].unique():
     best_roc_info = None
@@ -372,63 +392,3 @@ save_roc_curves(roc_data_dict, roc_save_path)
 
 
 
-'''def get_classifiers_with_best_params():
-    return [
-        (
-            "Naive Bayes",
-            Pipeline([
-                ('imputer', SimpleImputer(strategy='mean')),
-                ('scaler', MinMaxScaler()),
-                ('nb', GaussianNB())
-            ])
-        ),
-        (
-            "KNN",
-            Pipeline([
-                ('imputer', SimpleImputer(strategy='mean')),
-                ('scaler', MinMaxScaler()),
-                ('knn', KNeighborsClassifier())
-            ])
-        ),
-        (
-            "Logistic Regression",
-            Pipeline([
-                ('imputer', SimpleImputer(strategy='mean')),
-                ('scaler', MinMaxScaler()),
-                ('logreg', LogisticRegression(max_iter=1000, random_state=0))
-            ])
-        ),
-        (
-            "NuSVC",
-            Pipeline([
-                ('imputer', SimpleImputer(strategy='mean')),
-                ('scaler', MinMaxScaler()),
-                ('nusvc', NuSVC())
-            ])
-        ),
-        (
-            "Random Forest",
-            Pipeline([
-                ('imputer', SimpleImputer(strategy='mean')),
-                ('scaler', MinMaxScaler()),
-                ('rf', RandomForestClassifier(random_state=0))
-            ])
-        ),
-        (
-            "SVC",
-            Pipeline([
-                ('imputer', SimpleImputer(strategy='mean')),
-                ('scaler', MinMaxScaler()),
-                ('svc', SVC())
-            ])
-        ),
-        (
-            "MLP",
-            Pipeline([
-                ('imputer', SimpleImputer(strategy='mean')),
-                ('scaler', MinMaxScaler()),
-                ('mlp', MLPClassifier(max_iter=4000, random_state=0))
-            ])
-        )
-    ]
-'''

@@ -14,7 +14,6 @@ from sklearn.metrics import roc_auc_score, accuracy_score, precision_score, reca
 from sklearn.base import clone 
 import ast
 import re
-import matplotlib.pyplot as plt
 
 # Delete the file if already exists
 def delete_file_if_exists(file_path):

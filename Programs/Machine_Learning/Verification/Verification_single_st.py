@@ -11,14 +11,16 @@ from sklearn.svm import NuSVC, SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import roc_auc_score, accuracy_score, precision_score, recall_score, confusion_matrix, roc_curve
-
+from sklearn.base import clone 
+import ast
+import re
 
 # Delete the file if already exists
 def delete_file_if_exists(file_path):
     if os.path.exists(file_path):
         os.remove(file_path)
 
-# Create the csv if doesn't exists, otherwhise append to the existing one
+# Create the csv if doesn't exists, otherwise append to the existing one
 def append_to_csv(df, file_path):
     if not os.path.exists(file_path):
         df.to_csv(file_path, index=False)
@@ -38,7 +40,9 @@ delete_file_if_exists(results_path)
 
 #best_k_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
 best_k_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_st.csv"
-delete_file_if_exists(best_k_file)
+
+#best_params_file_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
+best_params_file_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
 
 
 # ---------------------------
@@ -56,10 +60,12 @@ def get_feature_columns():
 
 def load_best_k_features(csv_path):
     df = pd.read_csv(csv_path)
-    best_k_features = {}
+    # Keep only rows with "(S1+S2 vs S3)"
+    df = df[df['Model'].str.contains(r'\(S1\+S2 vs S3\)')]
 
+    best_k_features = {}
     for _, row in df.iterrows():
-        model = row['Model'].strip()
+        model = row['Model'].split("(")[0].strip()  # Clean model name
         animation = row['Animation'].strip()
         k = int(row['Best K'])
         feature = row['Feature'].strip()
@@ -72,6 +78,53 @@ def load_best_k_features(csv_path):
         best_k_features[model][animation]['features'].append(feature)
 
     return best_k_features
+
+
+# Mapping for scaler names to actual classes
+scaler_mapping = {
+    "StandardScaler": StandardScaler(),
+    "MinMaxScaler": MinMaxScaler(),
+    "RobustScaler": RobustScaler()
+}
+
+def parse_best_params(params_str):
+    # Extract the scaler using regex (e.g., "MinMaxScaler()")
+    scaler_match = re.search(r"scaler': (\w+)\(\)", params_str)
+    scaler_name = None
+    if scaler_match:
+        scaler_name = scaler_match.group(1)
+        # Replace the scaler call with just its name as a string
+        params_str = re.sub(rf"{scaler_name}\(\)", f"'{scaler_name}'", params_str)
+
+    try:
+        params_dict = ast.literal_eval(params_str)
+        if scaler_name and scaler_name in scaler_mapping:
+            params_dict['scaler'] = scaler_mapping[scaler_name]
+        return params_dict
+    except Exception as e:
+        print(f"Error parsing params: {params_str} -> {e}")
+        return None
+
+
+
+def load_best_params_from_file(csv_path):
+    df = pd.read_csv(csv_path)
+    df = df[df['Model'].str.contains(r'\(S1\+S2 vs S3\)')]
+
+    best_params = {}
+    for _, row in df.iterrows():
+        model_name = row['Model'].split("(")[0].strip()
+        animation = row['Animation'].strip()
+        params_str = row['Best Parameters']
+
+        params_dict = parse_best_params(params_str)
+
+        if model_name not in best_params:
+            best_params[model_name] = {}
+        best_params[model_name][animation] = params_dict
+
+    return best_params
+
 
 
 # ---------------------------
@@ -104,6 +157,7 @@ def compute_eer(y_true, y_score):
     eer_index = np.nanargmin(np.abs(fnr - fpr))
     return fpr[eer_index]
 
+
 def evaluate_model(model, X, y):
     y_pred = model.predict(X)
     if hasattr(model, "predict_proba"):
@@ -112,14 +166,15 @@ def evaluate_model(model, X, y):
         y_score = model.decision_function(X)
 
     test_acc = accuracy_score(y, y_pred)
-    prec = precision_score(y, y_pred)
-    rec = recall_score(y, y_pred)
+    prec = precision_score(y, y_pred, zero_division=0)  
+    rec = recall_score(y, y_pred, zero_division=0)      
     tn, fp, fn, tp = confusion_matrix(y, y_pred).ravel()
-    spec = tn / (tn + fp)
-    roc_auc = roc_auc_score(y, y_score)
-    eer = compute_eer(y, y_score)
+    spec = tn / (tn + fp) if (tn + fp) > 0 else 0
+    roc_auc = roc_auc_score(y, y_score) if len(np.unique(y)) > 1 else 0
+    eer = compute_eer(y, y_score) if len(np.unique(y)) > 1 else 0
 
     return test_acc, prec, rec, spec, roc_auc, eer
+
 
 # ---------------------------
 # Write Results
@@ -139,84 +194,119 @@ def write_results(model, best_params, train_acc, test_acc, metrics, results_path
         'EER': round(eer, 4)
     }
     df = pd.DataFrame([row])
-    if not os.path.exists(results_path):
-        df.to_csv(results_path, index=False)
-    else:
-        df.to_csv(results_path, mode='a', header=False, index=False)
+    append_to_csv(df, results_path)
 
 # ---------------------------
 # Classifier Pipelines
 # ---------------------------
+from sklearn.feature_selection import SelectKBest, f_classif
+
 def get_classifiers_with_best_params():
     return [
         (
             "Naive Bayes",
             Pipeline([
                 ('imputer', SimpleImputer(strategy='mean')),
-                ('scaler', MinMaxScaler()),  # will be overwritten
-                ('clf', GaussianNB())
+                ('scaler', MinMaxScaler()),
+                ('nb', GaussianNB())
             ])
         ),
         (
             "KNN",
             Pipeline([
                 ('imputer', SimpleImputer(strategy='mean')),
-                ('scaler', MinMaxScaler()),  # will be overwritten
-                ('clf', KNeighborsClassifier())
+                ('scaler', MinMaxScaler()),
+                ('knn', KNeighborsClassifier())
             ])
         ),
-        # Add other classifiers similarly
+        (
+            "Logistic Regression",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('logreg', LogisticRegression(max_iter=1000, random_state=0))
+            ])
+        ),
+        (
+            "NuSVC",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('nusvc', NuSVC())
+            ])
+        ),
+        (
+            "Random Forest",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('rf', RandomForestClassifier(random_state=0))
+            ])
+        ),
+        (
+            "SVC",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('svc', SVC())
+            ])
+        ),
+        (
+            "MLP",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('mlp', MLPClassifier(max_iter=4000, random_state=0))
+            ])
+        )
     ]
 
-# ---------------------------
-# Best Parameters Dictionary
-# ---------------------------
-best_params_all = {
-    "Naive Bayes": {
-        "VB_SL_LIT": {
-            'scaler': MinMaxScaler()
-        },
-        "Other_Animation": {
-            'scaler': StandardScaler(),
-        }
-    },
-    "KNN": {
-        "VB_SL_LIT": {
-            'scaler': MinMaxScaler(),
-            'clf__n_neighbors': 5
-        }
-    }
-    # Add other classifiers and their per-animation parameters here
-}
+
 
 # ---------------------------
-# Train & Evaluate
+# Train & Evaluate 
 # ---------------------------
 def train_and_evaluate(dataset, animation, clf_name, clf_pipeline, features_cols, best_params, num_seed, results_path):
-    for seed in range(num_seed):
-        all_X_train, all_y_train, all_X_test, all_y_test = [], [], [], []
-        for person in dataset['tester_id'].unique():
-            person_data = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == animation)]
-            X_train, y_train, X_test, y_test = prepare_train_test_data(dataset, person_data, seed, features_cols)
-            all_X_train.append(X_train)
-            all_y_train.append(y_train)
-            all_X_test.append(X_test)
-            all_y_test.append(y_test)
+    tester_metrics = []
 
-        clf_pipeline.set_params(**best_params)
-        clf_pipeline.fit(pd.concat(all_X_train), np.concatenate(all_y_train))
+    for person in dataset['tester_id'].unique():
+        person_data = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == animation)]
+        if person_data.empty:
+            continue
 
-        test_acc, prec, rec, spec, roc_auc, eer = evaluate_model(clf_pipeline, pd.concat(all_X_test), np.concatenate(all_y_test))
-        train_acc = clf_pipeline.score(pd.concat(all_X_train), np.concatenate(all_y_train))
+        # Train 20 models, pick the best based on training accuracy
+        best_model = None
+        best_train_acc = -np.inf
+        for seed in range(num_seed):
+            X_train, y_train, _, _ = prepare_train_test_data(dataset, person_data, seed, features_cols)
+            # Remove feature_selection parameters if they exist, since we already select features
+            best_params = {k: v for k, v in best_params.items() if not k.startswith("feature_selection")}
+            model = clone(clf_pipeline).set_params(**best_params)
+            model.fit(X_train, y_train)
+            train_acc = model.score(X_train, y_train)
+            if train_acc > best_train_acc:
+                best_train_acc = train_acc
+                best_model = model
 
-        write_results(clf_name, best_params, train_acc, test_acc, (prec, rec, spec, roc_auc, eer), results_path, animation)
+        # Test the best model on 20 seeds and average
+        seed_results = []
+        for seed in range(num_seed):
+            _, _, X_test, y_test = prepare_train_test_data(dataset, person_data, seed, features_cols)
+            seed_results.append(evaluate_model(best_model, X_test, y_test))
+
+        tester_metrics.append(np.mean(seed_results, axis=0))
+
+    if tester_metrics:
+        mean_metrics = np.mean(tester_metrics, axis=0)
+        test_acc, prec, rec, spec, roc_auc, eer = mean_metrics
+        write_results(clf_name, best_params, best_train_acc, test_acc, (prec, rec, spec, roc_auc, eer), results_path, animation)
 
 # ---------------------------
 # Main Execution
 # ---------------------------
-
 dataset = load_dataset(csv_path)
 best_k_features = load_best_k_features(best_k_file)
+best_params_all = load_best_params_from_file(best_params_file_path)
 
 for clf_name, clf_pipeline in get_classifiers_with_best_params():
     for animation in dataset['anim_name'].unique():
@@ -226,6 +316,7 @@ for clf_name, clf_pipeline in get_classifiers_with_best_params():
 
         k_info = best_k_features[clf_name][animation]
         selected_features = k_info['features'][:k_info['k']]  # ensure only top k
+        
 
         train_and_evaluate(
             dataset=dataset,
@@ -237,4 +328,3 @@ for clf_name, clf_pipeline in get_classifiers_with_best_params():
             num_seed=num_seed,
             results_path=results_path
         )
-

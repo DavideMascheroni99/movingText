@@ -1,41 +1,9 @@
-Model,Animation,Best Parameters,Best CV Accuracy,Train Accuracy,Test Accuracy,Precision,Recall,Specificity,Roc Auc,EER
-Naive Bayes,VB_SL_LIT,{'scaler': MinMaxScaler()},0.8714,0.7881,0.645,0.6033,0.9429,0.3471,0.5919,0.4771
-Naive Bayes,HS_SL_LIT,{'scaler': MinMaxScaler()},0.8762,0.9643,0.7162,0.6814,0.8952,0.5371,0.7658,0.3424
-Naive Bayes,VB_SL_BIG,{'scaler': MinMaxScaler()},0.8952,0.8833,0.729,0.6749,0.9524,0.5057,0.7646,0.3348
-Naive Bayes,HS_SL_BIG,{'scaler': MinMaxScaler()},0.8857,0.9333,0.6833,0.6557,0.8571,0.5095,0.7431,0.3581
-Naive Bayes,VB_FA_LIT,{'scaler': MinMaxScaler()},0.8667,0.8833,0.6831,0.6338,0.9238,0.4424,0.7013,0.4243
-Naive Bayes,HS_FA_LIT,{'scaler': MinMaxScaler()},0.8857,0.919,0.7529,0.7027,0.9619,0.5438,0.7861,0.2833
-Naive Bayes,VB_FA_BIG,{'scaler': MinMaxScaler()},0.9048,0.8929,0.759,0.6875,0.981,0.5371,0.831,0.2943
-Naive Bayes,HS_FA_BIG,{'scaler': MinMaxScaler()},0.8667,0.9095,0.6443,0.6145,0.8476,0.441,0.6811,0.3581
-KNN,VB_SL_LIT,"{'clf__metric': 'manhattan', 'clf__n_neighbors': 3, 'clf__weights': 'uniform', 'scaler': RobustScaler()}",0.8571,0.9881,0.676,0.6266,0.9905,0.3614,0.6967,0.5929
-KNN,HS_SL_LIT,"{'clf__metric': 'minkowski', 'clf__n_neighbors': 3, 'clf__weights': 'uniform', 'scaler': MinMaxScaler()}",0.8857,0.9929,0.7288,0.6844,0.9524,0.5052,0.7398,0.4867
-KNN,VB_SL_BIG,"{'clf__metric': 'manhattan', 'clf__n_neighbors': 3, 'clf__weights': 'uniform', 'scaler': MinMaxScaler()}",0.9,0.9952,0.7248,0.6631,0.9905,0.459,0.728,0.5386
-KNN,HS_SL_BIG,"{'clf__metric': 'minkowski', 'clf__n_neighbors': 3, 'clf__weights': 'uniform', 'scaler': MinMaxScaler()}",0.881,0.9881,0.6883,0.6377,0.981,0.3957,0.7054,0.5486
-KNN,VB_FA_LIT,"{'clf__metric': 'manhattan', 'clf__n_neighbors': 5, 'clf__weights': 'uniform', 'scaler': MinMaxScaler()}",0.8571,0.9905,0.7367,0.6771,0.981,0.4924,0.7497,0.4848
-KNN,HS_FA_LIT,"{'clf__metric': 'minkowski', 'clf__n_neighbors': 3, 'clf__weights': 'uniform', 'scaler': RobustScaler()}",0.8857,0.9905,0.6971,0.6361,0.981,0.4133,0.7135,0.5605
-KNN,VB_FA_BIG,"{'clf__metric': 'manhattan', 'clf__n_neighbors': 7, 'clf__weights': 'uniform', 'scaler': MinMaxScaler()}",0.9476,0.9762,0.7476,0.6895,0.9619,0.5333,0.7666,0.4371
-KNN,HS_FA_BIG,"{'clf__metric': 'manhattan', 'clf__n_neighbors': 3, 'clf__weights': 'uniform', 'scaler': RobustScaler()}",0.8476,0.9905,0.6598,0.6197,0.9333,0.3862,0.6637,0.601
-Logistic Regression,VB_SL_LIT,"{'clf__C': 0.01, 'scaler': StandardScaler()}",0.9,0.9357,0.6936,0.6477,0.9429,0.4443,0.7344,0.3019
-Logistic Regression,HS_SL_LIT,"{'clf__C': 0.1, 'scaler': RobustScaler()}",0.9381,0.981,0.6924,0.6548,0.9238,0.461,0.7844,0.2433
-Logistic Regression,VB_SL_BIG,"{'clf__C': 10, 'scaler': StandardScaler()}",0.9095,1.0,0.7121,0.6624,0.9429,0.4814,0.796,0.2376
-Logistic Regression,HS_SL_BIG,"{'clf__C': 100, 'scaler': StandardScaler()}",0.9333,0.9952,0.6771,0.6234,0.981,0.3733,0.7694,0.2738
-Logistic Regression,VB_FA_LIT,"{'clf__C': 10, 'scaler': RobustScaler()}",0.9238,0.9952,0.744,0.6901,0.9714,0.5167,0.788,0.2657
-Logistic Regression,HS_FA_LIT,"{'clf__C': 1, 'scaler': RobustScaler()}",0.9333,1.0,0.6912,0.6386,0.981,0.4014,0.7857,0.2467
-Logistic Regression,VB_FA_BIG,"{'clf__C': 10, 'scaler': RobustScaler()}",0.9524,0.9905,0.8007,0.7571,0.9333,0.6681,0.8734,0.1905
-Logistic Regression,HS_FA_BIG,"{'clf__C': 100, 'scaler': RobustScaler()}",0.9048,1.0,0.709,0.6574,0.9524,0.4657,0.7736,0.2895
-NuSVC,VB_SL_LIT,"{'clf__gamma': 'auto', 'clf__kernel': 'rbf', 'clf__nu': 0.25, 'scaler': RobustScaler()}",0.9476,0.9929,0.6102,0.5729,0.981,0.2395,0.7099,0.3314
-NuSVC,HS_SL_LIT,"{'clf__gamma': 'scale', 'clf__kernel': 'rbf', 'clf__nu': 0.25, 'scaler': StandardScaler()}",0.9095,0.9929,0.6519,0.6009,1.0,0.3038,0.7982,0.2548
-NuSVC,VB_SL_BIG,"{'clf__gamma': 'scale', 'clf__kernel': 'rbf', 'clf__nu': 0.25, 'scaler': StandardScaler()}",0.9095,1.0,0.6517,0.603,0.9905,0.3129,0.8207,0.2471
-NuSVC,HS_SL_BIG,"{'clf__gamma': 'scale', 'clf__kernel': 'rbf', 'clf__nu': 0.25, 'scaler': StandardScaler()}",0.8952,0.9952,0.6657,0.6148,1.0,0.3314,0.7209,0.3481
-NuSVC,VB_FA_LIT,"{'clf__gamma': 'auto', 'clf__kernel': 'rbf', 'clf__nu': 0.25, 'scaler': RobustScaler()}",0.9333,0.9881,0.5205,0.5122,1.0,0.041,0.7534,0.3129
-NuSVC,HS_FA_LIT,"{'clf__gamma': 'auto', 'clf__kernel': 'rbf', 'clf__nu': 0.25, 'scaler': RobustScaler()}",0.9476,1.0,0.6571,0.603,1.0,0.3143,0.7759,0.2929
-NuSVC,VB_FA_BIG,"{'clf__gamma': 'scale', 'clf__kernel': 'poly', 'clf__nu': 0.25, 'scaler': RobustScaler()}",0.9333,1.0,0.6852,0.6317,1.0,0.3705,0.8166,0.2519
-NuSVC,HS_FA_BIG,"{'clf__gamma': 'scale', 'clf__kernel': 'poly', 'clf__nu': 0.25, 'scaler': StandardScaler()}",0.8857,0.9929,0.6538,0.6083,0.981,0.3267,0.711,0.3538
-Random Forest,VB_SL_LIT,"{'clf__max_depth': 5, 'clf__max_features': 'sqrt', 'clf__n_estimators': 100, 'scaler': MinMaxScaler()}",0.9286,0.9952,0.6569,0.6025,1.0,0.3138,0.7823,0.2814
-Random Forest,HS_SL_LIT,"{'clf__max_depth': 5, 'clf__max_features': 'sqrt', 'clf__n_estimators': 100, 'scaler': MinMaxScaler()}",0.9238,1.0,0.676,0.62,0.9905,0.3614,0.7842,0.301
-Random Forest,VB_SL_BIG,"{'clf__max_depth': 5, 'clf__max_features': 'sqrt', 'clf__n_estimators': 30, 'scaler': MinMaxScaler()}",0.9429,1.0,0.7426,0.6847,0.9905,0.4948,0.8004,0.2733
-Random Forest,HS_SL_BIG,"{'clf__max_depth': 10, 'clf__max_features': 'sqrt', 'clf__n_estimators': 100, 'scaler': MinMaxScaler()}",0.9143,0.9952,0.6571,0.6028,0.9905,0.3238,0.7175,0.3057
-Random Forest,VB_FA_LIT,"{'clf__max_depth': 5, 'clf__max_features': 'sqrt', 'clf__n_estimators': 30, 'scaler': MinMaxScaler()}",0.9381,0.9952,0.6714,0.6157,1.0,0.3429,0.8528,0.2005
-Random Forest,HS_FA_LIT,"{'clf__max_depth': 5, 'clf__max_features': 'sqrt', 'clf__n_estimators': 50, 'scaler': MinMaxScaler()}",0.9524,1.0,0.6621,0.6076,1.0,0.3243,0.8208,0.2519
-Random Forest,VB_FA_BIG,"{'clf__max_depth': 5, 'clf__max_features': 'sqrt', 'clf__n_estimators': 50, 'scaler': MinMaxScaler()}",0.9857,0.9952,0.7495,0.693,0.981,0.5181,0.8659,0.2148
-Random Forest,HS_FA_BIG,"{'clf__max_depth': 5, 'clf__max_features': 'sqrt', 'clf__n_estimators': 30, 'scaler': MinMaxScaler()}",0.919,0.9952,0.674,0.6158,1.0,0.3481,0.7865,0.2614
+Model,Animation,Best Parameters,Train Accuracy,Test Accuracy,Precision,Recall,Specificity,Roc Auc,EER
+KNN,VB_SL_LIT,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 3, 'knn__weights': 'distance', 'scaler': StandardScaler()}",1.0,0.8326,0.7873,1.0,0.6652,0.9253,0.1229
+KNN,HS_SL_LIT,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 3, 'knn__weights': 'distance', 'scaler': StandardScaler()}",1.0,0.8136,0.7813,0.9429,0.6843,0.9009,0.1548
+KNN,VB_SL_BIG,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 3, 'knn__weights': 'distance', 'scaler': StandardScaler()}",1.0,0.826,0.7798,0.9905,0.6614,0.9386,0.1071
+KNN,HS_SL_BIG,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 3, 'knn__weights': 'distance', 'scaler': StandardScaler()}",1.0,0.814,0.7773,0.9619,0.6662,0.8956,0.1633
+KNN,VB_FA_LIT,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 5, 'knn__weights': 'distance', 'scaler': MinMaxScaler()}",1.0,0.7624,0.7136,1.0,0.5248,0.949,0.0781
+KNN,HS_FA_LIT,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 7, 'knn__weights': 'distance', 'scaler': RobustScaler()}",1.0,0.6988,0.6585,0.9905,0.4071,0.9352,0.0976
+KNN,VB_FA_BIG,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 3, 'knn__weights': 'distance', 'scaler': StandardScaler()}",1.0,0.8267,0.7781,0.9905,0.6629,0.9508,0.0962
+KNN,HS_FA_BIG,"{'knn__metric': 'manhattan', 'knn__n_neighbors': 3, 'knn__weights': 'distance', 'scaler': StandardScaler()}",1.0,0.7979,0.7511,0.981,0.6148,0.9046,0.1514

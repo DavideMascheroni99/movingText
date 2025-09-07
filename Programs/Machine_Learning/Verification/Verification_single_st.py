@@ -14,6 +14,7 @@ from sklearn.metrics import roc_auc_score, accuracy_score, precision_score, reca
 from sklearn.base import clone 
 import ast
 import re
+import matplotlib.pyplot as plt
 
 # Delete the file if already exists
 def delete_file_if_exists(file_path):
@@ -30,6 +31,8 @@ def append_to_csv(df, file_path):
 '''CONSTANTS'''
 
 num_seed = 20
+roc_data_dict = {}
+
 
 #csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
 csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
@@ -44,10 +47,10 @@ best_k_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Program
 #best_params_file_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
 best_params_file_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
 
+#roc_save_path =  r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\best_animation_roc_curves_st.png"
+roc_save_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\best_animation_roc_curves_st.png"
+delete_file_if_exists(roc_save_path)
 
-# ---------------------------
-# Load Dataset
-# ---------------------------
 def load_dataset(csv_path):
     dataset = pd.read_csv(csv_path)
     dataset['anim_name'] = dataset['file_key'].apply(lambda x: '_'.join(x.split('_')[-3:]))
@@ -58,6 +61,7 @@ def load_dataset(csv_path):
 def get_feature_columns():
     return [f'f{i}' for i in range(83)]
 
+# Read from the identification csv the top k selected features
 def load_best_k_features(csv_path):
     df = pd.read_csv(csv_path)
     # Keep only rows with "(S1+S2 vs S3)"
@@ -65,7 +69,7 @@ def load_best_k_features(csv_path):
 
     best_k_features = {}
     for _, row in df.iterrows():
-        model = row['Model'].split("(")[0].strip()  # Clean model name
+        model = row['Model'].split("(")[0].strip() 
         animation = row['Animation'].strip()
         k = int(row['Best K'])
         feature = row['Feature'].strip()
@@ -80,15 +84,16 @@ def load_best_k_features(csv_path):
     return best_k_features
 
 
-# Mapping for scaler names to actual classes
+# Map strings to the actual sklearn scaler objects
 scaler_mapping = {
     "StandardScaler": StandardScaler(),
     "MinMaxScaler": MinMaxScaler(),
     "RobustScaler": RobustScaler()
 }
 
+# Parse the parameter in a way that can be used in the pipeline
 def parse_best_params(params_str):
-    # Extract the scaler using regex (e.g., "MinMaxScaler()")
+    # Extract the scaler using regex 
     scaler_match = re.search(r"scaler': (\w+)\(\)", params_str)
     scaler_name = None
     if scaler_match:
@@ -105,8 +110,7 @@ def parse_best_params(params_str):
         print(f"Error parsing params: {params_str} -> {e}")
         return None
 
-
-
+# Read from the previous identification file the best parameters 
 def load_best_params_from_file(csv_path):
     df = pd.read_csv(csv_path)
     df = df[df['Model'].str.contains(r'\(S1\+S2 vs S3\)')]
@@ -126,10 +130,6 @@ def load_best_params_from_file(csv_path):
     return best_params
 
 
-
-# ---------------------------
-# Train/Test Split
-# ---------------------------
 def prepare_train_test_data(dataset, person_data, seed, features_cols):
     tester_id = person_data['tester_id'].iloc[0]
     train_genuine = person_data[person_data['session_id'].isin(['S1', 'S2'])]
@@ -148,9 +148,7 @@ def prepare_train_test_data(dataset, person_data, seed, features_cols):
 
     return X_train, y_train, X_test, y_test
 
-# ---------------------------
-# Evaluation
-# ---------------------------
+
 def compute_eer(y_true, y_score):
     fpr, tpr, _ = roc_curve(y_true, y_score)
     fnr = 1 - tpr
@@ -176,9 +174,6 @@ def evaluate_model(model, X, y):
     return test_acc, prec, rec, spec, roc_auc, eer
 
 
-# ---------------------------
-# Write Results
-# ---------------------------
 def write_results(model, best_params, train_acc, test_acc, metrics, results_path, anim_name):
     precision, recall, spec, roc_auc, eer = metrics
     row = {
@@ -196,12 +191,188 @@ def write_results(model, best_params, train_acc, test_acc, metrics, results_path
     df = pd.DataFrame([row])
     append_to_csv(df, results_path)
 
-# ---------------------------
-# Classifier Pipelines
-# ---------------------------
-from sklearn.feature_selection import SelectKBest, f_classif
 
-def get_classifiers_with_best_params():
+def get_classifiers():
+    return [
+        (
+            "Naive Bayes",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('nb', GaussianNB())
+            ])
+        ),
+        (
+            "KNN",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('knn', KNeighborsClassifier())
+            ])
+        )
+    ]
+
+
+def update_roc_data(clf_name, animation, y_true, y_score, eer):
+    """
+    Update the global ROC dictionary with the best animation per classifier.
+
+    Parameters:
+        clf_name: str - classifier name
+        animation: str - animation name
+        y_true: array-like - true labels
+        y_score: array-like - predicted scores
+        eer: float - Equal Error Rate of this classifier-animation
+    """
+    from sklearn.metrics import roc_auc_score
+    import numpy as np
+
+    if clf_name not in roc_data_dict or eer < roc_data_dict[clf_name]['eer']:
+        roc_data_dict[clf_name] = {
+            'animation': animation,
+            'y_true': np.array(y_true),
+            'y_score': np.array(y_score),
+            'auc': roc_auc_score(y_true, y_score),
+            'eer': eer
+        }
+
+
+
+def train_and_evaluate(dataset, animation, clf_name, clf_pipeline, features_cols, best_params, num_seed, results_path):
+    """
+    Train classifier, evaluate metrics, and collect ROC data for the best animation per classifier.
+    
+    Returns:
+        roc_info: dict with keys 'animation', 'y_true', 'y_score', 'auc', 'eer'
+    """
+    tester_metrics = []
+    y_true_all = []
+    y_score_all = []
+
+    for person in dataset['tester_id'].unique():
+        person_data = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == animation)]
+
+        # Train best model based on training accuracy
+        best_model = None
+        best_train_acc = -np.inf
+        for seed in range(num_seed):
+            X_train, y_train, _, _ = prepare_train_test_data(dataset, person_data, seed, features_cols)
+            model_params = {k: v for k, v in best_params.items() if not k.startswith("feature_selection")}
+            model = clone(clf_pipeline).set_params(**model_params)
+            model.fit(X_train, y_train)
+            train_acc = model.score(X_train, y_train)
+            if train_acc > best_train_acc:
+                best_train_acc = train_acc
+                best_model = model
+
+        # Evaluate metrics and collect ROC scores
+        for seed in range(num_seed):
+            _, _, X_test, y_test = prepare_train_test_data(dataset, person_data, seed, features_cols)
+            test_acc, prec, rec, spec, roc_auc, eer = evaluate_model(best_model, X_test, y_test)
+            tester_metrics.append([test_acc, prec, rec, spec, roc_auc, eer])
+
+            # Collect ROC data
+            if hasattr(best_model, "predict_proba"):
+                y_score = best_model.predict_proba(X_test)[:, 1]
+            else:
+                y_score = best_model.decision_function(X_test)
+            y_true_all.extend(y_test)
+            y_score_all.extend(y_score)
+
+    # Average metrics across testers and seeds
+    mean_metrics = np.mean(tester_metrics, axis=0)
+    test_acc, prec, rec, spec, roc_auc, eer = mean_metrics
+    write_results(clf_name, best_params, best_train_acc, test_acc, (prec, rec, spec, roc_auc, eer), results_path, animation)
+
+    # Prepare ROC info for this classifier-animation
+    roc_info = {
+        'animation': animation,
+        'y_true': np.array(y_true_all),
+        'y_score': np.array(y_score_all),
+        'auc': roc_auc_score(y_true_all, y_score_all),
+        'eer': eer
+    }
+
+    return roc_info
+
+
+
+def save_roc_curves(roc_data_dict, save_path):
+    import matplotlib.pyplot as plt
+    from sklearn.metrics import roc_curve
+
+    plt.figure(figsize=(12, 9), dpi=300)
+
+    colors = plt.colormaps['tab10'].resampled(len(roc_data_dict))
+    line_styles = ['-', '--', '-.', ':']
+
+    for i, (animation, data) in enumerate(roc_data_dict.items()):
+        fpr, tpr, _ = roc_curve(data['y_true'], data['y_score'])
+        plt.plot(fpr, tpr,
+                 color=colors(i),
+                 linestyle=line_styles[i % len(line_styles)],
+                 lw=2,
+                 label=f"{animation} ({data['classifier']}), AUC={data['auc']:.2f}")
+
+    plt.plot([0, 1], [0, 1], color='grey', lw=1, linestyle='--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Verification: ROC curves (best classifier per animation)')
+    plt.legend(loc="lower right", fontsize=10)
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig(save_path)
+    plt.close()
+
+
+
+
+'''EXECUTION'''
+
+dataset = load_dataset(csv_path)
+best_k_features = load_best_k_features(best_k_file)
+best_params_all = load_best_params_from_file(best_params_file_path)
+
+roc_data_dict = {}  # now keyed by animation
+
+for animation in dataset['anim_name'].unique():
+    best_roc_info = None
+    best_clf_name = None
+
+    for clf_name, clf_pipeline in get_classifiers():
+        k_info = best_k_features[clf_name][animation]
+        selected_features = k_info['features'][:k_info['k']]
+
+        roc_info = train_and_evaluate(
+            dataset=dataset,
+            animation=animation,
+            clf_name=clf_name,
+            clf_pipeline=clf_pipeline,
+            features_cols=selected_features,
+            best_params=best_params_all.get(clf_name, {}).get(animation, {}),
+            num_seed=num_seed,
+            results_path=results_path
+        )
+
+        # Keep the classifier with lowest EER for this animation
+        if best_roc_info is None or roc_info['eer'] < best_roc_info['eer']:
+            best_roc_info = roc_info
+            best_clf_name = clf_name
+
+    # Store best ROC per animation
+    roc_data_dict[animation] = {
+        'classifier': best_clf_name,
+        **best_roc_info
+    }
+
+save_roc_curves(roc_data_dict, roc_save_path)
+
+
+
+
+'''def get_classifiers_with_best_params():
     return [
         (
             "Naive Bayes",
@@ -260,71 +431,4 @@ def get_classifiers_with_best_params():
             ])
         )
     ]
-
-
-
-# ---------------------------
-# Train & Evaluate 
-# ---------------------------
-def train_and_evaluate(dataset, animation, clf_name, clf_pipeline, features_cols, best_params, num_seed, results_path):
-    tester_metrics = []
-
-    for person in dataset['tester_id'].unique():
-        person_data = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == animation)]
-        if person_data.empty:
-            continue
-
-        # Train 20 models, pick the best based on training accuracy
-        best_model = None
-        best_train_acc = -np.inf
-        for seed in range(num_seed):
-            X_train, y_train, _, _ = prepare_train_test_data(dataset, person_data, seed, features_cols)
-            # Remove feature_selection parameters if they exist, since we already select features
-            best_params = {k: v for k, v in best_params.items() if not k.startswith("feature_selection")}
-            model = clone(clf_pipeline).set_params(**best_params)
-            model.fit(X_train, y_train)
-            train_acc = model.score(X_train, y_train)
-            if train_acc > best_train_acc:
-                best_train_acc = train_acc
-                best_model = model
-
-        # Test the best model on 20 seeds and average
-        seed_results = []
-        for seed in range(num_seed):
-            _, _, X_test, y_test = prepare_train_test_data(dataset, person_data, seed, features_cols)
-            seed_results.append(evaluate_model(best_model, X_test, y_test))
-
-        tester_metrics.append(np.mean(seed_results, axis=0))
-
-    if tester_metrics:
-        mean_metrics = np.mean(tester_metrics, axis=0)
-        test_acc, prec, rec, spec, roc_auc, eer = mean_metrics
-        write_results(clf_name, best_params, best_train_acc, test_acc, (prec, rec, spec, roc_auc, eer), results_path, animation)
-
-# ---------------------------
-# Main Execution
-# ---------------------------
-dataset = load_dataset(csv_path)
-best_k_features = load_best_k_features(best_k_file)
-best_params_all = load_best_params_from_file(best_params_file_path)
-
-for clf_name, clf_pipeline in get_classifiers_with_best_params():
-    for animation in dataset['anim_name'].unique():
-        if clf_name not in best_k_features or animation not in best_k_features[clf_name]:
-            print(f"No feature selection info for {clf_name} and animation {animation}. Skipping.")
-            continue
-
-        k_info = best_k_features[clf_name][animation]
-        selected_features = k_info['features'][:k_info['k']]  # ensure only top k
-        
-
-        train_and_evaluate(
-            dataset=dataset,
-            animation=animation,
-            clf_name=clf_name,
-            clf_pipeline=clf_pipeline,
-            features_cols=selected_features,
-            best_params=best_params_all.get(clf_name, {}).get(animation, {}),
-            num_seed=num_seed,
-            results_path=results_path
-        )
+'''

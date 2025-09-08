@@ -33,21 +33,21 @@ num_seed = 20
 roc_data_dict = {}
 
 
-#csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
-csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
+csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
+#csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
 
-#results_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\Verification_single_results_ft.csv"
-results_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\Verification_single_results_ft.csv"
+results_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\Verification_single_results_ft.csv"
+#results_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\Verification_single_results_ft.csv"
 delete_file_if_exists(results_path)
 
-#best_k_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_ft.csv"
-best_k_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_ft.csv"
+best_k_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_ft.csv"
+#best_k_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_ft.csv"
 
-#best_params_file_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_ft.csv"
-best_params_file_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_ft.csv"
+best_params_file_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_ft.csv"
+#best_params_file_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_ft.csv"
 
-#roc_save_path =  r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\best_animation_roc_curves_ft.png"
-roc_save_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\best_animation_roc_curves_ft.png"
+roc_save_path =  r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\best_animation_roc_curves_ft.png"
+#roc_save_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_results\best_animation_roc_curves_ft.png"
 delete_file_if_exists(roc_save_path)
 
 def load_dataset(csv_path):
@@ -258,7 +258,7 @@ def update_roc_data(clf_name, animation, y_true, y_score, eer):
         }
 
 # Generate one large train set by concatenating the 20 training sets
-def prepare_big_train_data(dataset, person_data, num_seed, features_cols):
+def prepare_train_data(dataset, person_data, num_seed, features_cols):
     tester_id = person_data['tester_id'].iloc[0]
     train_genuine = person_data[person_data['session_id'].isin(['S1', 'S2'])]
     impostors_train_pool = dataset[(dataset['tester_id'] != tester_id) & (dataset['session_id'].isin(['S1', 'S2']))]
@@ -277,40 +277,47 @@ def prepare_big_train_data(dataset, person_data, num_seed, features_cols):
 
 
 def train_and_evaluate(dataset, animation, clf_name, clf_pipeline, features_cols, best_params, num_seed, results_path):
+  
     tester_metrics = []
     y_true_all = []
     y_score_all = []
 
     for person in dataset['tester_id'].unique():
-        person_data = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == animation)]
+        person_data_all_anim = dataset[(dataset['tester_id'] == person)]
+        person_data_test_anim = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == animation)]
 
-        # 1. Build a single large train set
-        X_train_big, y_train_big = prepare_big_train_data(dataset, person_data, num_seed, features_cols)
+        X_train_big, y_train_big = prepare_train_data(dataset, person_data_all_anim, num_seed, features_cols)
 
-        # 2. Train the model once
-        model_params = {k: v for k, v in best_params.items() if not k.startswith("feature_selection")}
-        model = clone(clf_pipeline).set_params(**model_params)
-        model.fit(X_train_big, y_train_big)
-        train_acc = model.score(X_train_big, y_train_big)
-
-        # 3. Test on 20 seeds (individually)
+        best_model = None
+        best_train_acc = -np.inf
         for seed in range(num_seed):
-            _, _, X_test, y_test = prepare_train_test_data(dataset, person_data, seed, features_cols)
-            test_acc, prec, rec, spec, roc_auc, eer = evaluate_model(model, X_test, y_test)
+            model_params = {k: v for k, v in best_params.items() if not k.startswith("feature_selection")}
+            model = clone(clf_pipeline).set_params(**model_params)
+            model.fit(X_train_big, y_train_big)
+            train_acc = model.score(X_train_big, y_train_big)
+            if train_acc > best_train_acc:
+                best_train_acc = train_acc
+                best_model = model
+
+        for seed in range(num_seed):
+            _, _, X_test, y_test = prepare_train_test_data(dataset, person_data_test_anim, seed, features_cols)
+            test_acc, prec, rec, spec, roc_auc, eer = evaluate_model(best_model, X_test, y_test)
             tester_metrics.append([test_acc, prec, rec, spec, roc_auc, eer])
 
-            # Collect ROC data
-            if hasattr(model, "predict_proba"):
-                y_score = model.predict_proba(X_test)[:, 1]
+            # Collect ROC info
+            if hasattr(best_model, "predict_proba"):
+                y_score = best_model.predict_proba(X_test)[:, 1]
             else:
-                y_score = model.decision_function(X_test)
+                y_score = best_model.decision_function(X_test)
             y_true_all.extend(y_test)
             y_score_all.extend(y_score)
 
     mean_metrics = np.mean(tester_metrics, axis=0)
     test_acc, prec, rec, spec, roc_auc, eer = mean_metrics
-    write_results(clf_name, best_params, train_acc, test_acc, (prec, rec, spec, roc_auc, eer), results_path, animation)
 
+    write_results(clf_name, best_params, best_train_acc, test_acc, (prec, rec, spec, roc_auc, eer), results_path, animation)
+
+    # Return ROC info for plotting
     roc_info = {
         'animation': animation,
         'y_true': np.array(y_true_all),
@@ -320,6 +327,7 @@ def train_and_evaluate(dataset, animation, clf_name, clf_pipeline, features_cols
     }
 
     return roc_info
+
 
 
 # Save the roc plot as a png

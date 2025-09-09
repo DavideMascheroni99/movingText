@@ -1,0 +1,15 @@
+Model,Best Parameters,Best CV Accuracy,Train Accuracy,Test Accuracy,Selected k,Precision,Recall,Specificity,Roc Auc,EER
+Naive Bayes (80/20),{'scaler': MinMaxScaler()},0.8555,0.871,0.8543,N/A,0.8429,0.8823,0.8274,0.9174,0.1421
+KNN (80/20),"{'clf__metric': 'manhattan', 'clf__n_neighbors': 7, 'clf__weights': 'uniform', 'scaler': MinMaxScaler()}",0.9017,0.9446,0.8841,N/A,0.8478,0.9551,0.8143,0.9453,0.0926
+Logistic Regression (80/20),"{'clf__C': 100, 'scaler': RobustScaler()}",0.9186,0.9768,0.894,N/A,0.8787,0.9251,0.8633,0.9415,0.1043
+NuSVC (80/20),"{'clf__gamma': 'scale', 'clf__kernel': 'poly', 'clf__nu': 0.25, 'scaler': MinMaxScaler()}",0.9358,0.9897,0.9142,N/A,0.9125,0.9211,0.9075,0.9669,0.0854
+Random Forest (80/20),"{'clf__max_depth': 10, 'clf__max_features': 'sqrt', 'clf__n_estimators': 50, 'scaler': StandardScaler()}",0.9318,0.9991,0.925,N/A,0.9226,0.9318,0.9185,0.9765,0.0636
+SVC (80/20),"{'clf__C': 0.1, 'clf__gamma': 0.1, 'clf__kernel': 'poly', 'scaler': MinMaxScaler()}",0.9417,0.9916,0.9147,N/A,0.9094,0.9256,0.9046,0.9671,0.0808
+MLP (80/20),"{'clf__activation': 'relu', 'clf__alpha': 0.01, 'clf__hidden_layer_sizes': (100, 50), 'clf__learning_rate_init': 0.01, 'clf__solver': 'adam', 'scaler': StandardScaler()}",0.9391,1.0,0.9091,N/A,0.8954,0.9312,0.8871,0.959,0.0854
+Naive Bayes (S1+S2 vs S3),{'scaler': MinMaxScaler()},0.8488,0.8841,0.8464,N/A,0.8091,0.9271,0.7656,0.9258,0.1302
+KNN (S1+S2 vs S3),"{'clf__metric': 'manhattan', 'clf__n_neighbors': 3, 'clf__weights': 'uniform', 'scaler': RobustScaler()}",0.8857,0.9453,0.8828,N/A,0.8442,0.9531,0.8125,0.9377,0.0833
+Logistic Regression (S1+S2 vs S3),"{'clf__C': 0.1, 'scaler': StandardScaler()}",0.8966,0.9648,0.8854,N/A,0.8652,0.9167,0.8542,0.9329,0.1198
+NuSVC (S1+S2 vs S3),"{'clf__gamma': 'scale', 'clf__kernel': 'rbf', 'clf__nu': 0.5, 'scaler': RobustScaler()}",0.918,0.9857,0.9036,N/A,0.9128,0.8958,0.9115,0.9583,0.099
+Random Forest (S1+S2 vs S3),"{'clf__max_depth': 5, 'clf__max_features': 'sqrt', 'clf__n_estimators': 200, 'scaler': MinMaxScaler()}",0.9071,1.0,0.9141,N/A,0.914,0.9219,0.9062,0.9732,0.0625
+SVC (S1+S2 vs S3),"{'clf__C': 100, 'clf__gamma': 0.01, 'clf__kernel': 'rbf', 'scaler': MinMaxScaler()}",0.9232,0.9883,0.9062,N/A,0.921,0.8906,0.9219,0.9607,0.0938
+MLP (S1+S2 vs S3),"{'clf__activation': 'relu', 'clf__alpha': 0.0001, 'clf__hidden_layer_sizes': (150, 100, 50), 'clf__learning_rate_init': 0.01, 'clf__solver': 'adam', 'scaler': MinMaxScaler()}",0.923,1.0,0.9219,N/A,0.9019,0.9479,0.8958,0.9655,0.0677

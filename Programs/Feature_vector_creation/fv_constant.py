@@ -5,13 +5,17 @@ BASE_PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Results_c
 
 # Output path where to save the result (complete - only first 5 seconds - only first 10 seconds)
 OUT_PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector.csv"
-FIVE_OUT_PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector_5sec.csv"
-TEN_OUT_PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\feature_vector_10sec.csv"
+FIVE_OUT_PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\five_sec_ds\feature_vector_5sec.csv"
+TEN_OUT_PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\ten_sec_ds\feature_vector_10sec.csv"
+EIGHT_M_OUT_PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\static_vs_moving\moving_fv.csv"
+
 
 # Fixation vector path where to save the result (complete - only first 5 seconds - only first 10 seconds)
 FIX_VECTOR_PATH = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\fixation_vector.csv"
 FIX_VECTOR_PATH_FIVE = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\five_sec_ds\fixation_vector_5sec.csv"
 FIX_VECTOR_PATH_TEN = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\ten_sec_ds\fixation_vector_10sec.csv"
+FIX_VECTOR_PATH_EIGHT_M = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Feature_csv\static_vs_moving\fixation_vector_moving.csv"
+
 
 filenames = ["SL_LIT", "SL_BIG", "FA_LIT", "FA_BIG"]
 animnames = ["VB", "HS"]

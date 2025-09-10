@@ -14,6 +14,8 @@ from sklearn.metrics import roc_auc_score, accuracy_score, precision_score, reca
 from sklearn.base import clone 
 import ast
 import re
+import matplotlib.pyplot as plt
+from sklearn.metrics import roc_curve
 
 # Delete the file if already exists
 def delete_file_if_exists(file_path):
@@ -332,8 +334,6 @@ def train_and_evaluate(dataset, animation, clf_name, clf_pipeline, features_cols
 
 # Save the roc plot as a png
 def save_roc_curves(roc_data_dict, save_path):
-    import matplotlib.pyplot as plt
-    from sklearn.metrics import roc_curve
 
     plt.figure(figsize=(12, 9), dpi=300)
 
@@ -359,6 +359,7 @@ def save_roc_curves(roc_data_dict, save_path):
     plt.tight_layout()
     plt.savefig(save_path)
     plt.close()
+
 
 
 '''EXECUTION'''

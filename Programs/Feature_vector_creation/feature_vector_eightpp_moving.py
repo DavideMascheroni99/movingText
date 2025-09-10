@@ -9,21 +9,6 @@ import fv_constant
 # Statistical functions
 stat_funcs = [np.min, np.max, np.mean, gmean, np.median, np.std,
               lambda x: median_abs_deviation(x, scale=1), skew, iqr, kurtosis]
-#No gmean for difference between left and right pupil diameter
-diff_funcs = [np.min, np.max, np.mean, np.median, np.std,
-              lambda x: median_abs_deviation(x, scale=1), skew, iqr, kurtosis]
-
-import os
-import pandas as pd
-import numpy as np
-from scipy.stats import gmean, skew, kurtosis, median_abs_deviation, iqr
-from scipy.spatial import distance
-import duckdb
-import fv_constant
-
-# Statistical functions
-stat_funcs = [np.min, np.max, np.mean, gmean, np.median, np.std,
-              lambda x: median_abs_deviation(x, scale=1), skew, iqr, kurtosis]
 diff_funcs = [np.min, np.max, np.mean, np.median, np.std,
               lambda x: median_abs_deviation(x, scale=1), skew, iqr, kurtosis]
 

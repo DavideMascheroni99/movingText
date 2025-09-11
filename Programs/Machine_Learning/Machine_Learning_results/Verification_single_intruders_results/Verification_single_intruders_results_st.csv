@@ -1,0 +1,9 @@
+Model,Animation,Best Parameters,Train Accuracy,Test Accuracy,Precision,Recall,Specificity,Roc Auc,EER
+Naive Bayes,VB_SL_LIT,"{'feature_selection__k': 50, 'scaler': MinMaxScaler()}",1.0,0.9902,0.2917,0.125,1.0,0.8788,0.1181
+Naive Bayes,HS_SL_LIT,"{'feature_selection__k': 20, 'scaler': MinMaxScaler()}",1.0,0.9789,0.275,0.4028,0.9855,0.8457,0.1783
+Naive Bayes,VB_SL_BIG,"{'feature_selection__k': 40, 'scaler': MinMaxScaler()}",1.0,0.9817,0.1797,0.1944,0.9907,0.8828,0.1572
+Naive Bayes,HS_SL_BIG,"{'feature_selection__k': 40, 'scaler': MinMaxScaler()}",1.0,0.9761,0.2825,0.3333,0.9834,0.8581,0.1578
+Naive Bayes,VB_FA_LIT,"{'feature_selection__k': 60, 'scaler': MinMaxScaler()}",1.0,0.9894,0.1458,0.1389,0.9991,0.8518,0.1043
+Naive Bayes,HS_FA_LIT,"{'feature_selection__k': 20, 'scaler': MinMaxScaler()}",1.0,0.9813,0.1551,0.2917,0.9891,0.9064,0.1384
+Naive Bayes,VB_FA_BIG,"{'feature_selection__k': 60, 'scaler': MinMaxScaler()}",1.0,0.9899,0.3522,0.1944,0.9989,0.8812,0.0939
+Naive Bayes,HS_FA_BIG,"{'feature_selection__k': 40, 'scaler': MinMaxScaler()}",1.0,0.9727,0.1809,0.125,0.9823,0.9248,0.1065

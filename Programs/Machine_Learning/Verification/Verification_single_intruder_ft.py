@@ -126,14 +126,14 @@ def load_best_params_from_file(csv_path):
 
     return best_params
 
-def prepare_open_set_train_data(dataset, person_data, train_ids, test_ids, seed, features_cols):
-    tester_id = person_data['tester_id'].iloc[0]
+def prepare_open_set_train_data(dataset, person_data_all, person_data_anim, train_ids, test_ids, seed, features_cols):
+    tester_id = person_data_all['tester_id'].iloc[0]
 
-    # TRAIN
-    train_genuine = person_data[person_data['session_id'].isin(['S1', 'S2'])]
+    # TRAIN (all animations, S1+S2)
+    train_genuine = person_data_all[person_data_all['session_id'].isin(['S1', 'S2'])]
     impostors_train_pool = dataset[
         (dataset['tester_id'].isin(train_ids)) & 
-        (dataset['tester_id'] != tester_id) &
+        (dataset['tester_id'] != tester_id) & 
         (dataset['session_id'].isin(['S1', 'S2']))
     ]
     impostors_train = impostors_train_pool.sample(n=len(train_genuine), random_state=seed, replace=False)
@@ -141,8 +141,8 @@ def prepare_open_set_train_data(dataset, person_data, train_ids, test_ids, seed,
     X_train = pd.concat([train_genuine[features_cols], impostors_train[features_cols]], ignore_index=True)
     y_train = np.array([1]*len(train_genuine) + [0]*len(impostors_train))
 
-    # TEST
-    test_genuine = person_data[person_data['session_id'] == 'S3']
+    # TEST (only the specific animation, S3)
+    test_genuine = person_data_anim[person_data_anim['session_id'] == 'S3']
     impostors_test_pool = dataset[
         (dataset['tester_id'].isin(test_ids)) &
         (dataset['session_id'] == 'S3')
@@ -153,6 +153,7 @@ def prepare_open_set_train_data(dataset, person_data, train_ids, test_ids, seed,
     y_test = np.array([1]*len(test_genuine) + [0]*len(impostors_test))
 
     return X_train, y_train, X_test, y_test
+
 
 def train_and_evaluate_open_set(dataset, animation, clf_name, clf_pipeline, features_cols, best_params, train_ids, test_ids, num_seed, results_path):
     tester_metrics = []
@@ -166,9 +167,8 @@ def train_and_evaluate_open_set(dataset, animation, clf_name, clf_pipeline, feat
 
         # Train multiple times to sample different impostors
         for seed in range(num_seed):
-            X_train, y_train, X_test, y_test = prepare_open_set_train_data(
-                dataset, person_data_all, train_ids, test_ids, seed, features_cols
-            )
+            X_train, y_train, X_test, y_test = prepare_open_set_train_data(dataset, person_data_all, person_data_anim, train_ids, test_ids, seed, features_cols)
+
             model_params = {k: v for k, v in best_params.items() if not k.startswith("feature_selection")}
             model = clone(clf_pipeline).set_params(**model_params)
             model.fit(X_train, y_train)

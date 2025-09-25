@@ -48,8 +48,8 @@ best_k_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Program
 best_params_file_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
 #best_params_file_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_st.csv"
 
-roc_save_path =  r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Prova_folder\Verification_single_roc_two_st.csv"
-#roc_save_path =  r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Prova_folder\Verification_single_roc_two_st.csv"
+roc_save_path =  r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Prova_folder\Verification_single_roc_two_st.png"
+#roc_save_path =  r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Prova_folder\Verification_single_roc_two_st.png"
 delete_file_if_exists(roc_save_path)
 
 def load_dataset(csv_path):

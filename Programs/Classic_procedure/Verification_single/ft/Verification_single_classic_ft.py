@@ -1,0 +1,404 @@
+import os
+import pandas as pd
+import numpy as np
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, RobustScaler
+from sklearn.naive_bayes import GaussianNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import NuSVC, SVC
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import roc_auc_score, accuracy_score, precision_score, recall_score, confusion_matrix, roc_curve
+from sklearn.base import clone 
+import ast
+import re
+import matplotlib.pyplot as plt
+from sklearn.metrics import roc_curve
+
+# Delete the file if already exists
+def delete_file_if_exists(file_path):
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
+# Create the csv if doesn't exists, otherwise append to the existing one
+def append_to_csv(df, file_path):
+    if not os.path.exists(file_path):
+        df.to_csv(file_path, index=False)
+    else:
+        df.to_csv(file_path, mode='a', header=False, index=False)
+
+'''CONSTANTS'''
+
+num_seed = 20
+roc_data_dict = {}
+
+
+csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
+
+results_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Classic_procedure\Verification_single\ft\Verification_single_results_classic_ft.csv"
+delete_file_if_exists(results_path)
+
+best_k_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_ft.csv"
+
+best_params_file_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_ft.csv"
+
+roc_save_path =  r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Classic_procedure\Verification_single\ft\Verification_single_roc_classic_ft.png"
+delete_file_if_exists(roc_save_path)
+
+def load_dataset(csv_path):
+    dataset = pd.read_csv(csv_path)
+    dataset['anim_name'] = dataset['file_key'].apply(lambda x: '_'.join(x.split('_')[-3:]))
+    dataset['tester_id'] = dataset['file_key'].apply(lambda x: x.split('_')[0])
+    dataset['session_id'] = dataset['file_key'].apply(lambda x: x.split('_')[1])
+    return dataset
+
+def get_feature_columns():
+    return [f'f{i}' for i in range(83)]
+
+# Read from the identification csv the top k selected features
+def load_best_k_features(csv_path):
+    df = pd.read_csv(csv_path)
+    df = df[df['Model'].str.contains(r'\(S1\+S2 vs S3\)')]
+
+    best_k_features = {}
+    for _, row in df.iterrows():
+        model = row['Model'].split("(")[0].strip()
+        k = int(row['Best K'])
+        feature = row['Feature'].strip()
+
+        if model not in best_k_features:
+            best_k_features[model] = {'k': k, 'features': []}
+
+        best_k_features[model]['features'].append(feature)
+
+    return best_k_features
+
+
+
+# Map strings to the actual sklearn scaler objects
+scaler_mapping = {
+    "StandardScaler": StandardScaler(),
+    "MinMaxScaler": MinMaxScaler(),
+    "RobustScaler": RobustScaler()
+}
+
+# Parse the parameter in a way that can be used in the pipeline
+def parse_best_params(params_str):
+    # Extract the scaler using regex 
+    scaler_match = re.search(r"scaler': (\w+)\(\)", params_str)
+    scaler_name = None
+    if scaler_match:
+        scaler_name = scaler_match.group(1)
+        # Replace the scaler call with just its name as a string
+        params_str = re.sub(rf"{scaler_name}\(\)", f"'{scaler_name}'", params_str)
+
+    try:
+        params_dict = ast.literal_eval(params_str)
+        if scaler_name and scaler_name in scaler_mapping:
+            params_dict['scaler'] = scaler_mapping[scaler_name]
+        return params_dict
+    except Exception as e:
+        print(f"Error parsing params: {params_str} -> {e}")
+        return None
+
+
+# Read from the previous identification file the best parameters 
+def load_best_params_from_file(csv_path):
+    df = pd.read_csv(csv_path)
+    df = df[df['Model'].str.contains(r'\(S1\+S2 vs S3\)')]
+
+    best_params = {}
+    for _, row in df.iterrows():
+        model_name = row['Model'].split("(")[0].strip()
+        params_str = row['Best Parameters']
+        params_dict = parse_best_params(params_str)
+        best_params[model_name] = params_dict
+
+    return best_params
+
+
+def prepare_open_set_train_data(dataset, person_data, num_seed, features_cols):
+    tester_id = person_data['tester_id'].iloc[0]
+    train_genuine = person_data[person_data['session_id'].isin(['S1', 'S2'])]
+    impostors_pool = dataset[(dataset['tester_id'] != tester_id) & (dataset['session_id'].isin(['S1', 'S2']))]
+
+    train_sets = []
+    for seed in range(num_seed):
+        impostors_train = impostors_pool.sample(n=len(train_genuine), random_state=seed, replace=False)
+        X_train = pd.concat([train_genuine[features_cols], impostors_train[features_cols]], ignore_index=True)
+        y_train = np.array([1]*len(train_genuine) + [0]*len(impostors_train))
+        train_sets.append((X_train, y_train))
+
+    return train_sets
+
+
+def prepare_open_set_test_data(dataset, person_data_anim, features_cols, seed):
+    tester_id = person_data_anim['tester_id'].iloc[0]
+
+    # Genuine test samples: S3 of this person (for the selected animation)
+    test_genuine = person_data_anim[person_data_anim['session_id'] == 'S3']
+
+    # Impostors pool: S3 samples of all other people
+    impostors_pool = dataset[(dataset['tester_id'] != tester_id) & (dataset['session_id'] == 'S3')]
+
+    # Sample impostors to balance with genuine
+    impostors_test = impostors_pool.sample(n=len(test_genuine), random_state=seed, replace=False)
+
+    # Build test set
+    X_test = pd.concat([test_genuine[features_cols], impostors_test[features_cols]], ignore_index=True)
+    y_test = np.array([1]*len(test_genuine) + [0]*len(impostors_test))
+
+    return X_test, y_test
+
+
+
+
+def compute_eer(y_true, y_score):
+    fpr, tpr, _ = roc_curve(y_true, y_score)
+    fnr = 1 - tpr
+    eer_index = np.nanargmin(np.abs(fnr - fpr))
+    return fpr[eer_index]
+
+
+def evaluate_model(model, X, y):
+    y_pred = model.predict(X)
+    if hasattr(model, "predict_proba"):
+        y_score = model.predict_proba(X)[:, 1]
+    else:
+        y_score = model.decision_function(X)
+
+    test_acc = accuracy_score(y, y_pred)
+    prec = precision_score(y, y_pred, zero_division=0)  
+    rec = recall_score(y, y_pred, zero_division=0)      
+    tn, fp, fn, tp = confusion_matrix(y, y_pred).ravel()
+    spec = tn / (tn + fp) if (tn + fp) > 0 else 0
+    roc_auc = roc_auc_score(y, y_score) if len(np.unique(y)) > 1 else 0
+    eer = compute_eer(y, y_score) if len(np.unique(y)) > 1 else 0
+
+    return test_acc, prec, rec, spec, roc_auc, eer
+
+
+def write_results(model, best_params, train_acc, test_acc, metrics, results_path, anim_name):
+    precision, recall, spec, roc_auc, eer = metrics
+    row = {
+        'Model': model,
+        'Animation': anim_name,
+        'Best Parameters': best_params,
+        'Train Accuracy': round(train_acc, 4),
+        'Test Accuracy': round(test_acc, 4),
+        'Precision': round(precision, 4),
+        'Recall': round(recall, 4),
+        'Specificity': round(spec, 4),
+        'Roc Auc': round(roc_auc, 4),
+        'EER': round(eer, 4)
+    }
+    df = pd.DataFrame([row])
+    append_to_csv(df, results_path)
+
+
+def get_classifiers():
+    return [
+        (
+            "Naive Bayes",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('nb', GaussianNB())
+            ])
+        ),
+        (
+            "KNN",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('knn', KNeighborsClassifier())
+            ])
+        ),
+        (
+            "Logistic Regression",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('logreg', LogisticRegression(max_iter=1000, random_state=0))
+            ])
+        ),
+        (
+            "NuSVC",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('nusvc', NuSVC())
+            ])
+        ),
+        (
+            "Random Forest",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('rf', RandomForestClassifier(random_state=0))
+            ])
+        ),
+        (
+            "SVC",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('svc', SVC())
+            ])
+        ),
+        (
+            "MLP",
+            Pipeline([
+                ('imputer', SimpleImputer(strategy='mean')),
+                ('scaler', MinMaxScaler()),
+                ('mlp', MLPClassifier(max_iter=4000, random_state=0))
+            ])
+        )
+    ]
+
+
+def update_roc_data(clf_name, animation, y_true, y_score, eer):
+  
+    if clf_name not in roc_data_dict or eer < roc_data_dict[clf_name]['eer']:
+        roc_data_dict[clf_name] = {
+            'animation': animation,
+            'y_true': np.array(y_true),
+            'y_score': np.array(y_score),
+            'auc': roc_auc_score(y_true, y_score),
+            'eer': eer
+        }
+
+
+def train_and_evaluate_open_set(dataset, animation, clf_name, clf_pipeline, features_cols, best_params, num_seed, results_path):
+
+    all_person_metrics = []
+    y_true_all, y_score_all = [], []
+
+    for person in dataset['tester_id'].unique():
+        person_data_anim = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == animation)]
+        person_data_all = dataset[dataset['tester_id'] == person]
+
+        seed_metrics = []
+        train_accs = []
+
+        # Loop over all seeds (train/test per seed)
+        for seed in range(num_seed):
+            # Train set for this seed
+            train_sets = prepare_open_set_train_data(dataset, person_data_all, num_seed=1, features_cols=features_cols)
+            X_train, y_train = train_sets[0]
+
+            model_params = {k: v for k, v in best_params.items() if not k.startswith("feature_selection")}
+            model = clone(clf_pipeline).set_params(**model_params)
+            model.fit(X_train, y_train)
+            train_accs.append(model.score(X_train, y_train))
+
+            # Test set for this seed
+            X_test, y_test = prepare_open_set_test_data(dataset, person_data_anim, features_cols, seed)
+            test_acc, prec, rec, spec, roc_auc, eer = evaluate_model(model, X_test, y_test)
+            seed_metrics.append([test_acc, prec, rec, spec, roc_auc, eer])
+
+            # Collect data for ROC across all persons
+            y_true_all.extend(y_test)
+            if hasattr(model, "predict_proba"):
+                y_score_all.extend(model.predict_proba(X_test)[:, 1])
+            else:
+                y_score_all.extend(model.decision_function(X_test))
+
+        # Average per person (across 20 seeds)
+        person_mean_metrics = np.mean(seed_metrics, axis=0)
+        person_mean_train_acc = np.mean(train_accs)
+        all_person_metrics.append([person_mean_train_acc, *person_mean_metrics])
+
+    # Now average across persons
+    all_person_metrics = np.mean(all_person_metrics, axis=0)
+    mean_train_acc, test_acc, prec, rec, spec, roc_auc, eer = all_person_metrics
+
+    write_results(clf_name, best_params, mean_train_acc, test_acc,
+                  (prec, rec, spec, roc_auc, eer), results_path, animation)
+
+    return {
+        'animation': animation,
+        'y_true': np.array(y_true_all),
+        'y_score': np.array(y_score_all),
+        'auc': roc_auc_score(y_true_all, y_score_all),
+        'eer': eer
+    }
+
+
+# Save the roc plot as a png
+def save_roc_curves(roc_data_dict, save_path):
+
+    plt.figure(figsize=(12, 9), dpi=300)
+
+    colors = plt.colormaps['tab10'].resampled(len(roc_data_dict))
+    line_styles = ['-', '--', '-.', ':']
+
+    for i, (animation, data) in enumerate(roc_data_dict.items()):
+        fpr, tpr, _ = roc_curve(data['y_true'], data['y_score'])
+        plt.plot(fpr, tpr,
+                 color=colors(i),
+                 linestyle=line_styles[i % len(line_styles)],
+                 lw=2,
+                 label=f"{animation} ({data['classifier']}), AUC={data['auc']:.2f}")
+
+    plt.plot([0, 1], [0, 1], color='grey', lw=1, linestyle='--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Verification: ROC curves (best classifier per animation)')
+    plt.legend(loc="lower right", fontsize=10)
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig(save_path)
+    plt.close()
+
+
+
+'''EXECUTION'''
+
+dataset = load_dataset(csv_path)
+best_k_features = load_best_k_features(best_k_file)
+best_params_all = load_best_params_from_file(best_params_file_path)
+
+roc_data_dict = {} 
+
+for animation in dataset['anim_name'].unique():
+    best_roc_info = None
+    best_clf_name = None
+
+    for clf_name, clf_pipeline in get_classifiers():
+        if clf_name not in best_k_features or clf_name not in best_params_all:
+            continue  # skip if no info available
+
+        selected_features = best_k_features[clf_name]['features'][:best_k_features[clf_name]['k']]
+        clf_params = best_params_all[clf_name]
+
+        roc_info = train_and_evaluate_open_set(
+            dataset=dataset,
+            animation=animation,
+            clf_name=clf_name,
+            clf_pipeline=clf_pipeline,
+            features_cols=selected_features,
+            best_params=clf_params,
+            num_seed=num_seed,
+            results_path=results_path
+        )
+
+
+        if best_roc_info is None or roc_info['eer'] < best_roc_info['eer']:
+            best_roc_info = roc_info
+            best_clf_name = clf_name
+
+    roc_data_dict[animation] = {
+        'classifier': best_clf_name,
+        **best_roc_info
+    }
+
+save_roc_curves(roc_data_dict, roc_save_path)
+
+
+
+

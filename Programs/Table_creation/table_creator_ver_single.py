@@ -1,8 +1,8 @@
 import pandas as pd
 
 # --- User-defined paths ---
-input_csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Verification_single_five_ten\Verification_single_ten_results_st.csv"
-output_ods_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Graphs\Verification_five_ten\Verification_single_ten_st.ods"
+input_csv_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Prova_folder\Verification_single_intruders_results_two_st.csv"
+output_ods_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Graphs\Verification_single_intruders_two_st.ods"
 
 # Step 1: Read CSV
 df = pd.read_csv(input_csv_path)

@@ -31,22 +31,21 @@ def append_to_csv(df, file_path):
 
 '''CONSTANTS'''
 
-RANDOM_SEED = 0 
 num_seed = 20
 roc_data_dict = {}
 
-csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\feature_vector.csv"
 
-results_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Classic_procedure\Verification_intruders\ft\Verification_single_intruders_results_classic_ft.csv"
+csv_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Feature_csv\five_sec_ds\feature_vector_5sec.csv"
+
+results_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Classic_procedure\five_ten\ft\Verification_single_results_five_classic_ft.csv"
 delete_file_if_exists(results_path)
 
 best_k_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\selected_features_ft.csv"
 
 best_params_file_path = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results\Identification_single_results_ft.csv"
 
-roc_save_path =  r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Classic_procedure\Verification_intruders\ft\Verification_single_intruders_roc_two_ft.png"
+roc_save_path =  r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Classic_procedure\five_ten\ft\Verification_single_roc_five_classic_ft.png"
 delete_file_if_exists(roc_save_path)
-
 
 def load_dataset(csv_path):
     dataset = pd.read_csv(csv_path)
@@ -58,13 +57,6 @@ def load_dataset(csv_path):
 def get_feature_columns():
     return [f'f{i}' for i in range(83)]
 
-def get_open_set_split(dataset, n_known=24, seed=RANDOM_SEED):
-    testers = sorted(dataset['tester_id'].unique())
-    rng = np.random.default_rng(seed)
-    train_ids = rng.choice(testers, size=n_known, replace=False)
-    test_ids = [t for t in testers if t not in train_ids]
-    return list(train_ids), list(test_ids)
-
 # Read from the identification csv the top k selected features
 def load_best_k_features(csv_path):
     df = pd.read_csv(csv_path)
@@ -75,11 +67,15 @@ def load_best_k_features(csv_path):
         model = row['Model'].split("(")[0].strip()
         k = int(row['Best K'])
         feature = row['Feature'].strip()
+
         if model not in best_k_features:
             best_k_features[model] = {'k': k, 'features': []}
+
         best_k_features[model]['features'].append(feature)
 
     return best_k_features
+
+
 
 # Map strings to the actual sklearn scaler objects
 scaler_mapping = {
@@ -107,6 +103,7 @@ def parse_best_params(params_str):
         print(f"Error parsing params: {params_str} -> {e}")
         return None
 
+
 # Read from the previous identification file the best parameters 
 def load_best_params_from_file(csv_path):
     df = pd.read_csv(csv_path)
@@ -121,88 +118,41 @@ def load_best_params_from_file(csv_path):
 
     return best_params
 
-def prepare_open_set_train_data(dataset, person_data_all, person_data_anim, train_ids, test_ids, seed, features_cols):
-    tester_id = person_data_all['tester_id'].iloc[0]
 
-    # TRAIN (all animations, S1+S2)
-    train_genuine = person_data_all[person_data_all['session_id'].isin(['S1', 'S2'])]
-    impostors_train_pool = dataset[
-        (dataset['tester_id'].isin(train_ids)) & 
-        (dataset['tester_id'] != tester_id) & 
-        (dataset['session_id'].isin(['S1', 'S2']))
-    ]
-    impostors_train = impostors_train_pool.sample(n=len(train_genuine), random_state=seed, replace=False)
+def prepare_open_set_train_data(dataset, person_data, num_seed, features_cols):
+    tester_id = person_data['tester_id'].iloc[0]
+    train_genuine = person_data[person_data['session_id'].isin(['S1', 'S2'])]
+    impostors_pool = dataset[(dataset['tester_id'] != tester_id) & (dataset['session_id'].isin(['S1', 'S2']))]
 
-    X_train = pd.concat([train_genuine[features_cols], impostors_train[features_cols]], ignore_index=True)
-    y_train = np.array([1]*len(train_genuine) + [0]*len(impostors_train))
+    train_sets = []
+    for seed in range(num_seed):
+        impostors_train = impostors_pool.sample(n=len(train_genuine), random_state=seed, replace=False)
+        X_train = pd.concat([train_genuine[features_cols], impostors_train[features_cols]], ignore_index=True)
+        y_train = np.array([1]*len(train_genuine) + [0]*len(impostors_train))
+        train_sets.append((X_train, y_train))
 
-    # TEST (only the specific animation, S3)
+    return train_sets
+
+
+def prepare_open_set_test_data(dataset, person_data_anim, features_cols, seed):
+    tester_id = person_data_anim['tester_id'].iloc[0]
+
+    # Genuine test samples: S3 of this person (for the selected animation)
     test_genuine = person_data_anim[person_data_anim['session_id'] == 'S3']
-    impostors_test_pool = dataset[
-        (dataset['tester_id'].isin(test_ids)) &
-        (dataset['session_id'] == 'S3')
-    ]
-    impostors_test = impostors_test_pool.sample(n=len(test_genuine), random_state=seed, replace=False)
 
+    # Impostors pool: S3 samples of all other people
+    impostors_pool = dataset[(dataset['tester_id'] != tester_id) & (dataset['session_id'] == 'S3')]
+
+    # Sample impostors to balance with genuine
+    impostors_test = impostors_pool.sample(n=len(test_genuine), random_state=seed, replace=False)
+
+    # Build test set
     X_test = pd.concat([test_genuine[features_cols], impostors_test[features_cols]], ignore_index=True)
     y_test = np.array([1]*len(test_genuine) + [0]*len(impostors_test))
 
-    return X_train, y_train, X_test, y_test
+    return X_test, y_test
 
 
-def train_and_evaluate_open_set(dataset, animation, clf_name, clf_pipeline, features_cols, best_params, train_ids, test_ids, num_seed, results_path):
-    all_person_metrics = []
-    y_true_all, y_score_all = [], []
-
-    for person in dataset['tester_id'].unique():
-        person_data_anim = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == animation)]
-        person_data_all = dataset[dataset['tester_id'] == person]
-
-        seed_metrics = []
-        train_accs = []
-
-        # One train-test pair per seed
-        for seed in range(num_seed):
-            X_train, y_train, X_test, y_test = prepare_open_set_train_data(
-                dataset, person_data_all, person_data_anim, train_ids, test_ids, seed, features_cols
-            )
-
-            model_params = {k: v for k, v in best_params.items() if not k.startswith("feature_selection")}
-            model = clone(clf_pipeline).set_params(**model_params)
-            model.fit(X_train, y_train)
-
-            train_accs.append(model.score(X_train, y_train))
-
-            # Test evaluation
-            test_acc, prec, rec, spec, roc_auc, eer = evaluate_model(model, X_test, y_test)
-            seed_metrics.append([test_acc, prec, rec, spec, roc_auc, eer])
-
-            # Collect for ROC
-            y_true_all.extend(y_test)
-            if hasattr(model, "predict_proba"):
-                y_score_all.extend(model.predict_proba(X_test)[:, 1])
-            else:
-                y_score_all.extend(model.decision_function(X_test))
-
-        # Average across seeds for this person
-        person_mean_metrics = np.mean(seed_metrics, axis=0)
-        person_mean_train_acc = np.mean(train_accs)
-        all_person_metrics.append([person_mean_train_acc, *person_mean_metrics])
-
-    # Average across persons
-    all_person_metrics = np.mean(all_person_metrics, axis=0)
-    mean_train_acc, test_acc, prec, rec, spec, roc_auc, eer = all_person_metrics
-
-    write_results(clf_name, best_params, mean_train_acc, test_acc,
-                  (prec, rec, spec, roc_auc, eer), results_path, animation)
-
-    return {
-        'animation': animation,
-        'y_true': np.array(y_true_all),
-        'y_score': np.array(y_score_all),
-        'auc': roc_auc_score(y_true_all, y_score_all),
-        'eer': eer
-    }
 
 
 def compute_eer(y_true, y_score):
@@ -210,6 +160,7 @@ def compute_eer(y_true, y_score):
     fnr = 1 - tpr
     eer_index = np.nanargmin(np.abs(fnr - fpr))
     return fpr[eer_index]
+
 
 def evaluate_model(model, X, y):
     y_pred = model.predict(X)
@@ -219,14 +170,15 @@ def evaluate_model(model, X, y):
         y_score = model.decision_function(X)
 
     test_acc = accuracy_score(y, y_pred)
-    prec = precision_score(y, y_pred, zero_division=0)
-    rec = recall_score(y, y_pred, zero_division=0)
+    prec = precision_score(y, y_pred, zero_division=0)  
+    rec = recall_score(y, y_pred, zero_division=0)      
     tn, fp, fn, tp = confusion_matrix(y, y_pred).ravel()
     spec = tn / (tn + fp) if (tn + fp) > 0 else 0
     roc_auc = roc_auc_score(y, y_score) if len(np.unique(y)) > 1 else 0
     eer = compute_eer(y, y_score) if len(np.unique(y)) > 1 else 0
 
     return test_acc, prec, rec, spec, roc_auc, eer
+
 
 def write_results(model, best_params, train_acc, test_acc, metrics, results_path, anim_name):
     precision, recall, spec, roc_auc, eer = metrics
@@ -244,6 +196,7 @@ def write_results(model, best_params, train_acc, test_acc, metrics, results_path
     }
     df = pd.DataFrame([row])
     append_to_csv(df, results_path)
+
 
 def get_classifiers():
     return [
@@ -305,7 +258,9 @@ def get_classifiers():
         )
     ]
 
+
 def update_roc_data(clf_name, animation, y_true, y_score, eer):
+  
     if clf_name not in roc_data_dict or eer < roc_data_dict[clf_name]['eer']:
         roc_data_dict[clf_name] = {
             'animation': animation,
@@ -315,15 +270,79 @@ def update_roc_data(clf_name, animation, y_true, y_score, eer):
             'eer': eer
         }
 
+
+def train_and_evaluate_open_set(dataset, animation, clf_name, clf_pipeline, features_cols, best_params, num_seed, results_path):
+
+    all_person_metrics = []
+    y_true_all, y_score_all = [], []
+
+    for person in dataset['tester_id'].unique():
+        person_data_anim = dataset[(dataset['tester_id'] == person) & (dataset['anim_name'] == animation)]
+        person_data_all = dataset[dataset['tester_id'] == person]
+
+        seed_metrics = []
+        train_accs = []
+
+        # Loop over all seeds (train/test per seed)
+        for seed in range(num_seed):
+            # Train set for this seed
+            train_sets = prepare_open_set_train_data(dataset, person_data_all, num_seed=1, features_cols=features_cols)
+            X_train, y_train = train_sets[0]
+
+            model_params = {k: v for k, v in best_params.items() if not k.startswith("feature_selection")}
+            model = clone(clf_pipeline).set_params(**model_params)
+            model.fit(X_train, y_train)
+            train_accs.append(model.score(X_train, y_train))
+
+            # Test set for this seed
+            X_test, y_test = prepare_open_set_test_data(dataset, person_data_anim, features_cols, seed)
+            test_acc, prec, rec, spec, roc_auc, eer = evaluate_model(model, X_test, y_test)
+            seed_metrics.append([test_acc, prec, rec, spec, roc_auc, eer])
+
+            # Collect data for ROC across all persons
+            y_true_all.extend(y_test)
+            if hasattr(model, "predict_proba"):
+                y_score_all.extend(model.predict_proba(X_test)[:, 1])
+            else:
+                y_score_all.extend(model.decision_function(X_test))
+
+        # Average per person (across 20 seeds)
+        person_mean_metrics = np.mean(seed_metrics, axis=0)
+        person_mean_train_acc = np.mean(train_accs)
+        all_person_metrics.append([person_mean_train_acc, *person_mean_metrics])
+
+    # Now average across persons
+    all_person_metrics = np.mean(all_person_metrics, axis=0)
+    mean_train_acc, test_acc, prec, rec, spec, roc_auc, eer = all_person_metrics
+
+    write_results(clf_name, best_params, mean_train_acc, test_acc,
+                  (prec, rec, spec, roc_auc, eer), results_path, animation)
+
+    return {
+        'animation': animation,
+        'y_true': np.array(y_true_all),
+        'y_score': np.array(y_score_all),
+        'auc': roc_auc_score(y_true_all, y_score_all),
+        'eer': eer
+    }
+
+
 # Save the roc plot as a png
 def save_roc_curves(roc_data_dict, save_path):
+
     plt.figure(figsize=(12, 9), dpi=300)
+
     colors = plt.colormaps['tab10'].resampled(len(roc_data_dict))
     line_styles = ['-', '--', '-.', ':']
+
     for i, (animation, data) in enumerate(roc_data_dict.items()):
         fpr, tpr, _ = roc_curve(data['y_true'], data['y_score'])
-        plt.plot(fpr, tpr, color=colors(i), linestyle=line_styles[i % len(line_styles)],
-                 lw=2, label=f"{animation} ({data['classifier']}), AUC={data['auc']:.2f}")
+        plt.plot(fpr, tpr,
+                 color=colors(i),
+                 linestyle=line_styles[i % len(line_styles)],
+                 lw=2,
+                 label=f"{animation} ({data['classifier']}), AUC={data['auc']:.2f}")
+
     plt.plot([0, 1], [0, 1], color='grey', lw=1, linestyle='--')
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.05])
@@ -336,24 +355,27 @@ def save_roc_curves(roc_data_dict, save_path):
     plt.savefig(save_path)
     plt.close()
 
+
+
 '''EXECUTION'''
 
 dataset = load_dataset(csv_path)
 best_k_features = load_best_k_features(best_k_file)
 best_params_all = load_best_params_from_file(best_params_file_path)
-roc_data_dict = {}
 
-# Split testers into known/train vs unknown/test
-train_ids, test_ids = get_open_set_split(dataset, n_known=24, seed=RANDOM_SEED)
+roc_data_dict = {} 
 
 for animation in dataset['anim_name'].unique():
     best_roc_info = None
     best_clf_name = None
+
     for clf_name, clf_pipeline in get_classifiers():
         if clf_name not in best_k_features or clf_name not in best_params_all:
-            continue
+            continue  # skip if no info available
+
         selected_features = best_k_features[clf_name]['features'][:best_k_features[clf_name]['k']]
         clf_params = best_params_all[clf_name]
+
         roc_info = train_and_evaluate_open_set(
             dataset=dataset,
             animation=animation,
@@ -361,14 +383,22 @@ for animation in dataset['anim_name'].unique():
             clf_pipeline=clf_pipeline,
             features_cols=selected_features,
             best_params=clf_params,
-            train_ids=train_ids,
-            test_ids=test_ids,
             num_seed=num_seed,
             results_path=results_path
         )
+
+
         if best_roc_info is None or roc_info['eer'] < best_roc_info['eer']:
             best_roc_info = roc_info
             best_clf_name = clf_name
-    roc_data_dict[animation] = {'classifier': best_clf_name, **best_roc_info}
+
+    roc_data_dict[animation] = {
+        'classifier': best_clf_name,
+        **best_roc_info
+    }
 
 save_roc_curves(roc_data_dict, roc_save_path)
+
+
+
+

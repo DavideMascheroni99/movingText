@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  29 SEP 2025 12:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  29 SEP 2025 12:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -425,43 +425,69 @@ Package caption Info: New subtype `subtable' on input line 238.
 Package: hyphenat 2009/09/02 v2.3c hyphenation utilities
 \langwohyphens=\language80
 LaTeX Info: Redefining \_ on input line 43.
+) (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.sty
+Package: microtype 2025/07/09 v3.2b Micro-typographical refinements (RS)
+\MT@toks=\toks21
+\MT@tempbox=\box53
+\MT@count=\count429
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1087.
+LaTeX Info: Redefining \leftprotrusion on input line 1088.
+\MT@prot@toks=\toks22
+LaTeX Info: Redefining \rightprotrusion on input line 1107.
+LaTeX Info: Redefining \textls on input line 1449.
+\MT@outer@kern=\dimen171
+LaTeX Info: Redefining \microtypecontext on input line 2053.
+LaTeX Info: Redefining \textmicrotypecontext on input line 2070.
+\MT@listname@count=\count430
+ (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype-pdftex.def
+File: microtype-pdftex.def 2025/07/09 v3.2b Definitions specific to pdftex (RS)
+LaTeX Info: Redefining \lsstyle on input line 944.
+LaTeX Info: Redefining \lslig on input line 944.
+\MT@outer@space=\skip74
 )
-\@quotelevel=\count429
-\@quotereset=\count430
- (thesis.aux)
+Package microtype Info: Loading configuration file microtype.cfg.
+ (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.cfg
+File: microtype.cfg 2025/07/09 v3.2b microtype main configuration file (RS)
+)
+LaTeX Info: Redefining \microtypesetup on input line 3065.
+)
+\@quotelevel=\count431
+\@quotereset=\count432
+
+No file thesis.aux.
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
- (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 13.
+LaTeX Font Info:    ... okay on input line 13.
+(C:\Users\david\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count431
-\scratchdimen=\dimen171
-\scratchbox=\box53
-\nofMPsegments=\count432
-\nofMParguments=\count433
-\everyMPshowfont=\toks21
-\MPscratchCnt=\count434
-\MPscratchDim=\dimen172
-\MPnumerator=\count435
-\makeMPintoPDFobject=\count436
-\everyMPtoPDFconversion=\toks22
+\scratchcounter=\count433
+\scratchdimen=\dimen172
+\scratchbox=\box54
+\nofMPsegments=\count434
+\nofMParguments=\count435
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count436
+\MPscratchDim=\dimen173
+\MPnumerator=\count437
+\makeMPintoPDFobject=\count438
+\everyMPtoPDFconversion=\toks24
 ) (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/grfext\grfext.sty
@@ -474,8 +500,7 @@ Package grfext Info: Graphics extension search list:
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 12.
- (thesis.out) (thesis.out)
+Package hyperref Info: Link coloring OFF on input line 13.
 \@outlinefile=\write4
 \openout4 = `thesis.out'.
 
@@ -490,11 +515,11 @@ Package biblatex Info: Automatic encoding selection.
 \openout3 = `thesis.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'thesis.bbl' found.
- (thesis.bbl)
-Package biblatex Info: Reference section=0 on input line 12.
-Package biblatex Info: Reference segment=0 on input line 12.
+Package biblatex Info: ... file 'thesis.bbl' not found.
 
+No file thesis.bbl.
+Package biblatex Info: Reference section=0 on input line 13.
+Package biblatex Info: Reference segment=0 on input line 13.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -531,21 +556,37 @@ Package biblatex Info: Reference segment=0 on input line 12.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-<Images/Theory/Logo_UNIPV.svg.png, id=179, 1284.8pt x 940.51375pt>
+LaTeX Info: Redefining \microtypecontext on input line 13.
+Package microtype Info: Applying patch `item' on input line 13.
+Package microtype Info: Applying patch `toc' on input line 13.
+Package microtype Info: Applying patch `eqnum' on input line 13.
+Package microtype Info: Applying patch `footnote' on input line 13.
+Package microtype Info: Applying patch `verbatim' on input line 13.
+LaTeX Info: Redefining \microtypesetup on input line 13.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `alltext-nott'.
+Package microtype Info: Patching command `\showhyphens'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+(C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
+)
+<Images/Theory/Logo_UNIPV.svg.png, id=3, 1284.8pt x 940.51375pt>
 File: Images/Theory/Logo_UNIPV.svg.png Graphic file (type png)
 <use Images/Theory/Logo_UNIPV.svg.png>
-Package pdftex.def Info: Images/Theory/Logo_UNIPV.svg.png  used on input line 19.
+Package pdftex.def Info: Images/Theory/Logo_UNIPV.svg.png  used on input line 22.
 (pdftex.def)             Requested size: 170.71652pt x 124.96907pt.
 
 
 [1
 
-{C:/Users/david/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Images/Theory/Logo_UNIPV.svg.png>] (thesis.toc
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 3.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 3.
-)
+{C:/Users/david/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Images/Theory/Logo_UNIPV.svg.png>]
+No file thesis.toc.
 \tf@toc=\write5
 \openout5 = `thesis.toc'.
 
@@ -555,22 +596,26 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.53 \newpage
+l.56 \newpage
               [1]
 
 [2]
 
 [3]
-<Images/Theory/Fingerprint_scanner_identification.jpg, id=247, 1284.8pt x 963.6pt>
+<Images/Theory/Fingerprint_scanner_identification.jpg, id=28, 1284.8pt x 963.6pt>
 File: Images/Theory/Fingerprint_scanner_identification.jpg Graphic file (type jpg)
 <use Images/Theory/Fingerprint_scanner_identification.jpg>
-Package pdftex.def Info: Images/Theory/Fingerprint_scanner_identification.jpg  used on input line 108.
+Package pdftex.def Info: Images/Theory/Fingerprint_scanner_identification.jpg  used on input line 111.
 (pdftex.def)             Requested size: 204.73033pt x 153.5469pt.
-<Images/Theory/eye.png, id=248, 240.9pt x 180.675pt>
+<Images/Theory/eye.png, id=29, 240.9pt x 180.675pt>
 File: Images/Theory/eye.png Graphic file (type png)
 <use Images/Theory/eye.png>
-Package pdftex.def Info: Images/Theory/eye.png  used on input line 115.
+Package pdftex.def Info: Images/Theory/eye.png  used on input line 118.
 (pdftex.def)             Requested size: 204.73033pt x 153.5524pt.
+
+
+LaTeX Warning: Reference `fig:scanners' on page 4 undefined on input line 126.
+
 
 
 [4]
@@ -578,258 +623,51 @@ Package pdftex.def Info: Images/Theory/eye.png  used on input line 115.
 [5 <./Images/Theory/Fingerprint_scanner_identification.jpg> <./Images/Theory/eye.png>]
 
 [6]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 214.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 214.
+
 
 [7]
-Overfull \hbox (13.19894pt too wide) in paragraph at lines 220--221
-\OT1/cmr/m/n/10 and rel-a-tively strong ap-proaches. They are built upon phys-i-cal char-ac-ter-is-tics that an in-di-vid-ual per-ma-nently
- []
-
-
 
 [8]
-Overfull \hbox (4.30891pt too wide) in paragraph at lines 253--259
-\OT1/cmr/m/n/10 sim-plis-tic. A com-pre-hen-sive un-der-stand-ing of vi-sual at-ten-tion must also ac-count for higher-level, vol-un-tary,
- []
-
-
-Overfull \hbox (11.81926pt too wide) in paragraph at lines 265--266
-\OT1/cmr/m/n/10 au-di-tory ex-per-i-ments that while in-for-ma-tion en-ters in par-al-lel, it is sub-se-quently fil-tered into limited-capacity
- []
-
-
 
 [9]
-Overfull \hbox (0.6804pt too wide) in paragraph at lines 273--276
-\OT1/cmr/m/n/10 while No-ton and Stark (1971) iden-ti-fied `scan-paths', demon-strat-ing that even with-out spe-cific in-struc-tions,
- []
-
-
-Overfull \hbox (6.59708pt too wide) in paragraph at lines 283--286
-\OT1/cmr/m/n/10 win-dow' that se-lec-tively trans-mits in-for-ma-tion from the vi-sual buffer, sim-i-lar to Broad-bent's and Treis-man's
- []
-
-
-Overfull \hbox (8.31927pt too wide) in paragraph at lines 288--294
-\OT1/cmr/m/n/10 Visual at-ten-tion can be con-cep-tu-al-ized through two com-ple-men-tary com-po-nents: the \what", cor-re-spond-ing
- []
-
-
 
 [10]
-<Images/Theory/occhio.jpg, id=284, 1027.84pt x 692.5875pt>
+<Images/Theory/occhio.jpg, id=81, 1027.84pt x 692.5875pt>
 File: Images/Theory/occhio.jpg Graphic file (type jpg)
 <use Images/Theory/occhio.jpg>
-Package pdftex.def Info: Images/Theory/occhio.jpg  used on input line 308.
+Package pdftex.def Info: Images/Theory/occhio.jpg  used on input line 311.
 (pdftex.def)             Requested size: 272.97841pt x 183.93639pt.
-<Images/Theory/rods_cones.jpg, id=285, 803.0pt x 1121.18875pt>
+<Images/Theory/rods_cones.jpg, id=82, 803.0pt x 1121.18875pt>
 File: Images/Theory/rods_cones.jpg Graphic file (type jpg)
 <use Images/Theory/rods_cones.jpg>
-Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 333.
+Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 336.
 (pdftex.def)             Requested size: 181.98097pt x 254.08713pt.
 
 
 [11 <./Images/Theory/occhio.jpg>]
 
 [12 <./Images/Theory/rods_cones.jpg>]
-Overfull \hbox (44.93048pt too wide) in paragraph at lines 393--397
-\OT1/cmr/m/n/10 Phys-i-o-log-i-cal nys-tag-mus refers to small, in-vol-un-tary move-ments|including tremors, drifts, and mi-crosac-cades|that
- []
-
-
 
 [13]
 
-[14]
-
-[15]
-<Images/Theory/eog.png, id=309, 481.8pt x 301.125pt>
-File: Images/Theory/eog.png Graphic file (type png)
-<use Images/Theory/eog.png>
-Package pdftex.def Info: Images/Theory/eog.png  used on input line 483.
-(pdftex.def)             Requested size: 204.7292pt x 122.84174pt.
-<Images/Theory/coil.png, id=310, 687.56876pt x 263.98625pt>
-File: Images/Theory/coil.png Graphic file (type png)
-<use Images/Theory/coil.png>
-Package pdftex.def Info: Images/Theory/coil.png  used on input line 490.
-(pdftex.def)             Requested size: 204.72997pt x 122.83691pt.
-<Images/Theory/vog.jpeg, id=311, 182.6825pt x 278.03876pt>
-File: Images/Theory/vog.jpeg Graphic file (type jpg)
-<use Images/Theory/vog.jpeg>
-Package pdftex.def Info: Images/Theory/vog.jpeg  used on input line 500.
-(pdftex.def)             Requested size: 143.31686pt x 122.84229pt.
-<Images/Theory/corneal.jpg, id=312, 1027.84pt x 312.16624pt>
-File: Images/Theory/corneal.jpg Graphic file (type jpg)
-<use Images/Theory/corneal.jpg>
-Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 507.
-(pdftex.def)             Requested size: 204.71744pt x 122.83989pt.
-
-
-[16 <./Images/Theory/eog.png> <./Images/Theory/coil.png (PNG copy)> <./Images/Theory/vog.jpeg> <./Images/Theory/corneal.jpg>]
-
-[17]
-Overfull \hbox (7.62479pt too wide) in paragraph at lines 555--557
-\OT1/cmr/m/n/10 em-pha-sized recog-ni-tion rather than re-call, ex-ploit-ing the hu-man vi-sual sys-tem's ef-fi-ciency in face per-cep-tion. 
- []
-
-
-Overfull \hbox (22.08774pt too wide) in paragraph at lines 577--581
-\OT1/cmr/m/n/10 such as PINs, bio-met-rics, and smart cards re-main vul-ner-a-ble. PINs are eas-ily ex-posed through shoulder-surfing,
- []
-
-
-Overfull \hbox (3.83664pt too wide) in paragraph at lines 582--587
-\OT1/cmr/m/n/10 chal-lenge{response mech-a-nism that de-fends against re-play at-tacks. A pro-to-type tested with 30 par-tic-i-pants
- []
-
-
-
-[18]
-
-[19]
-
-[20]
-Overfull \hbox (5.33778pt too wide) in paragraph at lines 670--674
-[]\OT1/cmr/m/n/10 Rigas et al. [64] ex-am-ined ve-loc-ity and ac-cel-er-a-tion as bio-met-ric in-di-ca-tors by ap-ply-ing the Wald{Wolfowitz
- []
-
-
-Overfull \hbox (4.05981pt too wide) in paragraph at lines 675--678
-\OT1/cmr/m/n/10 Cep-stral Co-ef-fi-cients (MFCCs). Fea-tures such as eye po-si-tion, eye dif-fer-ence, and ve-loc-ity were trans-formed
- []
-
-
-
-[21]
-Overfull \hbox (12.93025pt too wide) in paragraph at lines 713--717
-\OT1/cmr/m/n/10 dy-namic sac-cade char-ac-ter-is-tics with pupil-lary re-sponses, their study aimed to cap-ture a richer rep-re-sen-ta-tion
- []
-
-
-
-[22]
-
-[23]
-Overfull \hbox (27.93045pt too wide) in paragraph at lines 788--791
-\OT1/cmr/m/n/10 can pro-vide com-ple-men-tary in-for-ma-tion to tra-di-tional kine-matic mea-sures, thereby en-hanc-ing the dis-tinc-tive-ness
- []
-
-
-Overfull \hbox (12.06917pt too wide) in paragraph at lines 802--809
-\OT1/cmr/m/n/10 sug-gested by Hare-zlak and Plu-ci-enni[81], presents two neu-ral net-work{based ap-proaches to user iden-ti-fi-ca-tion
- []
-
-
-
-[24]
-Overfull \hbox (1.98593pt too wide) in paragraph at lines 827--831
-\OT1/cmr/m/n/10 Siamese Con-vo-lu-tional Neu-ral Net-works on data from 128 par-tic-i-pants, the study achieved an iden-ti-fi-ca-tion
- []
-
-
-
-[25]
-Overfull \hbox (19.26256pt too wide) in paragraph at lines 863--864
-[]\OT1/cmr/m/n/10 [2] NIST study shows com-put-er-ized fin-ger-print match-ing is highly ac-cu-rate, []$\OT1/cmss/m/n/10 https : / / www . nist . gov / news-[]events /
- []
-
-
-Overfull \hbox (6.07494pt too wide) in paragraph at lines 865--866
-\OT1/cmss/m/n/10 press / 202109 / global[]20210922[]02 . html# : [] : text = In % 20this % 20benchmark % 20test % 2C % 20the ,[] a % 20million %
- []
-
-
-Overfull \hbox (15.22577pt too wide) in paragraph at lines 877--878
-\OT1/cmr/m/n/10 [TIS-SEC]. ACM Trans-ac-tions on In-for-ma-tion and Sys-tem Se-cu-rity, 5(4), 367{397. doi:10.1145/581271.581272 
- []
-
-
-
-[26]
-Overfull \hbox (15.66663pt too wide) in paragraph at lines 907--908
-[]\OT1/cmr/m/n/10 [24] Crane,H.D.,&Steele,C.M.(1985).Generation-Vdual-purkinje-imageeyetracker.AppliedOptics,24, 527{537. 
- []
-
-
-Overfull \hbox (5.83313pt too wide) in paragraph at lines 911--912
-[]\OT1/cmr/m/n/10 [26] A. Maeder, C. Fookes, S. Srid-ha-ran, Gaze based user au-then-ti-ca-tion for per-sonal com-puter ap-pli-ca-tions,
- []
-
-
-Overfull \hbox (0.29152pt too wide) in paragraph at lines 911--912
-\OT1/cmr/m/n/10 in: Pro-ceed-ings of 2004 In-ter-na-tional Sym-po-sium on In-tel-li-gent Mul-ti-me-dia, Video and Speech Pro-cess-ing,
- []
-
-
-Overfull \hbox (9.30106pt too wide) in paragraph at lines 925--926
-\OT1/cmr/m/n/10 hu-man iden-ti-fi-ca-tion. Pat-tern Recog-ni-tion, 48(4), 1027{1038. https://doi.org/10.1016/j.patcog.2014.02.017 
- []
-
-
-Overfull \hbox (11.76375pt too wide) in paragraph at lines 927--928
-[]\OT1/cmr/m/n/10 [34] J. Yin, J. Sun, J. Li, and K. Liu, \An ef-fec-tive gaze-based au-then-ti-ca-tion method with the spa-tiotem-po-ral
- []
-
-
-
-[27]
-Overfull \hbox (18.43756pt too wide) in paragraph at lines 935--938
-[]\OT1/cmr/m/n/10 [38] ADIL HAMID MALLA, A GAZE-BASED AU-THEN-TI-CA-TION SYS-TEM: FROM AU-THEN-TI-CA-TION
- []
-
-
-Overfull \hbox (122.42151pt too wide) in paragraph at lines 941--942
-\OT1/cmr/m/n/10 Move-ment with Brain-wave Data for Mul-ti-modal User Au-then-ti-ca-tion in Ex-tended Re-al-ity. https://doi.org/10.48550/arXiv.2404.18694 
- []
-
-
-Overfull \hbox (13.00804pt too wide) in paragraph at lines 950--951
-[]\OT1/cmr/m/n/10 [44] Vir-ginio Can-toni, Tomas La-co-vara, Marco Porta, and Haochen Wang. 2018. A Study on Gaze-Controlled
- []
-
-
-Overfull \hbox (1.91643pt too wide) in paragraph at lines 962--963
-[]\OT1/cmr/m/n/10 [50] M. Wierzbowski, G. Pochwatko, P. Borkiewicz, D. Cnotkowski, M. Pabi^^Ss-Orzeszyna and P. Kobyli^^Snski,
- []
-
-
-Overfull \hbox (87.92155pt too wide) in paragraph at lines 962--963
-\OT1/cmr/m/n/10 Re-al-ity Ad-junct (ISMAR-Adjunct), Sin-ga-pore, Sin-ga-pore, 2022, pp. 417-422, doi: 10.1109/ISMAR-Adjunct57072.2022.00090. 
- []
-
-
-
-[28]
-
-[29]
-Overfull \hbox (10.48595pt too wide) in paragraph at lines 1013--1014
-\OT1/cmr/m/n/10 (Eds.), Bio-met-ric Au-then-ti-ca-tion, in: Lec-ture Notes in Com-puter Sci-ence, Springer In-ter-na-tional Pub-lish-ing,
- []
-
-
-
-[30] (thesis.aux)
- ***********
-LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-09-02>
- ***********
-Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 745A2ED12C7A483EF90AD662E5CEC02B;8214.
-Package logreq Info: Writing requests to 'thesis.run.xml'.
-\openout1 = `thesis.run.xml'.
-
- ) 
+[14
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:449: pdfTeX error (font expansion): auto expansion is only possible with scalable fonts.
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.449 
+      
+
+ 
 Here is how much of TeX's memory you used:
- 17847 strings out of 468130
- 319486 string characters out of 5430633
- 1159718 words of memory out of 5000000
- 46238 multiletter control sequences out of 15000+600000
- 630802 words of font info for 53 fonts, out of 8000000 for 9000
+ 19727 strings out of 468130
+ 350496 string characters out of 5430633
+ 1218734 words of memory out of 5000000
+ 48019 multiletter control sequences out of 15000+600000
+ 634070 words of font info for 121 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,8n,79p,759b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\david\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmss10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on thesis.pdf (31 pages, 1979957 bytes).
-PDF statistics:
- 447 PDF objects out of 1000 (max. 8388607)
- 80 named destinations out of 1000 (max. 500000)
- 398 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 75i,8n,79p,1067b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:449:  ==> Fatal error occurred, no output PDF file produced!

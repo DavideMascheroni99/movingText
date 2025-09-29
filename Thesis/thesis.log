@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  29 SEP 2025 12:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  29 SEP 2025 18:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -613,7 +613,7 @@ Package biblatex Info: ... file 'thesis.bbl' found.
  (thesis.bbl)
 Package biblatex Info: Reference section=0 on input line 19.
 Package biblatex Info: Reference segment=0 on input line 19.
-<Images/Theory/Logo_UNIPV.svg.png, id=179, 1284.8pt x 940.51375pt>
+<Images/Theory/Logo_UNIPV.svg.png, id=175, 1284.8pt x 940.51375pt>
 File: Images/Theory/Logo_UNIPV.svg.png Graphic file (type png)
 <use Images/Theory/Logo_UNIPV.svg.png>
 Package pdftex.def Info: Images/Theory/Logo_UNIPV.svg.png  used on input line 28.
@@ -661,12 +661,12 @@ l.62 \newpage
 [2]
 
 [3]
-<Images/Theory/Fingerprint_scanner_identification.jpg, id=247, 1284.8pt x 963.6pt>
+<Images/Theory/Fingerprint_scanner_identification.jpg, id=242, 1284.8pt x 963.6pt>
 File: Images/Theory/Fingerprint_scanner_identification.jpg Graphic file (type jpg)
 <use Images/Theory/Fingerprint_scanner_identification.jpg>
 Package pdftex.def Info: Images/Theory/Fingerprint_scanner_identification.jpg  used on input line 117.
 (pdftex.def)             Requested size: 204.73033pt x 153.5469pt.
-<Images/Theory/eye.png, id=248, 240.9pt x 180.675pt>
+<Images/Theory/eye.png, id=243, 240.9pt x 180.675pt>
 File: Images/Theory/eye.png Graphic file (type png)
 <use Images/Theory/eye.png>
 Package pdftex.def Info: Images/Theory/eye.png  used on input line 124.
@@ -690,12 +690,12 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 [9]
 
 [10]
-<Images/Theory/occhio.jpg, id=285, 1027.84pt x 692.5875pt>
+<Images/Theory/occhio.jpg, id=280, 1027.84pt x 692.5875pt>
 File: Images/Theory/occhio.jpg Graphic file (type jpg)
 <use Images/Theory/occhio.jpg>
 Package pdftex.def Info: Images/Theory/occhio.jpg  used on input line 317.
 (pdftex.def)             Requested size: 272.97841pt x 183.93639pt.
-<Images/Theory/rods_cones.jpg, id=286, 803.0pt x 1121.18875pt>
+<Images/Theory/rods_cones.jpg, id=281, 803.0pt x 1121.18875pt>
 File: Images/Theory/rods_cones.jpg Graphic file (type jpg)
 <use Images/Theory/rods_cones.jpg>
 Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 342.
@@ -711,22 +711,22 @@ Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 342.
 [14]
 
 [15]
-<Images/Theory/eog.png, id=310, 481.8pt x 301.125pt>
+<Images/Theory/eog.png, id=305, 481.8pt x 301.125pt>
 File: Images/Theory/eog.png Graphic file (type png)
 <use Images/Theory/eog.png>
 Package pdftex.def Info: Images/Theory/eog.png  used on input line 492.
 (pdftex.def)             Requested size: 204.7292pt x 122.84174pt.
-<Images/Theory/coil.png, id=311, 687.56876pt x 263.98625pt>
+<Images/Theory/coil.png, id=306, 687.56876pt x 263.98625pt>
 File: Images/Theory/coil.png Graphic file (type png)
 <use Images/Theory/coil.png>
 Package pdftex.def Info: Images/Theory/coil.png  used on input line 499.
 (pdftex.def)             Requested size: 204.72997pt x 122.83691pt.
-<Images/Theory/vog.jpeg, id=312, 182.6825pt x 278.03876pt>
+<Images/Theory/vog.jpeg, id=307, 182.6825pt x 278.03876pt>
 File: Images/Theory/vog.jpeg Graphic file (type jpg)
 <use Images/Theory/vog.jpeg>
 Package pdftex.def Info: Images/Theory/vog.jpeg  used on input line 509.
 (pdftex.def)             Requested size: 143.31686pt x 122.84229pt.
-<Images/Theory/corneal.jpg, id=313, 1027.84pt x 312.16624pt>
+<Images/Theory/corneal.jpg, id=308, 1027.84pt x 312.16624pt>
 File: Images/Theory/corneal.jpg Graphic file (type jpg)
 <use Images/Theory/corneal.jpg>
 Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 516.
@@ -752,7 +752,9 @@ Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 516.
 [24]
 
 [25]
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 870.
+
+[26]
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 887.
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -761,63 +763,80 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Underfull \hbox (badness 10000) in paragraph at lines 874--875
+Underfull \hbox (badness 10000) in paragraph at lines 891--892
 \T1/lmss/m/n/10 (+20) en / press / 202109 / global _ 20210922 _ 02 . html# : ~ : text = In % 20this % 20benchmark % 20test % 2C % 20the ,[] a %
  []
 
 
 
-[26]
-Underfull \hbox (badness 10000) in paragraph at lines 916--917
+[27]
+Underfull \hbox (badness 10000) in paragraph at lines 933--934
 []\T1/lmr/m/n/10 (+20) [24] Crane,H.D.,&Steele,C.M.(1985).Generation-Vdual-purkinje-imageeyetracker.AppliedOptics,24,
  []
 
 
-Underfull \hbox (badness 4634) in paragraph at lines 934--935
+Underfull \hbox (badness 4634) in paragraph at lines 951--952
 []\T1/lmr/m/n/10 (+20) [33] Can-toni, V., Galdi, C., Nappi, M., Porta, M., & Ric-cio, D. (2015). GANT:
  []
 
 
-Underfull \hbox (badness 2809) in paragraph at lines 934--935
+Underfull \hbox (badness 2809) in paragraph at lines 951--952
 \T1/lmr/m/n/10 (+20) Gaze anal-y-sis tech-nique for hu-man iden-ti-fi-ca-tion. Pat-tern Recog-ni-tion, 48(4), 1027^^U1038.
  []
 
 
 
-[27]
-Underfull \hbox (badness 10000) in paragraph at lines 944--947
+[28]
+Underfull \hbox (badness 10000) in paragraph at lines 961--962
 []\T1/lmr/m/n/10 (+20) [38] ADIL HAMID MALLA, A GAZE-BASED AU-THEN-TI-CA-TION SYS-TEM: FROM
  []
 
 
 
-[28]
-
 [29]
 
-[30] (thesis.aux)
+[30]
+Underfull \hbox (badness 10000) in paragraph at lines 1053--1054
+[]\T1/lmr/m/n/10 (+20) [84] Asish SM, Kul-shreshth AK, Borst CW. User Iden-ti-fi-ca-tion Uti-liz-ing Min-i-mal
+ []
+
+
+Underfull \hbox (badness 3965) in paragraph at lines 1053--1054
+\T1/lmr/m/n/10 (+20) Eye-Gaze Fea-tures in Vir-tual Re-al-ity Ap-pli-ca-tions. Vir-tual Worlds. 2022; 1(1):42-61.
+ []
+
+
+
+[31]
+Underfull \hbox (badness 1237) in paragraph at lines 1055--1056
+[]\T1/lmr/m/n/10 (+20) [85] Sherif Nagib Ab-bas Seha, Dim-itrios Hatz-i-nakos, Ali Shahidi Zandi, Fe-lix J.E. Comeau,
+ []
+
+
+
+[32] (thesis.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 745A2ED12C7A483EF90AD662E5CEC02B;8214.
+(rerunfilecheck)             Checksum: 44EFF2AB21BC75B14E2E34BCE3A6A108;8141.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 20292 strings out of 468130
- 361938 string characters out of 5430633
+ 20294 strings out of 468130
+ 361946 string characters out of 5430633
  1224423 words of memory out of 5000000
- 48476 multiletter control sequences out of 15000+600000
- 684209 words of font info for 141 fonts, out of 8000000 for 9000
+ 48475 multiletter control sequences out of 15000+600000
+ 684274 words of font info for 142 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,1067b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
-Output written on thesis.pdf (31 pages, 2049656 bytes).
+Output written on thesis.pdf (33 pages, 2055937 bytes).
 PDF statistics:
- 443 PDF objects out of 1000 (max. 8388607)
- 80 named destinations out of 1000 (max. 500000)
- 35214 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 446 PDF objects out of 1000 (max. 8388607)
+ 81 named destinations out of 1000 (max. 500000)
+ 35206 words of extra memory for PDF output out of 35830 (max. 10000000)
 

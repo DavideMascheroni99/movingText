@@ -664,6 +664,19 @@ We propose incorporating users’ understanding of password strength into securi
 In a proof-of-concept study (N = 15), participants created both weak and strong passwords.
 Results show that password strength can be predicted from gaze behaviour with 86\% accuracy using machine learning, paving the way for novel interfaces that encourage stronger password choices.
 
+B. L. Tait [83] proposed a study in which 25 participants employed the EyeWriter eye-tracking system to assess whether individual eye movement behavior is sufficiently distinctive for secure biometric authentication.
+The results indicate that behavioral eye movements can be effectively employed for biometric verification, particularly in a one-to-one authentication context, achieving success rates between 96\% and 100\%.
+In contrast, one-to-many identification yielded an accuracy of only 21.83\%. 
+While this demonstrates some potential, the limited sample size restricts the generalizability of the findings and highlights the need for further investigation with larger populations.
+
+With the emergence of Virtual Reality (VR) displays equipped with embedded eye trackers, eye-tracking data is increasingly accessible and can be leveraged for applications such as gaze monitoring, privacy protection, and user authentication.
+User identification is particularly critical in VR due to security and privacy concerns. 
+Previous work has primarily relied on machine learning applied to motion-based data (e.g., body, head, eye, and hand tracking), typically requiring explicit tasks and extensive feature sets. 
+In contrast, Asish SM et al. [84] proposed a system for user identification based on minimal eye-gaze features, without the need for identification-specific tasks. 
+To evaluate user identification, gaze data from an educational VR application were processed with machine learning models (RF, kNN) and deep learning models (CNN, LSTM).
+Results demonstrate that all models achieved identification accuracies exceeding 98\% using only six simple gaze features. 
+The findings underscore the potential of eye-gaze–based identification in VR, while emphasizing its security and privacy implications and acknowledging the limitations of the current study.
+
 \subsection{METHODS BASED ON EYE/GAZE VELOCITY}
 
 Bednarik et al. [62] investigated the potential of eye velocity as a distinguishing feature for biometric purposes.
@@ -811,10 +824,19 @@ A proof of concept on a publicly available dataset demonstrates the effectivenes
 The increasing need for secure digital access, coupled with technological advances and the lack of standardized solutions, continues to drive research into eye movement–based biometrics.
 This work, suggested by Harezlak and Plucienni[81], presents two neural network–based approaches to user identification from eye movement dynamics.
 In the first method, a 100-element time series was constructed to represent eye movement features, including velocity, acceleration, jerk, point-to-point percentage changes, and frequency-domain characteristics. 
-These were modeled using a Long Short-Term Memory (LSTM) network. The second method employed the same dynamic features but derived statistical descriptors from the time series, which were then classified using a dense neural network.
+These were modeled using a Long Short-Term Memory (LSTM) network. 
+The second method employed the same dynamic features but derived statistical descriptors from the time series, which were then classified using a dense neural network.
 Experiments were conducted with the publicly available GazeBase dataset, focusing on recordings obtained under the “jumping point” stimulus condition. 
 Results demonstrate strong discriminative potential: the LSTM model with time series feature vectors achieved 96\% accuracy, while the statistical feature–based method achieved 76\%. 
 These outcomes were observed across a three-year span of recordings, with analyses also considering different temporal segments and stimulus configurations.
+
+The work suggested by Abbas Seha et al. [85] examines the biometric potential of eye movement patterns from low frame rate eye-tracking devices.
+It also explores recognition improvements through additional static and dynamic ocular features, such as eye blinking patterns and periocular shape characteristics.These modalities are relevant for applications like continuous driver authentication in law enforcement. 
+Two datasets were collected using different low frame rate eye trackers, recording eye movements from 55 participants during real driving sessions. 
+For eye gaze, fixation and saccade features—including duration, amplitude, and statistical descriptors—were extracted.
+Blinking features included patterns, speed, acceleration, and power-per-unit-mass profiles, while periocular features comprised eye-opening height, width, and axial ratio. 
+Each modality was evaluated individually, then combined in a multi-modal fusion. While single modalities showed moderate performance, fusion of static and dynamic features significantly improved results, achieving up to a 98.5\% recognition rate and 0\% error rate. 
+This demonstrates that, although single-modality approaches may lack robustness, multi-modal fusion offers high reliability for continuous driver authentication.
 
 \subsection{METHODS BASED ON HEAD ORIENTATION}
 
@@ -838,21 +860,16 @@ Employing Siamese Convolutional Neural Networks on data from 128 participants, t
 Findings indicate that gaze patterns constitute distinctive, idiosyncratic behavioral traits, largely independent of self-reported personal characteristics.
 These results underscore significant privacy and security implications for Social VR environments, where gaze data may be collected passively under conditions of limited movement and variable data quality.
 
+Identifying users of a Virtual Reality (VR) headset enables adaptive interface design, personalization of settings, and adjustment of difficulty levels in both gaming and training applications.
+While most existing identification methods require explicit input, implicit user identification offers a less intrusive alternative that preserves immersion.
+Liebers et al. [82] proposed a biometric identification system leveraging gaze patterns and head orientation during stimulus tracking for user recognition.
+The method was validated through a user study, with a hybrid post-hoc analysis yielding identification accuracies of up to 75\% using an interpretable machine learning model and up to 100\% with a deep learning approach.
+Finally, potential application scenarios are discussed, demonstrating how this approach can enable seamless and implicit user identification in VR environments.
 
-
-
-
-
-
-
-
-
-\subsection{New}
-
-
-
-
-
+Recent research has explored identifying users in virtual reality (VR) based on behavioral data. 
+These approaches often rely on elaborate authentication tasks resistant to “shoulder surfing” but overlook whether identification is possible under natural behavior.
+In the study by Wierzbowski et al. [86], involving 43 participants, the authors investigated whether a viewer of an unseen 360° VR video could be identified using eye-tracking and headset orientation data recorded while viewing other 360° VR videos.
+Using deep learning and classical statistical methods, we achieved up to 75\% average identification accuracy, demonstrating the potential for VR user identification under unforced conditions.
 
 
 \section{experiment}
@@ -941,9 +958,7 @@ These results underscore significant privacy and security implications for Socia
 
 [37] Mohamed Khamis, Ludwig Trotter, Ville Mäkelä, Emanuel von Zezschwitz, Jens Le, Andreas Bulling, and Florian Alt. 2018. CueAuth: Comparing Touch, Mid-Air Gestures, and Gaze for Cue-based Authentication on Situated Displays.Proc. ACM Interact. Mob. Wearable Ubiquitous Technol. 2, 4, Article 174 (Dec. 2018), 21 pages. https://doi.org/10.1145/3287052
 
-[38] ADIL HAMID MALLA, A GAZE-BASED AUTHENTICATION SYSTEM: FROM AUTHENTICATION TO
-INTRUSION DETECTION. Submitted to the Office of Graduate and Professional Studies of
-Texas A\&M Universityin partial fulfillment of the requirements for the degree of MASTER OF SCIENCE.
+[38] ADIL HAMID MALLA, A GAZE-BASED AUTHENTICATION SYSTEM: FROM AUTHENTICATION TO INTRUSION DETECTION. Submitted to the Office of Graduate and Professional Studies of Texas A\&M Universityin partial fulfillment of the requirements for the degree of MASTER OF SCIENCE.
 
 [39] Ivo Sluganovic, Marc Roeschlin, Kasper B. Rasmussen, and Ivan Martinovic. 2018. Analysis of Reflexive Eye Movements for Fast Replay-Resistant Biometric Authentication. ACM Trans. Priv. Secur. 22, 1, Article 4 (February 2019), 30 pages. https://doi.org/10.1145/3281745
 
@@ -951,8 +966,7 @@ Texas A\&M Universityin partial fulfillment of the requirements for the degree o
 
 [41] N. Alsufyani, A. Ali, S. Hoque and F. Deravi, "Biometric presentation attack detection using gaze alignment," 2018 IEEE 4th International Conference on Identity, Security, and Behavior Analysis (ISBA), Singapore, 2018, pp. 1-8, doi:10.1109/ISBA.2018.8311472.
 
-[42] Dillon Lohr, Michael J. Proulx, Mehedi Hasan Raju, Oleg V. Komogortsev. Ocular Authentication: Fusion of Gaze and Periocular Modalities. 
-https://doi.org/10.48550/arXiv.2505.17343
+[42] Dillon Lohr, Michael J. Proulx, Mehedi Hasan Raju, Oleg V. Komogortsev. Ocular Authentication: Fusion of Gaze and Periocular Modalities.  https://doi.org/10.48550/arXiv.2505.17343
 
 [43] D’Amelio A, Patania S, Bursic S, Cuculo V, Boccignone G. Using Gaze for Behavioural Biometrics. Sensors. 2023; 23(3):1262. https://doi.org/10.3390/s23031262
 
@@ -970,8 +984,7 @@ https://doi.org/10.48550/arXiv.2505.17343
 
 [50] M. Wierzbowski, G. Pochwatko, P. Borkiewicz, D. Cnotkowski, M. Pabiś-Orzeszyna and P. Kobyliński, "Behavioural Biometrics in Virtual Reality: To What Extent Can We Identify a Person Based Solely on How They Watch 360-Degree Videos?," 2022 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct), Singapore, Singapore, 2022, pp. 417-422, doi: 10.1109/ISMAR-Adjunct57072.2022.00090.
 
-[51] Andrea Casanova, Lucia Cascone, Aniello Castiglione, Weizhi Meng, Chiara Pero, User recognition based on periocular biometrics and touch dynamics, Pattern Recognition Letters, Volume 148, 2021, Pages 114-120, ISSN 0167-8655.
-https://doi.org/10.1016/j.patrec.2021.05.006.
+[51] Andrea Casanova, Lucia Cascone, Aniello Castiglione, Weizhi Meng, Chiara Pero, User recognition based on periocular biometrics and touch dynamics, Pattern Recognition Letters, Volume 148, 2021, Pages 114-120, ISSN 0167-8655. https://doi.org/10.1016/j.patrec.2021.05.006.
 
 [52] Rubo, M., Son, G. Social gaze fingerprints: identifying social virtual reality users by their eye gaze patterns. Virtual Reality 29, 144 (2025). https://doi.org/10.1007/s10055-025-01210-4
 
@@ -1033,6 +1046,17 @@ https://doi.org/10.1016/j.patrec.2021.05.006.
 
 [81] Harezlak K, Pluciennik E. Towards Improved Eye Movement Biometrics: Investigating New Features with Neural Networks. Sensors. 2025; 25(14):4304. https://doi.org/10.3390/s25144304
 
+[82] Jonathan Liebers, Patrick Horn, Christian Burschik, Uwe Gruenefeld, and Stefan Schneegass. 2021. Using Gaze Behavior and Head Orientation for Implicit Identification in Virtual Reality. In Proceedings of the 27th ACM Symposium on Virtual Reality Software and Technology (VRST '21). Association for Computing Machinery, New York, NY, USA, Article 22, 1–9. https://doi.org/10.1145/3489849.3489880
+
+[83] B. L. Tait, "Behavioural Biometrics Authentication Tested Using EyeWriter Technology," 2019 IEEE 12th International Conference on Global Security, Safety and Sustainability (ICGS3), London, UK, 2019, pp. 1-9, doi: 10.1109/ICGS3.2019.8688257.
+
+[84] Asish SM, Kulshreshth AK, Borst CW. User Identification Utilizing Minimal Eye-Gaze Features in Virtual Reality Applications. Virtual Worlds. 2022; 1(1):42-61. https://doi.org/10.3390/virtualworlds1010004
+
+[85] Sherif Nagib Abbas Seha, Dimitrios Hatzinakos, Ali Shahidi Zandi, Felix J.E. Comeau, Improving eye movement biometrics in low frame rate eye-tracking devices using periocular and eye blinking features, Image and Vision Computing, Volume 108, 2021, 104124, ISSN 0262-8856, https://doi.org/10.1016/j.imavis.2021.104124.
+
+[86] M. Wierzbowski, G. Pochwatko, P. Borkiewicz, D. Cnotkowski, M. Pabiś-Orzeszyna and P. Kobyliński, "Behavioural Biometrics in Virtual Reality: To What Extent Can We Identify a Person Based Solely on How They Watch 360-Degree Videos?," 2022 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct), Singapore, Singapore, 2022, pp. 417-422, doi: 10.1109/ISMAR-Adjunct57072.2022.00090.
+
+[87] Cazzato D, Carcagnì P, Cimarelli C, Voos H, Distante C, Leo M. Ocular Biometrics Recognition by Analyzing Human Exploration during Video Observations. Applied Sciences. 2020; 10(13):4548. https://doi.org/10.3390/app10134548
 
 \end{document}
 

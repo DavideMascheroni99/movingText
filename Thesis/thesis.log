@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  29 SEP 2025 18:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  29 SEP 2025 18:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -754,7 +754,7 @@ Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 516.
 [25]
 
 [26]
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 887.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 889.
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -763,56 +763,16 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Underfull \hbox (badness 10000) in paragraph at lines 891--892
-\T1/lmss/m/n/10 (+20) en / press / 202109 / global _ 20210922 _ 02 . html# : ~ : text = In % 20this % 20benchmark % 20test % 2C % 20the ,[] a %
- []
-
-
 
 [27]
-Underfull \hbox (badness 10000) in paragraph at lines 933--934
-[]\T1/lmr/m/n/10 (+20) [24] Crane,H.D.,&Steele,C.M.(1985).Generation-Vdual-purkinje-imageeyetracker.AppliedOptics,24,
- []
-
-
-Underfull \hbox (badness 4634) in paragraph at lines 951--952
-[]\T1/lmr/m/n/10 (+20) [33] Can-toni, V., Galdi, C., Nappi, M., Porta, M., & Ric-cio, D. (2015). GANT:
- []
-
-
-Underfull \hbox (badness 2809) in paragraph at lines 951--952
-\T1/lmr/m/n/10 (+20) Gaze anal-y-sis tech-nique for hu-man iden-ti-fi-ca-tion. Pat-tern Recog-ni-tion, 48(4), 1027^^U1038.
- []
-
-
 
 [28]
-Underfull \hbox (badness 10000) in paragraph at lines 961--962
-[]\T1/lmr/m/n/10 (+20) [38] ADIL HAMID MALLA, A GAZE-BASED AU-THEN-TI-CA-TION SYS-TEM: FROM
- []
-
-
 
 [29]
 
 [30]
-Underfull \hbox (badness 10000) in paragraph at lines 1053--1054
-[]\T1/lmr/m/n/10 (+20) [84] Asish SM, Kul-shreshth AK, Borst CW. User Iden-ti-fi-ca-tion Uti-liz-ing Min-i-mal
- []
-
-
-Underfull \hbox (badness 3965) in paragraph at lines 1053--1054
-\T1/lmr/m/n/10 (+20) Eye-Gaze Fea-tures in Vir-tual Re-al-ity Ap-pli-ca-tions. Vir-tual Worlds. 2022; 1(1):42-61.
- []
-
-
 
 [31]
-Underfull \hbox (badness 1237) in paragraph at lines 1055--1056
-[]\T1/lmr/m/n/10 (+20) [85] Sherif Nagib Ab-bas Seha, Dim-itrios Hatz-i-nakos, Ali Shahidi Zandi, Fe-lix J.E. Comeau,
- []
-
-
 
 [32] (thesis.aux)
  ***********
@@ -820,23 +780,23 @@ LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 44EFF2AB21BC75B14E2E34BCE3A6A108;8141.
+(rerunfilecheck)             Checksum: 84EE1775F9DD84708D9FDE8E3E18D0EC;8141.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 20294 strings out of 468130
- 361946 string characters out of 5430633
+ 20297 strings out of 468130
+ 362026 string characters out of 5430633
  1224423 words of memory out of 5000000
- 48475 multiletter control sequences out of 15000+600000
+ 48478 multiletter control sequences out of 15000+600000
  684274 words of font info for 142 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,1067b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
-Output written on thesis.pdf (33 pages, 2055937 bytes).
+Output written on thesis.pdf (33 pages, 2052646 bytes).
 PDF statistics:
- 446 PDF objects out of 1000 (max. 8388607)
+ 445 PDF objects out of 1000 (max. 8388607)
  81 named destinations out of 1000 (max. 500000)
  35206 words of extra memory for PDF output out of 35830 (max. 10000000)
 

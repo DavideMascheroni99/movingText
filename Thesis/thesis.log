@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  30 SEP 2025 17:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  30 SEP 2025 18:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -693,12 +693,12 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 <Images/Theory/occhio.jpg, id=280, 1027.84pt x 692.5875pt>
 File: Images/Theory/occhio.jpg Graphic file (type jpg)
 <use Images/Theory/occhio.jpg>
-Package pdftex.def Info: Images/Theory/occhio.jpg  used on input line 381.
+Package pdftex.def Info: Images/Theory/occhio.jpg  used on input line 382.
 (pdftex.def)             Requested size: 272.97841pt x 183.93639pt.
 <Images/Theory/rods_cones.jpg, id=281, 803.0pt x 1121.18875pt>
 File: Images/Theory/rods_cones.jpg Graphic file (type jpg)
 <use Images/Theory/rods_cones.jpg>
-Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 406.
+Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 407.
 (pdftex.def)             Requested size: 181.98097pt x 254.08713pt.
 
 
@@ -714,22 +714,22 @@ Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 406.
 <Images/Theory/eog.png, id=305, 481.8pt x 301.125pt>
 File: Images/Theory/eog.png Graphic file (type png)
 <use Images/Theory/eog.png>
-Package pdftex.def Info: Images/Theory/eog.png  used on input line 556.
+Package pdftex.def Info: Images/Theory/eog.png  used on input line 557.
 (pdftex.def)             Requested size: 204.7292pt x 122.84174pt.
 <Images/Theory/coil.png, id=306, 687.56876pt x 263.98625pt>
 File: Images/Theory/coil.png Graphic file (type png)
 <use Images/Theory/coil.png>
-Package pdftex.def Info: Images/Theory/coil.png  used on input line 563.
+Package pdftex.def Info: Images/Theory/coil.png  used on input line 564.
 (pdftex.def)             Requested size: 204.72997pt x 122.83691pt.
 <Images/Theory/vog.jpeg, id=307, 182.6825pt x 278.03876pt>
 File: Images/Theory/vog.jpeg Graphic file (type jpg)
 <use Images/Theory/vog.jpeg>
-Package pdftex.def Info: Images/Theory/vog.jpeg  used on input line 573.
+Package pdftex.def Info: Images/Theory/vog.jpeg  used on input line 574.
 (pdftex.def)             Requested size: 143.31686pt x 122.84229pt.
 <Images/Theory/corneal.jpg, id=308, 1027.84pt x 312.16624pt>
 File: Images/Theory/corneal.jpg Graphic file (type jpg)
 <use Images/Theory/corneal.jpg>
-Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 580.
+Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 581.
 (pdftex.def)             Requested size: 204.71744pt x 122.83989pt.
 
 
@@ -754,7 +754,7 @@ Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 580.
 [25]
 
 [26]
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 953.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 955.
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -780,7 +780,7 @@ LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 2D36BF2510BA6D337224C6E575013F57;8136.
+(rerunfilecheck)             Checksum: A957A8BC25FD2548A994BB2579074C23;8112.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
@@ -794,7 +794,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,1067b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
-Output written on thesis.pdf (33 pages, 2054335 bytes).
+Output written on thesis.pdf (33 pages, 2054042 bytes).
 PDF statistics:
  445 PDF objects out of 1000 (max. 8388607)
  81 named destinations out of 1000 (max. 500000)

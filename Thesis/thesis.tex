@@ -168,7 +168,9 @@ Furthermore, it is more difficult to try to authenticate using another person's 
 
 \subsection{Behavioral biometric}
 
-Behavioral biometrics is a discipline primarily focused on the verification problem. Unlike physical biometrics, it does not rely on inherent physical characteristics, but rather on a person’s behavior. Each individual behaves differently, using specific skills or strategies to accomplish tasks in everyday life.
+Behavioral biometrics is a discipline primarily focused on the verification problem.
+Unlike physical biometrics, it does not rely on inherent physical characteristics, but rather on a person’s behavior. 
+Each individual behaves differently, using specific skills or strategies to accomplish tasks in everyday life.
 So the machine will be able to collect information about how a subject behave and it will be able to tell us if the user is really who is claiming to be.
 As we can expected the behavior is a soft biometric and less robust compared to the fingerprint or iris recognition.
 In fact this technology is not used in substitution of the former biometric system, but will be used as another security layer to verify the identity of a subject.
@@ -176,88 +178,129 @@ In comparison to the former biometry the system can collect the data in a non in
 
 As per Behavioral Biometrics for Human Identification: Intelligent Applications [4] behavioral biometric can be classified in five different categories based on the information about the user being collected:
 \begin{itemize}
-    \item Authorship based biometric: Is used to collect something that a user produce like a drawing or a written text. Based on this the system will be able to recognize some particular characteristics about the style and verify a subject.
-    \item Human Computer Interaction: Every user has a distinctive behavior when interact directly with a machine. The most famous method to do so is certainly the keyboard and the mouse. 
+    \item Authorship based biometric: Is used to collect something that a user produce like a drawing or a written text. 
+    Based on this the system will be able to recognize some particular characteristics about the style and verify a subject.
+    \item Human Computer Interaction: Every user has a distinctive behavior when interact directly with a machine. 
+    The most famous method to do so is certainly the keyboard and the mouse. 
     The way in which the user perform these actions is used as a method for verification.
-    \item Indirect HCI-based biometrics: This method is related to the second point, so the interaction of a user with a machine. The goal is to use what the users leaves during the interaction, as an indirect information, to verify it. Some examples of indirect information are audit log, program execution traces and memory usage.
+    \item Indirect HCI-based biometrics: This method is related to the second point, so the interaction of a user with a machine.
+    The goal is to use what the users leaves during the interaction, as an indirect information, to verify it. 
+    Some examples of indirect information are audit log, program execution traces and memory usage.
     \item Motor skills: This is probably the best research group because it is based on some characteristic that the user have and learn during his life.
     The motor skill indicate the ability of the user to move muscles in a particular way to perform a task.
     These skills are distinctive to each user and is difficult even to replicate them in the same exact way, so it can be exploited from a verification application.
-    \item Purely behavioral biometrics: The last category is based on the pure ability and the behavior used from a user to perform a task. These doesn't measure any muscle movement or something in particular, but it collect all the distinctive action that a user does.
+    \item Purely behavioral biometrics: The last category is based on the pure ability and the behavior used from a user to perform a task. 
+    These doesn't measure any muscle movement or something in particular, but it collect all the distinctive action that a user does.
     These actions vary from user to user and are based on the knowledge of a subject or the particular way in which he performs a task.
 \end{itemize}
 
-Behavioral biometrics is characterized by several key characteristics. Their universality is limited in the general population because behavioral traits vary in strength or may not exist for everyone. However, when applied in a specific domain, they can achieve full universality since all users are expected to demonstrate the relevant behavior.
+Behavioral biometrics is characterized by several key characteristics. 
+Their universality is limited in the general population because behavioral traits vary in strength or may not exist for everyone. 
+However, when applied in a specific domain, they can achieve full universality since all users are expected to demonstrate the relevant behavior.
 
-In terms of uniqueness, behavioral patterns such as writing styles, gaming strategies, or preferences are not highly distinctive. This makes them more effective for verifying a claimed identity than for identifying individuals in large groups, unless the user base is very small.
+In terms of uniqueness, behavioral patterns such as writing styles, gaming strategies, or preferences are not highly distinctive.
+This makes them more effective for verifying a claimed identity than for identifying individuals in large groups, unless the user base is very small.
 
-Permanence is also a challenge since behavior changes over time as people learn new skills or adapt their techniques. This issue, known as concept drift, is addressed in research on intrusion detection, where adaptive systems are designed to accommodate evolving behaviors.
+Permanence is also a challenge since behavior changes over time as people learn new skills or adapt their techniques.
+This issue, known as concept drift, is addressed in research on intrusion detection, where adaptive systems are designed to accommodate evolving behaviors.
 
-On the positive side, collectability is straightforward: data can be gathered unobtrusively, often without user awareness, and at low cost. Performance, however, tends to be weaker for identification in large databases, though verification accuracy is generally strong for certain behavioral biometrics.
+On the positive side, collectability is straightforward: data can be gathered unobtrusively, often without user awareness, and at low cost. 
+Performance, however, tends to be weaker for identification in large databases, though verification accuracy is generally strong for certain behavioral biometrics.
 
 With respect to acceptability, these methods are often well received due to their non-intrusive nature, though privacy and ethical concerns may arise. 
 
-Finally, circumvention is relatively difficult since it requires deep knowledge of another person’s behavior, but once obtained, imitation can be simple. This highlights the importance of securely encrypting behavioral profiles.
+Finally, circumvention is relatively difficult since it requires deep knowledge of another person’s behavior, but once obtained, imitation can be simple.
+This highlights the importance of securely encrypting behavioral profiles.
 
 \subsection{Some applications of behavioral biometric}
 
 This section is used to present different real world application of behavioral biometric.
-These and other applications are described in Chapter 1, Taxonomy of Behavioral Biometrics, of the book Behavioral Biometrics for Human Identification: Intelligent Applications [4], where they are subdivided into the five categories discussed earlier.
-In the thesis only three applications per typology will be represented to have a general overview. Is important to notice that some applications can be characterized with more than one class.
+These and other applications are described in Chapter 1, Taxonomy of Behavioral Biometrics [4], where they are subdivided into the five categories discussed earlier.
+In the thesis only three applications per typology will be represented to have a general overview. 
+Is important to notice that some applications can be characterized with more than one class.
 
-Starting from Authorship based biometric we have a biometric based on sketch recognition. With this method, proposed by (Al-Zubi, Brömme, \& Tönnies, 2003 [5]) , a user is invited to draw a simple sketch of a simple figure, for example some circles, and he can do it freely in the way he wants.
+Starting from Authorship based biometric we have a biometric based on sketch recognition. 
+With this method, proposed by Al-Zubi et al. [5], a user is invited to draw a simple sketch of a simple figure, for example some circles, and he can do it freely in the way he wants.
 This method captures the distinctive drawing style of the subject, allowing the system to build a model for authentication, achieving an Equal Error Rate (EER) of 7.2\%.
-Another example of this category is email behavior used to identify anomalies into mail messages proposed by (Stolfo, Hershkop, Wang, Nimeskern, \& Hu, 2003a; Stolfo, et al., 2003b)[6].
+Another example of this category is email behavior used to identify anomalies into mail messages proposed by Stolfo et al. [6].
 In fact the users follow some habits when they write or read an email.
-The time in which the subject reads the mails and empty the mail list, the structure of the mail, the structure of the greetings and the recipient address can be used to create a feature vectors and build a model on that.
+The time in which the subject reads the mails and empty the mail list, the structure of the mail, the structure of the greetings and the recipient address can be used to construct feature vectors and develop predictive models based on them.
 The application achieved a detection rate of 90.5\% in identifying suspicious messages.
-The programming style is also a method used for authorship and was suggested by Spafford et al. [7]. With this method is possible to recognize who is the author of a program and this is useful to prevent malware or virus, with a detection rate of 73\%.
+The programming style is also a method used for authorship and was suggested by Spafford et al. [7]. 
+With this method is possible to recognize who is the author of a program and this is useful to prevent malware or virus, with a detection rate of 73\%.
 To create a model the indentation, the comment stile, the programming language used, variable names, type editor and so on are used as features.
 
 The second group of models is the Human and computer interaction class and the email behavior described before is also classified under this name.
 Another example is the game strategy approach, in which a player model is build based on his characteristic when he plays.
 Yampolskiy et al. [8] proposed a system for verification of online poker players based on a behavioral profile which represents a statistical model of player’s strategy.
 Some factors to consider include the range of cards a player holds and the level of aggression in their playstyle. 
-This method can be used not only for verification, reaching an EER of 7\%, but also to give other players hints about an opponent
-Keystroke method is a method that can also be used for identification. The latter check the pattern used and the style a user uses when typing some characters on the keyboard. For example some users are really fasts while others uses only two fingers to type. We need only to type a short word, like a password, to be able to use this for verification while we need a lot more text if we want to take this model into an identification process.
+This method can be used not only for verification, reaching an EER of 7\%, but also to give other players hints about an opponent.
+Keystroke method is a method that can also be used for identification. 
+The latter check the pattern used and the style a user uses when typing some characters on the keyboard. 
+For example some users are really fasts while others uses only two fingers to type.
+We need only to type a short word, like a password, to be able to use this for verification while we need a lot more text if we want to take this model into an identification process.
 The keystroke approach for verification was proposed by Bergadano et al. [9], achieving a False Acceptance Rate (FAR) of 0.01\% and a False Rejection Rate (FRR) of 4\%.
 
 The main applications of indirect HCI are surely the audit log, GUI interaction and network traffic.
-The audit log is a track that the operating system write automatically about a user activity. CPU and I/O usage, file creation and number of usage of a folder are data collected in a non-intrusive manner and it can be used to verify that the person using the PC is the legitimate user with a detection rate of 93\% and a false positive rate of 8\%.
+The audit log is a track that the operating system write automatically about a user activity.
+CPU and I/O usage, file creation and number of usage of a folder are data collected in a non-intrusive manner and it can be used to verify that the person using the PC is the legitimate user, with a detection rate of 93\% and a false positive rate of 8\%.
 Given the overwhelming amount of information available, using a random sample is a reasonable approach.
 Since the high potential of this approach there are a lot of researches in this field and one of them was performed by Denning, 1987 [10].
-While GUI interaction, proposed by  Garg et al. (Garg, et al., 2006) [11], collects data about the interaction of a user with a graphic interface. The collected data enables the creation of advanced behavioral profiles of the system’s users. This comprehensive information can provide insights that are not obtainable from commonly analyzed command-line data.
+While GUI interaction, proposed by  Garg et al. [11], collects data about the interaction of a user with a graphic interface.
+The collected data enables the creation of advanced behavioral profiles of the system’s users. 
+This comprehensive information can provide insights that are not obtainable from commonly analyzed command-line data.
 In fact it reaches a detection rate of 96.15\% and a false positive rate of 3.85\%.
-Network traffic analysis has grown significantly in recent years due to the large volume of data arriving from outside the organization. The main focus is to analyse various packet attributes in network traffic, including IP protocol types, packet size, server port numbers, source and destination IP prefixes, Time-To-Live values, IP/TCP header lengths and so on. The goal is to build a user profile based on these data and easily detect a deviation from the normal behavior and mark it as suspect.
-Due to the importance of this topic, extensive research has been conducted, including the work of Novikov (2005) [12]. The combined studies achieved a detection rate of 96.2\% with a false positive rate of only 0.0393\%.
+Network traffic analysis has grown significantly in recent years due to the large volume of data arriving from outside the organization. 
+The main focus is to analyse various packet attributes in network traffic, including IP protocol types, packet size, server port numbers, source and destination IP prefixes, Time-To-Live values, IP/TCP header lengths and so on. 
+The goal is to build a user profile based on these data and easily detect a deviation from the normal behavior and mark it as suspect.
+Due to the importance of this topic, extensive research has been conducted, including the work of Novikov [12]. 
+The combined studies achieved a detection rate of 96.2\% with a false positive rate of only 0.0393\%.
 
-One common approach of verification based on motor skill quality was proposed by (Westeyn, Pesti,Park, \& Starner, 2005 [13]; Westeyn \& Starner, 2004 [14]) and is based on blinking. During the creation of the model the user listen a song and blink following the rhythm. Different factor are taken in consideration as the moment in which the user blink, the distance between each of them and the time in which the eye remain closed during that action. After the storage of a subject data is possible to being authenticated blinking again with the same stored song with a detection rate of 82.02\%.
-Another famous application is the gait verification method proposed by (BenAbdelkader, Cutler, \& Da
-vis, 2002 [15]; Kale, et al., 2004 [16]). The profile of a user is built on the way a user walk taking in consideration the length of the steps, the bounce, distance between the two feet and distance between a foot and the head. This characteristic can changed due to some external factor like pregnancy, body weight or injuries. The advantage of this technique is that can be recorder in a non-intrusive manner using a camera and reaching a detection rate of 90\%.
+One common approach of verification based on motor skill quality was proposed by Westeyn et al. [14] and is based on blinking. 
+During the creation of the model the user listen a song and blink following the rhythm. 
+Different factor are taken in consideration as the moment in which the user blink, the distance between each of them and the time in which the eye remain closed during that action. 
+After the storage of a subject data is possible to being authenticated blinking again with the same stored song with a detection rate of 82.02\%.
+Another famous application is the gait verification method proposed by BenAbdelkader et al. [16].
+The profile of a user is built on the way a user walk taking in consideration the length of the steps, the bounce, distance between the two feet and distance between a foot and the head. 
+This characteristic can changed due to some external factor like pregnancy, body weight or injuries. 
+The advantage of this technique is that can be recorder in a non-intrusive manner using a camera and reaching a detection rate of 90\%.
 The keystroke approach, described earlier, is another method that falls into both this category and the HCI category.
 
 The last category is purely behavioral and shares with the authorship category the application of sketch verification.
 Another important application of this category is car driving style.
-People operate vehicles in very different ways—some drive cautiously and slowly, while others are more aggressive, often speeding or tailgating. Consequently, driving behavior can be considered a form of behavioral biometric. Erdogan et al. (2005a [17]; 2005b [18]) and Erzin et al. (2006) [19] demonstrated that by analyzing variables such as accelerator and brake pedal pressure (in kilogram force per square centimeter), vehicle speed (in revolutions per minute), and steering angle (ranging from \(-720\) to +720 degrees), it is possible to achieve effective genuine versus impostor driver authentication with a detection rate of 88.25\%.
+People operate vehicles in very different ways—some drive cautiously and slowly, while others are more aggressive, often speeding or tailgating. 
+Consequently, driving behavior can be considered a form of behavioral biometric. 
+Erdogan et al. [18] and Erzin et al. [19] demonstrated that by analyzing variables such as accelerator and brake pedal pressure (in kilogram force per square centimeter), vehicle speed (in revolutions per minute), and steering angle (ranging from \(-720\) to +720 degrees), it is possible to achieve effective genuine versus impostor driver authentication with a detection rate of 88.25\%.
 The last example of this class is based on credit card usage.
-Data mining techniques are widely applied in credit card fraud detection, often by identifying statistical outliers such as unusual transactions, distant locations, or simultaneous card use. Outlier detection methods rely on distance, density, projection, or distribution analysis. 
-Brause et al. (1999) [20] developed a rule-based model using symbolic and analog transaction data, showing that analog data alone is insufficient for reliably detecting fraud with a detection rate of 99.995\% and a FRR of 20\%.
+Data mining techniques are widely applied in credit card fraud detection, often by identifying statistical outliers such as unusual transactions, distant locations, or simultaneous card use. 
+Outlier detection methods rely on distance, density, projection, or distribution analysis. 
+Brause et al. [20] developed a rule-based model using symbolic and analog transaction data, showing that analog data alone is insufficient for reliably detecting fraud with a detection rate of 99.995\% and a FRR of 20\%.
 
 \subsection{Soft Biometric}
 
-Behavioral biometrics is considered a soft biometric approach because it is generally weaker and less stable than traditional biometric systems. Unlike traditional biometric applications, such as fingerprint or iris recognition, which are based on physiological traits that remain largely constant throughout a person’s life, behavioral biometrics rely on dynamic patterns of human activity.
+Behavioral biometrics is considered a soft biometric approach because it is generally weaker and less stable than traditional biometric systems. 
+Unlike traditional biometric applications, such as fingerprint or iris recognition, which are based on physiological traits that remain largely constant throughout a person’s life, behavioral biometrics rely on dynamic patterns of human activity.
 
-Traditional biometric systems, particularly fingerprint and iris recognition, are regarded as highly reliable and relatively strong approaches. They are built upon physical characteristics that an individual permanently possesses, making them highly distinctive and resistant to change. As noted earlier, these two modalities can reach nearly 100\% accuracy in identification tasks, making them capable of reliably authenticating an individual even within large populations.
+Traditional biometric systems, particularly fingerprint and iris recognition, are regarded as highly reliable and relatively strong approaches. 
+They are built upon physical characteristics that an individual permanently possesses, making them highly distinctive and resistant to change. 
+As noted earlier, these two modalities can reach nearly 100\% accuracy in identification tasks, making them capable of reliably authenticating an individual even within large populations.
 
-By contrast, behavioral biometric technologies can sometimes be applied for identification, but they are generally more suitable for verification tasks. Their typically lower accuracy in identification makes them less suitable as standalone replacements for traditional physiological biometrics. This limitation arises from the fact that behavior is inherently variable: the way a person types, writes, speaks, or drives may change depending on mood, fatigue, health, stress, or environmental conditions.
+By contrast, behavioral biometric technologies can sometimes be applied for identification, but they are generally more suitable for verification tasks. 
+Their typically lower accuracy in identification makes them less suitable as standalone replacements for traditional physiological biometrics. 
+This limitation arises from the fact that behavior is inherently variable: the way a person types, writes, speaks, or drives may change depending on mood, fatigue, health, stress, or environmental conditions.
 
-Nevertheless, behavioral biometrics hold a unique advantage. Unlike traditional biometrics, which often require active cooperation (e.g., placing a finger on a scanner or looking into an iris reader), behavioral systems can operate passively. They collect data continuously in the background, often without explicit effort or awareness on the part of the user. This makes them particularly attractive for continuous authentication scenarios, where the system does not rely on a single login event but instead monitors user behavior throughout a session to ensure that the authenticated person remains the one interacting with the system.
+Nevertheless, behavioral biometrics hold a unique advantage. 
+Unlike traditional biometrics, which often require active cooperation (e.g., placing a finger on a scanner or looking into an iris reader), behavioral systems can operate passively. 
+They collect data continuously in the background, often without explicit effort or awareness on the part of the user. 
+This makes them particularly attractive for continuous authentication scenarios. 
+Instead of relying on a single login event, the system monitors user behavior throughout a session to ensure that the authenticated person remains the one interacting with it.
+Another strength of behavioral biometrics is their potential to complement traditional systems. 
+For instance, combining fingerprint authentication with continuous keystroke analysis or touch dynamics provides a layered defense: even if a fingerprint is compromised, the behavioral system can still flag anomalies. 
+This layered approach enhances both usability and security, reducing the risk of unauthorized access.
 
-Another strength of behavioral biometrics is their potential to complement traditional systems. For instance, combining fingerprint authentication with continuous keystroke analysis or touch dynamics provides a layered defense: even if a fingerprint is compromised, the behavioral system can still flag anomalies. This layered approach enhances both usability and security, reducing the risk of unauthorized access.
-
-Behavioral biometrics also raise important privacy and ethical considerations. Because these systems can function unobtrusively in the background, they may collect user data without the individual’s explicit awareness. While this capability enhances security, it also underscores the need for strict regulation, informed consent, and robust data protection measures to prevent misuse.
-
-
+Behavioral biometrics also raise important privacy and ethical considerations. 
+Because these systems can function unobtrusively in the background, they may collect user data without the individual’s explicit awareness. 
+While this capability enhances security, it also underscores the need for strict regulation, informed consent, and robust data protection measures to prevent misuse.
 
 \newpage
 

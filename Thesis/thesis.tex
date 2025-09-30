@@ -73,15 +73,32 @@
 \section{Introduction}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.7\baselineskip}
+In recent years, new information technologies have become increasingly widespread in everyday life. 
+Initially, the most prominent example was the personal computer, which revolutionized the way individuals work, communicate, and access information.
+However, technological development has progressed rapidly, and today there is a wide variety of smart devices available on the market.
+Such technologies encompass tablets, wearable devices, and home automation systems, with mobile phones representing the most prominent example.
+According to Statista [1], in 2024 more than 7.2 billion people worldwide own a smartphone, making it one of the most ubiquitous devices in human history.
+The growing reliance on such devices has brought tremendous convenience but also introduced significant security challenges. 
+Mobile devices store and process sensitive personal information, such as banking details, private communications, and location history. 
+This makes them prime targets for cyberattacks, and without adequate protection, they could be exploited for identity theft, financial fraud, and unauthorized access to personal data.
+To address these risks, multiple layers of security have been developed for mobile devices, including passwords, PINs, fingerprint scans, and facial recognition.
+However, these traditional methods often have limitations, such as being susceptible to theft, spoofing, or user inconvenience. 
+This thesis focuses on a more advanced and promising approach: behavioral biometrics.
+Behavioral biometrics examine the distinctive ways in which users interact with a device, enabling continuous identity verification.
+This approach provides user authentication in a less intrusive way, but unfortunatelly it doesn't reach the accuracy of the traditional biometric approach.
+For this reason behavioral biometric is rarely used as the main approach for user identification, but instead represents an additional layer of security to build on top of the traditional approaches.
+
 
 \newpage
 
-\section{Behavioural Biometric}
+\section{Behavioral Biometric}
 \noindent
-In recent years, new information technologies have become increasingly widespread in everyday life. Initially, the most prominent example was the personal computer, but today there is a wide variety of devices available on the market. Currently, the most notable example is the mobile phone. According to Statista [1], in 2024 more than 7.2 billion people worldwide own a smartphone.
-
-All of this has required significant efforts to secure these devices, as they would otherwise be highly vulnerable to attacks.
-There exists several layer of security on these devices, but the thesis will mainly focus on a method for verifying a user based on behavioral biometrics.
+As per Jim Holdsworth et al. [88] Behavioral biometrics is a form of authentication that analyzes the unique patterns in a user’s activity to verify their identity. 
+In particular this discipline is able to collect, in a non intrusive way, a distinctive way in which a user achieve a task.
+As we said earlier this technique achieve low performance to be used as the only authentication method in a system, so it is used as a complement of more secure solutions.
+This additional level of security will focus only on a verification purpose to detect possible attacks or fraud.
+A major advantage over traditional PIN or password-based methods is that mimicking the genuine user’s behavioral patterns to gain system access is considerably more difficult.
+These advantages have contributed to the growing prominence of the field, which has attracted considerable research attention in recent years.
 
 \subsection{Identification vs Verification}
 
@@ -89,7 +106,8 @@ An important thing to mention is surely the difference between identification an
 In fact, this difference represents the basis through which various biometric technologies have been developed.
 
 Identification is the process by which a subject is identified, based on some characteristics that it possesses, from a large number of other subjects.
-Identification establishes a user's identity based on the information they provide. This can include a username, email address, or any other information that uniquely identifies them.
+Identification establishes a user's identity based on the information they provide. 
+This can include a username, email address, or any other information that uniquely identifies them.
 
 Verification is the process by which a machine can verify the correct identity of a subject.
 In particular a user can only be accepted or rejected, but not recognized over a large number of users.
@@ -97,7 +115,9 @@ Verification confirms that the user is who they claim to be by comparing the inf
 
 \subsection{Biometric based on identification}
 
-The most well-known biometric technologies are those based on iris recognition and fingerprint scanning. Unlike traditional passwords, which identify a user through information they know, these technologies rely on intrinsic physical characteristics of the individual. They were specifically developed with the goal of user identification.
+The most well-known biometric technologies are those based on iris recognition and fingerprint scanning. 
+Unlike traditional passwords, which identify a user through information they know, these technologies rely on intrinsic physical characteristics of the individual.
+They were specifically developed with the goal of user identification.
 
 Fingerprints are a unique feature that every person has, and can be used to distinguish a person between every other subjects. 
 Biometrics uses the fingerprint to identify and authenticate a person.
@@ -132,7 +152,8 @@ The process is similar to that of a fingerprint, with some minor differences in 
 The figure \ref{fig:scanners} shows a real world example of scanners used for fingerprint and iris authentication and identification.
 
 As per Nist [2] the best fingerprint systems can reach an accuracy of more than 99\%.
-In particular, their test used operational fingerprints from a variety of U.S. and state government sources. A total of 48,105 fingerprint sets from 25,309 individuals, comprising 393,370 distinct fingerprint images, were used in the test.
+In particular, their test used operational fingerprints from a variety of U.S. and state government sources. 
+A total of 48,105 fingerprint sets from 25,309 individuals, comprising 393,370 distinct fingerprint images, were used in the test.
 The performance was based on how many fingerprint images of a person are matched.
 The best system was accurate 98.6 percent of the time on single-finger tests, 99.6 percent of the time on two-finger tests, and 99.9 percent of the time for tests involving four or more fingers.
 These results were obtained for a false positive rate of 0.01\%, which indicates the people who should have been rejected but were instead accepted by the system.
@@ -782,7 +803,7 @@ In addition to pupil features, temporal and spatial eye-movement features were a
 Classification was performed using k-Nearest Neighbors (kNN) and Support Vector Machines. 
 Across the three experimental settings, equal error rates (EER) ranged from 3.98\% to 9.27\%, underscoring the value of combining pupil size with dynamic ocular features for reliable biometric identification.
 
-The following work, proposed by Casanova et al. [51], develops a web user identification model by analyzing behavioural biometrics from touch dynamics and periocular characteristics such as pupil movements, blinks, and fixations.
+The following work, proposed by Casanova et al. [51], develops a web user identification model by analyzing behavioral biometrics from touch dynamics and periocular characteristics such as pupil movements, blinks, and fixations.
 A feature-level fusion approach is applied, combining different distance measures (Euclidean, Bray-Curtis, Manhattan, Canberra, Chebyshev, Cosine) to determine whether a test sample matches the target subject.
 Multi-data processing methods such as Canonical Correlation Analysis (CCA) and Principal Component Analysis (PCA) are used to further enhance performance.
 Results show that fusing these biometric traits significantly improves accuracy, achieving over 92\%, surpassing individual biometrics.
@@ -853,7 +874,7 @@ The results showed that precision ranged from 81\% to 83\%, while recall ranged 
 
 M. Wierzbowski et al. [50] conducted an investigation involving 43 participants who viewed multiple 360-degree VR videos while their eye-tracking data and headset orientation were recorded.
 Using both deep learning and classical statistical methods, the researchers tested whether a viewer of a previously unseen VR video could be identified based on prior viewing data. 
-The experiments achieved a maximum average identification accuracy of 75\%, demonstrating the potential for identifying VR users under unforced behavioural conditions.
+The experiments achieved a maximum average identification accuracy of 75\%, demonstrating the potential for identifying VR users under unforced behavioral conditions.
 
 This research, conducted by Rubo et al. [52], investigates the feasibility of implicit user identification in Social Virtual Reality (VR) based solely on eye gaze patterns during dyadic interactions.
 Employing Siamese Convolutional Neural Networks on data from 128 participants, the study achieved an identification accuracy of 95.50\% by combining models for gaze during speaking and listening. 
@@ -1059,6 +1080,10 @@ Using deep learning and classical statistical methods, we achieved up to 75\% av
 [86] M. Wierzbowski, G. Pochwatko, P. Borkiewicz, D. Cnotkowski, M. Pabiś-Orzeszyna and P. Kobyliński, "Behavioural Biometrics in Virtual Reality: To What Extent Can We Identify a Person Based Solely on How They Watch 360-Degree Videos?," 2022 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct), Singapore, Singapore, 2022, pp. 417-422, doi: 10.1109/ISMAR-Adjunct57072.2022.00090.
 
 [87] Cazzato D, Carcagnì P, Cimarelli C, Voos H, Distante C, Leo M. Ocular Biometrics Recognition by Analyzing Human Exploration during Video Observations. Applied Sciences. 2020; 10(13):4548. https://doi.org/10.3390/app10134548
+
+[88] Jim Holdsworth, Matthew Kosinski, What is behavioral biometrics? https://www.ibm.com/think/topics/behavioral-biometrics
+
+
 \end{raggedright}
 
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  1 OCT 2025 18:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  1 OCT 2025 19:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -764,9 +764,17 @@ Package pdftex.def Info: Images/Experiment/tester.png  used on input line 968.
 [27 <./Images/Experiment/tester.png>]
 
 [28{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}]
+<Images/Experiment/tester_speed.png, id=387, 354.32375pt x 193.22188pt>
+File: Images/Experiment/tester_speed.png Graphic file (type png)
+<use Images/Experiment/tester_speed.png>
+Package pdftex.def Info: Images/Experiment/tester_speed.png  used on input line 1042.
+(pdftex.def)             Requested size: 272.97841pt x 148.86385pt.
 
-[29]
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 1057.
+
+[29 <./Images/Experiment/tester_speed.png>]
+
+[30]
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 1098.
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -776,8 +784,6 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 
 
-[30]
-
 [31]
 
 [32]
@@ -786,7 +792,9 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 [34]
 
-[35] (thesis.aux)
+[35]
+
+[36] (thesis.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -798,17 +806,17 @@ Package logreq Info: Writing requests to 'thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 20334 strings out of 468130
- 362655 string characters out of 5430633
- 1225470 words of memory out of 5000000
- 48492 multiletter control sequences out of 15000+600000
+ 20344 strings out of 468130
+ 362974 string characters out of 5430633
+ 1225514 words of memory out of 5000000
+ 48500 multiletter control sequences out of 15000+600000
  689328 words of font info for 150 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,1067b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
-Output written on thesis.pdf (36 pages, 2121524 bytes).
+Output written on thesis.pdf (37 pages, 2132945 bytes).
 PDF statistics:
- 498 PDF objects out of 1000 (max. 8388607)
- 88 named destinations out of 1000 (max. 500000)
- 37283 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 509 PDF objects out of 1000 (max. 8388607)
+ 90 named destinations out of 1000 (max. 500000)
+ 37288 words of extra memory for PDF output out of 42996 (max. 10000000)
 

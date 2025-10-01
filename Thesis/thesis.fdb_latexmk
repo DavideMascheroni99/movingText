@@ -1,11 +1,11 @@
 # Fdb version 4
-["biber thesis"] 0 "thesis.bcf" "thesis.bbl" "thesis" 1759336206.48606 -1
-  "thesis.bcf" 1759336206 108053 92d793237121c8444051d54a8bc8b79c "pdflatex"
+["biber thesis"] 0 "thesis.bcf" "thesis.bbl" "thesis" 1759340126.80609 -1
+  "thesis.bcf" 1759340126 108053 92d793237121c8444051d54a8bc8b79c "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1759336204.52466 "c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex" "thesis.pdf" "thesis" 1759336206.48678 0
+["pdflatex"] 1759340123.46404 "c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex" "thesis.pdf" "thesis" 1759340126.80724 0
   "C:/Users/david/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1759140422 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/david/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1759080963 13286966 9e2c425acc25671a2748b4a1afa3f158 ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc" 1256929440 2375 baa924870cfb487815765f9094cf3728 ""
@@ -120,6 +120,7 @@
   "C:/Users/david/AppData/Local/Programs/MiKTeX/tex/latex/tools/verbatim.sty" 1749468414 7532 26d26e9d8f2ca784270d5da8ec7d102b ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "Images/Experiment/tester.png" 1759313809 11738 c08d4724990d2d7cd37456cc442eca31 ""
+  "Images/Experiment/tester_speed.png" 1759337398 11136 6d4a8598fe2d23a389197841a9271e49 ""
   "Images/Theory/Fingerprint_scanner_identification.jpg" 1749573018 294369 c9a73b565d2d5883b44305476a89ca75 ""
   "Images/Theory/Logo_UNIPV.svg.png" 1749459885 173582 e0af0b457b2c6c2fea3c8292167b8c63 ""
   "Images/Theory/coil.png" 1758561146 241755 d9e1b6ff392cd3a412d3c01d7c4f08dc ""
@@ -129,13 +130,13 @@
   "Images/Theory/occhio.jpg" 1758467324 95074 7cc47098c9bd844fa8fc6db5b2f08ffa ""
   "Images/Theory/rods_cones.jpg" 1758535915 175940 31a9dfdfe2e28eea437702ea024f0164 ""
   "Images/Theory/vog.jpeg" 1758619825 6297 096c1f7ca817b818445f3affa15ea703 ""
-  "c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex" 1759336201 129494 ac730164a45b3fd17b320c8d748eb51d ""
-  "thesis.aux" 1759336206 8561 fa38a4473bdc2c93832e11974b3fb709 "pdflatex"
+  "c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex" 1759340122 134045 d1634c76c85490104fe76930f428f82b ""
+  "thesis.aux" 1759340126 8758 222e195d9eee5aceab328fbba94233a9 "pdflatex"
   "thesis.bbl" 1759162589 0 d41d8cd98f00b204e9800998ecf8427e "biber thesis"
-  "thesis.out" 1759336206 8426 33227b6b3c4ab55d797fc106eeaa6538 "pdflatex"
-  "thesis.run.xml" 1759336206 2238 5924afb24500e169d37f4bf26c1bb90a "pdflatex"
-  "thesis.tex" 1759336201 129494 ac730164a45b3fd17b320c8d748eb51d ""
-  "thesis.toc" 1759336206 4272 60dd7b8dafc97a76eef13e3dff840dc1 "pdflatex"
+  "thesis.out" 1759340126 8426 33227b6b3c4ab55d797fc106eeaa6538 "pdflatex"
+  "thesis.run.xml" 1759340126 2238 5924afb24500e169d37f4bf26c1bb90a "pdflatex"
+  "thesis.tex" 1759340122 134045 d1634c76c85490104fe76930f428f82b ""
+  "thesis.toc" 1759340126 4272 ed0e50eaacd6f6f7c365f985d48ac8ec "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.bcf"

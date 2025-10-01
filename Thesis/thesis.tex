@@ -1032,10 +1032,50 @@ Specifically, each animation type was implemented with two different font sizes 
 
 \subsubsection{Preliminary experiments}
 
+This work also includes a preliminary experiment aimed at selecting appropriate text speed and size parameters. 
+Given the defined animations, it was necessary to determine optimal values for these two variables. 
+To address this question, we conducted a brief exploratory study in the laboratory involving seven participants.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Experiment/tester_speed.png}
+    \caption{Testers' data}
+    \label{fig:prel}
+\end{figure}
+
+The demographic data of these participants are presented in Figure \ref{fig:prel}. 
+The group consisted of six males and one female and four participants wore eyeglasses. 
+Regarding age distribution, three were between 21 and 30 years old, two between 31 and 40 years old, and two between 51 and 60 years old.
+
+The first study aimed to determine the minimum font size at which text remains comfortably readable on the screen during the animation. 
+Participants were asked to select the smallest font size at which they felt confident in reading the text. 
+In addition to the animated stimuli, a static text was presented to participants to allow them to indicate their preferred font size. 
+Rather than relying on specialized software, we manually selected a range of font sizes and displayed the animations to illustrate how each size would appear.
+We then solicited opinions from laboratory members to determine the minimum legible size, and based on this collective input, agreed upon the most suitable values.
+From these suggestions, we identified the largest value among the minimum sizes chosen, which was adopted as the baseline for the experiment. 
+It should be noted that the selected font size may have been influenced by the age of certain participants, as variations in visual acuity and reading comfort can affect preferences. 
+Although this size may appear relatively large, it was considered appropriate for the animation format, ensuring clarity and ease of reading under dynamic viewing conditions. 
+This decision prioritizes both readability and consistency across participants, which is essential for the reliability of gaze-based biometric analysis. 
+Consequently, the font size for the “small text” condition was set to 30, while the “large text” condition was defined as twice this size, at 60.
+
+The objective of the second study was to determine the maximum speed at which a participant can still read text within our dynamic animations. 
+For the purposes of this research, it was not essential for participants to read the entire text. 
+Rather, it was sufficient that they could perceive and process at least a portion of it. 
+This approach reflects the nature of gaze-based biometric authentication, where the goal is to verify an individual's identity based on eye movement patterns rather than full comprehension of the displayed content. 
+In practical applications, authentication can be successfully achieved without requiring the user to fully understand or read every element of the stimulus, as the biometric signature lies in the gaze behavior itself rather than in the complete reading of the text.
+Participants were instructed to select the highest speed at which they were still able to follow the text and comprehend it.
+Specifically, for the horizontal scroll animation, they were asked to read as much as possible, while for the vertical block animation, they were required to read at least the first four lines of text.
+For this purpose we developed a custom software application in Python to present both types of animations, namely horizontal scroll and vertical block, using the previously selected font sizes.
+This resulted in a total of four animation conditions: horizontal scroll with small font (HS-small), horizontal scroll with large font (HS-large), vertical block with small font (VB-small), and vertical block with large font (VB-large).
+During the experiment, participants were instructed to observe each animation and progressively increase its speed by pressing a designated key. 
+They continued this process until the animation became too fast to comfortably follow. 
+At that point, participants had the option to revert to the previous speed setting and select it as their preferred maximum readable speed. 
+This procedure allowed us to determine a personalized speed threshold for each animation condition, reflecting the highest speed at which participants could still comfortably read and track the text. 
 
 
 
-stimuli description + cross
+stimuli description + cross(Descrizione e immagini)
 
 tempo totale animazioni 
 

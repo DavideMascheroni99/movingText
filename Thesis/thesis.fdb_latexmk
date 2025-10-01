@@ -1,14 +1,15 @@
 # Fdb version 4
-["biber thesis"] 1759162571.39668 "thesis.bcf" "thesis.bbl" "thesis" 1759249861.86232 0
-  "thesis.bcf" 1759249861 108053 92d793237121c8444051d54a8bc8b79c "pdflatex"
+["biber thesis"] 0 "thesis.bcf" "thesis.bbl" "thesis" 1759336206.48606 -1
+  "thesis.bcf" 1759336206 108053 92d793237121c8444051d54a8bc8b79c "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1759249859.99926 "c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex" "thesis.pdf" "thesis" 1759249861.8635 0
+["pdflatex"] 1759336204.52466 "c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex" "thesis.pdf" "thesis" 1759336206.48678 0
   "C:/Users/david/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1759140422 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/david/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1759080963 13286966 9e2c425acc25671a2748b4a1afa3f158 ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc" 1256929440 2375 baa924870cfb487815765f9094cf3728 ""
+  "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc" 1256929440 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc" 1256929440 2840 216e6e45ad352e2456e1149f28885bee ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc" 1256929440 2327 9d6df24f9c4f7368395224341a95523a ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc" 1256929440 3031 6c4d3515bf7115d8518af1c9ab97ca44 ""
@@ -20,6 +21,7 @@
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr12.tfm" 1256929440 12092 7b1546e2d096cfd5dcbd4049b0b1ec2e ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr17.tfm" 1256929440 12156 ca1ae6a3c8564e89597f1f993fba1608 ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmr9.tfm" 1256929440 12084 b7f5e4c003de6f57f07c7e9fee73a37c ""
+  "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmri10.tfm" 1256929440 17148 9556e1b5f936b77a796f68d2d559ba99 ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/ec-lmss10.tfm" 1256929440 11176 53ebf7a171df1f9447b387b178768bb5 ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/lmex10.tfm" 1256929440 992 ce925c9346c7613270a79afbee98c070 ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/tfm/public/lm/lmmi10.tfm" 1256929440 1528 6d36b2385e0ca062a654de6ac59cb34f ""
@@ -35,8 +37,12 @@
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb" 1256929440 121021 836464b5fe0c782d94085eb083550ccc ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb" 1256929440 116908 9a7a12d1e4df280ea0ab4aad83cdef88 ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb" 1256929440 126646 56e3d11e90816073e07cc59bd07ef384 ""
+  "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb" 1256929440 30388 702fae6a5f0e6e9c48a1d872b442ffcf ""
+  "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi7.pfb" 1256929440 30789 39c6b966e509dbc60e7a1aaaf85d08a0 ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb" 1256929440 119235 05e5c8d6d60439433e50047898c2c0e0 ""
+  "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb" 1256929440 121145 00b210fbe9efd7ce850c04e64670de9a ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb" 1256929440 121065 ba8daf2228d9e511988917831f1e22e9 ""
+  "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb" 1256929440 112593 fda2373ba4420af33949610de4c28fe8 ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss10.pfb" 1256929440 97408 f595704ec2a07246c2d6f7b602587452 ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb" 1256929440 27863 09ce3735688ffde955e72da27c95b61a ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/tex/context/base/mkii/supp-pdf.mkii" 1580390158 71627 94eb9990bed73c364d7f53f960cc8c5b ""
@@ -113,6 +119,7 @@
   "C:/Users/david/AppData/Local/Programs/MiKTeX/tex/latex/tocbibind/tocbibind.sty" 1286957996 8927 46f54e33fc9cef24f78ab3bc811cb63f ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/tex/latex/tools/verbatim.sty" 1749468414 7532 26d26e9d8f2ca784270d5da8ec7d102b ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
+  "Images/Experiment/tester.png" 1759313809 11738 c08d4724990d2d7cd37456cc442eca31 ""
   "Images/Theory/Fingerprint_scanner_identification.jpg" 1749573018 294369 c9a73b565d2d5883b44305476a89ca75 ""
   "Images/Theory/Logo_UNIPV.svg.png" 1749459885 173582 e0af0b457b2c6c2fea3c8292167b8c63 ""
   "Images/Theory/coil.png" 1758561146 241755 d9e1b6ff392cd3a412d3c01d7c4f08dc ""
@@ -122,13 +129,13 @@
   "Images/Theory/occhio.jpg" 1758467324 95074 7cc47098c9bd844fa8fc6db5b2f08ffa ""
   "Images/Theory/rods_cones.jpg" 1758535915 175940 31a9dfdfe2e28eea437702ea024f0164 ""
   "Images/Theory/vog.jpeg" 1758619825 6297 096c1f7ca817b818445f3affa15ea703 ""
-  "c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex" 1759249859 119059 52ab82f6bade44c617d5d756924f95d3 ""
-  "thesis.aux" 1759249861 8004 aff83630d1bcc871721f08c51f878bd2 "pdflatex"
+  "c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex" 1759336201 129494 ac730164a45b3fd17b320c8d748eb51d ""
+  "thesis.aux" 1759336206 8561 fa38a4473bdc2c93832e11974b3fb709 "pdflatex"
   "thesis.bbl" 1759162589 0 d41d8cd98f00b204e9800998ecf8427e "biber thesis"
-  "thesis.out" 1759249861 8112 a957a8bc25fd2548a994bb2579074c23 "pdflatex"
-  "thesis.run.xml" 1759249861 2238 5924afb24500e169d37f4bf26c1bb90a "pdflatex"
-  "thesis.tex" 1759249859 119059 52ab82f6bade44c617d5d756924f95d3 ""
-  "thesis.toc" 1759249861 4035 e6799ad87853d1d2d6c03d2d039999b4 "pdflatex"
+  "thesis.out" 1759336206 8426 33227b6b3c4ab55d797fc106eeaa6538 "pdflatex"
+  "thesis.run.xml" 1759336206 2238 5924afb24500e169d37f4bf26c1bb90a "pdflatex"
+  "thesis.tex" 1759336201 129494 ac730164a45b3fd17b320c8d748eb51d ""
+  "thesis.toc" 1759336206 4272 60dd7b8dafc97a76eef13e3dff840dc1 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.bcf"

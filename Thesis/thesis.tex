@@ -973,7 +973,10 @@ Additionally, 18 wore eyeglasses, while only one wore contact lenses.
 A detailed overview is provided in Figure \ref{fig:test}.
 
 All recordings were carried out under identical artificial lighting conditions, with the same light source activated for each session.
-The experiments took place in a quiet environment, free from noise and distractions, using an eye tracker mounted on a monitor to record the tester's gaze.
+The experiments took place in a quiet environment, free from noise and distractions, using an eye tracker mounted on a monitor to record participants' gaze. 
+No additional information regarding the task was provided to the participants aside from the instruction to read or follow the text, even when it appeared at higher speeds. 
+Furthermore, no participant was exposed to any of the texts or animations prior to their first trial, ensuring unbiased and spontaneous responses throughout the experiment.
+
 The participant was seated on a height-adjustable chair and asked to observe the stimuli presented on the monitor. 
 The monitor, a 23-inch display with a resolution of 1920×1080 pixels (full-HD), was positioned in front of a white wall and equipped with an eye tracker. 
 Research carried out in controlled laboratory settings with high-frequency eye trackers, often requiring the use of a chin rest, has demonstrated that very high recognition rates can be achieved [89].
@@ -1165,14 +1168,32 @@ All the animations are detailed below:
     The applied parameters are a font size of 60 combined with a scrolling speed of 3.38 px/frame.
 \end{itemize}
 
+An important aspect to consider in the design of the experiment concerns the textual material used in the animations. 
+Since the primary objective of this research is to investigate gaze-based biometrics, it was crucial to ensure that the chosen text did not introduce biases related to content interest or familiarity. 
+If certain passages were perceived as more engaging, informative, or familiar than others, this could have inadvertently affected participants' reading behavior and consequently distorted the analysis. 
+To minimize this risk, we opted for neutral and homogeneous material by selecting descriptive texts taken from Wikipedia entries of municipalities in Lombardy, Italy.
 
+A total of 72 unique texts were employed, corresponding to the experimental design (8 animations × 3 trials × 3 sessions). 
+This ensured that each stimulus presentation featured a distinct text, thereby minimizing the risk of repetition effects or memorization influencing the results.
+To further enhance methodological rigor, texts were randomly selected for each trial, ensuring that each participant was exposed to a unique sequence of stimuli. 
+This approach prevented systematic biases and increased the generalizability of the findings by diversifying the conditions across participants.
+Similarly, the order of animation presentation was randomized for every trial, mitigating potential sequence effects such as learning, fatigue, or adaptation.
+To manage these randomizations and guarantee appropriate stimulus distribution, the experimental software integrated an SQL database to track previously displayed texts. 
+This system automatically assigned unused texts for each trial, ensuring that all participants experienced varied and unbiased stimuli. 
+By combining randomized text selection with randomized animation order, the design maintained both experimental consistency and stimulus neutrality across sessions and participants.
 
-stimuli description + cross(Descrizione e immagini)
+Prior to the presentation of each animation within a trial, a fixation stimulus consisting of a white cross displayed on a black background was shown.
+This cross was positioned at the center of the screen to act as a visual anchor, directing participants' gaze to a consistent starting point before the animation began. 
+The inclusion of this fixation stimulus serves two important purposes. 
+First, it standardizes the initial gaze position across trials and participants, which reduces variability that could affect gaze tracking accuracy. 
+Second, it ensures that participants are focused and visually prepared for the upcoming stimulus.
+This procedure enhances the reliability of the data by controlling for differences in initial eye position, which is especially critical in gaze-based biometric research where precise tracking of eye movement patterns is essential.
 
-
-testo di citta con db random
-
-tempo totale animazioni 
+In cocnlusion each trial comprised eight animations, each with a duration of 15 seconds. 
+Before each animation, a fixation cross was presented for 2 seconds at the center of the screen to guide the participant's gaze and establish a consistent starting point. 
+The total duration for a single trial was therefore (8 × 15) + (8 × 2) = 136 seconds per trial.
+During the same day, each tester completed three trials, each lasting 136 seconds, for a total of 136×3=408 seconds, or approximately 6 minutes and 48 seconds. 
+To complete the three sessions, the tester engaged in 136 × 3 × 3 = 1,224 seconds, which corresponds to a total of 20 minutes and 24 seconds of experimental exposure.
 
 \subsection{Dataset creation}
 feature eye tracker

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  1 OCT 2025 19:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  2 OCT 2025 11:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -613,7 +613,7 @@ Package biblatex Info: ... file 'thesis.bbl' found.
  (thesis.bbl)
 Package biblatex Info: Reference section=0 on input line 19.
 Package biblatex Info: Reference segment=0 on input line 19.
-<Images/Theory/Logo_UNIPV.svg.png, id=187, 1284.8pt x 940.51375pt>
+<Images/Theory/Logo_UNIPV.svg.png, id=191, 1284.8pt x 940.51375pt>
 File: Images/Theory/Logo_UNIPV.svg.png Graphic file (type png)
 <use Images/Theory/Logo_UNIPV.svg.png>
 Package pdftex.def Info: Images/Theory/Logo_UNIPV.svg.png  used on input line 28.
@@ -661,12 +661,12 @@ l.62 \newpage
 [2]
 
 [3]
-<Images/Theory/Fingerprint_scanner_identification.jpg, id=257, 1284.8pt x 963.6pt>
+<Images/Theory/Fingerprint_scanner_identification.jpg, id=262, 1284.8pt x 963.6pt>
 File: Images/Theory/Fingerprint_scanner_identification.jpg Graphic file (type jpg)
 <use Images/Theory/Fingerprint_scanner_identification.jpg>
 Package pdftex.def Info: Images/Theory/Fingerprint_scanner_identification.jpg  used on input line 137.
 (pdftex.def)             Requested size: 204.73033pt x 153.5469pt.
-<Images/Theory/eye.png, id=258, 240.9pt x 180.675pt>
+<Images/Theory/eye.png, id=263, 240.9pt x 180.675pt>
 File: Images/Theory/eye.png Graphic file (type png)
 <use Images/Theory/eye.png>
 Package pdftex.def Info: Images/Theory/eye.png  used on input line 144.
@@ -690,12 +690,12 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 [9]
 
 [10]
-<Images/Theory/occhio.jpg, id=295, 1027.84pt x 692.5875pt>
+<Images/Theory/occhio.jpg, id=300, 1027.84pt x 692.5875pt>
 File: Images/Theory/occhio.jpg Graphic file (type jpg)
 <use Images/Theory/occhio.jpg>
 Package pdftex.def Info: Images/Theory/occhio.jpg  used on input line 382.
 (pdftex.def)             Requested size: 272.97841pt x 183.93639pt.
-<Images/Theory/rods_cones.jpg, id=296, 803.0pt x 1121.18875pt>
+<Images/Theory/rods_cones.jpg, id=301, 803.0pt x 1121.18875pt>
 File: Images/Theory/rods_cones.jpg Graphic file (type jpg)
 <use Images/Theory/rods_cones.jpg>
 Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 407.
@@ -711,22 +711,22 @@ Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 407.
 [14]
 
 [15]
-<Images/Theory/eog.png, id=320, 481.8pt x 301.125pt>
+<Images/Theory/eog.png, id=325, 481.8pt x 301.125pt>
 File: Images/Theory/eog.png Graphic file (type png)
 <use Images/Theory/eog.png>
 Package pdftex.def Info: Images/Theory/eog.png  used on input line 557.
 (pdftex.def)             Requested size: 204.7292pt x 122.84174pt.
-<Images/Theory/coil.png, id=321, 687.56876pt x 263.98625pt>
+<Images/Theory/coil.png, id=326, 687.56876pt x 263.98625pt>
 File: Images/Theory/coil.png Graphic file (type png)
 <use Images/Theory/coil.png>
 Package pdftex.def Info: Images/Theory/coil.png  used on input line 564.
 (pdftex.def)             Requested size: 204.72997pt x 122.83691pt.
-<Images/Theory/vog.jpeg, id=322, 182.6825pt x 278.03876pt>
+<Images/Theory/vog.jpeg, id=327, 182.6825pt x 278.03876pt>
 File: Images/Theory/vog.jpeg Graphic file (type jpg)
 <use Images/Theory/vog.jpeg>
 Package pdftex.def Info: Images/Theory/vog.jpeg  used on input line 574.
 (pdftex.def)             Requested size: 143.31686pt x 122.84229pt.
-<Images/Theory/corneal.jpg, id=323, 1027.84pt x 312.16624pt>
+<Images/Theory/corneal.jpg, id=328, 1027.84pt x 312.16624pt>
 File: Images/Theory/corneal.jpg Graphic file (type jpg)
 <use Images/Theory/corneal.jpg>
 Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 581.
@@ -754,7 +754,7 @@ Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 581.
 [25]
 
 [26]
-<Images/Experiment/tester.png, id=371, 363.3575pt x 212.795pt>
+<Images/Experiment/tester.png, id=376, 363.3575pt x 212.795pt>
 File: Images/Experiment/tester.png Graphic file (type png)
 <use Images/Experiment/tester.png>
 Package pdftex.def Info: Images/Experiment/tester.png  used on input line 968.
@@ -764,7 +764,7 @@ Package pdftex.def Info: Images/Experiment/tester.png  used on input line 968.
 [27 <./Images/Experiment/tester.png>]
 
 [28{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}]
-<Images/Experiment/tester_speed.png, id=387, 354.32375pt x 193.22188pt>
+<Images/Experiment/tester_speed.png, id=392, 354.32375pt x 193.22188pt>
 File: Images/Experiment/tester_speed.png Graphic file (type png)
 <use Images/Experiment/tester_speed.png>
 Package pdftex.def Info: Images/Experiment/tester_speed.png  used on input line 1042.
@@ -772,9 +772,19 @@ Package pdftex.def Info: Images/Experiment/tester_speed.png  used on input line 
 
 
 [29 <./Images/Experiment/tester_speed.png>]
+<Images/Experiment/speeds.png, id=400, 357.335pt x 250.43562pt>
+File: Images/Experiment/speeds.png Graphic file (type png)
+<use Images/Experiment/speeds.png>
+Package pdftex.def Info: Images/Experiment/speeds.png  used on input line 1080.
+(pdftex.def)             Requested size: 272.97841pt x 191.32277pt.
 
-[30]
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 1098.
+
+[30 <./Images/Experiment/speeds.png>]
+
+[31]
+
+[32]
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 1146.
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -784,39 +794,39 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 
 
-[31]
-
-[32]
-
 [33]
 
 [34]
 
 [35]
 
-[36] (thesis.aux)
+[36]
+
+[37]
+
+[38] (thesis.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 33227B6B3C4AB55D797FC106EEAA6538;8426.
+(rerunfilecheck)             Checksum: 921E074C9E7B0288DE5E48A7F6E03E77;8486.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 20344 strings out of 468130
- 362974 string characters out of 5430633
- 1225514 words of memory out of 5000000
- 48500 multiletter control sequences out of 15000+600000
+ 20357 strings out of 468130
+ 363298 string characters out of 5430633
+ 1225570 words of memory out of 5000000
+ 48509 multiletter control sequences out of 15000+600000
  689328 words of font info for 150 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,1067b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
-Output written on thesis.pdf (37 pages, 2132945 bytes).
+Output written on thesis.pdf (39 pages, 2150147 bytes).
 PDF statistics:
- 509 PDF objects out of 1000 (max. 8388607)
- 90 named destinations out of 1000 (max. 500000)
- 37288 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 527 PDF objects out of 1000 (max. 8388607)
+ 94 named destinations out of 1000 (max. 500000)
+ 37301 words of extra memory for PDF output out of 42996 (max. 10000000)
 

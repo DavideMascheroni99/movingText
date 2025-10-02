@@ -1069,13 +1069,61 @@ Specifically, for the horizontal scroll animation, they were asked to read as mu
 For this purpose we developed a custom software application in Python to present both types of animations, namely horizontal scroll and vertical block, using the previously selected font sizes.
 This resulted in a total of four animation conditions: horizontal scroll with small font (HS-small), horizontal scroll with large font (HS-large), vertical block with small font (VB-small), and vertical block with large font (VB-large).
 During the experiment, participants were instructed to observe each animation and progressively increase its speed by pressing a designated key. 
-They continued this process until the animation became too fast to comfortably follow. 
+They continued this process until the animation became too fast to follow.
+In this experiment, we deliberately set aside the requirement for participants to read the text comfortably, as our primary interest was not in reading comprehension but in determining the maximum speed at which the text could still be followed.
 At that point, participants had the option to revert to the previous speed setting and select it as their preferred maximum readable speed. 
-This procedure allowed us to determine a personalized speed threshold for each animation condition, reflecting the highest speed at which participants could still comfortably read and track the text. 
+This procedure allowed us to determine a personalized speed threshold for each animation condition, reflecting the highest speed at which participants could still read and track the text. 
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Experiment/speeds.png}
+    \caption{Speeds data per animation}
+    \label{fig:sped}
+\end{figure}
+
+In our implementation, the scrolling speed of the text stimulus is defined as the number of pixels by which its position is updated at each frame of the animation.
+This means that speed is expressed in terms of pixels per frame inside our program. 
+At first sight, the use of non-integer values for speed (e.g., 2.38, 3.38, 0.62, or 0.88) may seem counterintuitive, since pixels are discrete entities on the display and cannot be physically subdivided. 
+The adoption of floating-point values, however, is a standard practice in computer graphics. 
+While the rendering process ultimately positions the stimulus at integer pixel coordinates, the internal position of the object is stored as a floating-point variable. 
+This allows the accumulation of fractional displacements across successive frames, such that sub-pixel movements are realized over time. 
+Without this approach, the animation would appear jerky or imprecise at low speeds, as small displacements would be lost due to rounding. 
+In this way, the use of decimal values for speed ensures the perceptual continuity of motion, despite the discreteness of the display grid.
+
+It is important to note that the measure of speed in pixels per frame is directly dependent on the refresh rate of the display. 
+In the present setup, the frame rate is explicitly fixed at 150 frames per second. 
+This choice is not arbitrary, but rather motivated by the need to synchronize the visual stimulus with the eye-tracking device, which samples gaze data at the same frequency of 150 Hz. 
+Such temporal alignment ensures that each frame of the animation corresponds precisely to one sample of eye-tracking data, thereby facilitating a consistent and interpretable mapping between stimulus motion and recorded gaze behavior.
+
+To convert the per-frame displacement into a more conventional measure of velocity, namely pixels per second, it is sufficient to multiply the displacement per frame by the number of frames per second. 
+Following this procedure, a speed of 2.38 pixels per frame corresponds to 357 pixels per second, while values of 3.38, 0.62, and 0.88 pixels per frame translate to 507, 93, and 132 pixels per second, respectively. 
+These values provide an interpretable indication of the actual velocity of the stimulus as perceived on the screen.
+All these values are summarized in Figure \ref{fig:sped}, which first presents the speeds chosen by each participant for each animation, and then reports the average of these speeds expressed both in pixels per frame and in pixels per second.
+
+From the perspective of the participant, these velocities determine the apparent rate at which the text traverses the display from right to left. 
+Higher values, such as 357 or 507 pixels per second, result in a rapid motion where the text crosses the screen in a relatively short amount of time, demanding faster eye movements to track it. 
+In contrast, lower values such as 93 or 132 pixels per second correspond to a slower drift of the text, allowing for more prolonged fixations and smoother pursuit. 
+Thus, expressing the stimulus velocity in terms of pixels per second not only provides a standardized physical measure of speed but also offers a direct connection to the perceptual experience of the task and to the temporal dynamics of oculomotor responses.
+
+Although in the present study the frame rate was fixed at 150 Hz to match the sampling rate of the eye tracker, the same principle applies to different refresh rates. 
+If the animation were instead run at 60 Hz or 120 Hz, the conversion from pixels per frame to pixels per second would need to be recalculated accordingly, leading to proportionally different velocities for the same per-frame displacement. 
+This illustrates that the absolute value of stimulus speed cannot be interpreted independently of the frame rate, and highlights the importance of reporting both parameters in experimental contexts.
+
+In conclusion we decided to adopt the mean speeds computed for each type of animation, averaged across the data collected from the seven participants, as the reference values for the “fast” condition of the experiment.
+This approach allowed us to derive a standardized measure of fast speed that reflects the natural preferences of the participants while ensuring consistency across stimulus types. 
+For the “slow” condition, we chose to set the speed at exactly half of the corresponding fast speed for each animation. 
+This decision was motivated by the desire to create a clear and perceptually meaningful distinction between the two conditions, while maintaining proportional scaling across animations. 
+Subsequently, we implemented these values in the experimental program and performed a qualitative verification of the resulting motion. 
+The observed scrolling speeds were found to be perceptually acceptable and consistent with the intended experimental design, providing confidence that the chosen parameters would yield reliable and interpretable results in subsequent testing.
+
+\subsubsection{}
+
+media e poi diviso due
 
 
 stimuli description + cross(Descrizione e immagini)
+testo di citta con db random
 
 tempo totale animazioni 
 

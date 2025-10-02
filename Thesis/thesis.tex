@@ -1074,6 +1074,10 @@ In this experiment, we deliberately set aside the requirement for participants t
 At that point, participants had the option to revert to the previous speed setting and select it as their preferred maximum readable speed. 
 This procedure allowed us to determine a personalized speed threshold for each animation condition, reflecting the highest speed at which participants could still read and track the text. 
 
+Rather than assigning a single uniform speed to all animations, we determined a distinct speed for each animation. 
+This choice was motivated by the fact that the perceptual effort required to follow a moving text depends not only on its velocity but also on its format (horizontal scroll vs. vertical block) and font size. 
+For example, a speed that is comfortable for a large-font vertical block may become unreadable when applied to a small-font horizontal scroll.
+
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.6
@@ -1117,12 +1121,55 @@ This decision was motivated by the desire to create a clear and perceptually mea
 Subsequently, we implemented these values in the experimental program and performed a qualitative verification of the resulting motion. 
 The observed scrolling speeds were found to be perceptually acceptable and consistent with the intended experimental design, providing confidence that the chosen parameters would yield reliable and interpretable results in subsequent testing.
 
-\subsubsection{}
+\subsubsection{Animations}
 
-media e poi diviso due
+In the previous chapter, we conducted a preliminary study to define the parameters of the experimental setup—specifically, the text speed and character size—ensuring that these values were selected based on empirical evidence rather than chosen arbitrarily. 
+This preparatory step was essential to establish a solid methodological foundation for the subsequent experiments. 
+Having established the parameters, we can now present and describe in detail the eight animations used as stimuli in our gaze-based biometric research. 
+These were systematically constructed by combining the two animation types (Horizontal Scroll and Vertical Block) with two font sizes (small and big) and two movement speeds (slow and fast). 
+This design yielded eight distinct conditions, providing a comprehensive basis for evaluating the effectiveness of dynamic text as a biometric modality.
+
+All the animations are detailed below:
+
+\begin{itemize}
+    \item \textbf{VB\_SL\_LIT}: Vertical Block animation with \emph{slow speed} and \emph{small text size}. 
+    In this condition, the block of text scrolls upward from the bottom to the top of the screen at a reduced speed, with characters displayed at the minimum legible size identified during the preliminary study.
+    Here, the parameters correspond to a font size of 30 and a scrolling speed of 0.31 px/frame.
+
+    \item \textbf{VB\_SL\_BIG}: Vertical Block animation with \emph{slow speed} and \emph{large text size}. 
+    Similar to VB\_SL\_LIT, but the increased character size facilitates readability, while maintaining the slower scrolling speed. 
+    In this case, the configuration employs a font size of 60 with a speed of 0.44 px/frame. 
+
+    \item \textbf{VB\_FA\_LIT}: Vertical Block animation with \emph{fast speed} and \emph{small text size}. 
+    In this case, the upward scrolling occurs at the maximum speed tolerable for participants, with the minimum character size, representing a challenging condition for gaze tracking.  
+    The setting combines a font size of 30 with a speed of 0.62 px/frame.
+
+    \item \textbf{VB\_FA\_BIG}: Vertical Block animation with \emph{fast speed} and \emph{large text size}. 
+    The rapid upward motion is combined with larger text, allowing participants to more easily perceive and follow the characters despite the increased pace.  
+    This version uses a font size of 60 together with a scrolling rate of 0.88 px/frame. 
+
+    \item \textbf{HS\_SL\_LIT}: Horizontal Scroll animation with \emph{slow speed} and \emph{small text size}. 
+    The text enters from the right edge of the screen and scrolls steadily toward the left at a slower rate, with characters displayed at the smaller size.  
+    The parameters here are a font size of 30 and a speed of 1.19 px/frame. 
+
+    \item \textbf{HS\_SL\_BIG}: Horizontal Scroll animation with \emph{slow speed} and \emph{large text size}. 
+    This condition presents the same horizontal scrolling movement, but with larger text, facilitating readability at the slower pace. 
+    The chosen configuration corresponds to a font size of 60 with a scrolling speed of 1.69 px/frame. 
+
+    \item \textbf{HS\_FA\_LIT}: Horizontal Scroll animation with \emph{fast speed} and \emph{small text size}. 
+    The text moves quickly from right to left, with minimal character dimensions, providing the most visually demanding condition in terms of both speed and size. 
+    In this setup, the font size is 30 and the speed reaches 2.38 px/frame. 
+
+    \item \textbf{HS\_FA\_BIG}: Horizontal Scroll animation with \emph{fast speed} and \emph{large text size}. 
+    In this case, the high-speed scrolling is mitigated by the increased character dimensions, offering a balance between perceptual clarity and dynamic movement.  
+    The applied parameters are a font size of 60 combined with a scrolling speed of 3.38 px/frame.
+\end{itemize}
+
 
 
 stimuli description + cross(Descrizione e immagini)
+
+
 testo di citta con db random
 
 tempo totale animazioni 

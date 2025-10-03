@@ -347,6 +347,7 @@ INPUT .\Images\Experiment\VB_big.png
 INPUT .\Images\Experiment\VB_big.png
 INPUT .\Images\Experiment\VB_big.png
 INPUT .\Images\Experiment\VB_big.png
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathex.enc
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmss.fd
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmss.fd
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmss.fd
@@ -362,6 +363,8 @@ INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbx12.
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbx12.pfb
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbx9.pfb
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbx9.pfb
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmex10.pfb
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmex10.pfb
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmmi10.pfb
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmmi10.pfb
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmmi7.pfb

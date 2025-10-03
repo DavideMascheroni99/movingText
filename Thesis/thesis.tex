@@ -1247,13 +1247,196 @@ Figure \ref{fig:anims} provides a representation of the two types of animations 
 Each animation type was implemented at two distinct speeds and with two font sizes, resulting in a total of eight unique animation conditions.
 
 \newpage
+
+\subsection{Captured Eye Tracking Features}
+
+In the present study, the set of ocular features was recorded using the GazePoint GP3 eye tracker, which outputs a wide range of parameters designed to characterize visual behavior with both spatial and physiological precision. 
+These features, according to [90], can be organized into several functional categories, namely fixation parameters, raw gaze coordinates, corneal reflection and pupil metrics, three-dimensional eye position, pupil dynamics, and blink-related measures. 
+Each category not only describes a specific aspect of eye activity but also provides potential discriminative cues for biometric modeling.
+
+The first group of features concerns fixations, which are intervals in which the eyes remain relatively stable on a spatial location, thereby enabling information intake and cognitive processing. 
+The GP3 provides normalized screen coordinates of each fixation (FPOGX, FPOGY), which indicate the point of regard on the display. 
+Alongside this spatial information, the system records the onset time of the fixation (FPOGS), its duration (FPOGD), and a unique identifier (FPOGID) for reference across the data stream. 
+An additional validity flag (FPOGV) specifies the confidence of the measurement. 
+Fixation duration is particularly important, as longer fixations are often associated with increased cognitive load or the processing of more complex visual material, while shorter ones may indicate scanning behavior. 
+The spatial distribution of fixations across the screen, in turn, reflects attentional allocation and search strategies. 
+Together, these measures provide a temporal and spatial fingerprint of how an individual interacts with visual stimuli.
+
+Complementing the fixation measures are raw gaze coordinates, which provide the instantaneous location of the eyes on the screen without aggregation into fixation events. 
+These are reported separately for the left (LPOGX, LPOGY, LPOGV) and right eyes (RPOGX, RPOGY, RPOGV), as well as for a binocular average (BPOGX, BPOGY, BPOGV). 
+By distinguishing between monocular and binocular tracking, the system allows for evaluation of convergence behavior (i.e., how well the two eyes align on a target) as well as interocular differences, which may emerge from physiological asymmetries or small errors in ocular coordination. 
+The binocular values represent a fused estimate of the point of regard, often more stable than monocular readings, but the monocular data themselves may carry subtle inter-eye differences that are individual-specific and thus of biometric relevance.
+
+The third group of features relates to corneal reflection and pupil properties, which are detected by the infrared illumination system of the tracker. 
+For each eye, the GP3 reports the estimated coordinates of the pupil center on the image plane (LPCX, LPCY for the left eye; RPCX, RPCY for the right eye), along with values describing pupil diameter and pupil size (LPD, LPS for the left eye; RPD, RPS for the right eye). 
+Each of these measurements is associated with a validity flag (LPV, RPV), indicating whether the tracking conditions were sufficient for reliable recording. 
+Pupil size is not static: it responds dynamically to changes in illumination, but is also modulated by cognitive and affective processes such as attention, emotional arousal, and mental workload. 
+These fluctuations are partially involuntary, making them difficult to consciously manipulate, and thus potentially stable individual signatures. 
+In addition, the spatial estimation of the pupil center contributes to precise gaze localization, while differences in pupil metrics across individuals can form part of a biometric profile.
+
+Beyond two-dimensional gaze data, the GP3 also captures three-dimensional eye position features, reporting the x-, y-, and z-coordinates of each eye relative to the eye tracker (LEYEX, LEYEY, LEYEZ for the left eye; REYEX, REYEY, REYEZ for the right eye). 
+The x and y values provide lateral and vertical offsets, while the z coordinate specifies the distance between the eye and the tracker, effectively measuring head-to-screen distance. 
+These measures are particularly valuable because they reveal natural head movements, posture adjustments, or minor asymmetries in eye alignment. 
+While such variability might traditionally be considered noise, in the context of biometrics, these natural tendencies may carry person-specific information. 
+For example, an individual may habitually lean closer to or further from the screen, or present consistent horizontal offsets due to ocular dominance.
+
+Closely related to pupil size are the pupil diameter dynamics, reported as LPUPILD and RPUPILD for the left and right eyes, each paired with validity indicators (LPUPILV, RPUPILV). 
+These values offer fine-grained recordings of moment-to-moment changes in pupil diameter, complementing the more general pupil size parameters described earlier. 
+Unlike fixation duration or gaze coordinates, which directly reflect attentional allocation, pupil dynamics provide a physiological signal that is largely involuntary and influenced by a combination of environmental, cognitive, and emotional factors.
+The stability of these responses across repeated sessions, combined with their resistance to voluntary control, makes them a promising source of biometric information.
+
+Finally, the dataset includes blink-related features, which capture involuntary eyelid closures that briefly interrupt gaze tracking. 
+For each blink, the GP3 assigns a unique identifier (BKID), records its duration (BKDUR), and stores the minimum pupil size observed during the event (BKPMIN), which reflects the degree of occlusion. 
+Blink dynamics are an integral part of ocular behavior, influenced by ocular physiology, fatigue levels, environmental factors, and cognitive state. 
+However, inter-individual variability in blink frequency, duration, and regularity has been documented, suggesting that blinking patterns may themselves provide discriminative information. 
+Importantly, because blinks are largely automatic and difficult to consciously regulate in a consistent manner, they can serve as a robust biometric trait resistant to intentional manipulation.
+
+Taken together, the features recorded by the GP3 provide a comprehensive view of ocular activity. 
+These measurements span spatial aspects of gaze location, temporal aspects of fixations and blinks, as well as physiological characteristics related to pupil dynamics and three-dimensional eye positioning.
+While some features directly represent visual exploration of stimuli (e.g., gaze coordinates, fixation positions), others capture involuntary physiological responses (e.g., pupil size fluctuations, blink dynamics) or natural head/eye geometry (3D coordinates). 
+The integration of these diverse signals is particularly valuable in a biometric context, as it enables the system to combine behavioral and physiological aspects of eye activity, thereby enhancing robustness, discriminative power, and resistance to spoofing.
+
+\newpage
 \subsection{Dataset creation}
-feature eye tracker
-feature dataset 
+
+In the current section, we describe the methodology employed to process the gaze-related features introduced in the previous chapter and transform them into the analytical features of the dataset. 
+It is important to note from the outset that the raw gaze coordinates along the x and y axes were not included as direct features. 
+This decision stems from the absence of a calibration procedure, which is intentional. 
+The aim is to design a system suitable for practical, everyday applications where calibration may not be feasible. 
+While this approach enhances usability and applicability in real-world scenarios, it comes at the cost of a slight reduction in the precision of gaze coordinate measurements.
+In this study, a total of 83 features were derived from the raw gaze and pupil data recorded by the GazePoint GP3 eye tracker. 
+
+\subsubsection{Fixation-Based Features (f0–f10)}
+
+Fixations are periods during which the gaze remains relatively stable, enabling detailed visual processing of stimuli. 
+This group of features captures both the frequency and statistical properties of fixation durations.  
+
+Feature \(f_0\) represents the total number of fixations recorded during a trial for each animation, reflecting the frequency with which gaze stabilization occurs.  
+
+All remaining fixation-based features (\(f_1\)–\(f_{10}\)) are derived from fixation durations, which are calculated from the relative gaze feature \(\mathrm{FPOGD}\) for each fixation’s unique identifier (\(\mathrm{FPOGID}\)). 
+Statistical descriptors of these durations provide insights into attentional control and scanning behavior:
+
+\begin{itemize}
+    \item \(f_1\) — \textbf{Minimum fixation duration}: The shortest fixation duration in the trial, indicating rapid scanning behavior.
+    \item \(f_2\) — \textbf{Maximum fixation duration}: The longest fixation duration, showing sustained attention to a specific location.
+    \item \(f_3\) — \textbf{Arithmetic mean fixation duration}: Average fixation time, representing typical gaze stability.
+    \item \(f_4\) — \textbf{Geometric mean fixation duration}: A measure of central tendency less sensitive to extreme values, useful for skewed distributions.
+    \item \(f_5\) — \textbf{Median fixation duration}: Middle value of fixation durations, robust against outliers.
+    \item \(f_6\) — \textbf{Standard deviation fixation duration}: Variability in fixation times across the trial.
+    \item \(f_7\) — \textbf{Median absolute deviation fixation duration}: Robust measure of variability, less influenced by extreme durations.
+    \item \(f_8\) — \textbf{Skewness fixation duration}: Asymmetry in the distribution of fixation durations.
+    \item \(f_9\) — \textbf{Interquartile range fixation duration}: Dispersion between the 25th and 75th percentile, excluding extremes.
+    \item \(f_{10}\) — \textbf{Kurtosis fixation duration}: Describes the "peakedness" of the fixation duration distribution.
+\end{itemize}
+
+\subsubsection{Fixation Distance Features (f11–f20)}
+
+These features quantify spatial distances between consecutive fixations, characterizing gaze exploration and scanning behavior.  
+
+Distances are computed from the normalized gaze coordinates, \(\mathrm{FPOGX}\) and \(\mathrm{FPOGY}\), for each fixation. 
+For each pair of consecutive fixations \((x_i, y_i)\) and \((x_{i+1}, y_{i+1})\), the Euclidean distance \(d_i\) is calculated as:
+
+\[
+d_i = \sqrt{(x_{i+1} - x_i)^2 + (y_{i+1} - y_i)^2}.
+\]
+
+These distances form a distribution for each trial, from which statistical descriptors are extracted to capture the spatial patterns of gaze movement:
+
+\begin{itemize}
+    \item \(f_{11}\) — \textbf{Minimum distance}: Smallest shift between consecutive fixations, indicating very local gaze changes.
+    \item \(f_{12}\) — \textbf{Maximum distance}: Largest shift, reflecting broad scanning movements.
+    \item \(f_{13}\) — \textbf{Arithmetic mean distance}: Average spatial shift, representing typical scanning magnitude.
+    \item \(f_{14}\) — \textbf{Geometric mean distance}: Central tendency less influenced by extreme distances.
+    \item \(f_{15}\) — \textbf{Median distance}: Middle value of fixation-to-fixation distances.
+    \item \(f_{16}\) — \textbf{Standard deviation distance}: Variability of spatial shifts.
+    \item \(f_{17}\) — \textbf{Median absolute deviation distance}: Robust measure of spatial variability.
+    \item \(f_{18}\) — \textbf{Skewness distance}: Asymmetry of the distance distribution.
+    \item \(f_{19}\) — \textbf{Interquartile range distance}: Dispersion measure excluding extreme values.
+    \item \(f_{20}\) — \textbf{Kurtosis distance}: Shape of the spatial distance distribution.
+\end{itemize}
+
+
+\subsubsection{Saccade Speed Features (f21–f30)}
+
+Saccades are rapid eye movements between fixations. This group describes their dynamics.
+
+f21 — Minimum saccade speed: Lowest velocity of saccadic movement.
+
+f22 — Maximum saccade speed: Highest velocity achieved, indicating abrupt gaze shifts.
+
+f23 — Arithmetic mean saccade speed: Average speed of saccades in the trial.
+
+f24 — Geometric mean saccade speed: Central tendency less affected by extreme speeds.
+
+f25 — Median saccade speed: Middle speed value, robust against outliers.
+
+f26 — Standard deviation saccade speed: Variability of saccade velocities.
+
+f27 — Median absolute deviation saccade speed: Robust measure of saccadic speed variation.
+
+f28 — Skewness saccade speed: Asymmetry in the distribution of saccade speeds.
+
+f29 — Interquartile range saccade speed: Spread of saccade speeds excluding extremes.
+
+f30 — Kurtosis saccade speed: Peakedness or tail heaviness of the speed distribution.
+
+\subsubsection{Scanpath Feature (f31)}
+
+f31 — Scanpath length: Total distance traveled by the gaze in a trial, integrating all saccadic movements. This reflects the overall extent of visual exploration during the task.
+
+\subsubsection{Pupil Diameter Features (f32–f51)}
+
+These describe statistical characteristics of the pupil diameter for each eye.
+
+f32–f41 (Left pupil) and f42–f51 (Right pupil): Include minimum, maximum, arithmetic mean, geometric mean, median, standard deviation, median absolute deviation, skewness, interquartile range, and kurtosis. These metrics capture both central tendencies and variations in pupil size, which are influenced by lighting, cognitive load, and physiological factors.
+
+\subsubsection{Pupil Diameter Ratio Features (f52–f61)}
+
+These features describe the relationship between the diameters of the left and right pupils.
+
+f52–f61: Statistical measures (minimum, maximum, means, median, variability, skewness, interquartile range, kurtosis) of the pupil diameter ratio provide insight into physiological symmetry or asymmetry and potential differential responses to stimuli.
+
+\subsubsection{Pupil Diameter Difference Features (f62–f70)}
+
+These describe absolute differences in pupil diameters.
+
+f62–f70: Include statistical descriptors (minimum, maximum, mean, median, standard deviation, median absolute deviation, skewness, interquartile range, kurtosis) of the diameter differences, capturing variation in inter-eye pupil size that could be biologically significant.
+
+\subsubsection{Blink Features (f71–f74)}
+
+Blinks are involuntary eye closures that can reveal physiological and cognitive states.
+
+f71 — Number of blinks: Count of blink events in a trial.
+
+f72 — Blink mean duration: Average blink duration.
+
+f73 — Blink minimum duration: Shortest blink observed.
+
+f74 — Blink maximum duration: Longest blink observed.
+
+\subsubsection{Directional Movement Features (f75–f82)}
+
+These capture directional properties of gaze movement.
+
+f75 — Total distance in ascending direction: Sum of upward gaze movements.
+
+f76 — Total distance in descending direction: Sum of downward gaze movements.
+
+f77 — Total distance in rightward direction: Sum of rightward gaze movements.
+
+f78 — Total distance in leftward direction: Sum of leftward gaze movements.
+
+f79–f82 — Number of movements in each direction: Count of gaze shifts upward, downward, rightward, and leftward, providing information about directional scanning patterns.
+
+
+
+
+
 
 \subsection{Machine learning}
+\subsection{Analysis}
 
-\section{Appendice}
+\section{Appendix}
 \section{Conclusion}
 \noindent
 \section{Acknowledgment}
@@ -1440,6 +1623,8 @@ feature dataset
 [88] Jim Holdsworth, Matthew Kosinski, What is behavioral biometrics? https://www.ibm.com/think/topics/behavioral-biometrics
 
 [89] A. George and A. Routray, “A score level fusion method for eye movement biometrics,” Pattern Recognit. Lett., vol. 82, pp. 207–215, Oct. 2016.
+
+[90] OPEN GAZE API BY GAZEPOINT, http://andrewd.ces.clemson.edu/courses/cpsc881/manuals/Gazepoint/Gazepoint\%20API.pdf
 
 \end{raggedright}
 

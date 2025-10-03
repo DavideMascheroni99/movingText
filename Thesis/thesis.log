@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  2 OCT 2025 18:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  3 OCT 2025 11:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -784,9 +784,37 @@ Package pdftex.def Info: Images/Experiment/speeds.png  used on input line 1087.
 [31 <./Images/Experiment/speeds.png>]
 
 [32]
+<Images/Experiment/cross.png, id=417, 1284.8pt x 722.7pt>
+File: Images/Experiment/cross.png Graphic file (type png)
+<use Images/Experiment/cross.png>
+Package pdftex.def Info: Images/Experiment/cross.png  used on input line 1201.
+(pdftex.def)             Requested size: 272.97841pt x 153.5469pt.
+<Images/Experiment/HS_little.png, id=419, 1284.8pt x 722.7pt>
+File: Images/Experiment/HS_little.png Graphic file (type png)
+<use Images/Experiment/HS_little.png>
+Package pdftex.def Info: Images/Experiment/HS_little.png  used on input line 1213.
+(pdftex.def)             Requested size: 204.7292pt x 122.83531pt.
+<Images/Experiment/HS_big.png, id=420, 1284.8pt x 722.7pt>
+File: Images/Experiment/HS_big.png Graphic file (type png)
+<use Images/Experiment/HS_big.png>
+Package pdftex.def Info: Images/Experiment/HS_big.png  used on input line 1220.
+(pdftex.def)             Requested size: 204.7292pt x 122.83531pt.
+<Images/Experiment/VB_little.png, id=421, 1284.8pt x 722.7pt>
+File: Images/Experiment/VB_little.png Graphic file (type png)
+<use Images/Experiment/VB_little.png>
+Package pdftex.def Info: Images/Experiment/VB_little.png  used on input line 1230.
+(pdftex.def)             Requested size: 143.30849pt x 122.83531pt.
+<Images/Experiment/VB_big.png, id=422, 1284.8pt x 722.7pt>
+File: Images/Experiment/VB_big.png Graphic file (type png)
+<use Images/Experiment/VB_big.png>
+Package pdftex.def Info: Images/Experiment/VB_big.png  used on input line 1237.
+(pdftex.def)             Requested size: 204.7292pt x 122.83531pt.
 
-[33]
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 1214.
+
+[33 <./Images/Experiment/cross.png (PNG copy)>]
+
+[34 <./Images/Experiment/HS_little.png (PNG copy)> <./Images/Experiment/HS_big.png (PNG copy)> <./Images/Experiment/VB_little.png (PNG copy)> <./Images/Experiment/VB_big.png (PNG copy)>]
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 1266.
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -796,8 +824,6 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 
 
-[34]
-
 [35]
 
 [36]
@@ -806,7 +832,9 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 [38]
 
-[39] (thesis.aux)
+[39]
+
+[40] (thesis.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
@@ -818,17 +846,17 @@ Package logreq Info: Writing requests to 'thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 20370 strings out of 468130
- 363445 string characters out of 5430633
- 1226570 words of memory out of 5000000
- 48509 multiletter control sequences out of 15000+600000
+ 20418 strings out of 468130
+ 364858 string characters out of 5430633
+ 1227191 words of memory out of 5000000
+ 48554 multiletter control sequences out of 15000+600000
  689812 words of font info for 156 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,79p,1067b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
-Output written on thesis.pdf (40 pages, 2158461 bytes).
+Output written on thesis.pdf (41 pages, 2279325 bytes).
 PDF statistics:
- 531 PDF objects out of 1000 (max. 8388607)
- 95 named destinations out of 1000 (max. 500000)
- 37301 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 545 PDF objects out of 1000 (max. 8388607)
+ 98 named destinations out of 1000 (max. 500000)
+ 37326 words of extra memory for PDF output out of 42996 (max. 10000000)
 

@@ -588,7 +588,7 @@ While this limitation reduces the comfort and naturalness of the setup, it ensur
 \end{figure}
 
 \newpage
-\section{State of the art}
+\section{Related}
 
 This section presents an updated overview of the state of the art in gaze-based biometric solutions.
 As a starting point, we draw on the work presented in Chapter 9 – Biometric Authentication to Access Controlled Areas Through Eye Tracking [25], published in 2017. 
@@ -1313,7 +1313,7 @@ This group of features captures both the frequency and statistical properties of
 
 Feature \(f_0\) represents the total number of fixations recorded during a trial for each animation, reflecting the frequency with which gaze stabilization occurs.  
 
-All remaining fixation-based features (\(f_1\)–\(f_{10}\)) are derived from fixation durations, which are calculated from the relative gaze feature \(\mathrm{FPOGD}\) for each fixation’s unique identifier (\(\mathrm{FPOGID}\)). 
+All remaining fixation-based features (\(f_1\)–\(f_{10}\)) are derived from fixation durations, which are calculated from the relative gaze feature \(\mathrm{FPOGD}\) for each fixation's unique identifier (\(\mathrm{FPOGID}\)). 
 Statistical descriptors of these durations provide insights into attentional control and scanning behavior:
 
 \begin{itemize}
@@ -1358,79 +1358,179 @@ These distances form a distribution for each trial, from which statistical descr
 
 \subsubsection{Saccade Speed Features (f21–f30)}
 
-Saccades are rapid eye movements between fixations. This group describes their dynamics.
+Saccades are rapid eye movements occurring between fixations, responsible for shifting the line of sight toward new visual targets. 
+To quantify their dynamics, saccade speeds are computed using the normalized gaze coordinates \(\mathrm{FPOGX}\) and \(\mathrm{FPOGY}\), combined with temporal markers from the gaze data. 
+For each pair of successive fixation points, the Euclidean distance between consecutive gaze positions is first determined. 
+The corresponding time interval is calculated as the difference in starting times of consecutive fixations, \(\mathrm{FPOGS}_{i+1} - \mathrm{FPOGS}_i\), adjusted by subtracting the duration of the first fixation \(\mathrm{FPOGD}_i\). 
+This adjustment ensures that the interval reflects only the transition time between fixations rather than the fixation itself. 
+Saccade speed for the transition is then defined as the ratio between traveled distance and elapsed time:
 
-f21 — Minimum saccade speed: Lowest velocity of saccadic movement.
+\[
+v_i = \frac{\sqrt{(x_{i+1} - x_i)^2 + (y_{i+1} - y_i)^2}}{t_{i+1} - t_i - d_i},
+\]
 
-f22 — Maximum saccade speed: Highest velocity achieved, indicating abrupt gaze shifts.
+where \((x_i, y_i)\) and \((x_{i+1}, y_{i+1})\) denote successive fixation coordinates, \(t_i\) the start time of fixation \(i\), and \(d_i\) its duration. 
+This procedure yields a distribution of saccade speeds for each trial, which is then summarized through a set of descriptive statistics (f21–f30).
 
-f23 — Arithmetic mean saccade speed: Average speed of saccades in the trial.
+\noindent The extracted features are:
 
-f24 — Geometric mean saccade speed: Central tendency less affected by extreme speeds.
+\begin{itemize}
+    \item \textbf{f21 — Minimum saccade speed:} The lowest velocity observed among saccades, indicating the slowest gaze transitions.
+    \item \textbf{f22 — Maximum saccade speed:} The highest velocity recorded, reflecting the most abrupt shifts in gaze.
+    \item \textbf{f23 — Arithmetic mean saccade speed:} The average speed across all saccades within the trial.
+    \item \textbf{f24 — Geometric mean saccade speed:} Central tendency of saccade speeds, less influenced by extreme values.
+    \item \textbf{f25 — Median saccade speed:} The middle speed value, robust against outlier influence.
+    \item \textbf{f26 — Standard deviation saccade speed:} The variability of saccadic velocities across the trial.
+    \item \textbf{f27 — Median absolute deviation saccade speed:} A robust measure of variation in saccade dynamics.
+    \item \textbf{f28 — Skewness saccade speed:} The asymmetry of the saccade speed distribution, indicating bias toward slower or faster movements.
+    \item \textbf{f29 — Interquartile range saccade speed:} The spread of saccade velocities within the 25th–75th percentile range.
+    \item \textbf{f30 — Kurtosis saccade speed:} The peakedness or tail heaviness of the speed distribution.
+\end{itemize}
 
-f25 — Median saccade speed: Middle speed value, robust against outliers.
-
-f26 — Standard deviation saccade speed: Variability of saccade velocities.
-
-f27 — Median absolute deviation saccade speed: Robust measure of saccadic speed variation.
-
-f28 — Skewness saccade speed: Asymmetry in the distribution of saccade speeds.
-
-f29 — Interquartile range saccade speed: Spread of saccade speeds excluding extremes.
-
-f30 — Kurtosis saccade speed: Peakedness or tail heaviness of the speed distribution.
 
 \subsubsection{Scanpath Feature (f31)}
 
-f31 — Scanpath length: Total distance traveled by the gaze in a trial, integrating all saccadic movements. This reflects the overall extent of visual exploration during the task.
+The scanpath length provides a global measure of the total extent of visual exploration during a trial. 
+It is computed as the cumulative sum of Euclidean distances between consecutive fixation points, based on their normalized screen coordinates \(\mathrm{FPOGX}\) and \(\mathrm{FPOGY}\). 
+Formally, given a sequence of fixation points \((x_i, y_i)\), the scanpath length \(L\) is defined as:
+
+\[
+L = \sum_{i=1}^{N-1} \sqrt{(x_{i+1} - x_i)^2 + (y_{i+1} - y_i)^2},
+\]
+
+where \(N\) is the total number of fixation points in the trial. 
+This measure integrates all individual fixation-to-fixation transitions into a single trajectory length, capturing the overall amount of gaze displacement. 
+A longer scanpath indicates more extensive or dispersed exploration of the visual stimulus, while a shorter scanpath reflects more localized or focused attention.
+
+\noindent The feature extracted is:
+
+\begin{itemize}
+    \item \textbf{f31 — Scanpath length:} Total cumulative distance of gaze movements during a trial, representing the overall extent of visual exploration.
+\end{itemize}
+
 
 \subsubsection{Pupil Diameter Features (f32–f51)}
 
-These describe statistical characteristics of the pupil diameter for each eye.
+Pupil diameter is a physiological indicator influenced not only by luminance but also by cognitive and emotional states. 
+In the present work, pupil diameter values were extracted separately for the left and right eyes, using the gaze features \(\mathrm{LPD}\) and \(\mathrm{RPD}\). 
+To ensure reliability of the measurements, only samples marked as valid by the corresponding validity flags (\(\mathrm{LPV} = 1\) or \(\mathrm{RPV} = 1\)) were included in the analysis. 
+For each eye, the collected pupil diameters across the trial were summarized using a set of descriptive statistics, resulting in two parallel groups of features: \(f32\)--\(f41\) for the left eye and \(f42\)--\(f51\) for the right eye. 
+This approach allows for both independent characterization of each eye and subsequent comparison across them.
 
-f32–f41 (Left pupil) and f42–f51 (Right pupil): Include minimum, maximum, arithmetic mean, geometric mean, median, standard deviation, median absolute deviation, skewness, interquartile range, and kurtosis. These metrics capture both central tendencies and variations in pupil size, which are influenced by lighting, cognitive load, and physiological factors.
+The features are defined as follows:
+
+\begin{itemize}
+    \item \textbf{f32, f42 — Minimum pupil diameter:} Smallest observed pupil size, reflecting momentary constriction.
+    \item \textbf{f33, f43 — Maximum pupil diameter:} Largest observed pupil size, reflecting dilation.
+    \item \textbf{f34, f44 — Arithmetic mean pupil diameter:} Average pupil size, representing typical diameter across the trial.
+    \item \textbf{f35, f45 — Geometric mean pupil diameter:} Alternative measure of central tendency, less sensitive to outliers.
+    \item \textbf{f36, f46 — Median pupil diameter:} Middle value of pupil size distribution, robust to extreme values.
+    \item \textbf{f37, f47 — Standard deviation pupil diameter:} Variability in pupil size across the trial.
+    \item \textbf{f38, f48 — Median absolute deviation pupil diameter:} Robust measure of dispersion, less influenced by extreme dilation or constriction.
+    \item \textbf{f39, f49 — Skewness pupil diameter:} Asymmetry of the pupil size distribution, indicating bias toward constriction or dilation.
+    \item \textbf{f40, f50 — Interquartile range pupil diameter:} Spread of the middle 50\% of pupil sizes, unaffected by extreme values.
+    \item \textbf{f41, f51 — Kurtosis pupil diameter:} Shape descriptor reflecting peakedness or tail heaviness in the pupil size distribution.
+\end{itemize}
 
 \subsubsection{Pupil Diameter Ratio Features (f52–f61)}
 
-These features describe the relationship between the diameters of the left and right pupils.
+In addition to analyzing the absolute pupil diameters of the left and right eyes, the present study also considered their ratio as a derived measure. 
+The pupil diameter ratio was computed as the quotient between the left and right pupil diameters (\(\mathrm{LPD}/\mathrm{RPD}\)), including only samples where both measurements were valid (\(\mathrm{LPV} = 1\) and \(\mathrm{RPV} = 1\)). 
+This ratio captures relative differences between the two eyes, which may reveal asymmetries in ocular physiology or subtle individual traits. 
+The resulting distribution of ratio values across each trial was summarized through descriptive statistics, generating features \(f52\)--\(f61\).
 
-f52–f61: Statistical measures (minimum, maximum, means, median, variability, skewness, interquartile range, kurtosis) of the pupil diameter ratio provide insight into physiological symmetry or asymmetry and potential differential responses to stimuli.
+The individual features are defined as follows:
+
+\begin{itemize}
+    \item \textbf{f52 — Minimum ratio:} The smallest observed value of the \(\mathrm{LPD}/\mathrm{RPD}\) ratio, indicating moments when the left pupil was relatively more constricted.
+    \item \textbf{f53 — Maximum ratio:} The largest observed ratio, reflecting moments when the left pupil was relatively more dilated.
+    \item \textbf{f54 — Arithmetic mean ratio:} The average ratio, providing a global estimate of relative pupil size balance.
+    \item \textbf{f55 — Geometric mean ratio:} Central tendency of the ratio distribution, less influenced by extreme deviations.
+    \item \textbf{f56 — Median ratio:} The middle ratio value, robust to outliers.
+    \item \textbf{f57 — Standard deviation ratio:} Variability of relative pupil sizes across the trial.
+    \item \textbf{f58 — Median absolute deviation ratio:} Robust measure of dispersion in the ratio values, resistant to outliers.
+    \item \textbf{f59 — Skewness ratio:} Degree of asymmetry in the ratio distribution, indicating whether the left pupil tends to be systematically larger or smaller than the right.
+    \item \textbf{f60 — Interquartile range ratio:} Range of the middle 50\% of ratio values, excluding extremes.
+    \item \textbf{f61 — Kurtosis ratio:} Descriptor of distribution shape, highlighting whether the ratios are tightly clustered or prone to extreme values.
+\end{itemize}
+
+By focusing on ratios rather than absolute diameters, these features emphasize interocular balance and asymmetry, providing an additional dimension of information that complements absolute pupil measurements.
 
 \subsubsection{Pupil Diameter Difference Features (f62–f70)}
 
-These describe absolute differences in pupil diameters.
+Complementing the ratio-based analysis, another set of features was derived from the direct difference between left and right pupil diameters, computed as
+\[
+D = \mathrm{LPD} - \mathrm{RPD},
+\]
+where only samples with valid measurements for both eyes (\(\mathrm{LPV} = 1\), \(\mathrm{RPV} = 1\)) were considered.  
+This difference provides a straightforward measure of interocular asymmetry, capturing the extent to which one pupil is larger than the other at a given moment. 
+Positive values indicate instances where the left pupil was larger, whereas negative values correspond to cases where the right pupil was larger.
+From the distribution of these differences, statistical descriptors were extracted, yielding features \(f62\)--\(f70\). 
+Unlike other feature groups, the geometric mean was not included here, since the distribution of differences may contain negative values, for which the geometric mean is mathematically undefined.  
 
-f62–f70: Include statistical descriptors (minimum, maximum, mean, median, standard deviation, median absolute deviation, skewness, interquartile range, kurtosis) of the diameter differences, capturing variation in inter-eye pupil size that could be biologically significant.
+The used features are:
+
+\begin{itemize}
+    \item \textbf{f62 — Minimum difference:} The most negative value of \(\mathrm{LPD} - \mathrm{RPD}\), corresponding to moments when the right pupil was much larger.
+    \item \textbf{f63 — Maximum difference:} The largest positive value, when the left pupil exceeded the right in diameter.
+    \item \textbf{f64 — Arithmetic mean difference:} The average signed difference, indicating overall bias toward one eye.
+    \item \textbf{f65 — Median difference:} The central value of the distribution, robust to outliers.
+    \item \textbf{f66 — Standard deviation difference:} Variability of interocular pupil differences.
+    \item \textbf{f67 — Median absolute deviation difference:} Robust measure of dispersion for pupil size differences.
+    \item \textbf{f68 — Skewness difference:} Asymmetry of the distribution, showing systematic tendencies toward one eye being larger.
+    \item \textbf{f69 — Interquartile range difference:} Spread of the middle 50\% of differences, insensitive to extremes.
+    \item \textbf{f70 — Kurtosis difference:} Shape of the distribution, indicating whether values cluster tightly or include frequent large deviations.
+\end{itemize}
 
 \subsubsection{Blink Features (f71–f74)}
 
-Blinks are involuntary eye closures that can reveal physiological and cognitive states.
+Blinking constitutes an involuntary yet highly individual ocular behavior, influenced by physiological and cognitive factors such as fatigue, attentional demand, and emotional state. 
+In the present analysis, blink-related features were derived from the identifiers and durations recorded by the GP3 eye tracker.
 
-f71 — Number of blinks: Count of blink events in a trial.
+The total number of blinks in a trial (\(f71\)) was determined by counting the distinct blink identifiers (\(\text{BKID}\)), restricted to values greater than zero to exclude missing or invalid entries. 
+This feature provides a measure of blink frequency, which can vary substantially across individuals and contexts.
 
-f72 — Blink mean duration: Average blink duration.
+In addition, the temporal properties of blinks were captured using the duration values (\(\text{BKDUR}\)), measured in milliseconds. 
+Only valid, nonzero durations were considered. 
+From this distribution, three descriptors were extracted: the mean blink duration (\(f72\)), the minimum blink duration (\(f73\)), and the maximum blink duration (\(f74\)). 
+Together, these features describe not only the overall temporal profile of blinks but also their variability within a trial, reflecting both individual oculomotor tendencies and task-related influences.
 
-f73 — Blink minimum duration: Shortest blink observed.
+Formally, the features are defined as follows:
 
-f74 — Blink maximum duration: Longest blink observed.
+\begin{itemize}
+    \item \textbf{f71 — Number of blinks:} Total count of distinct blink events during the trial.
+    \item \textbf{f72 — Blink mean duration:} Average duration of recorded blinks.
+    \item \textbf{f73 — Blink minimum duration:} Shortest recorded blink, representing rapid eyelid closures.
+    \item \textbf{f74 — Blink maximum duration:} Longest recorded blink, corresponding to prolonged eyelid closures.
+\end{itemize}
 
 \subsubsection{Directional Movement Features (f75–f82)}
 
-These capture directional properties of gaze movement.
+In addition to fixations, saccades, and blinks, gaze dynamics can also be characterized by the predominant directions of movement across the visual field. 
+These directional features capture the extent and frequency of horizontal and vertical displacements, providing insight into scanning strategies, asymmetries, and biases in exploration patterns.
 
-f75 — Total distance in ascending direction: Sum of upward gaze movements.
+For each pair of consecutive gaze points within a trial, the horizontal (\(\Delta x\)) and vertical (\(\Delta y\)) displacements were computed. 
+The direction of movement was determined by the sign of the displacement: a negative \(\Delta y\) corresponds to upward movement, a positive \(\Delta y\) to downward movement, a negative \(\Delta x\) to leftward movement, and a positive \(\Delta x\) to rightward movement. 
+For each direction, two types of measures were accumulated: (i) the total distance traveled in that direction, obtained as the sum of the absolute displacements, and (ii) the total number of directional transitions. 
 
-f76 — Total distance in descending direction: Sum of downward gaze movements.
+Formally, for a sequence of gaze points \((x_i, y_i)\) with \(i = 1, \dots, N\), the displacement vectors are given by:
+\[
+\Delta x_i = x_{i+1} - x_i, \quad \Delta y_i = y_{i+1} - y_i.
+\]
+Directional totals are then computed by summing the absolute values of displacements in each respective direction, while counts are obtained by tallying the number of occurrences where the displacement sign meets the condition for that direction.
 
-f77 — Total distance in rightward direction: Sum of rightward gaze movements.
+The features are defined as follows:
 
-f78 — Total distance in leftward direction: Sum of leftward gaze movements.
-
-f79–f82 — Number of movements in each direction: Count of gaze shifts upward, downward, rightward, and leftward, providing information about directional scanning patterns.
-
-
-
-
+\begin{itemize}
+    \item \textbf{f75 — Total upward distance:} Sum of vertical displacements in the upward direction (\(\Delta y < 0\)).
+    \item \textbf{f76 — Total downward distance:} Sum of vertical displacements in the downward direction (\(\Delta y > 0\)).
+    \item \textbf{f77 — Total leftward distance:} Sum of horizontal displacements in the leftward direction (\(\Delta x < 0\)).
+    \item \textbf{f78 — Total rightward distance:} Sum of horizontal displacements in the rightward direction (\(\Delta x > 0\)).
+    \item \textbf{f79 — Number of upward transitions:} Count of gaze shifts with \(\Delta y < 0\).
+    \item \textbf{f80 — Number of downward transitions:} Count of gaze shifts with \(\Delta y > 0\).
+    \item \textbf{f81 — Number of leftward transitions:} Count of gaze shifts with \(\Delta x < 0\).
+    \item \textbf{f82 — Number of rightward transitions:} Count of gaze shifts with \(\Delta x > 0\).
+\end{itemize}
 
 
 \subsection{Machine learning}

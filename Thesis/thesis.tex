@@ -588,7 +588,7 @@ While this limitation reduces the comfort and naturalness of the setup, it ensur
 \end{figure}
 
 \newpage
-\section{Related}
+\section{Related work}
 
 This section presents an updated overview of the state of the art in gaze-based biometric solutions.
 As a starting point, we draw on the work presented in Chapter 9 – Biometric Authentication to Access Controlled Areas Through Eye Tracking [25], published in 2017. 
@@ -1532,9 +1532,83 @@ The features are defined as follows:
     \item \textbf{f82 — Number of rightward transitions:} Count of gaze shifts with \(\Delta x > 0\).
 \end{itemize}
 
+\newpage
 
-\subsection{Machine learning}
-\subsection{Analysis}
+\subsection{Machine Learning Analysis}
+
+This section presents the machine learning analysis conducted on the collected data, which has been represented through the diverse set of features described in the previous section. 
+Given that the domain of behavioral biometrics based on dynamic text remains largely unexplored, our study also investigates the feasibility of performing user identification. 
+
+It is well established that biometric identification based on behavioral signals often achieves limited performance, making it unsuitable for reliable use in soft biometric applications. 
+Nevertheless, prior research has shown that certain modalities, such as keystroke dynamics [9], represent notable exceptions. 
+Accordingly, our first objective is to assess whether gaze- and pupil-based features in our setting also exhibit such exceptionality in the identification task. 
+
+In addition to this evaluation, the identification analysis is leveraged as a methodological step to optimize hyperparameters and to determine the most informative subsets of features via the SelectKBest method [91]. 
+The insights obtained from this stage are subsequently applied to the verification analysis, which constitutes the core of our biometric evaluation. 
+Specifically, by transferring the optimized hyperparameters and reduced feature sets from the identification task, we significantly lower the computational cost of verification. 
+This step is crucial, as verification requires training a separate model for each individual in the dataset, and performing hyperparameter optimization for every subject would otherwise lead to prohibitive computational demands.
+
+In our analysis, we employ seven different machine learning classifiers to construct and evaluate predictive models.
+As an initial step, we used the Naïve Bayes classifier to obtain a preliminary understanding of the potential performance that could be achieved.
+However due to its strong assumption of feature independence, which is rarely satisfied in practice, this model is utilized solely for exploratory purposes.
+Consequently, Naïve Bayes results are not included in the main performance tables, as the classifier is primarily used for a rapid baseline estimation, and its performance is typically inferior to more advanced methods.
+
+Among the classifiers employed in this study, the k-Nearest Neighbors (kNN) algorithm [94] represents a well-established and widely used method across various application domains.
+One of the principal strengths of k-NN lies in its simplicity and interpretability, making it an effective baseline model before the adoption of more complex techniques.
+It often provides satisfactory performance without extensive parameter tuning, which makes it particularly suitable for exploratory analysis.
+While the construction of a k-NN model is computationally efficient, prediction time can become relatively slow when dealing with large datasets, either in terms of the number of features or the number of samples [93].
+
+The next classifier employed is Logistic Regression [95], which is widely used due to its simplicity, interpretability, and efficiency. 
+One of its main advantages is that it is easy to implement and does not require strong assumptions about the distribution of the classes in the feature space. 
+Moreover, Logistic Regression can be naturally extended to handle multiple classes through multinomial regression, providing a probabilistic interpretation of class predictions that is both intuitive and informative.
+However, the primary limitation of Logistic Regression lies in its assumption of linearity between the independent variables and the log-odds of the dependent variable. 
+As a result, it can only model linear decision boundaries and therefore struggles to capture more complex, nonlinear relationships that may exist within the data [96].
+
+To proceed we used SVC [97] and one of its variant Nusvc [98].
+According to [93] Kernelized Support Vector Machines (SVMs) are highly effective models capable of learning complex decision boundaries, even with few features. 
+They perform well on both low- and high-dimensional data but scale poorly with the number of samples. 
+While datasets up to around 10,000 samples are manageable, larger ones can cause significant runtime and memory issues. 
+Moreover, SVMs require careful data preprocessing and precise parameter tuning to achieve optimal performance.
+Unlike SVC, which relies on the parameter C to balance the trade-off between maximizing the margin and minimizing classification errors, NuSVC introduces the parameter v (nu).
+This parameter defines an upper bound on the proportion of training errors and a lower bound on the proportion of support vectors. 
+As a result, NuSVC offers a more interpretable and direct means of controlling model complexity and the number of support vectors involved in the decision function [99].
+
+The next classifier is one of the most well-known and widely used: Random Forest [100].
+Random forests are powerful machine learning methods for both regression and classification, requiring minimal parameter tuning and no data scaling. 
+They retain the strengths of decision trees while overcoming many of their limitations. 
+However, their complexity—arising from combining numerous deep trees—reduces interpretability, making single decision trees preferable when a simple, visual explanation of the decision process is needed [93].
+
+Finally, the last classifier used is the multilayer perceptron (MLP) [101]. 
+Neural networks have regained prominence in machine learning due to their ability to capture complex patterns from large datasets. 
+With sufficient data, computation, and parameter tuning, they often outperform other algorithms in both classification and regression tasks. 
+However, they require extensive training time, careful data preprocessing, and are best suited for homogeneous data [93]. 
+
+The classifiers presented above will be employed throughout the analysis. 
+A single classifier is not used because, in machine learning, there is no universally best algorithm.
+In fact performance depends on the characteristics of the data and the specific problem being addressed.
+
+As previously stated, the first part of the analysis focuses on the identification problem. 
+This phase employs two distinct data-splitting strategies to create training and testing sets. 
+The first is the classic random split using 80\% of the data for the train set and 20\% for the test set.
+The second is a session-based split, where data from the first two sessions (S1 and S2) form the training set, and data from the third session (S3) is used as the test set.
+Initially, a general identification will be performed using the entire dataset, both with and without feature selection, to evaluate any potential improvements in performance.
+An analysis involving every single animation taken singularly is then performed to assess which is the best performing animations and see if a single animation can be used for identification purpose.
+This analysis is divided into two types, based on the data used in the training set.
+The first method is called single train (st), where the model is trained and tested on data from a single animation.
+While the second approach is called full train (ft), where the model is trained on data from all animations combined and tested on a single animation.
+The latter method has been used in previous studies and, in some cases, achieved better results due to the larger amount of training data. 
+However, in other cases, performance worsened because the inclusion of all animations introduced confusion between different data distributions.
+
+Afterward, we proceed to the verification phase, which represents the main objective of this work.
+In this stage, we employ only the session-based split, applied in the same manner as in the identification analysis.
+This choice reflects a more realistic, real-world scenario, where user verification occurs across different sessions.
+Similar to the identification phase, we first conduct a global analysis using the entire dataset across all animations, both with and without feature selection, to obtain a general overview of the achievable performance.
+Subsequently, we focus on single-animation analyses, maintaining the two training strategies previously adopted for identification.
+However, this part introduces an additional division.
+Specifically, we evaluate two modes, st and ft, to compare a standard verification approach with one that uses only the best-performing model for testing. 
+These modes will be discussed in detail in the dedicated chapter.
+
+Finally, we perform a comparative analysis between identification and verification using the full dataset, rather than single animations, in order to assess the performance differences between static and dynamic text under similar experimental conditions.
 
 \section{Appendix}
 \section{Conclusion}
@@ -1725,6 +1799,28 @@ The features are defined as follows:
 [89] A. George and A. Routray, “A score level fusion method for eye movement biometrics,” Pattern Recognit. Lett., vol. 82, pp. 207–215, Oct. 2016.
 
 [90] OPEN GAZE API BY GAZEPOINT, http://andrewd.ces.clemson.edu/courses/cpsc881/manuals/Gazepoint/Gazepoint\%20API.pdf
+
+[91] SelectKBest, \url{https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html}
+
+[92] Naive Bayes, \url{https://scikit-learn.org/stable/modules/naive_bayes.html}
+
+[93] Introduction to Machine Learning with Python, Andreas C. Müller and Sarah Guido
+
+[94] KNeighborsClassifier, \url{https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html}
+
+[95] Logistic Regression, \url{https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html}
+
+[96] Advantages and Disadvantages of Logistic Regression, \url{https://www.geeksforgeeks.org/data-science/advantages-and-disadvantages-of-logistic-regression/}
+
+[97] SVC, \url{https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html}
+
+[98] NuSVC, \url{https://scikit-learn.org/stable/modules/generated/sklearn.svm.NuSVC.html}
+
+[99] Underrated and Implementing Nu-Support Vector Classification (NuSVC), \url{https://www.geeksforgeeks.org/machine-learning/underrated-and-implementing-nu-support-vector-classification-nusvc/}
+
+[100] Random Forest, \url{https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html}
+
+[101] MLP, \url{https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html}
 
 \end{raggedright}
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  5 OCT 2025 11:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  5 OCT 2025 17:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -490,57 +490,139 @@ Package biblatex Info: ... and expl3
 Package: xparse 2024-08-16 L3 Experimental document command parser
 )
 Package: blx-case-expl3 2025/07/10 v3.21 expl3 case changing code for biblatex
-))
-\@quotelevel=\count431
-\@quotereset=\count432
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 19.
+)) (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count431
+\float@exts=\toks25
+\float@box=\box54
+\@float@everytoks=\toks26
+\@floatcapt=\box55
+) (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen172
+\lightrulewidth=\dimen173
+\cmidrulewidth=\dimen174
+\belowrulesep=\dimen175
+\belowbottomsep=\dimen176
+\aboverulesep=\dimen177
+\abovetopsep=\dimen178
+\cmidrulesep=\dimen179
+\cmidrulekern=\dimen180
+\defaultaddspace=\dimen181
+\@cmidla=\count432
+\@cmidlb=\count433
+\@aboverulesep=\dimen182
+\@belowrulesep=\dimen183
+\@thisruleclass=\count434
+\@lastruleclass=\count435
+\@thisrulewidth=\dimen184
+) (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
+\col@sep=\dimen185
+\ar@mcellbox=\box56
+\extrarowheight=\dimen186
+\NC@list=\toks27
+\extratabsurround=\skip75
+\backup@length=\skip76
+\ar@cellbox=\box57
+) (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip77
+\multirow@cntb=\count436
+\multirow@dima=\skip78
+\bigstrutjot=\dimen187
+) (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/makecell\makecell.sty
+Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
+\rotheadsize=\dimen188
+\c@nlinenum=\count437
+\TeXr@lab=\toks28
+)
+\@quotelevel=\count438
+\@quotereset=\count439
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 21.
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (thesis.aux)
+Runaway argument?
+{{7}{31}{Speeds data per animation}{figure.c 
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:21: File ended while scanning use of \@newl@bel.
+<inserted text> 
+                \par 
+l.21 \begin{document}
+                     
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
- (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+(C:\Users\david\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count433
-\scratchdimen=\dimen172
-\scratchbox=\box54
-\nofMPsegments=\count434
-\nofMParguments=\count435
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count436
-\MPscratchDim=\dimen173
-\MPnumerator=\count437
-\makeMPintoPDFobject=\count438
-\everyMPtoPDFconversion=\toks26
+\scratchcounter=\count440
+\scratchdimen=\dimen189
+\scratchbox=\box58
+\nofMPsegments=\count441
+\nofMParguments=\count442
+\everyMPshowfont=\toks29
+\MPscratchCnt=\count443
+\MPscratchDim=\dimen190
+\MPnumerator=\count444
+\makeMPintoPDFobject=\count445
+\everyMPtoPDFconversion=\toks30
 ) (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 19.
- (thesis.out) (thesis.out)
+Package hyperref Info: Link coloring OFF on input line 21.
+ (thesis.out)
+Runaway argument?
+{sect 
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:21: File ended while scanning use of \@@BOOKMARK.
+<inserted text> 
+                \par 
+l.21 \begin{document}
+                     
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
+(thesis.out)
+Runaway argument?
+{sect 
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:21: File ended while scanning use of \@@BOOKMARK.
+<inserted text> 
+                \par 
+l.21 \begin{document}
+                     
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
 \@outlinefile=\write4
 \openout4 = `thesis.out'.
-
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -577,14 +659,15 @@ Package hyperref Info: Link coloring OFF on input line 19.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Redefining \microtypecontext on input line 19.
-Package microtype Info: Applying patch `item' on input line 19.
-Package microtype Info: Applying patch `toc' on input line 19.
-Package microtype Info: Applying patch `eqnum' on input line 19.
-Package microtype Info: Applying patch `footnote' on input line 19.
-Package microtype Info: Applying patch `verbatim' on input line 19.
-LaTeX Info: Redefining \microtypesetup on input line 19.
+LaTeX Info: Redefining \microtypecontext on input line 21.
+Package microtype Info: Applying patch `item' on input line 21.
+Package microtype Info: Applying patch `toc' on input line 21.
+Package microtype Info: Applying patch `eqnum' on input line 21.
+Package microtype Info: Applying patch `footnote' on input line 21.
+Package microtype Info: Applying patch `verbatim' on input line 21.
+LaTeX Info: Redefining \microtypesetup on input line 21.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -609,133 +692,134 @@ Package biblatex Info: Automatic encoding selection.
 \openout3 = `thesis.bcf'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'thesis.bbl' found.
- (thesis.bbl)
-Package biblatex Info: Reference section=0 on input line 19.
-Package biblatex Info: Reference segment=0 on input line 19.
-<Images/Theory/Logo_UNIPV.svg.png, id=231, 1284.8pt x 940.51375pt>
+Package biblatex Info: ... file 'thesis.bbl' not found.
+
+No file thesis.bbl.
+Package biblatex Info: Reference section=0 on input line 21.
+Package biblatex Info: Reference segment=0 on input line 21.
+<Images/Theory/Logo_UNIPV.svg.png, id=171, 1284.8pt x 940.51375pt>
 File: Images/Theory/Logo_UNIPV.svg.png Graphic file (type png)
 <use Images/Theory/Logo_UNIPV.svg.png>
-Package pdftex.def Info: Images/Theory/Logo_UNIPV.svg.png  used on input line 28.
+Package pdftex.def Info: Images/Theory/Logo_UNIPV.svg.png  used on input line 30.
 (pdftex.def)             Requested size: 170.71652pt x 124.96907pt.
 
 
 [1
 
-{C:/Users/david/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc} <./Images/Theory/Logo_UNIPV.svg.png>] (thesis.toc
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3.
- (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
-File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3.
- (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
-File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 3.
- (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
-File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 3.
- (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
-File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 3.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 3.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 3.
+{C:/Users/david/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc} <./Images/Theory/Logo_UNIPV.svg.png>] (thesis.toc)
+\tf@toc=\write5
+\openout5 = `thesis.toc'.
+
 
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.53 ...ine Learning Analysis}{43}{subsection.5.5}
-                                                  % [1])
-\tf@toc=\write5
-\openout5 = `thesis.toc'.
-
-
+l.64 \newpage
+              [1]
 
 [2]
 
 [3]
-
-[4]
-<Images/Theory/Fingerprint_scanner_identification.jpg, id=316, 1284.8pt x 963.6pt>
+<Images/Theory/Fingerprint_scanner_identification.jpg, id=195, 1284.8pt x 963.6pt>
 File: Images/Theory/Fingerprint_scanner_identification.jpg Graphic file (type jpg)
 <use Images/Theory/Fingerprint_scanner_identification.jpg>
-Package pdftex.def Info: Images/Theory/Fingerprint_scanner_identification.jpg  used on input line 137.
+Package pdftex.def Info: Images/Theory/Fingerprint_scanner_identification.jpg  used on input line 139.
 (pdftex.def)             Requested size: 204.73033pt x 153.5469pt.
-<Images/Theory/eye.png, id=317, 240.9pt x 180.675pt>
+<Images/Theory/eye.png, id=196, 240.9pt x 180.675pt>
 File: Images/Theory/eye.png Graphic file (type png)
 <use Images/Theory/eye.png>
-Package pdftex.def Info: Images/Theory/eye.png  used on input line 144.
+Package pdftex.def Info: Images/Theory/eye.png  used on input line 146.
 (pdftex.def)             Requested size: 204.73033pt x 153.5524pt.
 
 
-[5]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 181.
+[4]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 183.
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 
-[6{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc} <./Images/Theory/Fingerprint_scanner_identification.jpg> <./Images/Theory/eye.png>]
+[5{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc} <./Images/Theory/Fingerprint_scanner_identification.jpg> <./Images/Theory/eye.png>]
 
-[7]
+[6]
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 275.
+ (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
+File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 275.
+ (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 275.
+ (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 275.
+ (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 275.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 275.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 275.
 
-[8{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
+
+[7{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
+
+[8]
 
 [9]
 
 [10]
-
-[11]
-<Images/Theory/occhio.jpg, id=354, 1027.84pt x 692.5875pt>
+<Images/Theory/occhio.jpg, id=233, 1027.84pt x 692.5875pt>
 File: Images/Theory/occhio.jpg Graphic file (type jpg)
 <use Images/Theory/occhio.jpg>
-Package pdftex.def Info: Images/Theory/occhio.jpg  used on input line 382.
+Package pdftex.def Info: Images/Theory/occhio.jpg  used on input line 384.
 (pdftex.def)             Requested size: 272.97841pt x 183.93639pt.
-<Images/Theory/rods_cones.jpg, id=355, 803.0pt x 1121.18875pt>
+<Images/Theory/rods_cones.jpg, id=234, 803.0pt x 1121.18875pt>
 File: Images/Theory/rods_cones.jpg Graphic file (type jpg)
 <use Images/Theory/rods_cones.jpg>
-Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 407.
+Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 409.
 (pdftex.def)             Requested size: 181.98097pt x 254.08713pt.
 
 
-[12 <./Images/Theory/occhio.jpg>]
+[11 <./Images/Theory/occhio.jpg>]
 
-[13 <./Images/Theory/rods_cones.jpg>]
+[12 <./Images/Theory/rods_cones.jpg>]
+
+[13]
 
 [14]
 
 [15]
-
-[16]
-<Images/Theory/eog.png, id=379, 481.8pt x 301.125pt>
+<Images/Theory/eog.png, id=258, 481.8pt x 301.125pt>
 File: Images/Theory/eog.png Graphic file (type png)
 <use Images/Theory/eog.png>
-Package pdftex.def Info: Images/Theory/eog.png  used on input line 557.
+Package pdftex.def Info: Images/Theory/eog.png  used on input line 559.
 (pdftex.def)             Requested size: 204.7292pt x 122.84174pt.
-<Images/Theory/coil.png, id=380, 687.56876pt x 263.98625pt>
+<Images/Theory/coil.png, id=259, 687.56876pt x 263.98625pt>
 File: Images/Theory/coil.png Graphic file (type png)
 <use Images/Theory/coil.png>
-Package pdftex.def Info: Images/Theory/coil.png  used on input line 564.
+Package pdftex.def Info: Images/Theory/coil.png  used on input line 566.
 (pdftex.def)             Requested size: 204.72997pt x 122.83691pt.
-<Images/Theory/vog.jpeg, id=381, 182.6825pt x 278.03876pt>
+<Images/Theory/vog.jpeg, id=260, 182.6825pt x 278.03876pt>
 File: Images/Theory/vog.jpeg Graphic file (type jpg)
 <use Images/Theory/vog.jpeg>
-Package pdftex.def Info: Images/Theory/vog.jpeg  used on input line 574.
+Package pdftex.def Info: Images/Theory/vog.jpeg  used on input line 576.
 (pdftex.def)             Requested size: 143.31686pt x 122.84229pt.
-<Images/Theory/corneal.jpg, id=382, 1027.84pt x 312.16624pt>
+<Images/Theory/corneal.jpg, id=261, 1027.84pt x 312.16624pt>
 File: Images/Theory/corneal.jpg Graphic file (type jpg)
 <use Images/Theory/corneal.jpg>
-Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 581.
+Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 583.
 (pdftex.def)             Requested size: 204.71744pt x 122.83989pt.
 
 
-[17 <./Images/Theory/eog.png> <./Images/Theory/coil.png (PNG copy)> <./Images/Theory/vog.jpeg> <./Images/Theory/corneal.jpg>]
+[16 <./Images/Theory/eog.png> <./Images/Theory/coil.png (PNG copy)> <./Images/Theory/vog.jpeg> <./Images/Theory/corneal.jpg>]
+
+[17]
 
 [18]
 
@@ -754,72 +838,83 @@ Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 581.
 [25]
 
 [26]
-
-[27]
-<Images/Experiment/tester.png, id=430, 363.3575pt x 212.795pt>
+<Images/Experiment/tester.png, id=309, 363.3575pt x 212.795pt>
 File: Images/Experiment/tester.png Graphic file (type png)
 <use Images/Experiment/tester.png>
-Package pdftex.def Info: Images/Experiment/tester.png  used on input line 968.
+Package pdftex.def Info: Images/Experiment/tester.png  used on input line 970.
 (pdftex.def)             Requested size: 272.97841pt x 159.86859pt.
 
 
-[28 <./Images/Experiment/tester.png>]
+[27 <./Images/Experiment/tester.png>]
 
-[29{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}]
-<Images/Experiment/tester_speed.png, id=446, 354.32375pt x 193.22188pt>
+[28{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}]
+<Images/Experiment/tester_speed.png, id=325, 354.32375pt x 193.22188pt>
 File: Images/Experiment/tester_speed.png Graphic file (type png)
 <use Images/Experiment/tester_speed.png>
-Package pdftex.def Info: Images/Experiment/tester_speed.png  used on input line 1045.
+Package pdftex.def Info: Images/Experiment/tester_speed.png  used on input line 1047.
 (pdftex.def)             Requested size: 272.97841pt x 148.86385pt.
 
 
-[30 <./Images/Experiment/tester_speed.png>]
-<Images/Experiment/speeds.png, id=455, 357.335pt x 250.43562pt>
+[29 <./Images/Experiment/tester_speed.png>]
+<Images/Experiment/speeds.png, id=333, 354.32375pt x 245.41687pt>
 File: Images/Experiment/speeds.png Graphic file (type png)
 <use Images/Experiment/speeds.png>
-Package pdftex.def Info: Images/Experiment/speeds.png  used on input line 1087.
-(pdftex.def)             Requested size: 272.97841pt x 191.32277pt.
+Package pdftex.def Info: Images/Experiment/speeds.png  used on input line 1089.
+(pdftex.def)             Requested size: 272.97841pt x 189.07642pt.
 
 
-[31]
+[30]
 
-[32 <./Images/Experiment/speeds.png>]
+LaTeX Warning: Reference `fig:sped' on page 31 undefined on input line 1111.
 
-[33]
-<Images/Experiment/cross.png, id=471, 1284.8pt x 722.7pt>
+
+
+[31 <./Images/Experiment/speeds.png>]
+
+[32]
+<Images/Experiment/cross.png, id=349, 1284.8pt x 722.7pt>
 File: Images/Experiment/cross.png Graphic file (type png)
 <use Images/Experiment/cross.png>
-Package pdftex.def Info: Images/Experiment/cross.png  used on input line 1201.
+Package pdftex.def Info: Images/Experiment/cross.png  used on input line 1203.
 (pdftex.def)             Requested size: 272.97841pt x 153.5469pt.
-<Images/Experiment/HS_little.png, id=473, 1284.8pt x 722.7pt>
+
+
+LaTeX Warning: Reference `fig:cross' on page 33 undefined on input line 1208.
+
+<Images/Experiment/HS_little.png, id=350, 1284.8pt x 722.7pt>
 File: Images/Experiment/HS_little.png Graphic file (type png)
 <use Images/Experiment/HS_little.png>
-Package pdftex.def Info: Images/Experiment/HS_little.png  used on input line 1213.
+Package pdftex.def Info: Images/Experiment/HS_little.png  used on input line 1215.
 (pdftex.def)             Requested size: 204.7292pt x 122.83531pt.
-<Images/Experiment/HS_big.png, id=474, 1284.8pt x 722.7pt>
+<Images/Experiment/HS_big.png, id=351, 1284.8pt x 722.7pt>
 File: Images/Experiment/HS_big.png Graphic file (type png)
 <use Images/Experiment/HS_big.png>
-Package pdftex.def Info: Images/Experiment/HS_big.png  used on input line 1220.
+Package pdftex.def Info: Images/Experiment/HS_big.png  used on input line 1222.
 (pdftex.def)             Requested size: 204.7292pt x 122.83531pt.
-<Images/Experiment/VB_little.png, id=475, 1284.8pt x 722.7pt>
+<Images/Experiment/VB_little.png, id=352, 1284.8pt x 722.7pt>
 File: Images/Experiment/VB_little.png Graphic file (type png)
 <use Images/Experiment/VB_little.png>
-Package pdftex.def Info: Images/Experiment/VB_little.png  used on input line 1230.
+Package pdftex.def Info: Images/Experiment/VB_little.png  used on input line 1232.
 (pdftex.def)             Requested size: 143.30849pt x 122.83531pt.
-<Images/Experiment/VB_big.png, id=476, 1284.8pt x 722.7pt>
+<Images/Experiment/VB_big.png, id=353, 1284.8pt x 722.7pt>
 File: Images/Experiment/VB_big.png Graphic file (type png)
 <use Images/Experiment/VB_big.png>
-Package pdftex.def Info: Images/Experiment/VB_big.png  used on input line 1237.
+Package pdftex.def Info: Images/Experiment/VB_big.png  used on input line 1239.
 (pdftex.def)             Requested size: 204.7292pt x 122.83531pt.
 
+LaTeX Warning: Reference `fig:anims' on page 33 undefined on input line 1248.
 
-[34 <./Images/Experiment/cross.png (PNG copy)>]
 
-[35 <./Images/Experiment/HS_little.png (PNG copy)> <./Images/Experiment/HS_big.png (PNG copy)> <./Images/Experiment/VB_little.png (PNG copy)> <./Images/Experiment/VB_big.png (PNG copy)>]
 
-[36]
+[33 <./Images/Experiment/cross.png (PNG copy)>]
 
-[37{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
+[34 <./Images/Experiment/HS_little.png (PNG copy)> <./Images/Experiment/HS_big.png (PNG copy)> <./Images/Experiment/VB_little.png (PNG copy)> <./Images/Experiment/VB_big.png (PNG copy)>]
+
+[35]
+
+[36{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
+
+[37]
 
 [38]
 
@@ -832,53 +927,145 @@ Package pdftex.def Info: Images/Experiment/VB_big.png  used on input line 1237.
 [42]
 
 [43]
-
-[44]
-
-[45]
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 1626.
- (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
-File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1652.
+ (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmss' (encoding: T1).
+(microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:1665: Missing number, treated as zero.
+<to be read again> 
+                   M
+l.1665 ...ler', 'StandardScaler', 'RobustScaler']}
+                                                   \\
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
 
-[46]
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:1665: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   M
+l.1665 ...ler', 'StandardScaler', 'RobustScaler']}
+                                                   \\
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
 
-[47]
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:1665: Missing = inserted for \ifdim.
+<to be read again> 
+                   M
+l.1665 ...ler', 'StandardScaler', 'RobustScaler']}
+                                                   \\
+I was expecting to see `<', `=', or `>'. Didn't.
 
-[48]
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:1665: Missing number, treated as zero.
+<to be read again> 
+                   M
+l.1665 ...ler', 'StandardScaler', 'RobustScaler']}
+                                                   \\
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
 
-[49]
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:1665: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   M
+l.1665 ...ler', 'StandardScaler', 'RobustScaler']}
+                                                   \\
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
 
-[50]
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:1665: Missing number, treated as zero.
+<to be read again> 
+                   \unskip 
+l.1665 ...ler', 'StandardScaler', 'RobustScaler']}
+                                                   \\
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
 
-[51] (thesis.aux)
- ***********
-LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-09-02>
- ***********
-Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 378EB7792E65B6B8FF2D3ED389666C96;11051.
-Package logreq Info: Writing requests to 'thesis.run.xml'.
-\openout1 = `thesis.run.xml'.
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:1665: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   \unskip 
+l.1665 ...ler', 'StandardScaler', 'RobustScaler']}
+                                                   \\
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
 
- ) 
-Here is how much of TeX's memory you used:
- 20500 strings out of 468130
- 365892 string characters out of 5430633
- 1229195 words of memory out of 5000000
- 48564 multiletter control sequences out of 15000+600000
- 692063 words of font info for 181 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 75i,8n,79p,1067b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy7.pfb>
-Output written on thesis.pdf (52 pages, 2351123 bytes).
-PDF statistics:
- 667 PDF objects out of 1000 (max. 8388607)
- 119 named destinations out of 1000 (max. 500000)
- 37406 words of extra memory for PDF output out of 42996 (max. 10000000)
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:1665: Missing number, treated as zero.
+<to be read again> 
+                   M
+l.1665 ...ler', 'StandardScaler', 'RobustScaler']}
+                                                   \\
+A number should have been here; I inserted `0'.
+(If you can't figure out why I needed to see a number,
+look up `weird error' in the index to The TeXbook.)
 
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:1665: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   M
+l.1665 ...ler', 'StandardScaler', 'RobustScaler']}
+                                                   \\
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+
+Overfull \hbox (272.94304pt too wide) in paragraph at lines 1665--1666
+|[][]
+ []
+
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:1669: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   5
+l.1669 ...xttt{n\_neighbors}: \\ [3, 5, 7, 9, 11]}
+                                                   \\
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:1669: Missing = inserted for \ifdim.
+<to be read again> 
+                   5
+l.1669 ...xttt{n\_neighbors}: \\ [3, 5, 7, 9, 11]}
+                                                   \\
+I was expecting to see `<', `=', or `>'. Didn't.
+
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:1669: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   7
+l.1669 ...xttt{n\_neighbors}: \\ [3, 5, 7, 9, 11]}
+                                                   \\
+Dimensions can be in units of em, ex, in, pt, pc,
+cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
+I'll assume that you meant to say pt, for printer's points.
+To recover gracefully from this error, it's best to
+delete the erroneous units; e.g., type `2' to delete
+two letters. (See Chapter 27 of The TeXbook.)
+
+c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex:1669: Illegal unit of measure (pt inserted).
+<to be read again> 
+                   5
+l.1669 ...xttt{n\_neighbors}: \\ [3, 5, 7, 9, 11]}
+                                                   \\
+Dimensions 

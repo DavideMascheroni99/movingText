@@ -12,9 +12,11 @@
 \usepackage{lmodern}         
 \usepackage{microtype}      
 \usepackage{biblatex}        
-
-
-
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{array}  
+\usepackage{multirow}  
+\usepackage{makecell} 
 
 \begin{document}
 \sloppy
@@ -1091,7 +1093,7 @@ For example, a speed that is comfortable for a large-font vertical block may bec
 
 In our implementation, the scrolling speed of the text stimulus is defined as the number of pixels by which its position is updated at each frame of the animation.
 This means that speed is expressed in terms of pixels per frame inside our program. 
-At first sight, the use of non-integer values for speed (e.g., 2.38, 3.38, 0.62, or 0.88) may seem counterintuitive, since pixels are discrete entities on the display and cannot be physically subdivided. 
+At first sight, the use of non-integer values for speed may seem counterintuitive, since pixels are discrete entities on the display and cannot be physically subdivided. 
 The adoption of floating-point values, however, is a standard practice in computer graphics. 
 While the rendering process ultimately positions the stimulus at integer pixel coordinates, the internal position of the object is stored as a floating-point variable. 
 This allows the accumulation of fractional displacements across successive frames, such that sub-pixel movements are realized over time. 
@@ -1104,13 +1106,13 @@ This choice is not arbitrary, but rather motivated by the need to synchronize th
 Such temporal alignment ensures that each frame of the animation corresponds precisely to one sample of eye-tracking data, thereby facilitating a consistent and interpretable mapping between stimulus motion and recorded gaze behavior.
 
 To convert the per-frame displacement into a more conventional measure of velocity, namely pixels per second, it is sufficient to multiply the displacement per frame by the number of frames per second. 
-Following this procedure, a speed of 2.38 pixels per frame corresponds to 357 pixels per second, while values of 3.38, 0.62, and 0.88 pixels per frame translate to 507, 93, and 132 pixels per second, respectively. 
+Following this procedure, a speed of 2.38 pixels per frame corresponds to 357 pixels per second, while values of 3.4, 0.58, and 0.94 pixels per frame translate to 510, 87, and 141 pixels per second, respectively. 
 These values provide an interpretable indication of the actual velocity of the stimulus as perceived on the screen.
 All these values are summarized in Figure \ref{fig:sped}, which first presents the speeds chosen by each participant for each animation, and then reports the average of these speeds expressed both in pixels per frame and in pixels per second.
 
 From the perspective of the participant, these velocities determine the apparent rate at which the text traverses the display from right to left. 
-Higher values, such as 357 or 507 pixels per second, result in a rapid motion where the text crosses the screen in a relatively short amount of time, demanding faster eye movements to track it. 
-In contrast, lower values such as 93 or 132 pixels per second correspond to a slower drift of the text, allowing for more prolonged fixations and smoother pursuit. 
+Higher values, such as 357 or 510 pixels per second, result in a rapid motion where the text crosses the screen in a relatively short amount of time, demanding faster eye movements to track it. 
+In contrast, lower values such as 87 or 141 pixels per second correspond to a slower drift of the text, allowing for more prolonged fixations and smoother pursuit. 
 Thus, expressing the stimulus velocity in terms of pixels per second not only provides a standardized physical measure of speed but also offers a direct connection to the perceptual experience of the task and to the temporal dynamics of oculomotor responses.
 
 Although in the present study the frame rate was fixed at 150 Hz to match the sampling rate of the eye tracker, the same principle applies to different refresh rates. 
@@ -1137,19 +1139,19 @@ All the animations are detailed below:
 \begin{itemize}
     \item \textbf{VB\_SL\_LIT}: Vertical Block animation with \emph{slow speed} and \emph{small text size}. 
     In this condition, the block of text scrolls upward from the bottom to the top of the screen at a reduced speed, with characters displayed at the minimum legible size identified during the preliminary study.
-    Here, the parameters correspond to a font size of 30 and a scrolling speed of 0.31 px/frame.
+    Here, the parameters correspond to a font size of 30 and a scrolling speed of 0.29 px/frame.
 
     \item \textbf{VB\_SL\_BIG}: Vertical Block animation with \emph{slow speed} and \emph{large text size}. 
     Similar to VB\_SL\_LIT, but the increased character size facilitates readability, while maintaining the slower scrolling speed. 
-    In this case, the configuration employs a font size of 60 with a speed of 0.44 px/frame. 
+    In this case, the configuration employs a font size of 60 with a speed of 0.47 px/frame. 
 
     \item \textbf{VB\_FA\_LIT}: Vertical Block animation with \emph{fast speed} and \emph{small text size}. 
     In this case, the upward scrolling occurs at the maximum speed tolerable for participants, with the minimum character size, representing a challenging condition for gaze tracking.  
-    The setting combines a font size of 30 with a speed of 0.62 px/frame.
+    The setting combines a font size of 30 with a speed of 0.58 px/frame.
 
     \item \textbf{VB\_FA\_BIG}: Vertical Block animation with \emph{fast speed} and \emph{large text size}. 
     The rapid upward motion is combined with larger text, allowing participants to more easily perceive and follow the characters despite the increased pace.  
-    This version uses a font size of 60 together with a scrolling rate of 0.88 px/frame. 
+    This version uses a font size of 60 together with a scrolling rate of 0.94 px/frame. 
 
     \item \textbf{HS\_SL\_LIT}: Horizontal Scroll animation with \emph{slow speed} and \emph{small text size}. 
     The text enters from the right edge of the screen and scrolls steadily toward the left at a slower rate, with characters displayed at the smaller size.  
@@ -1157,7 +1159,7 @@ All the animations are detailed below:
 
     \item \textbf{HS\_SL\_BIG}: Horizontal Scroll animation with \emph{slow speed} and \emph{large text size}. 
     This condition presents the same horizontal scrolling movement, but with larger text, facilitating readability at the slower pace. 
-    The chosen configuration corresponds to a font size of 60 with a scrolling speed of 1.69 px/frame. 
+    The chosen configuration corresponds to a font size of 60 with a scrolling speed of 1.7 px/frame. 
 
     \item \textbf{HS\_FA\_LIT}: Horizontal Scroll animation with \emph{fast speed} and \emph{small text size}. 
     The text moves quickly from right to left, with minimal character dimensions, providing the most visually demanding condition in terms of both speed and size. 
@@ -1165,7 +1167,7 @@ All the animations are detailed below:
 
     \item \textbf{HS\_FA\_BIG}: Horizontal Scroll animation with \emph{fast speed} and \emph{large text size}. 
     In this case, the high-speed scrolling is mitigated by the increased character dimensions, offering a balance between perceptual clarity and dynamic movement.  
-    The applied parameters are a font size of 60 combined with a scrolling speed of 3.38 px/frame.
+    The applied parameters are a font size of 60 combined with a scrolling speed of 3.4 px/frame.
 \end{itemize}
 
 An important aspect to consider in the design of the experiment concerns the textual material used in the animations. 
@@ -1613,7 +1615,104 @@ The objective was to assess how the best-performing animation behaves when using
 
 Finally, we perform a comparative analysis between identification and verification using the full dataset, rather than single animations, in order to assess the performance differences between static and dynamic text under similar experimental conditions.
 
+\subsubsection{Identification without feature selection}
+
+We begin the identification analysis using the entire dataset, without distinguishing between different animations.
+In this initial phase, feature selection through SelectKBest [91] is intentionally omitted, as the objective is to establish a baseline reference. 
+These results will serve as a comparison point to evaluate potential improvements obtained when applying feature selection in subsequent analyses.
+The program goal is to use two different types of split: random split and session split.
+
+The random split is performed using the train\_test\_split function [102], where 80\% of the dataset is randomly selected to form the training set, and the remaining 20\% is used as the test set.
+To ensure balanced representation across individuals, stratification based on the tester identifier is applied.
+This guarantees that approximately 80\% of each participant's data is included in the training set, while the remaining 20\% is allocated to the test set, maintaining consistent class proportions across both subsets.
+
+The session-based split corresponds to the three recording sessions conducted on different days. 
+This design was chosen primarily to minimize the influence of temporary conditions such as fatigue or momentary distraction, ensuring that the data reflect a more stable and representative ocular behavior. 
+Moreover, performing the recordings on separate days allows us to average out day-to-day variability. 
+The second motivation for this setup is methodological: the data from the first two sessions (S1 and S2) are used to train the model, while the third session (S3) serves as the test set, enabling an evaluation of the model's generalization capability across sessions.
+
+A hyperparameter tuning procedure was implemented using a pipeline [103] composed of three main stages.
+The first stage employs the SimpleImputer [105] to handle missing values by replacing them with the mean of the corresponding feature column. 
+The second stage performs feature scaling, tested with three different normalization methods: MinMaxScaler [106], StandardScaler [107], and RobustScaler [108]. 
+Finally, the third stage involves hyperparameter optimization, using the parameter grids reported in Appendix 1. 
+It is important to note that each time a GridSearchCV strategy was applied to determine the optimal hyperparameters, this complete pipeline configuration was consistently used.
+
 \section{Appendix}
+
+This section includes supplementary materials that could not be accommodated within the main chapters due to their length and level of detail. 
+Specifically, it provides a subsection presenting the complete parameter grid used during hyperparameter tuning, listing all parameters explored for each classifier. 
+In addition, it contains extended result tables that complement the main findings discussed in the core analysis, offering a broader and more detailed view of the experimental outcomes. 
+
+\subsection{Parameter grid}
+
+\begin{table}[H]
+\centering
+\caption{Parameter grids for each classifier (including scaler parameters). 
+All pipelines include a \texttt{SimpleImputer} (mean strategy) and one of three scalers: 
+\texttt{MinMaxScaler}, \texttt{StandardScaler}, or \texttt{RobustScaler}.}
+\label{tab:param_grid}
+
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{12pt}
+
+\begin{tabular}{p{6cm} | p{7cm}}
+\toprule
+\textbf{Classifier} & \textbf{Parameter} \\
+\midrule
+
+\textbf{Gaussian Naive Bayes} &
+\makecell[l]{– No additional hyperparameters tuned \\ 
+\texttt{scaler}: \\ ['MinMaxScaler', 'StandardScaler', 'RobustScaler']} \\
+\midrule
+
+\multirow{4}{*}{\makecell[l]{\textbf{K-Nearest Neighbors} \\ (k-NN)}} &
+\makecell[l]{\texttt{n\_neighbors}: \\ [3, 5, 7, 9, 11]} \\
+& \makecell[l]{\texttt{weights}: \\ ['uniform', 'distance']} \\
+& \makecell[l]{\texttt{metric}: \\ ['minkowski', 'euclidean', 'manhattan']} \\
+& \makecell[l]{\texttt{scaler}: \\ ['MinMaxScaler', 'StandardScaler', 'RobustScaler']} \\
+\midrule
+
+\multirow{2}{*}{\makecell[l]{\textbf{Logistic Regression}}} &
+\makecell[l]{\texttt{C}: \\ [0.001, 0.01, 0.1, 1, 10, 100]} \\
+& \makecell[l]{\texttt{scaler}: \\ ['MinMaxScaler', 'StandardScaler', 'RobustScaler']} \\
+\midrule
+
+\multirow{4}{*}{\makecell[l]{\textbf{Support Vector Machine} \\ (SVC)}} &
+\makecell[l]{\texttt{C}: \\ [0.001, 0.01, 0.1, 1, 10, 100]} \\
+& \makecell[l]{\texttt{gamma}: \\ [0.001, 0.01, 0.1, 1, 10, 100]} \\
+& \makecell[l]{\texttt{kernel}: \\ ['rbf', 'poly']} \\
+& \makecell[l]{\texttt{scaler}: \\ ['MinMaxScaler', 'StandardScaler', 'RobustScaler']} \\
+\midrule
+
+\multirow{4}{*}{\makecell[l]{\textbf{Nu-Support Vector Machine} \\ (NuSVC)}} &
+\makecell[l]{\texttt{nu}: \\ [0.25, 0.5, 0.75]} \\
+& \makecell[l]{\texttt{kernel}: \\ ['rbf', 'poly', 'sigmoid']} \\
+& \makecell[l]{\texttt{gamma}: \\ ['scale', 'auto']} \\
+& \makecell[l]{\texttt{scaler}: \\ ['MinMaxScaler', 'StandardScaler', 'RobustScaler']} \\
+\midrule
+
+\multirow{4}{*}{\makecell[l]{\textbf{Random Forest}}} &
+\makecell[l]{\texttt{n\_estimators}: \\ [20, 30, 50, 100, 200]} \\
+& \makecell[l]{\texttt{max\_features}: \\ ['sqrt']} \\
+& \makecell[l]{\texttt{max\_depth}: \\ [5, 10, 20, 30]} \\
+& \makecell[l]{\texttt{scaler}: \\ ['MinMaxScaler', 'StandardScaler', 'RobustScaler']} \\
+\midrule
+
+\multirow{6}{*}{\makecell[l]{\textbf{Multilayer Perceptron} \\ (MLP)}} &
+\makecell[l]{\texttt{hidden\_layer\_sizes}: \\ [(100,), (100, 50), (150, 100, 50)]} \\
+& \makecell[l]{\texttt{activation}: \\ ['tanh', 'relu']} \\
+& \makecell[l]{\texttt{alpha}: \\ [0.0001, 0.001, 0.01]} \\
+& \makecell[l]{\texttt{learning\_rate\_init}: \\ [0.001, 0.01]} \\
+& \makecell[l]{\texttt{solver}: \\ ['adam']} \\
+& \makecell[l]{\texttt{scaler}: \\ ['MinMaxScaler', 'StandardScaler', 'RobustScaler']} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+
+
 \section{Conclusion}
 \noindent
 \section{Acknowledgment}
@@ -1824,6 +1923,20 @@ Finally, we perform a comparative analysis between identification and verificati
 [100] Random Forest, \url{https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html}
 
 [101] MLP, \url{https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html}
+
+[102] train\_test\_split, \url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html}
+
+[103] Pipeline, \url{https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html}
+
+[104] GridSearchCV, \url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html}
+
+[105] SimpleImputer, \url{https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html}
+
+[106] MinMaxScaler, \url{https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html}
+
+[107] StandardScaler, \url{https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html}
+
+[108] RobustScaler, \url{https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.RobustScaler.html}
 
 \end{raggedright}
 

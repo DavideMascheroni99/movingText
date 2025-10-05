@@ -1,0 +1,5 @@
+[0] Config.pm:328> INFO - This is Biber 2.21
+[0] Config.pm:331> INFO - Logfile is 'thesis.blg'
+[280] biber-MSWIN64:342> INFO - === 
+[388] Utils.pm:479> ERROR - thesis.bcf is malformed, last biblatex run probably failed. Deleted thesis.bbl
+[388] Biber.pm:137> INFO - ERRORS: 1

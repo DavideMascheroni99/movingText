@@ -1607,6 +1607,9 @@ Subsequently, we focus on single-animation analyses, maintaining the two trainin
 However, this part introduces an additional division.
 Specifically, we evaluate two modes, st and ft, to compare a standard verification approach with one that uses only the best-performing model for testing. 
 These modes will be discussed in detail in the dedicated chapter.
+For all these configurations, we also performed an open-set analysis to evaluate how the system responds when an unregistered and previously unseen user attempts authentication.
+Finally, to complete the verification analysis, we conducted a temporal scaling experiment, reducing the duration of all animations. 
+The objective was to assess how the best-performing animation behaves when using only the first 10 or 5 seconds instead of the full 15-second duration.
 
 Finally, we perform a comparative analysis between identification and verification using the full dataset, rather than single animations, in order to assess the performance differences between static and dynamic text under similar experimental conditions.
 

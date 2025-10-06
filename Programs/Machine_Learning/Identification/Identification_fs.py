@@ -187,7 +187,7 @@ def write_results(title, best_params, best_cv_score, train_score, test_score, re
     else:
         df.to_csv(results_path, mode='a', header=False, index=False)
 
-'''PLOT THE K BEST VALUES WITH ITS F-SCORE'''
+'''SAVE THE K BEST VALUES WITH ITS F-SCORE'''
 def save_top_features_csv(grid_search, X_train, model_name, split_name, save_dir):
     feature_names = X_train.columns
     selector = grid_search.best_estimator_.named_steps['feature_selection']
@@ -234,8 +234,11 @@ model_list = [
 
 #Result file path
 results_file = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_results\Identification_results_fs.csv"
+#results_file = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_results\Identification_results_fs.csv"
 
-best_features_dir = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_results\Identification_KBest"
+best_features_dir = r"C:\Users\Davide Mascheroni\Desktop\movingText\movingText\Programs\Machine_Learning\Machine_Learning_results\Identification_results\Identification_KBest\Feature"
+#best_features_dir = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_results\Identification_KBest\Feature"
+
 
 # If i rerun the code I want to delete the previous results file
 if os.path.exists(results_file):

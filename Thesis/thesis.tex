@@ -11,12 +11,7 @@
 \usepackage[T1]{fontenc}     
 \usepackage{lmodern}         
 \usepackage{microtype}      
-\usepackage{biblatex}        
-\usepackage{float}
-\usepackage{booktabs}
-\usepackage{array}  
-\usepackage{multirow}  
-\usepackage{makecell} 
+\usepackage{biblatex}      
 
 \begin{document}
 \sloppy
@@ -1634,7 +1629,7 @@ The second motivation for this setup is methodological: the data from the first 
 A hyperparameter tuning procedure was implemented using a pipeline [103] composed of three main stages.
 The first stage employs the SimpleImputer [105] to handle missing values by replacing them with the mean of the corresponding feature column. 
 The second stage performs feature scaling, tested with three different normalization methods: MinMaxScaler [106], StandardScaler [107], and RobustScaler [108]. 
-Finally, the third stage involves hyperparameter optimization, using the parameter grids reported in Appendix 1. 
+Finally, the third stage involves hyperparameter optimization, using the parameter grids reported in table. 
 It is important to note that each time a GridSearchCV strategy was applied to determine the optimal hyperparameters, this complete pipeline configuration was consistently used.
 
 \section{Appendix}
@@ -1644,72 +1639,6 @@ Specifically, it provides a subsection presenting the complete parameter grid us
 In addition, it contains extended result tables that complement the main findings discussed in the core analysis, offering a broader and more detailed view of the experimental outcomes. 
 
 \subsection{Parameter grid}
-
-\begin{table}[H]
-\centering
-\caption{Parameter grids for each classifier (including scaler parameters). 
-All pipelines include a \texttt{SimpleImputer} (mean strategy) and one of three scalers: 
-\texttt{MinMaxScaler}, \texttt{StandardScaler}, or \texttt{RobustScaler}.}
-\label{tab:param_grid}
-
-\renewcommand{\arraystretch}{1.3}
-\setlength{\tabcolsep}{12pt}
-
-\begin{tabular}{p{6cm} | p{7cm}}
-\toprule
-\textbf{Classifier} & \textbf{Parameter} \\
-\midrule
-
-\textbf{Gaussian Naive Bayes} &
-\makecell[l]{– No additional hyperparameters tuned \\ 
-\texttt{scaler}: \\ ['MinMaxScaler', 'StandardScaler', 'RobustScaler']} \\
-\midrule
-
-\multirow{4}{*}{\makecell[l]{\textbf{K-Nearest Neighbors} \\ (k-NN)}} &
-\makecell[l]{\texttt{n\_neighbors}: \\ [3, 5, 7, 9, 11]} \\
-& \makecell[l]{\texttt{weights}: \\ ['uniform', 'distance']} \\
-& \makecell[l]{\texttt{metric}: \\ ['minkowski', 'euclidean', 'manhattan']} \\
-& \makecell[l]{\texttt{scaler}: \\ ['MinMaxScaler', 'StandardScaler', 'RobustScaler']} \\
-\midrule
-
-\multirow{2}{*}{\makecell[l]{\textbf{Logistic Regression}}} &
-\makecell[l]{\texttt{C}: \\ [0.001, 0.01, 0.1, 1, 10, 100]} \\
-& \makecell[l]{\texttt{scaler}: \\ ['MinMaxScaler', 'StandardScaler', 'RobustScaler']} \\
-\midrule
-
-\multirow{4}{*}{\makecell[l]{\textbf{Support Vector Machine} \\ (SVC)}} &
-\makecell[l]{\texttt{C}: \\ [0.001, 0.01, 0.1, 1, 10, 100]} \\
-& \makecell[l]{\texttt{gamma}: \\ [0.001, 0.01, 0.1, 1, 10, 100]} \\
-& \makecell[l]{\texttt{kernel}: \\ ['rbf', 'poly']} \\
-& \makecell[l]{\texttt{scaler}: \\ ['MinMaxScaler', 'StandardScaler', 'RobustScaler']} \\
-\midrule
-
-\multirow{4}{*}{\makecell[l]{\textbf{Nu-Support Vector Machine} \\ (NuSVC)}} &
-\makecell[l]{\texttt{nu}: \\ [0.25, 0.5, 0.75]} \\
-& \makecell[l]{\texttt{kernel}: \\ ['rbf', 'poly', 'sigmoid']} \\
-& \makecell[l]{\texttt{gamma}: \\ ['scale', 'auto']} \\
-& \makecell[l]{\texttt{scaler}: \\ ['MinMaxScaler', 'StandardScaler', 'RobustScaler']} \\
-\midrule
-
-\multirow{4}{*}{\makecell[l]{\textbf{Random Forest}}} &
-\makecell[l]{\texttt{n\_estimators}: \\ [20, 30, 50, 100, 200]} \\
-& \makecell[l]{\texttt{max\_features}: \\ ['sqrt']} \\
-& \makecell[l]{\texttt{max\_depth}: \\ [5, 10, 20, 30]} \\
-& \makecell[l]{\texttt{scaler}: \\ ['MinMaxScaler', 'StandardScaler', 'RobustScaler']} \\
-\midrule
-
-\multirow{6}{*}{\makecell[l]{\textbf{Multilayer Perceptron} \\ (MLP)}} &
-\makecell[l]{\texttt{hidden\_layer\_sizes}: \\ [(100,), (100, 50), (150, 100, 50)]} \\
-& \makecell[l]{\texttt{activation}: \\ ['tanh', 'relu']} \\
-& \makecell[l]{\texttt{alpha}: \\ [0.0001, 0.001, 0.01]} \\
-& \makecell[l]{\texttt{learning\_rate\_init}: \\ [0.001, 0.01]} \\
-& \makecell[l]{\texttt{solver}: \\ ['adam']} \\
-& \makecell[l]{\texttt{scaler}: \\ ['MinMaxScaler', 'StandardScaler', 'RobustScaler']} \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-
 
 
 

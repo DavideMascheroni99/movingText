@@ -1632,6 +1632,35 @@ The second stage performs feature scaling, tested with three different normaliza
 Finally, the third stage involves hyperparameter optimization, using the parameter grids reported in figure \ref{fig:pg_nofs}. 
 It is important to note that each time a GridSearchCV strategy was applied to determine the optimal hyperparameters, this complete pipeline configuration was consistently used.
 
+We're now ready to present the results obtained during this analyis.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Results/Identification/nofs.png}
+    \caption{Identification results without feature selection}
+    \label{fig:id_nofs}
+\end{figure}
+
+Figure~\ref{fig:id_nofs} illustrates that, for the random split type, the best performance is achieved by the Random Forest classifier, yielding an accuracy of 77.62\%.
+In contrast, for the session split type, the highest accuracy is obtained by the Multilayer Perceptron (MLP) model, with a value of 66.55\%.
+
+A notable performance drop is observed when transitioning from the random split to the session split. 
+This decline is expected and can be attributed to the reduced amount of training data available in the session split scenario. 
+Specifically, the random split allocates 80\% of the data to the training set, whereas the session split allocates only 66.6\%.
+Moreover, the random split introduces a potential data leakage issue, as samples from the same session may appear in both the training and testing sets. 
+This overlap provides the model with indirect information about the test data, thereby inflating performance compared to the session split, where such leakage is avoided.
+
+\subsubsection{Identification with feature selection}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Results/Identification/fs.png}
+    \caption{Identification results with feature selection}
+    \label{fig:id_fs}
+\end{figure}
+
 \section{Appendix}
 
 This section includes supplementary materials that could not be accommodated within the main chapters due to their length and level of detail. 
@@ -1640,7 +1669,7 @@ In addition, it contains extended result tables that complement the main finding
 
 \subsection{Parameter grid}
 
-
+Figure \ref{fig:pg_nofs} display the full parameter grid used everytime an hyperparameter tuning is performed, without using feature selection step.
 
 \begin{figure}[ht]
     \centering

@@ -55,6 +55,7 @@
 \contentsline {subsubsection}{\numberline {5.5.2}Identification with feature selection}{46}{subsubsection.5.5.2}%
 \contentsline {section}{\numberline {6}Appendix}{46}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Parameter grid}{46}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Identification with feature selection - Best k features}{47}{subsection.6.2}%
 \contentsline {section}{\numberline {7}Conclusion}{47}{section.7}%
 \contentsline {section}{\numberline {8}Acknowledgment}{47}{section.8}%
-\contentsline {section}{\numberline {9}References}{48}{section.9}%
+\contentsline {section}{\numberline {9}References}{49}{section.9}%

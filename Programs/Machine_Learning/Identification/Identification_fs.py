@@ -188,11 +188,8 @@ def write_results(title, best_params, best_cv_score, train_score, test_score, re
         df.to_csv(results_path, mode='a', header=False, index=False)
 
 '''PLOT THE K BEST VALUES WITH ITS F-SCORE'''
-
-def plot_top_features(grid_search, X_train, model_name, split_name, save_dir):
-
+def save_top_features_csv(grid_search, X_train, model_name, split_name, save_dir):
     feature_names = X_train.columns
-
     selector = grid_search.best_estimator_.named_steps['feature_selection']
     support_mask = selector.get_support()
     scores = selector.scores_
@@ -206,19 +203,22 @@ def plot_top_features(grid_search, X_train, model_name, split_name, save_dir):
 
     k = grid_search.best_params_['feature_selection__k']
 
-    plt.figure(figsize=(12, max(6, k * 0.3)))
-    plt.barh(sorted_features[:k][::-1], sorted_scores[:k][::-1], color='skyblue')
-    plt.xlabel('ANOVA F-score')
-    plt.title(f'Top {k} Features for {model_name} ({split_name} split)')
-    plt.tight_layout()
-    plt.subplots_adjust(left=0.3)
-    plt.yticks(fontsize=9)
+    data = {
+        "Model": [model_name + f" ({split_name})"] * k,
+        "Best K": [k] * k,
+        "Feature": sorted_features[:k],
+        "F-score": sorted_scores[:k]
+    }
+
+    df = pd.DataFrame(data)
 
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
 
-    save_path = os.path.join(save_dir, f"{model_name.lower().replace(' ', '_')}_{split_name.replace(' ', '_').replace('/', '-')}.png")
-    plt.savefig(save_path)
+    save_path = os.path.join(save_dir, f"{model_name.lower().replace(' ', '_')}_{split_name.replace(' ', '_').replace('/', '-')}_features.csv")
+    df.to_csv(save_path, index=False)
+
+
 
 '''RUN THE MODELS'''
 
@@ -274,12 +274,17 @@ for model_name, model_fn in model_list:
     #Write only the mean results after num_seed runs
     write_results(model_name + " (80/20)", best_params, mean_cv, mean_train, mean_test, results_file)
 
-    #Plot the features for the best random split run
-    plot_top_features(best_grid_search, X, model_name, "80/20", best_features_dir)
+    #Save the features for the best random split run
+    save_top_features_csv(best_grid_search, X, model_name, "80/20", best_features_dir)
+
 
 #Session split
+# Session split
 for model_name, model_fn in model_list:
     pipeline, param_grid = model_fn()
-    best_params, best_cv_score, train_score, test_score, _ = run_grid_search(
+    best_params, best_cv_score, train_score, test_score, grid_search = run_grid_search(
         X_train_sess, y_train_sess, X_test_sess, y_test_sess, pipeline, param_grid, model_name + " (S1+S2 vs S3)")
+    
     write_results(model_name + " (S1+S2 vs S3)", best_params, best_cv_score, train_score, test_score, results_file)
+    save_top_features_csv(grid_search, X, model_name, "S1+S2 vs S3", best_features_dir)
+

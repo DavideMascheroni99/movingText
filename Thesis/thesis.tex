@@ -1629,7 +1629,7 @@ The second motivation for this setup is methodological: the data from the first 
 A hyperparameter tuning procedure was implemented using a pipeline [103] composed of three main stages.
 The first stage employs the SimpleImputer [105] to handle missing values by replacing them with the mean of the corresponding feature column. 
 The second stage performs feature scaling, tested with three different normalization methods: MinMaxScaler [106], StandardScaler [107], and RobustScaler [108]. 
-Finally, the third stage involves hyperparameter optimization, using the parameter grids reported in table. 
+Finally, the third stage involves hyperparameter optimization, using the parameter grids reported in figure \ref{fig:pg_nofs}. 
 It is important to note that each time a GridSearchCV strategy was applied to determine the optimal hyperparameters, this complete pipeline configuration was consistently used.
 
 \section{Appendix}
@@ -1640,6 +1640,15 @@ In addition, it contains extended result tables that complement the main finding
 
 \subsection{Parameter grid}
 
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Results/param_grid_nofs.png}
+    \caption{Parameter grid without feature selection step}
+    \label{fig:pg_nofs}
+\end{figure}
 
 
 \section{Conclusion}

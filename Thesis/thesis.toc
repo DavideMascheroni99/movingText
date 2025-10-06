@@ -56,8 +56,7 @@
 \contentsline {subsubsection}{\numberline {5.5.3}Identification with single animation - single train(st) type}{46}{subsubsection.5.5.3}%
 \contentsline {section}{\numberline {6}Appendix}{46}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Parameter grid}{46}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Identification with feature selection - Best k features}{47}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}altro}{47}{subsection.6.3}%
-\contentsline {section}{\numberline {7}Conclusion}{47}{section.7}%
-\contentsline {section}{\numberline {8}Acknowledgment}{48}{section.8}%
-\contentsline {section}{\numberline {9}References}{53}{section.9}%
+\contentsline {subsection}{\numberline {6.2}Identification with feature selection - Best k features}{48}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Conclusion}{60}{section.7}%
+\contentsline {section}{\numberline {8}Acknowledgment}{60}{section.8}%
+\contentsline {section}{\numberline {9}References}{61}{section.9}%

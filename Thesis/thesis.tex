@@ -14,6 +14,7 @@
 \usepackage{biblatex} 
 \usepackage{float}  
 \usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
 \usepackage{pgfplotstable}   
 
 \begin{document}
@@ -1722,6 +1723,7 @@ Conversely, Figure \ref{fig:pg_nofs} presents the parameter grid that includes t
     \label{fig:pg_fs}
 \end{figure}
 
+\newpage
 \subsection{Identification with feature selection - Best k features}
 \label{subsec:id_fs_k}
 
@@ -1986,49 +1988,381 @@ It also provides a complete list of these features along with their correspondin
     \label{fig:nuSVC_r}
 \end{figure}
 
-
-
-
-\subsection{altro}
 \begin{figure}[htbp]
     \centering
     \begin{tikzpicture}
         \begin{axis}[
             xbar,
             width=0.7\textwidth,
-            height=10cm,
-            bar width=8pt,
+            height=14cm,
+            bar width=6pt,
             xlabel={f-score},
             symbolic y coords={
-                f44,f45,f46,f34,f35,f36,f64,f65,f43,f33,
-                f55,f56,f54,f71,f52,f58,f62,f67,f60,f66,
-                f69,f63,f57,f39,f80,f37,f53,f49,f42,f32
+                f44,f45,f46,f34,f35,f36,f33,f64,f43,f65,
+                f56,f55,f54,f71,f52,f62,f60,f58,f63,f69,
+                f67,f66,f39,f53,f57,f49,f37,f68,f80,f32,
+                f42,f76,f4,f5,f47,f29,f0,f38,f59,f41,
+                f27,f75,f51,f40,f3,f26,f81,f72,f73,f19,
+                f74,f17,f2,f6,f82,f78,f48,f8,f10,f50
             },
             ytick=data,
             nodes near coords,
+            nodes near coords style={
+                anchor=west,
+                font=\scriptsize,
+                /pgf/number format/.cd, fixed, precision=2
+            },
+            tick label style={font=\scriptsize},
             enlarge y limits=0.02,
             xmin=0,
-            xmax=300,              
+            xmax=300,
             xmajorgrids=true,
-            y dir=reverse,        
-            ]
+            y dir=reverse,
+        ]
             \addplot+[draw=none,fill=blue!50] coordinates {
-                (239.5346,f44) (234.8195,f45) (227.9371,f46) (214.0879,f34) (210.0965,f35)
-                (202.8798,f36) (137.1442,f64) (133.5825,f65) (112.8972,f43) (97.1717,f33)
-                (95.5547,f55) (94.4284,f56) (93.2866,f54) (63.8021,f71) (44.2695,f52)
-                (35.3556,f58) (35.1582,f62) (31.5449,f67) (31.2647,f60) (30.5274,f66)
-                (29.3705,f69) (23.7594,f63) (19.5021,f57) (19.3879,f39) (17.8821,f80)
-                (17.6366,f37) (17.5476,f53) (16.9170,f49) (14.7337,f42) (14.7176,f32)
+                (175.2333,f44) (171.5334,f45) (169.0183,f46) (154.6052,f34) (152.3920,f35)
+                (149.1571,f36) (133.5456,f33) (111.3281,f64) (110.4446,f43) (109.1565,f65)
+                (74.1115,f56) (73.7449,f55) (68.5592,f54) (44.5206,f71) (40.4476,f52)
+                (38.1881,f62) (28.5479,f60) (28.3515,f58) (23.9930,f63) (23.6672,f69)
+                (23.0624,f67) (22.3472,f66) (16.5880,f39) (15.5183,f53) (15.1985,f57)
+                (15.0263,f49) (14.9498,f37) (13.4947,f68) (13.1276,f80) (12.6615,f32)
+                (12.4996,f42) (11.7163,f76) (11.5307,f4) (10.9370,f5) (10.7126,f47)
+                (10.5603,f29) (10.4755,f0) (10.4133,f38) (10.3758,f59) (10.1483,f41)
+                (9.8590,f27) (9.7775,f75) (9.7652,f51) (9.0932,f40) (9.0333,f3)
+                (9.0048,f26) (8.7819,f81) (8.6823,f72) (7.8594,f73) (7.8015,f19)
+                (7.7325,f74) (7.4262,f17) (7.2618,f2) (6.5737,f6) (6.4270,f82)
+                (6.4202,f78) (6.2197,f48) (5.6742,f8) (5.5314,f10) (5.3741,f50)
             };
         \end{axis}
     \end{tikzpicture}
-    \caption{Feature importance (f-score) for Naive Bayes (80/20 split), sorted from highest to lowest.}
-    \label{fig:feature_importance}
+    \caption{NuSVC with session split and $k = 60$}
+    \label{fig:nuSVC_s}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            xbar,
+            width=0.7\textwidth,
+            height=16cm, % increased to avoid overlap
+            bar width=6pt,
+            xlabel={f-score},
+            symbolic y coords={
+                f44,f45,f46,f34,f35,f36,f64,f65,f43,f33,
+                f55,f56,f54,f71,f52,f62,f58,f67,f69,f66,
+                f60,f63,f39,f37,f57,f53,f49,f80,f42,f68,
+                f32,f4,f76,f5,f0,f38,f41,f59,f47,f40,
+                f3,f29,f27,f75,f81,f26,f72,f51,f74,f19,
+                f73,f82,f6,f48,f2,f17,f50,f78,f10,f7,
+                f8,f12,f18,f1,f31,f9,f15,f77,f20,f22
+            },
+            ytick=data,
+            nodes near coords,
+            nodes near coords style={
+                anchor=west,
+                font=\scriptsize,
+                /pgf/number format/.cd, fixed, precision=2
+            },
+            tick label style={font=\scriptsize},
+            enlarge y limits=0.02,
+            xmin=0,
+            xmax=300,
+            xmajorgrids=true,
+            y dir=reverse,
+        ]
+            \addplot+[draw=none,fill=blue!50] coordinates {
+                (215.5580,f44) (211.5482,f45) (206.1443,f46) (195.3641,f34) (192.4191,f35)
+                (189.1768,f36) (134.8255,f64) (131.9250,f65) (105.0297,f43) (91.5766,f33)
+                (86.0505,f55) (84.0957,f56) (80.8464,f54) (65.5171,f71) (46.5259,f52)
+                (37.3304,f62) (32.6740,f58) (31.8294,f67) (29.1799,f69) (29.1304,f66)
+                (28.2152,f60) (22.9372,f63) (19.2694,f39) (18.9983,f37) (17.4048,f57)
+                (17.3410,f53) (16.3733,f49) (16.0694,f80) (15.0505,f42) (14.5012,f68)
+                (14.4194,f32) (14.3551,f4) (13.6438,f76) (13.4707,f5) (13.3704,f0)
+                (13.2161,f38) (12.5199,f41) (12.2455,f59) (11.9622,f47) (11.7522,f40)
+                (11.7070,f3) (11.6395,f29) (11.4471,f27) (11.3284,f75) (10.9192,f81)
+                (10.2508,f26) (9.7388,f72) (9.6018,f51) (9.2829,f74) (8.6764,f19)
+                (8.6118,f73) (8.2161,f82) (8.1946,f6) (8.1798,f48) (8.0572,f2)
+                (8.0033,f17) (7.2412,f50) (7.0383,f78) (6.4792,f10) (6.4739,f7)
+                (6.3668,f8) (6.2203,f12) (5.9520,f18) (5.9293,f1) (5.8738,f31)
+                (5.8653,f9) (5.5785,f15) (4.9979,f77) (4.8812,f20) (4.8587,f22)
+            };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{SVC with random split and $k = 70$}
+    \label{fig:svc_r}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            xbar,
+            width=0.7\textwidth,
+            height=14cm,
+            bar width=6pt,
+            xlabel={f-score},
+            symbolic y coords={
+                f44,f45,f46,f34,f35,f36,f33,f64,f43,f65,
+                f56,f55,f54,f71,f52,f62,f60,f58,f63,f69,
+                f67,f66,f39,f53,f57,f49,f37,f68,f80,f32,
+                f42,f76,f4,f5,f47,f29,f0,f38,f59,f41,
+                f27,f75,f51,f40,f3,f26,f81,f72,f73,f19,
+                f74,f17,f2,f6,f82,f78,f48,f8,f10,f50
+            },
+            ytick=data,
+            nodes near coords,
+            nodes near coords style={
+                anchor=west,
+                font=\scriptsize,
+                /pgf/number format/.cd, fixed, precision=2
+            },
+            tick label style={font=\scriptsize},
+            enlarge y limits=0.02,
+            xmin=0,
+            xmax=300,
+            xmajorgrids=true,
+            y dir=reverse,
+        ]
+            \addplot+[draw=none,fill=blue!50] coordinates {
+                (175.2333,f44) (171.5334,f45) (169.0183,f46) (154.6052,f34) (152.3920,f35)
+                (149.1571,f36) (133.5456,f33) (111.3281,f64) (110.4446,f43) (109.1565,f65)
+                (74.1115,f56) (73.7449,f55) (68.5592,f54) (44.5206,f71) (40.4476,f52)
+                (38.1881,f62) (28.5479,f60) (28.3515,f58) (23.9930,f63) (23.6672,f69)
+                (23.0624,f67) (22.3472,f66) (16.5880,f39) (15.5183,f53) (15.1985,f57)
+                (15.0263,f49) (14.9498,f37) (13.4947,f68) (13.1276,f80) (12.6615,f32)
+                (12.4996,f42) (11.7163,f76) (11.5307,f4) (10.9370,f5) (10.7126,f47)
+                (10.5603,f29) (10.4755,f0) (10.4133,f38) (10.3758,f59) (10.1483,f41)
+                (9.8590,f27) (9.7775,f75) (9.7652,f51) (9.0932,f40) (9.0333,f3)
+                (9.0048,f26) (8.7819,f81) (8.6823,f72) (7.8594,f73) (7.8015,f19)
+                (7.7325,f74) (7.4262,f17) (7.2618,f2) (6.5737,f6) (6.4270,f82)
+                (6.4202,f78) (6.2197,f48) (5.6742,f8) (5.5314,f10) (5.3741,f50)
+            };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{SVC classifier with session split and $k = 60$}
+    \label{fig:svc_s}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            xbar,
+            width=0.7\textwidth,
+            height=16cm, % increased to avoid overlap
+            bar width=6pt,
+            xlabel={f-score},
+            symbolic y coords={
+                f44,f45,f46,f34,f35,f36,f33,f43,f64,f65,
+                f55,f56,f54,f71,f52,f62,f58,f60,f69,f67,
+                f63,f66,f39,f80,f49,f37,f53,f32,f57,f68,
+                f4,f0,f42,f41,f5,f38,f59,f3,f51,f27,
+                f81,f47,f40,f72,f29,f82,f74,f73,f2,f26,
+                f6,f17,f78,f48,f19,f70,f7,f50,f8,f1,
+                f10,f9,f15,f76,f18,f77,f75,f31,f20,f79
+            },
+            ytick=data,
+            nodes near coords,
+            nodes near coords style={
+                anchor=west,
+                font=\scriptsize,
+                /pgf/number format/.cd, fixed, precision=2
+            },
+            tick label style={font=\scriptsize},
+            enlarge y limits=0.02,
+            xmin=0,
+            xmax=250,
+            xmajorgrids=true,
+            y dir=reverse,
+        ]
+            \addplot+[draw=none,fill=blue!50] coordinates {
+                (229.8057,f44) (225.4831,f45) (218.9757,f46) (215.5614,f34) (211.5384,f35)
+                (205.2984,f36) (168.2274,f33) (140.7611,f43) (136.7333,f64) (133.3346,f65)
+                (89.7532,f55) (87.5562,f56) (84.6420,f54) (61.9398,f71) (45.2167,f52)
+                (41.3977,f62) (33.4591,f58) (31.7356,f60) (31.5405,f69) (30.8171,f67)
+                (28.9097,f63) (27.4030,f66) (21.2780,f39) (17.7607,f80) (17.0997,f49)
+                (16.3080,f37) (15.9767,f53) (15.9547,f32) (15.4897,f57) (15.4642,f68)
+                (15.2747,f4) (15.0548,f0) (15.0164,f42) (14.7863,f41) (14.1128,f5)
+                (12.9257,f38) (12.4658,f59) (12.4134,f3) (12.0407,f51) (11.6551,f27)
+                (11.6369,f81) (11.2670,f47) (10.5150,f40) (9.6913,f72) (9.6000,f29)
+                (9.3171,f82) (9.1461,f74) (8.8397,f73) (8.7480,f2) (8.7452,f26)
+                (8.7421,f6) (8.5344,f17) (7.6356,f78) (7.6185,f48) (7.5063,f19)
+                (6.6476,f70) (6.5285,f7) (6.2925,f50) (6.0190,f8) (5.9723,f1)
+                (5.9453,f10) (5.8758,f9) (5.6433,f15) (5.6421,f76) (5.5358,f18)
+                (5.4392,f77) (5.1032,f75) (4.8838,f31) (4.7708,f20) (4.2814,f79)
+            };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Random Forest with random split and $k = 70$}
+    \label{fig:rf_r}
 \end{figure}
 
 
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            xbar,
+            width=0.7\textwidth,
+            height=16cm, % increased to avoid overlap
+            bar width=6pt,
+            xlabel={f-score},
+            symbolic y coords={
+                f44,f45,f46,f34,f35,f36,f33,f64,f43,f65,
+                f56,f55,f54,f71,f52,f62,f60,f58,f63,f69,
+                f67,f66,f39,f53,f57,f49,f37,f68,f80,f32,
+                f42,f76,f4,f5,f47,f29,f0,f38,f59,f41,
+                f27,f75,f51,f40,f3,f26,f81,f72,f73,f19,
+                f74,f17,f2,f6,f82,f78,f48,f8,f10,f50,
+                f12,f7,f1,f31,f15,f18,f77,f22,f9,f13
+            },
+            ytick=data,
+            nodes near coords,
+            nodes near coords style={
+                anchor=west,
+                font=\scriptsize,
+                /pgf/number format/.cd, fixed, precision=2
+            },
+            tick label style={font=\scriptsize},
+            enlarge y limits=0.02,
+            xmin=0,
+            xmax=190, % adjusted to fit longest bar comfortably
+            xmajorgrids=true,
+            y dir=reverse,
+        ]
+            \addplot+[draw=none,fill=blue!50] coordinates {
+                (175.23,f44) (171.53,f45) (169.02,f46) (154.61,f34) (152.39,f35)
+                (149.16,f36) (133.55,f33) (111.33,f64) (110.44,f43) (109.16,f65)
+                (74.11,f56) (73.74,f55) (68.56,f54) (44.52,f71) (40.45,f52)
+                (38.19,f62) (28.55,f60) (28.35,f58) (23.99,f63) (23.67,f69)
+                (23.06,f67) (22.35,f66) (16.59,f39) (15.52,f53) (15.20,f57)
+                (15.03,f49) (14.95,f37) (13.49,f68) (13.13,f80) (12.66,f32)
+                (12.50,f42) (11.72,f76) (11.53,f4) (10.94,f5) (10.71,f47)
+                (10.56,f29) (10.48,f0) (10.41,f38) (10.38,f59) (10.15,f41)
+                (9.86,f27) (9.78,f75) (9.77,f51) (9.09,f40) (9.03,f3)
+                (9.00,f26) (8.78,f81) (8.68,f72) (7.86,f73) (7.80,f19)
+                (7.73,f74) (7.43,f17) (7.26,f2) (6.57,f6) (6.43,f82)
+                (6.42,f78) (6.22,f48) (5.67,f8) (5.53,f10) (5.37,f50)
+                (5.30,f12) (5.25,f7) (5.25,f1) (5.24,f31) (5.05,f15)
+                (4.62,f18) (4.42,f77) (4.23,f22) (4.15,f9) (4.13,f13)
+            };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Random Forest with session split and $k = 70$}
+    \label{fig:rf_s}
+\end{figure}
 
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            xbar,
+            width=0.7\textwidth,
+            height=16cm, % increased to avoid overlap
+            bar width=6pt,
+            xlabel={f-score},
+            symbolic y coords={
+                f44,f45,f46,f34,f35,f36,f64,f65,f43,f33,
+                f55,f56,f54,f71,f52,f62,f58,f67,f69,f66,
+                f60,f63,f39,f37,f57,f53,f49,f80,f42,f68,
+                f32,f4,f76,f5,f0,f38,f41,f59,f47,f40,
+                f3,f29,f27,f75,f81,f26,f72,f51,f74,f19,
+                f73,f82,f6,f48,f2,f17,f50,f78,f10,f7,
+                f8,f12,f18,f1,f31,f9,f15,f77,f20,f22
+            },
+            ytick=data,
+            nodes near coords,
+            nodes near coords style={
+                anchor=west,
+                font=\scriptsize,
+                /pgf/number format/.cd, fixed, precision=2
+            },
+            tick label style={font=\scriptsize},
+            enlarge y limits=0.02,
+            xmin=0,
+            xmax=230,
+            xmajorgrids=true,
+            y dir=reverse,
+        ]
+            \addplot+[draw=none,fill=blue!50] coordinates {
+                (215.56,f44) (211.55,f45) (206.14,f46) (195.36,f34) (192.42,f35)
+                (189.18,f36) (134.83,f64) (131.93,f65) (105.03,f43) (91.58,f33)
+                (86.05,f55) (84.10,f56) (80.85,f54) (65.52,f71) (46.53,f52)
+                (37.33,f62) (32.67,f58) (31.83,f67) (29.18,f69) (29.13,f66)
+                (28.22,f60) (22.94,f63) (19.27,f39) (18.99,f37) (17.40,f57)
+                (17.34,f53) (16.37,f49) (16.07,f80) (15.05,f42) (14.50,f68)
+                (14.42,f32) (14.36,f4) (13.64,f76) (13.47,f5) (13.37,f0)
+                (13.22,f38) (12.52,f41) (12.25,f59) (11.96,f47) (11.75,f40)
+                (11.71,f3) (11.64,f29) (11.45,f27) (11.33,f75) (10.92,f81)
+                (10.25,f26) (9.74,f72) (9.60,f51) (9.28,f74) (8.68,f19)
+                (8.61,f73) (8.22,f82) (8.19,f6) (8.18,f48) (8.06,f2)
+                (8.00,f17) (7.24,f50) (7.04,f78) (6.48,f10) (6.47,f7)
+                (6.37,f8) (6.22,f12) (5.95,f18) (5.93,f1) (5.87,f31)
+                (5.87,f9) (5.58,f15) (5.00,f77) (4.88,f20) (4.86,f22)
+            };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{MLP with random split and $k = 70$}
+    \label{fig:mlp_r}
+\end{figure}
 
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            xbar,
+            width=0.7\textwidth,
+            height=16cm, % increased to avoid overlap
+            bar width=6pt,
+            xlabel={f-score},
+            symbolic y coords={
+                f44,f45,f46,f34,f35,f36,f33,f64,f43,f65,
+                f56,f55,f54,f71,f52,f62,f60,f58,f63,f69,
+                f67,f66,f39,f53,f57,f49,f37,f68,f80,f32,
+                f42,f76,f4,f5,f47,f29,f0,f38,f59,f41,
+                f27,f75,f51,f40,f3,f26,f81,f72,f73,f19,
+                f74,f17,f2,f6,f82,f78,f48,f8,f10,f50,
+                f12,f7,f1,f31,f15,f18,f77,f22,f9,f13
+            },
+            ytick=data,
+            nodes near coords,
+            nodes near coords style={
+                anchor=west,
+                font=\scriptsize,
+                /pgf/number format/.cd, fixed, precision=2
+            },
+            tick label style={font=\scriptsize},
+            enlarge y limits=0.02,
+            xmin=0,
+            xmax=190,
+            xmajorgrids=true,
+            y dir=reverse,
+        ]
+            \addplot+[draw=none,fill=blue!50] coordinates {
+                (175.23,f44) (171.53,f45) (169.02,f46) (154.61,f34) (152.39,f35)
+                (149.16,f36) (133.55,f33) (111.33,f64) (110.44,f43) (109.16,f65)
+                (74.11,f56) (73.74,f55) (68.56,f54) (44.52,f71) (40.45,f52)
+                (38.19,f62) (28.55,f60) (28.35,f58) (23.99,f63) (23.67,f69)
+                (23.06,f67) (22.35,f66) (16.59,f39) (15.52,f53) (15.20,f57)
+                (15.03,f49) (14.95,f37) (13.49,f68) (13.13,f80) (12.66,f32)
+                (12.50,f42) (11.72,f76) (11.53,f4) (10.94,f5) (10.71,f47)
+                (10.56,f29) (10.48,f0) (10.41,f38) (10.38,f59) (10.15,f41)
+                (9.86,f27) (9.78,f75) (9.77,f51) (9.09,f40) (9.03,f3)
+                (9.00,f26) (8.78,f81) (8.68,f72) (7.86,f73) (7.80,f19)
+                (7.73,f74) (7.43,f17) (7.26,f2) (6.57,f6) (6.43,f82)
+                (6.42,f78) (6.22,f48) (5.67,f8) (5.53,f10) (5.37,f50)
+                (5.30,f12) (5.25,f7) (5.25,f1) (5.24,f31) (5.05,f15)
+                (4.62,f18) (4.42,f77) (4.23,f22) (4.15,f9) (4.13,f13)
+            };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{MLP classifier session split and $k = 70$}
+    \label{fig:mlp_s}
+\end{figure}
+
+\clearpage
+\newpage
 \section{Conclusion}
 \noindent
 \section{Acknowledgment}

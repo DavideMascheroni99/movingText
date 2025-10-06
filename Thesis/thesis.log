@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  6 OCT 2025 22:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  6 OCT 2025 22:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -748,30 +748,30 @@ Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
 ))
 \@quotelevel=\count460
 \@quotereset=\count461
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 19.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 20.
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count462
@@ -791,7 +791,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 19.
+Package hyperref Info: Link coloring OFF on input line 20.
  (thesis.out) (thesis.out)
 \@outlinefile=\write5
 \openout5 = `thesis.out'.
@@ -834,13 +834,13 @@ Package hyperref Info: Link coloring OFF on input line 19.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Redefining \microtypecontext on input line 19.
-Package microtype Info: Applying patch `item' on input line 19.
-Package microtype Info: Applying patch `toc' on input line 19.
-Package microtype Info: Applying patch `eqnum' on input line 19.
-Package microtype Info: Applying patch `footnote' on input line 19.
-Package microtype Info: Applying patch `verbatim' on input line 19.
-LaTeX Info: Redefining \microtypesetup on input line 19.
+LaTeX Info: Redefining \microtypecontext on input line 20.
+Package microtype Info: Applying patch `item' on input line 20.
+Package microtype Info: Applying patch `toc' on input line 20.
+Package microtype Info: Applying patch `eqnum' on input line 20.
+Package microtype Info: Applying patch `footnote' on input line 20.
+Package microtype Info: Applying patch `verbatim' on input line 20.
+LaTeX Info: Redefining \microtypesetup on input line 20.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -867,17 +867,15 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'thesis.bbl' found.
  (thesis.bbl)
-Package biblatex Info: Reference section=0 on input line 19.
-Package biblatex Info: Reference segment=0 on input line 19.
+Package biblatex Info: Reference section=0 on input line 20.
+Package biblatex Info: Reference segment=0 on input line 20.
 
+Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
-Package pgfplots Warning: running in backwards compatibility mode (unsuitable tick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into your preamble.
- on input line 19.
-
-<Images/Theory/Logo_UNIPV.svg.png, id=258, 1284.8pt x 940.51375pt>
+<Images/Theory/Logo_UNIPV.svg.png, id=254, 1284.8pt x 940.51375pt>
 File: Images/Theory/Logo_UNIPV.svg.png Graphic file (type png)
 <use Images/Theory/Logo_UNIPV.svg.png>
-Package pdftex.def Info: Images/Theory/Logo_UNIPV.svg.png  used on input line 28.
+Package pdftex.def Info: Images/Theory/Logo_UNIPV.svg.png  used on input line 29.
 (pdftex.def)             Requested size: 170.71652pt x 124.96907pt.
 
 
@@ -924,20 +922,20 @@ l.53 ...ine Learning Analysis}{43}{subsection.5.5}
 [3]
 
 [4]
-<Images/Theory/Fingerprint_scanner_identification.jpg, id=349, 1284.8pt x 963.6pt>
+<Images/Theory/Fingerprint_scanner_identification.jpg, id=344, 1284.8pt x 963.6pt>
 File: Images/Theory/Fingerprint_scanner_identification.jpg Graphic file (type jpg)
 <use Images/Theory/Fingerprint_scanner_identification.jpg>
-Package pdftex.def Info: Images/Theory/Fingerprint_scanner_identification.jpg  used on input line 137.
+Package pdftex.def Info: Images/Theory/Fingerprint_scanner_identification.jpg  used on input line 138.
 (pdftex.def)             Requested size: 204.73033pt x 153.5469pt.
-<Images/Theory/eye.png, id=350, 240.9pt x 180.675pt>
+<Images/Theory/eye.png, id=345, 240.9pt x 180.675pt>
 File: Images/Theory/eye.png Graphic file (type png)
 <use Images/Theory/eye.png>
-Package pdftex.def Info: Images/Theory/eye.png  used on input line 144.
+Package pdftex.def Info: Images/Theory/eye.png  used on input line 145.
 (pdftex.def)             Requested size: 204.73033pt x 153.5524pt.
 
 
 [5]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 181.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 182.
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -953,15 +951,15 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 [10]
 
 [11]
-<Images/Theory/occhio.jpg, id=387, 1027.84pt x 692.5875pt>
+<Images/Theory/occhio.jpg, id=382, 1027.84pt x 692.5875pt>
 File: Images/Theory/occhio.jpg Graphic file (type jpg)
 <use Images/Theory/occhio.jpg>
-Package pdftex.def Info: Images/Theory/occhio.jpg  used on input line 382.
+Package pdftex.def Info: Images/Theory/occhio.jpg  used on input line 383.
 (pdftex.def)             Requested size: 272.97841pt x 183.93639pt.
-<Images/Theory/rods_cones.jpg, id=388, 803.0pt x 1121.18875pt>
+<Images/Theory/rods_cones.jpg, id=383, 803.0pt x 1121.18875pt>
 File: Images/Theory/rods_cones.jpg Graphic file (type jpg)
 <use Images/Theory/rods_cones.jpg>
-Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 407.
+Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 408.
 (pdftex.def)             Requested size: 181.98097pt x 254.08713pt.
 
 
@@ -974,25 +972,25 @@ Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 407.
 [15]
 
 [16]
-<Images/Theory/eog.png, id=412, 481.8pt x 301.125pt>
+<Images/Theory/eog.png, id=407, 481.8pt x 301.125pt>
 File: Images/Theory/eog.png Graphic file (type png)
 <use Images/Theory/eog.png>
-Package pdftex.def Info: Images/Theory/eog.png  used on input line 557.
+Package pdftex.def Info: Images/Theory/eog.png  used on input line 558.
 (pdftex.def)             Requested size: 204.7292pt x 122.84174pt.
-<Images/Theory/coil.png, id=413, 687.56876pt x 263.98625pt>
+<Images/Theory/coil.png, id=408, 687.56876pt x 263.98625pt>
 File: Images/Theory/coil.png Graphic file (type png)
 <use Images/Theory/coil.png>
-Package pdftex.def Info: Images/Theory/coil.png  used on input line 564.
+Package pdftex.def Info: Images/Theory/coil.png  used on input line 565.
 (pdftex.def)             Requested size: 204.72997pt x 122.83691pt.
-<Images/Theory/vog.jpeg, id=414, 182.6825pt x 278.03876pt>
+<Images/Theory/vog.jpeg, id=409, 182.6825pt x 278.03876pt>
 File: Images/Theory/vog.jpeg Graphic file (type jpg)
 <use Images/Theory/vog.jpeg>
-Package pdftex.def Info: Images/Theory/vog.jpeg  used on input line 574.
+Package pdftex.def Info: Images/Theory/vog.jpeg  used on input line 575.
 (pdftex.def)             Requested size: 143.31686pt x 122.84229pt.
-<Images/Theory/corneal.jpg, id=415, 1027.84pt x 312.16624pt>
+<Images/Theory/corneal.jpg, id=410, 1027.84pt x 312.16624pt>
 File: Images/Theory/corneal.jpg Graphic file (type jpg)
 <use Images/Theory/corneal.jpg>
-Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 581.
+Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 582.
 (pdftex.def)             Requested size: 204.71744pt x 122.83989pt.
 
 
@@ -1017,28 +1015,28 @@ Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 581.
 [26]
 
 [27]
-<Images/Experiment/tester.png, id=463, 363.3575pt x 212.795pt>
+<Images/Experiment/tester.png, id=458, 363.3575pt x 212.795pt>
 File: Images/Experiment/tester.png Graphic file (type png)
 <use Images/Experiment/tester.png>
-Package pdftex.def Info: Images/Experiment/tester.png  used on input line 968.
+Package pdftex.def Info: Images/Experiment/tester.png  used on input line 969.
 (pdftex.def)             Requested size: 272.97841pt x 159.86859pt.
 
 
 [28 <./Images/Experiment/tester.png>]
 
 [29{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}]
-<Images/Experiment/tester_speed.png, id=479, 354.32375pt x 193.22188pt>
+<Images/Experiment/tester_speed.png, id=474, 354.32375pt x 193.22188pt>
 File: Images/Experiment/tester_speed.png Graphic file (type png)
 <use Images/Experiment/tester_speed.png>
-Package pdftex.def Info: Images/Experiment/tester_speed.png  used on input line 1045.
+Package pdftex.def Info: Images/Experiment/tester_speed.png  used on input line 1046.
 (pdftex.def)             Requested size: 272.97841pt x 148.86385pt.
 
 
 [30 <./Images/Experiment/tester_speed.png>]
-<Images/Experiment/speeds.png, id=488, 354.32375pt x 245.41687pt>
+<Images/Experiment/speeds.png, id=483, 354.32375pt x 245.41687pt>
 File: Images/Experiment/speeds.png Graphic file (type png)
 <use Images/Experiment/speeds.png>
-Package pdftex.def Info: Images/Experiment/speeds.png  used on input line 1087.
+Package pdftex.def Info: Images/Experiment/speeds.png  used on input line 1088.
 (pdftex.def)             Requested size: 272.97841pt x 189.07642pt.
 
 
@@ -1047,30 +1045,30 @@ Package pdftex.def Info: Images/Experiment/speeds.png  used on input line 1087.
 [32 <./Images/Experiment/speeds.png>]
 
 [33]
-<Images/Experiment/cross.png, id=504, 1284.8pt x 722.7pt>
+<Images/Experiment/cross.png, id=499, 1284.8pt x 722.7pt>
 File: Images/Experiment/cross.png Graphic file (type png)
 <use Images/Experiment/cross.png>
-Package pdftex.def Info: Images/Experiment/cross.png  used on input line 1201.
+Package pdftex.def Info: Images/Experiment/cross.png  used on input line 1202.
 (pdftex.def)             Requested size: 272.97841pt x 153.5469pt.
-<Images/Experiment/HS_little.png, id=506, 1284.8pt x 722.7pt>
+<Images/Experiment/HS_little.png, id=501, 1284.8pt x 722.7pt>
 File: Images/Experiment/HS_little.png Graphic file (type png)
 <use Images/Experiment/HS_little.png>
-Package pdftex.def Info: Images/Experiment/HS_little.png  used on input line 1213.
+Package pdftex.def Info: Images/Experiment/HS_little.png  used on input line 1214.
 (pdftex.def)             Requested size: 204.7292pt x 122.83531pt.
-<Images/Experiment/HS_big.png, id=507, 1284.8pt x 722.7pt>
+<Images/Experiment/HS_big.png, id=502, 1284.8pt x 722.7pt>
 File: Images/Experiment/HS_big.png Graphic file (type png)
 <use Images/Experiment/HS_big.png>
-Package pdftex.def Info: Images/Experiment/HS_big.png  used on input line 1220.
+Package pdftex.def Info: Images/Experiment/HS_big.png  used on input line 1221.
 (pdftex.def)             Requested size: 204.7292pt x 122.83531pt.
-<Images/Experiment/VB_little.png, id=508, 1284.8pt x 722.7pt>
+<Images/Experiment/VB_little.png, id=503, 1284.8pt x 722.7pt>
 File: Images/Experiment/VB_little.png Graphic file (type png)
 <use Images/Experiment/VB_little.png>
-Package pdftex.def Info: Images/Experiment/VB_little.png  used on input line 1230.
+Package pdftex.def Info: Images/Experiment/VB_little.png  used on input line 1231.
 (pdftex.def)             Requested size: 143.30849pt x 122.83531pt.
-<Images/Experiment/VB_big.png, id=509, 1284.8pt x 722.7pt>
+<Images/Experiment/VB_big.png, id=504, 1284.8pt x 722.7pt>
 File: Images/Experiment/VB_big.png Graphic file (type png)
 <use Images/Experiment/VB_big.png>
-Package pdftex.def Info: Images/Experiment/VB_big.png  used on input line 1237.
+Package pdftex.def Info: Images/Experiment/VB_big.png  used on input line 1238.
 (pdftex.def)             Requested size: 204.7292pt x 122.83531pt.
 
 
@@ -1095,7 +1093,7 @@ Package pdftex.def Info: Images/Experiment/VB_big.png  used on input line 1237.
 [43]
 
 [44]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1640.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1641.
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1103,35 +1101,48 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<Images/Results/Identification/nofs.png, id=562, 450.68375pt x 195.73125pt>
+<Images/Results/Identification/nofs.png, id=557, 450.68375pt x 195.73125pt>
 File: Images/Results/Identification/nofs.png Graphic file (type png)
 <use Images/Results/Identification/nofs.png>
-Package pdftex.def Info: Images/Results/Identification/nofs.png  used on input line 1649.
+Package pdftex.def Info: Images/Results/Identification/nofs.png  used on input line 1650.
 (pdftex.def)             Requested size: 272.97841pt x 118.55962pt.
 
 
 [45 <./Images/Results/Identification/nofs.png>]
-<Images/Results/Identification/fs.png, id=574, 441.14813pt x 188.705pt>
+<Images/Results/Identification/fs.png, id=569, 441.14813pt x 188.705pt>
 File: Images/Results/Identification/fs.png Graphic file (type png)
 <use Images/Results/Identification/fs.png>
-Package pdftex.def Info: Images/Results/Identification/fs.png  used on input line 1675.
+Package pdftex.def Info: Images/Results/Identification/fs.png  used on input line 1676.
 (pdftex.def)             Requested size: 272.97841pt x 116.77417pt.
-<Images/Results/param_grid_nofs.png, id=578, 315.1775pt x 301.62688pt>
+<Images/Results/param_grid_nofs.png, id=573, 315.1775pt x 301.62688pt>
 File: Images/Results/param_grid_nofs.png Graphic file (type png)
 <use Images/Results/param_grid_nofs.png>
-Package pdftex.def Info: Images/Results/param_grid_nofs.png  used on input line 1710.
+Package pdftex.def Info: Images/Results/param_grid_nofs.png  used on input line 1711.
 (pdftex.def)             Requested size: 181.98097pt x 174.15668pt.
 
 
 [46 <./Images/Results/Identification/fs.png>]
-<Images/Results/fs.png, id=587, 351.3125pt x 404.00937pt>
+<Images/Results/fs.png, id=582, 351.3125pt x 404.00937pt>
 File: Images/Results/fs.png Graphic file (type png)
 <use Images/Results/fs.png>
-Package pdftex.def Info: Images/Results/fs.png  used on input line 1720.
+Package pdftex.def Info: Images/Results/fs.png  used on input line 1721.
 (pdftex.def)             Requested size: 181.98097pt x 209.28467pt.
 
 
 [47 <./Images/Results/param_grid_nofs.png> <./Images/Results/fs.png>]
+Package pgfplots info on input line 1755: Using 'lua backend=false' for axis: x coord trafo unsupported.
+Package pgfplots info on input line 1803: Using 'lua backend=false' for axis: x coord trafo unsupported.
+Package pgfplots info on input line 1861: Using 'lua backend=false' for axis: x coord trafo unsupported.
+Package pgfplots info on input line 1916: Using 'lua backend=false' for axis: x coord trafo unsupported.
+Package pgfplots info on input line 1970: Using 'lua backend=false' for axis: x coord trafo unsupported.
+Package pgfplots info on input line 2021: Using 'lua backend=false' for axis: x coord trafo unsupported.
+Package pgfplots info on input line 2073: Using 'lua backend=false' for axis: x coord trafo unsupported.
+Package pgfplots info on input line 2126: Using 'lua backend=false' for axis: x coord trafo unsupported.
+Package pgfplots info on input line 2178: Using 'lua backend=false' for axis: x coord trafo unsupported.
+Package pgfplots info on input line 2233: Using 'lua backend=false' for axis: x coord trafo unsupported.
+Package pgfplots info on input line 2287: Using 'lua backend=false' for axis: x coord trafo unsupported.
+Package pgfplots info on input line 2341: Using 'lua backend=false' for axis: x coord trafo unsupported.
+
 
 [48]
 
@@ -1142,15 +1153,6 @@ Package pdftex.def Info: Images/Results/fs.png  used on input line 1720.
 [51]
 
 [52]
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 2041.
- (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
-File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmss' (encoding: T1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-
 
 [53]
 
@@ -1164,29 +1166,56 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 [58]
 
-[59] (thesis.aux)
+[59]
+
+[60
+
+]
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 2375.
+ (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
+File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmss' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+
+[61]
+
+[62]
+
+[63]
+
+[64]
+
+[65]
+
+[66]
+
+[67] (thesis.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 3649EF6915F42A20F9526BAB1A0FD081;12553.
+(rerunfilecheck)             Checksum: 25E100B7452F88DF6FC5CD14F68B9E0D;12470.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42400 strings out of 468130
- 977012 string characters out of 5430633
- 2036228 words of memory out of 5000000
- 70066 multiletter control sequences out of 15000+600000
+ 42458 strings out of 468130
+ 977973 string characters out of 5430633
+ 2271037 words of memory out of 5000000
+ 70111 multiletter control sequences out of 15000+600000
  695540 words of font info for 185 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,11n,105p,1067b,2438s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,11n,105p,1067b,2499s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on thesis.pdf (60 pages, 2686606 bytes).
+Output written on thesis.pdf (68 pages, 2740019 bytes).
 PDF statistics:
- 778 PDF objects out of 1000 (max. 8388607)
- 143 named destinations out of 1000 (max. 500000)
- 40046 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 816 PDF objects out of 1000 (max. 8388607)
+ 156 named destinations out of 1000 (max. 500000)
+ 40038 words of extra memory for PDF output out of 42996 (max. 10000000)
 

@@ -1598,8 +1598,8 @@ The second is a session-based split, where data from the first two sessions (S1 
 Initially, a general identification will be performed using the entire dataset, both with and without feature selection, to evaluate any potential improvements in performance.
 An analysis involving every single animation taken singularly is then performed to assess which is the best performing animations and see if a single animation can be used for identification purpose.
 This analysis is divided into two types, based on the data used in the training set.
-The first method is called single train (st), where the model is trained and tested on data from a single animation.
-While the second approach is called full train (ft), where the model is trained on data from all animations combined and tested on a single animation.
+The first method is called single train (ST), where the model is trained and tested on data from a single animation.
+While the second approach is called full train (FT), where the model is trained on data from all animations combined and tested on a single animation.
 The latter method has been used in previous studies and, in some cases, achieved better results due to the larger amount of training data. 
 However, in other cases, performance worsened because the inclusion of all animations introduced confusion between different data distributions.
 
@@ -1766,12 +1766,59 @@ f28 & Skewness saccade speed & Saccade speed metric \\
 f30 & Kurtosis saccade speed & Saccade speed metric \\
 f61 & Kurtosis ratio between left and right pupil diameter & Pupil diameter ratio metric \\
 \bottomrule
-\end{tabular}
+\end{tabular}st
 \end{table}
 
-\subsubsection{Identification with single animation - single train(st) type}
+\subsubsection{Identification with single animation - single train(ST) type}
 
+The main goal of this stage was to identify which animation performs best among the eight selected stimuli. 
+We began with a full identification analysis to establish a general baseline of the performance achievable when using all animations together. 
+Building on this, we refined the analysis to examine the performance of each animation individually. 
+This refined procedure, referred to as the single train (ST) approach, trains the model using data from one animation only and then tests it on data from the same animation.
 
+Two data splitting strategies were used to ensure robust evaluation. 
+The first, a random split, allocates 80\% of the data for a given animation to training and the remaining 20\% to testing.
+This process was stratified by tester ID to ensure a fairer distribution and was repeated ten times to reduce variability caused by random sampling.
+
+The second, a session-based split, uses data from the first two sessions of an animation for training and the third session for testing. 
+This method was executed once to simulate a real-world scenario of session progression.
+
+The analysis was conducted through a structured pipeline composed of four sequential steps. 
+First, missing values were addressed using an imputation procedure that replaced them with the mean value of each respective feature, ensuring completeness of the dataset. 
+Second, a scaling step was applied to standardize the feature values, bringing them onto a comparable range and preventing scale-related bias in the model. 
+Third, a feature selection process was performed, following the same methodology as in the previous analysis, to identify and retain the most informative features for the model. 
+Finally, hyperparameter tuning was carried out using GridSearchCV with the parameter grid presented in Figure \ref{fig:pg_fs}, optimizing the model's performance.
+
+This analysis serves a dual purpose. 
+Primarily, it evaluates the performance of each animation within the context of an identification task, providing insight into their relative effectiveness. 
+Additionally, it establishes the optimal parameters for the subsequent verification analysis, which is considerably more computationally intensive as it requires constructing a separate model for each individual. 
+By performing parameter tuning within the single-animation identification analysis, this process becomes significantly more efficient. 
+The parameters identified through this analysis, together with the top k features selected, constitute the foundation for the verification analysis, in which feature selection determines the final set of features used for model evaluation.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Identification_single/single_id_st.png}
+    \caption{Identification singe ST}
+    \label{fig:id_s_st}
+\end{figure}
+
+Figure \ref{fig:id_s_st} presents a comprehensive collection of the results obtained during the analysis. 
+For each type of data split, the figure includes a table showing the performance of each animation using the selected classifier.
+
+Considering the random split, the best-performing animations are VB\_SL\_BIG with an accuracy of $81.9\%$ and VB\_FA\_BIG with an accuracy of $81.75\%$. 
+In contrast, when evaluating the session split, VB\_FA\_BIG emerges as the best performer, with accuracy increasing from $81.75\%$ to $82.86\%$. 
+This is followed by VB\_FA\_LIT, whose accuracy rises from $78.25\%$ to $80\%$, while VB\_SL\_BIG shows a notable decrease from $81.9\%$ to $74.29\%$.
+
+At first glance, this behaviour may seem counterintuitive, as one would generally expect performance to decrease under a session split compared to a random split. 
+This expectation is based on the fact that the training set for the random split contains 80\% of the data, whereas the training set for the session split contains only 66.6\%, and in the random split samples from the same session can appear in both the training and test sets. 
+However, the results reveal a more nuanced pattern: certain animations experience a drop in accuracy, particularly horizontal scroll types, while others show slight improvements despite having a smaller training set.
+
+This improvement may be attributed to the reduced risk of overfitting when training on more distinct session data. 
+By excluding samples from the same session in training and testing, the model may generalise better to unseen data, particularly in animations with more consistent and robust patterns. This behaviour appears to be a characteristic of dynamic text stimuli, and further evidence supporting this observation will be discussed in Section \ref{subsec:s_vs_d}.
+
+\subsection{Static vs Dinamic text}
+\label{subsec:s_vs_d}
 
 \section{Appendix}
 

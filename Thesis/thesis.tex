@@ -1770,6 +1770,7 @@ f61 & Kurtosis ratio between left and right pupil diameter & Pupil diameter rati
 \end{table}
 
 \subsubsection{Identification with single animation - single train(ST) type}
+\label{subsec:id_s_st}
 
 The main goal of this stage was to identify which animation performs best among the eight selected stimuli. 
 We began with a full identification analysis to establish a general baseline of the performance achievable when using all animations together. 
@@ -1799,16 +1800,18 @@ The parameters identified through this analysis, together with the top k feature
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Identification_single/single_id_st.png}
-    \caption{Identification singe ST}
+    \caption{Identification single animation-ST}
     \label{fig:id_s_st}
 \end{figure}
 
 Figure \ref{fig:id_s_st} presents a comprehensive collection of the results obtained during the analysis. 
 For each type of data split, the figure includes a table showing the performance of each animation using the selected classifier.
 
-Considering the random split, the best-performing animations are VB\_SL\_BIG with an accuracy of $81.9\%$ and VB\_FA\_BIG with an accuracy of $81.75\%$. 
-In contrast, when evaluating the session split, VB\_FA\_BIG emerges as the best performer, with accuracy increasing from $81.75\%$ to $82.86\%$. 
+Considering the random split, the best-performing animations are VB\_SL\_BIG with an accuracy of $81.9\%$ and VB\_FA\_BIG with an accuracy of $81.75\%$.
+Both of these results were achieved using the Random Forest classifiers. 
+In contrast, when evaluating the session split, VB\_FA\_BIG emerges as the best performer, with accuracy increasing from $81.75\%$ to $82.86\%$ using SVC. 
 This is followed by VB\_FA\_LIT, whose accuracy rises from $78.25\%$ to $80\%$, while VB\_SL\_BIG shows a notable decrease from $81.9\%$ to $74.29\%$.
+These resulst were obtained with Logistic regression classifier.
 
 At first glance, this behaviour may seem counterintuitive, as one would generally expect performance to decrease under a session split compared to a random split. 
 This expectation is based on the fact that the training set for the random split contains 80\% of the data, whereas the training set for the session split contains only 66.6\%, and in the random split samples from the same session can appear in both the training and test sets. 
@@ -1828,36 +1831,36 @@ This behaviour appears to be a characteristic of dynamic text stimuli, and furth
 \toprule
 \textbf{Feature ID} & \textbf{Feature name} & \textbf{Cumulative F-score} \\
 \midrule
-f44 & Arithmetic mean right pupil diameter & 22031.83 \\
-f45 & Geometric mean right pupil diameter & 21605.79 \\
-f46 & Median right pupil diameter & 21213.68 \\
-f34 & Arithmetic mean left pupil diameter & 19774.78 \\
-f35 & Geometric mean left pupil diameter & 19458.95 \\
-f36 & Median left pupil diameter & 18983.48 \\
-f43 & Maximum right pupil diameter & 14691.47 \\
-f64 & Arithmetic mean difference between left and right pupil diameter & 13747.98 \\
-f65 & Median difference between left and right pupil diameter & 13502.27 \\
-f33 & Maximum left pupil diameter & 13104.34 \\
-f55 & Geometric mean ratio between left and right pupil diameter & 9259.87 \\
-f56 & Median ratio between left and right pupil diameter & 9219.42 \\
-f54 & Arithmetic mean ratio between left and right pupil diameter & 8718.40 \\
-f71 & Number of blinks & 6170.79 \\
-f52 & Minimum ratio between left and right pupil diameter & 4899.18 \\
-f62 & Minimum difference between left and right pupil diameter & 4656.37 \\
-f58 & Median absolute deviation ratio between left and right pupil diameter & 3997.34 \\
-f67 & Median absolute deviation difference between left and right pupil diameter & 3770.19 \\
-f60 & Interquartile range ratio between left and right pupil diameter & 3739.30 \\
-f69 & Interquartile range difference between left and right pupil diameter & 3639.55 \\
-f66 & Standard deviation difference between left and right pupil diameter & 3156.98 \\
-f63 & Maximum difference between left and right pupil diameter & 2904.19 \\
-f39 & Skewness left pupil diameter & 2160.19 \\
-f80 & Number of movements in the ascending direction & 2100.39 \\
-f57 & Standard deviation ratio between left and right pupil diameter & 2062.58 \\
-f49 & Skewness right pupil diameter & 1950.56 \\
-f53 & Maximum ratio between left and right pupil diameter & 1943.09 \\
-f0 & Number of fixations & 1912.33 \\
-f4 & Geometric mean fixation duration & 1898.40 \\
-f37 & Standard deviation left pupil diameter & 1815.50 \\
+f44 & Arithmetic mean right pupil diameter & 2658.73 \\
+f46 & Median right pupil diameter & 2640.75 \\
+f45 & Geometric mean right pupil diameter & 2626.95 \\
+f34 & Arithmetic mean left pupil diameter & 2461.19 \\
+f35 & Geometric mean left pupil diameter & 2430.31 \\
+f36 & Median left pupil diameter & 2408.50 \\
+f64 & Arithmetic mean difference between left and right pupil diameter & 2052.77 \\
+f43 & Maximum right pupil diameter & 2049.28 \\
+f65 & Median difference between left and right pupil diameter & 2032.88 \\
+f33 & Maximum left pupil diameter & 1846.29 \\
+f56 & Median ratio between left and right pupil diameter & 1452.92 \\
+f55 & Geometric mean ratio between left and right pupil diameter & 1448.45 \\
+f54 & Arithmetic mean ratio between left and right pupil diameter & 1386.62 \\
+f67 & Median absolute deviation difference between left and right pupil diameter & 1121.41 \\
+f69 & Interquartile range difference between left and right pupil diameter & 1073.47 \\
+f71 & Number of blinks & 1046.55 \\
+f58 & Median absolute deviation ratio between left and right pupil diameter & 963.74 \\
+f78 & Total distance in absolute value in the left direction & 954.15 \\
+f77 & Total distance in absolute value in the right direction & 933.19 \\
+f60 & Interquartile range ratio between left and right pupil diameter & 893.48 \\
+f82 & Number of movements in the ascending direction & 844.49 \\
+f52 & Minimum ratio between left and right pupil diameter & 770.60 \\
+f62 & Minimum difference between left and right pupil diameter & 766.01 \\
+f0 & Number of fixations & 732.23 \\
+f14 & Geometric mean distance between consecutive fixations & 706.63 \\
+f66 & Standard deviation difference between left and right pupil diameter & 690.05 \\
+f4 & Geometric mean fixation duration & 654.63 \\
+f15 & Median distance between consecutive fixations & 644.81 \\
+f3 & Arithmetic mean fixation duration & 643.15 \\
+f80 & Number of movements in the ascending direction & 635.33 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1865,12 +1868,131 @@ f37 & Standard deviation left pupil diameter & 1815.50 \\
 Table \ref{tab:top30_id_s_st} presents the top 30 features identified in this analysis.
 The ranking was determined by summing the F-scores of each feature across all selections and ordering them from highest to lowest.
 Notably, the leaderboard is largely dominated by pupil size-related features, which appear to be highly descriptive of individual human behavior.
-In contrast, the only feature that was never selected is Feature 30: Kurtosis of Saccade Speed, suggesting that it is not a particularly informative descriptor for the identification task.
+In contrast, the only two features that were never selected are Feature 30: Kurtosis of Saccade Speed and feature 61: kurtosis ratio between left and right pupil diameter, suggesting that there are not a particularly informative descriptors for the identification task.
 
-\subsection{Identification with single animation - single train(ST) type}
+\subsection{Identification with single animation - full train(FT) type}
+\label{subsec:id_s_ft}
+
+This type of analysis originates from previous research conducted at the University of Pavia [35], where a similar data split was employed. 
+In several cases, this approach yielded better results compared to the standard single train(ST) version presented previously.
+We also aim to evaluate this alternative approach to determine whether it yields improved or degraded performance compared to the classical procedure described in Chapter \ref{subsec:id_s_st}. 
+
+The current analysis follows the same methodology as the counterpart, with one key modification: the model is trained on the entire animation dataset and tested on a single animation. 
+This design intends to assess whether incorporating a larger and more diverse training set enhances the model's generalization performance, or instead introduces noise that may reduce accuracy.
+
+As before, the first step in this program is a random “80/20” split, which partitions the dataset into training and testing subsets by selecting 80\% of the data for training and 20\% for testing, while preserving the label distribution through stratification. 
+This splitting procedure is performed separately for each animation category to ensure balanced representation across classes. 
+For each animation, the samples are divided so that both the training and testing sets contain data from all participants, maintaining diversity within each subset. 
+The resulting training subsets from all animations are then aggregated into a single global training set, which is used to train the model, while the testing subsets are kept individually in a structured collection for per-animation evaluation. 
+
+The session split type works in a similar way to the random split but is organized by recording sessions rather than random selection. 
+Specifically, for each animation, the first two sessions (S1 and S2) are collected and combined to form the training set, ensuring that the model learns from multiple recordings of each animation. 
+Then, the test set for each animation is constructed exclusively from the corresponding third session (S3) data. 
+Each of these animation-specific test sets is used to evaluate the model individually, allowing a detailed assessment of performance for each animation under unseen session conditions.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Identification_single/single_id_ft.png}
+    \caption{Identification single animation-FT}
+    \label{fig:id_s_ft}
+\end{figure}
+
+Figure \ref{fig:id_s_ft} contains the results obtained evaluating the different models during the analysis.
+
+The best-performing animation in the random split procedure is VB\_SL\_BIG, which achieves an accuracy of 79.84\%, followed by VB\_FA\_LIT and VB\_FA\_BIG, with accuracies of 79.05\% and 77.14\%, respectively.
+All these results were obtained using the SVC classifier.
+
+In contrast to the ST variation, the performance tends to decrease when using the session split approach.
+Specifically, the highest accuracy under this condition is achieved by VB\_FA\_LIT and VB\_FA\_BIG, both reaching 75.24\%, with the Logistic Regression classifier performing best in this case.
+
+As we can see from these results we don't have a clear winner where the performance are always better.
+We have that some animation like HS\_FA\_LIT is better in the FT version while VB\_FA\_BIG reaches better accuracy in the ST mode.
+For this reason we move on keeping both of the mode and we will maintain this distinction even with verification analysis.
+
+As in the previous section we collected all the selected features during the feature selection part in the appendix \ref{subsec:topk_ft}.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Top 30 features for Identification single animation-FT}
+\label{tab:top30_id_s_ft}
+\begin{tabular}{lll}
+\toprule
+\textbf{Feature ID} & \textbf{Feature name} & \textbf{Cumulative F-score} \\
+\midrule
+f44 & Arithmetic mean right pupil diameter & 19373.10 \\
+f45 & Geometric mean right pupil diameter & 18978.84 \\
+f46 & Median right pupil diameter & 18572.92 \\
+f34 & Arithmetic mean left pupil diameter & 17313.59 \\
+f35 & Geometric mean left pupil diameter & 17028.64 \\
+f36 & Median left pupil diameter & 16574.98 \\
+f43 & Maximum right pupil diameter & 12642.19 \\
+f64 & Arithmetic mean difference between left and right pupil diameter & 11695.21 \\
+f65 & Median difference between left and right pupil diameter & 11469.39 \\
+f33 & Maximum left pupil diameter & 11258.05 \\
+f55 & Geometric mean ratio between left and right pupil diameter & 7811.42 \\
+f56 & Median ratio between left and right pupil diameter & 7766.50 \\
+f54 & Arithmetic mean ratio between left and right pupil diameter & 7331.78 \\
+f71 & Number of blinks & 5124.24 \\
+f52 & Minimum ratio between left and right pupil diameter & 4128.59 \\
+f62 & Minimum difference between left and right pupil diameter & 3890.36 \\
+f58 & Median absolute deviation ratio between left and right pupil diameter & 3033.60 \\
+f60 & Interquartile range ratio between left and right pupil diameter & 2845.82 \\
+f67 & Median absolute deviation difference between left and right pupil diameter & 2648.79 \\
+f69 & Interquartile range difference between left and right pupil diameter & 2566.08 \\
+f66 & Standard deviation difference between left and right pupil diameter & 2466.93 \\
+f63 & Maximum difference between left and right pupil diameter & 2361.47 \\
+f39 & Skewness left pupil diameter & 1706.41 \\
+f53 & Maximum ratio between left and right pupil diameter & 1623.34 \\
+f57 & Standard deviation ratio between left and right pupil diameter & 1601.76 \\
+f49 & Skewness right pupil diameter & 1569.37 \\
+f37 & Standard deviation left pupil diameter & 1541.31 \\
+f80 & Number of movements in the ascending direction & 1465.06 \\
+f68 & Skewness difference between left and right pupil diameter & 1365.49 \\
+f32 & Minimum left pupil diameter & 1348.24 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Consistent with the previous results, the ranking presented in Table \ref{tab:top30_id_s_ft} is once again dominated by pupil-related features.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Features never selected in identification single-FT}
+\label{tab:never_selected_features_ft}
+\begin{tabular}{ll}
+\toprule
+\textbf{Feature ID} & \textbf{Feature name} \\
+\midrule
+f11 & Minimum distance between consecutive fixations \\
+f16 & Standard deviation distance between consecutive fixations \\
+f21 & Minimum saccade speed \\
+f23 & Arithmetic mean saccade speed \\
+f24 & Geometric mean saccade speed \\
+f25 & Median saccade speed \\
+f28 & Skewness saccade speed \\
+f30 & kurtosis saccade speed \\
+f70 & kurtosis difference between left and right pupil diameter \\
+f79 & Number of movements in the ascending direction \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table \ref{tab:never_selected_features_ft} presents the list of the least informative features that were never selected during the analysis.
+
 
 \subsection{Static vs Dinamic text}
 \label{subsec:s_vs_d}
+
+\newpage
+\section{Conclusion}
+puo essere usata per l identificazione
+\noindent
+\section{Acknowledgment}
 
 \section{Appendix}
 
@@ -2562,11 +2684,22 @@ Therefore, a link to an additional downloadable file containing all the detailed
     {Selected Features CSV (Raw)} [111].
 \end{itemize}
 
+\subsection{Identification single FT - Best k features}
+\label{subsec:topk_ft}
 
-\newpage
-\section{Conclusion}
-\noindent
-\section{Acknowledgment}
+This section reports the optimal k features identified during the feature selection phase of the Identification - Full Animation (FT) analysis.
+In this case, the total number of selected features was too extensive to be conveniently presented in tabular form, as done previously in Section \ref{subsec:id_fs_k}.
+Indeed, each combination of classifier, animation type, and data split produced a distinct set and number of selected features.
+For this reason, the complete list of selected features is provided as a supplementary resource, accessible through the links below.
+
+\begin{itemize}
+    \item View online: 
+    \href{https://github.com/DavideMascheroni99/movingText/blob/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_ft.csv}
+    {Selected Features CSV (GitHub view)} [112].
+    \item Direct download: 
+    \href{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_ft.csv}
+    {Selected Features CSV (Raw)} [113].
+\end{itemize}
 
 
 \newpage
@@ -2794,6 +2927,10 @@ Therefore, a link to an additional downloadable file containing all the detailed
 [110] Top k features identification single-ST, \url{https://github.com/DavideMascheroni99/movingText/blob/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_st.csv}
 
 [111] Top k features identification single-ST raw,\url{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_st.csv}
+
+[112] Top k features identification single-FT, \url{https://github.com/DavideMascheroni99/movingText/blob/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_ft.csv}
+
+[114] Top k features identification single-FT raw,\url{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_ft.csv}
 
 
 \end{raggedright}

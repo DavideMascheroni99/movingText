@@ -15,7 +15,10 @@
 \usepackage{float}  
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
-\usepackage{pgfplotstable}   
+\usepackage{pgfplotstable}  
+\usepackage{booktabs}
+\usepackage{caption}
+
 
 \begin{document}
 \sloppy
@@ -1686,10 +1689,87 @@ Interestingly, the Support Vector Classifier (SVC) achieved the same accuracy of
 For the session split, a modest improvement was observed with the Multilayer Perceptron (MLP) classifier, whose accuracy increased from 66.55\% to 67.62\% when using only 70 features.
 
 The number of selected features, along with their corresponding identities, are presented in Appendix \ref{subsec:id_fs_k}.
-Here we can see that the best general performing features are ....
+\begin{table}[htbp]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Top 30 features for Identification with feature selection ranked by cumulative F-score}
+\label{tab:top30_id}
+\begin{tabular}{lll}
+\toprule
+\textbf{Feature ID} & \textbf{Feature name} & \textbf{Cumulative F-score} \\
+\midrule
+f44 & Arithmetic mean right pupil diameter & 2777.22 \\
+f45 & Geometric mean right pupil diameter & 2724.38 \\
+f46 & Median right pupil diameter & 2658.24 \\
+f34 & Arithmetic mean left pupil diameter & 2482.82 \\
+f35 & Geometric mean left pupil diameter & 2443.10 \\
+f36 & Median left pupil diameter & 2384.14 \\
+f64 & Arithmetic mean difference between left and right pupil diameter & 1734.38 \\
+f65 & Median difference between left and right pupil diameter & 1697.57 \\
+f33 & Maximum left pupil diameter & 1644.71 \\
+f43 & Maximum right pupil diameter & 1561.86 \\
+f55 & Geometric mean ratio between left and right pupil diameter & 1139.40 \\
+f56 & Median ratio between left and right pupil diameter & 1125.79 \\
+f54 & Arithmetic mean ratio between left and right pupil diameter & 1065.89 \\
+f71 & Number of blinks & 760.39 \\
+f52 & Minimum ratio between left and right pupil diameter & 599.55 \\
+f62 & Minimum difference between left and right pupil diameter & 529.04 \\
+f58 & Median absolute deviation ratio between left and right pupil diameter & 437.26 \\
+f60 & Interquartile range ratio between left and right pupil diameter & 410.47 \\
+f67 & Median absolute deviation difference between left and right pupil diameter & 385.03 \\
+f69 & Interquartile range difference between left and right pupil diameter & 374.81 \\
+f66 & Standard deviation difference between left and right pupil diameter & 357.18 \\
+f63 & Maximum difference between left and right pupil diameter & 340.73 \\
+f39 & Skewness left pupil diameter & 250.94 \\
+f53 & Maximum ratio between left and right pupil diameter & 234.36 \\
+f37 & Standard deviation left pupil diameter & 228.57 \\
+f57 & Standard deviation ratio between left and right pupil diameter & 227.71 \\
+f49 & Skewness right pupil diameter & 223.79 \\
+f80 & Number of movements in descending direction & 210.63 \\
+f42 & Minimum right pupil diameter & 196.55 \\
+f32 & Minimum left pupil diameter & 196.55 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The table \ref{tab:top30_id} displays the top 30 features selected across the entire analysis.
+These features were ranked according to their cumulative F-score, aggregated across all classifiers and session splits.
+Each time a feature appeared during the selection process, its F-score was added to an accumulator. 
+If the same feature appeared again in subsequent analyses, its score was added cumulatively to the previous total.
+As shown in the table, the top 10 positions are predominantly occupied by pupil-related features, either referring to a single eye or derived from ratios or differences between the two eyes.
+
+{\raggedright
+In contrast, Table \ref{tab:ns_id} displays the set of features that were never selected in any model or split type.
+We can observe that many of these are saccade speed features, along with two distance-between-consecutive-fixations features.
+Interestingly, the kurtosis ratio between left and right pupil diameter is also never selected, despite pupil diameter being among the best features. 
+This suggests that kurtosis may not be a representative metric in this context.
+\par}
+
+\begin{table}[H]
+\centering
+\small
+\setlength{\tabcolsep}{4pt} % same as top 30 table
+\caption{List of features never selected in Identification with feature selection}
+\label{tab:ns_id}
+\begin{tabular}{lll}
+\toprule
+\textbf{Feature ID} & \textbf{Feature name} & \textbf{Description} \\
+\midrule
+f11 & Minimum distance between consecutive fixations & Saccade-related metric \\
+f16 & Standard deviation distance between consecutive fixations & Saccade-related metric \\
+f21 & Minimum saccade speed & Saccade speed metric \\
+f23 & Arithmetic mean saccade speed & Saccade speed metric \\
+f24 & Geometric mean saccade speed & Saccade speed metric \\
+f25 & Median saccade speed & Saccade speed metric \\
+f28 & Skewness saccade speed & Saccade speed metric \\
+f30 & Kurtosis saccade speed & Saccade speed metric \\
+f61 & Kurtosis ratio between left and right pupil diameter & Pupil diameter ratio metric \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsubsection{Identification with single animation - single train(st) type}
-
 
 
 

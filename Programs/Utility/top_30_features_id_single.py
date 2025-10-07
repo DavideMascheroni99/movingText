@@ -2,19 +2,23 @@ import os
 import pandas as pd
 
 # === CONFIGURATION ===
-folder_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_results\Identification_KBest\Feature"
+folder_path = r"C:\Users\david\OneDrive\Documenti\Tesi_BehavBio\Programs\Programs\Machine_Learning\Machine_Learning_results\Identification_single_results"
 
 # Initialize cumulative dictionary
 feature_scores = {}
 
-# Read all CSV files
+# Read all CSV files in the folder
 for filename in os.listdir(folder_path):
     if filename.endswith(".csv"):
         filepath = os.path.join(folder_path, filename)
         df = pd.read_csv(filepath)
 
-        # Ensure expected columns exist
-        if {'Feature', 'F-score'}.issubset(df.columns):
+        # Ensure correct columns exist
+        if {'Model', 'Feature', 'F-score'}.issubset(df.columns):
+            # Exclude Naive Bayes models
+            df = df[~df['Model'].str.contains('Naive Bayes', case=False, na=False)]
+
+            # Add F-scores to cumulative total
             for _, row in df.iterrows():
                 feature = row['Feature']
                 score = row['F-score']
@@ -29,11 +33,12 @@ output_path = os.path.join(folder_path, "cumulative_fscore_results.csv")
 result_df.to_csv(output_path, index=False)
 
 # === Identify missing features ===
-# Assuming features go from f0 to f82 (adjust if necessary)
+# Adjust if you have more or fewer features
 all_features = [f"f{i}" for i in range(83)]
 present_features = set(feature_scores.keys())
 missing_features = [f for f in all_features if f not in present_features]
 
+# Save missing features
 missing_df = pd.DataFrame(missing_features, columns=["Missing Features"])
 missing_output_path = os.path.join(folder_path, "missing_features.csv")
 missing_df.to_csv(missing_output_path, index=False)

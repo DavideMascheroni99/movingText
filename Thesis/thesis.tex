@@ -1815,7 +1815,59 @@ This expectation is based on the fact that the training set for the random split
 However, the results reveal a more nuanced pattern: certain animations experience a drop in accuracy, particularly horizontal scroll types, while others show slight improvements despite having a smaller training set.
 
 This improvement may be attributed to the reduced risk of overfitting when training on more distinct session data. 
-By excluding samples from the same session in training and testing, the model may generalise better to unseen data, particularly in animations with more consistent and robust patterns. This behaviour appears to be a characteristic of dynamic text stimuli, and further evidence supporting this observation will be discussed in Section \ref{subsec:s_vs_d}.
+By excluding samples from the same session in training and testing, the model may generalise better to unseen data, particularly in animations with more consistent and robust patterns. 
+This behaviour appears to be a characteristic of dynamic text stimuli, and further evidence supporting this observation will be discussed in Section \ref{subsec:s_vs_d}.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\caption{Top 30 features for Identification single animation-ST}
+\label{tab:top30_id_s_st}
+\begin{tabular}{lll}
+\toprule
+\textbf{Feature ID} & \textbf{Feature name} & \textbf{Cumulative F-score} \\
+\midrule
+f44 & Arithmetic mean right pupil diameter & 22031.83 \\
+f45 & Geometric mean right pupil diameter & 21605.79 \\
+f46 & Median right pupil diameter & 21213.68 \\
+f34 & Arithmetic mean left pupil diameter & 19774.78 \\
+f35 & Geometric mean left pupil diameter & 19458.95 \\
+f36 & Median left pupil diameter & 18983.48 \\
+f43 & Maximum right pupil diameter & 14691.47 \\
+f64 & Arithmetic mean difference between left and right pupil diameter & 13747.98 \\
+f65 & Median difference between left and right pupil diameter & 13502.27 \\
+f33 & Maximum left pupil diameter & 13104.34 \\
+f55 & Geometric mean ratio between left and right pupil diameter & 9259.87 \\
+f56 & Median ratio between left and right pupil diameter & 9219.42 \\
+f54 & Arithmetic mean ratio between left and right pupil diameter & 8718.40 \\
+f71 & Number of blinks & 6170.79 \\
+f52 & Minimum ratio between left and right pupil diameter & 4899.18 \\
+f62 & Minimum difference between left and right pupil diameter & 4656.37 \\
+f58 & Median absolute deviation ratio between left and right pupil diameter & 3997.34 \\
+f67 & Median absolute deviation difference between left and right pupil diameter & 3770.19 \\
+f60 & Interquartile range ratio between left and right pupil diameter & 3739.30 \\
+f69 & Interquartile range difference between left and right pupil diameter & 3639.55 \\
+f66 & Standard deviation difference between left and right pupil diameter & 3156.98 \\
+f63 & Maximum difference between left and right pupil diameter & 2904.19 \\
+f39 & Skewness left pupil diameter & 2160.19 \\
+f80 & Number of movements in the ascending direction & 2100.39 \\
+f57 & Standard deviation ratio between left and right pupil diameter & 2062.58 \\
+f49 & Skewness right pupil diameter & 1950.56 \\
+f53 & Maximum ratio between left and right pupil diameter & 1943.09 \\
+f0 & Number of fixations & 1912.33 \\
+f4 & Geometric mean fixation duration & 1898.40 \\
+f37 & Standard deviation left pupil diameter & 1815.50 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table \ref{tab:top30_id_s_st} presents the top 30 features identified in this analysis.
+The ranking was determined by summing the F-scores of each feature across all selections and ordering them from highest to lowest.
+Notably, the leaderboard is largely dominated by pupil size-related features, which appear to be highly descriptive of individual human behavior.
+In contrast, the only feature that was never selected is Feature 30: Kurtosis of Saccade Speed, suggesting that it is not a particularly informative descriptor for the identification task.
+
+\subsection{Identification with single animation - single train(ST) type}
 
 \subsection{Static vs Dinamic text}
 \label{subsec:s_vs_d}
@@ -1854,8 +1906,13 @@ Conversely, Figure \ref{fig:pg_nofs} presents the parameter grid that includes t
 \subsection{Identification with feature selection - Best k features}
 \label{subsec:id_fs_k}
 
-The following section presents the optimal number of features (k) selected for each classifier during the identification phase with feature selection. 
-It also provides a complete list of these features along with their corresponding f-scores, which quantify the relative importance of each feature throughout the evaluation process.
+The following section presents the optimal number of features (k) selected for each classifier during the identification phase with feature selection.
+These values are available in the online repository:
+\href{https://github.com/DavideMascheroni99/movingText/tree/main/Programs/Machine_Learning/Machine_Learning_results/Identification_results/Identification_KBest/Feature}{GitHubLink} [109].
+There are two ways to explore these results. 
+First, a collection of tables organises all features alongside their corresponding F-scores, quantifying the relative importance of each feature throughout the evaluation process.
+Second, the full dataset is available for download, allowing for further analysis.
+
 
 \begin{figure}[htbp]
     \centering
@@ -2486,9 +2543,26 @@ It also provides a complete list of these features along with their correspondin
     \end{tikzpicture}
     \caption{MLP classifier session split and $k = 70$}
     \label{fig:mlp_s}
-\end{figure}
+\end{figure}   
 
 \clearpage
+\subsection{Identification single ST - Best k features}
+
+This section presents the best k features selected during the feature selection stage of the identification single animation-ST analysis.
+In this case, the number of selected features was too large to be effectively displayed in individual tables, as done in Section \ref{subsec:id_fs_k}.
+In fact each cobination of classifier, animation name and type of split have a different number of selected features.
+Therefore, a link to an additional downloadable file containing all the detailed results is provided.
+
+\begin{itemize}
+    \item View online: 
+    \href{https://github.com/DavideMascheroni99/movingText/blob/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_st.csv}
+    {Selected Features CSV (GitHub view)} [110].
+    \item Direct download: 
+    \href{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_st.csv}
+    {Selected Features CSV (Raw)} [111].
+\end{itemize}
+
+
 \newpage
 \section{Conclusion}
 \noindent
@@ -2714,6 +2788,13 @@ It also provides a complete list of these features along with their correspondin
 [107] StandardScaler, \url{https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html}
 
 [108] RobustScaler, \url{https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.RobustScaler.html}
+
+[109] Top k identification with feature selection, GitHub link, \url{https://github.com/DavideMascheroni99/movingText/tree/main/Programs/Machine_Learning/Machine_Learning_results/Identification_results/Identification_KBest/Feature}
+
+[110] Top k features identification single-ST, \url{https://github.com/DavideMascheroni99/movingText/blob/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_st.csv}
+
+[111] Top k features identification single-ST raw,\url{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_st.csv}
+
 
 \end{raggedright}
 

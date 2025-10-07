@@ -58,6 +58,7 @@
 \contentsline {section}{\numberline {6}Appendix}{49}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Parameter grid}{49}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}Identification with feature selection - Best k features}{50}{subsection.6.2}%
-\contentsline {section}{\numberline {7}Conclusion}{63}{section.7}%
-\contentsline {section}{\numberline {8}Acknowledgment}{63}{section.8}%
-\contentsline {section}{\numberline {9}References}{64}{section.9}%
+\contentsline {subsection}{\numberline {6.3}Identification single ST - Best k features}{63}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Conclusion}{64}{section.7}%
+\contentsline {section}{\numberline {8}Acknowledgment}{64}{section.8}%
+\contentsline {section}{\numberline {9}References}{65}{section.9}%

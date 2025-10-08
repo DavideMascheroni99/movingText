@@ -1,11 +1,11 @@
 # Fdb version 4
-["biber thesis"] 1759914377.46861 "thesis.bcf" "thesis.bbl" "thesis" 1759920973.35715 0
-  "thesis.bcf" 1759920973 108053 92d793237121c8444051d54a8bc8b79c "pdflatex"
+["biber thesis"] 1759914377.46861 "thesis.bcf" "thesis.bbl" "thesis" 1759954374.06298 0
+  "thesis.bcf" 1759954373 108053 92d793237121c8444051d54a8bc8b79c "pdflatex"
   (generated)
   "thesis.bbl"
   "thesis.blg"
   (rewritten before read)
-["pdflatex"] 1759920962.85006 "c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex" "thesis.pdf" "thesis" 1759920973.35793 0
+["pdflatex"] 1759954367.30653 "c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex" "thesis.pdf" "thesis" 1759954374.06603 0
   "C:/Users/david/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1759677618 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/david/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1759080963 13286966 9e2c425acc25671a2748b4a1afa3f158 ""
   "C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc" 1256929440 2375 baa924870cfb487815765f9094cf3728 ""
@@ -268,6 +268,14 @@
   "Images/Results/Verification_single/st/VB_SL_BIG.png" 1759920292 23202 ead718f67b466ff60efbbd5da07a27a9 ""
   "Images/Results/Verification_single/st/VB_SL_LIT.png" 1759919941 20935 6978b936bedc7387565ddc18a452490b ""
   "Images/Results/Verification_single/st/best_animation_roc_curves_st.png" 1757586424 358899 ce6616dc5bfbde1d6cf0c531182079c3 ""
+  "Images/Results/Verification_single_intruders/st/HS_FA_BIG.png" 1759953708 24036 54d159f3d042037045f0201750f2545c ""
+  "Images/Results/Verification_single_intruders/st/HS_FA_LIT.png" 1759953688 23191 5c2a00ce2a33dcbbbe492cd5dcff951d ""
+  "Images/Results/Verification_single_intruders/st/HS_SL_BIG.png" 1759953666 22813 480ad3f5e06e7a4435da07b39c707b4c ""
+  "Images/Results/Verification_single_intruders/st/VB_FA_BIG.png" 1758033433 23370 e1eec6d6bbdc5ce29c6946ae5abca87c ""
+  "Images/Results/Verification_single_intruders/st/VB_FA_LIT.png" 1758032835 22826 cf677d1338d64ada7884d6e56030a007 ""
+  "Images/Results/Verification_single_intruders/st/VB_SL_BIG.png" 1759953646 24046 fe4ac544a8e2c21003e668e2ab0e0ad0 ""
+  "Images/Results/Verification_single_intruders/st/VB_SL_LIT.png" 1758032803 22033 ee0d806b4371f7ebde9cd78d6750edba ""
+  "Images/Results/Verification_single_intruders/st/best_animation_roc_curves_st.png" 1757586424 358899 ce6616dc5bfbde1d6cf0c531182079c3 ""
   "Images/Results/fs.png" 1759762877 219476 5b90e89fbedcfb5dc220a8d826cfdde3 ""
   "Images/Results/param_grid_nofs.png" 1759744687 74309 4c147289eca2e40c74739966f1c28ebe ""
   "Images/Theory/Fingerprint_scanner_identification.jpg" 1749573018 294369 c9a73b565d2d5883b44305476a89ca75 ""
@@ -279,13 +287,13 @@
   "Images/Theory/occhio.jpg" 1758467324 95074 7cc47098c9bd844fa8fc6db5b2f08ffa ""
   "Images/Theory/rods_cones.jpg" 1758535915 175940 31a9dfdfe2e28eea437702ea024f0164 ""
   "Images/Theory/vog.jpeg" 1758619825 6297 096c1f7ca817b818445f3affa15ea703 ""
-  "c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex" 1759920950 257349 9bf039a624e816494d33a89163a19958 ""
-  "thesis.aux" 1759920972 22679 78112d94a9782d78cbe2a1be2289af31 "pdflatex"
+  "c:/Users/david/OneDrive/Documenti/Tesi_BehavBio/Programs/Thesis/thesis.tex" 1759954366 234801 edfd074a3e205e724cce9cc83af03519 ""
+  "thesis.aux" 1759954373 21954 f80cf54d33503826929f536d3a92bb74 "pdflatex"
   "thesis.bbl" 1759914383 0 d41d8cd98f00b204e9800998ecf8427e "biber thesis"
-  "thesis.out" 1759920972 14360 bc7a48b322daeec5b351b17672ca5fe0 "pdflatex"
-  "thesis.run.xml" 1759920973 2238 5924afb24500e169d37f4bf26c1bb90a "pdflatex"
-  "thesis.tex" 1759920950 257349 9bf039a624e816494d33a89163a19958 ""
-  "thesis.toc" 1759920973 6814 eae83c5aa3fb144b76556db11a0427ba "pdflatex"
+  "thesis.out" 1759954373 15078 e15821829a0205c788db43a0faf70a0b "pdflatex"
+  "thesis.run.xml" 1759954373 2238 5924afb24500e169d37f4bf26c1bb90a "pdflatex"
+  "thesis.tex" 1759954366 234801 edfd074a3e205e724cce9cc83af03519 ""
+  "thesis.toc" 1759954373 7076 9bf34d040b05d1cf1ee4992ccc2a0b73 "pdflatex"
   (generated)
   "thesis.aux"
   "thesis.bcf"

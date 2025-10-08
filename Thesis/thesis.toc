@@ -55,12 +55,15 @@
 \contentsline {subsubsection}{\numberline {5.5.2}Identification with feature selection}{46}{subsubsection.5.5.2}%
 \contentsline {subsubsection}{\numberline {5.5.3}Identification with single animation - single train(ST) type}{47}{subsubsection.5.5.3}%
 \contentsline {subsection}{\numberline {5.6}Identification with single animation - full train(FT) type}{49}{subsection.5.6}%
-\contentsline {subsection}{\numberline {5.7}Static vs Dinamic text}{50}{subsection.5.7}%
-\contentsline {section}{\numberline {6}Conclusion}{52}{section.6}%
-\contentsline {section}{\numberline {7}Acknowledgment}{52}{section.7}%
-\contentsline {section}{\numberline {8}Appendix}{52}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Parameter grid}{52}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Identification with feature selection - Best k features}{53}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}Identification single ST - Best k features}{66}{subsection.8.3}%
-\contentsline {subsection}{\numberline {8.4}Identification single FT - Best k features}{66}{subsection.8.4}%
-\contentsline {section}{\numberline {9}References}{67}{section.9}%
+\contentsline {subsubsection}{\numberline {5.6.1}Verification single animation - single train(ST)}{51}{subsubsection.5.6.1}%
+\contentsline {subsubsection}{\numberline {5.6.2}st ver single classic}{54}{subsubsection.5.6.2}%
+\contentsline {subsubsection}{\numberline {5.6.3}Static vs Dinamic text}{54}{subsubsection.5.6.3}%
+\contentsline {section}{\numberline {6}Conclusion}{55}{section.6}%
+\contentsline {section}{\numberline {7}Acknowledgment}{55}{section.7}%
+\contentsline {section}{\numberline {8}Appendix}{55}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Parameter grid}{55}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Identification with feature selection - Best k features}{56}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Identification single ST - Best k features}{69}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Identification single FT - Best k features}{69}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}Verification single ST - Animations}{69}{subsection.8.5}%
+\contentsline {section}{\numberline {9}References}{71}{section.9}%

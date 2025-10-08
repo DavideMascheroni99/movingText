@@ -1958,15 +1958,18 @@ f32 & Minimum left pupil diameter & 1348.24 \\
 
 Consistent with the previous results, the ranking presented in Table \ref{tab:top30_id_s_ft} is once again dominated by pupil-related features.
 
-\begin{table}[htbp]
+Table \ref{tab:never_selected_features_ft} presents the list of the least informative features that were never selected during the analysis.
+
+
+\begin{table}[H]
 \centering
-\scriptsize
-\setlength{\tabcolsep}{3pt}
+\small
+\setlength{\tabcolsep}{4pt} % same as top 30 table
 \caption{Features never selected in identification single-FT}
 \label{tab:never_selected_features_ft}
-\begin{tabular}{ll}
+\begin{tabular}{lll}
 \toprule
-\textbf{Feature ID} & \textbf{Feature name} \\
+\textbf{Feature ID} & \textbf{Feature name} & \textbf{Description} \\
 \midrule
 f11 & Minimum distance between consecutive fixations \\
 f16 & Standard deviation distance between consecutive fixations \\
@@ -1979,14 +1982,99 @@ f30 & kurtosis saccade speed \\
 f70 & kurtosis difference between left and right pupil diameter \\
 f79 & Number of movements in the ascending direction \\
 \bottomrule
-\end{tabular}
+\end{tabular}st
 \end{table}
 
-Table \ref{tab:never_selected_features_ft} presents the list of the least informative features that were never selected during the analysis.
+\subsubsection{Verification single animation - single train(ST)}
 
+We now proceed to the verification analysis.
+In this stage, the focus is directly placed on the single-animation configuration, as the primary objective of the project is to identify the animation that yields the best verification performance.
+The verification experiments are designed to assess the practical applicability and effectiveness of the proposed system in real-world scenarios, representing its main use case.
 
-\subsection{Static vs Dinamic text}
+Specifically, this and the subsequent verification analyses employ only the session-based split strategy.
+This choice is motivated by its closer resemblance to real application conditions.
+For instance, in a potential deployment within a banking environment, a user would perform three separate recording sessions: the first two would be used to train the model, while the third would serve as a test to verify the user's identity.
+The use of a single animation is intentional, aiming to minimize the time required for data acquisition.
+This ensures a more efficient and user-friendly procedure, reducing the likelihood of user fatigue or inattentive behavior during the recording phase.
+
+This section presents the verification analysis using the Single Train (ST) configuration.
+This setup corresponds to a closed-set scenario, as all subjects used for model evaluation also have data included in the training phase.
+Consequently, the analysis does not involve testing on data from previously unseen individuals.
+
+The model parameters employed here are those obtained from the identification-single animation (ST) analysis described earlier.
+By reusing these optimized hyperparameters, the computationally intensive parameter tuning stage can be bypassed.
+Each classifier is retrained using its previously determined best configuration, and the dataset is reduced to the top-k selected features in order to decrease memory requirements and improve efficiency.
+
+The verification task differs substantially from the identification one.
+While the identification process is a multi-class problem aimed at determining the correct class of each sample, the verification process is formulated as a binary classification problem that answers the question: “Does this sample belong to the claimed user?”
+
+In this analysis, a separate model is trained for each tester within the dataset.
+For the Single Train (ST) configuration, a modified version of the session-based split is applied.
+Specifically, for each model, only the genuine data from a single tester and a single animation—corresponding to sessions S1 and S2—are included in the training set.
+To balance the dataset, an equal number of feature vectors are randomly selected from the S1 and S2 data of other testers to represent impostor samples.
+This results in a training set composed of n genuine and n impostor feature vectors.
+The model is then trained using the previously optimized hyperparameters to maximize its ability to generalize and discriminate between genuine and impostor samples.
+
+To account for the randomness introduced by the selection of impostor samples, the creation of the training set is repeated twenty times using different random seeds.
+For each repetition, a separate model is trained, and the best-performing one is selected based on its training accuracy.
+
+This step represents a crucial component of the analysis, as it allows us to assess the difference in performance between evaluating each test set using the globally best-performing model and testing with its corresponding model.
+The latter approach will be further explored in the comparative analysis presented in Chapter \ref{subsec:s_vs_cst}.
+
+Using the same twenty seeds, twenty corresponding test sets are generated.
+Each test set is composed of the genuine data from the corresponding user and animation for session three (S3), together with an equal number of impostor feature vectors randomly sampled from other users’ session three data.
+As in the training phase, the evaluation is carried out independently for each animation.
+
+The final performance for each user is obtained by testing the best-trained model on all twenty test sets and averaging the results.
+To obtain a general estimate of classifier performance, the results are then averaged across all users.
+
+In this analysis, the evaluation does not rely solely on accuracy but also considers other metrics that provide a more comprehensive view of model behavior, including precision, recall, specificity, and the Equal Error Rate (EER).
+Precision quantifies the proportion of correctly identified genuine samples among all those predicted as genuine, while recall measures the proportion of genuine samples correctly recognized by the model.
+Specificity, on the other hand, indicates how effectively the system identifies impostor samples as non-genuine.
+Finally, the Equal Error Rate (EER) represents the point at which the false acceptance rate equals the false rejection rate, providing a single, balanced indicator of the system's verification performance.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single/st/VB_FA_BIG.png}
+    \caption{VB\_FA\_BIG animation}
+    \label{fig:VB_FA_BIG_st}
+\end{figure}
+
+Figure \ref{fig:VB_FA_BIG_st} illustrates that the best-performing animation, in terms of accuracy, is VB\_FA\_BIG, achieving an accuracy of 92.2\% with the Random Forest classifier and an Equal Error Rate (EER) of 3.6\%.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single/st/VB_FA_BIG.png}
+    \caption{VB\_FA\_LIT animation}
+    \label{fig:VB_FA_LIT_st}
+\end{figure}
+
+This animation is followed by VB\_FA\_LIT, which, as shown in Figure \ref{fig:VB_FA_LIT_st}, achieves an accuracy of 90.9\% using the SVC classifier and an Equal Error Rate (EER) of 4.7\%.
+The rest of the animation results are contained in the appendix \ref{subsec:vs_st_a}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Results/Verification_single/st/best_animation_roc_curves_st.png}
+    \caption{Roc curve}
+    \label{fig:roc_st}
+\end{figure}
+
+Figure \ref{fig:roc_st} presents the ROC curves for each individual animation, obtained using the best-performing classifier based on the Equal Error Rate (EER).
+For each curve and corresponding classifier, the Area Under the Curve (AUC) value is also reported in the legend as a performance indicator.
+
+\clearpage
+
+\subsubsection{st ver single classic}
+\label{subsec:s_vs_cst}
+Compara con l'altro tipo
+
+\subsubsection{Static vs Dinamic text}
 \label{subsec:s_vs_d}
+
+
 
 \newpage
 \section{Conclusion}
@@ -2701,8 +2789,61 @@ For this reason, the complete list of selected features is provided as a supplem
     {Selected Features CSV (Raw)} [113].
 \end{itemize}
 
+\subsection{Verification single ST - Animations}
+\label{subsec:vs_st_a}
 
-\newpage
+This section presents the additional results of the verification analysis conducted on individual animations using the single train (ST) configuration.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single/st/VB_SL_LIT.png}
+    \caption{VB\_SL\_LIT animation}
+    \label{fig:VB_SL_LIT_st}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single/st/HS_SL_LIT.png}
+    \caption{HS\_SL\_LIT animation}
+    \label{fig:HS_SL_LIT_st}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single/st/HS_SL_BIG.png}
+    \caption{HS\_SL\_BIG animation}
+    \label{fig:HS_SL_BIG_st}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single/st/VB_SL_BIG.png}
+    \caption{VB\_SL\_BIG animation}
+    \label{fig:VB_SL_BIG_st}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single/st/HS_FA_LIT.png}
+    \caption{HS\_FA\_LIT animation}
+    \label{fig:HS_FA_LIT_st}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single/st/HS_FA_BIG.png}
+    \caption{HS\_FA\_BIG animation}
+    \label{fig:HS_FA_BIG_st}
+\end{figure}
+
+
+\clearpage
 \section{References}
 \begin{raggedright}
 

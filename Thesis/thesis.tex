@@ -1986,6 +1986,7 @@ f79 & Number of movements in the ascending direction \\
 \end{table}
 
 \subsubsection{Verification single animation - single train(ST)}
+\label{subsec:vs_st}
 
 We now proceed to the verification analysis.
 In this stage, the focus is directly placed on the single-animation configuration, as the primary objective of the project is to identify the animation that yields the best verification performance.
@@ -2132,6 +2133,66 @@ To conclude the analysis Figure \ref{fig:roc_st} illustrates the ROC curves corr
     \caption{Roc curve}
     \label{fig:roc_sti}
 \end{figure}
+
+\subsubsection{Verification Single Animation with Reduced Session Duration - Single Train (ST)}
+
+The goal of the following section is to extend the single-animation verification using the single train (ST) configuration in order to evaluate the performance of the best animation when the recording duration is reduced.
+In particular, the same program described in Section \ref{subsec:vs_st} is executed, with the only modification being the dataset composition.
+In this case, the datasets consist of data recorded during the first ten seconds and first five seconds from the start of each animation.
+The GP3\_HD eye tracker operates at a sampling rate of 150 Hz, meaning that 150 data points are collected per second and stored as rows in the output CSV file.
+Accordingly, the dataset for the 10-second variation includes the first 1,500 samples (150 x 10) of each recording, while the 5-second variation contains the first 750 samples (150 x 5).
+
+This analysis is particularly important, as it aims to evaluate how the performance of the best animation changes when the recording duration is reduced.
+The objective is to identify an optimal trade-off between accuracy and acquisition time, a factor that will be crucial in real-world applications.
+In practice, if the animation duration is too long, users may lose focus or abandon the procedure, negatively affecting both data quality and system usability.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/VB_FA_BIG_ten_st.png}
+    \caption{VB\_FA\_BIG - 10-Second Recording}
+    \label{fig:VB_FA_BIG_10_st}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png}
+    \caption{VB\_FA\_BIG - 5-Second Recording}
+    \label{fig:VB_FA_BIG_5_st}
+\end{figure}
+
+ChatGPT ha detto:
+
+As expected, the best-performing animation remains VB\_FA\_BIG, consistent with the results obtained in the 15-second analysis.
+When considering only the first 10 seconds, its accuracy decreases slightly from 92.2\% to 90.2\% using the Random Forest classifier, while the Equal Error Rate (EER) increases from 3.6\% to 4.5\%.
+When the duration is further reduced to 5 seconds, accuracy drops to 88.8\%, and the EER rises to 6.8\%.
+
+These results are highly encouraging, as they demonstrate that the model maintains strong performance even with significantly shorter recording times.
+With a 10-second window, accuracy remains around 90\%, indicating minimal degradation, while the 5-second configuration still achieves a notably high accuracy of 88.8\%.
+Depending on the intended application and operational constraints, any of these configurations may be selected to balance efficiency and reliability according to specific requirements.
+
+We are interested only in the results obtained with the best-performing animation.
+The remaining results for the other animations are presented in Section \ref{subsec:vs_st_ft}, due to space constraints.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png}
+    \caption{Roc curve 10 seconds}
+    \label{fig:roc_t}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png}
+    \caption{Roc curve 5 seconds}
+    \label{fig:roc_f}
+\end{figure}
+
+To conclude this section, we present the two ROC curves based on the EER obtained from both analyses.
+Specifically, Figures \ref{fig:roc_t} and \ref{fig:roc_f} correspond respectively to the 10-second and 5-second analyses.
 
 \subsubsection{st ver single classic}
 \label{subsec:s_vs_cst}
@@ -2317,6 +2378,112 @@ This section presents the additional results of the verification analysis with i
     \label{fig:HS_FA_BIG_sti}
 \end{figure}
 
+\subsection{Verification Single Animation with Reduced Session Duration - Single Train (ST)}
+\label{subsec:vs_st_ft}
+
+The following appendix presents the results for all animations under reduced recording durations of 10 seconds and 5 seconds.
+The outcomes obtained using the 10-second window are reported first, followed by those corresponding to the 5-second recordings.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/VB_SL_LIT.png}
+    \caption{VB\_SL\_LIT animation - ten}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/HS_SL_LIT.png}
+    \caption{HS\_SL\_LIT animation- ten}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/VB_SL_BIG.png}
+    \caption{VB\_SL\_BIG animation - ten}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/HS_SL_BIG.png}
+    \caption{HS\_SL\_BIG animation - ten}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/VB_FA_LIT.png}
+    \caption{VB\_FA\_LIT animation - ten}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/HS_FA_BIG.png}
+    \caption{HS\_FA\_BIG animation - ten} 
+\end{figure}
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/HS_FA_LIT.png}
+    \caption{HS\_FA\_LIT animation - ten}
+\end{figure}
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/five/VB_SL_LIT.png}
+    \caption{VB\_SL\_LIT animation - five}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/five/HS_SL_LIT.png}
+    \caption{HS\_SL\_LIT animation- five}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/five/VB_SL_BIG.png}
+    \caption{VB\_SL\_BIG animation - five}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/five/HS_SL_BIG.png}
+    \caption{HS\_SL\_BIG animation - five}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/five/VB_FA_LIT.png}
+    \caption{VB\_FA\_LIT animation - five}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/five/HS_FA_BIG.png}
+    \caption{HS\_FA\_BIG animation - five} 
+\end{figure}
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single_five_ten/st/five/HS_FA_LIT.png}
+    \caption{HS\_FA\_LIT animation - five}
+\end{figure}
 
 \clearpage
 \section{References}

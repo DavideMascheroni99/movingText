@@ -1538,7 +1538,7 @@ The features are defined as follows:
 
 \newpage
 
-\subsection{Machine Learning Analysis}
+\section{Machine Learning Analysis}
 
 This section presents the machine learning analysis conducted on the collected data, which has been represented through the diverse set of features described in the previous section. 
 Given that the domain of behavioral biometrics based on dynamic text remains largely unexplored, our study also investigates the feasibility of performing user identification. 
@@ -1616,6 +1616,12 @@ Finally, to complete the verification analysis, we conducted a temporal scaling 
 The objective was to assess how the best-performing animation behaves when using only the first 10 or 5 seconds instead of the full 15-second duration.
 
 Finally, we perform a comparative analysis between identification and verification using the full dataset, rather than single animations, in order to assess the performance differences between static and dynamic text under similar experimental conditions.
+
+\subsection{Identification}
+The first analysis focuses on identification.
+In this case, a multiclass evaluation is performed to assess the application's performance in this domain. 
+Although this is not the final objective of the study, evaluating identification performance remains important, as previous applications have demonstrated promising results in this area.
+Furthermore, this analysis serves to identify the optimal combination of hyperparameters and to select the most relevant features, which will later be used in the subsequent verification phase.
 
 \subsubsection{Identification without feature selection}
 \label{subsec:id_fs_ch}
@@ -1769,7 +1775,7 @@ f61 & Kurtosis ratio between left and right pupil diameter & Pupil diameter rati
 \end{tabular}st
 \end{table}
 
-\subsubsection{Identification with single animation - single train(ST) type}
+\subsubsection{Identification with single animation - single train(ST)}
 \label{subsec:id_s_st}
 
 The main goal of this stage was to identify which animation performs best among the eight selected stimuli. 
@@ -1870,7 +1876,7 @@ The ranking was determined by summing the F-scores of each feature across all se
 Notably, the leaderboard is largely dominated by pupil size-related features, which appear to be highly descriptive of individual human behavior.
 In contrast, the only two features that were never selected are Feature 30: Kurtosis of Saccade Speed and feature 61: kurtosis ratio between left and right pupil diameter, suggesting that there are not a particularly informative descriptors for the identification task.
 
-\subsubsection{Identification with single animation - full train(FT) type}
+\subsubsection{Identification with single animation - full train(FT)}
 \label{subsec:id_s_ft}
 
 This type of analysis originates from previous research conducted at the University of Pavia [35], where a similar data split was employed. 
@@ -1984,6 +1990,14 @@ f79 & Number of movements in the ascending direction \\
 \bottomrule
 \end{tabular}st
 \end{table}
+
+\subsection{Verification single animation - ST type}
+\label{subsec:prima_ver}
+
+The following section presents the initial stage of the identification process.
+As the overarching objective of this work is to employ the proposed soft biometric modality for verification purposes, several analyses are conducted to explore different configurations of the verification framework.
+In particular, the first analysis comprises a series of experiments performed using single animations in conjunction with the Single-Trial (ST) variation mode.
+This configuration restricts both the training and testing phases to data derived exclusively from the same animation, thereby enabling an evaluation of the system's performance under animation-specific conditions.
 
 \subsubsection{Verification single animation - single train(ST)}
 \label{subsec:vs_st}
@@ -2162,8 +2176,6 @@ In practice, if the animation duration is too long, users may lose focus or aban
     \label{fig:VB_FA_BIG_5_st}
 \end{figure}
 
-ChatGPT ha detto:
-
 As expected, the best-performing animation remains VB\_FA\_BIG, consistent with the results obtained in the 15-second analysis.
 When considering only the first 10 seconds, its accuracy decreases slightly from 92.2\% to 90.2\% using the Random Forest classifier, while the Equal Error Rate (EER) increases from 3.6\% to 4.5\%.
 When the duration is further reduced to 5 seconds, accuracy drops to 88.8\%, and the EER rises to 6.8\%.
@@ -2194,9 +2206,97 @@ The remaining results for the other animations are presented in Section \ref{sub
 To conclude this section, we present the two ROC curves based on the EER obtained from both analyses.
 Specifically, Figures \ref{fig:roc_t} and \ref{fig:roc_f} correspond respectively to the 10-second and 5-second analyses.
 
-\subsubsection{st ver single classic}
+\subsection{Verification 'classic' single animation - ST type}
+
+The following section presents the same analysis described in Section \ref{subsec:prima_ver}, with a minor modification in the evaluation procedure.
+In this case, rather than assessing the performance using the best-performing model across all conditions, the evaluation is carried out separately for each train-test pair within every seed.
+The rationale behind the previous approach, evaluating all configurations using the single best model, was to explore whether such a strategy could yield superior results.
+To provide a meaningful comparison, the results of this more conventional verification analysis are also included.
+
+\subsubsection{Verification single animation classic - single train(ST)}
 \label{subsec:s_vs_cst}
-Compara con l'altro tipo
+
+This and the following sections present the classic verification analysis performed on single animations.
+The term classic refers to the fact that, instead of evaluating only the best-performing model based on training accuracy, each model is trained and tested as a pair for every individual seed.
+As before, two levels of averaging are computed: one across all repetitions for each participant, and another across participants for each classifier.
+
+This analysis is therefore a direct mirror of the previous one, still employing the single train (ST) configuration.
+For this reason, the methodological details will not be repeated here.
+Instead, we will focus on presenting the results and comparing them to identify the most consistent and effective approach.
+
+As in the previous analysis, the best-performing animation remains VB\_FA\_BIG, achieving an accuracy of 92.4\% using the NuSVC classifier and an EER of 4.6\%.
+When comparing the two analyses, the results are almost identical, with this configuration showing a slight improvement of 0.2\% in accuracy, but a small increase in EER from 3.6\% to 4.6\%.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/VB_FA_BIG.png}
+    \caption{VB\_FA\_BIG}
+    \label{fig:VB_FA_BIG_cst}
+\end{figure}
+
+Table \ref{fig:VB_FA_BIG_5_st} display the best performing animation, while the additional results regarding the other animations are contained in appendix \ref{subsec:vsc_st_ft}.
+
+As in the previous chapter, this analysis includes the ROC curves for the best-performing animations, selected based on their Equal Error Rate (EER), as shown in figure \ref{fig:roc_cst}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/Verification_single_roc_classic_st.png}
+    \caption{Roc curves}
+    \label{fig:roc_cst}
+\end{figure}
+
+\subsubsection{Verification 'classic' single animation with intruders - single train(ST)}
+
+To proceed, we performed the analysis with unseen users in the test set, referred to as intruders.
+Following the closed-set analysis, this intruder-based evaluation was carried out in the same way as in the previous section, with only minor updates to the evaluation procedure.
+
+The first observation from these results is that the best-performing animation remains consistent with the previous section, regarding the closed set analysis.
+This continuity is particularly important, as it suggests that the anomalous behavior observed earlier was likely due to the evaluation procedure rather than inherent differences in the data or model performance.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_BIG.png}
+    \caption{VB\_FA\_BIG}
+    \label{fig:VB_FA_BIG_cist}
+\end{figure}
+
+As we observe from figure \ref{fig:VB_FA_BIG_cist} we have a decrease in accuracy from 92.4\% to 91.2\% using nuSVC classifier and an increase of the equal error rate (EER) from 4.6\% to 6.2\%.
+This behavior is expected due to the presence of unseen users in the dataset.
+However, the performance decrease remains relatively small, indicating that the system continues to perform effectively even under this more challenging evaluation scenario.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/Verification_single_intruders_roc_two_st.png}
+    \caption{Roc curves}
+    \label{fig:roc_cist}
+\end{figure}
+
+To maintain consistency with the previous analyses, the ROC curve based on the Equal Error Rate (EER) is presented in Figure \ref{fig:roc_cist}. 
+Additional results related to this analysis are provided in the corresponding appendix (Section \ref{subsec:vsci_st_ft}).
+
+\subsubsection{Verification 'classic' Single Animation with Reduced Session Duration - Single Train (ST)}
+
+We conlude the analysis in the exact same way as we concluded in the previous subsection, so making a reduce animation time analysis.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_BIG.png}
+    \caption{VB\_FA\_BIG - 10 seconds}
+    \label{fig:VB_FA_BIG_cist_10}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/Verification_single_roc_classic_ten_st.png}
+    \caption{Roc curves - 10 seconds}
+    \label{fig:roc_cist}
+\end{figure}
 
 \subsubsection{Static vs Dinamic text}
 \label{subsec:s_vs_d}
@@ -2378,7 +2478,7 @@ This section presents the additional results of the verification analysis with i
     \label{fig:HS_FA_BIG_sti}
 \end{figure}
 
-\subsection{Verification Single Animation with Reduced Session Duration - Single Train (ST)}
+\subsection{Verification Single ST with Reduced Session Duration - Animations}
 \label{subsec:vs_st_ft}
 
 The following appendix presents the results for all animations under reduced recording durations of 10 seconds and 5 seconds.
@@ -2446,7 +2546,7 @@ The outcomes obtained using the 10-second window are reported first, followed by
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Verification_single_five_ten/st/five/HS_SL_LIT.png}
-    \caption{HS\_SL\_LIT animation- five}
+    \caption{HS\_SL\_LIT animation - five}
 \end{figure}
 
 \begin{figure}[ht]
@@ -2477,12 +2577,119 @@ The outcomes obtained using the 10-second window are reported first, followed by
     \caption{HS\_FA\_BIG animation - five} 
 \end{figure}
 
-
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Verification_single_five_ten/st/five/HS_FA_LIT.png}
     \caption{HS\_FA\_LIT animation - five}
+\end{figure}
+
+\subsection{Verification 'classic' Single ST - Animations}
+\label{subsec:vsc_st_ft}
+
+The following appendix presents all additional animation results that were omitted from the corresponding chapter due to space limitations.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/VB_SL_LIT.png}
+    \caption{VB\_SL\_LIT animation}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/HS_SL_LIT.png}
+    \caption{HS\_SL\_LIT animation}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/VB_SL_BIG.png}
+    \caption{VB\_SL\_BIG animation}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/HS_SL_BIG.png}
+    \caption{HS\_SL\_BIG animation}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/VB_FA_LIT.png}
+    \caption{VB\_FA\_LIT animation}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/HS_FA_BIG.png}
+    \caption{HS\_FA\_BIG animation} 
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/HS_FA_LIT.png}
+    \caption{HS\_FA\_LIT animation}
+\end{figure}
+
+\subsection{Verification 'classic' ST with intruders - Animations}
+\label{subsec:vsci_st_ft}
+
+This section contain the additional results obtained during the 'classic' verification analysis with intruders.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_LIT.png}
+    \caption{VB\_SL\_LIT animation}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_LIT.png}
+    \caption{HS\_SL\_LIT animation}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_BIG.png}
+    \caption{VB\_SL\_BIG animation}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_BIG.png}
+    \caption{HS\_SL\_BIG animation}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_LIT.png}
+    \caption{VB\_FA\_LIT animation}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_BIG.png}
+    \caption{HS\_FA\_BIG animation} 
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_LIT.png}
+    \caption{HS\_FA\_LIT animation}
 \end{figure}
 
 \clearpage

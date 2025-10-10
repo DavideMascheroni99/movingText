@@ -5,7 +5,7 @@
 \usepackage[nottoc]{tocbibind}  
 \usepackage{verbatim} %Package per i commenti
 \usepackage[left=2.8cm,right=2.8cm,top=2cm,bottom=2cm]{geometry}
-\usepackage{subcaption,graphicx}
+\usepackage{subcaption}
 \usepackage[none]{hyphenat} 
 \usepackage[utf8]{inputenc}  
 \usepackage[T1]{fontenc}     
@@ -18,6 +18,9 @@
 \usepackage{pgfplotstable}  
 \usepackage{booktabs}
 \usepackage{caption}
+\usepackage{placeins}
+\usepackage{pgffor} % for \foreach
+
 
 
 \begin{document}
@@ -1669,11 +1672,12 @@ This decline is expected and can be attributed to the reduced amount of training
 Specifically, the random split allocates 80\% of the data to the training set, whereas the session split allocates only 66.6\%.
 Moreover, the random split introduces a potential data leakage issue, as samples from the same session may appear in both the training and testing sets. 
 This overlap provides the model with indirect information about the test data, thereby inflating performance compared to the session split, where such leakage is avoided.
+\FloatBarrier
 
 \subsubsection{Identification with feature selection}
 
 We now proceed to perform the identification analysis with an additional step: feature selection.
-The overall procedure and implementation remain identical to those described in Section \ref{subsec:id_fs_ch}.
+The overall procedure and implementation remain identical to those described in appendix \ref{subsec:id_fs_ch}.
 In particular two data split strategies were used, random and session, together with GridSearchCV for hyperparameter optimization.
 The main difference lies in the inclusion of the feature selection stage, illustrated in Figure \ref{fig:pg_fs}. 
 Specifically, we employed the SelectKBest method[91] to identify the subset of features (k) that yielded the highest mean cross-validation accuracy during the grid search.
@@ -1694,7 +1698,7 @@ Interestingly, the Support Vector Classifier (SVC) achieved the same accuracy of
 
 For the session split, a modest improvement was observed with the Multilayer Perceptron (MLP) classifier, whose accuracy increased from 66.55\% to 67.62\% when using only 70 features.
 
-The number of selected features, along with their corresponding identities, are presented in Appendix \ref{subsec:id_fs_k}.
+The number of selected features, along with their corresponding identities, are presented in appendix \ref{subsec:id_fs_k}.
 \begin{table}[htbp]
 \centering
 \scriptsize
@@ -1774,6 +1778,8 @@ f61 & Kurtosis ratio between left and right pupil diameter & Pupil diameter rati
 \bottomrule
 \end{tabular}st
 \end{table}
+\FloatBarrier
+
 
 \subsubsection{Identification with single animation - single train(ST)}
 \label{subsec:id_s_st}
@@ -1825,7 +1831,7 @@ However, the results reveal a more nuanced pattern: certain animations experienc
 
 This improvement may be attributed to the reduced risk of overfitting when training on more distinct session data. 
 By excluding samples from the same session in training and testing, the model may generalise better to unseen data, particularly in animations with more consistent and robust patterns. 
-This behaviour appears to be a characteristic of dynamic text stimuli, and further evidence supporting this observation will be discussed in Section \ref{subsec:s_vs_d}.
+This behaviour appears to be a characteristic of dynamic text stimuli, and further evidence supporting this observation will be discussed in appendix \ref{subsec:s_vs_d}.
 
 \begin{table}[htbp]
 \centering
@@ -1875,13 +1881,14 @@ Table \ref{tab:top30_id_s_st} presents the top 30 features identified in this an
 The ranking was determined by summing the F-scores of each feature across all selections and ordering them from highest to lowest.
 Notably, the leaderboard is largely dominated by pupil size-related features, which appear to be highly descriptive of individual human behavior.
 In contrast, the only two features that were never selected are Feature 30: Kurtosis of Saccade Speed and feature 61: kurtosis ratio between left and right pupil diameter, suggesting that there are not a particularly informative descriptors for the identification task.
+\FloatBarrier
 
 \subsubsection{Identification with single animation - full train(FT)}
 \label{subsec:id_s_ft}
 
 This type of analysis originates from previous research conducted at the University of Pavia [35], where a similar data split was employed. 
 In several cases, this approach yielded better results compared to the standard single train(ST) version presented previously.
-We also aim to evaluate this alternative approach to determine whether it yields improved or degraded performance compared to the classical procedure described in Chapter \ref{subsec:id_s_st}. 
+We also aim to evaluate this alternative approach to determine whether it yields improved or degraded performance compared to the classical procedure described in section \ref{subsec:id_s_st}. 
 
 The current analysis follows the same methodology as the counterpart, with one key modification: the model is trained on the entire animation dataset and tested on a single animation. 
 This design intends to assess whether incorporating a larger and more diverse training set enhances the model's generalization performance, or instead introduces noise that may reduce accuracy.
@@ -1990,6 +1997,7 @@ f79 & Number of movements in the ascending direction \\
 \bottomrule
 \end{tabular}st
 \end{table}
+\FloatBarrier
 
 \subsection{Verification single animation - ST type}
 \label{subsec:prima_ver}
@@ -2034,7 +2042,7 @@ To account for the randomness introduced by the selection of impostor samples, t
 For each repetition, a separate model is trained, and the best-performing one is selected based on its training accuracy.
 
 This step represents a crucial component of the analysis, as it allows us to assess the difference in performance between evaluating each test set using the globally best-performing model and testing with its corresponding model.
-The latter approach will be further explored in the comparative analysis presented in Chapter \ref{subsec:s_vs_cst}.
+The latter approach will be further explored in the comparative analysis presented in section \ref{subsec:s_vs_cst}.
 
 Using the same twenty seeds, twenty corresponding test sets are generated.
 Each test set is composed of the genuine data from the corresponding user and animation for session three (S3), together with an equal number of impostor feature vectors randomly sampled from other users’ session three data.
@@ -2079,7 +2087,7 @@ The rest of the animation results are contained in the appendix \ref{subsec:vs_s
 
 Figure \ref{fig:roc_st} presents the ROC curves for each individual animation, obtained using the best-performing classifier based on the Equal Error Rate (EER).
 For each curve and corresponding classifier, the Area Under the Curve (AUC) value is also reported in the legend as a performance indicator.
-\clearpage
+\FloatBarrier
 
 \subsubsection{Verification single animation with intruders - single train(ST)}
 
@@ -2137,7 +2145,7 @@ At the same time, its Equal Error Rate (EER) improves, decreasing from 4.7\% to 
     \label{fig:VB_FA_LIT_sti}
 \end{figure}
 
-All the remaining results are reported in Appendix \ref{subsec:vs_sti_a}.
+All the remaining results are reported in appendix \ref{subsec:vs_sti_a}.
 To conclude the analysis Figure \ref{fig:roc_st} illustrates the ROC curves corresponding to each animation, generated using the classifier that achieved the lowest Equal Error Rate (EER).
 
 \begin{figure}[ht]
@@ -2147,6 +2155,7 @@ To conclude the analysis Figure \ref{fig:roc_st} illustrates the ROC curves corr
     \caption{Roc curve}
     \label{fig:roc_sti}
 \end{figure}
+\FloatBarrier
 
 \subsubsection{Verification Single Animation with Reduced Session Duration - Single Train (ST)}
 
@@ -2185,7 +2194,7 @@ With a 10-second window, accuracy remains around 90\%, indicating minimal degrad
 Depending on the intended application and operational constraints, any of these configurations may be selected to balance efficiency and reliability according to specific requirements.
 
 We are interested only in the results obtained with the best-performing animation.
-The remaining results for the other animations are presented in Section \ref{subsec:vs_st_ft}, due to space constraints.
+The remaining results for the other animations are presented in appendix \ref{subsec:vs_st_ft}, due to space constraints.
 
 \begin{figure}[ht]
     \centering
@@ -2212,6 +2221,7 @@ The following section presents the same analysis described in Section \ref{subse
 In this case, rather than assessing the performance using the best-performing model across all conditions, the evaluation is carried out separately for each train-test pair within every seed.
 The rationale behind the previous approach, evaluating all configurations using the single best model, was to explore whether such a strategy could yield superior results.
 To provide a meaningful comparison, the results of this more conventional verification analysis are also included.
+\FloatBarrier
 
 \subsubsection{Verification single animation classic - single train(ST)}
 \label{subsec:s_vs_cst}
@@ -2246,6 +2256,8 @@ As in the previous chapter, this analysis includes the ROC curves for the best-p
     \caption{Roc curves}
     \label{fig:roc_cst}
 \end{figure}
+\FloatBarrier
+
 
 \subsubsection{Verification 'classic' single animation with intruders - single train(ST)}
 
@@ -2281,7 +2293,8 @@ In practical scenarios, it is advantageous to maintain a single animation that p
 \end{figure}
 
 To maintain consistency with the previous analyses, the ROC curve based on the Equal Error Rate (EER) is presented in Figure \ref{fig:roc_cist}. 
-Additional results related to this analysis are provided in the corresponding appendix (Section \ref{subsec:vsci_st_ft}).
+Additional results related to this analysis are provided in the corresponding appendix (appendix \ref{subsec:vsci_st_ft}).
+\FloatBarrier
 
 \subsubsection{Verification 'classic' Single Animation with Reduced Session Duration - Single Train (ST)}
 
@@ -2297,7 +2310,7 @@ These findings indicate a trade-off between recording duration and system perfor
 
 The best performed animation resulst are collected in figures \ref{fig:VB_FA_BIG_cst_10} and \ref{fig:VB_FA_BIG_cst_5}.
 While the roc curves of this analysis are presented in figures \ref{fig:roc_cst_10} and \ref{fig:roc_cst_5}.
-All the additional material related to this type of analysi are placed in the subsection \ref{subsec:vsc_rt}.
+All the additional material related to this type of analysi are placed in the appendix \ref{subsec:vsc_rt}.
 
 \begin{figure}[ht]
     \centering
@@ -2341,8 +2354,80 @@ In conclusion, this evaluation generally outperforms the previous approach, with
 The choice between the two methods should ultimately depend on the specific application requirements. 
 In particular, if time constraints are not critical, or if recordings of up to ten seconds are feasible, the current analysis is preferred. 
 Conversely, for five-second recordings, the preferred method depends on whether the application favours accuracy or robustness against errors.
+\FloatBarrier
 
-\subsubsection{Static vs Dinamic text}
+\subsection{Verification single animation - FT}
+
+We now move to the third part of the verification analysis.
+In this case, we adopt a procedure similar to the one previously described, with the main difference being that all animations are used for training, while testing is still performed on single animations.
+The objective is to evaluate whether increasing the amount of training data can lead to improved model performance.
+The following analysis serves as the counterpart to the experiment described in Section \ref{subsec:prima_ver}. 
+Its purpose is to provide a direct and systematic comparison between the two methodologies, allowing for a clearer evaluation of their respective performance and consistency.
+
+\subsubsection{Verification single animation - full train(FT)}
+
+As previously stated, the main objective of this work is to identify the animation that achieves the best verification performance. 
+For this reason, the evaluation continues to focus on the single-animation configuration. 
+Only the session-based data split is employed in this phase, as it most accurately reflects realistic application scenarios.
+
+In this analysis, each model is trained using the same classifiers described in appendix \ref{subsec:param}, employing only their optimal parameter configurations. 
+Specifically, the training process utilizes the top-ranked features extracted through the SelectKBest method and the best hyperparameters identified during the corresponding identification analysis through GridSearchCV.
+
+This section presents the Full Train (FT) configuration, which represents a closed-set verification scenario. 
+In this setting, all subjects included in the evaluation phase are also present in the training phase, and therefore no testing is performed on previously unseen individuals.
+As in the other verification analyses, a dedicated model is trained for each individual subject. 
+The Full Train (FT) configuration introduces a key difference compared to the Single Train (ST) approach. 
+In this configuration all data from each subject are used for training, including every animation from sessions S1 and S2 instead of limiting the process to a single animation.
+To ensure class balance, an equivalent amount of impostor data is randomly sampled from the S1 and S2 data of other subjects.
+The test set, on the other hand, consists exclusively of data from a single animation of the target subject in session S3. 
+It is complemented by an equal number of randomly selected impostor samples taken from other users' S3 data.
+
+Each model is then trained and evaluated on its corresponding paired train-test sets.
+This entire procedure is repeated across twenty different random seeds to mitigate the influence of stochastic variability and to ensure that the reported results are statistically robust. 
+Consequently, each user-specific model is trained and evaluated twenty times, and the individual results are averaged to obtain the user's mean performance. 
+Finally, an additional averaging step across all users is performed to derive the overall system performance.
+
+The evaluation of the models is not limited to classification accuracy. 
+To offer a more complete assessment of system performance, several additional metrics are reported. 
+These include precision, recall, specificity, and the Equal Error Rate (EER), each providing distinct insights into the model's behavior.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single/ft/VB_FA_BIG.png}
+    \caption{VB\_FA\_LIT animation}
+    \label{fig:VB_FA_LIT_ft}
+\end{figure}
+
+Figure \ref{fig:VB_FA_LIT_ft} illustrates that the best-performing animation, in terms of accuracy, is VB\_FA\_LIT, achieving an accuracy of 92.6\% with the SVC classifier and an Equal Error Rate (EER) of 4\%.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Verification_single/ft/VB_FA_BIG.png}
+    \caption{VB\_FA\_BIG animation}
+    \label{fig:VB_FA_BIG_ft}
+\end{figure}
+
+The next best-performing animation is VB\_FA\_LIT. 
+As illustrated in Figure \ref{fig:VB_FA_BIG_st}, it attains an accuracy of 90.2\% with the SVC classifier and an Equal Error Rate (EER) of 7.3\%. 
+Results for the remaining animations are provided in appendix \ref{subsec:vs_ft}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Results/Verification_single/st/best_animation_roc_curves_st.png}
+    \caption{Roc curve}
+    \label{fig:roc_ft}
+\end{figure}
+
+Figure \ref{fig:roc_ft} shows the ROC curves for each animation, generated using the classifier that achieved the lowest Equal Error Rate (EER). 
+The legend for each curve also includes the corresponding Area Under the Curve (AUC) value, serving as an additional measure of performance.
+\FloatBarrier
+
+
+
+
+\subsection{Static vs Dinamic text}
 \label{subsec:s_vs_d}
 
 
@@ -2352,22 +2437,24 @@ Conversely, for five-second recordings, the preferred method depends on whether 
 puo essere usata per l identificazione
 \noindent
 \section{Acknowledgment}
+\newpage
+\clearpage
 
-\section{Appendix}
+\appendix
+\section{Appendix A — Parameter Grids and Feature Selection}
+\label{subsec:param}
 
-This section includes supplementary materials that could not be accommodated within the main chapters due to their length and level of detail. 
+This appendix includes supplementary materials that could not be accommodated within the main chapters due to their length and level of detail. 
 Specifically, it provides a subsection presenting the complete parameter grid used during hyperparameter tuning, listing all parameters explored for each classifier. 
-In addition, it contains extended result tables that complement the main findings discussed in the core analysis, offering a broader and more detailed view of the experimental outcomes. 
 
 \subsection{Parameter grid}
-
 For every \texttt{GridSearchCV} execution, the cross-validation parameter was set to \texttt{cv = 5}, applying a 5-fold cross-validation procedure.
 The evaluation metric was defined as \texttt{scoring = 'accuracy'} to optimize the models based on classification accuracy.
-Figure \ref{fig:pg_nofs} display the full parameter grid used everytime an hyperparameter tuning is performed, without using feature selection step.
+Figure \ref{fig:pg_nofs} displays the full parameter grid used whenever hyperparameter tuning was performed without applying a feature selection step.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width = 0.4
+    \includegraphics[width = 0.8
     \textwidth]{Images/Results/param_grid_nofs.png}
     \caption{Parameter grid without feature selection step}
     \label{fig:pg_nofs}
@@ -2377,26 +2464,32 @@ Conversely, Figure \ref{fig:pg_nofs} presents the parameter grid that includes t
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width = 0.4
+    \includegraphics[width = 0.8
     \textwidth]{Images/Results/fs.png}
     \caption{Parameter grid with feature selection step}
     \label{fig:pg_fs}
 \end{figure}
 
-\newpage
-\subsection{Identification with feature selection - Best k features}
+\FloatBarrier
+
+\subsection{Identification with Feature Selection — Best k Features}
 \label{subsec:id_fs_k}
 
-The following section presents the optimal number of features (k) selected for each classifier during the identification phase with feature selection.
-These results, due to their extensive length, are available in the online repository at the following link:
-\href{https://github.com/DavideMascheroni99/movingText/tree/main/Programs/Machine_Learning/Machine_Learning_results/Identification_results/Identification_KBest/Feature}{GitHubLink} [109].
+The following section presents the optimal number of features ($k$) selected for each classifier during the identification phase with feature selection.
+Due to their extensive length, these results are available in the online repository at the following link:
 
-\subsection{Identification single ST - Best k features}
+\begin{itemize}
+    \item View online: 
+    \href{https://github.com/DavideMascheroni99/movingText/tree/main/Programs/Machine_Learning/Machine_Learning_results/Identification_results/Identification_KBest/Feature}
+    {GitHub Link} [109].
+\end{itemize}
+\FloatBarrier
 
-This section presents the best k features selected during the feature selection stage of the identification single animation-ST analysis.
-In this case, the number of selected features was too large to be effectively displayed in individual tables, as done in Section \ref{subsec:id_fs_k}.
-In fact each cobination of classifier, animation name and type of split have a different number of selected features.
-Therefore, a link to an additional downloadable file containing all the detailed results is provided.
+\subsection{Identification Single ST — Best k Features}
+
+This section presents the best $k$ features selected during the feature selection stage of the single-animation ST identification analysis.
+The number of selected features varies for each combination of classifier, animation name, and data split. 
+Because the results are too detailed to fit in this document, a link to the full dataset is provided below.
 
 \begin{itemize}
     \item View online: 
@@ -2406,14 +2499,14 @@ Therefore, a link to an additional downloadable file containing all the detailed
     \href{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_st.csv}
     {Selected Features CSV (Raw)} [111].
 \end{itemize}
+\FloatBarrier
 
-\subsection{Identification single FT - Best k features}
+\subsection{Identification Single FT — Best k Features}
 \label{subsec:topk_ft}
 
-This section reports the optimal k features identified during the feature selection phase of the Identification - Full Animation (FT) analysis.
-In this case, the total number of selected features was too extensive to be conveniently presented in tabular form, as done previously in Section \ref{subsec:id_fs_k}.
-Indeed, each combination of classifier, animation type, and data split produced a distinct set and number of selected features.
-For this reason, the complete list of selected features is provided as a supplementary resource, accessible through the links below.
+This section reports the optimal $k$ features identified during the feature selection phase of the Full Train (FT) identification analysis.
+As before, each classifier–animation–split combination produced a distinct feature set.
+The complete list is available online via the following links:
 
 \begin{itemize}
     \item View online: 
@@ -2423,424 +2516,181 @@ For this reason, the complete list of selected features is provided as a supplem
     \href{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_ft.csv}
     {Selected Features CSV (Raw)} [113].
 \end{itemize}
+\FloatBarrier
 
-\subsection{Verification single ST - Animations}
+\section{Verification Appendix – Additional Results}
+
+The following appendix presents additional results that were omitted from the main chapter due to space limitations. 
+In particular, it includes a set of tables reporting the results for the remaining animations that were not discussed in the corresponding section.
+
+%--------------------------------------------------------
+\subsection{Verification Single ST – Animations}
 \label{subsec:vs_st_a}
 
-This section presents the additional results of the verification analysis conducted on individual animations using the single train (ST) configuration.
+This section presents the additional results of the verification analysis conducted on individual animations using the Single Train (ST) configuration.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single/st/VB_SL_LIT.png}
-    \caption{VB\_SL\_LIT animation}
-    \label{fig:VB_SL_LIT_st}
-\end{figure}
+    \begin{subfigure}[b]{0.65\textwidth}
+        \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/VB_SL_LIT.png}
+        \caption{VB\_SL\_LIT}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.65\textwidth}
+        \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/HS_SL_LIT.png}
+        \caption{HS\_SL\_LIT}
+    \end{subfigure}
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single/st/HS_SL_LIT.png}
-    \caption{HS\_SL\_LIT animation}
-    \label{fig:HS_SL_LIT_st}
-\end{figure}
+    \begin{subfigure}[b]{0.65\textwidth}
+        \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/HS_SL_BIG.png}
+        \caption{HS\_SL\_BIG}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.65\textwidth}
+        \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/VB_SL_BIG.png}
+        \caption{VB\_SL\_BIG}
+    \end{subfigure}
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single/st/HS_SL_BIG.png}
-    \caption{HS\_SL\_BIG animation}
-    \label{fig:HS_SL_BIG_st}
+    \begin{subfigure}[b]{0.65\textwidth}
+        \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/HS_FA_LIT.png}
+        \caption{HS\_FA\_LIT}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.65\textwidth}
+        \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/HS_FA_BIG.png}
+        \caption{HS\_FA\_BIG}
+    \end{subfigure}
+    \caption{Verification results for single animations using the ST configuration.}
 \end{figure}
+\FloatBarrier
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single/st/VB_SL_BIG.png}
-    \caption{VB\_SL\_BIG animation}
-    \label{fig:VB_SL_BIG_st}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single/st/HS_FA_LIT.png}
-    \caption{HS\_FA\_LIT animation}
-    \label{fig:HS_FA_LIT_st}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single/st/HS_FA_BIG.png}
-    \caption{HS\_FA\_BIG animation}
-    \label{fig:HS_FA_BIG_st}
-\end{figure}
-
-\subsection{Verification single intruders ST - Animations}
+%--------------------------------------------------------
+\subsection{Verification Single Intruders ST – Animations}
 \label{subsec:vs_sti_a}
 
-This section presents the additional results of the verification analysis with intruders, conducted on individual animations using the single train (ST) configuration.
+This section presents the additional results of the verification analysis with intruders, conducted on individual animations using the Single Train (ST) configuration.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single/st/HS_SL_LIT.png}
-    \caption{HS\_SL\_LIT animation}
-    \label{fig:HS_SL_LIT_sti}
-\end{figure}
+    \begin{subfigure}[b]{0.65\textwidth}
+        \includegraphics[width=\linewidth]{Images/Results/Verification_single_intruders/st/HS_SL_LIT.png}
+        \caption{HS\_SL\_LIT}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.65\textwidth}
+        \includegraphics[width=\linewidth]{Images/Results/Verification_single_intruders/st/HS_SL_BIG.png}
+        \caption{HS\_SL\_BIG}
+    \end{subfigure}
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_intruders/st/HS_SL_BIG.png}
-    \caption{HS\_SL\_BIG animation}
-    \label{fig:HS_SL_BIG_sti}
-\end{figure}
+    \begin{subfigure}[b]{0.65\textwidth}
+        \includegraphics[width=\linewidth]{Images/Results/Verification_single_intruders/st/VB_SL_BIG.png}
+        \caption{VB\_SL\_BIG}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.65\textwidth}
+        \includegraphics[width=\linewidth]{Images/Results/Verification_single_intruders/st/HS_FA_LIT.png}
+        \caption{HS\_FA\_LIT}
+    \end{subfigure}
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_intruders/st/VB_SL_BIG.png}
-    \caption{VB\_SL\_BIG animation}
-    \label{fig:VB_SL_BIG_sti}
+    \begin{subfigure}[b]{0.65\textwidth}
+        \includegraphics[width=\linewidth]{Images/Results/Verification_single_intruders/st/HS_FA_BIG.png}
+        \caption{HS\_FA\_BIG}
+    \end{subfigure}
+    \caption{Verification with intruders using the ST configuration.}
 \end{figure}
+\FloatBarrier
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_intruders/st/HS_FA_LIT.png}
-    \caption{HS\_FA\_LIT animation}
-    \label{fig:HS_FA_LIT_sti}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_intruders/st/HS_FA_BIG.png}
-    \caption{HS\_FA\_BIG animation}
-    \label{fig:HS_FA_BIG_sti}
-\end{figure}
-
-\subsection{Verification Single ST with Reduced Session Duration - Animations}
+%--------------------------------------------------------
+\subsection{Verification Single ST with Reduced Session Duration – Animations}
 \label{subsec:vs_st_ft}
 
-The following appendix presents the results for all animations under reduced recording durations of 10 seconds and 5 seconds.
-The outcomes obtained using the 10-second window are reported first, followed by those corresponding to the 5-second recordings.
+This appendix presents the results for all animations under reduced recording durations of 10 and 5 seconds. Results for 10 seconds are shown first, followed by 5 seconds.
 
-\begin{figure}[ht]
+% --- Ten seconds ---
+\begin{figure}[H]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/VB_SL_LIT.png}
-    \caption{VB\_SL\_LIT animation - ten}
+    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{
+        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/st/ten/\anim.png}
+    }
+    \caption{Verification results with 10-second recordings using the ST configuration.}
 \end{figure}
 
-\begin{figure}[ht]
+% --- Five seconds ---
+\begin{figure}[H]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/HS_SL_LIT.png}
-    \caption{HS\_SL\_LIT animation- ten}
+    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{
+        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/st/five/\anim.png}
+    }
+    \caption{Verification results with 5-second recordings using the ST configuration.}
 \end{figure}
+\FloatBarrier
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/VB_SL_BIG.png}
-    \caption{VB\_SL\_BIG animation - ten}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/HS_SL_BIG.png}
-    \caption{HS\_SL\_BIG animation - ten}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/VB_FA_LIT.png}
-    \caption{VB\_FA\_LIT animation - ten}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/HS_FA_BIG.png}
-    \caption{HS\_FA\_BIG animation - ten} 
-\end{figure}
-
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/HS_FA_LIT.png}
-    \caption{HS\_FA\_LIT animation - ten}
-\end{figure}
-
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/five/VB_SL_LIT.png}
-    \caption{VB\_SL\_LIT animation - five}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/five/HS_SL_LIT.png}
-    \caption{HS\_SL\_LIT animation - five}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/five/VB_SL_BIG.png}
-    \caption{VB\_SL\_BIG animation - five}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/five/HS_SL_BIG.png}
-    \caption{HS\_SL\_BIG animation - five}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/five/VB_FA_LIT.png}
-    \caption{VB\_FA\_LIT animation - five}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/five/HS_FA_BIG.png}
-    \caption{HS\_FA\_BIG animation - five} 
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/five/HS_FA_LIT.png}
-    \caption{HS\_FA\_LIT animation - five}
-\end{figure}
-
-\subsection{Verification 'classic' Single ST - Animations}
+%--------------------------------------------------------
+\subsection{Verification ‘Classic’ Single ST – Animations}
 \label{subsec:vsc_st_ft}
 
-The following appendix presents all additional animation results that were omitted from the corresponding chapter due to space limitations.
+This appendix contains additional animation results omitted from the main chapter due to space limitations.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/VB_SL_LIT.png}
-    \caption{VB\_SL\_LIT animation}
+    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_single/st/\anim.png}
+    }
+    \caption{‘Classic’ verification results using the Single ST configuration.}
 \end{figure}
+\FloatBarrier
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/HS_SL_LIT.png}
-    \caption{HS\_SL\_LIT animation}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/VB_SL_BIG.png}
-    \caption{VB\_SL\_BIG animation}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/HS_SL_BIG.png}
-    \caption{HS\_SL\_BIG animation}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/VB_FA_LIT.png}
-    \caption{VB\_FA\_LIT animation}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/HS_FA_BIG.png}
-    \caption{HS\_FA\_BIG animation} 
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/HS_FA_LIT.png}
-    \caption{HS\_FA\_LIT animation}
-\end{figure}
-
-\subsection{Verification 'classic' ST with intruders - Animations}
+%--------------------------------------------------------
+\subsection{Verification ‘Classic’ ST with Intruders – Animations}
 \label{subsec:vsci_st_ft}
 
-This section contain the additional results obtained during the 'classic' verification analysis with intruders.
+This section contains additional results obtained during the ‘classic’ verification analysis with intruders.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_LIT.png}
-    \caption{VB\_SL\_LIT animation}
+    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/\anim.png}
+    }
+    \caption{‘Classic’ verification with intruders using the ST configuration.}
 \end{figure}
+\FloatBarrier
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_LIT.png}
-    \caption{HS\_SL\_LIT animation}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_BIG.png}
-    \caption{VB\_SL\_BIG animation}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_BIG.png}
-    \caption{HS\_SL\_BIG animation}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_LIT.png}
-    \caption{VB\_FA\_LIT animation}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_BIG.png}
-    \caption{HS\_FA\_BIG animation} 
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_LIT.png}
-    \caption{HS\_FA\_LIT animation}
-\end{figure}
-
-\subsection{Verification 'classic' Single ST with Reduced Session Duration - Animations}
+%--------------------------------------------------------
+\subsection{Verification ‘Classic’ Single ST with Reduced Session Duration – Animations}
 \label{subsec:vsc_rt}
 
-The following appendix collects the remaining animations omitted from the corresponding chapter due to space constraints. 
-It includes the results for the first ten seconds, followed by those pertaining to the first five seconds.
+This appendix includes the results for reduced recording durations (10 and 5 seconds) omitted from the main chapter.
 
-\begin{figure}[ht]
+% --- Ten seconds ---
+\begin{figure}[H]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_LIT.png}
-    \caption{VB\_SL\_LIT animation - ten}
+    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/\anim.png}
+    }
+    \caption{‘Classic’ verification results (10-second recordings, Single ST configuration).}
 \end{figure}
 
-\begin{figure}[ht]
+% --- Five seconds ---
+\begin{figure}[H]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_LIT.png}
-    \caption{HS\_SL\_LIT animation - ten}
+    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/st/five/\anim.png}
+    }
+    \caption{‘Classic’ verification results (5-second recordings, Single ST configuration).}
 \end{figure}
+\FloatBarrier
 
-\begin{figure}[ht]
+%--------------------------------------------------------
+\subsection{Verification Single FT – Animations}
+\label{subsec:vs_ft}
+
+This section presents the additional results of the verification analysis conducted on individual animations using the Full Train (FT) configuration.
+
+\begin{figure}[H]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_BIG.png}
-    \caption{VB\_SL\_BIG animation - ten}
+    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,HS_SL_BIG,VB_SL_BIG,HS_FA_LIT,HS_FA_BIG}{
+        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single/ft/\anim.png}
+    }
+    \caption{Verification results using the Full Train (FT) configuration.}
 \end{figure}
+\FloatBarrier
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_BIG.png}
-    \caption{HS\_SL\_BIG animation - ten}
-\end{figure}
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_LIT.png}
-    \caption{VB\_FA\_LIT animation - ten}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_BIG.png}
-    \caption{HS\_FA\_BIG animation - ten} 
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_LIT.png}
-    \caption{HS\_FA\_LIT animation - ten}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/five/VB_SL_LIT.png}
-    \caption{VB\_SL\_LIT animation - five}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/five/HS_SL_LIT.png}
-    \caption{HS\_SL\_LIT animation - five}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/five/VB_SL_BIG.png}
-    \caption{VB\_SL\_BIG animation - five}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/five/HS_SL_BIG.png}
-    \caption{HS\_SL\_BIG animation - five}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/five/VB_FA_LIT.png}
-    \caption{VB\_FA\_LIT animation - five}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/five/HS_FA_BIG.png}
-    \caption{HS\_FA\_BIG animation - five} 
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/five/HS_FA_LIT.png}
-    \caption{HS\_FA\_LIT animation - five}
-\end{figure}
-
-\clearpage
 \section{References}
 \begin{raggedright}
 

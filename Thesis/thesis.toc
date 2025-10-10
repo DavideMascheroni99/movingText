@@ -66,20 +66,20 @@
 \contentsline {subsubsection}{\numberline {6.3.3}Verification 'classic' Single Animation with Reduced Session Duration - Single Train (ST)}{60}{subsubsection.6.3.3}%
 \contentsline {subsection}{\numberline {6.4}Verification single animation - FT}{61}{subsection.6.4}%
 \contentsline {subsubsection}{\numberline {6.4.1}Verification single animation - full train(FT)}{61}{subsubsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.5}Static vs Dinamic text}{63}{subsection.6.5}%
-\contentsline {section}{\numberline {7}Conclusion}{64}{section.7}%
-\contentsline {section}{\numberline {8}Acknowledgment}{64}{section.8}%
-\contentsline {section}{\numberline {A}Appendix A — Parameter Grids and Feature Selection}{65}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}Parameter grid}{65}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}Identification with Feature Selection — Best k Features}{66}{subsection.A.2}%
-\contentsline {subsection}{\numberline {A.3}Identification Single ST — Best k Features}{66}{subsection.A.3}%
-\contentsline {subsection}{\numberline {A.4}Identification Single FT — Best k Features}{67}{subsection.A.4}%
-\contentsline {section}{\numberline {B}Verification Appendix – Additional Results}{67}{appendix.B}%
-\contentsline {subsection}{\numberline {B.1}Verification Single ST – Animations}{67}{subsection.B.1}%
-\contentsline {subsection}{\numberline {B.2}Verification Single Intruders ST – Animations}{68}{subsection.B.2}%
-\contentsline {subsection}{\numberline {B.3}Verification Single ST with Reduced Session Duration – Animations}{69}{subsection.B.3}%
-\contentsline {subsection}{\numberline {B.4}Verification ‘Classic’ Single ST – Animations}{71}{subsection.B.4}%
-\contentsline {subsection}{\numberline {B.5}Verification ‘Classic’ ST with Intruders – Animations}{72}{subsection.B.5}%
-\contentsline {subsection}{\numberline {B.6}Verification ‘Classic’ Single ST with Reduced Session Duration – Animations}{73}{subsection.B.6}%
-\contentsline {subsection}{\numberline {B.7}Verification Single FT – Animations}{75}{subsection.B.7}%
-\contentsline {section}{\numberline {C}References}{76}{appendix.C}%
+\contentsline {subsection}{\numberline {6.5}Verification single animation with intruders - full train(FT)}{63}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Static vs Dinamic text}{64}{subsection.6.6}%
+\contentsline {section}{\numberline {7}Conclusion}{65}{section.7}%
+\contentsline {section}{\numberline {8}References}{66}{section.8}%
+\contentsline {section}{\numberline {A}Appendix A — Parameter Grids and Feature Selection}{73}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Parameter grid}{73}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}Identification with Feature Selection — Best k Features}{74}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Identification Single ST — Best k Features}{74}{subsection.A.3}%
+\contentsline {subsection}{\numberline {A.4}Identification Single FT — Best k Features}{75}{subsection.A.4}%
+\contentsline {section}{\numberline {B}Verification Appendix – Additional Results}{75}{appendix.B}%
+\contentsline {subsection}{\numberline {B.1}Verification Single ST – Animations}{75}{subsection.B.1}%
+\contentsline {subsection}{\numberline {B.2}Verification Single Intruders ST – Animations}{76}{subsection.B.2}%
+\contentsline {subsection}{\numberline {B.3}Verification Single ST with Reduced Session Duration – Animations}{77}{subsection.B.3}%
+\contentsline {subsection}{\numberline {B.4}Verification ‘Classic’ Single ST – Animations}{79}{subsection.B.4}%
+\contentsline {subsection}{\numberline {B.5}Verification ‘Classic’ ST with Intruders – Animations}{80}{subsection.B.5}%
+\contentsline {subsection}{\numberline {B.6}Verification ‘Classic’ Single ST with Reduced Session Duration – Animations}{81}{subsection.B.6}%
+\contentsline {subsection}{\numberline {B.7}Verification Single FT – Animations}{83}{subsection.B.7}%

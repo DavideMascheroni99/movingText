@@ -1601,8 +1601,8 @@ The second is a session-based split, where data from the first two sessions (S1 
 Initially, a general identification will be performed using the entire dataset, both with and without feature selection, to evaluate any potential improvements in performance.
 An analysis involving every single animation taken singularly is then performed to assess which is the best performing animations and see if a single animation can be used for identification purpose.
 This analysis is divided into two types, based on the data used in the training set.
-The first method is called single train (ST), where the model is trained and tested on data from a single animation.
-While the second approach is called full train (FT), where the model is trained on data from all animations combined and tested on a single animation.
+The first method is called Single Train (ST), where the model is trained and tested on data from a single animation.
+While the second approach is called Full Train (FT), where the model is trained on data from all animations combined and tested on a single animation.
 The latter method has been used in previous studies and, in some cases, achieved better results due to the larger amount of training data. 
 However, in other cases, performance worsened because the inclusion of all animations introduced confusion between different data distributions.
 
@@ -1781,13 +1781,13 @@ f61 & Kurtosis ratio between left and right pupil diameter & Pupil diameter rati
 \FloatBarrier
 
 
-\subsubsection{Identification with single animation - single train(ST)}
+\subsubsection{Identification with single animation - Single Train(ST)}
 \label{subsec:id_s_st}
 
 The main goal of this stage was to identify which animation performs best among the eight selected stimuli. 
 We began with a full identification analysis to establish a general baseline of the performance achievable when using all animations together. 
 Building on this, we refined the analysis to examine the performance of each animation individually. 
-This refined procedure, referred to as the single train (ST) approach, trains the model using data from one animation only and then tests it on data from the same animation.
+This refined procedure, referred to as the Single Train (ST) approach, trains the model using data from one animation only and then tests it on data from the same animation.
 
 Two data splitting strategies were used to ensure robust evaluation. 
 The first, a random split, allocates 80\% of the data for a given animation to training and the remaining 20\% to testing.
@@ -1883,11 +1883,11 @@ Notably, the leaderboard is largely dominated by pupil size-related features, wh
 In contrast, the only two features that were never selected are Feature 30: Kurtosis of Saccade Speed and feature 61: kurtosis ratio between left and right pupil diameter, suggesting that there are not a particularly informative descriptors for the identification task.
 \FloatBarrier
 
-\subsubsection{Identification with single animation - full train(FT)}
+\subsubsection{Identification with single animation - Full Train(FT)}
 \label{subsec:id_s_ft}
 
 This type of analysis originates from previous research conducted at the University of Pavia [35], where a similar data split was employed. 
-In several cases, this approach yielded better results compared to the standard single train(ST) version presented previously.
+In several cases, this approach yielded better results compared to the standard Single Train(ST) version presented previously.
 We also aim to evaluate this alternative approach to determine whether it yields improved or degraded performance compared to the classical procedure described in Section \ref{subsec:id_s_st}. 
 
 The current analysis follows the same methodology as the counterpart, with one key modification: the model is trained on the entire animation dataset and tested on a single animation. 
@@ -2007,7 +2007,7 @@ As the overarching objective of this work is to employ the proposed soft biometr
 In particular, the first analysis comprises a series of experiments performed using single animations in conjunction with the Single-Trial (ST) variation mode.
 This configuration restricts both the training and testing phases to data derived exclusively from the same animation, thereby enabling an evaluation of the system's performance under animation-specific conditions.
 
-\subsubsection{Verification single animation - single train(ST)}
+\subsubsection{Verification single animation - Single Train(ST)}
 \label{subsec:vs_st}
 
 We now proceed to the verification analysis.
@@ -2089,10 +2089,10 @@ Figure \ref{fig:roc_st} presents the ROC curves for each individual animation, o
 For each curve and corresponding classifier, the Area Under the Curve (AUC) value is also reported in the legend as a performance indicator.
 \FloatBarrier
 
-\subsubsection{Verification single animation with intruders - single train(ST)}
+\subsubsection{Verification single animation with intruders - Single Train(ST)}
 \label{subsec:vsi}
 
-After completing the closed-set verification analysis for the single animation and single train (ST) configuration, we proceed to perform the open-set analysis.
+After completing the closed-set verification analysis for the single animation and Single Train (ST) configuration, we proceed to perform the open-set analysis.
 This analysis aims to evaluate how the system behaves when exposed to test data from users who were not included in the training phase.
 In practical terms, this scenario simulates an unauthorized individual attempting to authenticate within a system where their identity is not previously registered.
 
@@ -2160,7 +2160,7 @@ To conclude the analysis Figure \ref{fig:roc_sti} illustrates the ROC curves cor
 
 \subsubsection{Verification Single Animation with Reduced Session Duration - Single Train (ST)}
 
-The goal of the following section is to extend the single-animation verification using the single train (ST) configuration in order to evaluate the performance of the best animation when the recording duration is reduced.
+The goal of the following section is to extend the single-animation verification using the Single Train (ST) configuration in order to evaluate the performance of the best animation when the recording duration is reduced.
 In particular, the same program described in Section \ref{subsec:vs_st} is executed, with the only modification being the dataset composition.
 In this case, the datasets consist of data recorded during the first ten seconds and first five seconds from the start of each animation.
 The GP3\_HD eye tracker operates at a sampling rate of 150 Hz, meaning that 150 data points are collected per second and stored as rows in the output CSV file.
@@ -2215,6 +2215,7 @@ The remaining results for the other animations are presented in Appendix \ref{su
 
 To conclude this section, we present the two ROC curves based on the EER obtained from both analyses.
 Specifically, Figures \ref{fig:roc_t} and \ref{fig:roc_f} correspond respectively to the 10-second and 5-second analyses.
+\FloatBarrier
 
 \subsection{Verification 'classic' single animation - ST type}
 
@@ -2222,7 +2223,6 @@ The following section presents the same analysis described in Section \ref{subse
 In this case, rather than assessing the performance using the best-performing model across all conditions, the evaluation is carried out separately for each train-test pair within every seed.
 The rationale behind the previous approach, evaluating all configurations using the single best model, was to explore whether such a strategy could yield superior results.
 To provide a meaningful comparison, the results of this more conventional verification analysis are also included.
-\FloatBarrier
 
 \subsubsection{Verification single animation classic - single train(ST)}
 \label{subsec:s_vs_cst}
@@ -2231,7 +2231,7 @@ This and the following sections present the classic verification analysis perfor
 The term classic refers to the fact that, instead of evaluating only the best-performing model based on training accuracy, each model is trained and tested as a pair for every individual seed.
 As before, two levels of averaging are computed: one across all repetitions for each participant, and another across participants for each classifier.
 
-This analysis is therefore a direct mirror of the previous one, still employing the single train (ST) configuration.
+This analysis is therefore a direct mirror of the previous one, still employing the Single Train (ST) configuration.
 For this reason, the methodological details will not be repeated here.
 Instead, we will focus on presenting the results and comparing them to identify the most consistent and effective approach.
 
@@ -2260,7 +2260,7 @@ As in the previous chapter, this analysis includes the ROC curves for the best-p
 \FloatBarrier
 
 
-\subsubsection{Verification 'classic' single animation with intruders - single train(ST)}
+\subsubsection{Verification 'classic' single animation with intruders - Single Train(ST)}
 
 To proceed, we performed the analysis with unseen users in the test set, referred to as intruders.
 Following the closed-set analysis, this intruder-based evaluation was carried out in the same way as in the previous section, with only minor updates to the evaluation procedure.
@@ -2358,6 +2358,7 @@ Conversely, for five-second recordings, the preferred method depends on whether 
 \FloatBarrier
 
 \subsection{Verification single animation - FT}
+\label{subsec:terza_ver}
 
 We now move to the third part of the verification analysis.
 In this case, we adopt a procedure similar to the one previously described, with the main difference being that all animations are used for training, while testing is still performed on single animations.
@@ -2365,7 +2366,7 @@ The objective is to evaluate whether increasing the amount of training data can 
 The following analysis serves as the counterpart to the experiment described in Section \ref{subsec:prima_ver}. 
 Its purpose is to provide a direct and systematic comparison between the two methodologies, allowing for a clearer evaluation of their respective performance and consistency.
 
-\subsubsection{Verification single animation - full train(FT)}
+\subsubsection{Verification single animation - Full Train(FT)}
 \label{subsec:vft}
 
 As previously stated, the main objective of this work is to identify the animation that achieves the best verification performance. 
@@ -2437,9 +2438,10 @@ Therefore, the choice between the two approaches depends on whether higher accur
 It is also important to note that the present analysis requires data collection over three different sessions, covering eight animations of 15 seconds each, whereas the previous analysis used only a single animation for model training.
 \FloatBarrier
 
-\subsubsection{Verification single animation with intruders - full train(FT)}
+\subsubsection{Verification single animation with intruders - Full Train(FT)}
+\label{subsec:intruders}
 
-Following the completion of the closed-set verification analysis for the single animation and full train (FT) configuration, we next conduct the open-set analysis. 
+Following the completion of the closed-set verification analysis for the single animation and Full Train (FT) configuration, we next conduct the open-set analysis. 
 The purpose of this evaluation is to assess the system’s performance when confronted with test data originating from users who were not part of the training process. 
 Essentially, this scenario represents an unauthorized individual attempting to gain access to a system without having a registered identity.
 
@@ -2572,6 +2574,150 @@ When selecting the optimal configuration for the 10-second recordings, the choic
 If lower EER is preferred, the ST configuration is more suitable.
 While if higher accuracy is the main objective, the FT configuration should be chosen.
 Overall, for the 5-second recordings, the ST configuration consistently outperforms the FT one across all scenarios.
+\FloatBarrier
+
+\subsection{Verification ’classic’ single animation - FT type}
+
+The following section presents an analysis analogous to that described in Section \ref{subsec:terza_ver}, with a slight modification to the evaluation procedure.
+In this case, the performance is not assessed using a single best-performing model across all conditions. 
+Instead, the evaluation is conducted independently for each training–testing pair corresponding to every random seed.
+The motivation behind the previous approach, evaluating all configurations using the globally best model, was to investigate whether this strategy could lead to improved overall performance.
+To enable a fair and consistent comparison, the results of this more traditional verification procedure are also reported here.
+Finally, it is important to note that this section concludes the verification analysis presented in this work.
+
+\subsubsection{Verification single animation classic - Full Train(FT)}
+
+This section, along with the next, presents the 'classic' verification analysis conducted on single animations.
+The term classic refers to the fact that this analysis differs from the previous approach, where the evaluation was performed using a single best-performing model.
+In this case, each model is trained and tested independently for every random seed.
+As in the previous analyses, two levels of averaging are applied. 
+The first level of averaging is carried out across all repetitions generated by the different random seeds for each subject-specific model, providing a stable estimate of individual performance. 
+The second level aggregates the outcomes of all subject models to assess the overall performance of the system.
+
+This analysis thus serves as a direct counterpart to the one discussed previously in Section \ref{subsec:vft}, maintaining the same Full Train (FT) configuration. 
+Consequently, the methodological details remain unchanged and will not be restated. 
+The focus instead is on examining the obtained results and comparing them with those from the previous setup to determine which approach yields more stable and effective performance.
+
+As in the preceding analysis, the best-performing animation continues to be VB\_FA\_LIT, attaining an accuracy of 92.4\% with the NuSVC classifier and an Equal Error Rate (EER) of 5\%.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_single/ft/VB_FA_LIT.png}
+    \caption{VB\_FA\_BIG}
+    \label{fig:VB_FA_LIT_cft}
+\end{figure}
+
+Table \ref{fig:VB_FA_LIT_cft} presents the best-performing animation, while the additional results for the remaining animations are provided in Appendix \ref{subsec:vsc_ft}.
+The current analysis also includes the ROC curves of the best-performing animations, selected according to their Equal Error Rate (EER), as shown in Figure \ref{fig:roc_cft}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Results/Classic_procedure/Verification_single/ft/Verification_single_roc_classic_ft.png}
+    \caption{Roc curves}
+    \label{fig:roc_cft}
+\end{figure}
+
+When compared to the previous approach (Section \ref{subsec:vft}), which achieved an accuracy of 92.6\% with the SVC classifier and an EER of 4\% on the same animation, the current method shows slightly lower performance in both accuracy and EER.
+\FloatBarrier
+
+\subsubsection{Verification 'classic' single animation with intruders - Full Train (FT)}
+
+To proceed, we conducted the analysis using unseen users in the test set, referred to as intruders. 
+This evaluation follows the closed-set analysis and was performed in the same manner as described in the previous section, with only minor adjustments to the evaluation procedure.
+
+The first notable observation is that the best-performing animation remains the same as in the closed-set analysis, but with a slightly decrease in performance due to the presence of the intruders.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/ft/VB_FA_LIT.png}
+    \caption{VB\_FA\_LIT}
+    \label{fig:VB_FA_LIT_cift}
+\end{figure}
+
+As shown in Figure \ref{fig:VB_FA_LIT_cift}, the accuracy decreases from 92.4\% using nuSVC to 89.2\% when using the SVC classifier.
+While the Equal Error Rate (EER) increases from 5\% to 8.2\%. 
+This reduction in performance is expected due to the introduction of unseen users in the test set. 
+Nevertheless, the drop remains relatively modest, indicating that the system continues to operate effectively under this more challenging evaluation scenario.
+
+When comparing these results with the evaluation using the best model (Section \ref{subsec:intruders}), performance remains comparable: 89.2\% versus 90.2\% using SVC. 
+In parallel the EER increase from 7.2\% of the previous analysis to 8.2\% in this one.
+In conclusion the analysis that evaluate only on the 'best model' achieve better performance.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.6\textwidth]{Images/Results/Classic_procedure/Verification_intruders/ft/Verification_single_intruders_roc_two_ft.png}
+\caption{ROC curves for the intruder-based verification analysis.}
+\label{fig:roc_cift}
+\end{figure}
+
+For consistency with previous analyses, the ROC curves based on the Equal Error Rate (EER) are presented in Figure \ref{fig:roc_cift}. 
+Additional results for this evaluation can be found in the corresponding appendix (Appendix \ref{subsec:vsci_ft}).
+\FloatBarrier
+
+\subsubsection{Verification 'classic' Single Animation with Reduced Session Duration - Full Train (FT)}
+
+We conclude this analysis by performing a reduced-duration evaluation, following the approach used in the previous subsection. 
+Specifically, we assess how performance changes when the total animation length is shortened from 15 seconds to 10 seconds, and subsequently to 5 seconds.
+
+The results align with our expectations, with VB\_FA\_LIT remaining the best-performing animation in terms of accuracy. 
+Interestingly, its accuracy slightly increases from 92.4\% with nuSVC to 92.7\% with SVC when the recording duration is reduced to 10 seconds. 
+Conversely, its Equal Error Rate (EER) rises modestly from 5\% to 5.4\%. 
+This suggests that the additional seconds in the longer recording may introduce some noise, slightly affecting the EER, while the accuracy benefits from the initial portion of the animation. 
+It is likely that after the first ten seconds, the animation scrolls too quickly for the user to follow effectively, providing limited useful information. 
+In contrast, for 15-second recordings, the EER decreases due to the availability of more data, which improves the system’s discriminative power.
+
+When recordings are limited to the first 5 seconds, performance decreases to 90.6\%, and the Equal Error Rate (EER) rises to 6.4\%. 
+These results highlight a trade-off between recording duration and system performance, with only a modest degradation observed for shorter recordings.
+
+The best-performing animations for the 10- and 5-second conditions are illustrated in Figures \ref{fig:VB_FA_LIT_cft_10} and \ref{fig:VB_FA_LIT_cft_5}, respectively. 
+The corresponding ROC curves for these conditions are presented in Figures \ref{fig:roc_cft_10} and \ref{fig:roc_cft_5}.
+Additional results and supporting material for this analysis are provided in the Appendix \ref{subsec:vsc_ftr}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/five_ten/ft/ten/VB_FA_LIT.png}
+    \caption{VB\_FA\_LIT - 10 seconds}
+    \label{fig:VB_FA_LIT_cft_10}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.8
+    \textwidth]{Images/Results/Classic_procedure/five_ten/ft/five/VB_FA_LIT.png}
+    \caption{VB\_FA\_LIT - 5 seconds}
+    \label{fig:VB_FA_LIT_cft_5}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Results/Classic_procedure/five_ten/ft/ten/Verification_single_roc_ten_classic_ft.png}
+    \caption{Roc curves - 10 seconds}
+    \label{fig:roc_cft_10}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Results/Classic_procedure/five_ten/ft/five/Verification_single_roc_five_classic_ft.png}
+    \caption{Roc curves - 10 seconds}
+    \label{fig:roc_cft_5}
+\end{figure}
+
+To conclude this section, we compare the results of the current analysis with those from the previous section, performed under the same reduced time conditions.
+For the ten-second recordings, the current procedure slightly outperforms the previous one, achieving an accuracy of 92.7\% compared to 91.9\% obtained using SVC. 
+The Equal Error Rate (EER) also improves, decreasing from 6.3\% to 5.4\%.
+
+For the five-second recordings, a similar trend is observed. 
+The current analysis reaches a higher accuracy of 90.6\%, compared to 88.2\% in the previous evaluation, while the Equal Error Rate (EER) decreases from 7.2\% to 6.4\%.
+In summary, this evaluation generally surpasses the previous approach in all aspects, demonstrating better performance across both accuracy and EER.
+
+\FloatBarrier
+
 
 \subsection{Static vs Dinamic text}
 \label{subsec:s_vs_d}
@@ -2579,7 +2725,8 @@ Overall, for the 5-second recordings, the ST configuration consistently outperfo
 
 \newpage
 \section{Conclusion}
-puo essere usata per l identificazione
+puo essere usata per l identificazione.
+Compara tutte e 4 le verifiche e dici qual è meglio per ogni situazione
 \newpage
 
 \section{References}
@@ -3007,7 +3154,7 @@ This appendix contains additional animation results omitted from the main chapte
     \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{
         \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_single/st/\anim.png}
     }
-    \caption{‘Classic’ verification results using the Single ST configuration.}
+    \caption{‘Classic’ verification results using the ST configuration.}
 \end{figure}
 \FloatBarrier
 
@@ -3038,7 +3185,7 @@ This appendix includes the results for reduced recording durations (10 and 5 sec
     \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{
         \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/\anim.png}
     }
-    \caption{‘Classic’ verification results (10-second recordings, Single ST configuration).}
+    \caption{Verification 'classic' results with 10-second recordings using the ST configuration.}
 \end{figure}
 
 % --- Five seconds ---
@@ -3047,7 +3194,7 @@ This appendix includes the results for reduced recording durations (10 and 5 sec
     \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{
         \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/st/five/\anim.png}
     }
-    \caption{‘Classic’ verification results (5-second recordings, Single ST configuration).}
+    \caption{Verification 'classic' results with 5-second recordings using the ST configuration.}
 \end{figure}
 \FloatBarrier
 
@@ -3080,7 +3227,7 @@ This section presents the additional results of the verification analysis conduc
 \end{figure}
 \FloatBarrier
 
-\subsection{Verification Single ST with Reduced Session Duration – Animations}
+\subsection{Verification Single FT with Reduced Session Duration – Animations}
 \label{subsec:vs_st_ft_rt}
 
 This appendix reports the results for all animations evaluated with reduced recording durations of 10 and 5 seconds. 
@@ -3092,7 +3239,7 @@ The results corresponding to the 10-second recordings are presented first, follo
     \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{
         \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/ft/ten/\anim.png}
     }
-    \caption{Verification results with 10-second recordings using the ST configuration.}
+    \caption{Verification results with 10-second recordings using the FT configuration.}
 \end{figure}
 
 % --- Five seconds ---
@@ -3101,7 +3248,59 @@ The results corresponding to the 10-second recordings are presented first, follo
     \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{
         \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/ft/five/\anim.png}
     }
-    \caption{Verification results with 5-second recordings using the ST configuration.}
+    \caption{Verification results with 5-second recordings using the FT configuration.}
+\end{figure}
+\FloatBarrier
+
+\subsection{Verification ‘Classic’ Single FT – Animations}
+\label{subsec:vsc_ft}
+
+This appendix contains all the results, related to the other animations, omitted from the main chapter due to space limitations.
+
+\begin{figure}[H]
+    \centering
+    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_single/ft/\anim.png}
+    }
+    \caption{‘Classic’ verification results using the FT configuration.}
+\end{figure}
+\FloatBarrier
+
+\subsection{Verification ‘Classic’ FT with Intruders – Animations}
+\label{subsec:vsci_ft}
+
+This section contains additional results obtained during the ‘classic’ verification analysis with intruders.
+
+\begin{figure}[H]
+    \centering
+    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_intruders/ft/\anim.png}
+    }
+    \caption{‘Classic’ verification with intruders using the FT configuration.}
+\end{figure}
+\FloatBarrier
+
+\subsection{Verification ‘Classic’ Single ST with Reduced Session Duration – Animations}
+\label{subsec:vsc_ftr}
+
+This appendix presents the results for reduced recording durations, 10 seconds and 5 seconds, that were omitted from the main chapter.
+
+% --- Ten seconds ---
+\begin{figure}[H]
+    \centering
+    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/ft/ten/\anim.png}
+    }
+    \caption{Verification 'classic' results with 10-second recordings using the FT configuration.}
+\end{figure}
+
+% --- Five seconds ---
+\begin{figure}[H]
+    \centering
+    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/ft/five/\anim.png}
+    }
+    \caption{Verification 'classic' results with 5-second recordings using the FT configuration.}
 \end{figure}
 \FloatBarrier
 

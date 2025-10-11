@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  10 OCT 2025 18:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.28)  11 OCT 2025 13:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -893,7 +893,7 @@ Package biblatex Info: Reference segment=0 on input line 26.
 
 Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
-<Images/Theory/Logo_UNIPV.svg.png, id=346, 1284.8pt x 940.51375pt>
+<Images/Theory/Logo_UNIPV.svg.png, id=358, 1284.8pt x 940.51375pt>
 File: Images/Theory/Logo_UNIPV.svg.png Graphic file (type png)
 <use Images/Theory/Logo_UNIPV.svg.png>
 Package pdftex.def Info: Images/Theory/Logo_UNIPV.svg.png  used on input line 35.
@@ -943,12 +943,12 @@ l.53 ...}Machine Learning Analysis}{43}{section.6}
 [3]
 
 [4]
-<Images/Theory/Fingerprint_scanner_identification.jpg, id=460, 1284.8pt x 963.6pt>
+<Images/Theory/Fingerprint_scanner_identification.jpg, id=475, 1284.8pt x 963.6pt>
 File: Images/Theory/Fingerprint_scanner_identification.jpg Graphic file (type jpg)
 <use Images/Theory/Fingerprint_scanner_identification.jpg>
 Package pdftex.def Info: Images/Theory/Fingerprint_scanner_identification.jpg  used on input line 144.
 (pdftex.def)             Requested size: 204.73033pt x 153.5469pt.
-<Images/Theory/eye.png, id=461, 240.9pt x 180.675pt>
+<Images/Theory/eye.png, id=476, 240.9pt x 180.675pt>
 File: Images/Theory/eye.png Graphic file (type png)
 <use Images/Theory/eye.png>
 Package pdftex.def Info: Images/Theory/eye.png  used on input line 151.
@@ -972,12 +972,12 @@ File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 [10]
 
 [11]
-<Images/Theory/occhio.jpg, id=498, 1027.84pt x 692.5875pt>
+<Images/Theory/occhio.jpg, id=513, 1027.84pt x 692.5875pt>
 File: Images/Theory/occhio.jpg Graphic file (type jpg)
 <use Images/Theory/occhio.jpg>
 Package pdftex.def Info: Images/Theory/occhio.jpg  used on input line 389.
 (pdftex.def)             Requested size: 272.97841pt x 183.93639pt.
-<Images/Theory/rods_cones.jpg, id=499, 803.0pt x 1121.18875pt>
+<Images/Theory/rods_cones.jpg, id=514, 803.0pt x 1121.18875pt>
 File: Images/Theory/rods_cones.jpg Graphic file (type jpg)
 <use Images/Theory/rods_cones.jpg>
 Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 414.
@@ -993,22 +993,22 @@ Package pdftex.def Info: Images/Theory/rods_cones.jpg  used on input line 414.
 [15]
 
 [16]
-<Images/Theory/eog.png, id=523, 481.8pt x 301.125pt>
+<Images/Theory/eog.png, id=538, 481.8pt x 301.125pt>
 File: Images/Theory/eog.png Graphic file (type png)
 <use Images/Theory/eog.png>
 Package pdftex.def Info: Images/Theory/eog.png  used on input line 564.
 (pdftex.def)             Requested size: 204.7292pt x 122.84174pt.
-<Images/Theory/coil.png, id=524, 687.56876pt x 263.98625pt>
+<Images/Theory/coil.png, id=539, 687.56876pt x 263.98625pt>
 File: Images/Theory/coil.png Graphic file (type png)
 <use Images/Theory/coil.png>
 Package pdftex.def Info: Images/Theory/coil.png  used on input line 571.
 (pdftex.def)             Requested size: 204.72997pt x 122.83691pt.
-<Images/Theory/vog.jpeg, id=525, 182.6825pt x 278.03876pt>
+<Images/Theory/vog.jpeg, id=540, 182.6825pt x 278.03876pt>
 File: Images/Theory/vog.jpeg Graphic file (type jpg)
 <use Images/Theory/vog.jpeg>
 Package pdftex.def Info: Images/Theory/vog.jpeg  used on input line 581.
 (pdftex.def)             Requested size: 143.31686pt x 122.84229pt.
-<Images/Theory/corneal.jpg, id=526, 1027.84pt x 312.16624pt>
+<Images/Theory/corneal.jpg, id=541, 1027.84pt x 312.16624pt>
 File: Images/Theory/corneal.jpg Graphic file (type jpg)
 <use Images/Theory/corneal.jpg>
 Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 588.
@@ -1036,7 +1036,7 @@ Package pdftex.def Info: Images/Theory/corneal.jpg  used on input line 588.
 [26]
 
 [27]
-<Images/Experiment/tester.png, id=574, 363.3575pt x 212.795pt>
+<Images/Experiment/tester.png, id=589, 363.3575pt x 212.795pt>
 File: Images/Experiment/tester.png Graphic file (type png)
 <use Images/Experiment/tester.png>
 Package pdftex.def Info: Images/Experiment/tester.png  used on input line 975.
@@ -1046,7 +1046,7 @@ Package pdftex.def Info: Images/Experiment/tester.png  used on input line 975.
 [28 <./Images/Experiment/tester.png>]
 
 [29{C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}]
-<Images/Experiment/tester_speed.png, id=590, 354.32375pt x 193.22188pt>
+<Images/Experiment/tester_speed.png, id=605, 354.32375pt x 193.22188pt>
 File: Images/Experiment/tester_speed.png Graphic file (type png)
 <use Images/Experiment/tester_speed.png>
 Package pdftex.def Info: Images/Experiment/tester_speed.png  used on input line 1052.
@@ -1054,7 +1054,7 @@ Package pdftex.def Info: Images/Experiment/tester_speed.png  used on input line 
 
 
 [30 <./Images/Experiment/tester_speed.png>]
-<Images/Experiment/speeds.png, id=599, 354.32375pt x 245.41687pt>
+<Images/Experiment/speeds.png, id=614, 354.32375pt x 245.41687pt>
 File: Images/Experiment/speeds.png Graphic file (type png)
 <use Images/Experiment/speeds.png>
 Package pdftex.def Info: Images/Experiment/speeds.png  used on input line 1094.
@@ -1066,27 +1066,27 @@ Package pdftex.def Info: Images/Experiment/speeds.png  used on input line 1094.
 [32 <./Images/Experiment/speeds.png>]
 
 [33]
-<Images/Experiment/cross.png, id=615, 1284.8pt x 722.7pt>
+<Images/Experiment/cross.png, id=630, 1284.8pt x 722.7pt>
 File: Images/Experiment/cross.png Graphic file (type png)
 <use Images/Experiment/cross.png>
 Package pdftex.def Info: Images/Experiment/cross.png  used on input line 1208.
 (pdftex.def)             Requested size: 272.97841pt x 153.5469pt.
-<Images/Experiment/HS_little.png, id=617, 1284.8pt x 722.7pt>
+<Images/Experiment/HS_little.png, id=632, 1284.8pt x 722.7pt>
 File: Images/Experiment/HS_little.png Graphic file (type png)
 <use Images/Experiment/HS_little.png>
 Package pdftex.def Info: Images/Experiment/HS_little.png  used on input line 1220.
 (pdftex.def)             Requested size: 204.7292pt x 122.83531pt.
-<Images/Experiment/HS_big.png, id=618, 1284.8pt x 722.7pt>
+<Images/Experiment/HS_big.png, id=633, 1284.8pt x 722.7pt>
 File: Images/Experiment/HS_big.png Graphic file (type png)
 <use Images/Experiment/HS_big.png>
 Package pdftex.def Info: Images/Experiment/HS_big.png  used on input line 1227.
 (pdftex.def)             Requested size: 204.7292pt x 122.83531pt.
-<Images/Experiment/VB_little.png, id=619, 1284.8pt x 722.7pt>
+<Images/Experiment/VB_little.png, id=634, 1284.8pt x 722.7pt>
 File: Images/Experiment/VB_little.png Graphic file (type png)
 <use Images/Experiment/VB_little.png>
 Package pdftex.def Info: Images/Experiment/VB_little.png  used on input line 1237.
 (pdftex.def)             Requested size: 143.30849pt x 122.83531pt.
-<Images/Experiment/VB_big.png, id=620, 1284.8pt x 722.7pt>
+<Images/Experiment/VB_big.png, id=635, 1284.8pt x 722.7pt>
 File: Images/Experiment/VB_big.png Graphic file (type png)
 <use Images/Experiment/VB_big.png>
 Package pdftex.def Info: Images/Experiment/VB_big.png  used on input line 1244.
@@ -1122,7 +1122,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-<Images/Results/Identification/nofs.png, id=673, 450.68375pt x 195.73125pt>
+<Images/Results/Identification/nofs.png, id=688, 450.68375pt x 195.73125pt>
 File: Images/Results/Identification/nofs.png Graphic file (type png)
 <use Images/Results/Identification/nofs.png>
 Package pdftex.def Info: Images/Results/Identification/nofs.png  used on input line 1662.
@@ -1130,7 +1130,7 @@ Package pdftex.def Info: Images/Results/Identification/nofs.png  used on input l
 
 
 [45 <./Images/Results/Identification/nofs.png>]
-<Images/Results/Identification/fs.png, id=685, 441.14813pt x 188.705pt>
+<Images/Results/Identification/fs.png, id=700, 441.14813pt x 188.705pt>
 File: Images/Results/Identification/fs.png Graphic file (type png)
 <use Images/Results/Identification/fs.png>
 Package pdftex.def Info: Images/Results/Identification/fs.png  used on input line 1689.
@@ -1145,7 +1145,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 
 [47]
-<Images/Results/Identification_single/single_id_st.png, id=706, 607.26875pt x 295.60437pt>
+<Images/Results/Identification_single/single_id_st.png, id=721, 607.26875pt x 295.60437pt>
 File: Images/Results/Identification_single/single_id_st.png Graphic file (type png)
 <use Images/Results/Identification_single/single_id_st.png>
 Package pdftex.def Info: Images/Results/Identification_single/single_id_st.png  used on input line 1814.
@@ -1155,7 +1155,7 @@ Package pdftex.def Info: Images/Results/Identification_single/single_id_st.png  
 [48 <./Images/Results/Identification_single/single_id_st.png>]
 
 [49]
-<Images/Results/Identification_single/single_id_ft.png, id=723, 644.4075pt x 283.55937pt>
+<Images/Results/Identification_single/single_id_ft.png, id=738, 644.4075pt x 283.55937pt>
 File: Images/Results/Identification_single/single_id_ft.png Graphic file (type png)
 <use Images/Results/Identification_single/single_id_ft.png>
 Package pdftex.def Info: Images/Results/Identification_single/single_id_ft.png  used on input line 1909.
@@ -1167,7 +1167,7 @@ Package pdftex.def Info: Images/Results/Identification_single/single_id_ft.png  
 [51]
 
 [52]
-<Images/Results/Verification_single/st/VB_FA_BIG.png, id=745, 419.06563pt x 110.4125pt>
+<Images/Results/Verification_single/st/VB_FA_BIG.png, id=760, 419.06563pt x 110.4125pt>
 File: Images/Results/Verification_single/st/VB_FA_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single/st/VB_FA_BIG.png>
 Package pdftex.def Info: Images/Results/Verification_single/st/VB_FA_BIG.png  used on input line 2062.
@@ -1176,7 +1176,7 @@ File: Images/Results/Verification_single/st/VB_FA_BIG.png Graphic file (type png
 <use Images/Results/Verification_single/st/VB_FA_BIG.png>
 Package pdftex.def Info: Images/Results/Verification_single/st/VB_FA_BIG.png  used on input line 2072.
 (pdftex.def)             Requested size: 363.9689pt x 95.89635pt.
-<Images/Results/Verification_single/st/best_animation_roc_curves_st.png, id=749, 867.24pt x 650.43pt>
+<Images/Results/Verification_single/st/best_animation_roc_curves_st.png, id=764, 867.24pt x 650.43pt>
 File: Images/Results/Verification_single/st/best_animation_roc_curves_st.png Graphic file (type png)
 <use Images/Results/Verification_single/st/best_animation_roc_curves_st.png>
 Package pdftex.def Info: Images/Results/Verification_single/st/best_animation_roc_curves_st.png  used on input line 2083.
@@ -1184,129 +1184,177 @@ Package pdftex.def Info: Images/Results/Verification_single/st/best_animation_ro
 
 
 [53 <./Images/Results/Verification_single/st/VB_FA_BIG.png> <./Images/Results/Verification_single/st/best_animation_roc_curves_st.png>]
-<Images/Results/Verification_single_intruders/st/VB_SL_LIT.png, id=761, 430.60875pt x 122.4575pt>
+<Images/Results/Verification_single_intruders/st/VB_SL_LIT.png, id=776, 430.60875pt x 122.4575pt>
 File: Images/Results/Verification_single_intruders/st/VB_SL_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single_intruders/st/VB_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single_intruders/st/VB_SL_LIT.png  used on input line 2122.
+Package pdftex.def Info: Images/Results/Verification_single_intruders/st/VB_SL_LIT.png  used on input line 2123.
 (pdftex.def)             Requested size: 363.9689pt x 103.50822pt.
-<Images/Results/Verification_single_intruders/st/VB_FA_BIG.png, id=762, 450.68375pt x 110.4125pt>
+<Images/Results/Verification_single_intruders/st/VB_FA_BIG.png, id=777, 450.68375pt x 110.4125pt>
 File: Images/Results/Verification_single_intruders/st/VB_FA_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single_intruders/st/VB_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single_intruders/st/VB_FA_BIG.png  used on input line 2132.
+Package pdftex.def Info: Images/Results/Verification_single_intruders/st/VB_FA_BIG.png  used on input line 2133.
 (pdftex.def)             Requested size: 363.9689pt x 89.17249pt.
-<Images/Results/Verification_single_intruders/st/VB_FA_LIT.png, id=763, 438.13687pt x 114.4275pt>
+<Images/Results/Verification_single_intruders/st/VB_FA_LIT.png, id=778, 438.13687pt x 114.4275pt>
 File: Images/Results/Verification_single_intruders/st/VB_FA_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single_intruders/st/VB_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single_intruders/st/VB_FA_LIT.png  used on input line 2143.
+Package pdftex.def Info: Images/Results/Verification_single_intruders/st/VB_FA_LIT.png  used on input line 2144.
 (pdftex.def)             Requested size: 363.9689pt x 95.0586pt.
 
 
 [54 <./Images/Results/Verification_single_intruders/st/VB_SL_LIT.png>]
-<Images/Results/Verification_single_intruders/st/best_animation_roc_curves_st.png, id=773, 867.24pt x 650.43pt>
+<Images/Results/Verification_single_intruders/st/best_animation_roc_curves_st.png, id=788, 867.24pt x 650.43pt>
 File: Images/Results/Verification_single_intruders/st/best_animation_roc_curves_st.png Graphic file (type png)
 <use Images/Results/Verification_single_intruders/st/best_animation_roc_curves_st.png>
-Package pdftex.def Info: Images/Results/Verification_single_intruders/st/best_animation_roc_curves_st.png  used on input line 2154.
+Package pdftex.def Info: Images/Results/Verification_single_intruders/st/best_animation_roc_curves_st.png  used on input line 2155.
 (pdftex.def)             Requested size: 272.97841pt x 204.73766pt.
 
 
 [55 <./Images/Results/Verification_single_intruders/st/VB_FA_BIG.png> <./Images/Results/Verification_single_intruders/st/VB_FA_LIT.png> <./Images/Results/Verification_single_intruders/st/best_animation_roc_curves_st.png>]
-<Images/Results/Verification_single_five_ten/st/ten/VB_FA_BIG_ten_st.png, id=785, 444.66125pt x 113.42375pt>
+<Images/Results/Verification_single_five_ten/st/ten/VB_FA_BIG_ten_st.png, id=800, 444.66125pt x 113.42375pt>
 File: Images/Results/Verification_single_five_ten/st/ten/VB_FA_BIG_ten_st.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/ten/VB_FA_BIG_ten_st.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/VB_FA_BIG_ten_st.png  used on input line 2175.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/VB_FA_BIG_ten_st.png  used on input line 2176.
 (pdftex.def)             Requested size: 363.9689pt x 92.84018pt.
-<Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png, id=786, 432.61626pt x 122.4575pt>
+<Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png, id=801, 432.61626pt x 122.4575pt>
 File: Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png  used on input line 2183.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png  used on input line 2184.
 (pdftex.def)             Requested size: 363.9689pt x 103.02988pt.
-File: Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png Graphic file (type png)
-<use Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png  used on input line 2202.
-(pdftex.def)             Requested size: 272.97841pt x 77.27194pt.
-File: Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png Graphic file (type png)
-<use Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png  used on input line 2210.
-(pdftex.def)             Requested size: 272.97841pt x 77.27194pt.
+<Images/Results/Verification_single_five_ten/st/ten/best_animation_roc_curves_ten_st.png, id=803, 867.24pt x 650.43pt>
+File: Images/Results/Verification_single_five_ten/st/ten/best_animation_roc_curves_ten_st.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/st/ten/best_animation_roc_curves_ten_st.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/best_animation_roc_curves_ten_st.png  used on input line 2203.
+(pdftex.def)             Requested size: 272.97841pt x 204.73766pt.
+<Images/Results/Verification_single_five_ten/st/five/best_animation_roc_curves_five_st.png, id=804, 867.24pt x 650.43pt>
+File: Images/Results/Verification_single_five_ten/st/five/best_animation_roc_curves_five_st.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/st/five/best_animation_roc_curves_five_st.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/best_animation_roc_curves_five_st.png  used on input line 2211.
+(pdftex.def)             Requested size: 272.97841pt x 204.73766pt.
 
 
 [56 <./Images/Results/Verification_single_five_ten/st/ten/VB_FA_BIG_ten_st.png> <./Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png>]
-<Images/Results/Classic_procedure/Verification_single/st/VB_FA_BIG.png, id=801, 411.03563pt x 105.89563pt>
+<Images/Results/Classic_procedure/Verification_single/st/VB_FA_BIG.png, id=818, 411.03563pt x 105.89563pt>
 File: Images/Results/Classic_procedure/Verification_single/st/VB_FA_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_single/st/VB_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/VB_FA_BIG.png  used on input line 2243.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/VB_FA_BIG.png  used on input line 2244.
 (pdftex.def)             Requested size: 363.9689pt x 93.77013pt.
-<Images/Results/Classic_procedure/Verification_single/st/Verification_single_roc_classic_st.png, id=805, 867.24pt x 650.43pt>
+
+
+[57 <./Images/Results/Verification_single_five_ten/st/ten/best_animation_roc_curves_ten_st.png> <./Images/Results/Verification_single_five_ten/st/five/best_animation_roc_curves_five_st.png>]
+<Images/Results/Classic_procedure/Verification_single/st/Verification_single_roc_classic_st.png, id=828, 867.24pt x 650.43pt>
 File: Images/Results/Classic_procedure/Verification_single/st/Verification_single_roc_classic_st.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_single/st/Verification_single_roc_classic_st.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/Verification_single_roc_classic_st.png  used on input line 2255.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/Verification_single_roc_classic_st.png  used on input line 2256.
 (pdftex.def)             Requested size: 272.97841pt x 204.73766pt.
-
-
-[57 <./Images/Results/Classic_procedure/Verification_single/st/VB_FA_BIG.png>]
-<Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_BIG.png, id=813, 419.06563pt x 105.89563pt>
+<Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_BIG.png, id=829, 419.06563pt x 105.89563pt>
 File: Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_BIG.png  used on input line 2273.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_BIG.png  used on input line 2274.
 (pdftex.def)             Requested size: 363.9689pt x 91.97331pt.
-<Images/Results/Classic_procedure/Verification_intruders/st/Verification_single_intruders_roc_two_st.png, id=815, 867.24pt x 650.43pt>
+
+
+[58 <./Images/Results/Classic_procedure/Verification_single/st/VB_FA_BIG.png> <./Images/Results/Classic_procedure/Verification_single/st/Verification_single_roc_classic_st.png>]
+<Images/Results/Classic_procedure/Verification_intruders/st/Verification_single_intruders_roc_two_st.png, id=840, 867.24pt x 650.43pt>
 File: Images/Results/Classic_procedure/Verification_intruders/st/Verification_single_intruders_roc_two_st.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_intruders/st/Verification_single_intruders_roc_two_st.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/Verification_single_intruders_roc_two_st.png  used on input line 2290.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/Verification_single_intruders_roc_two_st.png  used on input line 2291.
 (pdftex.def)             Requested size: 272.97841pt x 204.73766pt.
 
 
-[58 <./Images/Results/Classic_procedure/Verification_single/st/Verification_single_roc_classic_st.png> <./Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_BIG.png>]
-
-[59 <./Images/Results/Classic_procedure/Verification_intruders/st/Verification_single_intruders_roc_two_st.png>]
-<Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_BIG.png, id=836, 432.61626pt x 105.89563pt>
+[59 <./Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_BIG.png> <./Images/Results/Classic_procedure/Verification_intruders/st/Verification_single_intruders_roc_two_st.png>]
+<Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_BIG.png, id=857, 432.61626pt x 105.89563pt>
 File: Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_BIG.png  used on input line 2318.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_BIG.png  used on input line 2319.
 (pdftex.def)             Requested size: 363.9689pt x 89.0955pt.
-<Images/Results/Classic_procedure/five_ten/st/five/VB_FA_BIG.png, id=837, 429.10312pt x 110.4125pt>
+<Images/Results/Classic_procedure/five_ten/st/five/VB_FA_BIG.png, id=858, 429.10312pt x 110.4125pt>
 File: Images/Results/Classic_procedure/five_ten/st/five/VB_FA_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/five/VB_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/VB_FA_BIG.png  used on input line 2326.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/VB_FA_BIG.png  used on input line 2327.
 (pdftex.def)             Requested size: 363.9689pt x 93.65393pt.
-<Images/Results/Classic_procedure/five_ten/st/ten/Verification_single_roc_classic_ten_st.png, id=838, 867.24pt x 650.43pt>
+<Images/Results/Classic_procedure/five_ten/st/ten/Verification_single_roc_classic_ten_st.png, id=859, 867.24pt x 650.43pt>
 File: Images/Results/Classic_procedure/five_ten/st/ten/Verification_single_roc_classic_ten_st.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/ten/Verification_single_roc_classic_ten_st.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/Verification_single_roc_classic_ten_st.png  used on input line 2334.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/Verification_single_roc_classic_ten_st.png  used on input line 2335.
 (pdftex.def)             Requested size: 272.97841pt x 204.73766pt.
-<Images/Results/Classic_procedure/five_ten/st/five/Verification_single_roc_classic_five_st.png, id=839, 867.24pt x 650.43pt>
+<Images/Results/Classic_procedure/five_ten/st/five/Verification_single_roc_classic_five_st.png, id=860, 867.24pt x 650.43pt>
 File: Images/Results/Classic_procedure/five_ten/st/five/Verification_single_roc_classic_five_st.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/five/Verification_single_roc_classic_five_st.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/Verification_single_roc_classic_five_st.png  used on input line 2342.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/Verification_single_roc_classic_five_st.png  used on input line 2343.
 (pdftex.def)             Requested size: 272.97841pt x 204.73766pt.
 
 
-[60 <./Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_BIG.png> <./Images/Results/Classic_procedure/five_ten/st/five/VB_FA_BIG.png>]
+[60 <./Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_BIG.png> <./Images/Results/Classic_procedure/five_ten/st/five/VB_FA_BIG.png> <./Images/Results/Classic_procedure/five_ten/st/ten/Verification_single_roc_classic_ten_st.png>]
 
-[61 <./Images/Results/Classic_procedure/five_ten/st/ten/Verification_single_roc_classic_ten_st.png> <./Images/Results/Classic_procedure/five_ten/st/five/Verification_single_roc_classic_five_st.png>]
-<Images/Results/Verification_single/ft/VB_FA_BIG.png, id=859, 440.14438pt x 104.39pt>
+[61 <./Images/Results/Classic_procedure/five_ten/st/five/Verification_single_roc_classic_five_st.png>]
+<Images/Results/Verification_single/ft/VB_FA_LIT.png, id=878, 446.16687pt x 111.91812pt>
+File: Images/Results/Verification_single/ft/VB_FA_LIT.png Graphic file (type png)
+<use Images/Results/Verification_single/ft/VB_FA_LIT.png>
+Package pdftex.def Info: Images/Results/Verification_single/ft/VB_FA_LIT.png  used on input line 2398.
+(pdftex.def)             Requested size: 363.9689pt x 91.3004pt.
+<Images/Results/Verification_single/ft/VB_FA_BIG.png, id=880, 440.14438pt x 104.39pt>
 File: Images/Results/Verification_single/ft/VB_FA_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single/ft/VB_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single/ft/VB_FA_BIG.png  used on input line 2396.
+Package pdftex.def Info: Images/Results/Verification_single/ft/VB_FA_BIG.png  used on input line 2408.
 (pdftex.def)             Requested size: 363.9689pt x 86.32668pt.
-File: Images/Results/Verification_single/ft/VB_FA_BIG.png Graphic file (type png)
-<use Images/Results/Verification_single/ft/VB_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single/ft/VB_FA_BIG.png  used on input line 2406.
-(pdftex.def)             Requested size: 363.9689pt x 86.32668pt.
-File: Images/Results/Verification_single/st/best_animation_roc_curves_st.png Graphic file (type png)
-<use Images/Results/Verification_single/st/best_animation_roc_curves_st.png>
-Package pdftex.def Info: Images/Results/Verification_single/st/best_animation_roc_curves_st.png  used on input line 2418.
+<Images/Results/Verification_single/ft/best_animation_roc_curves_ft.png, id=883, 867.24pt x 650.43pt>
+File: Images/Results/Verification_single/ft/best_animation_roc_curves_ft.png Graphic file (type png)
+<use Images/Results/Verification_single/ft/best_animation_roc_curves_ft.png>
+Package pdftex.def Info: Images/Results/Verification_single/ft/best_animation_roc_curves_ft.png  used on input line 2420.
 (pdftex.def)             Requested size: 272.97841pt x 204.73766pt.
 
 
-[62 <./Images/Results/Verification_single/ft/VB_FA_BIG.png>]
+[62 <./Images/Results/Verification_single/ft/VB_FA_LIT.png> <./Images/Results/Verification_single/ft/VB_FA_BIG.png>]
 
-[63]
+[63 <./Images/Results/Verification_single/ft/best_animation_roc_curves_ft.png>]
+<Images/Results/Verification_single_intruders/ft/VB_FA_LIT.png, id=900, 426.09187pt x 106.89937pt>
+File: Images/Results/Verification_single_intruders/ft/VB_FA_LIT.png Graphic file (type png)
+<use Images/Results/Verification_single_intruders/ft/VB_FA_LIT.png>
+Package pdftex.def Info: Images/Results/Verification_single_intruders/ft/VB_FA_LIT.png  used on input line 2463.
+(pdftex.def)             Requested size: 363.9689pt x 91.31833pt.
+<Images/Results/Verification_single_intruders/ft/VB_FA_BIG.png, id=902, 423.08063pt x 104.39pt>
+File: Images/Results/Verification_single_intruders/ft/VB_FA_BIG.png Graphic file (type png)
+<use Images/Results/Verification_single_intruders/ft/VB_FA_BIG.png>
+Package pdftex.def Info: Images/Results/Verification_single_intruders/ft/VB_FA_BIG.png  used on input line 2474.
+(pdftex.def)             Requested size: 363.9689pt x 89.80708pt.
+<Images/Results/Verification_single_intruders/ft/best_animation_roc_curves_ft.png, id=905, 867.24pt x 650.43pt>
+File: Images/Results/Verification_single_intruders/ft/best_animation_roc_curves_ft.png Graphic file (type png)
+<use Images/Results/Verification_single_intruders/ft/best_animation_roc_curves_ft.png>
+Package pdftex.def Info: Images/Results/Verification_single_intruders/ft/best_animation_roc_curves_ft.png  used on input line 2486.
+(pdftex.def)             Requested size: 272.97841pt x 204.73766pt.
 
-[64]
 
-[65]
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 2460.
+[64 <./Images/Results/Verification_single_intruders/ft/VB_FA_LIT.png> <./Images/Results/Verification_single_intruders/ft/VB_FA_BIG.png>]
+<Images/Results/Verification_single_five_ten/ft/ten/VB_FA_LIT.png, id=918, 429.605pt x 107.40125pt>
+File: Images/Results/Verification_single_five_ten/ft/ten/VB_FA_LIT.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/ten/VB_FA_LIT.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/ten/VB_FA_LIT.png  used on input line 2519.
+(pdftex.def)             Requested size: 363.9689pt x 90.99321pt.
+<Images/Results/Verification_single_five_ten/ft/five/VB_FA_LIT.png, id=919, 429.10312pt x 101.37875pt>
+File: Images/Results/Verification_single_five_ten/ft/five/VB_FA_LIT.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/five/VB_FA_LIT.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/five/VB_FA_LIT.png  used on input line 2527.
+(pdftex.def)             Requested size: 363.9689pt x 85.99135pt.
+
+
+[65 <./Images/Results/Verification_single_intruders/ft/best_animation_roc_curves_ft.png>]
+<Images/Results/Verification_single_five_ten/ft/five/best_animation_roc_curves_five_ft.png, id=926, 867.24pt x 650.43pt>
+File: Images/Results/Verification_single_five_ten/ft/five/best_animation_roc_curves_five_ft.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/five/best_animation_roc_curves_five_ft.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/five/best_animation_roc_curves_five_ft.png  used on input line 2547.
+(pdftex.def)             Requested size: 272.97841pt x 204.73766pt.
+File: Images/Results/Verification_single_five_ten/ft/five/best_animation_roc_curves_five_ft.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/five/best_animation_roc_curves_five_ft.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/five/best_animation_roc_curves_five_ft.png  used on input line 2555.
+(pdftex.def)             Requested size: 272.97841pt x 204.73766pt.
+
+
+[66 <./Images/Results/Verification_single_five_ten/ft/ten/VB_FA_LIT.png> <./Images/Results/Verification_single_five_ten/ft/five/VB_FA_LIT.png> <./Images/Results/Verification_single_five_ten/ft/five/best_animation_roc_curves_five_ft.png>]
+
+[67]
+
+[68]
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 2588.
  (C:\Users\david\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1316,12 +1364,6 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 
 
-[66]
-
-[67]
-
-[68]
-
 [69]
 
 [70]
@@ -1329,369 +1371,484 @@ Package microtype Info: Loading generic protrusion settings for font family
 [71]
 
 [72]
-<Images/Results/param_grid_nofs.png, id=950, 315.1775pt x 301.62688pt>
+
+[73]
+
+[74]
+
+[75]
+<Images/Results/param_grid_nofs.png, id=1013, 315.1775pt x 301.62688pt>
 File: Images/Results/param_grid_nofs.png Graphic file (type png)
 <use Images/Results/param_grid_nofs.png>
-Package pdftex.def Info: Images/Results/param_grid_nofs.png  used on input line 2706.
+Package pdftex.def Info: Images/Results/param_grid_nofs.png  used on input line 2834.
 (pdftex.def)             Requested size: 363.9689pt x 348.34099pt.
-<Images/Results/fs.png, id=952, 351.3125pt x 404.00937pt>
+<Images/Results/fs.png, id=1015, 351.3125pt x 404.00937pt>
 File: Images/Results/fs.png Graphic file (type png)
 <use Images/Results/fs.png>
-Package pdftex.def Info: Images/Results/fs.png  used on input line 2716.
+Package pdftex.def Info: Images/Results/fs.png  used on input line 2844.
 (pdftex.def)             Requested size: 363.9689pt x 418.60016pt.
 
 
-[73
+[76
 
  <./Images/Results/param_grid_nofs.png>]
 
-[74 <./Images/Results/fs.png>]
-<Images/Results/Verification_single/st/VB_SL_LIT.png, id=968, 426.09187pt x 105.89563pt>
+[77 <./Images/Results/fs.png>]
+<Images/Results/Verification_single/st/VB_SL_LIT.png, id=1031, 426.09187pt x 105.89563pt>
 File: Images/Results/Verification_single/st/VB_SL_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single/st/VB_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single/st/VB_SL_LIT.png  used on input line 2783.
+Package pdftex.def Info: Images/Results/Verification_single/st/VB_SL_LIT.png  used on input line 2911.
 (pdftex.def)             Requested size: 295.72083pt x 73.49948pt.
-<Images/Results/Verification_single/st/HS_SL_LIT.png, id=969, 435.6275pt x 102.88437pt>
+<Images/Results/Verification_single/st/HS_SL_LIT.png, id=1032, 435.6275pt x 102.88437pt>
 File: Images/Results/Verification_single/st/HS_SL_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single/st/HS_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single/st/HS_SL_LIT.png  used on input line 2787.
+Package pdftex.def Info: Images/Results/Verification_single/st/HS_SL_LIT.png  used on input line 2915.
 (pdftex.def)             Requested size: 295.72083pt x 69.84113pt.
-<Images/Results/Verification_single/st/HS_SL_BIG.png, id=970, 456.70625pt x 117.94063pt>
+<Images/Results/Verification_single/st/HS_SL_BIG.png, id=1033, 456.70625pt x 117.94063pt>
 File: Images/Results/Verification_single/st/HS_SL_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single/st/HS_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single/st/HS_SL_BIG.png  used on input line 2792.
+Package pdftex.def Info: Images/Results/Verification_single/st/HS_SL_BIG.png  used on input line 2920.
 (pdftex.def)             Requested size: 295.72083pt x 76.36894pt.
-<Images/Results/Verification_single/st/VB_SL_BIG.png, id=971, 441.65pt x 102.88437pt>
+<Images/Results/Verification_single/st/VB_SL_BIG.png, id=1034, 441.65pt x 102.88437pt>
 File: Images/Results/Verification_single/st/VB_SL_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single/st/VB_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single/st/VB_SL_BIG.png  used on input line 2796.
+Package pdftex.def Info: Images/Results/Verification_single/st/VB_SL_BIG.png  used on input line 2924.
 (pdftex.def)             Requested size: 295.72083pt x 68.89291pt.
-<Images/Results/Verification_single/st/HS_FA_LIT.png, id=972, 423.5825pt x 108.90688pt>
+<Images/Results/Verification_single/st/HS_FA_LIT.png, id=1035, 423.5825pt x 108.90688pt>
 File: Images/Results/Verification_single/st/HS_FA_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single/st/HS_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single/st/HS_FA_LIT.png  used on input line 2801.
+Package pdftex.def Info: Images/Results/Verification_single/st/HS_FA_LIT.png  used on input line 2929.
 (pdftex.def)             Requested size: 295.72083pt x 76.03485pt.
-<Images/Results/Verification_single/st/HS_FA_BIG.png, id=973, 426.09187pt x 102.88437pt>
+<Images/Results/Verification_single/st/HS_FA_BIG.png, id=1036, 426.09187pt x 102.88437pt>
 File: Images/Results/Verification_single/st/HS_FA_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single/st/HS_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single/st/HS_FA_BIG.png  used on input line 2805.
+Package pdftex.def Info: Images/Results/Verification_single/st/HS_FA_BIG.png  used on input line 2933.
 (pdftex.def)             Requested size: 295.72083pt x 71.40944pt.
 
 
-[75]
-<Images/Results/Verification_single_intruders/st/HS_SL_LIT.png, id=978, 432.61626pt x 109.91063pt>
+[78]
+<Images/Results/Verification_single_intruders/st/HS_SL_LIT.png, id=1042, 432.61626pt x 109.91063pt>
 File: Images/Results/Verification_single_intruders/st/HS_SL_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single_intruders/st/HS_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single_intruders/st/HS_SL_LIT.png  used on input line 2821.
+Package pdftex.def Info: Images/Results/Verification_single_intruders/st/HS_SL_LIT.png  used on input line 2949.
 (pdftex.def)             Requested size: 295.72083pt x 75.13402pt.
-<Images/Results/Verification_single_intruders/st/HS_SL_BIG.png, id=979, 431.11063pt x 97.86563pt>
+<Images/Results/Verification_single_intruders/st/HS_SL_BIG.png, id=1043, 431.11063pt x 97.86563pt>
 File: Images/Results/Verification_single_intruders/st/HS_SL_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single_intruders/st/HS_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single_intruders/st/HS_SL_BIG.png  used on input line 2825.
+Package pdftex.def Info: Images/Results/Verification_single_intruders/st/HS_SL_BIG.png  used on input line 2953.
 (pdftex.def)             Requested size: 295.72083pt x 67.1331pt.
-<Images/Results/Verification_single_intruders/st/VB_SL_BIG.png, id=980, 450.18187pt x 129.98563pt>
+<Images/Results/Verification_single_intruders/st/VB_SL_BIG.png, id=1044, 450.18187pt x 129.98563pt>
 File: Images/Results/Verification_single_intruders/st/VB_SL_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single_intruders/st/VB_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single_intruders/st/VB_SL_BIG.png  used on input line 2830.
+Package pdftex.def Info: Images/Results/Verification_single_intruders/st/VB_SL_BIG.png  used on input line 2958.
 (pdftex.def)             Requested size: 295.72083pt x 85.3901pt.
-<Images/Results/Verification_single_intruders/st/HS_FA_LIT.png, id=981, 434.12187pt x 108.90688pt>
+<Images/Results/Verification_single_intruders/st/HS_FA_LIT.png, id=1045, 434.12187pt x 108.90688pt>
 File: Images/Results/Verification_single_intruders/st/HS_FA_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single_intruders/st/HS_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single_intruders/st/HS_FA_LIT.png  used on input line 2834.
+Package pdftex.def Info: Images/Results/Verification_single_intruders/st/HS_FA_LIT.png  used on input line 2962.
 (pdftex.def)             Requested size: 295.72083pt x 74.19028pt.
-<Images/Results/Verification_single_intruders/st/HS_FA_BIG.png, id=982, 435.6275pt x 108.90688pt>
+<Images/Results/Verification_single_intruders/st/HS_FA_BIG.png, id=1046, 435.6275pt x 108.90688pt>
 File: Images/Results/Verification_single_intruders/st/HS_FA_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single_intruders/st/HS_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single_intruders/st/HS_FA_BIG.png  used on input line 2839.
+Package pdftex.def Info: Images/Results/Verification_single_intruders/st/HS_FA_BIG.png  used on input line 2967.
 (pdftex.def)             Requested size: 295.72083pt x 73.92938pt.
 
 
-[76 <./Images/Results/Verification_single/st/VB_SL_LIT.png> <./Images/Results/Verification_single/st/HS_SL_LIT.png> <./Images/Results/Verification_single/st/HS_SL_BIG.png> <./Images/Results/Verification_single/st/VB_SL_BIG.png> <./Images/Results/Verification_single/st/HS_FA_LIT.png> <./Images/Results/Verification_single/st/HS_FA_BIG.png>]
-<Images/Results/Verification_single_five_ten/st/ten/VB_SL_LIT.png, id=994, 423.5825pt x 103.88812pt>
+[79 <./Images/Results/Verification_single/st/VB_SL_LIT.png> <./Images/Results/Verification_single/st/HS_SL_LIT.png> <./Images/Results/Verification_single/st/HS_SL_BIG.png> <./Images/Results/Verification_single/st/VB_SL_BIG.png> <./Images/Results/Verification_single/st/HS_FA_LIT.png> <./Images/Results/Verification_single/st/HS_FA_BIG.png>]
+<Images/Results/Verification_single_five_ten/st/ten/VB_SL_LIT.png, id=1058, 423.5825pt x 103.88812pt>
 File: Images/Results/Verification_single_five_ten/st/ten/VB_SL_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/ten/VB_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/VB_SL_LIT.png  used on input line 2857.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/VB_SL_LIT.png  used on input line 2985.
 (pdftex.def)             Requested size: 295.72083pt x 72.53096pt.
-<Images/Results/Verification_single_five_ten/st/ten/HS_SL_LIT.png, id=995, 426.09187pt x 108.90688pt>
+<Images/Results/Verification_single_five_ten/st/ten/HS_SL_LIT.png, id=1059, 426.09187pt x 108.90688pt>
 File: Images/Results/Verification_single_five_ten/st/ten/HS_SL_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/ten/HS_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/HS_SL_LIT.png  used on input line 2857.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/HS_SL_LIT.png  used on input line 2985.
 (pdftex.def)             Requested size: 295.72083pt x 75.5895pt.
-<Images/Results/Verification_single_five_ten/st/ten/VB_SL_BIG.png, id=996, 438.13687pt x 105.39375pt>
+<Images/Results/Verification_single_five_ten/st/ten/VB_SL_BIG.png, id=1060, 438.13687pt x 105.39375pt>
 File: Images/Results/Verification_single_five_ten/st/ten/VB_SL_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/ten/VB_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/VB_SL_BIG.png  used on input line 2857.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/VB_SL_BIG.png  used on input line 2985.
 (pdftex.def)             Requested size: 295.72083pt x 71.1361pt.
-<Images/Results/Verification_single_five_ten/st/ten/HS_SL_BIG.png, id=997, 448.67625pt x 107.40125pt>
+<Images/Results/Verification_single_five_ten/st/ten/HS_SL_BIG.png, id=1061, 448.67625pt x 107.40125pt>
 File: Images/Results/Verification_single_five_ten/st/ten/HS_SL_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/ten/HS_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/HS_SL_BIG.png  used on input line 2857.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/HS_SL_BIG.png  used on input line 2985.
 (pdftex.def)             Requested size: 295.72083pt x 70.78998pt.
-<Images/Results/Verification_single_five_ten/st/ten/VB_FA_LIT.png, id=998, 432.61626pt x 104.39pt>
+<Images/Results/Verification_single_five_ten/st/ten/VB_FA_LIT.png, id=1062, 432.61626pt x 104.39pt>
 File: Images/Results/Verification_single_five_ten/st/ten/VB_FA_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/ten/VB_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/VB_FA_LIT.png  used on input line 2857.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/VB_FA_LIT.png  used on input line 2985.
 (pdftex.def)             Requested size: 295.72083pt x 71.36015pt.
-<Images/Results/Verification_single_five_ten/st/ten/HS_FA_BIG.png, id=999, 423.08063pt x 103.88812pt>
+<Images/Results/Verification_single_five_ten/st/ten/HS_FA_BIG.png, id=1063, 423.08063pt x 103.88812pt>
 File: Images/Results/Verification_single_five_ten/st/ten/HS_FA_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/ten/HS_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/HS_FA_BIG.png  used on input line 2857.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/HS_FA_BIG.png  used on input line 2985.
 (pdftex.def)             Requested size: 295.72083pt x 72.61656pt.
-<Images/Results/Verification_single_five_ten/st/ten/HS_FA_LIT.png, id=1000, 419.06563pt x 102.3825pt>
+<Images/Results/Verification_single_five_ten/st/ten/HS_FA_LIT.png, id=1064, 419.06563pt x 102.3825pt>
 File: Images/Results/Verification_single_five_ten/st/ten/HS_FA_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/ten/HS_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/HS_FA_LIT.png  used on input line 2857.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/ten/HS_FA_LIT.png  used on input line 2985.
 (pdftex.def)             Requested size: 295.72083pt x 72.24684pt.
 
 
-[77 <./Images/Results/Verification_single_intruders/st/HS_SL_LIT.png> <./Images/Results/Verification_single_intruders/st/HS_SL_BIG.png> <./Images/Results/Verification_single_intruders/st/VB_SL_BIG.png> <./Images/Results/Verification_single_intruders/st/HS_FA_LIT.png> <./Images/Results/Verification_single_intruders/st/HS_FA_BIG.png>]
-<Images/Results/Verification_single_five_ten/st/five/VB_SL_LIT.png, id=1011, 425.08812pt x 104.39pt>
+[80 <./Images/Results/Verification_single_intruders/st/HS_SL_LIT.png> <./Images/Results/Verification_single_intruders/st/HS_SL_BIG.png> <./Images/Results/Verification_single_intruders/st/VB_SL_BIG.png> <./Images/Results/Verification_single_intruders/st/HS_FA_LIT.png> <./Images/Results/Verification_single_intruders/st/HS_FA_BIG.png>]
+<Images/Results/Verification_single_five_ten/st/five/VB_SL_LIT.png, id=1075, 425.08812pt x 104.39pt>
 File: Images/Results/Verification_single_five_ten/st/five/VB_SL_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/five/VB_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/VB_SL_LIT.png  used on input line 2866.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/VB_SL_LIT.png  used on input line 2994.
 (pdftex.def)             Requested size: 295.72083pt x 72.6249pt.
-<Images/Results/Verification_single_five_ten/st/five/HS_SL_LIT.png, id=1012, 426.09187pt x 106.89937pt>
+<Images/Results/Verification_single_five_ten/st/five/HS_SL_LIT.png, id=1076, 426.09187pt x 106.89937pt>
 File: Images/Results/Verification_single_five_ten/st/five/HS_SL_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/five/HS_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/HS_SL_LIT.png  used on input line 2866.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/HS_SL_LIT.png  used on input line 2994.
 (pdftex.def)             Requested size: 295.72083pt x 74.19615pt.
-<Images/Results/Verification_single_five_ten/st/five/VB_SL_BIG.png, id=1013, 441.14813pt x 107.40125pt>
+<Images/Results/Verification_single_five_ten/st/five/VB_SL_BIG.png, id=1077, 441.14813pt x 107.40125pt>
 File: Images/Results/Verification_single_five_ten/st/five/VB_SL_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/five/VB_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/VB_SL_BIG.png  used on input line 2866.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/VB_SL_BIG.png  used on input line 2994.
 (pdftex.def)             Requested size: 295.72083pt x 71.99777pt.
-<Images/Results/Verification_single_five_ten/st/five/HS_SL_BIG.png, id=1014, 449.17813pt x 114.4275pt>
+<Images/Results/Verification_single_five_ten/st/five/HS_SL_BIG.png, id=1078, 449.17813pt x 114.4275pt>
 File: Images/Results/Verification_single_five_ten/st/five/HS_SL_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/five/HS_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/HS_SL_BIG.png  used on input line 2866.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/HS_SL_BIG.png  used on input line 2994.
 (pdftex.def)             Requested size: 295.72083pt x 75.3373pt.
-<Images/Results/Verification_single_five_ten/st/five/VB_FA_LIT.png, id=1015, 442.65375pt x 113.42375pt>
+<Images/Results/Verification_single_five_ten/st/five/VB_FA_LIT.png, id=1079, 442.65375pt x 113.42375pt>
 File: Images/Results/Verification_single_five_ten/st/five/VB_FA_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/five/VB_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/VB_FA_LIT.png  used on input line 2866.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/VB_FA_LIT.png  used on input line 2994.
 (pdftex.def)             Requested size: 295.72083pt x 75.7789pt.
-<Images/Results/Verification_single_five_ten/st/five/HS_FA_BIG.png, id=1016, 440.14438pt x 110.4125pt>
+<Images/Results/Verification_single_five_ten/st/five/HS_FA_BIG.png, id=1080, 440.14438pt x 110.4125pt>
 File: Images/Results/Verification_single_five_ten/st/five/HS_FA_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/five/HS_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/HS_FA_BIG.png  used on input line 2866.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/HS_FA_BIG.png  used on input line 2994.
 (pdftex.def)             Requested size: 295.72083pt x 74.18489pt.
-<Images/Results/Verification_single_five_ten/st/five/HS_FA_LIT.png, id=1017, 418.56375pt x 105.89563pt>
+<Images/Results/Verification_single_five_ten/st/five/HS_FA_LIT.png, id=1081, 418.56375pt x 105.89563pt>
 File: Images/Results/Verification_single_five_ten/st/five/HS_FA_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single_five_ten/st/five/HS_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/HS_FA_LIT.png  used on input line 2866.
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/st/five/HS_FA_LIT.png  used on input line 2994.
 (pdftex.def)             Requested size: 295.72083pt x 74.81638pt.
 
 
-[78 <./Images/Results/Verification_single_five_ten/st/ten/VB_SL_LIT.png> <./Images/Results/Verification_single_five_ten/st/ten/HS_SL_LIT.png> <./Images/Results/Verification_single_five_ten/st/ten/VB_SL_BIG.png> <./Images/Results/Verification_single_five_ten/st/ten/HS_SL_BIG.png> <./Images/Results/Verification_single_five_ten/st/ten/VB_FA_LIT.png> <./Images/Results/Verification_single_five_ten/st/ten/HS_FA_BIG.png> <./Images/Results/Verification_single_five_ten/st/ten/HS_FA_LIT.png>]
-<Images/Results/Classic_procedure/Verification_single/st/VB_SL_LIT.png, id=1031, 437.13312pt x 113.42375pt>
+[81 <./Images/Results/Verification_single_five_ten/st/ten/VB_SL_LIT.png> <./Images/Results/Verification_single_five_ten/st/ten/HS_SL_LIT.png> <./Images/Results/Verification_single_five_ten/st/ten/VB_SL_BIG.png> <./Images/Results/Verification_single_five_ten/st/ten/HS_SL_BIG.png> <./Images/Results/Verification_single_five_ten/st/ten/VB_FA_LIT.png> <./Images/Results/Verification_single_five_ten/st/ten/HS_FA_BIG.png> <./Images/Results/Verification_single_five_ten/st/ten/HS_FA_LIT.png>]
+<Images/Results/Classic_procedure/Verification_single/st/VB_SL_LIT.png, id=1094, 437.13312pt x 113.42375pt>
 File: Images/Results/Classic_procedure/Verification_single/st/VB_SL_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_single/st/VB_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/VB_SL_LIT.png  used on input line 2881.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/VB_SL_LIT.png  used on input line 3009.
 (pdftex.def)             Requested size: 295.72083pt x 76.73079pt.
-<Images/Results/Classic_procedure/Verification_single/st/HS_SL_LIT.png, id=1032, 442.65375pt x 111.91812pt>
+<Images/Results/Classic_procedure/Verification_single/st/HS_SL_LIT.png, id=1095, 442.65375pt x 111.91812pt>
 File: Images/Results/Classic_procedure/Verification_single/st/HS_SL_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_single/st/HS_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/HS_SL_LIT.png  used on input line 2881.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/HS_SL_LIT.png  used on input line 3009.
 (pdftex.def)             Requested size: 295.72083pt x 74.77298pt.
-<Images/Results/Classic_procedure/Verification_single/st/VB_SL_BIG.png, id=1033, 439.6425pt x 112.92188pt>
+<Images/Results/Classic_procedure/Verification_single/st/VB_SL_BIG.png, id=1096, 439.6425pt x 112.92188pt>
 File: Images/Results/Classic_procedure/Verification_single/st/VB_SL_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_single/st/VB_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/VB_SL_BIG.png  used on input line 2881.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/VB_SL_BIG.png  used on input line 3009.
 (pdftex.def)             Requested size: 295.72083pt x 75.95706pt.
-<Images/Results/Classic_procedure/Verification_single/st/HS_SL_BIG.png, id=1034, 428.09938pt x 101.37875pt>
+<Images/Results/Classic_procedure/Verification_single/st/HS_SL_BIG.png, id=1097, 428.09938pt x 101.37875pt>
 File: Images/Results/Classic_procedure/Verification_single/st/HS_SL_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_single/st/HS_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/HS_SL_BIG.png  used on input line 2881.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/HS_SL_BIG.png  used on input line 3009.
 (pdftex.def)             Requested size: 295.72083pt x 70.03029pt.
-<Images/Results/Classic_procedure/Verification_single/st/VB_FA_LIT.png, id=1035, 441.14813pt x 112.92188pt>
+<Images/Results/Classic_procedure/Verification_single/st/VB_FA_LIT.png, id=1098, 441.14813pt x 112.92188pt>
 File: Images/Results/Classic_procedure/Verification_single/st/VB_FA_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_single/st/VB_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/VB_FA_LIT.png  used on input line 2881.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/VB_FA_LIT.png  used on input line 3009.
 (pdftex.def)             Requested size: 295.72083pt x 75.6986pt.
-<Images/Results/Classic_procedure/Verification_single/st/HS_FA_BIG.png, id=1036, 437.13312pt x 105.89563pt>
+<Images/Results/Classic_procedure/Verification_single/st/HS_FA_BIG.png, id=1099, 437.13312pt x 105.89563pt>
 File: Images/Results/Classic_procedure/Verification_single/st/HS_FA_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_single/st/HS_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/HS_FA_BIG.png  used on input line 2881.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/HS_FA_BIG.png  used on input line 3009.
 (pdftex.def)             Requested size: 295.72083pt x 71.63803pt.
-<Images/Results/Classic_procedure/Verification_single/st/HS_FA_LIT.png, id=1037, 432.11438pt x 102.88437pt>
+<Images/Results/Classic_procedure/Verification_single/st/HS_FA_LIT.png, id=1100, 432.11438pt x 102.88437pt>
 File: Images/Results/Classic_procedure/Verification_single/st/HS_FA_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_single/st/HS_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/HS_FA_LIT.png  used on input line 2881.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_single/st/HS_FA_LIT.png  used on input line 3009.
 (pdftex.def)             Requested size: 295.72083pt x 70.41257pt.
 
 
-[79 <./Images/Results/Verification_single_five_ten/st/five/VB_SL_LIT.png> <./Images/Results/Verification_single_five_ten/st/five/HS_SL_LIT.png> <./Images/Results/Verification_single_five_ten/st/five/VB_SL_BIG.png> <./Images/Results/Verification_single_five_ten/st/five/HS_SL_BIG.png> <./Images/Results/Verification_single_five_ten/st/five/VB_FA_LIT.png> <./Images/Results/Verification_single_five_ten/st/five/HS_FA_BIG.png> <./Images/Results/Verification_single_five_ten/st/five/HS_FA_LIT.png>]
-<Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_LIT.png, id=1050, 435.6275pt x 106.89937pt>
+[82 <./Images/Results/Verification_single_five_ten/st/five/VB_SL_LIT.png> <./Images/Results/Verification_single_five_ten/st/five/HS_SL_LIT.png> <./Images/Results/Verification_single_five_ten/st/five/VB_SL_BIG.png> <./Images/Results/Verification_single_five_ten/st/five/HS_SL_BIG.png> <./Images/Results/Verification_single_five_ten/st/five/VB_FA_LIT.png> <./Images/Results/Verification_single_five_ten/st/five/HS_FA_BIG.png> <./Images/Results/Verification_single_five_ten/st/five/HS_FA_LIT.png>]
+<Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_LIT.png, id=1113, 435.6275pt x 106.89937pt>
 File: Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_LIT.png  used on input line 2896.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_LIT.png  used on input line 3024.
 (pdftex.def)             Requested size: 295.72083pt x 72.56662pt.
-<Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_LIT.png, id=1051, 434.12187pt x 118.94438pt>
+<Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_LIT.png, id=1114, 434.12187pt x 118.94438pt>
 File: Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_LIT.png  used on input line 2896.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_LIT.png  used on input line 3024.
 (pdftex.def)             Requested size: 295.72083pt x 81.0281pt.
-<Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_BIG.png, id=1052, 437.13312pt x 110.4125pt>
+<Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_BIG.png, id=1115, 437.13312pt x 110.4125pt>
 File: Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_BIG.png  used on input line 2896.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_BIG.png  used on input line 3024.
 (pdftex.def)             Requested size: 295.72083pt x 74.69368pt.
-<Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_BIG.png, id=1053, 431.11063pt x 111.91812pt>
+<Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_BIG.png, id=1116, 431.11063pt x 111.91812pt>
 File: Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_BIG.png  used on input line 2896.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_BIG.png  used on input line 3024.
 (pdftex.def)             Requested size: 295.72083pt x 76.77274pt.
-<Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_LIT.png, id=1054, 434.12187pt x 102.88437pt>
+<Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_LIT.png, id=1117, 434.12187pt x 102.88437pt>
 File: Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_LIT.png  used on input line 2896.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_LIT.png  used on input line 3024.
 (pdftex.def)             Requested size: 295.72083pt x 70.0876pt.
-<Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_BIG.png, id=1055, 434.12187pt x 104.39pt>
+<Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_BIG.png, id=1118, 434.12187pt x 104.39pt>
 File: Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_BIG.png  used on input line 2896.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_BIG.png  used on input line 3024.
 (pdftex.def)             Requested size: 295.72083pt x 71.11327pt.
-<Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_LIT.png, id=1056, 435.6275pt x 103.88812pt>
+<Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_LIT.png, id=1119, 435.6275pt x 103.88812pt>
 File: Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_LIT.png  used on input line 2896.
+Package pdftex.def Info: Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_LIT.png  used on input line 3024.
 (pdftex.def)             Requested size: 295.72083pt x 70.5225pt.
 
 
-[80 <./Images/Results/Classic_procedure/Verification_single/st/VB_SL_LIT.png> <./Images/Results/Classic_procedure/Verification_single/st/HS_SL_LIT.png> <./Images/Results/Classic_procedure/Verification_single/st/VB_SL_BIG.png> <./Images/Results/Classic_procedure/Verification_single/st/HS_SL_BIG.png> <./Images/Results/Classic_procedure/Verification_single/st/VB_FA_LIT.png> <./Images/Results/Classic_procedure/Verification_single/st/HS_FA_BIG.png> <./Images/Results/Classic_procedure/Verification_single/st/HS_FA_LIT.png>]
-<Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_LIT.png, id=1069, 443.15562pt x 112.92188pt>
+[83 <./Images/Results/Classic_procedure/Verification_single/st/VB_SL_LIT.png> <./Images/Results/Classic_procedure/Verification_single/st/HS_SL_LIT.png> <./Images/Results/Classic_procedure/Verification_single/st/VB_SL_BIG.png> <./Images/Results/Classic_procedure/Verification_single/st/HS_SL_BIG.png> <./Images/Results/Classic_procedure/Verification_single/st/VB_FA_LIT.png> <./Images/Results/Classic_procedure/Verification_single/st/HS_FA_BIG.png> <./Images/Results/Classic_procedure/Verification_single/st/HS_FA_LIT.png>]
+<Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_LIT.png, id=1132, 443.15562pt x 112.92188pt>
 File: Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_LIT.png  used on input line 2912.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_LIT.png  used on input line 3040.
 (pdftex.def)             Requested size: 295.72083pt x 75.35744pt.
-<Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_LIT.png, id=1070, 427.5975pt x 107.40125pt>
+<Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_LIT.png, id=1133, 427.5975pt x 107.40125pt>
 File: Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_LIT.png  used on input line 2912.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_LIT.png  used on input line 3040.
 (pdftex.def)             Requested size: 295.72083pt x 74.27736pt.
-<Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_BIG.png, id=1071, 429.10312pt x 104.39pt>
+<Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_BIG.png, id=1134, 429.10312pt x 104.39pt>
 File: Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_BIG.png  used on input line 2912.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_BIG.png  used on input line 3040.
 (pdftex.def)             Requested size: 295.72083pt x 71.94154pt.
-<Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_BIG.png, id=1072, 427.5975pt x 109.91063pt>
+<Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_BIG.png, id=1135, 427.5975pt x 109.91063pt>
 File: Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_BIG.png  used on input line 2912.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_BIG.png  used on input line 3040.
 (pdftex.def)             Requested size: 295.72083pt x 76.01282pt.
-<Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_LIT.png, id=1073, 428.09938pt x 105.39375pt>
+<Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_LIT.png, id=1136, 428.09938pt x 105.39375pt>
 File: Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_LIT.png  used on input line 2912.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_LIT.png  used on input line 3040.
 (pdftex.def)             Requested size: 295.72083pt x 72.80377pt.
-<Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_BIG.png, id=1074, 438.63875pt x 109.91063pt>
+<Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_BIG.png, id=1137, 438.63875pt x 109.91063pt>
 File: Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_BIG.png  used on input line 2912.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_BIG.png  used on input line 3040.
 (pdftex.def)             Requested size: 295.72083pt x 74.10092pt.
-<Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_LIT.png, id=1075, 434.12187pt x 108.90688pt>
+<Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_LIT.png, id=1138, 434.12187pt x 108.90688pt>
 File: Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_LIT.png  used on input line 2912.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_LIT.png  used on input line 3040.
 (pdftex.def)             Requested size: 295.72083pt x 74.19028pt.
 
 
-[81 <./Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_LIT.png> <./Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_LIT.png> <./Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_BIG.png> <./Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_BIG.png> <./Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_LIT.png> <./Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_BIG.png> <./Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_LIT.png>]
-<Images/Results/Classic_procedure/five_ten/st/five/VB_SL_LIT.png, id=1088, 426.59375pt x 103.88812pt>
+[84 <./Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_LIT.png> <./Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_LIT.png> <./Images/Results/Classic_procedure/Verification_intruders/st/VB_SL_BIG.png> <./Images/Results/Classic_procedure/Verification_intruders/st/HS_SL_BIG.png> <./Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_LIT.png> <./Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_BIG.png> <./Images/Results/Classic_procedure/Verification_intruders/st/HS_FA_LIT.png>]
+<Images/Results/Classic_procedure/five_ten/st/five/VB_SL_LIT.png, id=1152, 426.59375pt x 103.88812pt>
 File: Images/Results/Classic_procedure/five_ten/st/five/VB_SL_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/five/VB_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/VB_SL_LIT.png  used on input line 2921.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/VB_SL_LIT.png  used on input line 3049.
 (pdftex.def)             Requested size: 295.72083pt x 72.02052pt.
-<Images/Results/Classic_procedure/five_ten/st/five/HS_SL_LIT.png, id=1089, 426.09187pt x 105.89563pt>
+<Images/Results/Classic_procedure/five_ten/st/five/HS_SL_LIT.png, id=1153, 426.09187pt x 105.89563pt>
 File: Images/Results/Classic_procedure/five_ten/st/five/HS_SL_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/five/HS_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/HS_SL_LIT.png  used on input line 2921.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/HS_SL_LIT.png  used on input line 3049.
 (pdftex.def)             Requested size: 295.72083pt x 73.49948pt.
-<Images/Results/Classic_procedure/five_ten/st/five/VB_SL_BIG.png, id=1090, 434.12187pt x 105.39375pt>
+<Images/Results/Classic_procedure/five_ten/st/five/VB_SL_BIG.png, id=1154, 434.12187pt x 105.39375pt>
 File: Images/Results/Classic_procedure/five_ten/st/five/VB_SL_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/five/VB_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/VB_SL_BIG.png  used on input line 2921.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/VB_SL_BIG.png  used on input line 3049.
 (pdftex.def)             Requested size: 295.72083pt x 71.79704pt.
-<Images/Results/Classic_procedure/five_ten/st/five/HS_SL_BIG.png, id=1091, 433.62pt x 102.88437pt>
+<Images/Results/Classic_procedure/five_ten/st/five/HS_SL_BIG.png, id=1155, 433.62pt x 102.88437pt>
 File: Images/Results/Classic_procedure/five_ten/st/five/HS_SL_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/five/HS_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/HS_SL_BIG.png  used on input line 2921.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/HS_SL_BIG.png  used on input line 3049.
 (pdftex.def)             Requested size: 295.72083pt x 70.16924pt.
-<Images/Results/Classic_procedure/five_ten/st/five/VB_FA_LIT.png, id=1092, 428.09938pt x 102.88437pt>
+<Images/Results/Classic_procedure/five_ten/st/five/VB_FA_LIT.png, id=1156, 428.09938pt x 102.88437pt>
 File: Images/Results/Classic_procedure/five_ten/st/five/VB_FA_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/five/VB_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/VB_FA_LIT.png  used on input line 2921.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/VB_FA_LIT.png  used on input line 3049.
 (pdftex.def)             Requested size: 295.72083pt x 71.07034pt.
-<Images/Results/Classic_procedure/five_ten/st/five/HS_FA_BIG.png, id=1093, 442.65375pt x 104.39pt>
+<Images/Results/Classic_procedure/five_ten/st/five/HS_FA_BIG.png, id=1157, 442.65375pt x 104.39pt>
 File: Images/Results/Classic_procedure/five_ten/st/five/HS_FA_BIG.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/five/HS_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/HS_FA_BIG.png  used on input line 2921.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/HS_FA_BIG.png  used on input line 3049.
 (pdftex.def)             Requested size: 295.72083pt x 69.74341pt.
-<Images/Results/Classic_procedure/five_ten/st/five/HS_FA_LIT.png, id=1094, 426.59375pt x 105.89563pt>
+<Images/Results/Classic_procedure/five_ten/st/five/HS_FA_LIT.png, id=1158, 426.59375pt x 105.89563pt>
 File: Images/Results/Classic_procedure/five_ten/st/five/HS_FA_LIT.png Graphic file (type png)
 <use Images/Results/Classic_procedure/five_ten/st/five/HS_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/HS_FA_LIT.png  used on input line 2921.
+Package pdftex.def Info: Images/Results/Classic_procedure/five_ten/st/five/HS_FA_LIT.png  used on input line 3049.
 (pdftex.def)             Requested size: 295.72083pt x 73.41222pt.
 
 
-[82 <./Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_LIT.png> <./Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_LIT.png> <./Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_BIG.png> <./Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_BIG.png> <./Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_LIT.png> <./Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_BIG.png> <./Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_LIT.png>]
-<Images/Results/Verification_single/ft/VB_SL_LIT.png, id=1107, 441.65pt x 107.40125pt>
+[85 <./Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_LIT.png> <./Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_LIT.png> <./Images/Results/Classic_procedure/five_ten/st/ten/VB_SL_BIG.png> <./Images/Results/Classic_procedure/five_ten/st/ten/HS_SL_BIG.png> <./Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_LIT.png> <./Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_BIG.png> <./Images/Results/Classic_procedure/five_ten/st/ten/HS_FA_LIT.png>]
+<Images/Results/Verification_single/ft/VB_SL_LIT.png, id=1171, 441.65pt x 107.40125pt>
 File: Images/Results/Verification_single/ft/VB_SL_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single/ft/VB_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single/ft/VB_SL_LIT.png  used on input line 2936.
+Package pdftex.def Info: Images/Results/Verification_single/ft/VB_SL_LIT.png  used on input line 3064.
 (pdftex.def)             Requested size: 295.72083pt x 71.91748pt.
-<Images/Results/Verification_single/ft/HS_SL_LIT.png, id=1108, 437.13312pt x 102.3825pt>
+<Images/Results/Verification_single/ft/HS_SL_LIT.png, id=1172, 437.13312pt x 102.3825pt>
 File: Images/Results/Verification_single/ft/HS_SL_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single/ft/HS_SL_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single/ft/HS_SL_LIT.png  used on input line 2936.
+Package pdftex.def Info: Images/Results/Verification_single/ft/HS_SL_LIT.png  used on input line 3064.
 (pdftex.def)             Requested size: 295.72083pt x 69.26141pt.
-<Images/Results/Verification_single/ft/HS_SL_BIG.png, id=1109, 435.6275pt x 109.91063pt>
+<Images/Results/Verification_single/ft/HS_SL_BIG.png, id=1173, 435.6275pt x 109.91063pt>
 File: Images/Results/Verification_single/ft/HS_SL_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single/ft/HS_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single/ft/HS_SL_BIG.png  used on input line 2936.
+Package pdftex.def Info: Images/Results/Verification_single/ft/HS_SL_BIG.png  used on input line 3064.
 (pdftex.def)             Requested size: 295.72083pt x 74.61076pt.
-<Images/Results/Verification_single/ft/VB_SL_BIG.png, id=1110, 432.61626pt x 102.88437pt>
+<Images/Results/Verification_single/ft/VB_SL_BIG.png, id=1174, 432.61626pt x 102.88437pt>
 File: Images/Results/Verification_single/ft/VB_SL_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single/ft/VB_SL_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single/ft/VB_SL_BIG.png  used on input line 2936.
+Package pdftex.def Info: Images/Results/Verification_single/ft/VB_SL_BIG.png  used on input line 3064.
 (pdftex.def)             Requested size: 295.72083pt x 70.33093pt.
-<Images/Results/Verification_single/ft/HS_FA_LIT.png, id=1111, 426.09187pt x 105.89563pt>
+<Images/Results/Verification_single/ft/HS_FA_LIT.png, id=1175, 426.09187pt x 105.89563pt>
 File: Images/Results/Verification_single/ft/HS_FA_LIT.png Graphic file (type png)
 <use Images/Results/Verification_single/ft/HS_FA_LIT.png>
-Package pdftex.def Info: Images/Results/Verification_single/ft/HS_FA_LIT.png  used on input line 2936.
+Package pdftex.def Info: Images/Results/Verification_single/ft/HS_FA_LIT.png  used on input line 3064.
 (pdftex.def)             Requested size: 295.72083pt x 73.49948pt.
-<Images/Results/Verification_single/ft/HS_FA_BIG.png, id=1112, 432.61626pt x 104.39pt>
+<Images/Results/Verification_single/ft/HS_FA_BIG.png, id=1176, 432.61626pt x 104.39pt>
 File: Images/Results/Verification_single/ft/HS_FA_BIG.png Graphic file (type png)
 <use Images/Results/Verification_single/ft/HS_FA_BIG.png>
-Package pdftex.def Info: Images/Results/Verification_single/ft/HS_FA_BIG.png  used on input line 2936.
+Package pdftex.def Info: Images/Results/Verification_single/ft/HS_FA_BIG.png  used on input line 3064.
 (pdftex.def)             Requested size: 295.72083pt x 71.36015pt.
 
 
-[83 <./Images/Results/Classic_procedure/five_ten/st/five/VB_SL_LIT.png> <./Images/Results/Classic_procedure/five_ten/st/five/HS_SL_LIT.png> <./Images/Results/Classic_procedure/five_ten/st/five/VB_SL_BIG.png> <./Images/Results/Classic_procedure/five_ten/st/five/HS_SL_BIG.png> <./Images/Results/Classic_procedure/five_ten/st/five/VB_FA_LIT.png> <./Images/Results/Classic_procedure/five_ten/st/five/HS_FA_BIG.png> <./Images/Results/Classic_procedure/five_ten/st/five/HS_FA_LIT.png>]
+[86 <./Images/Results/Classic_procedure/five_ten/st/five/VB_SL_LIT.png> <./Images/Results/Classic_procedure/five_ten/st/five/HS_SL_LIT.png> <./Images/Results/Classic_procedure/five_ten/st/five/VB_SL_BIG.png> <./Images/Results/Classic_procedure/five_ten/st/five/HS_SL_BIG.png> <./Images/Results/Classic_procedure/five_ten/st/five/VB_FA_LIT.png> <./Images/Results/Classic_procedure/five_ten/st/five/HS_FA_BIG.png> <./Images/Results/Classic_procedure/five_ten/st/five/HS_FA_LIT.png>]
+<Images/Results/Verification_single_intruders/ft/VB_SL_LIT.png, id=1189, 435.6275pt x 106.89937pt>
+File: Images/Results/Verification_single_intruders/ft/VB_SL_LIT.png Graphic file (type png)
+<use Images/Results/Verification_single_intruders/ft/VB_SL_LIT.png>
+Package pdftex.def Info: Images/Results/Verification_single_intruders/ft/VB_SL_LIT.png  used on input line 3078.
+(pdftex.def)             Requested size: 295.72083pt x 72.56662pt.
+<Images/Results/Verification_single_intruders/ft/HS_SL_LIT.png, id=1190, 436.63126pt x 105.89563pt>
+File: Images/Results/Verification_single_intruders/ft/HS_SL_LIT.png Graphic file (type png)
+<use Images/Results/Verification_single_intruders/ft/HS_SL_LIT.png>
+Package pdftex.def Info: Images/Results/Verification_single_intruders/ft/HS_SL_LIT.png  used on input line 3078.
+(pdftex.def)             Requested size: 295.72083pt x 71.72044pt.
+<Images/Results/Verification_single_intruders/ft/HS_SL_BIG.png, id=1191, 432.61626pt x 102.88437pt>
+File: Images/Results/Verification_single_intruders/ft/HS_SL_BIG.png Graphic file (type png)
+<use Images/Results/Verification_single_intruders/ft/HS_SL_BIG.png>
+Package pdftex.def Info: Images/Results/Verification_single_intruders/ft/HS_SL_BIG.png  used on input line 3078.
+(pdftex.def)             Requested size: 295.72083pt x 70.33093pt.
+<Images/Results/Verification_single_intruders/ft/VB_SL_BIG.png, id=1192, 432.61626pt x 108.90688pt>
+File: Images/Results/Verification_single_intruders/ft/VB_SL_BIG.png Graphic file (type png)
+<use Images/Results/Verification_single_intruders/ft/VB_SL_BIG.png>
+Package pdftex.def Info: Images/Results/Verification_single_intruders/ft/VB_SL_BIG.png  used on input line 3078.
+(pdftex.def)             Requested size: 295.72083pt x 74.44786pt.
+<Images/Results/Verification_single_intruders/ft/HS_FA_LIT.png, id=1193, 426.09187pt x 100.87688pt>
+File: Images/Results/Verification_single_intruders/ft/HS_FA_LIT.png Graphic file (type png)
+<use Images/Results/Verification_single_intruders/ft/HS_FA_LIT.png>
+Package pdftex.def Info: Images/Results/Verification_single_intruders/ft/HS_FA_LIT.png  used on input line 3078.
+(pdftex.def)             Requested size: 295.72083pt x 70.01608pt.
+<Images/Results/Verification_single_intruders/ft/HS_FA_BIG.png, id=1194, 435.6275pt x 110.4125pt>
+File: Images/Results/Verification_single_intruders/ft/HS_FA_BIG.png Graphic file (type png)
+<use Images/Results/Verification_single_intruders/ft/HS_FA_BIG.png>
+Package pdftex.def Info: Images/Results/Verification_single_intruders/ft/HS_FA_BIG.png  used on input line 3078.
+(pdftex.def)             Requested size: 295.72083pt x 74.95145pt.
 
-[84 <./Images/Results/Verification_single/ft/VB_SL_LIT.png> <./Images/Results/Verification_single/ft/HS_SL_LIT.png> <./Images/Results/Verification_single/ft/HS_SL_BIG.png> <./Images/Results/Verification_single/ft/VB_SL_BIG.png> <./Images/Results/Verification_single/ft/HS_FA_LIT.png> <./Images/Results/Verification_single/ft/HS_FA_BIG.png>] (thesis.aux)
+
+[87 <./Images/Results/Verification_single/ft/VB_SL_LIT.png> <./Images/Results/Verification_single/ft/HS_SL_LIT.png> <./Images/Results/Verification_single/ft/HS_SL_BIG.png> <./Images/Results/Verification_single/ft/VB_SL_BIG.png> <./Images/Results/Verification_single/ft/HS_FA_LIT.png> <./Images/Results/Verification_single/ft/HS_FA_BIG.png>]
+<Images/Results/Verification_single_five_ten/ft/ten/VB_SL_LIT.png, id=1206, 422.07687pt x 107.40125pt>
+File: Images/Results/Verification_single_five_ten/ft/ten/VB_SL_LIT.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/ten/VB_SL_LIT.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/ten/VB_SL_LIT.png  used on input line 3094.
+(pdftex.def)             Requested size: 295.72083pt x 75.25081pt.
+<Images/Results/Verification_single_five_ten/ft/ten/HS_SL_LIT.png, id=1207, 423.5825pt x 104.39pt>
+File: Images/Results/Verification_single_five_ten/ft/ten/HS_SL_LIT.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/ten/HS_SL_LIT.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/ten/HS_SL_LIT.png  used on input line 3094.
+(pdftex.def)             Requested size: 295.72083pt x 72.88133pt.
+<Images/Results/Verification_single_five_ten/ft/ten/VB_SL_BIG.png, id=1208, 435.12563pt x 96.36pt>
+File: Images/Results/Verification_single_five_ten/ft/ten/VB_SL_BIG.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/ten/VB_SL_BIG.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/ten/VB_SL_BIG.png  used on input line 3094.
+(pdftex.def)             Requested size: 295.72083pt x 65.49156pt.
+<Images/Results/Verification_single_five_ten/ft/ten/HS_SL_BIG.png, id=1209, 447.17062pt x 107.40125pt>
+File: Images/Results/Verification_single_five_ten/ft/ten/HS_SL_BIG.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/ten/HS_SL_BIG.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/ten/HS_SL_BIG.png  used on input line 3094.
+(pdftex.def)             Requested size: 295.72083pt x 71.0276pt.
+<Images/Results/Verification_single_five_ten/ft/ten/VB_FA_BIG.png, id=1210, 412.54124pt x 98.3675pt>
+File: Images/Results/Verification_single_five_ten/ft/ten/VB_FA_BIG.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/ten/VB_FA_BIG.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/ten/VB_FA_BIG.png  used on input line 3094.
+(pdftex.def)             Requested size: 295.72083pt x 70.51382pt.
+<Images/Results/Verification_single_five_ten/ft/ten/HS_FA_BIG.png, id=1211, 425.08812pt x 104.39pt>
+File: Images/Results/Verification_single_five_ten/ft/ten/HS_FA_BIG.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/ten/HS_FA_BIG.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/ten/HS_FA_BIG.png  used on input line 3094.
+(pdftex.def)             Requested size: 295.72083pt x 72.6249pt.
+<Images/Results/Verification_single_five_ten/ft/ten/HS_FA_LIT.png, id=1212, 422.07687pt x 99.87312pt>
+File: Images/Results/Verification_single_five_ten/ft/ten/HS_FA_LIT.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/ten/HS_FA_LIT.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/ten/HS_FA_LIT.png  used on input line 3094.
+(pdftex.def)             Requested size: 295.72083pt x 69.97623pt.
+
+
+[88 <./Images/Results/Verification_single_intruders/ft/VB_SL_LIT.png> <./Images/Results/Verification_single_intruders/ft/HS_SL_LIT.png> <./Images/Results/Verification_single_intruders/ft/HS_SL_BIG.png> <./Images/Results/Verification_single_intruders/ft/VB_SL_BIG.png> <./Images/Results/Verification_single_intruders/ft/HS_FA_LIT.png> <./Images/Results/Verification_single_intruders/ft/HS_FA_BIG.png>]
+<Images/Results/Verification_single_five_ten/ft/five/VB_SL_LIT.png, id=1224, 422.07687pt x 108.90688pt>
+File: Images/Results/Verification_single_five_ten/ft/five/VB_SL_LIT.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/five/VB_SL_LIT.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/five/VB_SL_LIT.png  used on input line 3103.
+(pdftex.def)             Requested size: 295.72083pt x 76.30573pt.
+<Images/Results/Verification_single_five_ten/ft/five/HS_SL_LIT.png, id=1225, 431.11063pt x 107.40125pt>
+File: Images/Results/Verification_single_five_ten/ft/five/HS_SL_LIT.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/five/HS_SL_LIT.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/five/HS_SL_LIT.png  used on input line 3103.
+(pdftex.def)             Requested size: 295.72083pt x 73.67429pt.
+<Images/Results/Verification_single_five_ten/ft/five/VB_SL_BIG.png, id=1226, 446.16687pt x 102.3825pt>
+File: Images/Results/Verification_single_five_ten/ft/five/VB_SL_BIG.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/five/VB_SL_BIG.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/five/VB_SL_BIG.png  used on input line 3103.
+(pdftex.def)             Requested size: 295.72083pt x 67.8601pt.
+<Images/Results/Verification_single_five_ten/ft/five/HS_SL_BIG.png, id=1227, 441.65pt x 108.405pt>
+File: Images/Results/Verification_single_five_ten/ft/five/HS_SL_BIG.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/five/HS_SL_BIG.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/five/HS_SL_BIG.png  used on input line 3103.
+(pdftex.def)             Requested size: 295.72083pt x 72.5896pt.
+<Images/Results/Verification_single_five_ten/ft/five/VB_FA_BIG.png, id=1228, 421.575pt x 102.88437pt>
+File: Images/Results/Verification_single_five_ten/ft/five/VB_FA_BIG.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/five/VB_FA_BIG.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/five/VB_FA_BIG.png  used on input line 3103.
+(pdftex.def)             Requested size: 295.72083pt x 72.17084pt.
+<Images/Results/Verification_single_five_ten/ft/five/HS_FA_BIG.png, id=1229, 425.08812pt x 106.89937pt>
+File: Images/Results/Verification_single_five_ten/ft/five/HS_FA_BIG.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/five/HS_FA_BIG.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/five/HS_FA_BIG.png  used on input line 3103.
+(pdftex.def)             Requested size: 295.72083pt x 74.37068pt.
+<Images/Results/Verification_single_five_ten/ft/five/HS_FA_LIT.png, id=1230, 423.5825pt x 105.89563pt>
+File: Images/Results/Verification_single_five_ten/ft/five/HS_FA_LIT.png Graphic file (type png)
+<use Images/Results/Verification_single_five_ten/ft/five/HS_FA_LIT.png>
+Package pdftex.def Info: Images/Results/Verification_single_five_ten/ft/five/HS_FA_LIT.png  used on input line 3103.
+(pdftex.def)             Requested size: 295.72083pt x 73.93251pt.
+
+
+[89 <./Images/Results/Verification_single_five_ten/ft/ten/VB_SL_LIT.png> <./Images/Results/Verification_single_five_ten/ft/ten/HS_SL_LIT.png> <./Images/Results/Verification_single_five_ten/ft/ten/VB_SL_BIG.png> <./Images/Results/Verification_single_five_ten/ft/ten/HS_SL_BIG.png> <./Images/Results/Verification_single_five_ten/ft/ten/VB_FA_BIG.png> <./Images/Results/Verification_single_five_ten/ft/ten/HS_FA_BIG.png> <./Images/Results/Verification_single_five_ten/ft/ten/HS_FA_LIT.png>]
+
+[90 <./Images/Results/Verification_single_five_ten/ft/five/VB_SL_LIT.png> <./Images/Results/Verification_single_five_ten/ft/five/HS_SL_LIT.png> <./Images/Results/Verification_single_five_ten/ft/five/VB_SL_BIG.png> <./Images/Results/Verification_single_five_ten/ft/five/HS_SL_BIG.png> <./Images/Results/Verification_single_five_ten/ft/five/VB_FA_BIG.png> <./Images/Results/Verification_single_five_ten/ft/five/HS_FA_BIG.png> <./Images/Results/Verification_single_five_ten/ft/five/HS_FA_LIT.png>] (thesis.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-09-02>
  ***********
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: D9765CE6321F074BDDAA3A0F1451B901;20569.
+(rerunfilecheck)             Checksum: 0406B00927B2B7FAD5BB8E4FB9984132;21781.
 Package logreq Info: Writing requests to 'thesis.run.xml'.
 \openout1 = `thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42491 strings out of 468130
- 1000238 string characters out of 5430633
- 1901882 words of memory out of 5000000
- 70051 multiletter control sequences out of 15000+600000
- 706233 words of font info for 198 fonts, out of 8000000 for 9000
+ 42736 strings out of 468130
+ 1016105 string characters out of 5430633
+ 1902621 words of memory out of 5000000
+ 70275 multiletter control sequences out of 15000+600000
+ 706298 words of font info for 199 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,9n,105p,1067b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx7.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi7.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/Users/david/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on thesis.pdf (85 pages, 5991303 bytes).
+Output written on thesis.pdf (91 pages, 7985433 bytes).
 PDF statistics:
- 1263 PDF objects out of 1440 (max. 8388607)
- 222 named destinations out of 1000 (max. 500000)
- 46756 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 1386 PDF objects out of 1440 (max. 8388607)
+ 241 named destinations out of 1000 (max. 500000)
+ 46930 words of extra memory for PDF output out of 51595 (max. 10000000)
 

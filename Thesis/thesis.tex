@@ -1005,6 +1005,7 @@ Before each session, participants were simply instructed to observe the content 
 The user is positioned approximately 50–60 cm from the monitor, with a possible additional adjustment of up to 15 cm to ensure a comfortable viewing angle for the eye tracker.
 
 \subsection{Stimuli}
+\label{subsec:stimuli}
 
 Since the field of gaze-based biometrics using dynamic text is largely unexplored, it was challenging to determine which types of stimuli would be most suitable to select.
 The initial idea was to use a white rectangular block containing black text, displayed against a black background, which moved by bouncing off the screen borders until the animation time expired.
@@ -2718,15 +2719,221 @@ In summary, this evaluation generally surpasses the previous approach in all asp
 
 \FloatBarrier
 
-
 \subsection{Static vs Dinamic text}
 \label{subsec:s_vs_d}
 
+The final part of the machine learning analysis presents a direct comparison between static and dynamic text under comparable experimental conditions.
+Data collection was conducted with eight participants, comprising seven males and one female, the majority of whom were laboratory staff.
+Among the participants, three were aged between 20 and 30 years, one between 31 and 40 years, one between 41 and 50 years, two between 51 and 60 years, and one participant was over 60 years old.
+Additionally, five participants wore eyeglasses, while none used contact lenses.
 
-\newpage
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.7
+    \textwidth]{Images/Experiment/static_vs_dynamic.png}
+    \caption{Data from Participants Involved in the Experiment}
+    \label{fig:tester_8}
+\end{figure}
+
+A detailed overview is presented in table \ref{fig:tester_8}.
+
+The presented stimuli differ in order to represent the characteristics of the two text modalities: static and dynamic.
+The dynamic text consists of two types of animations, Vertical Block and Horizontal Scroll, each combined with two display speeds and two character sizes, resulting in a total of eight animations. 
+These are the same stimuli described in Section \ref{subsec:stimuli}.
+
+In contrast, the static text includes only two animations, both derived from the Vertical Block configuration.
+The Horizontal Scroll format was excluded, as displaying a static line of text without movement would eliminate the purpose and meaning of the scrolling mechanism.
+
+The animations used for the static text are:
+\begin{itemize}
+\item Vertical Block – Big: This animation displays text occupying two-thirds of the screen width, with a font size of 60 pixels. 
+It mirrors the dynamic version of the same animation.
+However, instead of vertically scrolling text, the full content is visible from the start.
+\item Vertical Block – Small: This animation is a smaller variant of the Vertical Block used in the dynamic condition. 
+It also occupies two-thirds of the screen width, featuring a static text block with a font size of 30 pixels.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Images/Experiment/BIG_static.png}
+        \caption{Vertical Block – Big}
+        \label{fig:static_big}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Images/Experiment/LIT_static.png}
+        \caption{Vertical Block – Small}
+        \label{fig:static_small}
+    \end{subfigure}
+    \caption{Different type of static animations}
+    \label{fig:statics}
+\end{figure}
+
+Prior to the presentation of each animation within a trial, a fixation stimulus consisting of a white cross displayed at the center of a black screen was shown. 
+This visual marker served as an anchor point, ensuring that participants’ gaze was directed toward a consistent location before the onset of each animation.
+
+The inclusion of this fixation phase fulfilled two key purposes. 
+First, it standardized the initial gaze position across participants and trials, thereby minimizing variability that could compromise gaze-tracking precision. 
+Second, it ensured that participants were visually attentive and prepared for the subsequent stimulus. 
+Together, these factors enhanced the reliability of the recorded data by controlling for differences in initial eye position, which is a crucial aspect in gaze-based biometric research where even small deviations can affect performance outcomes.
+
+Each trial consisted of two animations, each lasting 15 seconds. 
+Before the onset of every animation, a 2-second fixation cross was displayed, resulting in a total duration of 46 seconds per trial.
+Each participant completed three trials in a single session, amounting to 138 seconds, equivalent to approximately 2 minutes and 18 seconds per session.
+Across the three sessions conducted on the same day, the total experimental exposure time was 414 seconds, corresponding to approximately 6 minutes and 54 seconds of participation.
+
+After data collection, a machine learning analysis was conducted, focusing on both identification and verification tasks.
+The first stage involved performing an identification analysis without distinguishing between individual animations.
+Two types of data splits were considered: a random split and a session-based split.
+
+In the random split, the entire dataset was randomly divided into 80\% for training and 20\% for testing.
+A stratification procedure was applied based on the participant identifier to ensure a balanced distribution of samples across users, meaning that each participant contributed approximately 80\% of their data to the training set and 20\% to the test set.
+This process was repeated ten times to obtain averaged results and reduce the influence of chance variations due to any specific random split.
+
+In contrast, the session split approach used the data from the first two sessions (S1 and S2) for training and the data from the third session (S3) for testing.
+This configuration allows for assessing the model’s robustness when applied to data collected at different times.
+
+A GridSearchCV procedure was employed for both datasets to optimize hyperparameters, with the feature selection step omitted for simplicity.
+The classifiers and their corresponding parameter grids are presented in Appendix \ref{subsec:param}.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Images/Results/Static_Dynamic/id_moving.png}
+        \caption{Identification with dynamic text}
+        \label{fig:dyn_id}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Images/Results/Static_Dynamic/id_stat.png}
+        \caption{Identification with static text}
+        \label{fig:stat_id}
+    \end{subfigure}
+    \caption{Identification results}
+    \label{fig:id_stat_dyn}
+\end{figure}
+
+Figure \ref{fig:id_stat_dyn} shows the results obtained during the identification analysis. 
+In general, random splits yield higher accuracies compared to the static text stimuli. 
+For instance, the best result with this split is achieved using SVC, reaching an accuracy of 93.1\% for the static variation, whereas dynamic text reaches 90.78\% with an MLP classifier.
+
+The interesting property of the dynamic text is the way in which the results scale down with session split. 
+Even if static text reaches an accuracy of 85.42\% using MPL we can see that the overall results are generally lower than dynamic text variation. 
+As we noticed earlier infact, dynamic text stimuli mantain a comparable performance between random split and session split. 
+This is very important for us because session split will be the mode we will use in real life application. 
+The peak with this split is reached with 86.46\% using nuSVC.
+
+It should also be noted that the relatively high accuracies are partially due to the limited number of testers involved, which simplifies both identification and verification tasks. 
+Nevertheless, under similar experimental conditions, dynamic text stimuli demonstrate a promising property.
+
+We now move to the verification analysis to examine whether the properties observed in the identification stage are maintained in this context.
+The classifiers and the parameters used for hyperparameter tuning through GridSearchCV are the same as those described in the previous identification process.
+
+In verification, a separate model is trained for each user, and the same two data split strategies are employed, with some adaptations.
+
+For the random split, the training set for each model is composed of 80\% of the genuine user’s data, combined with an equal number of feature vectors randomly sampled from other users. 
+The model is then tested on the remaining 20\% of the genuine user’s data, together with an equal number of impostor samples not used during training.
+This process is repeated ten times with different random seeds to reduce randomness, and the final results represent the average performance across all trials.
+
+The session split is executed only once. 
+In this case, the training set consists of the data from the first two sessions (S1 and S2) of the genuine user, along with an equal number of samples randomly drawn from other users. 
+The test set includes the data of the third session (S3) of the genuine user and an equal amount of S3 data from impostors.
+The model is then evaluated on this configuration, and the results provide the average performance under this type of split.
+
+For this analysis, in addition to accuracy, precision, recall, specificity, and Equal Error Rate (EER) are also reported to provide a comprehensive evaluation of system performance.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Results/Static_Dynamic/Ver_mov.png}
+    \caption{Verification with dynamic text}
+    \label{fig:ver_dyn}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 0.6
+    \textwidth]{Images/Results/Static_Dynamic/Ver_stat.png}
+    \caption{Verification with dynamic text}
+    \label{fig:ver_stat}
+\end{figure}
+
+The results of the verification analysis for dynamic and static text are presented in Table \ref{fig:ver_dyn} and Table \ref{fig:ver_stat}, respectively.
+As shown, under the random split, the static text stimuli achieve slightly better performance, reaching an accuracy of 93.59\% with the Random Forest classifier, compared to 92.5\% for the dynamic text. 
+The Equal Error Rate (EER) follows the same trend, with the static text achieving 2.81\% versus 6.36\% for the dynamic variation.
+
+When examining the session split, we observe that the same property highlighted earlier still holds.
+Namely, the performance difference between random and session splits remains relatively small.
+In this case, the dynamic text reaches an accuracy of 92.19\% with the MLP classifier, compared to 87.5\% achieved by the static text using the same model. 
+However, the static text maintains a lower EER (4.17\%) compared to 6.77\% for the dynamic text.
+Overall, across both configurations, the static text consistently provides lower EER values, indicating a higher degree of reliability in terms of security performance.
+
+In conclusion, when considering the session split, which reflects the conditions of a real-world application, the dynamic text demonstrates higher accuracy, with minimal or negligible degradation compared to the random split.
+Conversely, the static text consistently achieves better EER values, making it more suitable for scenarios where security and low error rates are the primary concern.
+Therefore, a behavioral biometric system based on dynamic text is more appropriate when accuracy is the key performance indicator, whereas a static text-based approach is preferable in applications that prioritize security and robustness.
+
+\FloatBarrier
+
+
 \section{Conclusion}
-puo essere usata per l identificazione.
-Compara tutte e 4 le verifiche e dici qual è meglio per ogni situazione
+
+The present thesis aimed to investigate an unexplored soft biometric stimulus based on dynamic text. 
+To achieve this goal, two types of animations were designed: the Vertical Block Scroll (VB) and the Horizontal Scroll (HS), each implemented with two different scrolling speeds and two font sizes.
+This combination produced a total of eight distinct stimuli. 
+These animations were presented to thirty-five participants, who completed three trials on the same day, repeated across three separate sessions on different days. 
+This experimental design enabled the collection of a rich dataset of eye movement features through an eye-tracking device, providing the foundation for an extensive machine learning analysis.
+
+The first part of the study focused on the identification process, with the objective of evaluating the discriminative capability of the proposed stimuli. 
+Although soft biometric traits are most commonly applied in verification systems, several works have demonstrated their suitability for identification as well. 
+In this initial evaluation, when all animations were analyzed together, the system achieved a maximum accuracy of 67.62\% using an MLP classifier under the session split configuration. 
+This result, while moderate, confirmed the potential of the dynamic text-based stimuli as identifiable behavioral patterns.
+
+Following this, the analysis proceeded with the evaluation of each individual animation, tested under two distinct training modalities: Single Train (ST) and Full Train (FT). 
+The best performance in this phase was achieved using the ST configuration with the VB\_FA\_BIG animation, reaching an accuracy of 82.86\% with the SVC classifier. 
+This finding suggests that such an animation could be effectively employed in identification scenarios where this level of accuracy is sufficient for the intended application.
+
+The core of the thesis centered on the verification analysis, which constituted the most comprehensive and informative part of the research. 
+To ensure a thorough understanding of the system behavior, the verification study was divided into four experimental configurations, encompassing both ST and FT modalities, each examined under two evaluation strategies: one based on the best-performing model and the other evaluating all possible model pairs. 
+For each of these settings, additional analyses were conducted under closed-set and open-set conditions, as well as with reduced recording durations of ten and five seconds.
+
+It is important to note that the FT configuration, although more computationally demanding, integrates all animations in the training phase, while the ST configuration relies on a single animation. 
+Across all analyses, the best closed-set verification performance was obtained using the VB\_FA\_LIT animation under the FT configuration and best-model evaluation procedure, achieving an accuracy of 92.6\% and an Equal Error Rate (EER) of 4\%. 
+Conversely, the lowest EER was observed during the ST analysis with best-model evaluation, where the VB\_FA\_BIG animation reached an EER of 3.6\% and an accuracy of 92.2\% using the Random Forest classifier.
+These results collectively demonstrate the robustness and reliability of the proposed approach. 
+The experiments confirm that dynamic text stimuli can achieve both high accuracy and low error rates, making them a promising candidate for behavioral biometric verification systems. 
+Depending on the specific application requirements, different configurations may be preferred: the VB\_FA\_LIT animation proves optimal when maximizing overall accuracy is the main objective, while the VB\_FA\_BIG animation is more suitable when minimizing the error rate is of primary concern.
+
+In the open-set verification analysis, the highest accuracy was obtained using the Single Train (ST) configuration with the best-model evaluation strategy. 
+Under this setup, the system achieved an accuracy of 91.9\% with the SVC classifier and an Equal Error Rate (EER) of 6.1\%. 
+The lowest EER within the same analysis was also achieved under identical conditions and using the same animation. 
+Specifically, the NuSVC classifier reached an EER of 5.1\%, maintaining a high accuracy of 91.2\%.
+
+When examining the reduced-time analyses, the best result for the 10-second recordings was recorded under the Full Train (FT) configuration with the pairwise evaluation procedure. 
+In this case, the VB\_FA\_LIT animation achieved an accuracy of 92.7\% with the SVC classifier and an EER of 5.4\%. 
+The minimum EER for this duration was observed under the ST configuration, also with pairwise evaluation, where the VB\_FA\_BIG animation achieved 91.5\% accuracy using NuSVC, with an EER of 4.1\%.
+
+For the 5-second recordings, the best overall performance, both in terms of accuracy and EER, was achieved during the Verification “Classic” Single Animation with Reduced Session Duration - Full Train (FT) analysis. 
+In this case, the VB\_FA\_LIT animation reached an accuracy of 90.6\% with the NuSVC classifier and an EER of 6.4\%.
+
+Finally, a comparative analysis was conducted between dynamic and static text stimuli under similar experimental conditions.
+From this evaluation, two key observations emerged.
+First, the performance drop between the random split and session split was found to be minimal, and in some cases even negligible, when using dynamic text stimuli.
+This indicates that dynamic text maintains a consistent level of performance even when evaluated across different sessions, a valuable property for real-world biometric applications.
+Second, the Equal Error Rate (EER) consistently remained lower for static text stimuli compared to their dynamic counterparts, suggesting that static text provides a slightly stronger level of security and discrimination.
+
+In terms of quantitative results, the best performance for dynamic text in the verification task was obtained using the MLP classifier, achieving an accuracy of 92.19\% with an EER of 6.77\%.
+Conversely, the static text stimuli reached an accuracy of 87.5\%, also using MLP, but with a lower EER of 4.17\%.
+These findings highlight a trade-off between robustness and precision, where dynamic text offers greater consistency across sessions, while static text provides enhanced reliability in terms of error rate.
+
+Another important aspect to highlight is that the vertical block–based animations consistently achieved better results than the horizontal scroll–based ones across nearly all experimental conditions.
+
+In conclusion, the findings of this work demonstrate that dynamic text animations represent a promising and effective stimulus for behavioral biometric applications, offering both reliability and adaptability for real-world user authentication systems.
+
 \newpage
 
 \section{References}

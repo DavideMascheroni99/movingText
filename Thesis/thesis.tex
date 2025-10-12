@@ -116,9 +116,39 @@ This field aims to exploit individual differences in gaze behavior to achieve re
 The review discusses a wide range of methodological approaches, including systems inspired by ATM authentication processes, studies focusing on fixation and scanpath analysis, and works based on gaze velocity, pupil size, oculomotor dynamics, and head orientation.
 Through this discussion, the chapter outlines the evolution of gaze-based biometric research and clarifies the position and originality of the present study within this scientific landscape.
 
-After this theory introduction we will Finally move to the core of our work: 
+After this theoretical introduction, we move to the core of the project, which consists of an experiment focused on gaze-based biometrics using dynamic text as stimuli.
+A total of 35 participants took part in the study, each completing three trials per day, repeated over three different days, for a total of nine trials per participant.
+During each trial, participants were seated in front of a monitor on which a series of animations were displayed, while an eye tracker recorded their gaze behavior.
+The experimental stimuli consisted of two types of animations: a vertical block of text moving from the bottom to the top of the screen, and a horizontal scrolling line of text moving from left to right.
+Each of these animations was presented with two different speeds and two font sizes, resulting in a total of eight distinct stimuli.
 
+To proceed, a machine learning analysis is conducted using the previously constructed database, focusing on the tasks of identification and verification.
+The objective is to assess system performance across both tasks and identify the best-performing animation for potential real-world deployment.
+The first part of the analysis focuses on identification, formulated as a multiclass classification problem. 
 
+This evaluation is initially conducted using the complete dataset, followed by a detailed examination of each individual animation, which represents the primary focus of this study.
+The initial identification phase demonstrated the discriminative potential of gaze patterns elicited by these stimuli, achieving up to 67.6\% accuracy with an MLP classifier under session-based evaluation. 
+Following this, the analysis proceeded with the evaluation of each individual animation, tested under two distinct training modalities: Single Train (ST) and Full Train (FT). 
+The highest performance in this phase was obtained with the ST configuration using the VB\_FA\_BIG animation, achieving an accuracy of 82.86\% with the SVC classifier. 
+These results indicate that this animation can be effectively employed in identification scenarios where such a level of accuracy meets the application’s requirements.
+
+Subsequently, the analysis proceeds with the verification phase, which forms the central part of the study and provides the most complete assessment of the proposed gaze-based biometric system.
+The analysis explores several experimental configurations that vary in training modality (Single Train and Full Train), evaluation strategy (best-model and pairwise), and testing condition (closed-set, open-set, and reduced recording durations).
+A dedicated chapter is presented for each experimental configuration, detailing the methodology, results, and comparative discussion for every combination of training modality, evaluation strategy, and testing condition.
+
+Overall, the best verification performance was achieved using the VB\_FA\_LIT animation under the Full Train configuration and best-model evaluation, reaching an accuracy of 92.6\% and an Equal Error Rate (EER) of 4\%.
+The lowest EER, however, was obtained in the Single Train setup with the VB\_FA\_BIG animation, achieving 3.6\% EER and 92.2\% accuracy with the Random Forest classifier.
+In the open-set scenario, the system maintained strong performance, with the VB\_FA\_LIT animation and SVC classifier reaching 91.9\% accuracy and 6.1\% EER.
+When the recording duration was reduced, results remained robust.
+For 10-second recordings, the VB\_FA\_LIT animation achieved 92.7\% accuracy and 5.4\% EER using the Full Train configuration, while for 5-second recordings, it reached 90.6\% accuracy and 6.4\% EER with the NuSVC classifier.
+
+To conclude, a comparative analysis between dynamic and static text stimuli is presented.
+For this study, a similar data collection protocol was followed, consisting of three sessions of three trials each.
+Eight participants were involved to evaluate and compare the performance of the two methods.
+In terms of quantitative performance, the highest results for dynamic text in the verification task were achieved using the MLP classifier, reaching an accuracy of 92.19\% with an Equal Error Rate (EER) of 6.77\%.
+By comparison, static text stimuli obtained an accuracy of 87.5\%, also with MLP, but with a lower EER of 4.17\%.
+These results highlight a trade-off between robustness and precision: dynamic text offers greater consistency across sessions, while static text provides improved reliability in terms of error rate.
+Additionally, vertical block–based animations consistently outperformed horizontal scroll–based ones across nearly all experimental conditions, indicating their stronger suitability for gaze-based biometric applications.
 
 \newpage
 

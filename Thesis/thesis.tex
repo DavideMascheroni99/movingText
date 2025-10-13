@@ -1,13 +1,15 @@
 \documentclass{article}
+\usepackage[main=english, italian]{babel}
+\usepackage[utf8]{inputenc}  
+\usepackage[autostyle, english = american]{csquotes}
 \usepackage{graphicx} % Required for inserting images
 \usepackage[hidelinks]{hyperref}
 \urlstyle{sf}
 \usepackage[nottoc]{tocbibind}  
 \usepackage{verbatim} %Package per i commenti
-\usepackage[left=2.8cm,right=2.8cm,top=2cm,bottom=2cm]{geometry}
+\usepackage[a4paper, left=2.8cm, right=2.8cm, top=2cm, bottom=2cm]{geometry}
 \usepackage{subcaption}
 \usepackage[none]{hyphenat} 
-\usepackage[utf8]{inputenc}  
 \usepackage[T1]{fontenc}     
 \usepackage{lmodern}         
 \usepackage{microtype}      
@@ -22,7 +24,6 @@
 \usepackage{pgffor} % for \foreach
 
 
-
 \begin{document}
 \sloppy
 
@@ -32,7 +33,7 @@
 
     \vspace*{1cm}
     
-    \includegraphics[width=6cm]{Images/Theory/Logo_UNIPV.svg.png} 
+    \includegraphics[width=6cm]{Images/Theory/logo.png} 
     
     \vspace{1cm}
     
@@ -72,9 +73,44 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.7\baselineskip}
 \noindent
+In recent years, the technological landscape has advanced rapidly, enabling individuals to access portable devices such as personal computers and smartphones.
+While this evolution has greatly simplified many aspects of daily life, it has also introduced new and significant security challenges, particularly in the domain of user authentication.
+To address these concerns, this work proposes a novel approach grounded in the field of behavioral biometrics, aimed at providing an additional layer of security for personal devices.
+The goal of the proposed method is not to replace conventional authentication techniques, such as PIN codes or physiological biometric systems, but rather to complement them with an additional behavioral verification mechanism.
 
+Specifically, this study investigates gaze-based soft biometrics using simple dynamic text animations as visual stimuli.
+Two types of text movement are explored: a vertical block of text moving from bottom to top, and a horizontal scrolling line of text moving from left to right.
+Each animation type is further varied by combining two display speeds and two font sizes, resulting in a total of eight distinct dynamic text stimuli.
+Importantly, the proposed method does not require any preliminary calibration of the eye-tracking device, ensuring ease of deployment.
 
+Experimental data were collected from 35 participants, and subsequently analyzed through a series of machine learning algorithms addressing both identification and verification tasks.
+The obtained results are highly encouraging for both applications.
+In the identification scenario, the system achieved an accuracy of 82.86\% using a single animation stimulus.
+In the verification task, which represents the primary use case for soft biometric systems, the best performance reached an accuracy of 92.2\% with an Equal Error Rate (EER) of 3.6\%.
 \end{abstract}
+
+\begin{otherlanguage}{italian}
+  \renewcommand{\abstractname}{Sommario}
+  \begin{abstract}
+  \setlength{\parindent}{0pt}
+  \setlength{\parskip}{0.7\baselineskip}
+  \noindent
+  Negli ultimi anni, il panorama tecnologico è avanzato rapidamente, consentendo agli individui di accedere a dispositivi portatili come computer personali e smartphone.
+  Sebbene questa evoluzione abbia notevolmente semplificato molti aspetti della vita quotidiana, ha anche introdotto nuove e significative sfide in termini di sicurezza, in particolare nel campo dell’autenticazione degli utenti.
+  Per affrontare queste problematiche, questo lavoro propone un approccio innovativo basato sulla disciplina delle biometrie comportamentali, con l’obiettivo di fornire un ulteriore livello di sicurezza per i dispositivi personali.
+  Lo scopo del metodo proposto non è sostituire le tecniche di autenticazione convenzionali, come i codici PIN o i sistemi biometrici fisiologici, bensì affiancarle con un meccanismo di verifica comportamentale aggiuntivo.
+
+  In particolare, questo studio indaga l’uso di biometrie comportamentali basate sullo sguardo (gaze-based soft biometrics) impiegando semplici animazioni di testo dinamico come stimoli visivi.
+  Sono stati esplorati due tipi di movimento del testo: un blocco verticale di testo che si muove dal basso verso l’alto e una linea orizzontale scorrevole che si muove da sinistra a destra.
+  Ciascun tipo di animazione è stato ulteriormente variato combinando due velocità di scorrimento e due dimensioni dei caratteri, per un totale di otto differenti stimoli di testo dinamico.
+  È importante sottolineare che il metodo proposto non richiede alcuna calibrazione preliminare del dispositivo di eye tracking, garantendo così una maggiore semplicità di utilizzo.
+
+  I dati sperimentali sono stati raccolti da 35 partecipanti e successivamente analizzati mediante una serie di algoritmi di apprendimento automatico applicati ai compiti di identificazione e verifica.
+  I risultati ottenuti sono molto incoraggianti per entrambe le applicazioni.
+  Nel caso dell’identificazione, il sistema ha raggiunto una accuratezza dell’82.86\% utilizzando un singolo stimolo di animazione.
+  Nel compito di verifica, che rappresenta l’applicazione principale dei sistemi biometrici comportamentali, la migliore prestazione ha raggiunto una accuratezza del 92.2\% con un Equal Error Rate (EER) del 3.6\%.
+  \end{abstract}
+\end{otherlanguage}
 \newpage
 
 \section{Introduction}
@@ -1000,25 +1036,25 @@ In the study by Wierzbowski et al. [86], involving 43 participants, the authors 
 Using deep learning and classical statistical methods, we achieved up to 75\% average identification accuracy, demonstrating the potential for VR user identification under unforced conditions.
 \newpage
 
-\section{Experiment on Gaze-based Biometric with dynamic text}
+\section{Experiments}
 
 Considering the advantages offered by behavioral biometric approaches, this research aims to investigate their effectiveness in the context of a novel application.
-In particular the thesis will focus on a specific field of research of this discipline called Gaze-based biometric.
-Gaze biometric is a field which investigate the behaviour from a user that reacts to a visual stimulus.
+In particular the thesis will focus on a specific field of research in this discipline called Gaze-based biometric.
+Gaze-based biometrics is a field that investigates the behaviour of a user who reacts to a visual stimulus.
 In this study, we propose to record subjects gaze patterns using an eye-tracking device, capturing a range of descriptive features.
 The analysis will focus on identifying the specific points of visual attention and extracting meaningful information from these gaze behaviors.
 This approach not only allows for a detailed characterization of individual visual patterns but also facilitates the development of models to evaluate their performance in both identification and verification tasks.
-There are two types of stimuli that can be used for Gaze-based biometric: Static stimulus or dynamic stimulus.
+There are two types of stimuli that can be used for Gaze-based biometrics: Static stimuli or dynamic stimuli.
 A static stimulus refers to an object displayed on the screen that remains fixed, such as a still image, whereas a dynamic stimulus involves an animation that changes its properties or behavior over time.
 In this work, we employed a dynamic stimulus consisting of moving text that changes its position over time.
-The stimulus was designed with two speed conditions (slow and fast) and two font sizes (small and large), resulting in a total of eight distinct animations.
+The stimulus was designed with two speed conditions (slow and fast) and two font sizes (small and large), resulting in a total of eight distinct stimuli.
 We selected dynamic text as our stimulus because this area remains largely unexplored in the context of gaze-based biometrics.
 In contrast, previous studies proposed by Holland et al. [54] and Bednarik et al. [62], have primarily focused on static text stimuli for biometric applications.
 The objective of this research is to apply machine learning techniques to evaluate the performance, for identification and verification, of these kinds of stimuli and determine the most effective animation. 
-Although prior studies have examined static text, we also conducted a preliminary experiment with static text to enable a direct comparison, since the previously reported tests were carried out under different conditions than ours.
+Although these prior studies have examined static text, we also conducted a preliminary experiment with static text to enable a direct comparison under the same experimental conditions.
 
 \subsection{Set up}
-At the beginning, before starting the analysis, a phase used to collect the data and create the dataset was performed.
+At the beginning, before starting the analysis, a phase was performed to collect the data and create the dataset.
 The data collection involved 35 participants, including 22 males and 13 females, the majority of whom were university students.
 Of the participants, 17 were aged 25 or younger, 13 were between 26 and 40 years old, and 4 were over 40. 
 Additionally, 18 wore eyeglasses, while only one wore contact lenses.
@@ -1035,7 +1071,7 @@ A detailed overview is provided in Figure \ref{fig:test}.
 
 All recordings were carried out under identical artificial lighting conditions, with the same light source activated for each session.
 The experiments took place in a quiet environment, free from noise and distractions, using an eye tracker mounted on a monitor to record participants' gaze. 
-No additional information regarding the task was provided to the participants aside from the instruction to read or follow the text, even when it appeared at higher speeds. 
+No additional information regarding the task was provided to the participants aside from the instruction to read and follow the text, even when it moved fast. 
 Furthermore, no participant was exposed to any of the texts or animations prior to their first trial, ensuring unbiased and spontaneous responses throughout the experiment.
 
 The participant was seated on a height-adjustable chair and asked to observe the stimuli presented on the monitor. 
@@ -1043,7 +1079,7 @@ The monitor, a 23-inch display with a resolution of 1920×1080 pixels (full-HD),
 Research carried out in controlled laboratory settings with high-frequency eye trackers, often requiring the use of a chin rest, has demonstrated that very high recognition rates can be achieved [89].
 However, such conditions are not realistic for practical applications, as high-frequency devices are costly and the use of a chin rest is inconvenient for everyday scenarios. 
 In real-world contexts, lower-frequency eye trackers should be employed without physically constraining the user's head. 
-For this reason the eye tracker used was a GazePoint GP3, configured with a data sampling rate of 150 Hz, and employed in our experiments without head restraints.
+For this reason the eye tracker used was a GazePoint GP3\_HD, configured with a data sampling rate of 150 Hz, and employed in our experiments without head restraints.
 We also chose to conduct the recordings without calibration. 
 While calibration is typically a short procedure, lasting between 15 and 30 seconds, it inevitably lengthens the overall authentication process and can become inconvenient or even frustrating for users. 
 More importantly, although calibration is generally straightforward in controlled laboratory conditions, it is far less reliable in real-world contexts. 
@@ -1054,42 +1090,46 @@ Nevertheless, we consider this approach to be more practical and representative 
 With regard to the experimental procedure, each participant completed nine trials, organized into three separate sessions (S1, S2, and S3).
 Each session was conducted on a different day, with the second and third sessions occurring no more than a month after the preceding ones. 
 Consequently, the total testing period for each participant ranged from a minimum of 3 days to a maximum of 30 days, with an average duration of 10 days.
-During each session, participants completed the test three times, referred to as “trials” (T1, T2, and T3), with a minute breaks between trials. 
-Before each session, participants were simply instructed to observe the content displayed on the screen without receiving any explanation of the experiment's purpose.
-The user is positioned approximately 50–60 cm from the monitor, with a possible additional adjustment of up to 15 cm to ensure a comfortable viewing angle for the eye tracker.
+During each session, participants completed the test three times, referred to as “trials” (T1, T2, and T3), with a one-minute break between trials. 
+Before each session, participants were simply instructed to read the text displayed on the screen without receiving any explanation of the experiment's purpose.
+The participant was positioned approximately 50–60 cm from the monitor, with a possible additional adjustment of up to 15 cm to ensure a comfortable viewing angle for the eye tracker.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=5cm, angle=0]{Images/Theory/eye-tracker.png}
+        \caption{GP3\_HD Eye-Tracker device}
+        \label{fig:et}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[height=5cm]{Images/Theory/sample.jpg} 
+        \caption{Subject attending to the stimuli during data collection}
+        \label{fig:sample}
+    \end{subfigure}
+    \label{fig:et_sample}
+\end{figure}
+
+
+\FloatBarrier
 
 \subsection{Stimuli}
 \label{subsec:stimuli}
 
 Since the field of gaze-based biometrics using dynamic text is largely unexplored, it was challenging to determine which types of stimuli would be most suitable to select.
-The initial idea was to use a white rectangular block containing black text, displayed against a black background, which moved by bouncing off the screen borders until the animation time expired.
+The initial idea was to use a white rectangular block containing black text, displayed on a black background, which moved by bouncing off the screen borders until the animation time expired.
 At that stage, only four animations were implemented, each differing in the initial position of the block and the direction of its movement.
-In particular we had:
-\begin{itemize}
-    \item \textbf{Horizontal moving – left start:} The block of text appeared at the middle-left of the screen (\( x = 0, \quad y = \frac{screen\_height}{2} - \frac{block\_height}{2} \)) and initially moved to the right until it reached the border. 
-    At that point, it bounced back toward its initial position. 
-    This loop repeated until the animation's time expired. 
-    It is important to note that the block moved exclusively along the x-axis, while the y-axis remained fixed.
-    \item \textbf{Horizontal moving – right start:} This animation followed the same behavior as the \textit{Horizontal moving – left start}, with the only difference being the starting position. 
-    In this case, the block of text appeared at the middle-right of the screen (\( x = screen\_width, \quad y = \frac{screen\_height}{2} - \frac{block\_height}{2} \)) and initially moved to the left.
-    The motion was restricted to the x-axis, while the y-axis and the bouncing strategy remained unchanged.
-    \item \textbf{Diagonal moving – top-left start:} This animation used the same block of text as the previous cases. 
-    The block started in the top-left corner of the screen and moved diagonally toward the bottom-right corner. 
-    Upon reaching the boundary, it bounced back and returned to its initial position. 
-    This cycle was repeated continuously until the allotted time expired.
-    \item \textbf{Diagonal moving – bottom-right start:} This animation followed the same pattern as \textit{Diagonal moving – top-left start}, with the only difference being the starting position, which was the bottom-right corner of the screen.
-\end{itemize}
-However, after discussion, we were not fully convinced about these animations. 
-While we did not expect their performance to be poor, we agreed that such animations represented an unusual form of dynamic text. 
 
-For this initial investigation in the field, we aimed to adhere to a classic format and employ a type of text that is most frequently encountered in everyday contexts. 
-Consequently, we selected two types of animations for the study: Horizontal Scroll and Vertical Block.
+However, these animations were unusual for text and we preferred to adhere to a classic format and employ a type of text that is most frequently encountered in everyday contexts. 
+Consequently, we selected two types of animations for the study: Horizontal Scroll and Vertical Scroll.
 The Horizontal Scroll animation consists of a single line of text presented continuously. 
 The text initially appears at the middle right of the screen and moves steadily toward the left. 
 As the animation progresses, additional characters are gradually revealed, producing a continuous scrolling effect. 
 This presentation is analogous to the running text commonly utilized in television news broadcasts, thereby providing a familiar stimulus for gaze-based biometric analysis.
 The Vertical Block animation consists of a block of text occupying approximately two-thirds of the screen width. 
-The block moves steadily from the bottom toward the top of the screen in a continuous manner, similar to the credit roll seen at the conclusion of films. 
+The block moves steadily from the bottom toward the top of the screen in a continuous manner, similarly to the credit roll seen at the conclusion of films. 
 This animation offers a different motion pattern for gaze behavior analysis and serves as a complementary stimulus to the Horizontal Scroll animation, enabling a comparative evaluation of gaze dynamics in distinct movement contexts.
 
 The previously mentioned animation types were further diversified to generate a total of eight distinct stimuli for the experiment. 
@@ -1097,8 +1137,7 @@ Specifically, each animation type was implemented with two different font sizes 
 
 \subsubsection{Preliminary experiments}
 
-This work also includes a preliminary experiment aimed at selecting appropriate text speed and size parameters. 
-Given the defined animations, it was necessary to determine optimal values for these two variables. 
+Preliminary experiments were carried out aimed at selecting appropriate text speed and size parameters. 
 To address this question, we conducted a brief exploratory study in the laboratory involving seven participants.
 
 \begin{figure}[ht]
@@ -1312,12 +1351,12 @@ Each animation type was implemented at two distinct speeds and with two font siz
 
 \subsection{Captured Eye Tracking Features}
 
-In the present study, the set of ocular features was recorded using the GazePoint GP3 eye tracker, which outputs a wide range of parameters designed to characterize visual behavior with both spatial and physiological precision. 
+In the present study, the set of ocular features was recorded using the GazePoint GP3\_HD eye tracker, which outputs a wide range of parameters designed to characterize visual behavior with both spatial and physiological precision. 
 These features, according to [90], can be organized into several functional categories, namely fixation parameters, raw gaze coordinates, corneal reflection and pupil metrics, three-dimensional eye position, pupil dynamics, and blink-related measures. 
 Each category not only describes a specific aspect of eye activity but also provides potential discriminative cues for biometric modeling.
 
 The first group of features concerns fixations, which are intervals in which the eyes remain relatively stable on a spatial location, thereby enabling information intake and cognitive processing. 
-The GP3 provides normalized screen coordinates of each fixation (FPOGX, FPOGY), which indicate the point of regard on the display. 
+The GP3\_HD provides normalized screen coordinates of each fixation (FPOGX, FPOGY), which indicate the point of regard on the display. 
 Alongside this spatial information, the system records the onset time of the fixation (FPOGS), its duration (FPOGD), and a unique identifier (FPOGID) for reference across the data stream. 
 An additional validity flag (FPOGV) specifies the confidence of the measurement. 
 Fixation duration is particularly important, as longer fixations are often associated with increased cognitive load or the processing of more complex visual material, while shorter ones may indicate scanning behavior. 
@@ -1336,7 +1375,7 @@ Pupil size is not static: it responds dynamically to changes in illumination, bu
 These fluctuations are partially involuntary, making them difficult to consciously manipulate, and thus potentially stable individual signatures. 
 In addition, the spatial estimation of the pupil center contributes to precise gaze localization, while differences in pupil metrics across individuals can form part of a biometric profile.
 
-Beyond two-dimensional gaze data, the GP3 also captures three-dimensional eye position features, reporting the x-, y-, and z-coordinates of each eye relative to the eye tracker (LEYEX, LEYEY, LEYEZ for the left eye; REYEX, REYEY, REYEZ for the right eye). 
+Beyond two-dimensional gaze data, the GP3\_HD also captures three-dimensional eye position features, reporting the x-, y-, and z-coordinates of each eye relative to the eye tracker (LEYEX, LEYEY, LEYEZ for the left eye; REYEX, REYEY, REYEZ for the right eye). 
 The x and y values provide lateral and vertical offsets, while the z coordinate specifies the distance between the eye and the tracker, effectively measuring head-to-screen distance. 
 These measures are particularly valuable because they reveal natural head movements, posture adjustments, or minor asymmetries in eye alignment. 
 While such variability might traditionally be considered noise, in the context of biometrics, these natural tendencies may carry person-specific information. 
@@ -1348,12 +1387,12 @@ Unlike fixation duration or gaze coordinates, which directly reflect attentional
 The stability of these responses across repeated sessions, combined with their resistance to voluntary control, makes them a promising source of biometric information.
 
 Finally, the dataset includes blink-related features, which capture involuntary eyelid closures that briefly interrupt gaze tracking. 
-For each blink, the GP3 assigns a unique identifier (BKID), records its duration (BKDUR), and stores the minimum pupil size observed during the event (BKPMIN), which reflects the degree of occlusion. 
+For each blink, the GP3\_HD assigns a unique identifier (BKID), records its duration (BKDUR), and stores the minimum pupil size observed during the event (BKPMIN), which reflects the degree of occlusion. 
 Blink dynamics are an integral part of ocular behavior, influenced by ocular physiology, fatigue levels, environmental factors, and cognitive state. 
 However, inter-individual variability in blink frequency, duration, and regularity has been documented, suggesting that blinking patterns may themselves provide discriminative information. 
 Importantly, because blinks are largely automatic and difficult to consciously regulate in a consistent manner, they can serve as a robust biometric trait resistant to intentional manipulation.
 
-Taken together, the features recorded by the GP3 provide a comprehensive view of ocular activity. 
+Taken together, the features recorded by the GP3\_HD provide a comprehensive view of ocular activity. 
 These measurements span spatial aspects of gaze location, temporal aspects of fixations and blinks, as well as physiological characteristics related to pupil dynamics and three-dimensional eye positioning.
 While some features directly represent visual exploration of stimuli (e.g., gaze coordinates, fixation positions), others capture involuntary physiological responses (e.g., pupil size fluctuations, blink dynamics) or natural head/eye geometry (3D coordinates). 
 The integration of these diverse signals is particularly valuable in a biometric context, as it enables the system to combine behavioral and physiological aspects of eye activity, thereby enhancing robustness, discriminative power, and resistance to spoofing.
@@ -1366,7 +1405,7 @@ It is important to note from the outset that the raw gaze coordinates along the 
 This decision stems from the absence of a calibration procedure, which is intentional. 
 The aim is to design a system suitable for practical, everyday applications where calibration may not be feasible. 
 While this approach enhances usability and applicability in real-world scenarios, it comes at the cost of a slight reduction in the precision of gaze coordinate measurements.
-In this study, a total of 83 features were derived from the raw gaze and pupil data recorded by the GazePoint GP3 eye tracker. 
+In this study, a total of 83 features were derived from the raw gaze and pupil data recorded by the GazePoint GP3\_HD eye tracker. 
 
 \subsubsection{Fixation-Based Features (f0–f10)}
 
@@ -1547,7 +1586,7 @@ The used features are:
 \subsubsection{Blink Features (f71–f74)}
 
 Blinking constitutes an involuntary yet highly individual ocular behavior, influenced by physiological and cognitive factors such as fatigue, attentional demand, and emotional state. 
-In the present analysis, blink-related features were derived from the identifiers and durations recorded by the GP3 eye tracker.
+In the present analysis, blink-related features were derived from the identifiers and durations recorded by the GP\_HD 3 eye tracker.
 
 The total number of blinks in a trial (\(f71\)) was determined by counting the distinct blink identifiers (\(\mathrm{BKID}\)), restricted to values greater than zero to exclude missing or invalid entries. 
 This feature provides a measure of blink frequency, which can vary substantially across individuals and contexts.
@@ -2563,7 +2602,7 @@ The purpose of the following section is to extend the single-animation verificat
 Specifically, the same procedure described in Section \ref{subsec:vft} is applied, with the only change being the composition of the dataset.
 
 In this experiment, the datasets include recordings corresponding to the first ten seconds and the first five seconds of each animation. 
-Since the GP3 HD eye tracker samples at 150 Hz, it captures 150 data points per second, each stored as a separate row in the resulting CSV file. 
+Since the GP3\_HD eye tracker samples at 150 Hz, it captures 150 data points per second, each stored as a separate row in the resulting CSV file. 
 Consequently, the dataset for the 10-second condition contains the initial 1,500 samples (150 × 10) of each recording, while the 5-second condition includes the first 750 samples (150 × 5).
 
 This analysis is particularly significant because it investigates how reducing the recording duration impacts the performance of the best-performing animation. 
@@ -3218,6 +3257,8 @@ In conclusion, the findings of this work demonstrate that dynamic text animation
 [112] Top k features identification single-FT, \url{https://github.com/DavideMascheroni99/movingText/blob/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_ft.csv}
 
 [114] Top k features identification single-FT raw,\url{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_ft.csv}
+
+[115] What is the Difference between Identification, Identity Verification and Authentication?, \url{https://www.pingidentity.com/en/resources/blog/post/identification-vs-verification-vs-authentication.html}
 
 \end{raggedright}
 

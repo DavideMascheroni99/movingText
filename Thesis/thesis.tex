@@ -12,7 +12,7 @@
 \usepackage[none]{hyphenat} 
 \usepackage[T1]{fontenc}     
 \usepackage{lmodern}         
-\usepackage{microtype}      
+\usepackage{microtype} 
 \usepackage{biblatex} 
 \usepackage{float}  
 \usepackage{pgfplots}
@@ -22,47 +22,13 @@
 \usepackage{caption}
 \usepackage{placeins}
 \usepackage{pgffor} % for \foreach
+\usepackage{pdfpages}
 
 
 \begin{document}
 \sloppy
+\includepdf[pages=1, fitpaper=true]{Images/Theory/Frontespizio.pdf}
 
-
-\begin{titlepage}
-    \centering
-
-    \vspace*{1cm}
-    
-    \includegraphics[width=6cm]{Images/Theory/logo.png} 
-    
-    \vspace{1cm}
-    
-    \textbf{\Large UNIVERSITY OF PAVIA} \\
-    \textbf{FACULTY OF ENGINEERING} \\
-    \textbf{DEPARTMENT OF INDUSTRIAL ENGINEERING AND INFORMATION}
-    
-    \vspace{2cm}
-    
-    \textbf{\Large MASTER'S DEGREE IN COMPUTER ENGINEERING}
-    
-    \vspace{1.5cm}
-    
-    {\LARGE \textbf{MASTER THESIS}}
-    
-    \vspace{2cm}
-  
-    {\Huge \textbf{Gaze-Based Biometric Authentication Through Dynamic Text Reading}\\[0.8cm]}
-    \vfill
-    
-    
-    \begin{flushleft}
-        \textbf{Candidate:} Davide Mascheroni \\
-        \textbf{Supervisor:} Prof. Marco Porta \\
-        \textbf{Co-supervisor:} Piercarlo Dondi and Hoàng Nam Lê \\
-        \textbf{Academic Year:} 2024/2025
-    \end{flushleft}
-    
-\end{titlepage}
 
 \newpage
 \renewcommand{\contentsname}{Table of contents}
@@ -1143,7 +1109,7 @@ To address this question, we conducted a brief exploratory study in the laborato
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.6
-    \textwidth]{Images/Experiment/tester_speed.png}
+    \textwidth]{Images/Experiment/tester_speeds.png}
     \caption{Testers' data}
     \label{fig:prel}
 \end{figure}
@@ -1152,8 +1118,8 @@ The demographic data of these participants are presented in Figure \ref{fig:prel
 The group consisted of six males and one female and four participants wore eyeglasses. 
 Regarding age distribution, three were between 21 and 30 years old, two between 31 and 40 years old, and two between 51 and 60 years old.
 
-The first study aimed to determine the minimum font size at which text remains comfortably readable on the screen during the animation. 
-Participants were asked to select the smallest font size at which they felt confident in reading the text. 
+The first experiment was aimed at determining the minimum font size at which text remains comfortably readable on the screen during the movement. 
+Different-sized text was displayed and participants were asked to select the smallest font size at which they felt confident in reading it. 
 In addition to the animated stimuli, a static text was presented to participants to allow them to indicate their preferred font size. 
 Rather than relying on specialized software, we manually selected a range of font sizes and displayed the animations to illustrate how each size would appear.
 We then solicited opinions from laboratory members to determine the minimum legible size, and based on this collective input, agreed upon the most suitable values.
@@ -1161,25 +1127,25 @@ From these suggestions, we identified the largest value among the minimum sizes 
 It should be noted that the selected font size may have been influenced by the age of certain participants, as variations in visual acuity and reading comfort can affect preferences. 
 Although this size may appear relatively large, it was considered appropriate for the animation format, ensuring clarity and ease of reading under dynamic viewing conditions. 
 This decision prioritizes both readability and consistency across participants, which is essential for the reliability of gaze-based biometric analysis. 
-Consequently, the font size for the “small text” condition was set to 30, while the “large text” condition was defined as twice this size, at 60.
+Consequently, the font size for the “small text” condition was set to 30 pixels, while the “large text” condition was defined as twice this size, at 60 pixels.
 
-The objective of the second study was to determine the maximum speed at which a participant can still read text within our dynamic animations. 
+The objective of the second experiment was to determine the maximum speed at which a participant can still read our dynamic text. 
 For the purposes of this research, it was not essential for participants to read the entire text. 
 Rather, it was sufficient that they could perceive and process at least a portion of it. 
-This approach reflects the nature of gaze-based biometric authentication, where the goal is to verify an individual's identity based on eye movement patterns rather than full comprehension of the displayed content. 
+This approach reflects the nature of gaze-based biometric authentication, where the goal is to verify an individual's identity based on eye movement patterns rather than a full comprehension of the displayed content. 
 In practical applications, authentication can be successfully achieved without requiring the user to fully understand or read every element of the stimulus, as the biometric signature lies in the gaze behavior itself rather than in the complete reading of the text.
 Participants were instructed to select the highest speed at which they were still able to follow the text and comprehend it.
-Specifically, for the horizontal scroll animation, they were asked to read as much as possible, while for the vertical block animation, they were required to read at least the first four lines of text.
+Specifically, for the horizontal scroll animation, they were asked to read as much as possible, while for the vertical block animation, they were required to read at least the firsts lines of the text.
 For this purpose we developed a custom software application in Python to present both types of animations, namely horizontal scroll and vertical block, using the previously selected font sizes.
 This resulted in a total of four animation conditions: horizontal scroll with small font (HS-small), horizontal scroll with large font (HS-large), vertical block with small font (VB-small), and vertical block with large font (VB-large).
-During the experiment, participants were instructed to observe each animation and progressively increase its speed by pressing a designated key. 
-They continued this process until the animation became too fast to follow.
+During the experiment, participants were instructed to read the text and progressively increase its speed by pressing a keyboard key. 
+They continued this process until the speed ation became too high to follow the text.
 In this experiment, we deliberately set aside the requirement for participants to read the text comfortably, as our primary interest was not in reading comprehension but in determining the maximum speed at which the text could still be followed.
-At that point, participants had the option to revert to the previous speed setting and select it as their preferred maximum readable speed. 
+At that point, participants could either revert to the previous speed if the current one was too fast, or confirm the current speed as their preferred maximum readable speed by pressing a key.
 This procedure allowed us to determine a personalized speed threshold for each animation condition, reflecting the highest speed at which participants could still read and track the text. 
 
-Rather than assigning a single uniform speed to all animations, we determined a distinct speed for each animation. 
-This choice was motivated by the fact that the perceptual effort required to follow a moving text depends not only on its velocity but also on its format (horizontal scroll vs. vertical block) and font size. 
+Rather than assigning the same speed to both horizontal and vertical text scroll, we determined a distinct speed for each. 
+This choice was motivated by the fact that the perceptual effort required to follow a moving text depends not only on the kind of movement (horizontal scroll vs. vertical block) and font size. 
 For example, a speed that is comfortable for a large-font vertical block may become unreadable when applied to a small-font horizontal scroll.
 
 \begin{figure}[ht]
@@ -1191,6 +1157,10 @@ For example, a speed that is comfortable for a large-font vertical block may bec
 \end{figure}
 
 In our implementation, the scrolling speed of the text stimulus is defined as the number of pixels by which its position is updated at each frame of the animation.
+A frame represents a single iteration of the display update cycle in a computer-based animation or graphical application. 
+In this study, the visual stimuli were implemented using Pygame, a Python library for creating interactive graphics.
+In Pygame, each frame corresponds to one complete execution of the main loop, during which the visual scene is refreshed on the screen. 
+Consequently, the frame rate, typically measured in frames per second (FPS), determines how many times per second the display is updated and, therefore, how smoothly motion or animation appears.
 This means that speed is expressed in terms of pixels per frame inside our program. 
 At first sight, the use of non-integer values for speed may seem counterintuitive, since pixels are discrete entities on the display and cannot be physically subdivided. 
 The adoption of floating-point values, however, is a standard practice in computer graphics. 
@@ -1227,51 +1197,51 @@ The observed scrolling speeds were found to be perceptually acceptable and consi
 
 \subsubsection{Animations}
 
-In the previous chapter, we conducted a preliminary study to define the parameters of the experimental setup—specifically, the text speed and character size—ensuring that these values were selected based on empirical evidence rather than chosen arbitrarily. 
+In the previous sub-section, we conducted a preliminary study to define the parameters of the experimental setup—specifically, the text speed and character size—ensuring that these values were selected based on empirical evidence rather than chosen arbitrarily. 
 This preparatory step was essential to establish a solid methodological foundation for the subsequent experiments. 
 Having established the parameters, we can now present and describe in detail the eight animations used as stimuli in our gaze-based biometric research. 
 These were systematically constructed by combining the two animation types (Horizontal Scroll and Vertical Block) with two font sizes (small and big) and two movement speeds (slow and fast). 
 This design yielded eight distinct conditions, providing a comprehensive basis for evaluating the effectiveness of dynamic text as a biometric modality.
 
-All the animations are detailed below:
+The animations are detailed below:
 
 \begin{itemize}
-    \item \textbf{VB\_SL\_LIT}: Vertical Block animation with \emph{slow speed} and \emph{small text size}. 
-    In this condition, the block of text scrolls upward from the bottom to the top of the screen at a reduced speed, with characters displayed at the minimum legible size identified during the preliminary study.
-    Here, the parameters correspond to a font size of 30 and a scrolling speed of 0.29 px/frame.
+    \item \textbf{VB\_SL\_SMA}: Vertical Block animation with \emph{slow speed} and \emph{small text size}. 
+    In this condition, the block of text scrolls upward from the bottom to the top of the screen at the low speed, with characters displayed at the minimum legible size identified during the preliminary study.
+    The parameters correspond to a font size of 30 pixels and a scrolling speed of 0.29 px/frame.
 
     \item \textbf{VB\_SL\_BIG}: Vertical Block animation with \emph{slow speed} and \emph{large text size}. 
     Similar to VB\_SL\_LIT, but the increased character size facilitates readability, while maintaining the slower scrolling speed. 
-    In this case, the configuration employs a font size of 60 with a speed of 0.47 px/frame. 
+    In this case, the configuration employs a font size of 60 pixels with a speed of 0.47 px/frame. 
 
-    \item \textbf{VB\_FA\_LIT}: Vertical Block animation with \emph{fast speed} and \emph{small text size}. 
-    In this case, the upward scrolling occurs at the maximum speed tolerable for participants, with the minimum character size, representing a challenging condition for gaze tracking.  
-    The setting combines a font size of 30 with a speed of 0.58 px/frame.
+    \item \textbf{VB\_FA\_SMA}: Vertical Block animation with \emph{fast speed} and \emph{small text size}. 
+    In this case, the upward scrolling occurs at the maximum speed identified in the preliminary study, with the minimum character size, representing a challenging condition for the user.  
+    The setting combines a font size of 30 pixels with a speed of 0.58 px/frame.
 
     \item \textbf{VB\_FA\_BIG}: Vertical Block animation with \emph{fast speed} and \emph{large text size}. 
     The rapid upward motion is combined with larger text, allowing participants to more easily perceive and follow the characters despite the increased pace.  
-    This version uses a font size of 60 together with a scrolling rate of 0.94 px/frame. 
+    This version uses a font size of 60 pixels together with a scrolling rate of 0.94 px/frame. 
 
-    \item \textbf{HS\_SL\_LIT}: Horizontal Scroll animation with \emph{slow speed} and \emph{small text size}. 
-    The text enters from the right edge of the screen and scrolls steadily toward the left at a slower rate, with characters displayed at the smaller size.  
-    The parameters here are a font size of 30 and a speed of 1.19 px/frame. 
+    \item \textbf{HS\_SL\_SMA}: Horizontal Scroll animation with \emph{slow speed} and \emph{small text size}. 
+    The text enters from the right edge of the screen and scrolls steadily toward the left at the slower rate, with characters displayed at the smaller size.  
+    The parameters here are a font size of 30 pixels and a speed of 1.19 px/frame. 
 
     \item \textbf{HS\_SL\_BIG}: Horizontal Scroll animation with \emph{slow speed} and \emph{large text size}. 
     This condition presents the same horizontal scrolling movement, but with larger text, facilitating readability at the slower pace. 
-    The chosen configuration corresponds to a font size of 60 with a scrolling speed of 1.7 px/frame. 
+    The chosen configuration corresponds to a font size of 60 pixels and a scrolling speed of 1.7 px/frame. 
 
-    \item \textbf{HS\_FA\_LIT}: Horizontal Scroll animation with \emph{fast speed} and \emph{small text size}. 
-    The text moves quickly from right to left, with minimal character dimensions, providing the most visually demanding condition in terms of both speed and size. 
-    In this setup, the font size is 30 and the speed reaches 2.38 px/frame. 
+    \item \textbf{HS\_FA\_SMA}: Horizontal Scroll animation with \emph{fast speed} and \emph{small text size}. 
+    The text moves quickly from right to left, with small character dimensions, providing the most visually demanding condition in terms of both speed and size. 
+    In this setup, the font size is 30 pixels and the speed reaches 2.38 px/frame. 
 
     \item \textbf{HS\_FA\_BIG}: Horizontal Scroll animation with \emph{fast speed} and \emph{large text size}. 
     In this case, the high-speed scrolling is mitigated by the increased character dimensions, offering a balance between perceptual clarity and dynamic movement.  
-    The applied parameters are a font size of 60 combined with a scrolling speed of 3.4 px/frame.
+    The applied parameters are a font size of 60 pixels combined with a scrolling speed of 3.4 px/frame.
 \end{itemize}
 
 An important aspect to consider in the design of the experiment concerns the textual material used in the animations. 
 Since the primary objective of this research is to investigate gaze-based biometrics, it was crucial to ensure that the chosen text did not introduce biases related to content interest or familiarity. 
-If certain passages were perceived as more engaging, informative, or familiar than others, this could have inadvertently affected participants' reading behavior and consequently distorted the analysis. 
+If certain passages were perceived as more engaging, informative, or familiar than others, this could have inadvertently affected participants' reading behavior and consequently distorted the study. 
 To minimize this risk, we opted for neutral and homogeneous material by selecting descriptive texts taken from Wikipedia entries of municipalities in Lombardy, Italy.
 
 A total of 72 unique texts were employed, corresponding to the experimental design (8 animations × 3 trials × 3 sessions). 
@@ -1283,15 +1253,15 @@ To manage these randomizations and guarantee appropriate stimulus distribution, 
 This system automatically assigned unused texts for each trial, ensuring that all participants experienced varied and unbiased stimuli. 
 By combining randomized text selection with randomized animation order, the design maintained both experimental consistency and stimulus neutrality across sessions and participants.
 
-Prior to the presentation of each animation within a trial, a fixation stimulus consisting of a white cross displayed on a black background was shown.
+Prior to the presentation of each animation within a trial, a fixation stimulus consisting of a white cross displayed on a black background was shown(Figure \ref{fig:cross}).
 This cross was positioned at the center of the screen to act as a visual anchor, directing participants' gaze to a consistent starting point before the animation began. 
 The inclusion of this fixation stimulus serves two important purposes. 
 First, it standardizes the initial gaze position across trials and participants, which reduces variability that could affect gaze tracking accuracy. 
 Second, it ensures that participants are focused and visually prepared for the upcoming stimulus.
 This procedure enhances the reliability of the data by controlling for differences in initial eye position, which is especially critical in gaze-based biometric research where precise tracking of eye movement patterns is essential.
 
-In cocnlusion each trial comprised eight animations, each with a duration of 15 seconds. 
-Before each animation, a fixation cross was presented for 2 seconds at the center of the screen to guide the participant's gaze and establish a consistent starting point. 
+In conclusion each trial comprised eight animations, each with a duration of 15 seconds. 
+Before each animation, a fixation cross was presented for 2 seconds at the center of the screen to (implicitly) guide the participant's gaze and establish a consistent starting point. 
 The total duration for a single trial was therefore (8 × 15) + (8 × 2) = 136 seconds per trial.
 During the same day, each tester completed three trials, each lasting 136 seconds, for a total of 136×3=408 seconds, or approximately 6 minutes and 48 seconds. 
 To complete the three sessions, the tester engaged in 136 × 3 × 3 = 1,224 seconds, which corresponds to a total of 20 minutes and 24 seconds of experimental exposure.
@@ -1304,22 +1274,20 @@ To complete the three sessions, the tester engaged in 136 × 3 × 3 = 1,224 seco
     \label{fig:cross}
 \end{figure}
 
-Figure \ref{fig:cross} illustrates the white fixation cross that was presented prior to the onset of each animation.
-
 \begin{figure}[ht]
     \centering
     % First row
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=1\textwidth,height=0.6\textwidth]{Images/Experiment/HS_little.png}
-        \caption{Horizontal scroll little animation}
+        \caption{Horizontal scroll, small text}
         \label{fig:HS_L}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=1\textwidth,height=0.6\textwidth]{Images/Experiment/HS_big.png}
-        \caption{Horizontal scroll big animation}
+        \caption{Horizontal scroll, big text}
         \label{fig:HS_B}
     \end{subfigure}
     
@@ -1329,25 +1297,24 @@ Figure \ref{fig:cross} illustrates the white fixation cross that was presented p
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=0.7\textwidth,height=0.6\textwidth]{Images/Experiment/VB_little.png}
-        \caption{Vertical block little animation}
+        \caption{Vertical block, small text}
         \label{fig:VB_L}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=1\textwidth,height=0.6\textwidth]{Images/Experiment/VB_big.png}
-        \caption{Vertical block big animation}
+        \caption{Vertical block, big text}
         \label{fig:VB_B}
     \end{subfigure}
 
-    \caption{Different types of animations}
+    \caption{The different types of animations}
     \label{fig:anims}
 \end{figure}
 
 Figure \ref{fig:anims} provides a representation of the two types of animations employed in the study. 
 Each animation type was implemented at two distinct speeds and with two font sizes, resulting in a total of eight unique animation conditions.
-
-\newpage
+\FloatBarrier
 
 \subsection{Captured Eye Tracking Features}
 
@@ -1356,7 +1323,7 @@ These features, according to [90], can be organized into several functional cate
 Each category not only describes a specific aspect of eye activity but also provides potential discriminative cues for biometric modeling.
 
 The first group of features concerns fixations, which are intervals in which the eyes remain relatively stable on a spatial location, thereby enabling information intake and cognitive processing. 
-The GP3\_HD provides normalized screen coordinates of each fixation (FPOGX, FPOGY), which indicate the point of regard on the display. 
+The GP3\_HD eye tracker provides normalized screen coordinates of each fixation (FPOGX, FPOGY), which indicate the point of regard on the display. 
 Alongside this spatial information, the system records the onset time of the fixation (FPOGS), its duration (FPOGD), and a unique identifier (FPOGID) for reference across the data stream. 
 An additional validity flag (FPOGV) specifies the confidence of the measurement. 
 Fixation duration is particularly important, as longer fixations are often associated with increased cognitive load or the processing of more complex visual material, while shorter ones may indicate scanning behavior. 
@@ -1369,13 +1336,13 @@ By distinguishing between monocular and binocular tracking, the system allows fo
 The binocular values represent a fused estimate of the point of regard, often more stable than monocular readings, but the monocular data themselves may carry subtle inter-eye differences that are individual-specific and thus of biometric relevance.
 
 The third group of features relates to corneal reflection and pupil properties, which are detected by the infrared illumination system of the tracker. 
-For each eye, the GP3 reports the estimated coordinates of the pupil center on the image plane (LPCX, LPCY for the left eye; RPCX, RPCY for the right eye), along with values describing pupil diameter and pupil size (LPD, LPS for the left eye; RPD, RPS for the right eye). 
+For each eye, the GP3\_HD eye tracker reports the estimated coordinates of the pupil center on the image plane (LPCX, LPCY for the left eye; RPCX, RPCY for the right eye), along with values describing pupil diameter and pupil size (LPD, LPS for the left eye; RPD, RPS for the right eye). 
 Each of these measurements is associated with a validity flag (LPV, RPV), indicating whether the tracking conditions were sufficient for reliable recording. 
 Pupil size is not static: it responds dynamically to changes in illumination, but is also modulated by cognitive and affective processes such as attention, emotional arousal, and mental workload. 
 These fluctuations are partially involuntary, making them difficult to consciously manipulate, and thus potentially stable individual signatures. 
 In addition, the spatial estimation of the pupil center contributes to precise gaze localization, while differences in pupil metrics across individuals can form part of a biometric profile.
 
-Beyond two-dimensional gaze data, the GP3\_HD also captures three-dimensional eye position features, reporting the x-, y-, and z-coordinates of each eye relative to the eye tracker (LEYEX, LEYEY, LEYEZ for the left eye; REYEX, REYEY, REYEZ for the right eye). 
+Beyond two-dimensional gaze data, the GP3\_HD eye tracker also captures three-dimensional eye position features, reporting the x-, y-, and z-coordinates of each eye relative to the eye tracker (LEYEX, LEYEY, LEYEZ for the left eye; REYEX, REYEY, REYEZ for the right eye). 
 The x and y values provide lateral and vertical offsets, while the z coordinate specifies the distance between the eye and the tracker, effectively measuring head-to-screen distance. 
 These measures are particularly valuable because they reveal natural head movements, posture adjustments, or minor asymmetries in eye alignment. 
 While such variability might traditionally be considered noise, in the context of biometrics, these natural tendencies may carry person-specific information. 
@@ -1387,12 +1354,12 @@ Unlike fixation duration or gaze coordinates, which directly reflect attentional
 The stability of these responses across repeated sessions, combined with their resistance to voluntary control, makes them a promising source of biometric information.
 
 Finally, the dataset includes blink-related features, which capture involuntary eyelid closures that briefly interrupt gaze tracking. 
-For each blink, the GP3\_HD assigns a unique identifier (BKID), records its duration (BKDUR), and stores the minimum pupil size observed during the event (BKPMIN), which reflects the degree of occlusion. 
+For each blink, the GP3\_HD eye tracker assigns a unique identifier (BKID), records its duration (BKDUR), and stores the minimum pupil size observed during the event (BKPMIN), which reflects the degree of occlusion. 
 Blink dynamics are an integral part of ocular behavior, influenced by ocular physiology, fatigue levels, environmental factors, and cognitive state. 
 However, inter-individual variability in blink frequency, duration, and regularity has been documented, suggesting that blinking patterns may themselves provide discriminative information. 
 Importantly, because blinks are largely automatic and difficult to consciously regulate in a consistent manner, they can serve as a robust biometric trait resistant to intentional manipulation.
 
-Taken together, the features recorded by the GP3\_HD provide a comprehensive view of ocular activity. 
+Taken together, the features recorded by the GP3\_HD eye tracker provide a comprehensive view of ocular activity. 
 These measurements span spatial aspects of gaze location, temporal aspects of fixations and blinks, as well as physiological characteristics related to pupil dynamics and three-dimensional eye positioning.
 While some features directly represent visual exploration of stimuli (e.g., gaze coordinates, fixation positions), others capture involuntary physiological responses (e.g., pupil size fluctuations, blink dynamics) or natural head/eye geometry (3D coordinates). 
 The integration of these diverse signals is particularly valuable in a biometric context, as it enables the system to combine behavioral and physiological aspects of eye activity, thereby enhancing robustness, discriminative power, and resistance to spoofing.
@@ -1400,14 +1367,14 @@ The integration of these diverse signals is particularly valuable in a biometric
 \newpage
 \subsection{Dataset creation}
 
-In the current section, we describe the methodology employed to process the gaze-related features introduced in the previous chapter and transform them into the analytical features of the dataset. 
+In this section, we describe the methodology employed to process the gaze-related features introduced in the previous chapter and transform them into the analytical features of the dataset. 
 It is important to note from the outset that the raw gaze coordinates along the x and y axes were not included as direct features. 
 This decision stems from the absence of a calibration procedure, which is intentional. 
 The aim is to design a system suitable for practical, everyday applications where calibration may not be feasible. 
 While this approach enhances usability and applicability in real-world scenarios, it comes at the cost of a slight reduction in the precision of gaze coordinate measurements.
 In this study, a total of 83 features were derived from the raw gaze and pupil data recorded by the GazePoint GP3\_HD eye tracker. 
 
-\subsubsection{Fixation-Based Features (f0–f10)}
+\subsubsection[Fixation-Based Features (f0–f10)]{Fixation-Based Features (\(f_0\)–\(f_{10}\))}
 
 Fixations are periods during which the gaze remains relatively stable, enabling detailed visual processing of stimuli. 
 This group of features captures both the frequency and statistical properties of fixation durations.  
@@ -1418,19 +1385,20 @@ All remaining fixation-based features (\(f_1\)–\(f_{10}\)) are derived from fi
 Statistical descriptors of these durations provide insights into attentional control and scanning behavior:
 
 \begin{itemize}
-    \item \(f_1\) — \textbf{Minimum fixation duration}: The shortest fixation duration in the trial, indicating rapid scanning behavior.
-    \item \(f_2\) — \textbf{Maximum fixation duration}: The longest fixation duration, showing sustained attention to a specific location.
-    \item \(f_3\) — \textbf{Arithmetic mean fixation duration}: Average fixation time, representing typical gaze stability.
-    \item \(f_4\) — \textbf{Geometric mean fixation duration}: A measure of central tendency less sensitive to extreme values, useful for skewed distributions.
-    \item \(f_5\) — \textbf{Median fixation duration}: Middle value of fixation durations, robust against outliers.
-    \item \(f_6\) — \textbf{Standard deviation fixation duration}: Variability in fixation times across the trial.
-    \item \(f_7\) — \textbf{Median absolute deviation fixation duration}: Robust measure of variability, less influenced by extreme durations.
-    \item \(f_8\) — \textbf{Skewness fixation duration}: Asymmetry in the distribution of fixation durations.
-    \item \(f_9\) — \textbf{Interquartile range fixation duration}: Dispersion between the 25th and 75th percentile, excluding extremes.
-    \item \(f_{10}\) — \textbf{Kurtosis fixation duration}: Describes the "peakedness" of the fixation duration distribution.
+    \item \(f_1\) — \textbf{Minimum fixation duration} (\(f_{1n}\)): The shortest fixation duration in the trial, indicating rapid scanning behavior.
+    \item \(f_2\) — \textbf{Maximum fixation duration} (\(f_{2n}\)): The longest fixation duration, showing sustained attention to a specific location.
+    \item \(f_3\) — \textbf{Arithmetic mean fixation duration} (\(f_{3n}\)): Average fixation time, representing typical gaze stability.
+    \item \(f_4\) — \textbf{Geometric mean fixation duration} (\(f_{4n}\)): A measure of central tendency less sensitive to extreme values, useful for skewed distributions.
+    \item \(f_5\) — \textbf{Median fixation duration} (\(f_{5n}\)): Middle value of fixation durations, robust against outliers.
+    \item \(f_6\) — \textbf{Standard deviation fixation duration} (\(f_{6n}\)): Variability in fixation times across the trial.
+    \item \(f_7\) — \textbf{Median absolute deviation fixation duration} (\(f_{7n}\)): Robust measure of variability, less influenced by extreme durations.
+    \item \(f_8\) — \textbf{Skewness fixation duration} (\(f_{8n}\)): Asymmetry in the distribution of fixation durations.
+    \item \(f_9\) — \textbf{Interquartile range fixation duration} (\(f_{9n}\)): Dispersion between the 25th and 75th percentile, excluding extremes.
+    \item \(f_{10}\) — \textbf{Kurtosis fixation duration} (\(f_{10n}\)): Describes the "peakedness" of the fixation duration distribution.
 \end{itemize}
 
-\subsubsection{Fixation Distance Features (f11–f20)}
+
+\subsubsection[Fixation Distance Features (f11–f20)]{Fixation Distance Features (\(f_{11}\)–\(f_{20}\))}
 
 These features quantify spatial distances between consecutive fixations, characterizing gaze exploration and scanning behavior.  
 
@@ -1444,193 +1412,142 @@ d_i = \sqrt{(x_{i+1} - x_i)^2 + (y_{i+1} - y_i)^2}.
 These distances form a distribution for each trial, from which statistical descriptors are extracted to capture the spatial patterns of gaze movement:
 
 \begin{itemize}
-    \item \(f_{11}\) — \textbf{Minimum distance}: Smallest shift between consecutive fixations, indicating very local gaze changes.
-    \item \(f_{12}\) — \textbf{Maximum distance}: Largest shift, reflecting broad scanning movements.
-    \item \(f_{13}\) — \textbf{Arithmetic mean distance}: Average spatial shift, representing typical scanning magnitude.
-    \item \(f_{14}\) — \textbf{Geometric mean distance}: Central tendency less influenced by extreme distances.
-    \item \(f_{15}\) — \textbf{Median distance}: Middle value of fixation-to-fixation distances.
-    \item \(f_{16}\) — \textbf{Standard deviation distance}: Variability of spatial shifts.
-    \item \(f_{17}\) — \textbf{Median absolute deviation distance}: Robust measure of spatial variability.
-    \item \(f_{18}\) — \textbf{Skewness distance}: Asymmetry of the distance distribution.
-    \item \(f_{19}\) — \textbf{Interquartile range distance}: Dispersion measure excluding extreme values.
-    \item \(f_{20}\) — \textbf{Kurtosis distance}: Shape of the spatial distance distribution.
+    \item \(f_{11n}\) — \textbf{Minimum distance}: Smallest shift between consecutive fixations, indicating very local gaze changes.
+    \item \(f_{12n}\) — \textbf{Maximum distance}: Largest shift, reflecting broad scanning movements.
+    \item \(f_{13n}\) — \textbf{Arithmetic mean distance}: Average spatial shift, representing typical scanning magnitude.
+    \item \(f_{14n}\) — \textbf{Geometric mean distance}: Central tendency less influenced by extreme distances.
+    \item \(f_{15n}\) — \textbf{Median distance}: Middle value of fixation-to-fixation distances.
+    \item \(f_{16n}\) — \textbf{Standard deviation distance}: Variability of spatial shifts.
+    \item \(f_{17n}\) — \textbf{Median absolute deviation distance}: Robust measure of spatial variability.
+    \item \(f_{18n}\) — \textbf{Skewness distance}: Asymmetry of the distance distribution.
+    \item \(f_{19n}\) — \textbf{Interquartile range distance}: Dispersion measure excluding extreme values.
+    \item \(f_{20n}\) — \textbf{Kurtosis distance}: Shape of the spatial distance distribution.
 \end{itemize}
 
-
-\subsubsection{Saccade Speed Features (f21–f30)}
+\subsubsection[Saccade Speed Features (f21–f30)]{Saccade Speed Features (\(f_{21}\)–\(f_{30}\))}
 
 Saccades are rapid eye movements occurring between fixations, responsible for shifting the line of sight toward new visual targets. 
 To quantify their dynamics, saccade speeds are computed using the normalized gaze coordinates \(\mathrm{FPOGX}\) and \(\mathrm{FPOGY}\), combined with temporal markers from the gaze data. 
 For each pair of successive fixation points, the Euclidean distance between consecutive gaze positions is first determined. 
 The corresponding time interval is calculated as the difference in starting times of consecutive fixations, \(\mathrm{FPOGS}_{i+1} - \mathrm{FPOGS}_i\), adjusted by subtracting the duration of the first fixation \(\mathrm{FPOGD}_i\). 
-This adjustment ensures that the interval reflects only the transition time between fixations rather than the fixation itself. 
-Saccade speed for the transition is then defined as the ratio between traveled distance and elapsed time:
+This ensures that the interval reflects only the transition time between fixations. 
+Saccade speed for the transition is then defined as:
 
 \[
 v_i = \frac{\sqrt{(x_{i+1} - x_i)^2 + (y_{i+1} - y_i)^2}}{t_{i+1} - t_i - d_i},
 \]
 
 where \((x_i, y_i)\) and \((x_{i+1}, y_{i+1})\) denote successive fixation coordinates, \(t_i\) the start time of fixation \(i\), and \(d_i\) its duration. 
-This procedure yields a distribution of saccade speeds for each trial, which is then summarized through a set of descriptive statistics (f21–f30).
-
-\noindent The extracted features are:
+This procedure yields a distribution of saccade speeds for each trial, summarized through descriptive statistics.
 
 \begin{itemize}
-    \item \textbf{f21 — Minimum saccade speed:} The lowest velocity observed among saccades, indicating the slowest gaze transitions.
-    \item \textbf{f22 — Maximum saccade speed:} The highest velocity recorded, reflecting the most abrupt shifts in gaze.
-    \item \textbf{f23 — Arithmetic mean saccade speed:} The average speed across all saccades within the trial.
-    \item \textbf{f24 — Geometric mean saccade speed:} Central tendency of saccade speeds, less influenced by extreme values.
-    \item \textbf{f25 — Median saccade speed:} The middle speed value, robust against outlier influence.
-    \item \textbf{f26 — Standard deviation saccade speed:} The variability of saccadic velocities across the trial.
-    \item \textbf{f27 — Median absolute deviation saccade speed:} A robust measure of variation in saccade dynamics.
-    \item \textbf{f28 — Skewness saccade speed:} The asymmetry of the saccade speed distribution, indicating bias toward slower or faster movements.
-    \item \textbf{f29 — Interquartile range saccade speed:} The spread of saccade velocities within the 25th–75th percentile range.
-    \item \textbf{f30 — Kurtosis saccade speed:} The peakedness or tail heaviness of the speed distribution.
+    \item \(f_{21n}\) — Minimum saccade speed: The lowest velocity observed among saccades, indicating the slowest gaze transitions.
+    \item \(f_{22n}\) — Maximum saccade speed: The highest velocity recorded, reflecting the most abrupt shifts in gaze.
+    \item \(f_{23n}\) — Arithmetic mean saccade speed: Average speed across all saccades within the trial.
+    \item \(f_{24n}\) — Geometric mean saccade speed: Central tendency of saccade speeds, less influenced by extreme values.
+    \item \(f_{25n}\) — Median saccade speed: The middle speed value, robust against outlier influence.
+    \item \(f_{26n}\) — Standard deviation saccade speed: Variability of saccadic velocities across the trial.
+    \item \(f_{27n}\) — Median absolute deviation saccade speed: Robust measure of variation in saccade dynamics.
+    \item \(f_{28n}\) — Skewness saccade speed: Asymmetry of the saccade speed distribution, indicating bias toward slower or faster movements.
+    \item \(f_{29n}\) — Interquartile range saccade speed: Spread of saccade velocities within the 25th–75th percentile range.
+    \item \(f_{30n}\) — Kurtosis saccade speed: Peakedness or tail heaviness of the speed distribution.
 \end{itemize}
 
-
-\subsubsection{Scanpath Feature (f31)}
+\subsubsection[Scanpath Feature (f31)]{Scanpath Feature (\(f_{31}\))}
 
 The scanpath length provides a global measure of the total extent of visual exploration during a trial. 
 It is computed as the cumulative sum of Euclidean distances between consecutive fixation points, based on their normalized screen coordinates \(\mathrm{FPOGX}\) and \(\mathrm{FPOGY}\). 
-Formally, given a sequence of fixation points \((x_i, y_i)\), the scanpath length \(L\) is defined as:
+Formally, for fixation points \((x_i, y_i)\), the scanpath length \(L\) is:
 
 \[
 L = \sum_{i=1}^{N-1} \sqrt{(x_{i+1} - x_i)^2 + (y_{i+1} - y_i)^2},
 \]
 
-where \(N\) is the total number of fixation points in the trial. 
-This measure integrates all individual fixation-to-fixation transitions into a single trajectory length, capturing the overall amount of gaze displacement. 
-A longer scanpath indicates more extensive or dispersed exploration of the visual stimulus, while a shorter scanpath reflects more localized or focused attention.
-
-\noindent The feature extracted is:
+where \(N\) is the total number of fixation points. 
 
 \begin{itemize}
-    \item \textbf{f31 — Scanpath length:} Total cumulative distance of gaze movements during a trial, representing the overall extent of visual exploration.
+    \item \(f_{31n}\) — Scanpath length: Total cumulative distance of gaze movements during a trial, representing the overall extent of visual exploration.
 \end{itemize}
 
 
-\subsubsection{Pupil Diameter Features (f32–f51)}
+\subsubsection[Pupil Diameter Features (f32–f51)]{Pupil Diameter Features (\(f_{32}\)–\(f_{51}\))}
 
-Pupil diameter is a physiological indicator influenced not only by luminance but also by cognitive and emotional states. 
-In the present work, pupil diameter values were extracted separately for the left and right eyes, using the gaze features \(\mathrm{LPD}\) and \(\mathrm{RPD}\). 
-To ensure reliability of the measurements, only samples marked as valid by the corresponding validity flags (\(\mathrm{LPV} = 1\) or \(\mathrm{RPV} = 1\)) were included in the analysis. 
-For each eye, the collected pupil diameters across the trial were summarized using a set of descriptive statistics, resulting in two parallel groups of features: \(f32\)--\(f41\) for the left eye and \(f42\)--\(f51\) for the right eye. 
-This approach allows for both independent characterization of each eye and subsequent comparison across them.
-
-The features are defined as follows:
+Pupil diameter is a physiological indicator influenced by luminance, cognitive load, and emotional state. 
+Values were extracted separately for the left and right eyes (\(\mathrm{LPD}\) and \(\mathrm{RPD}\)), including only valid samples (\(\mathrm{LPV} = 1\) or \(\mathrm{RPV} = 1\)). 
+For each eye, pupil diameters across the trial were summarized using descriptive statistics, generating two parallel groups of features: \(f_{32n}\)--\(f_{41n}\) for the left eye and \(f_{42n}\)--\(f_{51n}\) for the right eye.
 
 \begin{itemize}
-    \item \textbf{f32, f42 — Minimum pupil diameter:} Smallest observed pupil size, reflecting momentary constriction.
-    \item \textbf{f33, f43 — Maximum pupil diameter:} Largest observed pupil size, reflecting dilation.
-    \item \textbf{f34, f44 — Arithmetic mean pupil diameter:} Average pupil size, representing typical diameter across the trial.
-    \item \textbf{f35, f45 — Geometric mean pupil diameter:} Alternative measure of central tendency, less sensitive to outliers.
-    \item \textbf{f36, f46 — Median pupil diameter:} Middle value of pupil size distribution, robust to extreme values.
-    \item \textbf{f37, f47 — Standard deviation pupil diameter:} Variability in pupil size across the trial.
-    \item \textbf{f38, f48 — Median absolute deviation pupil diameter:} Robust measure of dispersion, less influenced by extreme dilation or constriction.
-    \item \textbf{f39, f49 — Skewness pupil diameter:} Asymmetry of the pupil size distribution, indicating bias toward constriction or dilation.
-    \item \textbf{f40, f50 — Interquartile range pupil diameter:} Spread of the middle 50\% of pupil sizes, unaffected by extreme values.
-    \item \textbf{f41, f51 — Kurtosis pupil diameter:} Shape descriptor reflecting peakedness or tail heaviness in the pupil size distribution.
+    \item \(f_{32n}, f_{42n}\) — Minimum pupil diameter
+    \item \(f_{33n}, f_{43n}\) — Maximum pupil diameter
+    \item \(f_{34n}, f_{44n}\) — Arithmetic mean pupil diameter
+    \item \(f_{35n}, f_{45n}\) — Geometric mean pupil diameter
+    \item \(f_{36n}, f_{46n}\) — Median pupil diameter
+    \item \(f_{37n}, f_{47n}\) — Standard deviation pupil diameter
+    \item \(f_{38n}, f_{48n}\) — Median absolute deviation pupil diameter
+    \item \(f_{39n}, f_{49n}\) — Skewness pupil diameter
+    \item \(f_{40n}, f_{50n}\) — Interquartile range pupil diameter
+    \item \(f_{41n}, f_{51n}\) — Kurtosis pupil diameter
 \end{itemize}
 
-\subsubsection{Pupil Diameter Ratio Features (f52–f61)}
+\subsubsection[Pupil Diameter Ratio Features (f52–f61)]{Pupil Diameter Ratio Features (\(f_{52}\)–\(f_{61}\))}
 
-In addition to analyzing the absolute pupil diameters of the left and right eyes, the present study also considered their ratio as a derived measure. 
-The pupil diameter ratio was computed as the quotient between the left and right pupil diameters (\(\mathrm{LPD}/\mathrm{RPD}\)), including only samples where both measurements were valid (\(\mathrm{LPV} = 1\) and \(\mathrm{RPV} = 1\)). 
-This ratio captures relative differences between the two eyes, which may reveal asymmetries in ocular physiology or subtle individual traits. 
-The resulting distribution of ratio values across each trial was summarized through descriptive statistics, generating features \(f52\)--\(f61\).
-
-The individual features are defined as follows:
+The ratio between left and right pupil diameters (\(\mathrm{LPD}/\mathrm{RPD}\)) was computed using valid samples from both eyes (\(\mathrm{LPV} = 1\) and \(\mathrm{RPV} = 1\)). 
+Descriptive statistics summarize the distribution across the trial, yielding features \(f_{52n}\)--\(f_{61n}\).
 
 \begin{itemize}
-    \item \textbf{f52 — Minimum ratio:} The smallest observed value of the \(\mathrm{LPD}/\mathrm{RPD}\) ratio, indicating moments when the left pupil was relatively more constricted.
-    \item \textbf{f53 — Maximum ratio:} The largest observed ratio, reflecting moments when the left pupil was relatively more dilated.
-    \item \textbf{f54 — Arithmetic mean ratio:} The average ratio, providing a global estimate of relative pupil size balance.
-    \item \textbf{f55 — Geometric mean ratio:} Central tendency of the ratio distribution, less influenced by extreme deviations.
-    \item \textbf{f56 — Median ratio:} The middle ratio value, robust to outliers.
-    \item \textbf{f57 — Standard deviation ratio:} Variability of relative pupil sizes across the trial.
-    \item \textbf{f58 — Median absolute deviation ratio:} Robust measure of dispersion in the ratio values, resistant to outliers.
-    \item \textbf{f59 — Skewness ratio:} Degree of asymmetry in the ratio distribution, indicating whether the left pupil tends to be systematically larger or smaller than the right.
-    \item \textbf{f60 — Interquartile range ratio:} Range of the middle 50\% of ratio values, excluding extremes.
-    \item \textbf{f61 — Kurtosis ratio:} Descriptor of distribution shape, highlighting whether the ratios are tightly clustered or prone to extreme values.
+    \item \(f_{52n}\) — Minimum ratio
+    \item \(f_{53n}\) — Maximum ratio
+    \item \(f_{54n}\) — Arithmetic mean ratio
+    \item \(f_{55n}\) — Geometric mean ratio
+    \item \(f_{56n}\) — Median ratio
+    \item \(f_{57n}\) — Standard deviation ratio
+    \item \(f_{58n}\) — Median absolute deviation ratio
+    \item \(f_{59n}\) — Skewness ratio
+    \item \(f_{60n}\) — Interquartile range ratio
+    \item \(f_{61n}\) — Kurtosis ratio
 \end{itemize}
 
-By focusing on ratios rather than absolute diameters, these features emphasize interocular balance and asymmetry, providing an additional dimension of information that complements absolute pupil measurements.
+\subsubsection[Pupil Diameter Difference Features (f62–f70)]{Pupil Diameter Difference Features (\(f_{62}\)–\(f_{70}\))}
 
-\subsubsection{Pupil Diameter Difference Features (f62–f70)}
-
-Complementing the ratio-based analysis, another set of features was derived from the direct difference between left and right pupil diameters, computed as
-\[
-D = \mathrm{LPD} - \mathrm{RPD},
-\]
-where only samples with valid measurements for both eyes (\(\mathrm{LPV} = 1\), \(\mathrm{RPV} = 1\)) were considered.  
-This difference provides a straightforward measure of interocular asymmetry, capturing the extent to which one pupil is larger than the other at a given moment. 
-Positive values indicate instances where the left pupil was larger, whereas negative values correspond to cases where the right pupil was larger.
-From the distribution of these differences, statistical descriptors were extracted, yielding features \(f62\)--\(f70\). 
-Unlike other feature groups, the geometric mean was not included here, since the distribution of differences may contain negative values, for which the geometric mean is mathematically undefined.  
-
-The used features are:
+Direct differences between left and right pupil diameters were computed as \(D = \mathrm{LPD} - \mathrm{RPD}\), using only valid samples. 
+Descriptive statistics were then extracted, resulting in features \(f_{62n}\)--\(f_{70n}\). The geometric mean is excluded due to possible negative values.
 
 \begin{itemize}
-    \item \textbf{f62 — Minimum difference:} The most negative value of \(\mathrm{LPD} - \mathrm{RPD}\), corresponding to moments when the right pupil was much larger.
-    \item \textbf{f63 — Maximum difference:} The largest positive value, when the left pupil exceeded the right in diameter.
-    \item \textbf{f64 — Arithmetic mean difference:} The average signed difference, indicating overall bias toward one eye.
-    \item \textbf{f65 — Median difference:} The central value of the distribution, robust to outliers.
-    \item \textbf{f66 — Standard deviation difference:} Variability of interocular pupil differences.
-    \item \textbf{f67 — Median absolute deviation difference:} Robust measure of dispersion for pupil size differences.
-    \item \textbf{f68 — Skewness difference:} Asymmetry of the distribution, showing systematic tendencies toward one eye being larger.
-    \item \textbf{f69 — Interquartile range difference:} Spread of the middle 50\% of differences, insensitive to extremes.
-    \item \textbf{f70 — Kurtosis difference:} Shape of the distribution, indicating whether values cluster tightly or include frequent large deviations.
+    \item \(f_{62n}\) — Minimum difference
+    \item \(f_{63n}\) — Maximum difference
+    \item \(f_{64n}\) — Arithmetic mean difference
+    \item \(f_{65n}\) — Median difference
+    \item \(f_{66n}\) — Standard deviation difference
+    \item \(f_{67n}\) — Median absolute deviation difference
+    \item \(f_{68n}\) — Skewness difference
+    \item \(f_{69n}\) — Interquartile range difference
+    \item \(f_{70n}\) — Kurtosis difference
 \end{itemize}
 
-\subsubsection{Blink Features (f71–f74)}
+\subsubsection[Blink Features (f71–f74)]{Blink Features (\(f_{71}\)–\(f_{74}\))}
 
-Blinking constitutes an involuntary yet highly individual ocular behavior, influenced by physiological and cognitive factors such as fatigue, attentional demand, and emotional state. 
-In the present analysis, blink-related features were derived from the identifiers and durations recorded by the GP\_HD 3 eye tracker.
-
-The total number of blinks in a trial (\(f71\)) was determined by counting the distinct blink identifiers (\(\mathrm{BKID}\)), restricted to values greater than zero to exclude missing or invalid entries. 
-This feature provides a measure of blink frequency, which can vary substantially across individuals and contexts.
-
-In addition, the temporal properties of blinks were captured using the duration values (\(\mathrm{BKDUR}\)), measured in milliseconds. 
-Only valid, nonzero durations were considered. 
-From this distribution, three descriptors were extracted: the mean blink duration (\(f72\)), the minimum blink duration (\(f73\)), and the maximum blink duration (\(f74\)). 
-Together, these features describe not only the overall temporal profile of blinks but also their variability within a trial, reflecting both individual oculomotor tendencies and task-related influences.
-
-Formally, the features are defined as follows:
+Blink features were extracted from identifiers (\(\mathrm{BKID}\)) and durations (\(\mathrm{BKDUR}\)).
 
 \begin{itemize}
-    \item \textbf{f71 — Number of blinks:} Total count of distinct blink events during the trial.
-    \item \textbf{f72 — Blink mean duration:} Average duration of recorded blinks.
-    \item \textbf{f73 — Blink minimum duration:} Shortest recorded blink, representing rapid eyelid closures.
-    \item \textbf{f74 — Blink maximum duration:} Longest recorded blink, corresponding to prolonged eyelid closures.
+    \item \(f_{71n}\) — Number of blinks
+    \item \(f_{72n}\) — Mean blink duration
+    \item \(f_{73n}\) — Minimum blink duration
+    \item \(f_{74n}\) — Maximum blink duration
 \end{itemize}
 
-\subsubsection{Directional Movement Features (f75–f82)}
+\subsubsection[Directional Movement Features (f75–f82)]{Directional Movement Features (\(f_{75}\)–\(f_{82}\))}
 
-In addition to fixations, saccades, and blinks, gaze dynamics can also be characterized by the predominant directions of movement across the visual field. 
-These directional features capture the extent and frequency of horizontal and vertical displacements, providing insight into scanning strategies, asymmetries, and biases in exploration patterns.
-
-For each pair of consecutive gaze points within a trial, the horizontal (\(\Delta x\)) and vertical (\(\Delta y\)) displacements were computed. 
-The direction of movement was determined by the sign of the displacement: a negative \(\Delta y\) corresponds to upward movement, a positive \(\Delta y\) to downward movement, a negative \(\Delta x\) to leftward movement, and a positive \(\Delta x\) to rightward movement. 
-For each direction, two types of measures were accumulated: (i) the total distance traveled in that direction, obtained as the sum of the absolute displacements, and (ii) the total number of directional transitions. 
-
-Formally, for a sequence of gaze points \((x_i, y_i)\) with \(i = 1, \dots, N\), the displacement vectors are given by:
-\[
-\Delta x_i = x_{i+1} - x_i, \quad \Delta y_i = y_{i+1} - y_i.
-\]
-Directional totals are then computed by summing the absolute values of displacements in each respective direction, while counts are obtained by tallying the number of occurrences where the displacement sign meets the condition for that direction.
-
-The features are defined as follows:
+Directional movements capture horizontal and vertical gaze displacements:
 
 \begin{itemize}
-    \item \textbf{f75 — Total upward distance:} Sum of vertical displacements in the upward direction (\(\Delta y < 0\)).
-    \item \textbf{f76 — Total downward distance:} Sum of vertical displacements in the downward direction (\(\Delta y > 0\)).
-    \item \textbf{f77 — Total leftward distance:} Sum of horizontal displacements in the leftward direction (\(\Delta x < 0\)).
-    \item \textbf{f78 — Total rightward distance:} Sum of horizontal displacements in the rightward direction (\(\Delta x > 0\)).
-    \item \textbf{f79 — Number of upward transitions:} Count of gaze shifts with \(\Delta y < 0\).
-    \item \textbf{f80 — Number of downward transitions:} Count of gaze shifts with \(\Delta y > 0\).
-    \item \textbf{f81 — Number of leftward transitions:} Count of gaze shifts with \(\Delta x < 0\).
-    \item \textbf{f82 — Number of rightward transitions:} Count of gaze shifts with \(\Delta x > 0\).
+    \item \(f_{75n}\) — Total upward distance (\(\Delta y < 0\))
+    \item \(f_{76n}\) — Total downward distance (\(\Delta y > 0\))
+    \item \(f_{77n}\) — Total leftward distance (\(\Delta x < 0\))
+    \item \(f_{78n}\) — Total rightward distance (\(\Delta x > 0\))
+    \item \(f_{79n}\) — Number of upward transitions
+    \item \(f_{80n}\) — Number of downward transitions
+    \item \(f_{81n}\) — Number of leftward transitions
+    \item \(f_{82n}\) — Number of rightward transitions
 \end{itemize}
 
 \newpage
@@ -1651,7 +1568,7 @@ This step is crucial, as verification requires training a separate model for eac
 
 In our analysis, we employ seven different machine learning classifiers to construct and evaluate predictive models.
 As an initial step, we used the Naïve Bayes classifier to obtain a preliminary understanding of the potential performance that could be achieved.
-However due to its strong assumption of feature independence, which is rarely satisfied in practice, this model is utilized solely for exploratory purposes.
+However, due to its strong assumption of feature independence, which is rarely satisfied in practice, this model is utilized solely for exploratory purposes.
 Consequently, Naïve Bayes results are not included in the main performance tables, as the classifier is primarily used for a rapid baseline estimation, and its performance is typically inferior to more advanced methods.
 
 Among the classifiers employed in this study, the k-Nearest Neighbors (kNN) algorithm [94] represents a well-established and widely used method across various application domains.
@@ -1665,8 +1582,8 @@ Moreover, Logistic Regression can be naturally extended to handle multiple class
 However, the primary limitation of Logistic Regression lies in its assumption of linearity between the independent variables and the log-odds of the dependent variable. 
 As a result, it can only model linear decision boundaries and therefore struggles to capture more complex, nonlinear relationships that may exist within the data [96].
 
-To proceed we used SVC [97] and one of its variant Nusvc [98].
-According to [93] Kernelized Support Vector Machines (SVMs) are highly effective models capable of learning complex decision boundaries, even with few features. 
+To proceed we used SVC [97] and one of its variants Nusvc [98].
+According to [93], Kernelized Support Vector Machines (SVMs) are highly effective models capable of learning complex decision boundaries, even with few features. 
 They perform well on both low- and high-dimensional data but scale poorly with the number of samples. 
 While datasets up to around 10,000 samples are manageable, larger ones can cause significant runtime and memory issues. 
 Moreover, SVMs require careful data preprocessing and precise parameter tuning to achieve optimal performance.

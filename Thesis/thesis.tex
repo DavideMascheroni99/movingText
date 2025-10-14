@@ -23,6 +23,8 @@
 \usepackage{placeins}
 \usepackage{pgffor} % for \foreach
 \usepackage{pdfpages}
+\usepackage{regexpatch}
+
 
 
 \begin{document}
@@ -138,11 +140,11 @@ Subsequently, the analysis proceeds with the verification phase, which forms the
 The analysis explores several experimental configurations that vary in training modality (Single Train and Full Train), evaluation strategy (best-model and pairwise), and testing condition (closed-set, open-set, and reduced recording durations).
 A dedicated chapter is presented for each experimental configuration, detailing the methodology, results, and comparative discussion for every combination of training modality, evaluation strategy, and testing condition.
 
-Overall, the best verification performance was achieved using the VB\_FA\_LIT animation under the Full Train configuration and best-model evaluation, reaching an accuracy of 92.6\% and an Equal Error Rate (EER) of 4\%.
+Overall, the best verification performance was achieved using the VB\_FA\_SMA animation under the Full Train configuration and best-model evaluation, reaching an accuracy of 92.6\% and an Equal Error Rate (EER) of 4\%.
 The lowest EER, however, was obtained in the Single Train setup with the VB\_FA\_BIG animation, achieving 3.6\% EER and 92.2\% accuracy with the Random Forest classifier.
-In the open-set scenario, the system maintained strong performance, with the VB\_FA\_LIT animation and SVC classifier reaching 91.9\% accuracy and 6.1\% EER.
+In the open-set scenario, the system maintained strong performance, with the VB\_FA\_SMA animation and SVC classifier reaching 91.9\% accuracy and 6.1\% EER.
 When the recording duration was reduced, results remained robust.
-For 10-second recordings, the VB\_FA\_LIT animation achieved 92.7\% accuracy and 5.4\% EER using the Full Train configuration, while for 5-second recordings, it reached 90.6\% accuracy and 6.4\% EER with the NuSVC classifier.
+For 10-second recordings, the VB\_FA\_SMA animation achieved 92.7\% accuracy and 5.4\% EER using the Full Train configuration, while for 5-second recordings, it reached 90.6\% accuracy and 6.4\% EER with the NuSVC classifier.
 
 To conclude, a comparative analysis between dynamic and static text stimuli is presented.
 For this study, a similar data collection protocol was followed, consisting of three sessions of three trials each.
@@ -1211,7 +1213,7 @@ The animations are detailed below:
     The parameters correspond to a font size of 30 pixels and a scrolling speed of 0.29 px/frame.
 
     \item \textbf{VB\_SL\_BIG}: Vertical Block animation with \emph{slow speed} and \emph{large text size}. 
-    Similar to VB\_SL\_LIT, but the increased character size facilitates readability, while maintaining the slower scrolling speed. 
+    Similar to VB\_SL\_SMA, but the increased character size facilitates readability, while maintaining the slower scrolling speed. 
     In this case, the configuration employs a font size of 60 pixels with a speed of 0.47 px/frame. 
 
     \item \textbf{VB\_FA\_SMA}: Vertical Block animation with \emph{fast speed} and \emph{small text size}. 
@@ -1412,16 +1414,16 @@ d_i = \sqrt{(x_{i+1} - x_i)^2 + (y_{i+1} - y_i)^2}.
 These distances form a distribution for each trial, from which statistical descriptors are extracted to capture the spatial patterns of gaze movement:
 
 \begin{itemize}
-    \item \(f_{11n}\) — \textbf{Minimum distance}: Smallest shift between consecutive fixations, indicating very local gaze changes.
-    \item \(f_{12n}\) — \textbf{Maximum distance}: Largest shift, reflecting broad scanning movements.
-    \item \(f_{13n}\) — \textbf{Arithmetic mean distance}: Average spatial shift, representing typical scanning magnitude.
-    \item \(f_{14n}\) — \textbf{Geometric mean distance}: Central tendency less influenced by extreme distances.
-    \item \(f_{15n}\) — \textbf{Median distance}: Middle value of fixation-to-fixation distances.
-    \item \(f_{16n}\) — \textbf{Standard deviation distance}: Variability of spatial shifts.
-    \item \(f_{17n}\) — \textbf{Median absolute deviation distance}: Robust measure of spatial variability.
-    \item \(f_{18n}\) — \textbf{Skewness distance}: Asymmetry of the distance distribution.
-    \item \(f_{19n}\) — \textbf{Interquartile range distance}: Dispersion measure excluding extreme values.
-    \item \(f_{20n}\) — \textbf{Kurtosis distance}: Shape of the spatial distance distribution.
+    \item \(f_{11}\) — \textbf{Minimum distance}: Smallest shift between consecutive fixations, indicating very local gaze changes.
+    \item \(f_{12}\) — \textbf{Maximum distance}: Largest shift, reflecting broad scanning movements.
+    \item \(f_{13}\) — \textbf{Arithmetic mean distance}: Average spatial shift, representing typical scanning magnitude.
+    \item \(f_{14}\) — \textbf{Geometric mean distance}: Central tendency less influenced by extreme distances.
+    \item \(f_{15}\) — \textbf{Median distance}: Middle value of fixation-to-fixation distances.
+    \item \(f_{16}\) — \textbf{Standard deviation distance}: Variability of spatial shifts.
+    \item \(f_{17}\) — \textbf{Median absolute deviation distance}: Robust measure of spatial variability.
+    \item \(f_{18}\) — \textbf{Skewness distance}: Asymmetry of the distance distribution.
+    \item \(f_{19}\) — \textbf{Interquartile range distance}: Dispersion measure excluding extreme values.
+    \item \(f_{20}\) — \textbf{Kurtosis distance}: Shape of the spatial distance distribution.
 \end{itemize}
 
 \subsubsection[Saccade Speed Features (f21–f30)]{Saccade Speed Features (\(f_{21}\)–\(f_{30}\))}
@@ -1441,16 +1443,16 @@ where \((x_i, y_i)\) and \((x_{i+1}, y_{i+1})\) denote successive fixation coord
 This procedure yields a distribution of saccade speeds for each trial, summarized through descriptive statistics.
 
 \begin{itemize}
-    \item \(f_{21n}\) — Minimum saccade speed: The lowest velocity observed among saccades, indicating the slowest gaze transitions.
-    \item \(f_{22n}\) — Maximum saccade speed: The highest velocity recorded, reflecting the most abrupt shifts in gaze.
-    \item \(f_{23n}\) — Arithmetic mean saccade speed: Average speed across all saccades within the trial.
-    \item \(f_{24n}\) — Geometric mean saccade speed: Central tendency of saccade speeds, less influenced by extreme values.
-    \item \(f_{25n}\) — Median saccade speed: The middle speed value, robust against outlier influence.
-    \item \(f_{26n}\) — Standard deviation saccade speed: Variability of saccadic velocities across the trial.
-    \item \(f_{27n}\) — Median absolute deviation saccade speed: Robust measure of variation in saccade dynamics.
-    \item \(f_{28n}\) — Skewness saccade speed: Asymmetry of the saccade speed distribution, indicating bias toward slower or faster movements.
-    \item \(f_{29n}\) — Interquartile range saccade speed: Spread of saccade velocities within the 25th–75th percentile range.
-    \item \(f_{30n}\) — Kurtosis saccade speed: Peakedness or tail heaviness of the speed distribution.
+    \item \(f_{21}\) — Minimum saccade speed: The lowest velocity observed among saccades, indicating the slowest gaze transitions.
+    \item \(f_{22}\) — Maximum saccade speed: The highest velocity recorded, reflecting the most abrupt shifts in gaze.
+    \item \(f_{23}\) — Arithmetic mean saccade speed: Average speed across all saccades within the trial.
+    \item \(f_{24}\) — Geometric mean saccade speed: Central tendency of saccade speeds, less influenced by extreme values.
+    \item \(f_{25}\) — Median saccade speed: The middle speed value, robust against outlier influence.
+    \item \(f_{26}\) — Standard deviation saccade speed: Variability of saccadic velocities across the trial.
+    \item \(f_{27}\) — Median absolute deviation saccade speed: Robust measure of variation in saccade dynamics.
+    \item \(f_{28}\) — Skewness saccade speed: Asymmetry of the saccade speed distribution, indicating bias toward slower or faster movements.
+    \item \(f_{29}\) — Interquartile range saccade speed: Spread of saccade velocities within the 25th–75th percentile range.
+    \item \(f_{30}\) — Kurtosis saccade speed: Peakedness or tail heaviness of the speed distribution.
 \end{itemize}
 
 \subsubsection[Scanpath Feature (f31)]{Scanpath Feature (\(f_{31}\))}
@@ -1466,7 +1468,7 @@ L = \sum_{i=1}^{N-1} \sqrt{(x_{i+1} - x_i)^2 + (y_{i+1} - y_i)^2},
 where \(N\) is the total number of fixation points. 
 
 \begin{itemize}
-    \item \(f_{31n}\) — Scanpath length: Total cumulative distance of gaze movements during a trial, representing the overall extent of visual exploration.
+    \item \(f_{31}\) — Scanpath length: Total cumulative distance of gaze movements during a trial, representing the overall extent of visual exploration.
 \end{itemize}
 
 
@@ -1477,16 +1479,16 @@ Values were extracted separately for the left and right eyes (\(\mathrm{LPD}\) a
 For each eye, pupil diameters across the trial were summarized using descriptive statistics, generating two parallel groups of features: \(f_{32n}\)--\(f_{41n}\) for the left eye and \(f_{42n}\)--\(f_{51n}\) for the right eye.
 
 \begin{itemize}
-    \item \(f_{32n}, f_{42n}\) — Minimum pupil diameter
-    \item \(f_{33n}, f_{43n}\) — Maximum pupil diameter
-    \item \(f_{34n}, f_{44n}\) — Arithmetic mean pupil diameter
-    \item \(f_{35n}, f_{45n}\) — Geometric mean pupil diameter
-    \item \(f_{36n}, f_{46n}\) — Median pupil diameter
-    \item \(f_{37n}, f_{47n}\) — Standard deviation pupil diameter
-    \item \(f_{38n}, f_{48n}\) — Median absolute deviation pupil diameter
-    \item \(f_{39n}, f_{49n}\) — Skewness pupil diameter
-    \item \(f_{40n}, f_{50n}\) — Interquartile range pupil diameter
-    \item \(f_{41n}, f_{51n}\) — Kurtosis pupil diameter
+    \item \(f_{32}, f_{42}\) — Minimum pupil diameter
+    \item \(f_{33}, f_{43}\) — Maximum pupil diameter
+    \item \(f_{34}, f_{44}\) — Arithmetic mean pupil diameter
+    \item \(f_{35}, f_{45}\) — Geometric mean pupil diameter
+    \item \(f_{36}, f_{46}\) — Median pupil diameter
+    \item \(f_{37}, f_{47}\) — Standard deviation pupil diameter
+    \item \(f_{38}, f_{48}\) — Median absolute deviation pupil diameter
+    \item \(f_{39}, f_{49}\) — Skewness pupil diameter
+    \item \(f_{40}, f_{50}\) — Interquartile range pupil diameter
+    \item \(f_{41}, f_{51}\) — Kurtosis pupil diameter
 \end{itemize}
 
 \subsubsection[Pupil Diameter Ratio Features (f52–f61)]{Pupil Diameter Ratio Features (\(f_{52}\)–\(f_{61}\))}
@@ -1495,16 +1497,16 @@ The ratio between left and right pupil diameters (\(\mathrm{LPD}/\mathrm{RPD}\))
 Descriptive statistics summarize the distribution across the trial, yielding features \(f_{52n}\)--\(f_{61n}\).
 
 \begin{itemize}
-    \item \(f_{52n}\) — Minimum ratio
-    \item \(f_{53n}\) — Maximum ratio
-    \item \(f_{54n}\) — Arithmetic mean ratio
-    \item \(f_{55n}\) — Geometric mean ratio
-    \item \(f_{56n}\) — Median ratio
-    \item \(f_{57n}\) — Standard deviation ratio
-    \item \(f_{58n}\) — Median absolute deviation ratio
-    \item \(f_{59n}\) — Skewness ratio
-    \item \(f_{60n}\) — Interquartile range ratio
-    \item \(f_{61n}\) — Kurtosis ratio
+    \item \(f_{52}\) — Minimum ratio
+    \item \(f_{53}\) — Maximum ratio
+    \item \(f_{54}\) — Arithmetic mean ratio
+    \item \(f_{55}\) — Geometric mean ratio
+    \item \(f_{56}\) — Median ratio
+    \item \(f_{57}\) — Standard deviation ratio
+    \item \(f_{58}\) — Median absolute deviation ratio
+    \item \(f_{59}\) — Skewness ratio
+    \item \(f_{60}\) — Interquartile range ratio
+    \item \(f_{61}\) — Kurtosis ratio
 \end{itemize}
 
 \subsubsection[Pupil Diameter Difference Features (f62–f70)]{Pupil Diameter Difference Features (\(f_{62}\)–\(f_{70}\))}
@@ -1513,15 +1515,15 @@ Direct differences between left and right pupil diameters were computed as \(D =
 Descriptive statistics were then extracted, resulting in features \(f_{62n}\)--\(f_{70n}\). The geometric mean is excluded due to possible negative values.
 
 \begin{itemize}
-    \item \(f_{62n}\) — Minimum difference
-    \item \(f_{63n}\) — Maximum difference
-    \item \(f_{64n}\) — Arithmetic mean difference
-    \item \(f_{65n}\) — Median difference
-    \item \(f_{66n}\) — Standard deviation difference
-    \item \(f_{67n}\) — Median absolute deviation difference
-    \item \(f_{68n}\) — Skewness difference
-    \item \(f_{69n}\) — Interquartile range difference
-    \item \(f_{70n}\) — Kurtosis difference
+    \item \(f_{62}\) — Minimum difference
+    \item \(f_{63}\) — Maximum difference
+    \item \(f_{64}\) — Arithmetic mean difference
+    \item \(f_{65}\) — Median difference
+    \item \(f_{66}\) — Standard deviation difference
+    \item \(f_{67}\) — Median absolute deviation difference
+    \item \(f_{68}\) — Skewness difference
+    \item \(f_{69}\) — Interquartile range difference
+    \item \(f_{70}\) — Kurtosis difference
 \end{itemize}
 
 \subsubsection[Blink Features (f71–f74)]{Blink Features (\(f_{71}\)–\(f_{74}\))}
@@ -1529,10 +1531,10 @@ Descriptive statistics were then extracted, resulting in features \(f_{62n}\)--\
 Blink features were extracted from identifiers (\(\mathrm{BKID}\)) and durations (\(\mathrm{BKDUR}\)).
 
 \begin{itemize}
-    \item \(f_{71n}\) — Number of blinks
-    \item \(f_{72n}\) — Mean blink duration
-    \item \(f_{73n}\) — Minimum blink duration
-    \item \(f_{74n}\) — Maximum blink duration
+    \item \(f_{71}\) — Number of blinks
+    \item \(f_{72}\) — Mean blink duration
+    \item \(f_{73}\) — Minimum blink duration
+    \item \(f_{74}\) — Maximum blink duration
 \end{itemize}
 
 \subsubsection[Directional Movement Features (f75–f82)]{Directional Movement Features (\(f_{75}\)–\(f_{82}\))}
@@ -1540,14 +1542,14 @@ Blink features were extracted from identifiers (\(\mathrm{BKID}\)) and durations
 Directional movements capture horizontal and vertical gaze displacements:
 
 \begin{itemize}
-    \item \(f_{75n}\) — Total upward distance (\(\Delta y < 0\))
-    \item \(f_{76n}\) — Total downward distance (\(\Delta y > 0\))
-    \item \(f_{77n}\) — Total leftward distance (\(\Delta x < 0\))
-    \item \(f_{78n}\) — Total rightward distance (\(\Delta x > 0\))
-    \item \(f_{79n}\) — Number of upward transitions
-    \item \(f_{80n}\) — Number of downward transitions
-    \item \(f_{81n}\) — Number of leftward transitions
-    \item \(f_{82n}\) — Number of rightward transitions
+    \item \(f_{75}\) — Total upward distance (\(\Delta y < 0\))
+    \item \(f_{76}\) — Total downward distance (\(\Delta y > 0\))
+    \item \(f_{77}\) — Total leftward distance (\(\Delta x < 0\))
+    \item \(f_{78}\) — Total rightward distance (\(\Delta x > 0\))
+    \item \(f_{79}\) — Number of upward transitions
+    \item \(f_{80}\) — Number of downward transitions
+    \item \(f_{81}\) — Number of leftward transitions
+    \item \(f_{82}\) — Number of rightward transitions
 \end{itemize}
 
 \newpage
@@ -1833,7 +1835,7 @@ For each type of data split, the figure includes a table showing the performance
 Considering the random split, the best-performing animations are VB\_SL\_BIG with an accuracy of $81.9\%$ and VB\_FA\_BIG with an accuracy of $81.75\%$.
 Both of these results were achieved using the Random Forest classifiers. 
 In contrast, when evaluating the session split, VB\_FA\_BIG emerges as the best performer, with accuracy increasing from $81.75\%$ to $82.86\%$ using SVC. 
-This is followed by VB\_FA\_LIT, whose accuracy rises from $78.25\%$ to $80\%$, while VB\_SL\_BIG shows a notable decrease from $81.9\%$ to $74.29\%$.
+This is followed by VB\_FA\_SMA, whose accuracy rises from $78.25\%$ to $80\%$, while VB\_SL\_BIG shows a notable decrease from $81.9\%$ to $74.29\%$.
 These resulst were obtained with Logistic regression classifier.
 
 At first glance, this behaviour may seem counterintuitive, as one would generally expect performance to decrease under a session split compared to a random split. 
@@ -1928,10 +1930,10 @@ The best-performing animation in the random split procedure is VB\_SL\_BIG, whic
 All these results were obtained using the SVC classifier.
 
 In contrast to the ST variation, the performance tends to decrease when using the session split approach.
-Specifically, the highest accuracy under this condition is achieved by VB\_FA\_LIT and VB\_FA\_BIG, both reaching 75.24\%, with the Logistic Regression classifier performing best in this case.
+Specifically, the highest accuracy under this condition is achieved by VB\_FA\_SMA and VB\_FA\_BIG, both reaching 75.24\%, with the Logistic Regression classifier performing best in this case.
 
 As we can see from these results we don't have a clear winner where the performance are always better.
-We have that some animation like HS\_FA\_LIT is better in the FT version while VB\_FA\_BIG reaches better accuracy in the ST mode.
+We have that some animation like HS\_FA\_SMA is better in the FT version while VB\_FA\_BIG reaches better accuracy in the ST mode.
 For this reason we move on keeping both of the mode and we will maintain this distinction even with verification analysis.
 
 As in the previous section we collected all the selected features during the feature selection part in the Appendix \ref{subsec:topk_ft}.
@@ -2081,11 +2083,11 @@ Figure \ref{fig:VB_FA_BIG_st} illustrates that the best-performing animation, in
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Verification_single/st/VB_FA_BIG.png}
-    \caption{VB\_FA\_LIT animation}
+    \caption{VB\_FA\_SMA animation}
     \label{fig:VB_FA_LIT_st}
 \end{figure}
 
-This animation is followed by VB\_FA\_LIT, which, as shown in Figure \ref{fig:VB_FA_LIT_st}, achieves an accuracy of 90.9\% using the SVC classifier and an Equal Error Rate (EER) of 4.7\%.
+This animation is followed by VB\_FA\_SMA, which, as shown in Figure \ref{fig:VB_FA_LIT_st}, achieves an accuracy of 90.9\% using the SVC classifier and an Equal Error Rate (EER) of 4.7\%.
 The rest of the animation results are contained in the Appendix \ref{subsec:vs_st_a}.
 
 \begin{figure}[ht]
@@ -2121,18 +2123,18 @@ In this way, each test set includes both authorized and unauthorized data, effec
 Each of the 20 test sets is then used to evaluate the best-trained model, and the performance metrics are averaged to obtain a representative result for the corresponding user.
 Finally, an overall performance estimate is computed by averaging the results across all 24 models, providing a general measure of system effectiveness under open-set verification conditions.
 
-In this analysis, the accuracy of each animation generally decreases compared to the closed-set scenario, with the exception of VB\_SL\_LIT, which emerges as the best-performing animation.
+In this analysis, the accuracy of each animation generally decreases compared to the closed-set scenario, with the exception of VB\_SL\_SMA, which emerges as the best-performing animation.
 This unexpected behavior may be attributed to the choice of evaluating all test sets using the globally best-performing model.
 For this reason, an additional analysis employing the classic one-to-one training and testing approach will be conducted to enable a more direct comparison with the current results.
 In principle, we would expect the best-performing animation to remain consistent between the open-set and closed-set verification analyses.
-For VB\_SL\_LIT, accuracy increases from 85.9\% to 91.9\% when using the SVC classifier, while the Equal Error Rate (EER) decreases from 7.0\% to 6.1\%.
+For VB\_SL\_SMA, accuracy increases from 85.9\% to 91.9\% when using the SVC classifier, while the Equal Error Rate (EER) decreases from 7.0\% to 6.1\%.
 The corresponding results are illustrated in Figure \ref{fig:VB_SL_LIT_sti}.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Verification_single_intruders/st/VB_SL_LIT.png}
-    \caption{VB\_SL\_LIT animation}
+    \caption{VB\_SL\_SMA animation}
     \label{fig:VB_SL_LIT_sti}
 \end{figure}
 
@@ -2146,14 +2148,14 @@ The best-performing animation from the closed-set analysis, VB\_FA\_BIG, exhibit
     \label{fig:VB_FA_BIG_sti}
 \end{figure}
 
-Similarly, VB\_FA\_LIT, the second-best animation in terms of accuracy from the closed-set analysis, shows a slight decrease in accuracy from 90.9\% to 90.5\% when using the SVC classifier.
+Similarly, VB\_FA\_SMA, the second-best animation in terms of accuracy from the closed-set analysis, shows a slight decrease in accuracy from 90.9\% to 90.5\% when using the SVC classifier.
 At the same time, its Equal Error Rate (EER) improves, decreasing from 4.7\% to 3.3\%.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Verification_single_intruders/st/VB_FA_LIT.png}
-    \caption{VB\_FA\_LIT animation}
+    \caption{VB\_FA\_SMA animation}
     \label{fig:VB_FA_LIT_sti}
 \end{figure}
 
@@ -2408,11 +2410,11 @@ These include precision, recall, specificity, and the Equal Error Rate (EER), ea
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single/ft/VB_FA_LIT.png}
-    \caption{VB\_FA\_LIT animation}
+    \caption{VB\_FA\_SMA animation}
     \label{fig:VB_FA_LIT_ft}
 \end{figure}
 
-Figure \ref{fig:VB_FA_LIT_ft} illustrates that the best-performing animation, in terms of accuracy, is VB\_FA\_LIT, achieving an accuracy of 92.6\% with the SVC classifier and an Equal Error Rate (EER) of 4\%.
+Figure \ref{fig:VB_FA_LIT_ft} illustrates that the best-performing animation, in terms of accuracy, is VB\_FA\_SMA, achieving an accuracy of 92.6\% with the SVC classifier and an Equal Error Rate (EER) of 4\%.
 
 \begin{figure}[ht]
     \centering
@@ -2441,7 +2443,7 @@ To conclude this section, we present a comparison between the results obtained h
 Considering all animations, the current analysis outperforms the previous one in six out of eight cases. 
 Nevertheless, the overall results are quite close, with differences of less than ten percentage points.
 
-When comparing the best-performing animations from each analysis, the VB\_FA\_LIT animation in this study achieves higher accuracy than the VB\_FA\_BIG animation from the previous analysis. 
+When comparing the best-performing animations from each analysis, the VB\_FA\_SMA animation in this study achieves higher accuracy than the VB\_FA\_BIG animation from the previous analysis. 
 Specifically, the Support Vector Classifier (SVC) yields an accuracy of 92.6\%, compared to 92.2\% obtained with the Random Forest classifier. 
 However, the Equal Error Rate (EER) increases slightly in this analysis—from 3.6\% in the previous section to 4\%.
 
@@ -2474,11 +2476,11 @@ Then, we calculate the overall average across all users to determine the general
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single_intruders/ft/VB_FA_LIT.png}
-    \caption{VB\_FA\_LIT animation}
+    \caption{VB\_FA\_SMA animation}
     \label{fig:VB_FA_LIT_fti}
 \end{figure}
 
-Figure \ref{fig:VB_FA_LIT_fti} shows that the VB\_FA\_LIT animation yields the highest accuracy among all tested cases, reaching 90.2\% when using the SVC classifier. 
+Figure \ref{fig:VB_FA_LIT_fti} shows that the VB\_FA\_SMA animation yields the highest accuracy among all tested cases, reaching 90.2\% when using the SVC classifier. 
 The corresponding Equal Error Rate (EER) for this configuration is 7.2\%.
 
 \begin{figure}[ht]
@@ -2503,7 +2505,7 @@ The results for the other animations are reported in Appendix \ref{subsec:vsi_ft
 
 Figure \ref{fig:roc_fti} display the roc curves obtained from the analysis.
 
-When comparing these results with those obtained in the corresponding analysis including intruders, the best-performing animation remains VB\_FA\_LIT. 
+When comparing these results with those obtained in the corresponding analysis including intruders, the best-performing animation remains VB\_FA\_SMA. 
 In the open-set configuration, its accuracy decreases from 92.6\% to 90.2\% using the SVC classifier, while the Equal Error Rate (EER) rises from 4\% to 7.2\%. 
 This performance drop is expected due to the introduction of previously unseen users. 
 Nonetheless, the model continues to demonstrate strong performance, maintaining an accuracy above 90\%.
@@ -2543,7 +2545,7 @@ In real-world scenarios, excessively long animations may lead to a loss of user 
 \end{figure}
 
 In this section, the focus is on evaluating how the performance of the best-performing animation changes as the recording duration is progressively reduced. 
-As anticipated, VB\_FA\_LIT continues to be the top-performing animation, confirming the findings from the 15-second analysis.
+As anticipated, VB\_FA\_SMA continues to be the top-performing animation, confirming the findings from the 15-second analysis.
 
 When the recording time is limited to the first 10 seconds, accuracy shows a slight decrease from 92.6\% to 91.9\% with the SVC classifier, while the Equal Error Rate (EER) increases from 4\% to 6.3\%. 
 Further shortening the duration to 5 seconds results in an accuracy of 88.2\% using the nuSVC classifier and an EER of 7.2\%.
@@ -2574,11 +2576,11 @@ To continue this section, we present the ROC curves derived from the EER values 
 Specifically, Figures \ref{fig:roc_t_ft} and \ref{fig:roc_f_ft} correspond to the 10-second and 5-second experiments, respectively.
 
 To assess which configuration provides the best results for the top-performing animation in both the single-train (ST) and full-train (FT) cases, a direct comparison is conducted.
-For the 10-second recordings, the FT configuration outperforms the ST one in terms of accuracy, achieving 91.9\% with the SVC classifier and the VB\_FA\_LIT animation, compared to 90.2\% obtained with the Random Forest classifier and the VB\_FA\_BIG animation.
+For the 10-second recordings, the FT configuration outperforms the ST one in terms of accuracy, achieving 91.9\% with the SVC classifier and the VB\_FA\_SMA animation, compared to 90.2\% obtained with the Random Forest classifier and the VB\_FA\_BIG animation.
 However, the ST configuration maintains a lower EER of 4.5\%, compared to 6.3\% for the FT setup.
 
 When examining the 5-second recordings, both configurations show very similar accuracy results. 
-The ST approach reaches 88.8\% using the Random Forest classifier with the VB\_FA\_BIG animation, while the FT setup achieves 88.2\% using the nuSVC classifier with VB\_FA\_LIT.
+The ST approach reaches 88.8\% using the Random Forest classifier with the VB\_FA\_BIG animation, while the FT setup achieves 88.2\% using the nuSVC classifier with VB\_FA\_SMA.
 Again, the ST configuration provides a lower EER, with 6.8\% compared to 7.2\% for the FT case.
 
 When selecting the optimal configuration for the 10-second recordings, the choice depends on whether accuracy or security is prioritized. 
@@ -2609,7 +2611,7 @@ This analysis thus serves as a direct counterpart to the one discussed previousl
 Consequently, the methodological details remain unchanged and will not be restated. 
 The focus instead is on examining the obtained results and comparing them with those from the previous setup to determine which approach yields more stable and effective performance.
 
-As in the preceding analysis, the best-performing animation continues to be VB\_FA\_LIT, attaining an accuracy of 92.4\% with the NuSVC classifier and an Equal Error Rate (EER) of 5\%.
+As in the preceding analysis, the best-performing animation continues to be VB\_FA\_SMA, attaining an accuracy of 92.4\% with the NuSVC classifier and an Equal Error Rate (EER) of 5\%.
 
 \begin{figure}[ht]
     \centering
@@ -2644,7 +2646,7 @@ The first notable observation is that the best-performing animation remains the 
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Classic_procedure/Verification_intruders/ft/VB_FA_LIT.png}
-    \caption{VB\_FA\_LIT}
+    \caption{VB\_FA\_SMA}
     \label{fig:VB_FA_LIT_cift}
 \end{figure}
 
@@ -2673,7 +2675,7 @@ Additional results for this evaluation can be found in the corresponding appendi
 We conclude this analysis by performing a reduced-duration evaluation, following the approach used in the previous subsection. 
 Specifically, we assess how performance changes when the total animation length is shortened from 15 seconds to 10 seconds, and subsequently to 5 seconds.
 
-The results align with our expectations, with VB\_FA\_LIT remaining the best-performing animation in terms of accuracy. 
+The results align with our expectations, with VB\_FA\_SMA remaining the best-performing animation in terms of accuracy. 
 Interestingly, its accuracy slightly increases from 92.4\% with nuSVC to 92.7\% with SVC when the recording duration is reduced to 10 seconds. 
 Conversely, its Equal Error Rate (EER) rises modestly from 5\% to 5.4\%. 
 This suggests that the additional seconds in the longer recording may introduce some noise, slightly affecting the EER, while the accuracy benefits from the initial portion of the animation. 
@@ -2691,7 +2693,7 @@ Additional results and supporting material for this analysis are provided in the
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Classic_procedure/five_ten/ft/ten/VB_FA_LIT.png}
-    \caption{VB\_FA\_LIT - 10 seconds}
+    \caption{VB\_FA\_SMA - 10 seconds}
     \label{fig:VB_FA_LIT_cft_10}
 \end{figure}
 
@@ -2699,7 +2701,7 @@ Additional results and supporting material for this analysis are provided in the
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Classic_procedure/five_ten/ft/five/VB_FA_LIT.png}
-    \caption{VB\_FA\_LIT - 5 seconds}
+    \caption{VB\_FA\_SMA - 5 seconds}
     \label{fig:VB_FA_LIT_cft_5}
 \end{figure}
 
@@ -2912,11 +2914,11 @@ To ensure a thorough understanding of the system behavior, the verification stud
 For each of these settings, additional analyses were conducted under closed-set and open-set conditions, as well as with reduced recording durations of ten and five seconds.
 
 It is important to note that the FT configuration, although more computationally demanding, integrates all animations in the training phase, while the ST configuration relies on a single animation. 
-Across all analyses, the best closed-set verification performance was obtained using the VB\_FA\_LIT animation under the FT configuration and best-model evaluation procedure, achieving an accuracy of 92.6\% and an Equal Error Rate (EER) of 4\%. 
+Across all analyses, the best closed-set verification performance was obtained using the VB\_FA\_SMA animation under the FT configuration and best-model evaluation procedure, achieving an accuracy of 92.6\% and an Equal Error Rate (EER) of 4\%. 
 Conversely, the lowest EER was observed during the ST analysis with best-model evaluation, where the VB\_FA\_BIG animation reached an EER of 3.6\% and an accuracy of 92.2\% using the Random Forest classifier.
 These results collectively demonstrate the robustness and reliability of the proposed approach. 
 The experiments confirm that dynamic text stimuli can achieve both high accuracy and low error rates, making them a promising candidate for behavioral biometric verification systems. 
-Depending on the specific application requirements, different configurations may be preferred: the VB\_FA\_LIT animation proves optimal when maximizing overall accuracy is the main objective, while the VB\_FA\_BIG animation is more suitable when minimizing the error rate is of primary concern.
+Depending on the specific application requirements, different configurations may be preferred: the VB\_FA\_SMA animation proves optimal when maximizing overall accuracy is the main objective, while the VB\_FA\_BIG animation is more suitable when minimizing the error rate is of primary concern.
 
 In the open-set verification analysis, the highest accuracy was obtained using the Single Train (ST) configuration with the best-model evaluation strategy. 
 Under this setup, the system achieved an accuracy of 91.9\% with the SVC classifier and an Equal Error Rate (EER) of 6.1\%. 
@@ -2924,11 +2926,11 @@ The lowest EER within the same analysis was also achieved under identical condit
 Specifically, the NuSVC classifier reached an EER of 5.1\%, maintaining a high accuracy of 91.2\%.
 
 When examining the reduced-time analyses, the best result for the 10-second recordings was recorded under the Full Train (FT) configuration with the pairwise evaluation procedure. 
-In this case, the VB\_FA\_LIT animation achieved an accuracy of 92.7\% with the SVC classifier and an EER of 5.4\%. 
+In this case, the VB\_FA\_SMA animation achieved an accuracy of 92.7\% with the SVC classifier and an EER of 5.4\%. 
 The minimum EER for this duration was observed under the ST configuration, also with pairwise evaluation, where the VB\_FA\_BIG animation achieved 91.5\% accuracy using NuSVC, with an EER of 4.1\%.
 
 For the 5-second recordings, the best overall performance, both in terms of accuracy and EER, was achieved during the Verification “Classic” Single Animation with Reduced Session Duration - Full Train (FT) analysis. 
-In this case, the VB\_FA\_LIT animation reached an accuracy of 90.6\% with the NuSVC classifier and an EER of 6.4\%.
+In this case, the VB\_FA\_SMA animation reached an accuracy of 90.6\% with the NuSVC classifier and an EER of 6.4\%.
 
 Finally, a comparative analysis was conducted between dynamic and static text stimuli under similar experimental conditions.
 From this evaluation, two key observations emerged.
@@ -2959,13 +2961,13 @@ In conclusion, the findings of this work demonstrate that dynamic text animation
 
 [5] Al-Zubi, S., Brömme, A., \& Tönnies, K. (2003, September 10-12). Using an active shape structural model for biometric sketch recognition. Paper presented at the DAGM, Magdeburg, Germany (pp. 187-195).
 
-[6] Stolfo, S. J., Hu, C.-W., Li, W.-J., Hershkop, S., Wang, K., \& Nimeskern, O. (2003b). Combining behavior models to secure e-mail systems (No. CU Tech. Rep.). 
+[6] Stolfo, S. J., Hu, C.-W., Li, W.-J., Hershkop, S., Wang, K., \& Nimeskern, O. (2003b). Combining behavior models to secure e-mail systems (No. CU Tech. Rep.).
 
 [7] Spafford, E. H., \& Weeber, S. A. (1992, October). Software forensics: Can we track code to its authors? Paper presented at the 15th National Computer Security Conference (pp. 641-650).
 
 [8] Yampolskiy, R. V., \& Govindaraju, V. (2006b, April 17-22). Use of behavioral biometrics in intrusion detection and online gaming. Paper presented at the Biometric Technology for Human Identification III. SPIE Defense and Security Symposium, Orlando, FL.
 
-[9] Bergadano, F., Gunetti, D., \& Picardi, C. (2002). User authentication through keystroke dynamics. [TISSEC]. ACM Transactions on Information and System Security, 5(4), 367–397. doi:10.1145/581271.581272
+[9] Bergadano, F., Gunetti, D., \& Picardi, C. (2002). User authentication through keystroke dynamics. ACM Transactions on Information and System Security, 5(4), 367–397. doi:10.1145/581271.581272
 
 [10] Denning, D. E. (1987). An intrusion-detection model. IEEE Transactions on Software Engineering, 13(2), 222–232. doi:10.1109/TSE.1987.232894
 
@@ -2973,167 +2975,167 @@ In conclusion, the findings of this work demonstrate that dynamic text animation
 
 [12] Novikov, D. (2005). Neural networks to intrusion detection. Unpublished MS thesis, Rochester Institute of Technology, Rochester, NY.
 
-[13]Westeyn, T., Pesti, P., Park, K., \& Starner, T. (2005, July). Biometric identification using song-based eye blink patterns. Paper presented at the Human Computer Interaction International (HCII), Las Vegas, NV.
+[13] Westeyn, T., Pesti, P., Park, K., \& Starner, T. (2005, July). Biometric identification using song-based eye blink patterns. Paper presented at the Human Computer Interaction International (HCII), Las Vegas, NV.
 
-[14] Westeyn, T., \& Starner, T. (2004). Recognizing song-based blink patterns: Applications for re stricted and universal access. Paper presented at the Sixth IEEE International Conference on Automatic Face and Gesture Recognition (p. 717).
+[14] Westeyn, T., \& Starner, T. (2004). Recognizing song-based blink patterns: Applications for restricted and universal access. Paper presented at the Sixth IEEE International Conference on Automatic Face and Gesture Recognition (p. 717).
 
-[15]  BenAbdelkader, C., Cutler, R., \& Davis, L. (2002). Person identification using automatic height and stride estimation. Paper presented at the IEEE International Conference on Pattern Recognition.
+[15] BenAbdelkader, C., Cutler, R., \& Davis, L. (2002). Person identification using automatic height and stride estimation. Paper presented at the IEEE International Conference on Pattern Recognition.
 
 [16] Kale, A., Sundaresan, A., Rajagopalan, A. N., \& Cuntoor, N., RoyChowdhury, A., Kruger, V., et al. (2004). Identification of humans using gait. IEEE Transactions on Image Processing, 13(9). doi:10.1109/TIP.2004.832865
 
-[17]Erdogan, H., Ercil, A., Ekenel, H., Bilgin, S., Eden, I., \& Kirisci, M. (2005a). Multimodal person recognition for vehicular applications. LNCS, 3541, 366–375.
+[17] Erdogan, H., Ercil, A., Ekenel, H., Bilgin, S., Eden, I., \& Kirisci, M. (2005a). Multimodal person recognition for vehicular applications. LNCS, 3541, 366–375.
 
 [18] Erdogan, H., Ozyagci, A. N., Eskil, T., Rodoper, M., Ercil, A., \& Abut, H. (2005b, September). Experiments on decision fusion for driver recognition. Paper presented at the Biennial on DSP for in-vehicle and mobile systems, Sesimbra, Portugal.
 
 [19] Erzin, E., Yemez, Y., Tekalp, A. M., Erçil, A., Erdogan, H., \& Abut, H. (2006). Multimodal person recognition for human-vehicle interaction. IEEE MultiMedia, 13, 18–31. doi:10.1109/MMUL.2006.37
 
-[20]  Brause, R., Langsdorf, T., \& Hepp, M. (1999). Neural data mining for credit card fraud detection. Paper presented at the 11th IEEE International Conference on Tools with Artificial Intelligence (pp. 103-106).
+[20] Brause, R., Langsdorf, T., \& Hepp, M. (1999). Neural data mining for credit card fraud detection. Paper presented at the 11th IEEE International Conference on Tools with Artificial Intelligence (pp. 103-106).
 
-[21] Andrew T. Duchowski. 2017. Eye Tracking Methodology: Theory and Practice (3rd. ed.). Springer Publishing Company, Incorporated.
+[21] Duchowski, A. T. (2017). Eye Tracking Methodology: Theory and Practice (3rd ed.). Springer.
 
-[22] Young, L.R., Sheena, D. Survey of eye movement recording methods. Behavior Research Methods \& Instrumentation 7, 397–429 (1975). https://doi.org/10.3758/BF03201553
+[22] Young, L. R., Sheena, D. (1975). Survey of eye movement recording methods. Behavior Research Methods \& Instrumentation, 7, 397–429. doi:10.3758/BF03201553
 
-[23] Crane, H. D. (1994). The purkinje image eyetracker, image stabilization, and related forms of stimulus manipulation. In D. H.Kelly(Ed.), Visual science and engineering: Models and applications(pp. 13–89). New York: Marcel Dekker.
+[23] Crane, H. D. (1994). The Purkinje image eyetracker, image stabilization, and related forms of stimulus manipulation. In D. H. Kelly (Ed.), Visual Science and Engineering: Models and Applications (pp. 13–89). New York: Marcel Dekker.
 
-[24] Crane,H.D.,\&Steele,C.M.(1985).Generation-Vdual-purkinje-imageeyetracker.AppliedOptics,24, 527–537.
+[24] Crane, H. D., \& Steele, C. M. (1985). Generation-V dual-Purkinje-image eyetracker. Applied Optics, 24, 527–537.
 
-[25] Chapter 9 - Biometric Authentication to Access Controlled Areas Through Eye Tracking, doi: https://doi.org/10.1016/B978-0-08-100705-1.00009-9
+[25] Chapter 9 - Biometric Authentication to Access Controlled Areas Through Eye Tracking, doi:10.1016/B978-0-08-100705-1.00009-9
 
-[26] A. Maeder, C. Fookes, S. Sridharan, Gaze based user authentication for personal computer applications, in: Proceedings of 2004 International Symposium on Intelligent Multimedia, Video and Speech Processing, 2004, pp. 727–730.
+[26] Maeder, A., Fookes, C., Sridharan, S. (2004). Gaze-based user authentication for personal computer applications. Proceedings of 2004 International Symposium on Intelligent Multimedia, Video and Speech Processing, pp. 727–730.
 
-[27] O.V. Komogortsev, A. Karpov, L.R. Price, C. Aragon, Biometric authentication via oculomotor plant characteristics, in: 2012 5th IAPR International Conference on Biometrics (ICB), 2012, pp. 413–420
+[27] Komogortsev, O. V., Karpov, A., Price, L. R., Aragon, C. (2012). Biometric authentication via oculomotor plant characteristics. In 2012 5th IAPR International Conference on Biometrics (ICB), pp. 413–420.
 
-[28] A. De Luca, R. Weiss, H. Hußmann, X. An, Eyepass– eye-stroke authentication for public terminals, in: CHI '08 Extended Abstracts on Human Factors in Computing Systems (CHI EA '08), ACM, New York, NY, USA, 2008, pp. 3003–3008.
+[28] De Luca, A., Weiss, R., Hußmann, H., An, X. (2008). EyePass– eye-stroke authentication for public terminals. In CHI '08 Extended Abstracts on Human Factors in Computing Systems (CHI EA '08), pp. 3003–3008.
 
-[29] P. Dunphy, A. Fitch, P. Olivier, Gaze-contingent passwords at the ATM, in: 4th Conference on Communication by Gaze Interaction (COGAIN), Citeseer, 2008, pp. 59–62.
+[29] Dunphy, P., Fitch, A., Olivier, P. (2008). Gaze-contingent passwords at the ATM. 4th Conference on Communication by Gaze Interaction (COGAIN), pp. 59–62.
 
-[30] J. Weaver, K. Mock, B. Hoanca, Gaze-based password authentication through automatic clustering of gaze points, in: 2011 IEEE International Conference on Systems, Man, and Cybernetics (SMC), 2011, pp. 2749–2754.
+[30] Weaver, J., Mock, K., Hoanca, B. (2011). Gaze-based password authentication through automatic clustering of gaze points. In 2011 IEEE International Conference on Systems, Man, and Cybernetics (SMC), pp. 2749–2754.
 
-[31] D.H. Cymek, A.C. Venjakob, S. Ruff, O.H.-M. Lutz, S. Hofmann, M. Roetting, Entering PIN codes by smooth pursuit eye movements, J. Eye Mov. Res. 7 (2014) 1–11.
+[31] Cymek, D. H., Venjakob, A. C., Ruff, S., Lutz, O. H.-M., Hofmann, S., Roetting, M. (2014). Entering PIN codes by smooth pursuit eye movements. J. Eye Mov. Res., 7, 1–11.
 
-[32] D. Cazzato, A. Evangelista, M. Leo, P. Carcagnì, and C. Distante, “A low-cost and calibration-free gaze estimator for soft biometrics: An explorative study,” Pattern Recognition Letters, vol. 82, pp. 196–206, 2016, doi: 10.1016/j.patrec.2015.10.015.
+[32] Cazzato, D., Evangelista, A., Leo, M., Carcagnì, P., Distante, C. (2016). A low-cost and calibration-free gaze estimator for soft biometrics: An explorative study. Pattern Recognition Letters, 82, 196–206. doi:10.1016/j.patrec.2015.10.015
 
-[33] Cantoni, V., Galdi, C., Nappi, M., Porta, M., \& Riccio, D. (2015). GANT: Gaze analysis technique for human identification. Pattern Recognition, 48(4), 1027–1038. https://doi.org/10.1016/j.patcog.2014.02.017
+[33] Cantoni, V., Galdi, C., Nappi, M., Porta, M., Riccio, D. (2015). GANT: Gaze analysis technique for human identification. Pattern Recognition, 48(4), 1027–1038. doi:10.1016/j.patcog.2014.02.017
 
-[34] J. Yin, J. Sun, J. Li, and K. Liu, “An effective gaze-based authentication method with the spatiotemporal feature of eye movement,” Sensors, vol. 22, no. 8, p. 3002, 2022, doi: 10.3390/s22083002.
+[34] Yin, J., Sun, J., Li, J., Liu, K. (2022). An effective gaze-based authentication method with the spatiotemporal feature of eye movement. Sensors, 22(8), 3002. doi:10.3390/s22083002
 
-[35] M. Porta, P. Dondi, N. Zangrandi and L. Lombardi, "Gaze-Based Biometrics From Free Observation of Moving Elements," in IEEE Transactions on Biometrics, Behavior, and Identity Science, vol. 4, no. 1, pp. 85-96, Jan. 2022, doi: 10.1109/TBIOM.2021.3130798.
+[35] Porta, M., Dondi, P., Zangrandi, N., Lombardi, L. (2022). Gaze-Based Biometrics From Free Observation of Moving Elements. IEEE Transactions on Biometrics, Behavior, and Identity Science, 4(1), 85–96. doi:10.1109/TBIOM.2021.3130798
 
-[36] Omair Shahzad Bhatti, Michael Barz, and Daniel Sonntag. 2021. EyeLogin - Calibration-free Authentication Method for Public Displays Using Eye Gaze. In ACM Symposium on Eye Tracking Research and Applications (ETRA '21 Short Papers). Association for Computing Machinery, New York, NY, USA, Article 14, 1–7. https://doi.org/10.1145/3448018.3458001
+[36] Bhatti, O. S., Barz, M., Sonntag, D. (2021). EyeLogin - Calibration-free Authentication Method for Public Displays Using Eye Gaze. ACM Symposium on Eye Tracking Research and Applications (ETRA '21 Short Papers), Article 14, 1–7. doi:10.1145/3448018.3458001
 
-[37] Mohamed Khamis, Ludwig Trotter, Ville Mäkelä, Emanuel von Zezschwitz, Jens Le, Andreas Bulling, and Florian Alt. 2018. CueAuth: Comparing Touch, Mid-Air Gestures, and Gaze for Cue-based Authentication on Situated Displays.Proc. ACM Interact. Mob. Wearable Ubiquitous Technol. 2, 4, Article 174 (Dec. 2018), 21 pages. https://doi.org/10.1145/3287052
+[37] Khamis, M., Trotter, L., Mäkelä, V., von Zezschwitz, E., Le, J., Bulling, A., Alt, F. (2018). CueAuth: Comparing Touch, Mid-Air Gestures, and Gaze for Cue-based Authentication on Situated Displays. Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., 2(4), Article 174. doi:10.1145/3287052
 
-[38] ADIL HAMID MALLA, A GAZE-BASED AUTHENTICATION SYSTEM: FROM AUTHENTICATION TO INTRUSION DETECTION. Submitted to the Office of Graduate and Professional Studies of Texas A\&M Universityin partial fulfillment of the requirements for the degree of MASTER OF SCIENCE.
+[38] Malla, A. H. (MS Thesis). A Gaze-Based Authentication System: From Authentication to Intrusion Detection. Texas A\&M University.
 
-[39] Ivo Sluganovic, Marc Roeschlin, Kasper B. Rasmussen, and Ivan Martinovic. 2018. Analysis of Reflexive Eye Movements for Fast Replay-Resistant Biometric Authentication. ACM Trans. Priv. Secur. 22, 1, Article 4 (February 2019), 30 pages. https://doi.org/10.1145/3281745
+[39] Sluganovic, I., Roeschlin, M., Rasmussen, K. B., Martinovic, I. (2019). Analysis of Reflexive Eye Movements for Fast Replay-Resistant Biometric Authentication. ACM Trans. Priv. Secur., 22(1), Article 4. doi:10.1145/3281745
 
-[40] Matin Fallahi, Patricia Arias-Cabarcos, Thorsten Strufe. Beyond Gaze Points: Augmenting Eye Movement with Brainwave Data for Multimodal User Authentication in Extended Reality. https://doi.org/10.48550/arXiv.2404.18694
+[40] Fallahi, M., Arias-Cabarcos, P., Strufe, T. (2024). Beyond Gaze Points: Augmenting Eye Movement with Brainwave Data for Multimodal User Authentication in Extended Reality. doi:10.48550/arXiv.2404.18694
 
-[41] N. Alsufyani, A. Ali, S. Hoque and F. Deravi, "Biometric presentation attack detection using gaze alignment," 2018 IEEE 4th International Conference on Identity, Security, and Behavior Analysis (ISBA), Singapore, 2018, pp. 1-8, doi:10.1109/ISBA.2018.8311472.
+[41] Alsufyani, N., Ali, A., Hoque, S., Deravi, F. (2018). Biometric presentation attack detection using gaze alignment. 2018 IEEE 4th International Conference on Identity, Security, and Behavior Analysis (ISBA), pp. 1–8. doi:10.1109/ISBA.2018.8311472
 
-[42] Dillon Lohr, Michael J. Proulx, Mehedi Hasan Raju, Oleg V. Komogortsev. Ocular Authentication: Fusion of Gaze and Periocular Modalities.  https://doi.org/10.48550/arXiv.2505.17343
+[42] Lohr, D., Proulx, M. J., Raju, M. H., Komogortsev, O. V. (2025). Ocular Authentication: Fusion of Gaze and Periocular Modalities. doi:10.48550/arXiv.2505.17343
 
-[43] D'Amelio A, Patania S, Bursic S, Cuculo V, Boccignone G. Using Gaze for Behavioural Biometrics. Sensors. 2023; 23(3):1262. https://doi.org/10.3390/s23031262
+[43] D'Amelio, A., Patania, S., Bursic, S., Cuculo, V., Boccignone, G. (2023). Using Gaze for Behavioural Biometrics. Sensors, 23(3), 1262. doi:10.3390/s23031262
 
-[44] Virginio Cantoni, Tomas Lacovara, Marco Porta, and Haochen Wang. 2018. A Study on Gaze-Controlled PIN Input with Biometric Data Analysis. In Proceedings of the 19th International Conference on Computer Systems and Technologies (CompSysTech '18). Association for Computing Machinery, New York, NY, USA, 99–103. https://doi.org/10.1145/3274005.3274029
+[44] Cantoni, V., Lacovara, T., Porta, M., Wang, H. (2018). A Study on Gaze-Controlled PIN Input with Biometric Data Analysis. In Proceedings of the 19th International Conference on Computer Systems and Technologies (CompSysTech '18), pp. 99–103. doi:10.1145/3274005.3274029
 
-[45] Ali A, Hoque S, Deravi F. Directed Gaze Trajectories for Biometric Presentation Attack Detection. Sensors. 2021; 21(4):1394. https://doi.org/10.3390/s21041394
+[45] Ali, A., Hoque, S., Deravi, F. (2021). Directed Gaze Trajectories for Biometric Presentation Attack Detection. Sensors, 21(4), 1394. doi:10.3390/s21041394
 
-[46] Ali, A., Hoque, S. \& Deravi, F. Gaze stability for liveness detection. Pattern Anal Applic 21, 437–449 (2018). https://doi.org/10.1007/s10044-016-0587-2
+[46] Ali, A., Hoque, S., Deravi, F. (2018). Gaze stability for liveness detection. Pattern Anal Applic, 21, 437–449. doi:10.1007/s10044-016-0587-2
 
-[47] Haochen Wang, Prof. Virginio Cantoni. Gaze-Based Biometrics: Some Case Studies. 
+[47] Wang, H., Cantoni, V. Gaze-Based Biometrics: Some Case Studies.
 
-[48] Yasmeen Abdrabou, Ahmed Shams, Mohamed Omar Mantawy, Anam Ahmad Khan, Mohamed Khamis, Florian Alt, and Yomna Abdelrahman. 2021. GazeMeter: Exploring the Usage of Gaze Behaviour to Enhance Password Assessments. In ACM Symposium on Eye Tracking Research and Applications (ETRA '21 Full Papers). Association for Computing Machinery, New York, NY, USA, Article 9, 1–12. https://doi.org/10.1145/3448017.3457384
+[48] Abdrabou, Y., Shams, A., Mantawy, M. O., Khan, A. A., Khamis, M., Alt, F., Abdelrahman, Y. (2021). GazeMeter: Exploring the Usage of Gaze Behaviour to Enhance Password Assessments. ACM Symposium on Eye Tracking Research and Applications (ETRA '21 Full Papers), Article 9, 1–12. doi:10.1145/3448017.3457384
 
-[49] Harezlak K, Blasiak M, Kasprowski P. Biometric Identification Based on Eye Movement Dynamic Features. Sensors. 2021; 21(18):6020. https://doi.org/10.3390/s21186020
+[49] Harezlak, K., Blasiak, M., Kasprowski, P. (2021). Biometric Identification Based on Eye Movement Dynamic Features. Sensors, 21(18), 6020. doi:10.3390/s21186020
 
-[50] M. Wierzbowski, G. Pochwatko, P. Borkiewicz, D. Cnotkowski, M. Pabiś-Orzeszyna and P. Kobyliński, "Behavioural Biometrics in Virtual Reality: To What Extent Can We Identify a Person Based Solely on How They Watch 360-Degree Videos?," 2022 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct), Singapore, Singapore, 2022, pp. 417-422, doi: 10.1109/ISMAR-Adjunct57072.2022.00090.
+[50] Wierzbowski, M., Pochwatko, G., Borkiewicz, P., Cnotkowski, D., Pabiś-Orzeszyna, M., Kobyliński, P. (2022). Behavioural Biometrics in Virtual Reality: To What Extent Can We Identify a Person Based Solely on How They Watch 360-Degree Videos? 2022 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct), pp. 417–422. doi:10.1109/ISMAR-Adjunct57072.2022.00090
 
-[51] Andrea Casanova, Lucia Cascone, Aniello Castiglione, Weizhi Meng, Chiara Pero, User recognition based on periocular biometrics and touch dynamics, Pattern Recognition Letters, Volume 148, 2021, Pages 114-120, ISSN 0167-8655. https://doi.org/10.1016/j.patrec.2021.05.006.
+[51] Casanova, A., Cascone, L., Castiglione, A., Meng, W., Pero, C. (2021). User recognition based on periocular biometrics and touch dynamics. Pattern Recognition Letters, 148, 114–120. doi:10.1016/j.patrec.2021.05.006
 
-[52] Rubo, M., Son, G. Social gaze fingerprints: identifying social virtual reality users by their eye gaze patterns. Virtual Reality 29, 144 (2025). https://doi.org/10.1007/s10055-025-01210-4
+[52] Rubo, M., Son, G. (2025). Social gaze fingerprints: identifying social virtual reality users by their eye gaze patterns. Virtual Reality, 29, 144. doi:10.1007/s10055-025-01210-4
 
-[53] D.L. Silver, A. Biggs, Keystroke and eye-tracking biometrics for user identification, in: IC-AI, 2006, pp. 344–348.
+[53] Silver, D. L., Biggs, A. (2006). Keystroke and eye-tracking biometrics for user identification. IC-AI, pp. 344–348.
 
-[54] C. Holland, O.V. Komogortsev, Biometric identification via eye movement scanpaths in reading, in: 2011 International Joint Conference on Biometrics (IJCB), 2011, pp. 1–8.
+[54] Holland, C., Komogortsev, O. V. (2011). Biometric identification via eye movement scanpaths in reading. 2011 International Joint Conference on Biometrics (IJCB), pp. 1–8.
 
-[55] C.D. Holland, O.V. Komogortsev, Complex eye movement pattern biometrics: analyzing fixations and saccades, in: 2013 International Conference on Biometrics (ICB), 2013.
+[55] Holland, C. D., Komogortsev, O. V. (2013). Complex eye movement pattern biometrics: analyzing fixations and saccades. 2013 International Conference on Biometrics (ICB).
 
-[56] I. Rigas, G. Economou, S. Fotopoulos, Biometric identification based on the eye movements and graph matching techniques, Pattern Recognit. Lett. 33 (2012) 786–792.
+[56] Rigas, I., Economou, G., Fotopoulos, S. (2012). Biometric identification based on the eye movements and graph matching techniques. Pattern Recognit. Lett., 33, 786–792.
 
-[57] C. Galdi, M. Nappi, D. Riccio, V. Cantoni, M. Porta, A new gaze analysis based soft biometric, in: J.A. Carrasco-Ochoa, J.F. Martínez-Trinidad, J.S. Rodríguez, G.S. di Baja (Eds.), Pattern Recognition, in: Lecture Notes in Computer Science, Springer, Berlin, Heidelberg, 2013, pp. 136–144.
+[57] Galdi, C., Nappi, M., Riccio, D., Cantoni, V., Porta, M. (2013). A new gaze analysis based soft biometric. In J.A. Carrasco-Ochoa et al. (Eds.), Pattern Recognition, Lecture Notes in Computer Science, Springer, pp. 136–144.
 
-[58] V. Cantoni, M. Porta, C. Galdi, M. Nappi, H. Wechsler, Gender and age categorization using gaze analysis, in: 2014 10th International Conference on Signal-Image Technology and Internet-Based Systems (SITIS), 2014, pp. 574–579.
+[58] Cantoni, V., Porta, M., Galdi, C., Nappi, M., Wechsler, H. (2014). Gender and age categorization using gaze analysis. 10th International Conference on Signal-Image Technology and Internet-Based Systems (SITIS), pp. 574–579.
 
-[59] C. Galdi, H. Wechsler, V. Cantoni, M. Porta, M. Nappi, Towards demographic categorization using gaze analysis, Pattern Recognit. Lett. (2015) (accessed 16 September 2015).
+[59] Galdi, C., Wechsler, H., Cantoni, V., Porta, M., Nappi, M. (2015). Towards demographic categorization using gaze analysis. Pattern Recognit. Lett. (accessed 16 September 2015).
 
-[60] R.Biedert, M. Frank, I. Martinovic, D. Song, Stimuli for gaze based intrusion detection, in: J.J. Park, H. Jong, V.C.M. Leung, C.-L. Wang, T. Shon (Eds.), Future Information Technology, Application, and Service, in: Lecture Notes in Electrical Engineering, Springer, Netherlands, 2012, pp. 757–763.
+[60] Biedert, R., Frank, M., Martinovic, I., Song, D. (2012). Stimuli for gaze based intrusion detection. In J.J. Park et al. (Eds.), Future Information Technology, Application, and Service, Lecture Notes in Electrical Engineering, Springer, pp. 757–763.
 
-[61] A. George, A. Routray, A score level fusion method for eye movement biometrics, Pattern Recognit. Lett. (2015) (accessed 2 December 2015).
+[61] George, A., Routray, A. (2015). A score level fusion method for eye movement biometrics. Pattern Recognit. Lett. (accessed 2 December 2015).
 
-[62] R. Bednarik, T. Kinnunen, A. Mihaila, P. Fränti, Eye-movements as a biometric, in: H. Kalviainen, J. Parkkinen, A. Kaarna (Eds.), Image Analysis, in: Lecture Notes in Computer Science, Springer, Berlin, Heidelberg, 2005, pp. 780–789.
+[62] Bednarik, R., Kinnunen, T., Mihaila, A., Fränti, P. (2005). Eye-movements as a biometric. In H. Kalviainen et al. (Eds.), Image Analysis, Lecture Notes in Computer Science, Springer, pp. 780–789.
 
-[63] T. Kinnunen, F. Sedlak, R. Bednarik, Towards task-independent person authentication using eye movement signals, in: Proceedings of the 2010 Symposium on Eye-Tracking Research \& Applications (ETRA '10), 2010, pp. 187–190. 
+[63] Kinnunen, T., Sedlak, F., Bednarik, R. (2010). Towards task-independent person authentication using eye movement signals. Proceedings of the 2010 Symposium on Eye-Tracking Research \& Applications (ETRA '10), pp. 187–190.
 
-[64] I. Rigas, G. Economou, S. Fotopoulos, Human eye movements as a trait for biometrical identification, in: 2012 IEEE Fifth International Conference on Biometrics: Theory, Applications and Systems (BTAS), 2012, pp. 217–222.
+[64] Rigas, I., Economou, G., Fotopoulos, S. (2012). Human eye movements as a trait for biometrical identification. 2012 IEEE Fifth International Conference on Biometrics: Theory, Applications and Systems (BTAS), pp. 217–222.
 
-[65] N.V. Cuong, V. Dinh, L.S.T. Ho, Mel-frequency cepstral coefficients for eye movement identification, in: 2012 IEEE 24th International Conference on Tools with Artificial Intelligence (ICTAI), 2012, pp. 253–260.
+[65] Cuong, N. V., Dinh, V., Ho, L. S. T. (2012). Mel-frequency cepstral coefficients for eye movement identification. 2012 IEEE 24th International Conference on Tools with Artificial Intelligence (ICTAI), pp. 253–260.
 
-[66] Z. Liang, F. Tan, Z. Chi, Video-based biometric identification using eye tracking technique, in: 2012 IEEE International Conference on Signal Processing, Communication and Computing (ICSPCC), 2012, pp. 728–733.
+[66] Liang, Z., Tan, F., Chi, Z. (2012). Video-based biometric identification using eye tracking technique. 2012 IEEE International Conference on Signal Processing, Communication and Computing (ICSPCC), pp. 728–733.
 
-[67] A. Darwish, M. Pasquier, Biometric identification using the dynamic features of the eyes, in: 2013 IEEE Sixth International Conference on Biometrics: Theory, Applications and Systems (BTAS), 2013, pp. 1–6.
+[67] Darwish, A., Pasquier, M. (2013). Biometric identification using the dynamic features of the eyes. 2013 IEEE Sixth International Conference on Biometrics: Theory, Applications and Systems (BTAS), pp. 1–6.
 
-[68] C.D. Holland, O.V. Komogortsev, Complex eye movement pattern biometrics: analyzing fixations and saccades, in: 2013 International Conference on Biometrics (ICB), 2013.
+[68] Holland, C. D., Komogortsev, O. V. (2013). Complex eye movement pattern biometrics: analyzing fixations and saccades. 2013 International Conference on Biometrics (ICB).
 
-[69] H.J. Yoon, T.R. Carmichael, G. Tourassi, Gaze as a Biometric (Medical Imaging 2014: Image Perception, Observer Performance, and Technology Assessment), in: Proc. SPIE, vol. 9037, International Society for Optics and Photonics, 2014.
+[69] Yoon, H. J., Carmichael, T. R., Tourassi, G. (2014). Gaze as a Biometric. Medical Imaging 2014: Image Perception, Observer Performance, and Technology Assessment. Proc. SPIE, 9037.
 
-[70] H.J. Yoon, T.R. Carmichael, G. Tourassi, Temporal stability of visual search-driven biometrics, in: Medical Imaging 2015: Image Perception, Observer Performance, and Technology Assessment, International Society for Optics and Photonics, in: Proc. SPIE, vol. 9416, 2015.
+[70] Yoon, H. J., Carmichael, T. R., Tourassi, G. (2015). Temporal stability of visual search-driven biometrics. Medical Imaging 2015: Image Perception, Observer Performance, and Technology Assessment, Proc. SPIE, 9416.
 
-[71] M. Juhola, Y. Zhang, J. Rasku, Biometric verification of a subject through eye movements, Comput. Biol. Med. 43 (2013) 42–50.
+[71] Juhola, M., Zhang, Y., Rasku, J. (2013). Biometric verification of a subject through eye movements. Comput. Biol. Med., 43, 42–50.
 
-[72] Y. Zhang, J. Laurikkala, M. Juhola, Biometric verification of a subject with eye movements, with special reference to temporal variability in saccades between a subject's measurements, Int. J. Biom. 6 (2014) 75
+[72] Zhang, Y., Laurikkala, J., Juhola, M. (2014). Biometric verification of a subject with eye movements, with special reference to temporal variability in saccades between a subject's measurements. Int. J. Biom., 6, 75.
 
-[73] N. Srivastava, U. Agrawal, S.K. Roy, U.S. Tiwary, Human identification using linear multiclass SVM and eye movement biometrics, in: 2015 Eighth International Conference on Contemporary Computing (IC3), 2015, pp. 365–369.
+[73] Srivastava, N., Agrawal, U., Roy, S. K., Tiwary, U. S. (2015). Human identification using linear multiclass SVM and eye movement biometrics. 2015 Eighth International Conference on Contemporary Computing (IC3), pp. 365–369.
 
-[74] S. Eberz, K.B. Rasmussen, V. Lenders, I. Martinovic, Preventing lunchtime attacks: fighting insider threats with eye movement biometrics, in: 2015 Network and Distributed System Security (NDSS) Symposium, 2015.
+[74] Eberz, S., Rasmussen, K. B., Lenders, V., Martinovic, I. (2015). Preventing lunchtime attacks: fighting insider threats with eye movement biometrics. 2015 Network and Distributed System Security (NDSS) Symposium.
 
-[75] N. Nugrahaningsih, M. Porta, Pupil size as a biometric trait, in: V. Cantoni, D.Dimov, M. Tistarelli (Eds.), Biometric Authentication, in: Lecture Notes in Computer Science, Springer International Publishing, 2014, pp. 222–233
+[75] Nugrahaningsih, N., Porta, M. (2014). Pupil size as a biometric trait. In V. Cantoni et al. (Eds.), Biometric Authentication, Lecture Notes in Computer Science, Springer, pp. 222–233.
 
-[76] S.Eberz, K.B. Rasmussen, V. Lenders, I. Martinovic, Preventing lunchtime attacks:fighting insider threats with eye movement biometrics, in: 2015 Network and Distributed System Security (NDSS) Symposium, 2015.
+[76] Eberz, S., Rasmussen, K. B., Lenders, V., Martinovic, I. (2015). Preventing lunchtime attacks: fighting insider threats with eye movement biometrics. 2015 NDSS Symposium.
 
-[77] P. Kasprowski, J. Ober, Eye movements in biometrics, in: D. Maltoni, A.K. Jain (Eds.), Biometric Authentication, in: Lecture Notes in Computer Science, Springer, Berlin, Heidelberg, 2004, pp. 248–258.
+[77] Kasprowski, P., Ober, J. (2004). Eye movements in biometrics. In D. Maltoni, A. K. Jain (Eds.), Biometric Authentication, Lecture Notes in Computer Science, Springer, pp. 248–258.
 
-[78] O.V. Komogortsev, A. Karpov, L.R. Price, C. Aragon, Biometric authentication via oculomotor plant characteristics, in: 2012 5th IAPR International Conference on Bio metrics (ICB), 2012, pp. 413–420.
+[78] Komogortsev, O. V., Karpov, A., Price, L. R., Aragon, C. (2012). Biometric authentication via oculomotor plant characteristics. 2012 5th IAPR International Conference on Biometrics (ICB), pp. 413–420.
 
-[79] O.V. Komogortsev, A. Karpov, C.D. Holland, H.P. Proenca, Multimodal ocular biometrics approach: a feasibility study, in: 2012 IEEE Fifth International Conference on Biometrics: Theory, Applications and Systems (BTAS), 2012, pp. 209–216.
+[79] Komogortsev, O. V., Karpov, A., Holland, C. D., Proenca, H. P. (2012). Multimodal ocular biometrics approach: a feasibility study. 2012 IEEE Fifth International Conference on Biometrics: Theory, Applications and Systems (BTAS), pp. 209–216.
 
-[80] Z. Liang, F. Tan, Z. Chi, Video-based biometric identification using eye tracking technique, in: 2012 IEEE International Conference on Signal Processing, Communication and Computing (ICSPCC), 2012, pp. 728–733.
+[80] Liang, Z., Tan, F., Chi, Z. (2012). Video-based biometric identification using eye tracking technique. 2012 IEEE International Conference on Signal Processing, Communication and Computing (ICSPCC), pp. 728–733.
 
-[81] Harezlak K, Pluciennik E. Towards Improved Eye Movement Biometrics: Investigating New Features with Neural Networks. Sensors. 2025; 25(14):4304. https://doi.org/10.3390/s25144304
+[81] Harezlak, K., Pluciennik, E. (2025). Towards Improved Eye Movement Biometrics: Investigating New Features with Neural Networks. Sensors, 25(14), 4304. doi:10.3390/s25144304
 
-[82] Jonathan Liebers, Patrick Horn, Christian Burschik, Uwe Gruenefeld, and Stefan Schneegass. 2021. Using Gaze Behavior and Head Orientation for Implicit Identification in Virtual Reality. In Proceedings of the 27th ACM Symposium on Virtual Reality Software and Technology (VRST '21). Association for Computing Machinery, New York, NY, USA, Article 22, 1–9. https://doi.org/10.1145/3489849.3489880
+[82] Liebers, J., Horn, P., Burschik, C., Gruenefeld, U., Schneegass, S. (2021). Using Gaze Behavior and Head Orientation for Implicit Identification in Virtual Reality. 27th ACM Symposium on Virtual Reality Software and Technology (VRST '21), Article 22, 1–9. doi:10.1145/3489849.3489880
 
-[83] B. L. Tait, "Behavioural Biometrics Authentication Tested Using EyeWriter Technology," 2019 IEEE 12th International Conference on Global Security, Safety and Sustainability (ICGS3), London, UK, 2019, pp. 1-9, doi: 10.1109/ICGS3.2019.8688257.
+[83] Tait, B. L. (2019). Behavioural Biometrics Authentication Tested Using EyeWriter Technology. 2019 IEEE 12th International Conference on Global Security, Safety and Sustainability (ICGS3), pp. 1–9. doi:10.1109/ICGS3.2019.8688257
 
-[84] Asish SM, Kulshreshth AK, Borst CW. User Identification Utilizing Minimal Eye-Gaze Features in Virtual Reality Applications. Virtual Worlds. 2022; 1(1):42-61. https://doi.org/10.3390/virtualworlds1010004
+[84] Asish, S. M., Kulshreshth, A. K., Borst, C. W. (2022). User Identification Utilizing Minimal Eye-Gaze Features in Virtual Reality Applications. Virtual Worlds, 1(1), 42–61. doi:10.3390/virtualworlds1010004
 
-[85] Sherif Nagib Abbas Seha, Dimitrios Hatzinakos, Ali Shahidi Zandi, Felix J.E. Comeau, Improving eye movement biometrics in low frame rate eye-tracking devices using periocular and eye blinking features, Image and Vision Computing, Volume 108, 2021, 104124, ISSN 0262-8856, https://doi.org/10.1016/j.imavis.2021.104124.
+[85] Seha, S. N. A., Hatzinakos, D., Zandi, A. S., Comeau, F. J. E. (2021). Improving eye movement biometrics in low frame rate eye-tracking devices using periocular and eye blinking features. Image and Vision Computing, 108, 104124. doi:10.1016/j.imavis.2021.104124
 
-[86] M. Wierzbowski, G. Pochwatko, P. Borkiewicz, D. Cnotkowski, M. Pabiś-Orzeszyna and P. Kobyliński, "Behavioural Biometrics in Virtual Reality: To What Extent Can We Identify a Person Based Solely on How They Watch 360-Degree Videos?," 2022 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct), Singapore, Singapore, 2022, pp. 417-422, doi: 10.1109/ISMAR-Adjunct57072.2022.00090.
+[86] Wierzbowski, M., Pochwatko, G., Borkiewicz, P., Cnotkowski, D., Pabiś-Orzeszyna, M., Kobyliński, P. (2022). Behavioural Biometrics in Virtual Reality: To What Extent Can We Identify a Person Based Solely on How They Watch 360-Degree Videos? 2022 IEEE ISMAR-Adjunct, pp. 417–422. doi:10.1109/ISMAR-Adjunct57072.2022.00090
 
-[87] Cazzato D, Carcagnì P, Cimarelli C, Voos H, Distante C, Leo M. Ocular Biometrics Recognition by Analyzing Human Exploration during Video Observations. Applied Sciences. 2020; 10(13):4548. https://doi.org/10.3390/app10134548
+[87] Cazzato, D., Carcagnì, P., Cimarelli, C., Voos, H., Distante, C., Leo, M. (2020). Ocular Biometrics Recognition by Analyzing Human Exploration during Video Observations. Applied Sciences, 10(13), 4548. doi:10.3390/app10134548
 
-[88] Jim Holdsworth, Matthew Kosinski, What is behavioral biometrics? https://www.ibm.com/think/topics/behavioral-biometrics
+[88] Holdsworth, J., Kosinski, M. What is behavioral biometrics? \url{https://www.ibm.com/think/topics/behavioral-biometrics}
 
-[89] A. George and A. Routray, “A score level fusion method for eye movement biometrics,” Pattern Recognit. Lett., vol. 82, pp. 207–215, Oct. 2016.
+[89] George, A., Routray, A. (2016). A score level fusion method for eye movement biometrics. Pattern Recognit. Lett., 82, 207–215.
 
-[90] OPEN GAZE API BY GAZEPOINT, http://andrewd.ces.clemson.edu/courses/cpsc881/manuals/Gazepoint/Gazepoint\%20API.pdf
+[90] Open Gaze API by GazePoint, \url{http://andrewd.ces.clemson.edu/courses/cpsc881/manuals/Gazepoint/Gazepoint%20API.pdf}
 
 [91] SelectKBest, \url{https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html}
 
 [92] Naive Bayes, \url{https://scikit-learn.org/stable/modules/naive_bayes.html}
 
-[93] Introduction to Machine Learning with Python, Andreas C. Müller and Sarah Guido
+[93] Müller, A. C., Guido, S. Introduction to Machine Learning with Python.
 
 [94] KNeighborsClassifier, \url{https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html}
 
@@ -3165,17 +3167,18 @@ In conclusion, the findings of this work demonstrate that dynamic text animation
 
 [108] RobustScaler, \url{https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.RobustScaler.html}
 
-[109] Top k identification with feature selection, GitHub link, \url{https://github.com/DavideMascheroni99/movingText/tree/main/Programs/Machine_Learning/Machine_Learning_results/Identification_results/Identification_KBest/Feature}
+[109] Top k identification with feature selection, GitHub, \url{https://github.com/DavideMascheroni99/movingText/tree/main/Programs/Machine_Learning/Machine_Learning_results/Identification_results/Identification_KBest/Feature}
 
 [110] Top k features identification single-ST, \url{https://github.com/DavideMascheroni99/movingText/blob/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_st.csv}
 
-[111] Top k features identification single-ST raw,\url{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_st.csv}
+[111] Top k features identification single-ST raw, \url{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_st.csv}
 
 [112] Top k features identification single-FT, \url{https://github.com/DavideMascheroni99/movingText/blob/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_ft.csv}
 
-[114] Top k features identification single-FT raw,\url{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_ft.csv}
+[113] Top k features identification single-FT raw, \url{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_ft.csv}
 
-[115] What is the Difference between Identification, Identity Verification and Authentication?, \url{https://www.pingidentity.com/en/resources/blog/post/identification-vs-verification-vs-authentication.html}
+[114] What is the Difference between Identification, Identity Verification and Authentication?, \url{https://www.pingidentity.com/en/resources/blog/post/identification-vs-verification-vs-authentication.html}
+
 
 \end{raggedright}
 
@@ -3275,16 +3278,16 @@ This section presents the additional results of the verification analysis conduc
     \centering
     \begin{subfigure}[b]{0.65\textwidth}
         \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/VB_SL_LIT.png}
-        \caption{VB\_SL\_LIT}
+        \caption{VB\_SL\_SMA}
     \end{subfigure}
     \begin{subfigure}[b]{0.65\textwidth}
         \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/HS_SL_LIT.png}
-        \caption{HS\_SL\_LIT}
+        \caption{HS\_SL\_SMA}
     \end{subfigure}
 
     \begin{subfigure}[b]{0.65\textwidth}
         \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/HS_SL_BIG.png}
-        \caption{HS\_SL\_BIG}
+        \caption{HS\_SL\_SMA}
     \end{subfigure}
     \begin{subfigure}[b]{0.65\textwidth}
         \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/VB_SL_BIG.png}
@@ -3293,7 +3296,7 @@ This section presents the additional results of the verification analysis conduc
 
     \begin{subfigure}[b]{0.65\textwidth}
         \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/HS_FA_LIT.png}
-        \caption{HS\_FA\_LIT}
+        \caption{HS\_FA\_SMA}
     \end{subfigure}
     \begin{subfigure}[b]{0.65\textwidth}
         \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/HS_FA_BIG.png}
@@ -3313,7 +3316,7 @@ This section presents the additional results of the verification analysis with i
     \centering
     \begin{subfigure}[b]{0.65\textwidth}
         \includegraphics[width=\linewidth]{Images/Results/Verification_single_intruders/st/HS_SL_LIT.png}
-        \caption{HS\_SL\_LIT}
+        \caption{HS\_SL\_SMA}
     \end{subfigure}
     \begin{subfigure}[b]{0.65\textwidth}
         \includegraphics[width=\linewidth]{Images/Results/Verification_single_intruders/st/HS_SL_BIG.png}
@@ -3326,7 +3329,7 @@ This section presents the additional results of the verification analysis with i
     \end{subfigure}
     \begin{subfigure}[b]{0.65\textwidth}
         \includegraphics[width=\linewidth]{Images/Results/Verification_single_intruders/st/HS_FA_LIT.png}
-        \caption{HS\_FA\_LIT}
+        \caption{HS\_FA\_SMA}
     \end{subfigure}
 
     \begin{subfigure}[b]{0.65\textwidth}

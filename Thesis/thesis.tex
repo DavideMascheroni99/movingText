@@ -26,7 +26,6 @@
 \usepackage{regexpatch}
 
 
-
 \begin{document}
 \sloppy
 \includepdf[pages=1, fitpaper=true]{Images/Theory/Frontespizio.pdf}
@@ -1387,16 +1386,16 @@ All remaining fixation-based features (\(f_1\)–\(f_{10}\)) are derived from fi
 Statistical descriptors of these durations provide insights into attentional control and scanning behavior:
 
 \begin{itemize}
-    \item \(f_1\) — \textbf{Minimum fixation duration} (\(f_{1n}\)): The shortest fixation duration in the trial, indicating rapid scanning behavior.
-    \item \(f_2\) — \textbf{Maximum fixation duration} (\(f_{2n}\)): The longest fixation duration, showing sustained attention to a specific location.
-    \item \(f_3\) — \textbf{Arithmetic mean fixation duration} (\(f_{3n}\)): Average fixation time, representing typical gaze stability.
-    \item \(f_4\) — \textbf{Geometric mean fixation duration} (\(f_{4n}\)): A measure of central tendency less sensitive to extreme values, useful for skewed distributions.
-    \item \(f_5\) — \textbf{Median fixation duration} (\(f_{5n}\)): Middle value of fixation durations, robust against outliers.
-    \item \(f_6\) — \textbf{Standard deviation fixation duration} (\(f_{6n}\)): Variability in fixation times across the trial.
-    \item \(f_7\) — \textbf{Median absolute deviation fixation duration} (\(f_{7n}\)): Robust measure of variability, less influenced by extreme durations.
-    \item \(f_8\) — \textbf{Skewness fixation duration} (\(f_{8n}\)): Asymmetry in the distribution of fixation durations.
-    \item \(f_9\) — \textbf{Interquartile range fixation duration} (\(f_{9n}\)): Dispersion between the 25th and 75th percentile, excluding extremes.
-    \item \(f_{10}\) — \textbf{Kurtosis fixation duration} (\(f_{10n}\)): Describes the "peakedness" of the fixation duration distribution.
+    \item \(f_1\) — \textbf{Minimum fixation duration}: The shortest fixation duration in the trial, indicating rapid scanning behavior.
+    \item \(f_2\) — \textbf{Maximum fixation duration}: The longest fixation duration, showing sustained attention to a specific location.
+    \item \(f_3\) — \textbf{Arithmetic mean fixation duration}: Average fixation time, representing typical gaze stability.
+    \item \(f_4\) — \textbf{Geometric mean fixation duration}: A measure of central tendency less sensitive to extreme values, useful for skewed distributions.
+    \item \(f_5\) — \textbf{Median fixation duration}: Middle value of fixation durations, robust against outliers.
+    \item \(f_6\) — \textbf{Standard deviation fixation duration}: Variability in fixation times across the trial.
+    \item \(f_7\) — \textbf{Median absolute deviation fixation duration}: Robust measure of variability, less influenced by extreme durations.
+    \item \(f_8\) — \textbf{Skewness fixation duration}: Asymmetry in the distribution of fixation durations.
+    \item \(f_9\) — \textbf{Interquartile range fixation duration}: Dispersion between the 25th and 75th percentile, excluding extremes.
+    \item \(f_{10}\) — \textbf{Kurtosis fixation duration}: Describes the "peakedness" of the fixation duration distribution.
 \end{itemize}
 
 
@@ -1926,7 +1925,7 @@ Each of these animation-specific test sets is used to evaluate the model individ
 
 Figure \ref{fig:id_s_ft} contains the results obtained evaluating the different models during the analysis.
 
-The best-performing animation in the random split procedure is VB\_SL\_BIG, which achieves an accuracy of 79.84\%, followed by VB\_FA\_LIT and VB\_FA\_BIG, with accuracies of 79.05\% and 77.14\%, respectively.
+The best-performing animation in the random split procedure is VB\_SL\_BIG, which achieves an accuracy of 79.84\%, followed by VB\_FA\_SMA and VB\_FA\_BIG, with accuracies of 79.05\% and 77.14\%, respectively.
 All these results were obtained using the SVC classifier.
 
 In contrast to the ST variation, the performance tends to decrease when using the session split approach.
@@ -2951,233 +2950,237 @@ In conclusion, the findings of this work demonstrate that dynamic text animation
 \section{References}
 \begin{raggedright}
 
-[1] Number of smartphone mobile network subscriptions worldwide from 2016 to 2023, with forecasts from 2023 to 2028, \url{https://www.statista.com/statistics/330695/number-of-smartphone-users-worldwide/}
+\section*{References}
 
-[2] NIST study shows computerized fingerprint matching is highly accurate, \url{https://www.nist.gov/news-events/news/2004/07/nist-study-shows-computerized-fingerprint-matching-highly-accurate}
+\textit{Note: All web pages and online resources cited above were available and accessible as of October 14, 2025.}
 
-[3] NIST study shows computerized fingerprint matching is highly accurate, \url{https://www.nec.com/en/press/202109/global_20210922_02.html#:~:text=In%20this%20benchmark%20test%2C%20the,a%20million%20people%20(*2).}
 
-[4] Behavioral Biometrics for Human Identification: Intelligent Applications, Liang Wang University of Melbourne, Australia Xin Geng Southeast University, China
+[1] Statista. (2023). Number of smartphone mobile network subscriptions worldwide from 2016 to 2023, with forecasts from 2023 to 2028. \url{https://www.statista.com/statistics/330695/number-of-smartphone-users-worldwide/}
 
-[5] Al-Zubi, S., Brömme, A., \& Tönnies, K. (2003, September 10-12). Using an active shape structural model for biometric sketch recognition. Paper presented at the DAGM, Magdeburg, Germany (pp. 187-195).
+[2] National Institute of Standards and Technology (NIST). (2004). NIST study shows computerized fingerprint matching is highly accurate. \url{https://www.nist.gov/news-events/news/2004/07/nist-study-shows-computerized-fingerprint-matching-highly-accurate}
 
-[6] Stolfo, S. J., Hu, C.-W., Li, W.-J., Hershkop, S., Wang, K., \& Nimeskern, O. (2003b). Combining behavior models to secure e-mail systems (No. CU Tech. Rep.).
+[3] NEC Corporation. (2021). NIST study shows computerized fingerprint matching is highly accurate. \url{https://www.nec.com/en/press/202109/global_20210922_02.html#:~:text=In%20this%20benchmark%20test%2C%20the,a%20million%20people%20(*2).}
 
-[7] Spafford, E. H., \& Weeber, S. A. (1992, October). Software forensics: Can we track code to its authors? Paper presented at the 15th National Computer Security Conference (pp. 641-650).
+[4] Wang, L., \& Geng, X. (2009). \textit{Behavioral Biometrics for Human Identification: Intelligent Applications.} University of Melbourne, Australia; Southeast University, China.
 
-[8] Yampolskiy, R. V., \& Govindaraju, V. (2006b, April 17-22). Use of behavioral biometrics in intrusion detection and online gaming. Paper presented at the Biometric Technology for Human Identification III. SPIE Defense and Security Symposium, Orlando, FL.
+[5] Al-Zubi, S., Brömme, A., \& Tönnies, K. (2003, September 10–12). Using an active shape structural model for biometric sketch recognition. In \textit{Proceedings of the DAGM Conference} (pp. 187–195). Magdeburg, Germany.
 
-[9] Bergadano, F., Gunetti, D., \& Picardi, C. (2002). User authentication through keystroke dynamics. ACM Transactions on Information and System Security, 5(4), 367–397. doi:10.1145/581271.581272
+[6] Stolfo, S. J., Hu, C.-W., Li, W.-J., Hershkop, S., Wang, K., \& Nimeskern, O. (2003). Combining behavior models to secure e-mail systems (No. CU Tech. Rep.). Columbia University.
 
-[10] Denning, D. E. (1987). An intrusion-detection model. IEEE Transactions on Software Engineering, 13(2), 222–232. doi:10.1109/TSE.1987.232894
+[7] Spafford, E. H., \& Weeber, S. A. (1992, October). Software forensics: Can we track code to its authors? In \textit{Proceedings of the 15th National Computer Security Conference} (pp. 641–650).
 
-[11] Garg, A., Rahalkar, R., Upadhyaya, S., \& Kwiat, K. (2006, June 21-23). Profiling users in GUI based systems for masquerade detection. Paper presented at The 7th IEEE Information Assurance Workshop (IAWorkshop 2006), West Point, NY.
+[8] Yampolskiy, R. V., \& Govindaraju, V. (2006, April 17–22). Use of behavioral biometrics in intrusion detection and online gaming. In \textit{Biometric Technology for Human Identification III, SPIE Defense and Security Symposium}. Orlando, FL.
+
+[9] Bergadano, F., Gunetti, D., \& Picardi, C. (2002). User authentication through keystroke dynamics. \textit{ACM Transactions on Information and System Security, 5}(4), 367–397. doi:10.1145/581271.581272
+
+[10] Denning, D. E. (1987). An intrusion-detection model. \textit{IEEE Transactions on Software Engineering, 13}(2), 222–232. doi:10.1109/TSE.1987.232894
+
+[11] Garg, A., Rahalkar, R., Upadhyaya, S., \& Kwiat, K. (2006, June 21–23). Profiling users in GUI based systems for masquerade detection. In \textit{Proceedings of the 7th IEEE Information Assurance Workshop (IAWorkshop 2006)}. West Point, NY.
 
 [12] Novikov, D. (2005). Neural networks to intrusion detection. Unpublished MS thesis, Rochester Institute of Technology, Rochester, NY.
 
-[13] Westeyn, T., Pesti, P., Park, K., \& Starner, T. (2005, July). Biometric identification using song-based eye blink patterns. Paper presented at the Human Computer Interaction International (HCII), Las Vegas, NV.
+[13] Westeyn, T., Pesti, P., Park, K., \& Starner, T. (2005, July). Biometric identification using song-based eye blink patterns. In \textit{Proceedings of the Human Computer Interaction International (HCII)}. Las Vegas, NV.
 
-[14] Westeyn, T., \& Starner, T. (2004). Recognizing song-based blink patterns: Applications for restricted and universal access. Paper presented at the Sixth IEEE International Conference on Automatic Face and Gesture Recognition (p. 717).
+[14] Westeyn, T., \& Starner, T. (2004). Recognizing song-based blink patterns: Applications for restricted and universal access. In \textit{Proceedings of the Sixth IEEE International Conference on Automatic Face and Gesture Recognition} (p. 717).
 
-[15] BenAbdelkader, C., Cutler, R., \& Davis, L. (2002). Person identification using automatic height and stride estimation. Paper presented at the IEEE International Conference on Pattern Recognition.
+[15] BenAbdelkader, C., Cutler, R., \& Davis, L. (2002). Person identification using automatic height and stride estimation. In *Proceedings of the 2002 International Conference on Pattern Recognition* (pp. 377–380, Vol. 4). Quebec City, QC, Canada. doi:10.1109/ICPR.2002.1047474
 
-[16] Kale, A., Sundaresan, A., Rajagopalan, A. N., \& Cuntoor, N., RoyChowdhury, A., Kruger, V., et al. (2004). Identification of humans using gait. IEEE Transactions on Image Processing, 13(9). doi:10.1109/TIP.2004.832865
+[16] Kale, A., Sundaresan, A., Rajagopalan, A. N., Cuntoor, N., RoyChowdhury, A., Kruger, V., et al. (2004). Identification of humans using gait. \textit{IEEE Transactions on Image Processing, 13}(9). doi:10.1109/TIP.2004.832865
 
-[17] Erdogan, H., Ercil, A., Ekenel, H., Bilgin, S., Eden, I., \& Kirisci, M. (2005a). Multimodal person recognition for vehicular applications. LNCS, 3541, 366–375.
+[17] Erdogan, H., Ercil, A., Ekenel, H., Bilgin, S., Eden, I., \& Kirisci, M. (2005a). Multimodal person recognition for vehicular applications. \textit{Lecture Notes in Computer Science, 3541}, 366–375.
 
-[18] Erdogan, H., Ozyagci, A. N., Eskil, T., Rodoper, M., Ercil, A., \& Abut, H. (2005b, September). Experiments on decision fusion for driver recognition. Paper presented at the Biennial on DSP for in-vehicle and mobile systems, Sesimbra, Portugal.
+[18] Erdogan, H., Ozyagci, A. N., Eskil, T., Rodoper, M., Ercil, A., \& Abut, H. (2005b, September). Experiments on decision fusion for driver recognition. In \textit{Biennial on DSP for in-vehicle and mobile systems}. Sesimbra, Portugal.
 
-[19] Erzin, E., Yemez, Y., Tekalp, A. M., Erçil, A., Erdogan, H., \& Abut, H. (2006). Multimodal person recognition for human-vehicle interaction. IEEE MultiMedia, 13, 18–31. doi:10.1109/MMUL.2006.37
+[19] Erzin, E., Yemez, Y., Tekalp, A. M., Erçil, A., Erdogan, H., \& Abut, H. (2006). Multimodal person recognition for human-vehicle interaction. \textit{IEEE MultiMedia, 13}, 18–31. doi:10.1109/MMUL.2006.37
 
-[20] Brause, R., Langsdorf, T., \& Hepp, M. (1999). Neural data mining for credit card fraud detection. Paper presented at the 11th IEEE International Conference on Tools with Artificial Intelligence (pp. 103-106).
+[20] Brause, R., Langsdorf, T., \& Hepp, M. (1999). Neural data mining for credit card fraud detection. In \textit{Proceedings of the 11th IEEE International Conference on Tools with Artificial Intelligence} (pp. 103–106).
 
-[21] Duchowski, A. T. (2017). Eye Tracking Methodology: Theory and Practice (3rd ed.). Springer.
+[21] Duchowski, A. T. (2017). \textit{Eye Tracking Methodology: Theory and Practice} (3rd ed.). Springer.
 
-[22] Young, L. R., Sheena, D. (1975). Survey of eye movement recording methods. Behavior Research Methods \& Instrumentation, 7, 397–429. doi:10.3758/BF03201553
+[22] Young, L. R., \& Sheena, D. (1975). Survey of eye movement recording methods. \textit{Behavior Research Methods \& Instrumentation, 7}, 397–429. doi:10.3758/BF03201553
 
-[23] Crane, H. D. (1994). The Purkinje image eyetracker, image stabilization, and related forms of stimulus manipulation. In D. H. Kelly (Ed.), Visual Science and Engineering: Models and Applications (pp. 13–89). New York: Marcel Dekker.
+[23] Crane, H. D. (1994). The Purkinje image eyetracker, image stabilization, and related forms of stimulus manipulation. In D. H. Kelly (Ed.), \textit{Visual Science and Engineering: Models and Applications} (pp. 13–89). New York: Marcel Dekker.
 
-[24] Crane, H. D., \& Steele, C. M. (1985). Generation-V dual-Purkinje-image eyetracker. Applied Optics, 24, 527–537.
+[24] Crane, H. D., \& Steele, C. M. (1985). Generation-V dual-Purkinje-image eyetracker. \textit{Applied Optics, 24}, 527–537.
 
-[25] Chapter 9 - Biometric Authentication to Access Controlled Areas Through Eye Tracking, doi:10.1016/B978-0-08-100705-1.00009-9
+[25] Cantoni, V., Nugrahaningsih, N., \& Porta, M., \& Wang, H. (2017). Biometric authentication to access controlled areas through eye tracking. In M. De Marsico, M. Nappi, \& H. Proença (Eds.), *Human Recognition in Unconstrained Environments* (pp. 197–216). Academic Press. doi:10.1016/B978-0-08-100705-1.00009-9
 
-[26] Maeder, A., Fookes, C., Sridharan, S. (2004). Gaze-based user authentication for personal computer applications. Proceedings of 2004 International Symposium on Intelligent Multimedia, Video and Speech Processing, pp. 727–730.
+[26] Maeder, A., Fookes, C., \& Sridharan, S. (2004). Gaze-based user authentication for personal computer applications. In \textit{Proceedings of 2004 International Symposium on Intelligent Multimedia, Video and Speech Processing} (pp. 727–730).
 
-[27] Komogortsev, O. V., Karpov, A., Price, L. R., Aragon, C. (2012). Biometric authentication via oculomotor plant characteristics. In 2012 5th IAPR International Conference on Biometrics (ICB), pp. 413–420.
+[27] Komogortsev, O. V., Karpov, A., \& Price, L. R., Aragon, C. (2012). Biometric authentication via oculomotor plant characteristics. In \textit{2012 5th IAPR International Conference on Biometrics (ICB)} (pp. 413–420).
 
-[28] De Luca, A., Weiss, R., Hußmann, H., An, X. (2008). EyePass– eye-stroke authentication for public terminals. In CHI '08 Extended Abstracts on Human Factors in Computing Systems (CHI EA '08), pp. 3003–3008.
+[28] De Luca, A., Weiss, R., Hußmann, H., \& An, X. (2008). EyePass– eye-stroke authentication for public terminals. In \textit{CHI '08 Extended Abstracts on Human Factors in Computing Systems (CHI EA '08)} (pp. 3003–3008).
 
-[29] Dunphy, P., Fitch, A., Olivier, P. (2008). Gaze-contingent passwords at the ATM. 4th Conference on Communication by Gaze Interaction (COGAIN), pp. 59–62.
+[29] Dunphy, P., Fitch, A., \& Olivier, P. (2008). Gaze-contingent passwords at the ATM. In \textit{4th Conference on Communication by Gaze Interaction (COGAIN)} (pp. 59–62).
 
-[30] Weaver, J., Mock, K., Hoanca, B. (2011). Gaze-based password authentication through automatic clustering of gaze points. In 2011 IEEE International Conference on Systems, Man, and Cybernetics (SMC), pp. 2749–2754.
+[30] Weaver, J., Mock, K., \& Hoanca, B. (2011). Gaze-based password authentication through automatic clustering of gaze points. In \textit{2011 IEEE International Conference on Systems, Man, and Cybernetics (SMC)} (pp. 2749–2754).
 
-[31] Cymek, D. H., Venjakob, A. C., Ruff, S., Lutz, O. H.-M., Hofmann, S., Roetting, M. (2014). Entering PIN codes by smooth pursuit eye movements. J. Eye Mov. Res., 7, 1–11.
+[31] Cymek, D. H., Venjakob, A. C., Ruff, S., Lutz, O. H.-M., Hofmann, S., \& Roetting, M. (2014). Entering PIN codes by smooth pursuit eye movements. \textit{Journal of Eye Movement Research, 7}(1), Technische Universität Berlin.
 
-[32] Cazzato, D., Evangelista, A., Leo, M., Carcagnì, P., Distante, C. (2016). A low-cost and calibration-free gaze estimator for soft biometrics: An explorative study. Pattern Recognition Letters, 82, 196–206. doi:10.1016/j.patrec.2015.10.015
+[32] Cazzato, D., Evangelista, A., Leo, M., Carcagnì, P., \& Distante, C. (2016). A low-cost and calibration-free gaze estimator for soft biometrics: An explorative study. \textit{Pattern Recognition Letters, 82}, 196–206. doi:10.1016/j.patrec.2015.10.015
 
-[33] Cantoni, V., Galdi, C., Nappi, M., Porta, M., Riccio, D. (2015). GANT: Gaze analysis technique for human identification. Pattern Recognition, 48(4), 1027–1038. doi:10.1016/j.patcog.2014.02.017
+[33] Cantoni, V., Galdi, C., Nappi, M., Porta, M., \& Riccio, D. (2015). GANT: Gaze analysis technique for human identification. \textit{Pattern Recognition, 48}(4), 1027–1038. doi:10.1016/j.patcog.2014.02.017
 
-[34] Yin, J., Sun, J., Li, J., Liu, K. (2022). An effective gaze-based authentication method with the spatiotemporal feature of eye movement. Sensors, 22(8), 3002. doi:10.3390/s22083002
+[34] Yin, J., Sun, J., Li, J., \& Liu, K. (2022). An effective gaze-based authentication method with the spatiotemporal feature of eye movement. \textit{Sensors, 22}(8), 3002. doi:10.3390/s22083002
 
-[35] Porta, M., Dondi, P., Zangrandi, N., Lombardi, L. (2022). Gaze-Based Biometrics From Free Observation of Moving Elements. IEEE Transactions on Biometrics, Behavior, and Identity Science, 4(1), 85–96. doi:10.1109/TBIOM.2021.3130798
+[35] Porta, M., Dondi, P., Zangrandi, N., \& Lombardi, L. (2022). Gaze-Based Biometrics From Free Observation of Moving Elements. \textit{IEEE Transactions on Biometrics, Behavior, and Identity Science, 4}(1), 85–96. doi:10.1109/TBIOM.2021.3130798
 
-[36] Bhatti, O. S., Barz, M., Sonntag, D. (2021). EyeLogin - Calibration-free Authentication Method for Public Displays Using Eye Gaze. ACM Symposium on Eye Tracking Research and Applications (ETRA '21 Short Papers), Article 14, 1–7. doi:10.1145/3448018.3458001
+[36] Bhatti, O. S., Barz, M., \& Sonntag, D. (2021). EyeLogin - Calibration-free Authentication Method for Public Displays Using Eye Gaze. In \textit{ACM Symposium on Eye Tracking Research and Applications (ETRA '21 Short Papers)}, Article 14, 1–7. doi:10.1145/3448018.3458001
 
-[37] Khamis, M., Trotter, L., Mäkelä, V., von Zezschwitz, E., Le, J., Bulling, A., Alt, F. (2018). CueAuth: Comparing Touch, Mid-Air Gestures, and Gaze for Cue-based Authentication on Situated Displays. Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., 2(4), Article 174. doi:10.1145/3287052
+[37] Khamis, M., Trotter, L., Mäkelä, V., von Zezschwitz, E., Le, J., Bulling, A., \& Alt, F. (2018). CueAuth: Comparing Touch, Mid-Air Gestures, and Gaze for Cue-based Authentication on Situated Displays. \textit{Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., 2}(4), Article 174. doi:10.1145/3287052
 
-[38] Malla, A. H. (MS Thesis). A Gaze-Based Authentication System: From Authentication to Intrusion Detection. Texas A\&M University.
+[38] Malla, A. H. (2018). A Gaze-Based Authentication System: From Authentication to Intrusion Detection. MS Thesis, Texas A\&M University.
 
-[39] Sluganovic, I., Roeschlin, M., Rasmussen, K. B., Martinovic, I. (2019). Analysis of Reflexive Eye Movements for Fast Replay-Resistant Biometric Authentication. ACM Trans. Priv. Secur., 22(1), Article 4. doi:10.1145/3281745
+[39] Sluganovic, I., Roeschlin, M., Rasmussen, K. B., \& Martinovic, I. (2019). Analysis of Reflexive Eye Movements for Fast Replay-Resistant Biometric Authentication. \textit{ACM Trans. Priv. Secur., 22}(1), Article 4. doi:10.1145/3281745
 
-[40] Fallahi, M., Arias-Cabarcos, P., Strufe, T. (2024). Beyond Gaze Points: Augmenting Eye Movement with Brainwave Data for Multimodal User Authentication in Extended Reality. doi:10.48550/arXiv.2404.18694
+[40] Fallahi, M., Arias-Cabarcos, P., \& Strufe, T. (2024). Beyond Gaze Points: Augmenting Eye Movement with Brainwave Data for Multimodal User Authentication in Extended Reality. doi:10.48550/arXiv.2404.18694
 
-[41] Alsufyani, N., Ali, A., Hoque, S., Deravi, F. (2018). Biometric presentation attack detection using gaze alignment. 2018 IEEE 4th International Conference on Identity, Security, and Behavior Analysis (ISBA), pp. 1–8. doi:10.1109/ISBA.2018.8311472
+[41] Alsufyani, N., Ali, A., Hoque, S., \& Deravi, F. (2018). Biometric presentation attack detection using gaze alignment. In \textit{2018 IEEE 4th International Conference on Identity, Security, and Behavior Analysis (ISBA)}, 1–8. doi:10.1109/ISBA.2018.8311472
 
-[42] Lohr, D., Proulx, M. J., Raju, M. H., Komogortsev, O. V. (2025). Ocular Authentication: Fusion of Gaze and Periocular Modalities. doi:10.48550/arXiv.2505.17343
+[42] Lohr, D., Proulx, M. J., Raju, M. H., \& Komogortsev, O. V. (2025). Ocular Authentication: Fusion of Gaze and Periocular Modalities. doi:10.48550/arXiv.2505.17343
 
-[43] D'Amelio, A., Patania, S., Bursic, S., Cuculo, V., Boccignone, G. (2023). Using Gaze for Behavioural Biometrics. Sensors, 23(3), 1262. doi:10.3390/s23031262
+[43] D'Amelio, A., Patania, S., Bursic, S., Cuculo, V., \& Boccignone, G. (2023). Using Gaze for Behavioural Biometrics. \textit{Sensors, 23}(3), 1262. doi:10.3390/s23031262
 
-[44] Cantoni, V., Lacovara, T., Porta, M., Wang, H. (2018). A Study on Gaze-Controlled PIN Input with Biometric Data Analysis. In Proceedings of the 19th International Conference on Computer Systems and Technologies (CompSysTech '18), pp. 99–103. doi:10.1145/3274005.3274029
+[44] Cantoni, V., Lacovara, T., Porta, M., \& Wang, H. (2018). A Study on Gaze-Controlled PIN Input with Biometric Data Analysis. In \textit{Proceedings of the 19th International Conference on Computer Systems and Technologies (CompSysTech '18)}, 99–103. doi:10.1145/3274005.3274029
 
-[45] Ali, A., Hoque, S., Deravi, F. (2021). Directed Gaze Trajectories for Biometric Presentation Attack Detection. Sensors, 21(4), 1394. doi:10.3390/s21041394
+[45] Ali, A., Hoque, S., \& Deravi, F. (2021). Directed Gaze Trajectories for Biometric Presentation Attack Detection. \textit{Sensors, 21}(4), 1394. doi:10.3390/s21041394
 
-[46] Ali, A., Hoque, S., Deravi, F. (2018). Gaze stability for liveness detection. Pattern Anal Applic, 21, 437–449. doi:10.1007/s10044-016-0587-2
+[46] Ali, A., Hoque, S., \& Deravi, F. (2018). Gaze stability for liveness detection. \textit{Pattern Anal Applic, 21}, 437–449. doi:10.1007/s10044-016-0587-2
 
-[47] Wang, H., Cantoni, V. Gaze-Based Biometrics: Some Case Studies.
+[47] Wang, H., \& Cantoni, V. (2018). Gaze-Based Biometrics: Some Case Studies. University of Pavia.
 
-[48] Abdrabou, Y., Shams, A., Mantawy, M. O., Khan, A. A., Khamis, M., Alt, F., Abdelrahman, Y. (2021). GazeMeter: Exploring the Usage of Gaze Behaviour to Enhance Password Assessments. ACM Symposium on Eye Tracking Research and Applications (ETRA '21 Full Papers), Article 9, 1–12. doi:10.1145/3448017.3457384
+[48] Abdrabou, Y., Shams, A., Mantawy, M. O., Khan, A. A., Khamis, M., Alt, F., \& Abdelrahman, Y. (2021). GazeMeter: Exploring the Usage of Gaze Behaviour to Enhance Password Assessments. In \textit{ACM Symposium on Eye Tracking Research and Applications (ETRA '21 Full Papers)}, Article 9, 1–12. doi:10.1145/3448017.3457384
 
-[49] Harezlak, K., Blasiak, M., Kasprowski, P. (2021). Biometric Identification Based on Eye Movement Dynamic Features. Sensors, 21(18), 6020. doi:10.3390/s21186020
+[49] Harezlak, K., Blasiak, M., \& Kasprowski, P. (2021). Biometric Identification Based on Eye Movement Dynamic Features. \textit{Sensors, 21}(18), 6020. doi:10.3390/s21186020
 
-[50] Wierzbowski, M., Pochwatko, G., Borkiewicz, P., Cnotkowski, D., Pabiś-Orzeszyna, M., Kobyliński, P. (2022). Behavioural Biometrics in Virtual Reality: To What Extent Can We Identify a Person Based Solely on How They Watch 360-Degree Videos? 2022 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct), pp. 417–422. doi:10.1109/ISMAR-Adjunct57072.2022.00090
+[50] Wierzbowski, M., Pochwatko, G., Borkiewicz, P., Cnotkowski, D., Pabiś-Orzeszyna, M., \& Kobyliński, P. (2022). Behavioural Biometrics in Virtual Reality: To What Extent Can We Identify a Person Based Solely on How They Watch 360-Degree Videos? In \textit{2022 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)}, 417–422. doi:10.1109/ISMAR-Adjunct57072.2022.00090
 
-[51] Casanova, A., Cascone, L., Castiglione, A., Meng, W., Pero, C. (2021). User recognition based on periocular biometrics and touch dynamics. Pattern Recognition Letters, 148, 114–120. doi:10.1016/j.patrec.2021.05.006
+[51] Casanova, A., Cascone, L., Castiglione, A., Meng, W., \& Pero, C. (2021). User recognition based on periocular biometrics and touch dynamics. \textit{Pattern Recognition Letters, 148}, 114–120. doi:10.1016/j.patrec.2021.05.006
 
-[52] Rubo, M., Son, G. (2025). Social gaze fingerprints: identifying social virtual reality users by their eye gaze patterns. Virtual Reality, 29, 144. doi:10.1007/s10055-025-01210-4
+[52] Rubo, M., \& Son, G. (2025). Social gaze fingerprints: identifying social virtual reality users by their eye gaze patterns. \textit{Virtual Reality, 29}, 144. doi:10.1007/s10055-025-01210-4
 
-[53] Silver, D. L., Biggs, A. (2006). Keystroke and eye-tracking biometrics for user identification. IC-AI, pp. 344–348.
+[53] Silver, D. L., \& Biggs, A. (2006). Keystroke and eye-tracking biometrics for user identification. In \textit{IC-AI}, 344–348.
 
-[54] Holland, C., Komogortsev, O. V. (2011). Biometric identification via eye movement scanpaths in reading. 2011 International Joint Conference on Biometrics (IJCB), pp. 1–8.
+[54] Holland, C., \& Komogortsev, O. V. (2011). Biometric identification via eye movement scanpaths in reading. In \textit{2011 International Joint Conference on Biometrics (IJCB)}, 1–8.
 
-[55] Holland, C. D., Komogortsev, O. V. (2013). Complex eye movement pattern biometrics: analyzing fixations and saccades. 2013 International Conference on Biometrics (ICB).
+[55] Holland, C. D., Komogortsev, O. V. (2013). Complex eye movement pattern biometrics: Analyzing fixations and saccades. Paper presented at the 2013 International Conference on Biometrics (ICB), Madrid, Spain, pp. 1–8. doi:10.1109/ICB.2013.6612953
 
-[56] Rigas, I., Economou, G., Fotopoulos, S. (2012). Biometric identification based on the eye movements and graph matching techniques. Pattern Recognit. Lett., 33, 786–792.
+[56] Rigas, I., Economou, G., \& Fotopoulos, S. (2012). Biometric identification based on the eye movements and graph matching techniques. \textit{Pattern Recognit. Lett., 33}, 786–792.
 
-[57] Galdi, C., Nappi, M., Riccio, D., Cantoni, V., Porta, M. (2013). A new gaze analysis based soft biometric. In J.A. Carrasco-Ochoa et al. (Eds.), Pattern Recognition, Lecture Notes in Computer Science, Springer, pp. 136–144.
+[57] Galdi, C., Nappi, M., Riccio, D., Cantoni, V., \& Porta, M. (2013). A new gaze analysis based soft biometric. In J. A. Carrasco-Ochoa et al. (Eds.), \textit{Pattern Recognition, Lecture Notes in Computer Science}, Springer, 136–144.
 
-[58] Cantoni, V., Porta, M., Galdi, C., Nappi, M., Wechsler, H. (2014). Gender and age categorization using gaze analysis. 10th International Conference on Signal-Image Technology and Internet-Based Systems (SITIS), pp. 574–579.
+[58] Cantoni, V., Porta, M., Galdi, C., Nappi, M., \& Wechsler, H. (2014). Gender and age categorization using gaze analysis. In \textit{10th International Conference on Signal-Image Technology and Internet-Based Systems (SITIS)}, 574–579.
 
-[59] Galdi, C., Wechsler, H., Cantoni, V., Porta, M., Nappi, M. (2015). Towards demographic categorization using gaze analysis. Pattern Recognit. Lett. (accessed 16 September 2015).
+[59] Galdi, C., Wechsler, H., Cantoni, V., Porta, M., \& Nappi, M. (2015). Towards demographic categorization using gaze analysis. \textit{Pattern Recognit. Lett.} (accessed 16 September 2015). University of Pavia.
 
-[60] Biedert, R., Frank, M., Martinovic, I., Song, D. (2012). Stimuli for gaze based intrusion detection. In J.J. Park et al. (Eds.), Future Information Technology, Application, and Service, Lecture Notes in Electrical Engineering, Springer, pp. 757–763.
+[60] Biedert, R., Frank, M., Martinovic, I., \& Song, D. (2012). Stimuli for gaze based intrusion detection. In J. J. Park et al. (Eds.), \textit{Future Information Technology, Application, and Service, Lecture Notes in Electrical Engineering}, Springer, 757–763.
 
-[61] George, A., Routray, A. (2015). A score level fusion method for eye movement biometrics. Pattern Recognit. Lett. (accessed 2 December 2015).
+[61] George, A., \& Routray, A. (2015). A score level fusion method for eye movement biometrics. \textit{Pattern Recognit. Lett.} (accessed 2 December 2015).
 
-[62] Bednarik, R., Kinnunen, T., Mihaila, A., Fränti, P. (2005). Eye-movements as a biometric. In H. Kalviainen et al. (Eds.), Image Analysis, Lecture Notes in Computer Science, Springer, pp. 780–789.
+[62] Bednarik, R., Kinnunen, T., Mihaila, A., \& Fränti, P. (2005). Eye-movements as a biometric. In H. Kalviainen et al. (Eds.), \textit{Image Analysis, Lecture Notes in Computer Science}, Springer, 780–789.
 
-[63] Kinnunen, T., Sedlak, F., Bednarik, R. (2010). Towards task-independent person authentication using eye movement signals. Proceedings of the 2010 Symposium on Eye-Tracking Research \& Applications (ETRA '10), pp. 187–190.
+[63] Kinnunen, T., Sedlak, F., \& Bednarik, R. (2010). Towards task-independent person authentication using eye movement signals. In \textit{Proceedings of the 2010 Symposium on Eye-Tracking Research \& Applications (ETRA '10)}, 187–190.
 
-[64] Rigas, I., Economou, G., Fotopoulos, S. (2012). Human eye movements as a trait for biometrical identification. 2012 IEEE Fifth International Conference on Biometrics: Theory, Applications and Systems (BTAS), pp. 217–222.
+[64] Rigas, I., Economou, G., \& Fotopoulos, S. (2012). Human eye movements as a trait for biometrical identification. In \textit{2012 IEEE Fifth International Conference on Biometrics: Theory, Applications and Systems (BTAS)}, 217–222.
 
-[65] Cuong, N. V., Dinh, V., Ho, L. S. T. (2012). Mel-frequency cepstral coefficients for eye movement identification. 2012 IEEE 24th International Conference on Tools with Artificial Intelligence (ICTAI), pp. 253–260.
+[65] Cuong, N. V., Dinh, V., \& Ho, L. S. T. (2012). Mel-frequency cepstral coefficients for eye movement identification. In \textit{2012 IEEE 24th International Conference on Tools with Artificial Intelligence (ICTAI)}, 253–260.
 
-[66] Liang, Z., Tan, F., Chi, Z. (2012). Video-based biometric identification using eye tracking technique. 2012 IEEE International Conference on Signal Processing, Communication and Computing (ICSPCC), pp. 728–733.
+[66] Liang, Z., Tan, F., \& Chi, Z. (2012). Video-based biometric identification using eye tracking technique. In \textit{2012 IEEE International Conference on Signal Processing, Communication and Computing (ICSPCC)}, 728–733.
 
-[67] Darwish, A., Pasquier, M. (2013). Biometric identification using the dynamic features of the eyes. 2013 IEEE Sixth International Conference on Biometrics: Theory, Applications and Systems (BTAS), pp. 1–6.
+[67] Darwish, A., \& Pasquier, M. (2013). Biometric identification using the dynamic features of the eyes. In \textit{2013 IEEE Sixth International Conference on Biometrics: Theory, Applications and Systems (BTAS)}, 1–6.
 
-[68] Holland, C. D., Komogortsev, O. V. (2013). Complex eye movement pattern biometrics: analyzing fixations and saccades. 2013 International Conference on Biometrics (ICB).
+[68] Holland, C. D., \& Komogortsev, O. V. (2013). Complex eye movement pattern biometrics: analyzing fixations and saccades. In \textit{2013 International Conference on Biometrics (ICB)}.
 
-[69] Yoon, H. J., Carmichael, T. R., Tourassi, G. (2014). Gaze as a Biometric. Medical Imaging 2014: Image Perception, Observer Performance, and Technology Assessment. Proc. SPIE, 9037.
+[69] Yoon, H. J., Carmichael, T. R., \& Tourassi, G. (2014). Gaze as a Biometric. In \textit{Medical Imaging 2014: Image Perception, Observer Performance, and Technology Assessment, Proc. SPIE, 9037}. 
 
-[70] Yoon, H. J., Carmichael, T. R., Tourassi, G. (2015). Temporal stability of visual search-driven biometrics. Medical Imaging 2015: Image Perception, Observer Performance, and Technology Assessment, Proc. SPIE, 9416.
+[70] Yoon, H. J., Carmichael, T. R., \& Tourassi, G. (2015). Temporal stability of visual search-driven biometrics. In \textit{Medical Imaging 2015: Image Perception, Observer Performance, and Technology Assessment, Proc. SPIE, 9416}.
 
-[71] Juhola, M., Zhang, Y., Rasku, J. (2013). Biometric verification of a subject through eye movements. Comput. Biol. Med., 43, 42–50.
+[71] Juhola, M., Zhang, Y., \& Rasku, J. (2013). Biometric verification of a subject through eye movements. \textit{Comput. Biol. Med., 43}, 42–50.
 
-[72] Zhang, Y., Laurikkala, J., Juhola, M. (2014). Biometric verification of a subject with eye movements, with special reference to temporal variability in saccades between a subject's measurements. Int. J. Biom., 6, 75.
+[72] Zhang, Y., Laurikkala, J., \& Juhola, M. (2014). Biometric verification of a subject with eye movements, with special reference to temporal variability in saccades between a subject's measurements. \textit{Int. J. Biom., 6}, 75.
 
-[73] Srivastava, N., Agrawal, U., Roy, S. K., Tiwary, U. S. (2015). Human identification using linear multiclass SVM and eye movement biometrics. 2015 Eighth International Conference on Contemporary Computing (IC3), pp. 365–369.
+[73] Srivastava, N., Agrawal, U., Roy, S. K., \& Tiwary, U. S. (2015). Human identification using linear multiclass SVM and eye movement biometrics. In \textit{2015 Eighth International Conference on Contemporary Computing (IC3)}, 365–369.
 
-[74] Eberz, S., Rasmussen, K. B., Lenders, V., Martinovic, I. (2015). Preventing lunchtime attacks: fighting insider threats with eye movement biometrics. 2015 Network and Distributed System Security (NDSS) Symposium.
+[74] Eberz, S., Rasmussen, K. B., Lenders, V., \& Martinovic, I. (2015). Preventing lunchtime attacks: fighting insider threats with eye movement biometrics. In \textit{2015 Network and Distributed System Security (NDSS) Symposium}.
+[75] Nugrahaningsih, N., \& Porta, M. (2014). Pupil size as a biometric trait. In V. Cantoni et al. (Eds.), \textit{Biometric Authentication, Lecture Notes in Computer Science}, Springer, 222–233.
 
-[75] Nugrahaningsih, N., Porta, M. (2014). Pupil size as a biometric trait. In V. Cantoni et al. (Eds.), Biometric Authentication, Lecture Notes in Computer Science, Springer, pp. 222–233.
+[76] Eberz, S., Rasmussen, K. B., Lenders, V., \& Martinovic, I. (2015). Preventing lunchtime attacks: fighting insider threats with eye movement biometrics. In \textit{2015 NDSS Symposium}.
 
-[76] Eberz, S., Rasmussen, K. B., Lenders, V., Martinovic, I. (2015). Preventing lunchtime attacks: fighting insider threats with eye movement biometrics. 2015 NDSS Symposium.
+[77] Kasprowski, P., \& Ober, J. (2004). Eye movements in biometrics. In D. Maltoni, \& A. K. Jain (Eds.), \textit{Biometric Authentication, Lecture Notes in Computer Science}, Springer, 248–258.
 
-[77] Kasprowski, P., Ober, J. (2004). Eye movements in biometrics. In D. Maltoni, A. K. Jain (Eds.), Biometric Authentication, Lecture Notes in Computer Science, Springer, pp. 248–258.
+[78] Komogortsev, O. V., Karpov, A., Price, L. R., \& Aragon, C. (2012). Biometric authentication via oculomotor plant characteristics. In \textit{2012 5th IAPR International Conference on Biometrics (ICB)}, 413–420.
 
-[78] Komogortsev, O. V., Karpov, A., Price, L. R., Aragon, C. (2012). Biometric authentication via oculomotor plant characteristics. 2012 5th IAPR International Conference on Biometrics (ICB), pp. 413–420.
+[79] Komogortsev, O. V., Karpov, A., Holland, C. D., \& Proenca, H. P. (2012). Multimodal ocular biometrics approach: a feasibility study. In \textit{2012 IEEE Fifth International Conference on Biometrics: Theory, Applications and Systems (BTAS)}, 209–216.
 
-[79] Komogortsev, O. V., Karpov, A., Holland, C. D., Proenca, H. P. (2012). Multimodal ocular biometrics approach: a feasibility study. 2012 IEEE Fifth International Conference on Biometrics: Theory, Applications and Systems (BTAS), pp. 209–216.
+[80] Liang, Z., Tan, F., \& Chi, Z. (2012). Video-based biometric identification using eye tracking technique. In \textit{2012 IEEE International Conference on Signal Processing, Communication and Computing (ICSPCC)}, 728–733.
 
-[80] Liang, Z., Tan, F., Chi, Z. (2012). Video-based biometric identification using eye tracking technique. 2012 IEEE International Conference on Signal Processing, Communication and Computing (ICSPCC), pp. 728–733.
+[81] Harezlak, K., \& Pluciennik, E. (2025). Towards Improved Eye Movement Biometrics: Investigating New Features with Neural Networks. \textit{Sensors, 25}(14), 4304. doi:10.3390/s25144304
 
-[81] Harezlak, K., Pluciennik, E. (2025). Towards Improved Eye Movement Biometrics: Investigating New Features with Neural Networks. Sensors, 25(14), 4304. doi:10.3390/s25144304
+[82] Liebers, J., Horn, P., Burschik, C., Gruenefeld, U., \& Schneegass, S. (2021). Using Gaze Behavior and Head Orientation for Implicit Identification in Virtual Reality. In \textit{27th ACM Symposium on Virtual Reality Software and Technology (VRST '21)}, Article 22, 1–9. doi:10.1145/3489849.3489880
 
-[82] Liebers, J., Horn, P., Burschik, C., Gruenefeld, U., Schneegass, S. (2021). Using Gaze Behavior and Head Orientation for Implicit Identification in Virtual Reality. 27th ACM Symposium on Virtual Reality Software and Technology (VRST '21), Article 22, 1–9. doi:10.1145/3489849.3489880
+[83] Tait, B. L. (2019). Behavioural Biometrics Authentication Tested Using EyeWriter Technology. In \textit{2019 IEEE 12th International Conference on Global Security, Safety and Sustainability (ICGS3)}, 1–9. doi:10.1109/ICGS3.2019.8688257
 
-[83] Tait, B. L. (2019). Behavioural Biometrics Authentication Tested Using EyeWriter Technology. 2019 IEEE 12th International Conference on Global Security, Safety and Sustainability (ICGS3), pp. 1–9. doi:10.1109/ICGS3.2019.8688257
+[84] Asish, S. M., Kulshreshth, A. K., \& Borst, C. W. (2022). User Identification Utilizing Minimal Eye-Gaze Features in Virtual Reality Applications. \textit{Virtual Worlds, 1}(1), 42–61. doi:10.3390/virtualworlds1010004
 
-[84] Asish, S. M., Kulshreshth, A. K., Borst, C. W. (2022). User Identification Utilizing Minimal Eye-Gaze Features in Virtual Reality Applications. Virtual Worlds, 1(1), 42–61. doi:10.3390/virtualworlds1010004
+[85] Seha, S. N. A., Hatzinakos, D., Zandi, A. S., \& Comeau, F. J. E. (2021). Improving eye movement biometrics in low frame rate eye-tracking devices using periocular and eye blinking features. \textit{Image and Vision Computing, 108}, 104124. doi:10.1016/j.imavis.2021.104124
 
-[85] Seha, S. N. A., Hatzinakos, D., Zandi, A. S., Comeau, F. J. E. (2021). Improving eye movement biometrics in low frame rate eye-tracking devices using periocular and eye blinking features. Image and Vision Computing, 108, 104124. doi:10.1016/j.imavis.2021.104124
+[86] Wierzbowski, M., Pochwatko, G., Borkiewicz, P., Cnotkowski, D., Pabiś-Orzeszyna, M., \& Kobyliński, P. (2022). Behavioural Biometrics in Virtual Reality: To What Extent Can We Identify a Person Based Solely on How They Watch 360-Degree Videos? In \textit{2022 IEEE ISMAR-Adjunct}, 417–422. doi:10.1109/ISMAR-Adjunct57072.2022.00090
 
-[86] Wierzbowski, M., Pochwatko, G., Borkiewicz, P., Cnotkowski, D., Pabiś-Orzeszyna, M., Kobyliński, P. (2022). Behavioural Biometrics in Virtual Reality: To What Extent Can We Identify a Person Based Solely on How They Watch 360-Degree Videos? 2022 IEEE ISMAR-Adjunct, pp. 417–422. doi:10.1109/ISMAR-Adjunct57072.2022.00090
+[87] Cazzato, D., Carcagnì, P., Cimarelli, C., Voos, H., Distante, C., \& Leo, M. (2020). Ocular Biometrics Recognition by Analyzing Human Exploration during Video Observations. \textit{Applied Sciences, 10}(13), 4548. doi:10.3390/app10134548
 
-[87] Cazzato, D., Carcagnì, P., Cimarelli, C., Voos, H., Distante, C., Leo, M. (2020). Ocular Biometrics Recognition by Analyzing Human Exploration during Video Observations. Applied Sciences, 10(13), 4548. doi:10.3390/app10134548
+[88] Holdsworth, J., \& Kosinski, M. (2025). What is behavioral biometrics? \url{https://www.ibm.com/think/topics/behavioral-biometrics}
 
-[88] Holdsworth, J., Kosinski, M. What is behavioral biometrics? \url{https://www.ibm.com/think/topics/behavioral-biometrics}
+[89] George, A., \& Routray, A. (2016). A score level fusion method for eye movement biometrics. \textit{Pattern Recognit. Lett., 82}, 207–215.
 
-[89] George, A., Routray, A. (2016). A score level fusion method for eye movement biometrics. Pattern Recognit. Lett., 82, 207–215.
+[90] Open Gaze API by GazePoint. (2019). \url{http://andrewd.ces.clemson.edu/courses/cpsc881/manuals/Gazepoint/Gazepoint%20API.pdf}
 
-[90] Open Gaze API by GazePoint, \url{http://andrewd.ces.clemson.edu/courses/cpsc881/manuals/Gazepoint/Gazepoint%20API.pdf}
+[91] SelectKBest. (2025). \url{https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html}
 
-[91] SelectKBest, \url{https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html}
+[92] Naive Bayes. (2025). \url{https://scikit-learn.org/stable/modules/naive_bayes.html}
 
-[92] Naive Bayes, \url{https://scikit-learn.org/stable/modules/naive_bayes.html}
+[93] Müller, A. C., Guido, S. (2016). Introduction to Machine Learning with Python: A Guide for Data Scientists. O'Reilly Media. \url{https://www.nrigroupindia.com/e-book/Introduction%20to%20Machine%20Learning%20with%20Python%20(%20PDFDrive.com%20)-min.pdf}.
 
-[93] Müller, A. C., Guido, S. Introduction to Machine Learning with Python.
+[94] KNeighborsClassifier. (2025). \url{https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html}
 
-[94] KNeighborsClassifier, \url{https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html}
+[95] Logistic Regression. (2025). \url{https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html}
 
-[95] Logistic Regression, \url{https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html}
+[96] Advantages and Disadvantages of Logistic Regression. (2025). \url{https://www.geeksforgeeks.org/data-science/advantages-and-disadvantages-of-logistic-regression/}
 
-[96] Advantages and Disadvantages of Logistic Regression, \url{https://www.geeksforgeeks.org/data-science/advantages-and-disadvantages-of-logistic-regression/}
+[97] SVC. (2025). \url{https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html}
 
-[97] SVC, \url{https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html}
+[98] NuSVC. (2025). \url{https://scikit-learn.org/stable/modules/generated/sklearn.svm.NuSVC.html}
 
-[98] NuSVC, \url{https://scikit-learn.org/stable/modules/generated/sklearn.svm.NuSVC.html}
+[99] Underrated and Implementing Nu-Support Vector Classification (NuSVC). (2025). \url{https://www.geeksforgeeks.org/machine-learning/underrated-and-implementing-nu-support-vector-classification-nusvc/}
 
-[99] Underrated and Implementing Nu-Support Vector Classification (NuSVC), \url{https://www.geeksforgeeks.org/machine-learning/underrated-and-implementing-nu-support-vector-classification-nusvc/}
+[100] Random Forest. (2025). \url{https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html}
 
-[100] Random Forest, \url{https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html}
+[101] MLP. (2025). \url{https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html}
 
-[101] MLP, \url{https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html}
+[102] train\_test\_split. (2025). \url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html}
 
-[102] train\_test\_split, \url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html}
+[103] Pipeline. (2025). \url{https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html}
 
-[103] Pipeline, \url{https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html}
+[104] GridSearchCV. (2025). \url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html}
 
-[104] GridSearchCV, \url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html}
+[105] SimpleImputer. (2025). \url{https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html}
 
-[105] SimpleImputer, \url{https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html}
+[106] MinMaxScaler. (2025). \url{https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html}
 
-[106] MinMaxScaler, \url{https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html}
+[107] StandardScaler. (2025). \url{https://scikit-learn.org/stable/modules/sklearn.preprocessing.StandardScaler.html}
 
-[107] StandardScaler, \url{https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html}
+[108] RobustScaler. (2025). \url{https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.RobustScaler.html}
 
-[108] RobustScaler, \url{https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.RobustScaler.html}
+[109] Top k identification with feature selection. (2025). GitHub. \url{https://github.com/DavideMascheroni99/movingText/tree/main/Programs/Machine_Learning/Machine_Learning_results/Identification_results/Identification_KBest/Feature}
 
-[109] Top k identification with feature selection, GitHub, \url{https://github.com/DavideMascheroni99/movingText/tree/main/Programs/Machine_Learning/Machine_Learning_results/Identification_results/Identification_KBest/Feature}
+[110] Top k features identification single-ST. (2025). GitHub. \url{https://github.com/DavideMascheroni99/movingText/blob/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_st.csv}
 
-[110] Top k features identification single-ST, \url{https://github.com/DavideMascheroni99/movingText/blob/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_st.csv}
+[111] Top k features identification single-ST raw. (2025). GitHub. \url{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_st.csv}
 
-[111] Top k features identification single-ST raw, \url{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_st.csv}
+[112] Top k features identification single-FT. (2025). GitHub. \url{https://github.com/DavideMascheroni99/movingText/blob/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_ft.csv}
 
-[112] Top k features identification single-FT, \url{https://github.com/DavideMascheroni99/movingText/blob/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_ft.csv}
+[113] Top k features identification single-FT raw. (2025). GitHub. \url{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_ft.csv}
 
-[113] Top k features identification single-FT raw, \url{https://github.com/DavideMascheroni99/movingText/raw/main/Programs/Machine_Learning/Machine_Learning_results/Identification_single_results/selected_features_ft.csv}
-
-[114] What is the Difference between Identification, Identity Verification and Authentication?, \url{https://www.pingidentity.com/en/resources/blog/post/identification-vs-verification-vs-authentication.html}
+[114] What is the Difference between Identification, Identity Verification and Authentication? (Year [missing]). \url{https://www.pingidentity.com/en/resources/blog/post/identification-vs-verification-vs-authentication.html}
 
 
 \end{raggedright}
@@ -3364,6 +3367,8 @@ This appendix presents the results for all animations under reduced recording du
     \caption{Verification results with 5-second recordings using the ST configuration.}
 \end{figure}
 \FloatBarrier
+
+
 
 %--------------------------------------------------------
 \subsection{Verification ‘Classic’ Single ST – Animations}

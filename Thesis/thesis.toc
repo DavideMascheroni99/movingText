@@ -49,35 +49,35 @@
 \contentsline {subsubsection}{\numberline {5.4.3}Saccade Speed Features (f21–f30)}{39}{subsubsection.5.4.3}%
 \contentsline {subsubsection}{\numberline {5.4.4}Scanpath Feature (f31)}{40}{subsubsection.5.4.4}%
 \contentsline {subsubsection}{\numberline {5.4.5}Pupil Diameter Features (f32–f51)}{40}{subsubsection.5.4.5}%
-\contentsline {subsubsection}{\numberline {5.4.6}Pupil Diameter Ratio Features (f52–f61)}{41}{subsubsection.5.4.6}%
+\contentsline {subsubsection}{\numberline {5.4.6}Pupil Diameter Ratio Features (f52–f61)}{40}{subsubsection.5.4.6}%
 \contentsline {subsubsection}{\numberline {5.4.7}Pupil Diameter Difference Features (f62–f70)}{41}{subsubsection.5.4.7}%
 \contentsline {subsubsection}{\numberline {5.4.8}Blink Features (f71–f74)}{41}{subsubsection.5.4.8}%
-\contentsline {subsubsection}{\numberline {5.4.9}Directional Movement Features (f75–f82)}{42}{subsubsection.5.4.9}%
-\contentsline {section}{\numberline {6}Machine Learning Analysis}{43}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Identification}{44}{subsection.6.1}%
-\contentsline {subsubsection}{\numberline {6.1.1}Identification without feature selection}{45}{subsubsection.6.1.1}%
-\contentsline {subsubsection}{\numberline {6.1.2}Identification with feature selection}{46}{subsubsection.6.1.2}%
-\contentsline {subsubsection}{\numberline {6.1.3}Identification with single animation - Single Train(ST)}{47}{subsubsection.6.1.3}%
-\contentsline {subsubsection}{\numberline {6.1.4}Identification with single animation - Full Train(FT)}{50}{subsubsection.6.1.4}%
-\contentsline {subsection}{\numberline {6.2}Verification single animation - ST type}{51}{subsection.6.2}%
-\contentsline {subsubsection}{\numberline {6.2.1}Verification single animation - Single Train(ST)}{52}{subsubsection.6.2.1}%
-\contentsline {subsubsection}{\numberline {6.2.2}Verification single animation with intruders - Single Train(ST)}{54}{subsubsection.6.2.2}%
-\contentsline {subsubsection}{\numberline {6.2.3}Verification Single Animation with Reduced Session Duration - Single Train (ST)}{56}{subsubsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.3}Verification 'classic' single animation - ST type}{57}{subsection.6.3}%
-\contentsline {subsubsection}{\numberline {6.3.1}Verification single animation classic - single train(ST)}{57}{subsubsection.6.3.1}%
-\contentsline {subsubsection}{\numberline {6.3.2}Verification 'classic' single animation with intruders - Single Train(ST)}{58}{subsubsection.6.3.2}%
-\contentsline {subsubsection}{\numberline {6.3.3}Verification 'classic' Single Animation with Reduced Session Duration - Single Train (ST)}{59}{subsubsection.6.3.3}%
-\contentsline {subsection}{\numberline {6.4}Verification single animation - FT}{61}{subsection.6.4}%
-\contentsline {subsubsection}{\numberline {6.4.1}Verification single animation - Full Train(FT)}{61}{subsubsection.6.4.1}%
-\contentsline {subsubsection}{\numberline {6.4.2}Verification single animation with intruders - Full Train(FT)}{63}{subsubsection.6.4.2}%
-\contentsline {subsubsection}{\numberline {6.4.3}Verification Single Animation with Reduced Session Duration - Full Train (FT)}{65}{subsubsection.6.4.3}%
-\contentsline {subsection}{\numberline {6.5}Verification ’classic’ single animation - FT type}{66}{subsection.6.5}%
-\contentsline {subsubsection}{\numberline {6.5.1}Verification single animation classic - Full Train(FT)}{67}{subsubsection.6.5.1}%
-\contentsline {subsubsection}{\numberline {6.5.2}Verification 'classic' single animation with intruders - Full Train (FT)}{68}{subsubsection.6.5.2}%
-\contentsline {subsubsection}{\numberline {6.5.3}Verification 'classic' Single Animation with Reduced Session Duration - Full Train (FT)}{68}{subsubsection.6.5.3}%
-\contentsline {subsection}{\numberline {6.6}Static vs Dinamic text}{70}{subsection.6.6}%
-\contentsline {section}{\numberline {7}Conclusion}{73}{section.7}%
-\contentsline {section}{\numberline {8}References}{76}{section.8}%
+\contentsline {subsubsection}{\numberline {5.4.9}Directional Movement Features (f75–f82)}{41}{subsubsection.5.4.9}%
+\contentsline {section}{\numberline {6}Machine Learning Analysis}{42}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Identification}{43}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Identification without feature selection}{44}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Identification with feature selection}{45}{subsubsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.3}Identification with single animation - Single Train(ST)}{46}{subsubsection.6.1.3}%
+\contentsline {subsubsection}{\numberline {6.1.4}Identification with single animation - Full Train(FT)}{49}{subsubsection.6.1.4}%
+\contentsline {subsection}{\numberline {6.2}Verification single animation - ST type}{50}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Verification single animation - Single Train(ST)}{51}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Verification single animation with intruders - Single Train(ST)}{53}{subsubsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.3}Verification Single Animation with Reduced Session Duration - Single Train (ST)}{55}{subsubsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.3}Verification 'classic' single animation - ST type}{56}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}Verification single animation classic - single train(ST)}{56}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}Verification 'classic' single animation with intruders - Single Train(ST)}{57}{subsubsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.3}Verification 'classic' Single Animation with Reduced Session Duration - Single Train (ST)}{58}{subsubsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.4}Verification single animation - FT}{60}{subsection.6.4}%
+\contentsline {subsubsection}{\numberline {6.4.1}Verification single animation - Full Train(FT)}{60}{subsubsection.6.4.1}%
+\contentsline {subsubsection}{\numberline {6.4.2}Verification single animation with intruders - Full Train(FT)}{62}{subsubsection.6.4.2}%
+\contentsline {subsubsection}{\numberline {6.4.3}Verification Single Animation with Reduced Session Duration - Full Train (FT)}{64}{subsubsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.5}Verification ’classic’ single animation - FT type}{65}{subsection.6.5}%
+\contentsline {subsubsection}{\numberline {6.5.1}Verification single animation classic - Full Train(FT)}{66}{subsubsection.6.5.1}%
+\contentsline {subsubsection}{\numberline {6.5.2}Verification 'classic' single animation with intruders - Full Train (FT)}{67}{subsubsection.6.5.2}%
+\contentsline {subsubsection}{\numberline {6.5.3}Verification 'classic' Single Animation with Reduced Session Duration - Full Train (FT)}{67}{subsubsection.6.5.3}%
+\contentsline {subsection}{\numberline {6.6}Static vs Dinamic text}{69}{subsection.6.6}%
+\contentsline {section}{\numberline {7}Conclusion}{72}{section.7}%
+\contentsline {section}{\numberline {8}References}{75}{section.8}%
 \contentsline {section}{\numberline {A}Appendix A — Parameter Grids and Feature Selection}{82}{appendix.A}%
 \contentsline {subsection}{\numberline {A.1}Parameter grid}{82}{subsection.A.1}%
 \contentsline {subsection}{\numberline {A.2}Identification with Feature Selection — Best k Features}{83}{subsection.A.2}%

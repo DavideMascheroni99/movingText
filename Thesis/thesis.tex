@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[12pt]{report} 
 \usepackage[main=english, italian]{babel}
 \usepackage[utf8]{inputenc}  
 \usepackage[autostyle, english = american]{csquotes}
@@ -75,12 +75,13 @@ In the verification task, which represents the primary use case for soft biometr
   I dati sperimentali sono stati raccolti da 35 partecipanti e successivamente analizzati mediante una serie di algoritmi di apprendimento automatico applicati ai compiti di identificazione e verifica.
   I risultati ottenuti sono molto incoraggianti per entrambe le applicazioni.
   Nel caso dell’identificazione, il sistema ha raggiunto una accuratezza dell’82.86\% utilizzando un singolo stimolo di animazione.
-  Nel compito di verifica, che rappresenta l’applicazione principale dei sistemi biometrici comportamentali, la migliore prestazione ha raggiunto una accuratezza del 92.2\% con un Equal Error Rate (EER) del 3.6\%.
+  Nel compito di verifica, che rappresenta l’applicazione principale dei sistemi biometrici comportamentali, la migliore prestazione ha raggiunto una accuratezza del 92.2\% con un EER del 3.6\%.
   \end{abstract}
 \end{otherlanguage}
 \newpage
 
-\section{Introduction}
+\chapter{Introduction}
+
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.7\baselineskip}
 In recent years, new information technologies have become increasingly widespread in everyday life. 
@@ -139,7 +140,7 @@ Subsequently, the analysis proceeds with the verification phase, which forms the
 The analysis explores several experimental configurations that vary in training modality (Single Train and Full Train), evaluation strategy (best-model and pairwise), and testing condition (closed-set, open-set, and reduced recording durations).
 A dedicated chapter is presented for each experimental configuration, detailing the methodology, results, and comparative discussion for every combination of training modality, evaluation strategy, and testing condition.
 
-Overall, the best verification performance was achieved using the VB\_FA\_SMA animation under the Full Train configuration and best-model evaluation, reaching an accuracy of 92.6\% and an Equal Error Rate (EER) of 4\%.
+Overall, the best verification performance was achieved using the VB\_FA\_SMA animation under the Full Train configuration and best-model evaluation, reaching an accuracy of 92.6\% and an EER of 4\%.
 The lowest EER, however, was obtained in the Single Train setup with the VB\_FA\_BIG animation, achieving 3.6\% EER and 92.2\% accuracy with the Random Forest classifier.
 In the open-set scenario, the system maintained strong performance, with the VB\_FA\_SMA animation and SVC classifier reaching 91.9\% accuracy and 6.1\% EER.
 When the recording duration was reduced, results remained robust.
@@ -148,14 +149,15 @@ For 10-second recordings, the VB\_FA\_SMA animation achieved 92.7\% accuracy and
 To conclude, a comparative analysis between dynamic and static text stimuli is presented.
 For this study, a similar data collection protocol was followed, consisting of three sessions of three trials each.
 Eight participants were involved to evaluate and compare the performance of the two methods.
-In terms of quantitative performance, the highest results for dynamic text in the verification task were achieved using the MLP classifier, reaching an accuracy of 92.19\% with an Equal Error Rate (EER) of 6.77\%.
+In terms of quantitative performance, the highest results for dynamic text in the verification task were achieved using the MLP classifier, reaching an accuracy of 92.19\% with an EER of 6.77\%.
 By comparison, static text stimuli obtained an accuracy of 87.5\%, also with MLP, but with a lower EER of 4.17\%.
 These results highlight a trade-off between robustness and precision: dynamic text offers greater consistency across sessions, while static text provides improved reliability in terms of error rate.
 Additionally, vertical block–based animations consistently outperformed horizontal scroll–based ones across nearly all experimental conditions, indicating their stronger suitability for gaze-based biometric applications.
 
 \newpage
 
-\section{Behavioral Biometric}
+\chapter{Behavioral Biometric}
+
 \noindent
 As per Jim Holdsworth et al. [88] Behavioral biometrics is a form of authentication that analyzes the unique patterns in a user's activity to verify their identity. 
 In particular this discipline is able to collect, in a non intrusive way, a distinctive way in which a user achieve a task.
@@ -164,7 +166,7 @@ This additional level of security will focus only on a verification purpose to d
 A major advantage over traditional PIN or password-based methods is that mimicking the genuine user's behavioral patterns to gain system access is considerably more difficult.
 These advantages have contributed to the growing prominence of the field, which has attracted considerable research attention in recent years.
 
-\subsection{Identification vs Verification}
+\section{Identification vs Verification}
 
 An important thing to mention is surely the difference between identification and verification.
 In fact, this difference represents the basis through which various biometric technologies have been developed.
@@ -179,7 +181,7 @@ In particular a user can only be accepted or rejected, but not recognized over a
 Verification confirms that the user is who they claim to be [114] by comparing the information provided by the user against a trusted source, such as a government-issued ID, a passport, or a driver's license.
 
 
-\subsection{Biometric based on identification}
+\section{Biometric based on identification}
 
 The most well-known biometric technologies are those based on iris recognition and fingerprint scanning. 
 Unlike traditional passwords, which identify a user through information they know, these technologies rely on intrinsic physical characteristics of the individual.
@@ -232,7 +234,7 @@ These characteristics can be used to uniquely identify a person and remain uncha
 Another advantage is also that, unlike password-based systems, the user does not have to remember secret information.
 Furthermore, it is more difficult to try to authenticate using another person's fingerprint or iris compared to a system based on what a subject knows.
 
-\subsection{Behavioral biometric}
+\section{Behavioral biometric}
 
 Behavioral biometrics is a discipline primarily focused on the verification problem.
 Unlike physical biometrics, it does not rely on inherent physical characteristics, but rather on a person's behavior. 
@@ -278,7 +280,7 @@ With respect to acceptability, these methods are often well received due to thei
 Finally, circumvention is relatively difficult since it requires deep knowledge of another person's behavior, but once obtained, imitation can be simple.
 This highlights the importance of securely encrypting behavioral profiles.
 
-\subsection{Some applications of behavioral biometric}
+\section{Some applications of behavioral biometric}
 
 This section is used to present different real world application of behavioral biometric.
 These and other applications are described in Chapter 1, Taxonomy of Behavioral Biometrics [4], where they are subdivided into the five categories discussed earlier.
@@ -287,7 +289,7 @@ Is important to notice that some applications can be characterized with more tha
 
 Starting from Authorship based biometric we have a biometric based on sketch recognition. 
 With this method, proposed by Al-Zubi et al. [5], a user is invited to draw a simple sketch of a simple figure, for example some circles, and he can do it freely in the way he wants.
-This method captures the distinctive drawing style of the subject, allowing the system to build a model for authentication, achieving an Equal Error Rate (EER) of 7.2\%.
+This method captures the distinctive drawing style of the subject, allowing the system to build a model for authentication, achieving an EER of 7.2\%.
 Another example of this category is email behavior used to identify anomalies into mail messages proposed by Stolfo et al. [6].
 In fact the users follow some habits when they write or read an email.
 The time in which the subject reads the mails and empty the mail list, the structure of the mail, the structure of the greetings and the recipient address can be used to construct feature vectors and develop predictive models based on them.
@@ -342,7 +344,7 @@ Data mining techniques are widely applied in credit card fraud detection, often 
 Outlier detection methods rely on distance, density, projection, or distribution analysis. 
 Brause et al. [20] developed a rule-based model using symbolic and analog transaction data, showing that analog data alone is insufficient for reliably detecting fraud with a detection rate of 99.995\% and a FRR of 20\%.
 
-\subsection{Soft Biometric}
+\section{Soft Biometric}
 
 Behavioral biometrics is considered a soft biometric approach because it is generally weaker and less stable than traditional biometric systems. 
 Unlike traditional biometric applications, such as fingerprint or iris recognition, which are based on physiological traits that remain largely constant throughout a person's life, behavioral biometrics rely on dynamic patterns of human activity.
@@ -370,25 +372,25 @@ While this capability enhances security, it also underscores the need for strict
 
 \newpage
 
-\section{Eye tracker}
+\chapter{Eye tracker}
 
 Before describing an eye tracker we have to understand why the point in which a person is looking is so important.
 The reason is that when a person looks at something, they focus on a scene in fine detail and direct their attention to that point.
 Therefore, if we can detect where a person is looking during an activity, we can infer their path of attention.
 We can also know which part of the scene can be labeled as important for a subject.
 
-\subsection{Visual attention}
+\section{Visual attention}
 Humans receive numerous stimuli during any activity, but they cannot process all of them due to limited cognitive capacity.
 As a result, they must select a subset of stimuli they find more interesting or important and focus their processing on those.
 The psychologist William James gives the definition of visual attention as:“Many filtered into few for perception”.
 This section, according to chapter 1: Visual attention [21], will contain the history of the main study about visual attention during the past years.
 
-\subsubsection{Von Helmholtz's “Where”}
+\subsection{Von Helmholtz's “Where”}
 In the late 19th century, Von Helmholtz (1925) emphasized visual attention as a key mechanism of perception.
 He noted that while attention naturally shifts to new stimuli, it can also be consciously directed even toward peripheral objects without moving the eyes. 
 However, he mainly linked attention to eye movements toward spatial locations, which serve as evidence of overt visual attention.[21]
 
-\subsubsection{James' “What”}
+\subsection{James' “What”}
 In contrast to Von Helmholtz's spatial ('where') view of attention, James (1981) described attention as an internal, covert process concerned with the identity or meaning of stimuli the 'what'. 
 These perspectives are complementary, reflecting two aspects of visual processing.
 The foveal, or 'what,' component enables detailed recognition of central objects, while the parafoveal, or 'where,' component guides spatial awareness and directs attention toward peripheral stimuli. 
@@ -396,35 +398,35 @@ Together, they illustrate how visual attention integrates object identification 
 Although this dual view forms the basis for computational models of bottom-up attention, it is inherently simplistic. 
 A comprehensive understanding of visual attention must also account for higher-level, voluntary, and cognitive factors that influence how attention is directed.[21]
 
-\subsubsection{Gibson's “How”}
+\subsection{Gibson's “How”}
 In the 1940s, Gibson (1941) introduced intention as a third factor in visual attention, emphasizing the role of advance preparation in shaping reactions.
 His view highlighted the interplay between expectation and intention, showing how perception can shift depending on preconceptions, such as reading 'sael' as 'seal' or 'sail.'
 This 'what to do' aspect underscores the importance of considering perceptual expectations when designing experiments.[21]
 
-\subsubsection{Broadbent's “Selective Filter”}
+\subsection{Broadbent's “Selective Filter”}
 In the 1950s, Broadbent (1958) introduced the 'selective filter' model of attention, showing through auditory experiments that while information enters in parallel, it is subsequently filtered into limited-capacity sensory channels.[21]
 
-\subsubsection{Deutsch and Deutsch's “Importance Weightings”}
+\subsection{Deutsch and Deutsch's “Importance Weightings”}
 Deutsch and Deutsch (1963) opposed Broadbent's selective filter, proposing instead that all sensory input is processed, with importance weightings determining attention.
 Treisman (1971) later reconciled both models by introducing an attenuation filter that weakens, rather than blocks, irrelevant signals, followed by 'dictionary units' tuned to importance and context the 'where' and the 'what'. 
 However, the unresolved scene integration problem highlighted how, despite selective perception, we can still construct a coherent overall view of complex scenes, a challenge further explored through eye movement studies and Gestalt theories.[21]
 
-\subsubsection{Yarbus and Noton and Stark's “Scanpaths”}
+\subsection{Yarbus and Noton and Stark's “Scanpaths”}
 Early eye movement studies challenged the Gestalt idea of parallel, holistic visual recognition. 
 Yarbus (1967) showed that viewers' gaze followed sequential patterns when answering questions about an image, while Noton and Stark (1971) identified 'scanpaths', demonstrating that even without specific instructions, observers tend to fixate on informative regions in variable sequences. 
 These findings suggest that a coherent visual scene is constructed piecemeal, supporting James 'what' aspect of attention, where foveal vision selectively processes regions of interest.[21]
 
-\subsubsection{Treisman's “Glue”}
+\subsection{Treisman's “Glue”}
 Posner et al. and Noton and Stark extended the theories of visual attention originally proposed by Von Helmholtz and James, later integrated by Broadbent and Deutsch \& Deutsch. 
 Treisman further unified these ideas through the Feature Integration Theory (FIT), which posits that attention acts as the 'glue' binding separate features at specific locations to perceive objects as unified wholes. 
 FIT relies on a master map indicating feature locations such as color, orientation, size, and depth while eye tracking is often used experimentally to validate the theory.[21]
 
-\subsubsection{Kosslyn's “Window”}
+\subsection{Kosslyn's “Window”}
 Kosslyn (1994) proposed a refined model of visual attention, introducing an adjustable 'attentional window' that selectively transmits information from the visual buffer, similar to Broadbent's and Treisman's filters. 
 The model also posits a redundant, stimulus-based attention-shifting subsystem, relevant to mental imagery, which involves forming internal representations resembling actual perception. 
 Notably, eye movements during REM sleep may reflect this internal attentional process, though this remains uncertain.[21]
 
-\subsubsection{Bottom-up model}
+\subsection{Bottom-up model}
 Visual attention can be conceptualized through two complementary components: the “what”, corresponding to foveal, object-focused processing, and the “where”, associated with parafoveal, spatial guidance.
 In a bottom-up model, peripheral vision first detects salient features at low resolution, which then guide eye movements to reposition the fovea on regions of interest for detailed inspection.
 This framework provides a powerful foundation for computational models of visual search, yet it remains incomplete because it does not account for higher-level, voluntary, or cognitive influences.
@@ -432,13 +434,13 @@ Voluntary attention enables individuals to selectively focus on areas outside th
 However, while eye tracking offers valuable insights into attentional processes, it is limited to capturing overt eye movements. 
 It cannot capture covert shifts of attention, in which focus is redirected without accompanying eye movements, which represents an important limitation for observational studies.”
 
-\subsection{The human eye}
+\section{The human eye}
 
 The human eye is a highly specialized organ responsible for capturing light from the environment and transforming it into neural signals that the brain interprets as visual perception.
 Its structure is finely adapted to focus incoming light, regulate brightness, and detect a wide spectrum of colors and details.
 Understanding the anatomy of the eye is crucial to explain how humans perceive the world, particularly the mechanisms of color vision, which rely on the retina and its photoreceptor cells: rods and cones.
 
-\subsubsection{Anatomy of human the eye}
+\subsection{Anatomy of human the eye}
 
 The human eye is approximately spherical, with a diameter of about 24 millimeters. 
 
@@ -462,7 +464,7 @@ Far from being a passive screen, the retina actively processes the incoming ligh
 It contains specialized photoreceptor cells, rods and cones, that convert light into electrical impulses. 
 These signals are then transmitted through the optic nerve, a dense bundle of nerve fibers, to the brain's visual cortex, where they are interpreted and transformed into meaningful images.
 
-\subsubsection{The retina and photoreceptor}
+\subsection{The retina and photoreceptor}
 
 As we said earlier the retina plays a central role in vision, functioning as the site where light is transformed into neural signals that the brain can interpret. 
 Within this thin layer of tissue reside two main types of photoreceptor cells, namely rods and cones, each of which is adapted for specific visual tasks.[115]
@@ -486,7 +488,7 @@ Some are sensitive to short wavelengths corresponding to blue light, others resp
 The combined activity of these three types of cones forms the basis of human trichromatic vision, enabling us to perceive the full spectrum of visible colors.
 This characteristic explains why the RGB color model is among the most widely used frameworks in digital imaging and display technologies.
 
-\subsubsection{Color perception}
+\subsection{Color perception}
 
 The process of color perception begins when incoming light stimulates the cones.
 Each cone type has a broad response curve, meaning that their sensitivity ranges overlap. 
@@ -501,7 +503,7 @@ This shift, known as the Purkinje effect, reflects the higher sensitivity of rod
 As a result, red objects appear to darken as twilight falls, while blue ones remain more easily visible. 
 Such changes highlight the complementary nature of rods and cones: one system optimized for detail and color in bright environments, and the other specialized for sensitivity in low-light conditions.
 
-\subsubsection{Type of eye movements}
+\subsection{Type of eye movements}
 
 Human vision is not a static process. 
 The eyes are in constant motion, guided by a sophisticated neuromuscular system that allows the fovea, the central region of the retina responsible for high acuity, to be directed toward relevant visual targets.
@@ -540,7 +542,7 @@ In natural vision, they combine seamlessly to provide both stability and flexibi
 For instance, during visual search, saccades bring the fovea to regions of interest, smooth pursuit maintains focus on moving targets, vergence adjusts for depth, vestibular reflexes stabilize the gaze against body motion, and physiological nystagmus ensures constant retinal stimulation.
 Together, they form a dynamic and adaptive system that underpins the human ability to explore, interact with, and interpret the visual world.
 
-\subsubsection{Fixation}
+\subsection{Fixation}
 
 Fixation is the process by which the eyes maintain their gaze on a single point, allowing the visual system to capture and process detailed information from the environment.
 Although the eyes may appear motionless during fixation, they are in fact never completely still.
@@ -556,7 +558,7 @@ In essence, fixation is not merely a passive pause of the eyes but a dynamic and
 It balances stability and subtle motion, integrating seamlessly with other eye movements to support accurate, continuous, and detailed visual perception.
 Without fixation, the human ability to explore, interpret, and respond to the environment with precision would be significantly impaired, highlighting its critical role in the visual system
 
-\subsection{Eye tracking techniques}
+\section{Eye tracking techniques}
 
 After recognizing the importance of eye movements, it becomes clear that we need a tool to track them, and this tool is called an eye tracker.
 In the past, eye trackers were highly expensive devices, mostly limited to research labs and specialized industries.
@@ -566,12 +568,12 @@ This reduction in cost has opened the door to new innovations, allowing eye trac
 Eye trackers can be divided into two main categories: those that measure the position of the eye relative to the head and those that measure the orientation of the eye in space, also known as the Point of Regard (POR).
 Building on this distinction, Chapter 5 of Eye Tracking Methodology: Theory and Practice [21] further identifies four methodological approaches to eye movement measurement: Electro-Oculography (EOG), scleral contact lens or search coil methods, Photo-Oculography (POG) or Video-Oculography (VOG), and video-based techniques combining pupil and corneal reflection.
 
-\subsubsection{Electro-OculoGraphy (EOG)}
+\subsection{Electro-OculoGraphy (EOG)}
 
 Electro-oculography (EOG) was the predominant method for recording eye movements around forty years ago and, although less common today, it still finds use in both clinical and research settings.
 The technique operates by detecting differences in the corneo-retinal standing potential, which are measured through electrodes placed on the skin surrounding the eye. The recorded signal typically falls within the range of 15 to 200 µV, with a nominal sensitivity of approximately 20 µV per degree of eye movement. While EOG is effective for capturing eye movements relative to head position, it lacks the precision required for determining the point of regard. Consequently, its application for gaze tracking is limited unless combined with complementary systems capable of monitoring head movements, such as head trackers.
 
-\subsubsection{Scleral Contact Lens/Search Coil}
+\subsection{Scleral Contact Lens/Search Coil}
 
 One of the most accurate ways to measure eye movements uses a mechanical or optical reference attached to a contact lens that is worn directly on the eye. 
 Early versions of this method, dating back to the late 19th century and later developed by Young and Sheena (1975) [22], used a plaster-of-Paris ring placed on the cornea, connected by mechanical linkages to recording devices.
@@ -584,7 +586,7 @@ However, it is also highly invasive.
 Inserting the lens requires practice and care, and wearing it can be uncomfortable. 
 In addition, this method measures the eye's position relative to the head, so it is generally not suitable for directly determining the point of regard.
 
-\subsubsection{Photo-OculoGraphy (POG) or Video-OculoGraphy (VOG)}
+\subsection{Photo-OculoGraphy (POG) or Video-OculoGraphy (VOG)}
 
 This category includes a wide range of eye movement recording techniques that rely on measuring distinct features of the eye during rotation or translation. 
 Examples include the apparent shape of the pupil, the position of the limbus (the boundary between the iris and the sclera), and reflections from a nearby directed light source, often in the infrared spectrum. 
@@ -593,7 +595,7 @@ Measurements of ocular features in these techniques may be obtained either autom
 Manual visual inspection, such as reviewing recorded eye movements frame by frame on videotape, is extremely time-consuming, prone to error, and limited by the temporal sampling rate of the video device.
 Automatic limbus tracking typically uses photodiodes mounted on spectacle frames and generally relies on invisible illumination, usually in the infrared range. Many of these methods also require the head to be held still, commonly using a head or chin rest, or a bite bar, to reduce movement (Young and Sheena, 1975)[22].
 
-\subsubsection{Video-Based Combined Pupil/Corneal Reflection}
+\subsection{Video-Based Combined Pupil/Corneal Reflection}
 
 While the previously discussed techniques are generally suitable for measuring eye movements, they often do not directly provide point-of-regard measurements.
 To determine the point of regard, either the head must be stabilized so that eye position relative to the head corresponds to gaze direction, or multiple ocular features must be tracked to distinguish between head movements and eye rotations.
@@ -654,7 +656,7 @@ While this limitation reduces the comfort and naturalness of the setup, it ensur
 \end{figure}
 
 \newpage
-\section{Related work}
+\chapter{Related work}
 
 This section presents an updated overview of the state of the art in gaze-based biometric solutions.
 As a starting point, we draw on the work presented in Chapter 9 – Biometric Authentication to Access Controlled Areas Through Eye Tracking [25], published in 2017. 
@@ -670,7 +672,7 @@ The third category emphasizes eye and gaze velocity, capturing the dynamics of e
 The fourth examines pupil size variations, which may be influenced by both physiological and cognitive factors.
 Finally, the fifth category explores oculomotor characteristics and head orientation, integrating motor control features of the visual system into biometric assessment.
 
-\subsection{ATM-like solutions}
+\section{ATM-like solutions}
 
 This section begins with a review of gaze-driven authentication systems, which have been developed as alternatives to traditional password or PIN entry methods.
 Such systems are particularly relevant in contexts resembling Automated Teller Machines (ATMs), where secure and efficient user authentication is essential. 
@@ -730,7 +732,7 @@ A prototype tested with 30 participants demonstrated strong performance, achievi
 Matin Fallahi et al. [40] proposed a multimodal biometric authentication system for Extended Reality (XR), addressing the usability and security limitations of password-based methods. 
 Traditional password entry in XR is cumbersome and error-prone, often leading to weaker password choices and reduced security. 
 To overcome this, their approach combines eye movement patterns with brainwave signals, using consumer-grade sensors that can be seamlessly integrated into XR devices.
-A prototype tested with 30 participants achieved an exceptionally low Equal Error Rate (EER) of 0.29\%, significantly outperforming single-modality systems based on eye movements (1.82\%) or brainwaves (4.92\%), as well as state-of-the-art biometric methods (EERs between 2.5\% and 7\%).
+A prototype tested with 30 participants achieved an exceptionally low EER of 0.29\%, significantly outperforming single-modality systems based on eye movements (1.82\%) or brainwaves (4.92\%), as well as state-of-the-art biometric methods (EERs between 2.5\% and 7\%).
 Importantly, this solution supports seamless and immersive authentication through visual stimuli, eliminating the need for complex user interactions.
 
 Traditional authentication methods such as passwords overlook personal behavioral traits of users.
@@ -743,7 +745,7 @@ Haochen Wang [47], in his thesis, presents four case studies evaluating gaze-bas
 Both identification and authentication were tested, including an analysis of user familiarity in the building access study. 
 Results showed classification accuracies above 0.7 across most experiments, demonstrating the feasibility of gaze-based biometrics as a viable “soft biometric” method when combined with traditional authentication techniques.
 
-\subsection{Methods based on fixation and scanpath analysis}
+\section{Methods based on fixation and scanpath analysis}
 
 The use of fixations and scanpaths for biometric applications has been investigated for over a decade.
 One of the earliest contributions was by Silver and Biggs [53], who compared keystroke dynamics with eye-tracking data for identification purposes. 
@@ -752,7 +754,7 @@ Although keystroke-based models clearly outperformed gaze-based ones, this work 
 Subsequent studies have sought to extract and refine gaze features for improved performance. 
 Holland and Komogortsev [54], for example, examined reading scanpaths using a high-frequency eye tracker (1000 Hz) and a dataset of 32 participants. 
 They employed a wide range of features, such as fixation count, average fixation duration, and saccade amplitudes, as well as aggregate scanpath descriptors including path length, area, and inflection count.
-By applying Gaussian cumulative distribution similarity measures and feature fusion, they achieved their best result with an Equal Error Rate (EER) of 27\%. 
+By applying Gaussian cumulative distribution similarity measures and feature fusion, they achieved their best result with an EER of 27\%. 
 
 In later work, Holland and Komogortsev [55] expanded this line of inquiry using both high-end (1000 Hz) and low-cost (75 Hz) eye trackers. 
 From 32 and 173 participants, respectively, they extracted fixation and saccade features, which were analyzed with several statistical tests and machine learning classifiers. 
@@ -765,7 +767,7 @@ Comparing overlap in MST structures between subjects enabled user identification
 Galdi et al. [57] conducted an experiment involving 88 participants across three sessions. 
 Sixteen grayscale facial images were used as stimuli, and each image was divided into 17 Areas of Interest (AOIs) corresponding to facial regions (e.g., eyes, mouth, nose). 
 For each participant, feature vectors were constructed by calculating the average fixation duration per AOI across all images. 
-Using Euclidean and Cosine distance measures for comparison, the system achieved its best performance with combined features, reaching an Equal Error Rate (EER) of 0.361.
+Using Euclidean and Cosine distance measures for comparison, the system achieved its best performance with combined features, reaching an EER of 0.361.
 
 Cantoni et al. [33] extended this approach with a larger participant pool (111 from the first study plus 24 additional subjects one year later) and introduced the Gaze ANalysis Technique (GANT). 
 Instead of manually defined AOIs, an automatic face normalization algorithm was applied to divide each image into a uniform 7×6 grid (42 cells).
@@ -786,11 +788,11 @@ Their method achieved success rates of 98\% across the shorter interval and 94\%
 Yin et al. (2022) [34] proposed a gaze-based authentication method leveraging the spatiotemporal features of eye movements.
 To address the long recording times required by previous approaches, their method uses shorter eye movement recordings, recommending durations under 12 seconds based on deviations between gaze points and stimuli.
 Temporal motion of gaze points and spatial saccade patterns were used to represent individual identity.
-Experiments on two datasets (5 s and 12 s recordings) showed that open-set Equal Error Rates (EER) reached 10.62\% for 12 s and 12.48\% for 5 s, while closed-set EERs were 5.25\% and 7.82\%, respectively, demonstrating the method's effectiveness for rapid, eye-movement-based authentication.
+Experiments on two datasets (5 s and 12 s recordings) showed that open-set EER reached 10.62\% for 12 s and 12.48\% for 5 s, while closed-set EERs were 5.25\% and 7.82\%, respectively, demonstrating the method's effectiveness for rapid, eye-movement-based authentication.
 
 The COVID-19 pandemic underscored the need for contactless authentication methods, particularly those based on eye or gaze features, which remain effective even when users wear masks and can complement traditional password or PIN systems. 
 In this context, Porta et al. [35] presented a study on gaze-based soft biometrics that employed simple animations as visual stimuli, in which small squares moved along different patterns and trajectories without the need for preliminary calibration of the eye tracker. 
-Machine learning analysis of the collected data demonstrated strong performance, especially in verification tasks, achieving accuracies above 80\% and Equal Error Rates (EER) often below 10\%.
+Machine learning analysis of the collected data demonstrated strong performance, especially in verification tasks, achieving accuracies above 80\% and EER often below 10\%.
 
 The study, suggested by Yasmeen Abdrabou et al. [48], explores using gaze behaviour to assess perceived password strength, aiming to help users select passwords resistant to guessing attacks. 
 We propose incorporating users' understanding of password strength into security mechanisms by analysing gaze patterns during password creation.
@@ -810,7 +812,7 @@ To evaluate user identification, gaze data from an educational VR application we
 Results demonstrate that all models achieved identification accuracies exceeding 98\% using only six simple gaze features. 
 The findings underscore the potential of eye-gaze–based identification in VR, while emphasizing its security and privacy implications and acknowledging the limitations of the current study.
 
-\subsection{Methods based on eye/gaze velocity}
+\section{Methods based on eye/gaze velocity}
 
 Bednarik et al. [62] investigated the potential of eye velocity as a distinguishing feature for biometric purposes.
 They considered left-eye, right-eye, and combined velocity signals.
@@ -885,7 +887,7 @@ Feature vectors were created for single points and sequences of three points.
 Two training/testing scenarios were tested: one with 75\% of randomly selected vectors and equal participant representation, and another using separate sessions for training and testing.
 Decision tree and random forest classifiers performed best, with random forest achieving up to 100\% accuracy in the first scenario, while performance dropped significantly in the second.
 
-\subsection{Methods based on pupil size}
+\section{Methods based on pupil size}
 
 Despite receiving relatively limited attention as a biometric trait, pupil size has emerged as a promising indicator for both identification and verification, as evidenced by several noteworthy investigations.
 
@@ -913,14 +915,14 @@ Participants were instructed to click as quickly as possible on red dots with wh
 Three experimental conditions were used: no prior instruction, textual guidance, and a visual preview of the dot locations. 
 In addition to pupil features, temporal and spatial eye-movement features were also considered. 
 Classification was performed using k-Nearest Neighbors (kNN) and Support Vector Machines. 
-Across the three experimental settings, equal error rates (EER) ranged from 3.98\% to 9.27\%, underscoring the value of combining pupil size with dynamic ocular features for reliable biometric identification.
+Across the three experimental settings, EER ranged from 3.98\% to 9.27\%, underscoring the value of combining pupil size with dynamic ocular features for reliable biometric identification.
 
 The following work, proposed by Casanova et al. [51], develops a web user identification model by analyzing behavioral biometrics from touch dynamics and periocular characteristics such as pupil movements, blinks, and fixations.
 A feature-level fusion approach is applied, combining different distance measures (Euclidean, Bray-Curtis, Manhattan, Canberra, Chebyshev, Cosine) to determine whether a test sample matches the target subject.
 Multi-data processing methods such as Canonical Correlation Analysis (CCA) and Principal Component Analysis (PCA) are used to further enhance performance.
 Results show that fusing these biometric traits significantly improves accuracy, achieving over 92\%, surpassing individual biometrics.
 
-\subsection{Methods based on oculomotor features}
+\section{Methods based on oculomotor features}
 
 Kasprowski and Ober [77] investigated the use of Cepstral analysis, the inverse Fourier transform of the logarithm of a signal's power spectrum, as a biometric feature.
 Eye movement data were collected with a 250 Hz tracker from nine participants instructed to follow a 3×3 jumping point stimulus, with each participant enrolled on 30 occasions. 
@@ -971,7 +973,7 @@ Blinking features included patterns, speed, acceleration, and power-per-unit-mas
 Each modality was evaluated individually, then combined in a multi-modal fusion. While single modalities showed moderate performance, fusion of static and dynamic features significantly improved results, achieving up to a 98.5\% recognition rate and 0\% error rate. 
 This demonstrates that, although single-modality approaches may lack robustness, multi-modal fusion offers high reliability for continuous driver authentication.
 
-\subsection{Methods based on head orientation}
+\section{Methods based on head orientation}
 
 Cazzato et al. [32] introduced an alternative to traditional eye trackers by employing the depth and RGB streams of the Microsoft Kinect sensor.
 Their approach did not aim to precisely determine the exact gaze point.
@@ -1005,7 +1007,7 @@ In the study by Wierzbowski et al. [86], involving 43 participants, the authors 
 Using deep learning and classical statistical methods, we achieved up to 75\% average identification accuracy, demonstrating the potential for VR user identification under unforced conditions.
 \newpage
 
-\section{Experiments}
+\chapter{Experiments}
 
 Considering the advantages offered by behavioral biometric approaches, this research aims to investigate their effectiveness in the context of a novel application.
 In particular the thesis will focus on a specific field of research in this discipline called Gaze-based biometric.
@@ -1022,7 +1024,7 @@ In contrast, previous studies proposed by Holland et al. [54] and Bednarik et al
 The objective of this research is to apply machine learning techniques to evaluate the performance, for identification and verification, of these kinds of stimuli and determine the most effective animation. 
 Although these prior studies have examined static text, we also conducted a preliminary experiment with static text to enable a direct comparison under the same experimental conditions.
 
-\subsection{Set up}
+\section{Set up}
 At the beginning, before starting the analysis, a phase was performed to collect the data and create the dataset.
 The data collection involved 35 participants, including 22 males and 13 females, the majority of whom were university students.
 Of the participants, 17 were aged 25 or younger, 13 were between 26 and 40 years old, and 4 were over 40. 
@@ -1084,7 +1086,7 @@ The participant was positioned approximately 50–60 cm from the monitor, with a
 
 \FloatBarrier
 
-\subsection{Stimuli}
+\section{Stimuli}
 \label{subsec:stimuli}
 
 Since the field of gaze-based biometrics using dynamic text is largely unexplored, it was challenging to determine which types of stimuli would be most suitable to select.
@@ -1104,7 +1106,7 @@ This animation offers a different motion pattern for gaze behavior analysis and 
 The previously mentioned animation types were further diversified to generate a total of eight distinct stimuli for the experiment. 
 Specifically, each animation type was implemented with two different font sizes (large and small) and two movement speeds (slow and fast), resulting in eight unique animation conditions to be tested.
 
-\subsubsection{Preliminary experiments}
+\subsection{Preliminary experiments}
 
 Preliminary experiments were carried out aimed at selecting appropriate text speed and size parameters. 
 To address this question, we conducted a brief exploratory study in the laboratory involving seven participants.
@@ -1198,7 +1200,7 @@ This decision was motivated by the desire to create a clear and perceptually mea
 Subsequently, we implemented these values in the experimental program and performed a qualitative verification of the resulting motion. 
 The observed scrolling speeds were found to be perceptually acceptable and consistent with the intended experimental design, providing confidence that the chosen parameters would yield reliable and interpretable results in subsequent testing.
 
-\subsubsection{Animations}
+\subsection{Animations}
 
 In the previous sub-section, we conducted a preliminary study to define the parameters of the experimental setup—specifically, the text speed and character size—ensuring that these values were selected based on empirical evidence rather than chosen arbitrarily. 
 This preparatory step was essential to establish a solid methodological foundation for the subsequent experiments. 
@@ -1319,7 +1321,7 @@ Figure \ref{fig:anims} provides a representation of the two types of animations 
 Each animation type was implemented at two distinct speeds and with two font sizes, resulting in a total of eight unique animation conditions.
 \FloatBarrier
 
-\subsection{Captured Eye Tracking Features}
+\section{Captured Eye Tracking Features}
 
 In the present study, the set of ocular features was recorded using the GazePoint GP3\_HD eye tracker, which outputs a wide range of parameters designed to characterize visual behavior with both spatial and physiological precision. 
 These features, according to [90], can be organized into several functional categories, namely fixation parameters, raw gaze coordinates, corneal reflection and pupil metrics, three-dimensional eye position, pupil dynamics, and blink-related measures. 
@@ -1368,7 +1370,7 @@ While some features directly represent visual exploration of stimuli (e.g., gaze
 The integration of these diverse signals is particularly valuable in a biometric context, as it enables the system to combine behavioral and physiological aspects of eye activity, thereby enhancing robustness, discriminative power, and resistance to spoofing.
 
 \newpage
-\subsection{Dataset creation}
+\section{Dataset creation}
 
 In this section, we describe the methodology employed to process the gaze-related features introduced in the previous chapter and transform them into the analytical features of the dataset. 
 It is important to note from the outset that the raw gaze coordinates along the x and y axes were not included as direct features. 
@@ -1377,7 +1379,7 @@ The aim is to design a system suitable for practical, everyday applications wher
 While this approach enhances usability and applicability in real-world scenarios, it comes at the cost of a slight reduction in the precision of gaze coordinate measurements.
 In this study, a total of 83 features were derived from the raw gaze and pupil data recorded by the GazePoint GP3\_HD eye tracker. 
 
-\subsubsection[Fixation-Based Features (f0–f10)]{Fixation-Based Features (\(f_0\)–\(f_{10}\))}
+\subsection[Fixation-Based Features (f0–f10)]{Fixation-Based Features (\(f_0\)–\(f_{10}\))}
 
 Fixations are periods during which the gaze remains relatively stable, enabling detailed visual processing of stimuli. 
 This group of features captures both the frequency and statistical properties of fixation durations.  
@@ -1401,7 +1403,7 @@ Statistical descriptors of these durations provide insights into attentional con
 \end{itemize}
 
 
-\subsubsection[Fixation Distance Features (f11–f20)]{Fixation Distance Features (\(f_{11}\)–\(f_{20}\))}
+\subsection[Fixation Distance Features (f11–f20)]{Fixation Distance Features (\(f_{11}\)–\(f_{20}\))}
 
 These features quantify spatial distances between consecutive fixations, characterizing gaze exploration and scanning behavior.  
 
@@ -1456,7 +1458,7 @@ This procedure yields a distribution of saccade speeds for each trial, summarize
     \item \(f_{30}\) — Kurtosis saccade speed: Peakedness or tail heaviness of the speed distribution.
 \end{itemize}
 
-\subsubsection[Scanpath Feature (f31)]{Scanpath Feature (\(f_{31}\))}
+\subsection[Scanpath Feature (f31)]{Scanpath Feature (\(f_{31}\))}
 
 The scanpath length provides a global measure of the total extent of visual exploration during a trial. 
 It is computed as the cumulative sum of Euclidean distances between consecutive fixation points, based on their normalized screen coordinates \(\mathrm{FPOGX}\) and \(\mathrm{FPOGY}\). 
@@ -1473,7 +1475,7 @@ where \(N\) is the total number of fixation points.
 \end{itemize}
 
 
-\subsubsection[Pupil Diameter Features (f32–f51)]{Pupil Diameter Features (\(f_{32}\)–\(f_{51}\))}
+\subsection[Pupil Diameter Features (f32–f51)]{Pupil Diameter Features (\(f_{32}\)–\(f_{51}\))}
 
 Pupil diameter is a physiological indicator influenced by luminance, cognitive load, and emotional state. 
 Values were extracted separately for the left and right eyes (\(\mathrm{LPD}\) and \(\mathrm{RPD}\)), including only valid samples (\(\mathrm{LPV} = 1\) or \(\mathrm{RPV} = 1\)). 
@@ -1492,7 +1494,7 @@ For each eye, pupil diameters across the trial were summarized using descriptive
     \item \(f_{41}, f_{51}\) — Kurtosis pupil diameter
 \end{itemize}
 
-\subsubsection[Pupil Diameter Ratio Features (f52–f61)]{Pupil Diameter Ratio Features (\(f_{52}\)–\(f_{61}\))}
+\subsection[Pupil Diameter Ratio Features (f52–f61)]{Pupil Diameter Ratio Features (\(f_{52}\)–\(f_{61}\))}
 
 The ratio between left and right pupil diameters (\(\mathrm{LPD}/\mathrm{RPD}\)) was computed using valid samples from both eyes (\(\mathrm{LPV} = 1\) and \(\mathrm{RPV} = 1\)). 
 Descriptive statistics summarize the distribution across the trial, yielding features \(f_{52n}\)--\(f_{61n}\).
@@ -1510,7 +1512,7 @@ Descriptive statistics summarize the distribution across the trial, yielding fea
     \item \(f_{61}\) — Kurtosis ratio
 \end{itemize}
 
-\subsubsection[Pupil Diameter Difference Features (f62–f70)]{Pupil Diameter Difference Features (\(f_{62}\)–\(f_{70}\))}
+\subsection[Pupil Diameter Difference Features (f62–f70)]{Pupil Diameter Difference Features (\(f_{62}\)–\(f_{70}\))}
 
 Direct differences between left and right pupil diameters were computed as \(D = \mathrm{LPD} - \mathrm{RPD}\), using only valid samples. 
 Descriptive statistics were then extracted, resulting in features \(f_{62n}\)--\(f_{70n}\). The geometric mean is excluded due to possible negative values.
@@ -1527,7 +1529,7 @@ Descriptive statistics were then extracted, resulting in features \(f_{62n}\)--\
     \item \(f_{70}\) — Kurtosis difference
 \end{itemize}
 
-\subsubsection[Blink Features (f71–f74)]{Blink Features (\(f_{71}\)–\(f_{74}\))}
+\subsection[Blink Features (f71–f74)]{Blink Features (\(f_{71}\)–\(f_{74}\))}
 
 Blink features were extracted from identifiers (\(\mathrm{BKID}\)) and durations (\(\mathrm{BKDUR}\)).
 
@@ -1538,7 +1540,7 @@ Blink features were extracted from identifiers (\(\mathrm{BKID}\)) and durations
     \item \(f_{74}\) — Maximum blink duration
 \end{itemize}
 
-\subsubsection[Directional Movement Features (f75–f82)]{Directional Movement Features (\(f_{75}\)–\(f_{82}\))}
+\subsection[Directional Movement Features (f75–f82)]{Directional Movement Features (\(f_{75}\)–\(f_{82}\))}
 
 Directional movements capture horizontal and vertical gaze displacements:
 
@@ -1555,7 +1557,7 @@ Directional movements capture horizontal and vertical gaze displacements:
 
 \newpage
 
-\section{Machine Learning Analysis}
+\chapter{Machine Learning Analysis}
 
 This section presents the machine learning analysis conducted on the collected data, which has been represented through the diverse set of features described in the previous section. 
 Given that the domain of behavioral biometrics based on dynamic text remains largely unexplored, our study also investigates the feasibility of performing user identification. 
@@ -1634,13 +1636,13 @@ The objective was to assess how the best-performing animation behaves when using
 
 Finally, we perform a comparative analysis between identification and verification using the full dataset, rather than single animations, in order to assess the performance differences between static and dynamic text under similar experimental conditions.
 
-\subsection{Identification}
+\section{Identification}
 The first analysis focuses on identification.
 In this case, a multiclass evaluation is performed to assess the application's performance in this domain. 
 Although this is not the final objective of the study, evaluating identification performance remains important, as previous applications have demonstrated promising results in this area.
 Furthermore, this analysis serves to identify the optimal combination of hyperparameters and to select the most relevant features, which will later be used in the subsequent verification phase.
 
-\subsubsection{Identification without feature selection}
+\subsection{Identification without feature selection}
 \label{subsec:id_fs_ch}
 
 We begin the identification analysis using the entire dataset, without distinguishing between different animations.
@@ -1688,7 +1690,7 @@ Moreover, the random split introduces a potential data leakage issue, as samples
 This overlap provides the model with indirect information about the test data, thereby inflating performance compared to the session split, where such leakage is avoided.
 \FloatBarrier
 
-\subsubsection{Identification with feature selection}
+\subsection{Identification with feature selection}
 
 We now proceed to perform the identification analysis with an additional step: feature selection.
 The overall procedure and implementation remain identical to those described in Appendix \ref{subsec:id_fs_ch}.
@@ -1795,7 +1797,7 @@ f61 & Kurtosis ratio between left and right pupil diameter & Pupil diameter rati
 \FloatBarrier
 
 
-\subsubsection{Identification with single animation - Single Train(ST)}
+\subsection{Identification with single animation - Single Train(ST)}
 \label{subsec:id_s_st}
 
 The main goal of this stage was to identify which animation performs best among the eight selected stimuli. 
@@ -1897,7 +1899,7 @@ Notably, the leaderboard is largely dominated by pupil size-related features, wh
 In contrast, the only two features that were never selected are Feature 30: Kurtosis of Saccade Speed and feature 61: kurtosis ratio between left and right pupil diameter, suggesting that there are not a particularly informative descriptors for the identification task.
 \FloatBarrier
 
-\subsubsection{Identification with single animation - Full Train(FT)}
+\subsection{Identification with single animation - Full Train(FT)}
 \label{subsec:id_s_ft}
 
 This type of analysis originates from previous research conducted at the University of Pavia [35], where a similar data split was employed. 
@@ -2013,7 +2015,7 @@ f79 & Number of movements in the ascending direction \\
 \end{table}
 \FloatBarrier
 
-\subsection{Verification single animation - ST type}
+\section{Verification single animation - ST type}
 \label{subsec:prima_ver}
 
 The following section presents the initial stage of the identification process.
@@ -2021,7 +2023,7 @@ As the overarching objective of this work is to employ the proposed soft biometr
 In particular, the first analysis comprises a series of experiments performed using single animations in conjunction with the Single-Trial (ST) variation mode.
 This configuration restricts both the training and testing phases to data derived exclusively from the same animation, thereby enabling an evaluation of the system's performance under animation-specific conditions.
 
-\subsubsection{Verification single animation - Single Train(ST)}
+\subsection{Verification single animation - Single Train(ST)}
 \label{subsec:vs_st}
 
 We now proceed to the verification analysis.
@@ -2065,10 +2067,10 @@ As in the training phase, the evaluation is carried out independently for each a
 The final performance for each user is obtained by testing the best-trained model on all twenty test sets and averaging the results.
 To obtain a general estimate of classifier performance, the results are then averaged across all users.
 
-In this analysis, the evaluation does not rely solely on accuracy but also considers other metrics that provide a more comprehensive view of model behavior, including precision, recall, specificity, and the Equal Error Rate (EER).
+In this analysis, the evaluation does not rely solely on accuracy but also considers other metrics that provide a more comprehensive view of model behavior, including precision, recall, specificity, and the Equal Error Rate.
 Precision quantifies the proportion of correctly identified genuine samples among all those predicted as genuine, while recall measures the proportion of genuine samples correctly recognized by the model.
 Specificity, on the other hand, indicates how effectively the system identifies impostor samples as non-genuine.
-Finally, the Equal Error Rate (EER) represents the point at which the false acceptance rate equals the false rejection rate, providing a single, balanced indicator of the system's verification performance.
+Finally, the Equal Error Rate represents the point at which the false acceptance rate equals the false rejection rate, providing a single, balanced indicator of the system's verification performance.
 
 \begin{figure}[ht]
     \centering
@@ -2078,7 +2080,7 @@ Finally, the Equal Error Rate (EER) represents the point at which the false acce
     \label{fig:VB_FA_BIG_st}
 \end{figure}
 
-Figure \ref{fig:VB_FA_BIG_st} illustrates that the best-performing animation, in terms of accuracy, is VB\_FA\_BIG, achieving an accuracy of 92.2\% with the Random Forest classifier and an Equal Error Rate (EER) of 3.6\%.
+Figure \ref{fig:VB_FA_BIG_st} illustrates that the best-performing animation, in terms of accuracy, is VB\_FA\_BIG, achieving an accuracy of 92.2\% with the Random Forest classifier and an EER of 3.6\%.
 
 \begin{figure}[ht]
     \centering
@@ -2088,22 +2090,22 @@ Figure \ref{fig:VB_FA_BIG_st} illustrates that the best-performing animation, in
     \label{fig:VB_FA_LIT_st}
 \end{figure}
 
-This animation is followed by VB\_FA\_SMA, which, as shown in Figure \ref{fig:VB_FA_LIT_st}, achieves an accuracy of 90.9\% using the SVC classifier and an Equal Error Rate (EER) of 4.7\%.
+This animation is followed by VB\_FA\_SMA, which, as shown in Figure \ref{fig:VB_FA_LIT_st}, achieves an accuracy of 90.9\% using the SVC classifier and an EER of 4.7\%.
 The rest of the animation results are contained in the Appendix \ref{subsec:vs_st_a}.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single/st/best_animation_roc_curves_st.png}
-    \caption{Roc curve}
+    \caption{ROC curve}
     \label{fig:roc_st}
 \end{figure}
 
-Figure \ref{fig:roc_st} presents the ROC curves for each individual animation, obtained using the best-performing classifier based on the Equal Error Rate (EER).
+Figure \ref{fig:roc_st} presents the ROC curves for each individual animation, obtained using the best-performing classifier based on the Equal Error Rate.
 For each curve and corresponding classifier, the Area Under the Curve (AUC) value is also reported in the legend as a performance indicator.
 \FloatBarrier
 
-\subsubsection{Verification single animation with intruders - Single Train(ST)}
+\subsection{Verification single animation with intruders - Single Train(ST)}
 \label{subsec:vsi}
 
 After completing the closed-set verification analysis for the single animation and Single Train (ST) configuration, we proceed to perform the open-set analysis.
@@ -2128,7 +2130,7 @@ In this analysis, the accuracy of each animation generally decreases compared to
 This unexpected behavior may be attributed to the choice of evaluating all test sets using the globally best-performing model.
 For this reason, an additional analysis employing the classic one-to-one training and testing approach will be conducted to enable a more direct comparison with the current results.
 In principle, we would expect the best-performing animation to remain consistent between the open-set and closed-set verification analyses.
-For VB\_SL\_SMA, accuracy increases from 85.9\% to 91.9\% when using the SVC classifier, while the Equal Error Rate (EER) decreases from 7.0\% to 6.1\%.
+For VB\_SL\_SMA, accuracy increases from 85.9\% to 91.9\% when using the SVC classifier, while the EER decreases from 7.0\% to 6.1\%.
 The corresponding results are illustrated in Figure \ref{fig:VB_SL_LIT_sti}.
 
 \begin{figure}[ht]
@@ -2139,7 +2141,7 @@ The corresponding results are illustrated in Figure \ref{fig:VB_SL_LIT_sti}.
     \label{fig:VB_SL_LIT_sti}
 \end{figure}
 
-The best-performing animation from the closed-set analysis, VB\_FA\_BIG, exhibits a decrease in accuracy from 92.2\% to 87.2\% when using the Random Forest classifier, while its Equal Error Rate (EER) increases from 3.6\% to 8.3\%.
+The best-performing animation from the closed-set analysis, VB\_FA\_BIG, exhibits a decrease in accuracy from 92.2\% to 87.2\% when using the Random Forest classifier, while its EER increases from 3.6\% to 8.3\%.
 
 \begin{figure}[ht]
     \centering
@@ -2150,7 +2152,7 @@ The best-performing animation from the closed-set analysis, VB\_FA\_BIG, exhibit
 \end{figure}
 
 Similarly, VB\_FA\_SMA, the second-best animation in terms of accuracy from the closed-set analysis, shows a slight decrease in accuracy from 90.9\% to 90.5\% when using the SVC classifier.
-At the same time, its Equal Error Rate (EER) improves, decreasing from 4.7\% to 3.3\%.
+At the same time, its EER improves, decreasing from 4.7\% to 3.3\%.
 
 \begin{figure}[ht]
     \centering
@@ -2161,18 +2163,18 @@ At the same time, its Equal Error Rate (EER) improves, decreasing from 4.7\% to 
 \end{figure}
 
 All the remaining results are reported in Appendix \ref{subsec:vs_sti_a}.
-To conclude the analysis Figure \ref{fig:roc_sti} illustrates the ROC curves corresponding to each animation, generated using the classifier that achieved the lowest Equal Error Rate (EER).
+To conclude the analysis Figure \ref{fig:roc_sti} illustrates the ROC curves corresponding to each animation, generated using the classifier that achieved the lowest EER.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single_intruders/st/best_animation_roc_curves_st.png}
-    \caption{Roc curve}
+    \caption{ROC curve}
     \label{fig:roc_sti}
 \end{figure}
 \FloatBarrier
 
-\subsubsection{Verification Single Animation with Reduced Session Duration - Single Train (ST)}
+\subsection{Verification Single Animation with Reduced Session Duration - Single Train (ST)}
 
 The goal of the following section is to extend the single-animation verification using the Single Train (ST) configuration in order to evaluate the performance of the best animation when the recording duration is reduced.
 In particular, the same program described in Section \ref{subsec:vs_st} is executed, with the only modification being the dataset composition.
@@ -2201,7 +2203,7 @@ In practice, if the animation duration is too long, users may lose focus or aban
 \end{figure}
 
 As expected, the best-performing animation remains VB\_FA\_BIG, consistent with the results obtained in the 15-second analysis.
-When considering only the first 10 seconds, its accuracy decreases slightly from 92.2\% to 90.2\% using the Random Forest classifier, while the Equal Error Rate (EER) increases from 3.6\% to 4.5\%.
+When considering only the first 10 seconds, its accuracy decreases slightly from 92.2\% to 90.2\% using the Random Forest classifier, while the EER increases from 3.6\% to 4.5\%.
 When the duration is further reduced to 5 seconds, accuracy drops to 88.8\%, and the EER rises to 6.8\%.
 
 These results are highly encouraging, as they demonstrate that the model maintains strong performance even with significantly shorter recording times.
@@ -2215,7 +2217,7 @@ The remaining results for the other animations are presented in Appendix \ref{su
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single_five_ten/st/ten/best_animation_roc_curves_ten_st.png}
-    \caption{Roc curve 10 seconds}
+    \caption{ROC  curve 10 seconds}
     \label{fig:roc_t}
 \end{figure}
 
@@ -2223,7 +2225,7 @@ The remaining results for the other animations are presented in Appendix \ref{su
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single_five_ten/st/five/best_animation_roc_curves_five_st.png}
-    \caption{Roc curve 5 seconds}
+    \caption{ROC  curve 5 seconds}
     \label{fig:roc_f}
 \end{figure}
 
@@ -2231,14 +2233,14 @@ To conclude this section, we present the two ROC curves based on the EER obtaine
 Specifically, Figures \ref{fig:roc_t} and \ref{fig:roc_f} correspond respectively to the 10-second and 5-second analyses.
 \FloatBarrier
 
-\subsection{Verification 'classic' single animation - ST type}
+\section{Verification 'classic' single animation - ST type}
 
 The following section presents the same analysis described in Section \ref{subsec:prima_ver}, with a minor modification in the evaluation procedure.
 In this case, rather than assessing the performance using the best-performing model across all conditions, the evaluation is carried out separately for each train-test pair within every seed.
 The rationale behind the previous approach, evaluating all configurations using the single best model, was to explore whether such a strategy could yield superior results.
 To provide a meaningful comparison, the results of this more conventional verification analysis are also included.
 
-\subsubsection{Verification single animation classic - single train(ST)}
+\subsection{Verification single animation classic - single train(ST)}
 \label{subsec:s_vs_cst}
 
 This and the following sections present the classic verification analysis performed on single animations.
@@ -2262,19 +2264,19 @@ When comparing the two analyses, the results are almost identical, with this con
 
 Table \ref{fig:VB_FA_BIG_cst} display the best performing animation, while the additional results regarding the other animations are contained in Appendix \ref{subsec:vsc_st_ft}.
 
-As in the previous chapter, this analysis includes the ROC curves for the best-performing animations, selected based on their Equal Error Rate (EER), as shown in figure \ref{fig:roc_cst}.
+As in the previous chapter, this analysis includes the ROC curves for the best-performing animations, selected based on their EER, as shown in figure \ref{fig:roc_cst}.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Classic_procedure/Verification_single/st/Verification_single_roc_classic_st.png}
-    \caption{Roc curves}
+    \caption{ROC  curves}
     \label{fig:roc_cst}
 \end{figure}
 \FloatBarrier
 
 
-\subsubsection{Verification 'classic' single animation with intruders - Single Train(ST)}
+\subsection{Verification 'classic' single animation with intruders - Single Train(ST)}
 
 To proceed, we performed the analysis with unseen users in the test set, referred to as intruders.
 Following the closed-set analysis, this intruder-based evaluation was carried out in the same way as in the previous section, with only minor updates to the evaluation procedure.
@@ -2290,7 +2292,7 @@ This continuity is particularly important, as it suggests that the anomalous beh
     \label{fig:VB_FA_BIG_cist}
 \end{figure}
 
-As we observe from figure \ref{fig:VB_FA_BIG_cist} we have a decrease in accuracy from 92.4\% to 91.2\% using nuSVC classifier and an increase of the equal error rate (EER) from 4.6\% to 6.2\%.
+As we observe from figure \ref{fig:VB_FA_BIG_cist} we have a decrease in accuracy from 92.4\% to 91.2\% using nuSVC classifier and an increase of the EER from 4.6\% to 6.2\%.
 This behavior is expected due to the presence of unseen users in the dataset.
 However, the performance decrease remains relatively small, indicating that the system continues to perform effectively even under this more challenging evaluation scenario.
 
@@ -2303,28 +2305,28 @@ In practical scenarios, it is advantageous to maintain a single animation that p
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/Verification_single_intruders_roc_two_st.png}
-    \caption{Roc curves}
+    \caption{ROC  curves}
     \label{fig:roc_cist}
 \end{figure}
 
-To maintain consistency with the previous analyses, the ROC curve based on the Equal Error Rate (EER) is presented in Figure \ref{fig:roc_cist}. 
+To maintain consistency with the previous analyses, the ROC curve based on the Equal Error Rate is presented in Figure \ref{fig:roc_cist}. 
 Additional results related to this analysis are provided in the corresponding appendix (Appendix \ref{subsec:vsci_st_ft}).
 \FloatBarrier
 
-\subsubsection{Verification 'classic' Single Animation with Reduced Session Duration - Single Train (ST)}
+\subsection{Verification 'classic' Single Animation with Reduced Session Duration - Single Train (ST)}
 
 We conclude this analysis in the same manner as in the previous subsection, by conducting a reduced animation time evaluation. 
 Specifically, we examine how the results change when reducing the total duration from 15 seconds to 10 seconds, and then to 5 seconds.
 
 The results remain consistent with our expectations, with VB\_FA\_BIG maintaining its position as the best-performing animation based on the accuracy score. 
 Notably, its performance declines only slightly, from 92.4\% to 91.5\% using nuSVC, when the recording time is reduced to 10 seconds. 
-Concurrently, its equal error rate (EER) increases modestly from 4.6\% to 5.3\%.
+Concurrently, its EER increases modestly from 4.6\% to 5.3\%.
 
 If recordings are limited to only the first 5 seconds of data, performance further decreases to 90.8\%, and the EER rises to 8\%. 
 These findings indicate a trade-off between recording duration and system performance, with relatively minor degradation for shorter recordings.
 
 The best performed animation resulst are collected in figures \ref{fig:VB_FA_BIG_cst_10} and \ref{fig:VB_FA_BIG_cst_5}.
-While the roc curves of this analysis are presented in figures \ref{fig:roc_cst_10} and \ref{fig:roc_cst_5}.
+While the ROC  curves of this analysis are presented in figures \ref{fig:roc_cst_10} and \ref{fig:roc_cst_5}.
 All the additional material related to this type of analysi are placed in the Appendix \ref{subsec:vsc_rt}.
 
 \begin{figure}[ht]
@@ -2347,7 +2349,7 @@ All the additional material related to this type of analysi are placed in the Ap
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/Verification_single_roc_classic_ten_st.png}
-    \caption{Roc curves - 10 seconds}
+    \caption{ROC  curves - 10 seconds}
     \label{fig:roc_cst_10}
 \end{figure}
 
@@ -2355,7 +2357,7 @@ All the additional material related to this type of analysi are placed in the Ap
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Classic_procedure/five_ten/st/five/Verification_single_roc_classic_five_st.png}
-    \caption{Roc curves - 10 seconds}
+    \caption{ROC  curves - 10 seconds}
     \label{fig:roc_cst_5}
 \end{figure}
 
@@ -2371,7 +2373,7 @@ In particular, if time constraints are not critical, or if recordings of up to t
 Conversely, for five-second recordings, the preferred method depends on whether the application favours accuracy or robustness against errors.
 \FloatBarrier
 
-\subsection{Verification single animation - FT}
+\section{Verification single animation - FT}
 \label{subsec:terza_ver}
 
 We now move to the third part of the verification analysis.
@@ -2380,7 +2382,7 @@ The objective is to evaluate whether increasing the amount of training data can 
 The following analysis serves as the counterpart to the experiment described in Section \ref{subsec:prima_ver}. 
 Its purpose is to provide a direct and systematic comparison between the two methodologies, allowing for a clearer evaluation of their respective performance and consistency.
 
-\subsubsection{Verification single animation - Full Train(FT)}
+\subsection{Verification single animation - Full Train(FT)}
 \label{subsec:vft}
 
 As previously stated, the main objective of this work is to identify the animation that achieves the best verification performance. 
@@ -2406,7 +2408,7 @@ Finally, an additional averaging step across all users is performed to derive th
 
 The evaluation of the models is not limited to classification accuracy. 
 To offer a more complete assessment of system performance, several additional metrics are reported. 
-These include precision, recall, specificity, and the Equal Error Rate (EER), each providing distinct insights into the model's behavior.
+These include precision, recall, specificity, and the EER, each providing distinct insights into the model's behavior.
 
 \begin{figure}[ht]
     \centering
@@ -2415,7 +2417,7 @@ These include precision, recall, specificity, and the Equal Error Rate (EER), ea
     \label{fig:VB_FA_LIT_ft}
 \end{figure}
 
-Figure \ref{fig:VB_FA_LIT_ft} illustrates that the best-performing animation, in terms of accuracy, is VB\_FA\_SMA, achieving an accuracy of 92.6\% with the SVC classifier and an Equal Error Rate (EER) of 4\%.
+Figure \ref{fig:VB_FA_LIT_ft} illustrates that the best-performing animation, in terms of accuracy, is VB\_FA\_SMA, achieving an accuracy of 92.6\% with the SVC classifier and an EER of 4\%.
 
 \begin{figure}[ht]
     \centering
@@ -2426,18 +2428,18 @@ Figure \ref{fig:VB_FA_LIT_ft} illustrates that the best-performing animation, in
 \end{figure}
 
 The next best-performing animation is VB\_FA\_BIG. 
-As illustrated in Figure \ref{fig:VB_FA_BIG_ft}, it attains an accuracy of 90.2\% with the SVC classifier and an Equal Error Rate (EER) of 7.3\%. 
+As illustrated in Figure \ref{fig:VB_FA_BIG_ft}, it attains an accuracy of 90.2\% with the SVC classifier and an EER of 7.3\%. 
 Results for the remaining animations are provided in Appendix \ref{subsec:vs_ft}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single/ft/best_animation_roc_curves_ft.png}
-    \caption{Roc curve}
+    \caption{ROC  curve}
     \label{fig:roc_ft}
 \end{figure}
 
-Figure \ref{fig:roc_ft} shows the ROC curves for each animation, generated using the classifier that achieved the lowest Equal Error Rate (EER). 
+Figure \ref{fig:roc_ft} shows the ROC curves for each animation, generated using the classifier that achieved the lowest Equal Error Rate. 
 The legend for each curve also includes the corresponding Area Under the Curve (AUC) value, serving as an additional measure of performance.
 
 To conclude this section, we present a comparison between the results obtained here and those discussed in Section \ref{subsec:vs_st}. 
@@ -2446,13 +2448,13 @@ Nevertheless, the overall results are quite close, with differences of less than
 
 When comparing the best-performing animations from each analysis, the VB\_FA\_SMA animation in this study achieves higher accuracy than the VB\_FA\_BIG animation from the previous analysis. 
 Specifically, the Support Vector Classifier (SVC) yields an accuracy of 92.6\%, compared to 92.2\% obtained with the Random Forest classifier. 
-However, the Equal Error Rate (EER) increases slightly in this analysis—from 3.6\% in the previous section to 4\%.
+However, the EER increases slightly in this analysis—from 3.6\% in the previous section to 4\%.
 
 Therefore, the choice between the two approaches depends on whether higher accuracy or greater security is prioritized for the intended implementation. 
 It is also important to note that the present analysis requires data collection over three different sessions, covering eight animations of 15 seconds each, whereas the previous analysis used only a single animation for model training.
 \FloatBarrier
 
-\subsubsection{Verification single animation with intruders - Full Train(FT)}
+\subsection{Verification single animation with intruders - Full Train(FT)}
 \label{subsec:intruders}
 
 Following the completion of the closed-set verification analysis for the single animation and Full Train (FT) configuration, we next conduct the open-set analysis. 
@@ -2482,7 +2484,7 @@ Then, we calculate the overall average across all users to determine the general
 \end{figure}
 
 Figure \ref{fig:VB_FA_LIT_fti} shows that the VB\_FA\_SMA animation yields the highest accuracy among all tested cases, reaching 90.2\% when using the SVC classifier. 
-The corresponding Equal Error Rate (EER) for this configuration is 7.2\%.
+The corresponding EER for this configuration is 7.2\%.
 
 \begin{figure}[ht]
     \centering
@@ -2493,21 +2495,21 @@ The corresponding Equal Error Rate (EER) for this configuration is 7.2\%.
 \end{figure}
 
 The second-best performance is obtained with the VB\_FA\_BIG animation. 
-As shown in Figure \ref{fig:VB_FA_BIG_fti}, this configuration achieves an accuracy of 87.9\% when using the SVC classifier, along with an Equal Error Rate (EER) of 10.1\%. 
+As shown in Figure \ref{fig:VB_FA_BIG_fti}, this configuration achieves an accuracy of 87.9\% when using the SVC classifier, along with an EER of 10.1\%. 
 The results for the other animations are reported in Appendix \ref{subsec:vsi_ft}.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single_intruders/ft/best_animation_roc_curves_ft.png}
-    \caption{Roc curve}
+    \caption{ROC  curve}
     \label{fig:roc_fti}
 \end{figure}
 
-Figure \ref{fig:roc_fti} display the roc curves obtained from the analysis.
+Figure \ref{fig:roc_fti} display the ROC  curves obtained from the analysis.
 
 When comparing these results with those obtained in the corresponding analysis including intruders, the best-performing animation remains VB\_FA\_SMA. 
-In the open-set configuration, its accuracy decreases from 92.6\% to 90.2\% using the SVC classifier, while the Equal Error Rate (EER) rises from 4\% to 7.2\%. 
+In the open-set configuration, its accuracy decreases from 92.6\% to 90.2\% using the SVC classifier, while the EER rises from 4\% to 7.2\%. 
 This performance drop is expected due to the introduction of previously unseen users. 
 Nonetheless, the model continues to demonstrate strong performance, maintaining an accuracy above 90\%.
 
@@ -2516,7 +2518,7 @@ However, considering the top-performing animations, the single-train (ST) config
 Specifically, the ST setup attains an accuracy of 91.2\% compared to 90.2\% using the SVC classifier, and also exhibits a lower EER of 6.1\% versus 7.2\% in the current analysis.
 \FloatBarrier
 
-\subsubsection{Verification Single Animation with Reduced Session Duration - Full Train (FT)}
+\subsection{Verification Single Animation with Reduced Session Duration - Full Train (FT)}
 
 The purpose of the following section is to extend the single-animation verification using the full-train (FT) configuration, with the aim of assessing how the system’s performance varies when the recording duration is shortened. 
 Specifically, the same procedure described in Section \ref{subsec:vft} is applied, with the only change being the composition of the dataset.
@@ -2548,7 +2550,7 @@ In real-world scenarios, excessively long animations may lead to a loss of user 
 In this section, the focus is on evaluating how the performance of the best-performing animation changes as the recording duration is progressively reduced. 
 As anticipated, VB\_FA\_SMA continues to be the top-performing animation, confirming the findings from the 15-second analysis.
 
-When the recording time is limited to the first 10 seconds, accuracy shows a slight decrease from 92.6\% to 91.9\% with the SVC classifier, while the Equal Error Rate (EER) increases from 4\% to 6.3\%. 
+When the recording time is limited to the first 10 seconds, accuracy shows a slight decrease from 92.6\% to 91.9\% with the SVC classifier, while the EER increases from 4\% to 6.3\%. 
 Further shortening the duration to 5 seconds results in an accuracy of 88.2\% using the nuSVC classifier and an EER of 7.2\%.
 
 These outcomes are highly promising, as they indicate that the model preserves robust performance even under substantially shorter acquisition times. 
@@ -2561,7 +2563,7 @@ The remaining results for the other animations are presented in Appendix \ref{su
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single_five_ten/ft/five/best_animation_roc_curves_five_ft.png}
-    \caption{Roc curve 10 seconds}
+    \caption{ROC  curve 10 seconds}
     \label{fig:roc_t_ft}
 \end{figure}
 
@@ -2569,7 +2571,7 @@ The remaining results for the other animations are presented in Appendix \ref{su
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single_five_ten/ft/five/best_animation_roc_curves_five_ft.png}
-    \caption{Roc curve 5 seconds}
+    \caption{ROC  curve 5 seconds}
     \label{fig:roc_f_ft}
 \end{figure}
 
@@ -2590,7 +2592,7 @@ While if higher accuracy is the main objective, the FT configuration should be c
 Overall, for the 5-second recordings, the ST configuration consistently outperforms the FT one across all scenarios.
 \FloatBarrier
 
-\subsection{Verification ’classic’ single animation - FT type}
+\section{Verification ’classic’ single animation - FT type}
 
 The following section presents an analysis analogous to that described in Section \ref{subsec:terza_ver}, with a slight modification to the evaluation procedure.
 In this case, the performance is not assessed using a single best-performing model across all conditions. 
@@ -2599,7 +2601,7 @@ The motivation behind the previous approach, evaluating all configurations using
 To enable a fair and consistent comparison, the results of this more traditional verification procedure are also reported here.
 Finally, it is important to note that this section concludes the verification analysis presented in this work.
 
-\subsubsection{Verification single animation classic - Full Train(FT)}
+\subsection{Verification single animation classic - Full Train(FT)}
 
 This section, along with the next, presents the 'classic' verification analysis conducted on single animations.
 The term classic refers to the fact that this analysis differs from the previous approach, where the evaluation was performed using a single best-performing model.
@@ -2612,7 +2614,7 @@ This analysis thus serves as a direct counterpart to the one discussed previousl
 Consequently, the methodological details remain unchanged and will not be restated. 
 The focus instead is on examining the obtained results and comparing them with those from the previous setup to determine which approach yields more stable and effective performance.
 
-As in the preceding analysis, the best-performing animation continues to be VB\_FA\_SMA, attaining an accuracy of 92.4\% with the NuSVC classifier and an Equal Error Rate (EER) of 5\%.
+As in the preceding analysis, the best-performing animation continues to be VB\_FA\_SMA, attaining an accuracy of 92.4\% with the NuSVC classifier and an EER of 5\%.
 
 \begin{figure}[ht]
     \centering
@@ -2623,20 +2625,20 @@ As in the preceding analysis, the best-performing animation continues to be VB\_
 \end{figure}
 
 Table \ref{fig:VB_FA_LIT_cft} presents the best-performing animation, while the additional results for the remaining animations are provided in Appendix \ref{subsec:vsc_ft}.
-The current analysis also includes the ROC curves of the best-performing animations, selected according to their Equal Error Rate (EER), as shown in Figure \ref{fig:roc_cft}.
+The current analysis also includes the ROC curves of the best-performing animations, selected according to their Equal Error Rate, as shown in Figure \ref{fig:roc_cft}.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Classic_procedure/Verification_single/ft/Verification_single_roc_classic_ft.png}
-    \caption{Roc curves}
+    \caption{ROC  curves}
     \label{fig:roc_cft}
 \end{figure}
 
 When compared to the previous approach (Section \ref{subsec:vft}), which achieved an accuracy of 92.6\% with the SVC classifier and an EER of 4\% on the same animation, the current method shows slightly lower performance in both accuracy and EER.
 \FloatBarrier
 
-\subsubsection{Verification 'classic' single animation with intruders - Full Train (FT)}
+\subsection{Verification 'classic' single animation with intruders - Full Train (FT)}
 
 To proceed, we conducted the analysis using unseen users in the test set, referred to as intruders. 
 This evaluation follows the closed-set analysis and was performed in the same manner as described in the previous section, with only minor adjustments to the evaluation procedure.
@@ -2652,7 +2654,7 @@ The first notable observation is that the best-performing animation remains the 
 \end{figure}
 
 As shown in Figure \ref{fig:VB_FA_LIT_cift}, the accuracy decreases from 92.4\% using nuSVC to 89.2\% when using the SVC classifier.
-While the Equal Error Rate (EER) increases from 5\% to 8.2\%. 
+While the EER increases from 5\% to 8.2\%. 
 This reduction in performance is expected due to the introduction of unseen users in the test set. 
 Nevertheless, the drop remains relatively modest, indicating that the system continues to operate effectively under this more challenging evaluation scenario.
 
@@ -2667,23 +2669,23 @@ In conclusion the analysis that evaluate only on the 'best model' achieve better
 \label{fig:roc_cift}
 \end{figure}
 
-For consistency with previous analyses, the ROC curves based on the Equal Error Rate (EER) are presented in Figure \ref{fig:roc_cift}. 
+For consistency with previous analyses, the ROC curves based on the Equal Error Rate are presented in Figure \ref{fig:roc_cift}. 
 Additional results for this evaluation can be found in the corresponding appendix (Appendix \ref{subsec:vsci_ft}).
 \FloatBarrier
 
-\subsubsection{Verification 'classic' Single Animation with Reduced Session Duration - Full Train (FT)}
+\subsection{Verification 'classic' Single Animation with Reduced Session Duration - Full Train (FT)}
 
 We conclude this analysis by performing a reduced-duration evaluation, following the approach used in the previous subsection. 
 Specifically, we assess how performance changes when the total animation length is shortened from 15 seconds to 10 seconds, and subsequently to 5 seconds.
 
 The results align with our expectations, with VB\_FA\_SMA remaining the best-performing animation in terms of accuracy. 
 Interestingly, its accuracy slightly increases from 92.4\% with nuSVC to 92.7\% with SVC when the recording duration is reduced to 10 seconds. 
-Conversely, its Equal Error Rate (EER) rises modestly from 5\% to 5.4\%. 
+Conversely, its EER rises modestly from 5\% to 5.4\%. 
 This suggests that the additional seconds in the longer recording may introduce some noise, slightly affecting the EER, while the accuracy benefits from the initial portion of the animation. 
 It is likely that after the first ten seconds, the animation scrolls too quickly for the user to follow effectively, providing limited useful information. 
 In contrast, for 15-second recordings, the EER decreases due to the availability of more data, which improves the system’s discriminative power.
 
-When recordings are limited to the first 5 seconds, performance decreases to 90.6\%, and the Equal Error Rate (EER) rises to 6.4\%. 
+When recordings are limited to the first 5 seconds, performance decreases to 90.6\%, and the EER rises to 6.4\%. 
 These results highlight a trade-off between recording duration and system performance, with only a modest degradation observed for shorter recordings.
 
 The best-performing animations for the 10- and 5-second conditions are illustrated in Figures \ref{fig:VB_FA_LIT_cft_10} and \ref{fig:VB_FA_LIT_cft_5}, respectively. 
@@ -2710,7 +2712,7 @@ Additional results and supporting material for this analysis are provided in the
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Classic_procedure/five_ten/ft/ten/Verification_single_roc_ten_classic_ft.png}
-    \caption{Roc curves - 10 seconds}
+    \caption{ROC  curves - 10 seconds}
     \label{fig:roc_cft_10}
 \end{figure}
 
@@ -2718,21 +2720,21 @@ Additional results and supporting material for this analysis are provided in the
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Classic_procedure/five_ten/ft/five/Verification_single_roc_five_classic_ft.png}
-    \caption{Roc curves - 10 seconds}
+    \caption{ROC  curves - 10 seconds}
     \label{fig:roc_cft_5}
 \end{figure}
 
 To conclude this section, we compare the results of the current analysis with those from the previous section, performed under the same reduced time conditions.
 For the ten-second recordings, the current procedure slightly outperforms the previous one, achieving an accuracy of 92.7\% compared to 91.9\% obtained using SVC. 
-The Equal Error Rate (EER) also improves, decreasing from 6.3\% to 5.4\%.
+The EER also improves, decreasing from 6.3\% to 5.4\%.
 
 For the five-second recordings, a similar trend is observed. 
-The current analysis reaches a higher accuracy of 90.6\%, compared to 88.2\% in the previous evaluation, while the Equal Error Rate (EER) decreases from 7.2\% to 6.4\%.
+The current analysis reaches a higher accuracy of 90.6\%, compared to 88.2\% in the previous evaluation, while the EER decreases from 7.2\% to 6.4\%.
 In summary, this evaluation generally surpasses the previous approach in all aspects, demonstrating better performance across both accuracy and EER.
 
 \FloatBarrier
 
-\subsection{Static vs Dinamic text}
+\section{Static vs Dinamic text}
 \label{subsec:s_vs_d}
 
 The final part of the machine learning analysis presents a direct comparison between static and dynamic text under comparable experimental conditions.
@@ -2858,7 +2860,7 @@ In this case, the training set consists of the data from the first two sessions 
 The test set includes the data of the third session (S3) of the genuine user and an equal amount of S3 data from impostors.
 The model is then evaluated on this configuration, and the results provide the average performance under this type of split.
 
-For this analysis, in addition to accuracy, precision, recall, specificity, and Equal Error Rate (EER) are also reported to provide a comprehensive evaluation of system performance.
+For this analysis, in addition to accuracy, precision, recall, specificity, and Equal Error Rate are also reported to provide a comprehensive evaluation of system performance.
 
 \begin{figure}[ht]
     \centering
@@ -2878,7 +2880,7 @@ For this analysis, in addition to accuracy, precision, recall, specificity, and 
 
 The results of the verification analysis for dynamic and static text are presented in Table \ref{fig:ver_dyn} and Table \ref{fig:ver_stat}, respectively.
 As shown, under the random split, the static text stimuli achieve slightly better performance, reaching an accuracy of 93.59\% with the Random Forest classifier, compared to 92.5\% for the dynamic text. 
-The Equal Error Rate (EER) follows the same trend, with the static text achieving 2.81\% versus 6.36\% for the dynamic variation.
+The Equal Error Rate follows the same trend, with the static text achieving 2.81\% versus 6.36\% for the dynamic variation.
 
 When examining the session split, we observe that the same property highlighted earlier still holds.
 Namely, the performance difference between random and session splits remains relatively small.
@@ -2892,8 +2894,7 @@ Therefore, a behavioral biometric system based on dynamic text is more appropria
 
 \FloatBarrier
 
-
-\section{Conclusion}
+\chapter{Conclusion}
 
 The present thesis aimed to investigate an unexplored soft biometric stimulus based on dynamic text. 
 To achieve this goal, two types of animations were designed: the Vertical Block Scroll (VB) and the Horizontal Scroll (HS), each implemented with two different scrolling speeds and two font sizes.
@@ -2915,14 +2916,14 @@ To ensure a thorough understanding of the system behavior, the verification stud
 For each of these settings, additional analyses were conducted under closed-set and open-set conditions, as well as with reduced recording durations of ten and five seconds.
 
 It is important to note that the FT configuration, although more computationally demanding, integrates all animations in the training phase, while the ST configuration relies on a single animation. 
-Across all analyses, the best closed-set verification performance was obtained using the VB\_FA\_SMA animation under the FT configuration and best-model evaluation procedure, achieving an accuracy of 92.6\% and an Equal Error Rate (EER) of 4\%. 
+Across all analyses, the best closed-set verification performance was obtained using the VB\_FA\_SMA animation under the FT configuration and best-model evaluation procedure, achieving an accuracy of 92.6\% and an EER of 4\%. 
 Conversely, the lowest EER was observed during the ST analysis with best-model evaluation, where the VB\_FA\_BIG animation reached an EER of 3.6\% and an accuracy of 92.2\% using the Random Forest classifier.
 These results collectively demonstrate the robustness and reliability of the proposed approach. 
 The experiments confirm that dynamic text stimuli can achieve both high accuracy and low error rates, making them a promising candidate for behavioral biometric verification systems. 
 Depending on the specific application requirements, different configurations may be preferred: the VB\_FA\_SMA animation proves optimal when maximizing overall accuracy is the main objective, while the VB\_FA\_BIG animation is more suitable when minimizing the error rate is of primary concern.
 
 In the open-set verification analysis, the highest accuracy was obtained using the Single Train (ST) configuration with the best-model evaluation strategy. 
-Under this setup, the system achieved an accuracy of 91.9\% with the SVC classifier and an Equal Error Rate (EER) of 6.1\%. 
+Under this setup, the system achieved an accuracy of 91.9\% with the SVC classifier and an EER of 6.1\%. 
 The lowest EER within the same analysis was also achieved under identical conditions and using the same animation. 
 Specifically, the NuSVC classifier reached an EER of 5.1\%, maintaining a high accuracy of 91.2\%.
 
@@ -2937,7 +2938,7 @@ Finally, a comparative analysis was conducted between dynamic and static text st
 From this evaluation, two key observations emerged.
 First, the performance drop between the random split and session split was found to be minimal, and in some cases even negligible, when using dynamic text stimuli.
 This indicates that dynamic text maintains a consistent level of performance even when evaluated across different sessions, a valuable property for real-world biometric applications.
-Second, the Equal Error Rate (EER) consistently remained lower for static text stimuli compared to their dynamic counterparts, suggesting that static text provides a slightly stronger level of security and discrimination.
+Second, the Equal Error Rate consistently remained lower for static text stimuli compared to their dynamic counterparts, suggesting that static text provides a slightly stronger level of security and discrimination.
 
 In terms of quantitative results, the best performance for dynamic text in the verification task was obtained using the MLP classifier, achieving an accuracy of 92.19\% with an EER of 6.77\%.
 Conversely, the static text stimuli reached an accuracy of 87.5\%, also using MLP, but with a lower EER of 4.17\%.
@@ -2949,13 +2950,11 @@ In conclusion, the findings of this work demonstrate that dynamic text animation
 
 \newpage
 
-\section{References}
+\chapter*{References}
+\addcontentsline{toc}{chapter}{References}
 \begin{raggedright}
 
-\section*{References}
-
 \textit{Note: All web pages and online resources cited above were available and accessible as of October 14, 2025.}
-
 
 [1] Statista. (2023). Number of smartphone mobile network subscriptions worldwide from 2016 to 2023, with forecasts from 2023 to 2028. \url{https://www.statista.com/statistics/330695/number-of-smartphone-users-worldwide/}
 
@@ -2963,7 +2962,7 @@ In conclusion, the findings of this work demonstrate that dynamic text animation
 
 [3] NEC Corporation. (2021). NIST study shows computerized fingerprint matching is highly accurate. \url{https://www.nec.com/en/press/202109/global_20210922_02.html#:~:text=In%20this%20benchmark%20test%2C%20the,a%20million%20people%20(*2).}
 
-[4] Wang, L., \& Geng, X. (2009). \textit{Behavioral Biometrics for Human Identification: Intelligent Applications.} University of Melbourne, Australia; Southeast University, China.
+[4] Wang, L., \& Geng, X. (2009). \textit{Behavioral Biometrics for Human Identification: Intelligent Applications.} University of Melbourne, Australia; Southeast University, China. IGI Global.
 
 [5] Al-Zubi, S., Brömme, A., \& Tönnies, K. (2003, September 10–12). Using an active shape structural model for biometric sketch recognition. In \textit{Proceedings of the DAGM Conference} (pp. 187–195). Magdeburg, Germany.
 
@@ -3104,6 +3103,7 @@ In conclusion, the findings of this work demonstrate that dynamic text animation
 [73] Srivastava, N., Agrawal, U., Roy, S. K., \& Tiwary, U. S. (2015). Human identification using linear multiclass SVM and eye movement biometrics. In \textit{2015 Eighth International Conference on Contemporary Computing (IC3)}, 365–369.
 
 [74] Eberz, S., Rasmussen, K. B., Lenders, V., \& Martinovic, I. (2015). Preventing lunchtime attacks: fighting insider threats with eye movement biometrics. In \textit{2015 Network and Distributed System Security (NDSS) Symposium}.
+
 [75] Nugrahaningsih, N., \& Porta, M. (2014). Pupil size as a biometric trait. In V. Cantoni et al. (Eds.), \textit{Biometric Authentication, Lecture Notes in Computer Science}, Springer, 222–233.
 
 [76] Eberz, S., Rasmussen, K. B., Lenders, V., \& Martinovic, I. (2015). Preventing lunchtime attacks: fighting insider threats with eye movement biometrics. In \textit{2015 NDSS Symposium}.
@@ -3140,7 +3140,7 @@ In conclusion, the findings of this work demonstrate that dynamic text animation
 
 [92] Naive Bayes. (2025). \url{https://scikit-learn.org/stable/modules/naive_bayes.html}
 
-[93] Müller, A. C., Guido, S. (2016). Introduction to Machine Learning with Python: A Guide for Data Scientists. O'Reilly Media. \url{https://www.nrigroupindia.com/e-book/Introduction%20to%20Machine%20Learning%20with%20Python%20(%20PDFDrive.com%20)-min.pdf}.
+[93] Müller, A. C., \& Guido, S. (2016). \textit{Introduction to Machine Learning with Python: A Guide for Data Scientists.} Sebastopol, CA: O'Reilly Media.
 
 [94] KNeighborsClassifier. (2025). \url{https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html}
 
@@ -3192,13 +3192,14 @@ In conclusion, the findings of this work demonstrate that dynamic text animation
 \clearpage
 
 \appendix
-\section{Appendix A — Parameter Grids and Feature Selection}
+\chapter{Parameter Grids and Feature Selection}
 \label{subsec:param}
+
 
 This appendix includes supplementary materials that could not be accommodated within the main chapters due to their length and level of detail. 
 Specifically, it provides a subsection presenting the complete parameter grid used during hyperparameter tuning, listing all parameters explored for each classifier. 
 
-\subsection{Parameter grid}
+\section{Parameter grid}
 For every \texttt{GridSearchCV} execution, the cross-validation parameter was set to \texttt{cv = 5}, applying a 5-fold cross-validation procedure.
 The evaluation metric was defined as \texttt{scoring = 'accuracy'} to optimize the models based on classification accuracy.
 Figure \ref{fig:pg_nofs} displays the full parameter grid used whenever hyperparameter tuning was performed without applying a feature selection step.
@@ -3223,7 +3224,7 @@ Conversely, Figure \ref{fig:pg_nofs} presents the parameter grid that includes t
 
 \FloatBarrier
 
-\subsection{Identification with Feature Selection — Best k Features}
+\section{Identification with Feature Selection — Best k Features}
 \label{subsec:id_fs_k}
 
 The following section presents the optimal number of features ($k$) selected for each classifier during the identification phase with feature selection.
@@ -3236,7 +3237,7 @@ Due to their extensive length, these results are available in the online reposit
 \end{itemize}
 \FloatBarrier
 
-\subsection{Identification Single ST — Best k Features}
+\section{Identification Single ST — Best k Features}
 
 This section presents the best $k$ features selected during the feature selection stage of the single-animation ST identification analysis.
 The number of selected features varies for each combination of classifier, animation name, and data split. 
@@ -3252,7 +3253,7 @@ Because the results are too detailed to fit in this document, a link to the full
 \end{itemize}
 \FloatBarrier
 
-\subsection{Identification Single FT — Best k Features}
+\section{Identification Single FT — Best k Features}
 \label{subsec:topk_ft}
 
 This section reports the optimal $k$ features identified during the feature selection phase of the Full Train (FT) identification analysis.
@@ -3269,13 +3270,13 @@ The complete list is available online via the following links:
 \end{itemize}
 \FloatBarrier
 
-\section{Verification Appendix – Additional Results}
+\chapter{Full results}
 
 The following appendix presents additional results that were omitted from the main chapter due to space limitations. 
 In particular, it includes a set of tables reporting the results for the remaining animations that were not discussed in the corresponding section.
 
 %--------------------------------------------------------
-\subsection{Verification Single ST – Animations}
+\section{Verification Single ST – Animations}
 \label{subsec:vs_st_a}
 
 This section presents the additional results of the verification analysis conducted on individual animations using the Single Train (ST) configuration.
@@ -3313,7 +3314,7 @@ This section presents the additional results of the verification analysis conduc
 \FloatBarrier
 
 %--------------------------------------------------------
-\subsection{Verification Single Intruders ST – Animations}
+\section{Verification Single Intruders ST – Animations}
 \label{subsec:vs_sti_a}
 
 This section presents the additional results of the verification analysis with intruders, conducted on individual animations using the Single Train (ST) configuration.
@@ -3347,7 +3348,7 @@ This section presents the additional results of the verification analysis with i
 \FloatBarrier
 
 %--------------------------------------------------------
-\subsection{Verification Single ST with Reduced Session Duration – Animations}
+\section{Verification Single ST with Reduced Session Duration – Animations}
 \label{subsec:vs_st_ft}
 
 This appendix presents the results for all animations under reduced recording durations of 10 and 5 seconds. Results for 10 seconds are shown first, followed by 5 seconds.
@@ -3374,7 +3375,7 @@ This appendix presents the results for all animations under reduced recording du
 
 
 %--------------------------------------------------------
-\subsection{Verification ‘Classic’ Single ST – Animations}
+\section{Verification ‘Classic’ Single ST – Animations}
 \label{subsec:vsc_st_ft}
 
 This appendix contains additional animation results omitted from the main chapter due to space limitations.
@@ -3389,7 +3390,7 @@ This appendix contains additional animation results omitted from the main chapte
 \FloatBarrier
 
 %--------------------------------------------------------
-\subsection{Verification ‘Classic’ ST with Intruders – Animations}
+\section{Verification ‘Classic’ ST with Intruders – Animations}
 \label{subsec:vsci_st_ft}
 
 This section contains additional results obtained during the ‘classic’ verification analysis with intruders.
@@ -3404,7 +3405,7 @@ This section contains additional results obtained during the ‘classic’ verif
 \FloatBarrier
 
 %--------------------------------------------------------
-\subsection{Verification ‘Classic’ Single ST with Reduced Session Duration – Animations}
+\section{Verification ‘Classic’ Single ST with Reduced Session Duration – Animations}
 \label{subsec:vsc_rt}
 
 This appendix includes the results for reduced recording durations (10 and 5 seconds) omitted from the main chapter.
@@ -3429,7 +3430,7 @@ This appendix includes the results for reduced recording durations (10 and 5 sec
 \FloatBarrier
 
 %--------------------------------------------------------
-\subsection{Verification Single FT – Animations}
+\section{Verification Single FT – Animations}
 \label{subsec:vs_ft}
 
 This section presents the additional results of the verification analysis conducted on individual animations using the Full Train (FT) configuration.
@@ -3443,7 +3444,7 @@ This section presents the additional results of the verification analysis conduc
 \end{figure}
 \FloatBarrier
 
-\subsection{Verification Single intrusers FT – Animations}
+\section{Verification Single intrusers FT – Animations}
 \label{subsec:vsi_ft}
 
 This section presents the additional results of the verification analysis conducted on individual animations using the Full Train (FT) configuration.
@@ -3457,7 +3458,7 @@ This section presents the additional results of the verification analysis conduc
 \end{figure}
 \FloatBarrier
 
-\subsection{Verification Single FT with Reduced Session Duration – Animations}
+\section{Verification Single FT with Reduced Session Duration – Animations}
 \label{subsec:vs_st_ft_rt}
 
 This appendix reports the results for all animations evaluated with reduced recording durations of 10 and 5 seconds. 
@@ -3482,7 +3483,7 @@ The results corresponding to the 10-second recordings are presented first, follo
 \end{figure}
 \FloatBarrier
 
-\subsection{Verification ‘Classic’ Single FT – Animations}
+\section{Verification ‘Classic’ Single FT – Animations}
 \label{subsec:vsc_ft}
 
 This appendix contains all the results, related to the other animations, omitted from the main chapter due to space limitations.
@@ -3496,7 +3497,7 @@ This appendix contains all the results, related to the other animations, omitted
 \end{figure}
 \FloatBarrier
 
-\subsection{Verification ‘Classic’ FT with Intruders – Animations}
+\section{Verification ‘Classic’ FT with Intruders – Animations}
 \label{subsec:vsci_ft}
 
 This section contains additional results obtained during the ‘classic’ verification analysis with intruders.
@@ -3510,7 +3511,7 @@ This section contains additional results obtained during the ‘classic’ verif
 \end{figure}
 \FloatBarrier
 
-\subsection{Verification ‘Classic’ Single ST with Reduced Session Duration – Animations}
+\section{Verification ‘Classic’ Single ST with Reduced Session Duration – Animations}
 \label{subsec:vsc_ftr}
 
 This appendix presents the results for reduced recording durations, 10 seconds and 5 seconds, that were omitted from the main chapter.

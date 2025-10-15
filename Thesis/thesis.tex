@@ -283,7 +283,7 @@ This highlights the importance of securely encrypting behavioral profiles.
 
 \section{Some Applications Of Behavioral Biometrics}
 
-This section is used to present different real world application of behavioral biometric.
+This section is used to present different real world application of behavioral biometrics.
 These and other applications are described in Chapter 1, Taxonomy of Behavioral Biometrics [4], where they are subdivided into the five categories discussed earlier.
 In the thesis only three applications per typology will be represented to have a general overview. 
 Is important to notice that some applications can be characterized with more than one class.
@@ -354,7 +354,7 @@ Traditional biometric systems, particularly fingerprint and iris recognition, ar
 They are built upon physical characteristics that an individual permanently possesses, making them highly distinctive and resistant to change. 
 As noted earlier, these two modalities can reach nearly 100\% accuracy in identification tasks, making them capable of reliably authenticating an individual even within large populations.
 \sloppy
-By contrast, behavioral biometric technologies can sometimes be applied for identification, but they are generally more suitable for verification tasks. 
+By contrast, behavioral biometrics technologies can sometimes be applied for identification, but they are generally more suitable for verification tasks. 
 \fussy
 Their typically lower accuracy in identification makes them less suitable as standalone replacements for traditional physiological biometrics. [35]
 This limitation arises from the fact that behavior is inherently variable: the way a person types, writes, speaks, or drives may change depending on mood, fatigue, health, stress, or environmental conditions.
@@ -374,7 +374,7 @@ While this capability enhances security, it also underscores the need for strict
 
 \newpage
 
-\chapter{Eye Tracker}
+\chapter{Eye Tracking}
 
 Before describing an eye tracker we have to understand why the point in which a person is looking is so important.
 The reason is that when a person looks at something, they focus on a scene in fine detail and direct their attention to that point.
@@ -505,7 +505,7 @@ This shift, known as the Purkinje effect, reflects the higher sensitivity of rod
 As a result, red objects appear to darken as twilight falls, while blue ones remain more easily visible. 
 Such changes highlight the complementary nature of rods and cones: one system optimized for detail and color in bright environments, and the other specialized for sensitivity in low-light conditions.
 
-\subsection{Type Of Eye Movements}
+\subsection{Types Of Eye Movements}
 
 Human vision is not a static process. 
 The eyes are in constant motion, guided by a sophisticated neuromuscular system that allows the fovea, the central region of the retina responsible for high acuity, to be directed toward relevant visual targets.
@@ -1011,7 +1011,7 @@ Using deep learning and classical statistical methods, we achieved up to 75\% av
 
 \chapter{Experiments}
 
-Considering the advantages offered by behavioral biometric approaches, this research aims to investigate their effectiveness in the context of a novel application.
+Considering the advantages offered by behavioral biometrics approaches, this research aims to investigate their effectiveness in the context of a novel application.
 In particular the thesis will focus on a specific field of research in this discipline called Gaze-based biometric.
 Gaze-based biometrics is a field that investigates the behaviour of a user who reacts to a visual stimulus.
 In this study, we propose to record subjects gaze patterns using an eye-tracking device, capturing a range of descriptive features.
@@ -1026,7 +1026,7 @@ In contrast, previous studies proposed by Holland et al. [54] and Bednarik et al
 The objective of this research is to apply machine learning techniques to evaluate the performance, for identification and verification, of these kinds of stimuli and determine the most effective animation. 
 Although these prior studies have examined static text, we also conducted a preliminary experiment with static text to enable a direct comparison under the same experimental conditions.
 
-\section{Set Up}
+\section{Setup}
 At the beginning, before starting the analysis, a phase was performed to collect the data and create the dataset.
 The data collection involved 35 participants, including 22 males and 13 females, the majority of whom were university students.
 Of the participants, 17 were aged 25 or younger, 13 were between 26 and 40 years old, and 4 were over 40. 
@@ -1690,7 +1690,7 @@ Moreover, the random split introduces a potential data leakage issue, as samples
 This overlap provides the model with indirect information about the test data, thereby inflating performance compared to the session split, where such leakage is avoided.
 \FloatBarrier
 
-\subsection{Identification With Feature Selection.}
+\subsection{Identification With Feature Selection}
 
 We now proceed to perform the identification analysis with an additional step: feature selection.
 The overall procedure and implementation remain identical to those described in Appendix \ref{subsec:id_fs_ch}.
@@ -2883,7 +2883,7 @@ Overall, across both configurations, the static text consistently provides lower
 
 In conclusion, when considering the session split, which reflects the conditions of a real-world application, the dynamic text demonstrates higher accuracy, with minimal or negligible degradation compared to the random split.
 Conversely, the static text consistently achieves better EER values, making it more suitable for scenarios where security and low error rates are the primary concern.
-Therefore, a behavioral biometric system based on dynamic text is more appropriate when accuracy is the key performance indicator, whereas a static text-based approach is preferable in applications that prioritize security and robustness.
+Therefore, a behavioral biometrics system based on dynamic text is more appropriate when accuracy is the key performance indicator, whereas a static text-based approach is preferable in applications that prioritize security and robustness.
 
 \FloatBarrier
 \newpage
@@ -2913,7 +2913,7 @@ It is important to note that the FT configuration, although more computationally
 Across all analyses, the best closed-set verification performance was obtained using the VB\_FA\_SMA animation under the FT configuration and best-model evaluation procedure, achieving an accuracy of 92.6\% and an EER of 4\%. 
 Conversely, the lowest EER was observed during the ST analysis with best-model evaluation, where the VB\_FA\_BIG animation reached an EER of 3.6\% and an accuracy of 92.2\% using the Random Forest classifier.
 These results collectively demonstrate the robustness and reliability of the proposed approach. 
-The experiments confirm that dynamic text stimuli can achieve both high accuracy and low error rates, making them a promising candidate for behavioral biometric verification systems. 
+The experiments confirm that dynamic text stimuli can achieve both high accuracy and low error rates, making them a promising candidate for behavioral biometrics verification systems. 
 Depending on the specific application requirements, different configurations may be preferred: the VB\_FA\_SMA animation proves optimal when maximizing overall accuracy is the main objective, while the VB\_FA\_BIG animation is more suitable when minimizing the error rate is of primary concern.
 
 In the open-set verification analysis, the highest accuracy was obtained using the Single Train (ST) configuration with the best-model evaluation strategy. 
@@ -2940,7 +2940,7 @@ These findings highlight a trade-off between robustness and precision, where dyn
 
 Another important aspect to highlight is that the vertical block–based animations consistently achieved better results than the horizontal scroll–based ones across nearly all experimental conditions.
 
-In conclusion, the findings of this work demonstrate that dynamic text animations represent a promising and effective stimulus for behavioral biometric applications, offering both reliability and adaptability for real-world user authentication systems.
+In conclusion, the findings of this work demonstrate that dynamic text animations represent a promising and effective stimulus for behavioral biometrics applications, offering both reliability and adaptability for real-world user authentication systems.
 
 \newpage
 

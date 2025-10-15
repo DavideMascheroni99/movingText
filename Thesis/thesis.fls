@@ -359,6 +359,9 @@ INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\pdfpages\pppdftex.d
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\pdfpages\pppdftex.def
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\regexpatch\regexpatch.sty
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\regexpatch\regexpatch.sty
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\xstring\xstring.sty
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\xstring\xstring.sty
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\generic\xstring\xstring.tex
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmr.fd
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmr.fd
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmr.fd
@@ -647,10 +650,13 @@ INPUT .\Images\Results\Verification_single\st\VB_FA_BIG.png
 INPUT .\Images\Results\Verification_single\st\VB_FA_BIG.png
 INPUT .\Images\Results\Verification_single\st\VB_FA_BIG.png
 INPUT .\Images\Results\Verification_single\st\VB_FA_BIG.png
-INPUT .\Images\Results\Verification_single\st\VB_FA_BIG.png
-INPUT .\Images\Results\Verification_single\st\VB_FA_BIG.png
-INPUT .\Images\Results\Verification_single\st\VB_FA_BIG.png
-INPUT .\Images\Results\Verification_single\st\VB_FA_BIG.png
+INPUT .\Images\Results\Verification_single\st\VB_FA_LIT.png
+INPUT .\Images\Results\Verification_single\st\VB_FA_LIT.png
+INPUT .\Images\Results\Verification_single\st\VB_FA_LIT.png
+INPUT .\Images\Results\Verification_single\st\VB_FA_LIT.png
+INPUT .\Images\Results\Verification_single\st\VB_FA_LIT.png
+INPUT .\Images\Results\Verification_single\st\VB_FA_LIT.png
+INPUT .\Images\Results\Verification_single\st\VB_FA_LIT.png
 INPUT .\Images\Results\Verification_single\st\best_animation_roc_curves_st.png
 INPUT .\Images\Results\Verification_single\st\best_animation_roc_curves_st.png
 INPUT .\Images\Results\Verification_single\st\best_animation_roc_curves_st.png

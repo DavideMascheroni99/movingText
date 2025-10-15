@@ -24,6 +24,7 @@
 \usepackage{pgffor} % for \foreach
 \usepackage{pdfpages}
 \usepackage{regexpatch}
+\usepackage{xstring}
 
 
 \begin{document}
@@ -623,14 +624,14 @@ While this limitation reduces the comfort and naturalness of the setup, it ensur
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=1\textwidth,height=0.6\textwidth]{Images/Theory/eog.png}
-        \caption{Electro-OculoGraphy (EOG).}
+        \caption{Electro-OculoGraphy (EOG) eye tracker.}
         \label{fig:eog}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=1\textwidth,height=0.6\textwidth]{Images/Theory/coil.png}
-        \caption{Scleral Contact Lens/Search Coil.}
+        \caption{Scleral Contact Lens/Search Coil eye tracker.}
         \label{fig:coil}
     \end{subfigure}
     
@@ -640,14 +641,14 @@ While this limitation reduces the comfort and naturalness of the setup, it ensur
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=0.7\textwidth,height=0.6\textwidth]{Images/Theory/vog.jpeg}
-        \caption{Video-OculoGraphy (VOG).}
+        \caption{Video-OculoGraphy (VOG) eye tracker.}
         \label{fig:vog}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=1\textwidth,height=0.6\textwidth]{Images/Theory/corneal.jpg}
-        \caption{Corneal Reflection.}
+        \caption{Corneal Reflection eye tracker.}
         \label{fig:corneal}
     \end{subfigure}
 
@@ -1034,7 +1035,7 @@ Additionally, 18 wore eyeglasses, while only one wore contact lenses.
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Experiment/tester.png}
-    \caption{Testers' data.}
+    \caption{Participants’ data.}
     \label{fig:test}
 \end{figure}
 
@@ -1115,7 +1116,7 @@ To address this question, we conducted a brief exploratory study in the laborato
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Experiment/tester_speeds.png}
-    \caption{Testers' data.}
+    \caption{Participants' data.}
     \label{fig:prel}
 \end{figure}
 
@@ -1703,7 +1704,7 @@ This approach not only enhances model interpretability but also reduces the dime
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Identification/fs.png}
-    \caption{Identification results with feature selection}
+    \caption{Identification results with feature selection.}
     \label{fig:id_fs}
 \end{figure}
 
@@ -1719,7 +1720,7 @@ The number of selected features, along with their corresponding identities, is p
 \centering
 \scriptsize
 \setlength{\tabcolsep}{3pt}
-\caption{Top 30 features for Identification with feature selection ranked by cumulative F-score}
+\caption{Top 30 features for Identification with feature selection ranked by cumulative F-score.}
 \label{tab:top30_id}
 \begin{tabular}{lll}
 \toprule
@@ -1776,7 +1777,7 @@ This suggests that kurtosis may not be a representative metric in this context.
 \centering
 \small
 \setlength{\tabcolsep}{4pt} % same as top 30 table
-\caption{List of features never selected in Identification with feature selection}
+\caption{List of features never selected in Identification with feature selection.}
 \label{tab:ns_id}
 \begin{tabular}{lll}
 \toprule
@@ -1828,7 +1829,7 @@ The parameters identified through this analysis, together with the top k feature
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Identification_single/single_id_st.png}
-    \caption{Identification single animation-ST}
+    \caption{Results for identification with single animation - ST.}
     \label{fig:id_s_st}
 \end{figure}
 
@@ -1853,7 +1854,7 @@ This behaviour appears to be a characteristic of dynamic text stimuli, and furth
 \centering
 \scriptsize
 \setlength{\tabcolsep}{3pt}
-\caption{Top 30 features for Identification single animation-ST}
+\caption{Top 30 features for Identification single animation - ST.}
 \label{tab:top30_id_s_st}
 \begin{tabular}{lll}
 \toprule
@@ -1923,7 +1924,7 @@ Each of these animation-specific test sets is used to evaluate the model individ
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Identification_single/single_id_ft.png}
-    \caption{Identification single animation-FT}
+    \caption{Results for identification with single animation - FT.}
     \label{fig:id_s_ft}
 \end{figure}
 
@@ -1945,7 +1946,7 @@ As in the previous section we collected all the selected features during the fea
 \centering
 \scriptsize
 \setlength{\tabcolsep}{3pt}
-\caption{Top 30 features for Identification single animation-FT}
+\caption{Top 30 features for Identification single animation - FT.}
 \label{tab:top30_id_s_ft}
 \begin{tabular}{lll}
 \toprule
@@ -1994,7 +1995,7 @@ The table \ref{tab:never_selected_features_ft} presents the list of the least in
 \centering
 \small
 \setlength{\tabcolsep}{4pt} % same as top 30 table
-\caption{Features never selected in identification single-FT}
+\caption{Features never selected in identification single - FT.}
 \label{tab:never_selected_features_ft}
 \begin{tabular}{lll}
 \toprule
@@ -2076,7 +2077,7 @@ Finally, the Equal Error Rate represents the point at which the false acceptance
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Verification_single/st/VB_FA_BIG.png}
-    \caption{VB\_FA\_BIG animation}
+    \caption{Verification results for single animations using the ST configuration and VB\_FA\_BIG animation.}
     \label{fig:VB_FA_BIG_st}
 \end{figure}
 
@@ -2085,8 +2086,8 @@ The figure \ref{fig:VB_FA_BIG_st} illustrates that the best-performing animation
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single/st/VB_FA_BIG.png}
-    \caption{VB\_FA\_SMA animation}
+    \textwidth]{Images/Results/Verification_single/st/VB_FA_LIT.png}
+    \caption{Verification results for single animations using the ST configuration and VB\_FA\_SMA animation.}
     \label{fig:VB_FA_LIT_st}
 \end{figure}
 
@@ -2097,7 +2098,7 @@ The rest of the animation results are contained in Appendix \ref{subsec:vs_st_a}
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single/st/best_animation_roc_curves_st.png}
-    \caption{ROC curve}
+    \caption{ROC curves.}
     \label{fig:roc_st}
 \end{figure}
 
@@ -2137,7 +2138,7 @@ The corresponding results are illustrated in Figure \ref{fig:VB_SL_LIT_sti}.
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Verification_single_intruders/st/VB_SL_LIT.png}
-    \caption{VB\_SL\_SMA animation}
+    \caption{Verification with intruders using the ST configuration and VB\_SL\_SMA animation.}
     \label{fig:VB_SL_LIT_sti}
 \end{figure}
 
@@ -2147,7 +2148,7 @@ The best-performing animation from the closed-set analysis, VB\_FA\_BIG, exhibit
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Verification_single_intruders/st/VB_FA_BIG.png}
-    \caption{VB\_FA\_BIG animation}
+    \caption{Verification with intruders using the ST configuration and VB\_FA\_BIG animation.}
     \label{fig:VB_FA_BIG_sti}
 \end{figure}
 
@@ -2158,7 +2159,7 @@ At the same time, its EER improves, decreasing from 4.7\% to 3.3\%.
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Verification_single_intruders/st/VB_FA_LIT.png}
-    \caption{VB\_FA\_SMA animation}
+    \caption{Verification with intruders using the ST configuration and VB\_FA\_SMA animation.}
     \label{fig:VB_FA_LIT_sti}
 \end{figure}
 
@@ -2169,7 +2170,7 @@ To conclude the analysis Figure \ref{fig:roc_sti} illustrates the ROC curves cor
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single_intruders/st/best_animation_roc_curves_st.png}
-    \caption{ROC curve}
+    \caption{ROC curves.}
     \label{fig:roc_sti}
 \end{figure}
 \FloatBarrier
@@ -2190,7 +2191,7 @@ In practice, if the animation duration is too long, users may lose focus or aban
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Verification_single_five_ten/st/ten/VB_FA_BIG_ten_st.png}
-    \caption{VB\_FA\_BIG - 10-Second Recording}
+    \caption{Verification results with 10-second recordings using the ST configuration and VB\_FA\_BIG animation.}
     \label{fig:VB_FA_BIG_10_st}
 \end{figure}
 
@@ -2198,7 +2199,7 @@ In practice, if the animation duration is too long, users may lose focus or aban
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png}
-    \caption{VB\_FA\_BIG - 5-Second Recording}
+    \caption{Verification results with 5-second recordings using the ST configuration and VB\_FA\_BIG animation.}
     \label{fig:VB_FA_BIG_5_st}
 \end{figure}
 
@@ -2217,7 +2218,7 @@ The remaining results for the other animations are presented in Appendix \ref{su
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single_five_ten/st/ten/best_animation_roc_curves_ten_st.png}
-    \caption{ROC  curve 10 seconds}
+    \caption{ROC curves 10 seconds.}
     \label{fig:roc_t}
 \end{figure}
 
@@ -2225,7 +2226,7 @@ The remaining results for the other animations are presented in Appendix \ref{su
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single_five_ten/st/five/best_animation_roc_curves_five_st.png}
-    \caption{ROC  curve 5 seconds}
+    \caption{ROC curves 5 seconds.}
     \label{fig:roc_f}
 \end{figure}
 
@@ -2264,7 +2265,7 @@ When comparing the two analyses, the results are almost identical, with this con
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Classic_procedure/Verification_single/st/VB_FA_BIG.png}
-    \caption{VB\_FA\_BIG}
+    \caption{Classic’ verification results using the ST configuration and VB\_SL\_BIG animation.}
     \label{fig:VB_FA_BIG_cst}
 \end{figure}
 
@@ -2276,7 +2277,7 @@ As in the previous chapter, this analysis includes the ROC curves for the best-p
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Classic_procedure/Verification_single/st/Verification_single_roc_classic_st.png}
-    \caption{ROC  curves}
+    \caption{ROC curves.}
     \label{fig:roc_cst}
 \end{figure}
 \FloatBarrier
@@ -2294,7 +2295,7 @@ This continuity is particularly important, as it suggests that the anomalous beh
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_BIG.png}
-    \caption{VB\_FA\_BIG}
+    \caption{‘Classic’ verification with intruders using the ST configuration and VB\_FA\_BIG animation.}
     \label{fig:VB_FA_BIG_cist}
 \end{figure}
 
@@ -2311,7 +2312,7 @@ In practical scenarios, it is advantageous to maintain a single animation that p
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/Verification_single_intruders_roc_two_st.png}
-    \caption{ROC  curves}
+    \caption{ROC curves.}
     \label{fig:roc_cist}
 \end{figure}
 
@@ -2339,7 +2340,7 @@ All the additional material related to this type of analysis is placed in Append
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_BIG.png}
-    \caption{VB\_FA\_BIG - 10 seconds}
+    \caption{Verification ’classic’ results with 10-second recordings using the ST configuration and VB\_FA\_BIG animation.}
     \label{fig:VB_FA_BIG_cst_10}
 \end{figure}
 
@@ -2347,7 +2348,7 @@ All the additional material related to this type of analysis is placed in Append
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Classic_procedure/five_ten/st/five/VB_FA_BIG.png}
-    \caption{VB\_FA\_BIG - 5 seconds}
+    \caption{Verification ’classic’ results with 5-second recordings using the ST configuration and VB\_FA\_BIG animation.}
     \label{fig:VB_FA_BIG_cst_5}
 \end{figure}
 
@@ -2355,7 +2356,7 @@ All the additional material related to this type of analysis is placed in Append
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/Verification_single_roc_classic_ten_st.png}
-    \caption{ROC  curves - 10 seconds}
+    \caption{ROC curves - 10 seconds.}
     \label{fig:roc_cst_10}
 \end{figure}
 
@@ -2363,7 +2364,7 @@ All the additional material related to this type of analysis is placed in Append
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Classic_procedure/five_ten/st/five/Verification_single_roc_classic_five_st.png}
-    \caption{ROC  curves - 10 seconds}
+    \caption{ROC curves - 5 seconds}
     \label{fig:roc_cst_5}
 \end{figure}
 
@@ -2419,7 +2420,7 @@ These include precision, recall, specificity, and the EER, each providing distin
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single/ft/VB_FA_LIT.png}
-    \caption{VB\_FA\_SMA animation}
+    \caption{Verification results using the Full Train (FT) configuration and VB\_FA\_SMA animation.}
     \label{fig:VB_FA_LIT_ft}
 \end{figure}
 
@@ -2429,7 +2430,7 @@ The figure \ref{fig:VB_FA_LIT_ft} illustrates that the best-performing animation
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Verification_single/ft/VB_FA_BIG.png}
-    \caption{VB\_FA\_BIG animation}
+    \caption{Verification results using the Full Train (FT) configuration and VB\_FA\_BIG animation.}
     \label{fig:VB_FA_BIG_ft}
 \end{figure}
 
@@ -2441,7 +2442,7 @@ Results for the remaining animations are provided in Appendix \ref{subsec:vs_ft}
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single/ft/best_animation_roc_curves_ft.png}
-    \caption{ROC  curve}
+    \caption{ROC curves.}
     \label{fig:roc_ft}
 \end{figure}
 
@@ -2485,7 +2486,7 @@ Then, we calculate the overall average across all users to determine the general
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single_intruders/ft/VB_FA_LIT.png}
-    \caption{VB\_FA\_SMA animation}
+    \caption{Verification results with intruders using the Full Train (FT) configuration and VB\_FA\_SMA animation.}
     \label{fig:VB_FA_LIT_fti}
 \end{figure}
 
@@ -2496,7 +2497,7 @@ The corresponding EER for this configuration is 7.2\%.
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Verification_single_intruders/ft/VB_FA_BIG.png}
-    \caption{VB\_FA\_BIG animation}
+    \caption{Verification results with intruders using the Full Train (FT) configuration and VB\_FA\_BIG animation.}
     \label{fig:VB_FA_BIG_fti}
 \end{figure}
 
@@ -2508,7 +2509,7 @@ The results for the other animations are reported in Appendix \ref{subsec:vsi_ft
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single_intruders/ft/best_animation_roc_curves_ft.png}
-    \caption{ROC  curve}
+    \caption{ROC curves.}
     \label{fig:roc_fti}
 \end{figure}
 
@@ -2541,7 +2542,7 @@ In real-world scenarios, excessively long animations may lead to a loss of user 
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Verification_single_five_ten/ft/ten/VB_FA_LIT.png}
-    \caption{VB\_FA\_BIG - 10-Second Recording}
+    \caption{Verification results with 10-second recordings using the FT configuration and VB\_FA\_SMA animation.}
     \label{fig:VB_FA_LIT_10_ft}
 \end{figure}
 
@@ -2549,7 +2550,7 @@ In real-world scenarios, excessively long animations may lead to a loss of user 
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Verification_single_five_ten/ft/five/VB_FA_LIT.png}
-    \caption{VB\_FA\_BIG - 5-Second Recording}
+    \caption{Verification results with 5-second recordings using the FT configuration and VB\_FA\_SMA animation.}
     \label{fig:VB_FA_LIT_5_ft}
 \end{figure}
 
@@ -2569,7 +2570,7 @@ The remaining results for the other animations are presented in Appendix \ref{su
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single_five_ten/ft/five/best_animation_roc_curves_five_ft.png}
-    \caption{ROC  curve 10 seconds}
+    \caption{ROC curves 10 seconds.}
     \label{fig:roc_t_ft}
 \end{figure}
 
@@ -2577,7 +2578,7 @@ The remaining results for the other animations are presented in Appendix \ref{su
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Verification_single_five_ten/ft/five/best_animation_roc_curves_five_ft.png}
-    \caption{ROC  curve 5 seconds}
+    \caption{ROC curvas 5 seconds.}
     \label{fig:roc_f_ft}
 \end{figure}
 
@@ -2629,7 +2630,7 @@ As in the preceding analysis, the best-performing animation continues to be VB\_
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Classic_procedure/Verification_single/ft/VB_FA_LIT.png}
-    \caption{VB\_FA\_BIG}
+    \caption{Classic’ verification results using the FT configuration and VB\_FA\_SMA animation.}
     \label{fig:VB_FA_LIT_cft}
 \end{figure}
 
@@ -2640,7 +2641,7 @@ The current analysis also includes the ROC curves of the best-performing animati
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Classic_procedure/Verification_single/ft/Verification_single_roc_classic_ft.png}
-    \caption{ROC  curves}
+    \caption{ROC curves.}
     \label{fig:roc_cft}
 \end{figure}
 
@@ -2658,7 +2659,7 @@ The first notable observation is that the best-performing animation remains the 
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Classic_procedure/Verification_intruders/ft/VB_FA_LIT.png}
-    \caption{VB\_FA\_SMA}
+    \caption{‘Classic’ verification with intruders using the FT configuration and VB\_FA\_SMA animation.}
     \label{fig:VB_FA_LIT_cift}
 \end{figure}
 
@@ -2674,7 +2675,7 @@ In conclusion, the analysis that evaluate only on the 'best model' achieves bett
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.6\textwidth]{Images/Results/Classic_procedure/Verification_intruders/ft/Verification_single_intruders_roc_two_ft.png}
-\caption{ROC curves for the intruder-based verification analysis.}
+\caption{ROC curves.}
 \label{fig:roc_cift}
 \end{figure}
 
@@ -2705,7 +2706,7 @@ Additional results and supporting material for this analysis are provided in App
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Classic_procedure/five_ten/ft/ten/VB_FA_LIT.png}
-    \caption{VB\_FA\_SMA - 10 seconds}
+    \caption{Verification ’classic’ results with 10-second recordings using the FT configuration and VB\_FA\_SMA animation.}
     \label{fig:VB_FA_LIT_cft_10}
 \end{figure}
 
@@ -2713,7 +2714,7 @@ Additional results and supporting material for this analysis are provided in App
     \centering
     \includegraphics[width = 0.8
     \textwidth]{Images/Results/Classic_procedure/five_ten/ft/five/VB_FA_LIT.png}
-    \caption{VB\_FA\_SMA - 5 seconds}
+    \caption{Verification ’classic’ results with 5-second recordings using the FT configuration and VB\_FA\_SMA animation.}
     \label{fig:VB_FA_LIT_cft_5}
 \end{figure}
 
@@ -2721,7 +2722,7 @@ Additional results and supporting material for this analysis are provided in App
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Classic_procedure/five_ten/ft/ten/Verification_single_roc_ten_classic_ft.png}
-    \caption{ROC  curves - 10 seconds}
+    \caption{ROC curves - 10 seconds.}
     \label{fig:roc_cft_10}
 \end{figure}
 
@@ -2729,7 +2730,7 @@ Additional results and supporting material for this analysis are provided in App
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Classic_procedure/five_ten/ft/five/Verification_single_roc_five_classic_ft.png}
-    \caption{ROC  curves - 10 seconds}
+    \caption{ROC curves - 5 seconds.}
     \label{fig:roc_cft_5}
 \end{figure}
 
@@ -2755,7 +2756,7 @@ Additionally, five participants wore eyeglasses, while none used contact lenses.
     \centering
     \includegraphics[width = 0.7
     \textwidth]{Images/Experiment/static_vs_dynamic.png}
-    \caption{Data from Participants Involved in the Experiment}
+    \caption{Data from Participants Involved in the Experiment.}
     \label{fig:tester_8}
 \end{figure}
 
@@ -2782,17 +2783,17 @@ It also occupies two-thirds of the screen width, featuring a static text block w
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{Images/Experiment/BIG_static.png}
-        \caption{Vertical Block – Big}
+        \caption{Vertical Block – Big.}
         \label{fig:static_big}
     \end{subfigure}
     \hfill
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{Images/Experiment/LIT_static.png}
-        \caption{Vertical Block – Small}
+        \caption{Vertical Block – Small.}
         \label{fig:static_small}
     \end{subfigure}
-    \caption{Different types of static animations}
+    \caption{Different types of static animations.}
     \label{fig:statics}
 \end{figure}
 
@@ -2828,14 +2829,14 @@ The classifiers and their corresponding parameter grids are presented in Appendi
     \begin{subfigure}[t]{0.49\textwidth}
         \centering
         \includegraphics[width=\linewidth]{Images/Results/Static_Dynamic/id_moving.png}
-        \caption{Identification with dynamic text}
+        \caption{Identification with dynamic text.}
         \label{fig:dyn_id}
     \end{subfigure}
     \hfill
     \begin{subfigure}[t]{0.49\textwidth}
         \centering
         \includegraphics[width=\linewidth]{Images/Results/Static_Dynamic/id_stat.png}
-        \caption{Identification with static text}
+        \caption{Identification with static text.}
         \label{fig:stat_id}
     \end{subfigure}
     \caption{Identification results}
@@ -2875,7 +2876,7 @@ For this analysis, in addition to accuracy, precision, recall, specificity, and 
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Static_Dynamic/Ver_mov.png}
-    \caption{Verification with dynamic text}
+    \caption{Verification with dynamic text.}
     \label{fig:ver_dyn}
 \end{figure}
 
@@ -2883,7 +2884,7 @@ For this analysis, in addition to accuracy, precision, recall, specificity, and 
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Results/Static_Dynamic/Ver_stat.png}
-    \caption{Verification with dynamic text}
+    \caption{Verification with dynamic text.}
     \label{fig:ver_stat}
 \end{figure}
 
@@ -2902,6 +2903,7 @@ Conversely, the static text consistently achieves better EER values, making it m
 Therefore, a behavioral biometric system based on dynamic text is more appropriate when accuracy is the key performance indicator, whereas a static text-based approach is preferable in applications that prioritize security and robustness.
 
 \FloatBarrier
+\newpage
 
 \chapter{Conclusion}
 
@@ -3196,9 +3198,8 @@ In conclusion, the findings of this work demonstrate that dynamic text animation
 [115] American Academy of Ophthalmology. (2024). Parts of the eye. \url{https://www.aao.org/eye-health/anatomy/parts-of-eye}.
 
 \end{raggedright}
-
-
 \clearpage
+\newpage
 
 \appendix
 \chapter{Parameter Grids and Feature Selection}
@@ -3215,7 +3216,7 @@ The figure \ref{fig:pg_nofs} displays the full parameter grid used whenever hype
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width = 0.8
+    \includegraphics[width = 0.9
     \textwidth]{Images/Results/param_grid_nofs.png}
     \caption{Parameter grid without feature selection step}
     \label{fig:pg_nofs}
@@ -3225,7 +3226,7 @@ Conversely, Figure \ref{fig:pg_nofs} presents the parameter grid that includes t
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width = 0.8
+    \includegraphics[width = 0.9
     \textwidth]{Images/Results/fs.png}
     \caption{Parameter grid with feature selection step}
     \label{fig:pg_fs}
@@ -3278,6 +3279,7 @@ The complete list is available online via the following links:
     {Selected Features CSV (Raw)} [113].
 \end{itemize}
 \FloatBarrier
+\newpage
 
 \chapter{Full results}
 
@@ -3285,76 +3287,45 @@ The following appendix presents additional results that were omitted from the ma
 In particular, it includes a set of tables reporting the results for the remaining animations that were not discussed in the corresponding section.
 
 %--------------------------------------------------------
-\section{Verification Single ST – Animations}
+\section{Verification Single without intruders ST – Animations}
 \label{subsec:vs_st_a}
 
 This section presents the additional results of the verification analysis conducted on individual animations using the Single Train (ST) configuration.
 
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}[b]{0.65\textwidth}
-        \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/VB_SL_LIT.png}
-        \caption{VB\_SL\_SMA}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.65\textwidth}
-        \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/HS_SL_LIT.png}
-        \caption{HS\_SL\_SMA}
-    \end{subfigure}
-
-    \begin{subfigure}[b]{0.65\textwidth}
-        \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/HS_SL_BIG.png}
-        \caption{HS\_SL\_SMA}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.65\textwidth}
-        \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/VB_SL_BIG.png}
-        \caption{VB\_SL\_BIG}
-    \end{subfigure}
-
-    \begin{subfigure}[b]{0.65\textwidth}
-        \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/HS_FA_LIT.png}
-        \caption{HS\_FA\_SMA}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.65\textwidth}
-        \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/HS_FA_BIG.png}
-        \caption{HS\_FA\_BIG}
-    \end{subfigure}
-    \caption{Verification results for single animations using the ST configuration.}
-\end{figure}
+\foreach \anim in {VB_SL_LIT,HS_SL_LIT,HS_SL_BIG,VB_SL_BIG,HS_FA_LIT,HS_FA_BIG}{%
+    % Replace _LIT with _SMA for the caption
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaption]%
+    \noindent\hfill
+    \begin{minipage}{0.65\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/\anim.png}\\[1mm]
+        {\small Verification results for single animations using the ST configuration and \expandafter\detokenize\expandafter{\animCaption} animation.}
+    \end{minipage}%
+    \hfill\par\vspace{0.4cm} % spacing between images
+}
 \FloatBarrier
 
+
 %--------------------------------------------------------
-\section{Verification Single Intruders ST – Animations}
+\section{Verification Single with Intruders ST – Animations}
 \label{subsec:vs_sti_a}
 
 This section presents the additional results of the verification analysis with intruders, conducted on individual animations using the Single Train (ST) configuration.
 
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}[b]{0.65\textwidth}
-        \includegraphics[width=\linewidth]{Images/Results/Verification_single_intruders/st/HS_SL_LIT.png}
-        \caption{HS\_SL\_SMA}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.65\textwidth}
-        \includegraphics[width=\linewidth]{Images/Results/Verification_single_intruders/st/HS_SL_BIG.png}
-        \caption{HS\_SL\_BIG}
-    \end{subfigure}
-
-    \begin{subfigure}[b]{0.65\textwidth}
-        \includegraphics[width=\linewidth]{Images/Results/Verification_single_intruders/st/VB_SL_BIG.png}
-        \caption{VB\_SL\_BIG}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.65\textwidth}
-        \includegraphics[width=\linewidth]{Images/Results/Verification_single_intruders/st/HS_FA_LIT.png}
-        \caption{HS\_FA\_SMA}
-    \end{subfigure}
-
-    \begin{subfigure}[b]{0.65\textwidth}
-        \includegraphics[width=\linewidth]{Images/Results/Verification_single_intruders/st/HS_FA_BIG.png}
-        \caption{HS\_FA\_BIG}
-    \end{subfigure}
-    \caption{Verification with intruders using the ST configuration.}
-\end{figure}
+\foreach \anim in {HS_SL_LIT,HS_SL_BIG,VB_SL_BIG,HS_FA_LIT,HS_FA_BIG}{%
+    % Replace _LIT with _SMA for readable captions
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaption]%
+    \noindent\hfill
+    \begin{minipage}{0.65\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Images/Results/Verification_single_intruders/st/\anim.png}\\[2mm]
+        {\small Verification with intruders using the ST configuration and \expandafter\detokenize\expandafter{\animCaption} animation.}
+    \end{minipage}%
+    \hfill\par\vspace{0.4cm} % space between images, allows flexible page breaks
+}
 \FloatBarrier
+
+
 
 %--------------------------------------------------------
 \section{Verification Single ST with Reduced Session Duration – Animations}
@@ -3362,40 +3333,47 @@ This section presents the additional results of the verification analysis with i
 
 This appendix presents the results for all animations under reduced recording durations of 10 and 5 seconds. Results for 10 seconds are shown first, followed by 5 seconds.
 
-% --- Ten seconds ---
-\begin{figure}[H]
-    \centering
-    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{
-        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/st/ten/\anim.png}
-    }
-    \caption{Verification results with 10-second recordings using the ST configuration.}
-\end{figure}
+% --- 10-second recordings ---
+\foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{%
+    % Replace _LIT with _SMA for cleaner caption
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaption]%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/st/ten/\anim.png}\\[2mm]
+        {\small Verification results with 10-second recordings using the ST configuration and \expandafter\detokenize\expandafter{\animCaption} animation.}
+    \end{figure}
+}
+\FloatBarrier
 
-% --- Five seconds ---
-\begin{figure}[H]
-    \centering
-    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{
-        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/st/five/\anim.png}
-    }
-    \caption{Verification results with 5-second recordings using the ST configuration.}
-\end{figure}
+% --- 5-second recordings ---
+\foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{%
+    % Replace _LIT with _SMA for cleaner caption
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaption]%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/st/five/\anim.png}\\[2mm]
+        {\small Verification results with 5-second recordings using the ST configuration and \expandafter\detokenize\expandafter{\animCaption} animation.}
+    \end{figure}
+}
 \FloatBarrier
 
 
-
 %--------------------------------------------------------
-\section{Verification ‘Classic’ Single ST – Animations}
+\section{Verification ‘Classic’ Single without intruders ST – Animations}
 \label{subsec:vsc_st_ft}
 
 This appendix contains additional animation results omitted from the main chapter due to space limitations.
 
-\begin{figure}[H]
-    \centering
-    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{
-        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_single/st/\anim.png}
-    }
-    \caption{‘Classic’ verification results using the ST configuration.}
-\end{figure}
+\foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{%
+    % Create the caption with _LIT replaced by _SMA
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
+    % Each image as a separate flexible figure
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_single/st/\anim.png}\\[2mm]
+        {\small ‘Classic’ verification results using the ST configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
+    \end{figure}
+}
 \FloatBarrier
 
 %--------------------------------------------------------
@@ -3404,14 +3382,18 @@ This appendix contains additional animation results omitted from the main chapte
 
 This section contains additional results obtained during the ‘classic’ verification analysis with intruders.
 
-\begin{figure}[H]
-    \centering
-    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{
-        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/\anim.png}
-    }
-    \caption{‘Classic’ verification with intruders using the ST configuration.}
-\end{figure}
+\foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{%
+    % Create the caption with _LIT replaced by _SMA
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
+    % Each image as a separate flexible figure
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/\anim.png}\\[2mm]
+        {\small ‘Classic’ verification with intruders using the ST configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
+    \end{figure}
+}
 \FloatBarrier
+
 
 %--------------------------------------------------------
 \section{Verification ‘Classic’ Single ST with Reduced Session Duration – Animations}
@@ -3420,52 +3402,64 @@ This section contains additional results obtained during the ‘classic’ verif
 This appendix includes the results for reduced recording durations (10 and 5 seconds) omitted from the main chapter.
 
 % --- Ten seconds ---
-\begin{figure}[H]
-    \centering
-    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{
-        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/\anim.png}
-    }
-    \caption{Verification 'classic' results with 10-second recordings using the ST configuration.}
-\end{figure}
+\foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{%
+    % Replace _LIT with _SMA for caption
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/\anim.png}\\[2mm]
+        {\small Verification 'classic' results with 10-second recordings using the ST configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
+    \end{figure}
+}
 
 % --- Five seconds ---
-\begin{figure}[H]
-    \centering
-    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{
-        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/st/five/\anim.png}
-    }
-    \caption{Verification 'classic' results with 5-second recordings using the ST configuration.}
-\end{figure}
+\foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{%
+    % Replace _LIT with _SMA for caption
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/st/five/\anim.png}\\[2mm]
+        {\small Verification 'classic' results with 5-second recordings using the ST configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
+    \end{figure}
+}
+
 \FloatBarrier
 
+
 %--------------------------------------------------------
-\section{Verification Single FT – Animations}
+\section{Verification Single without intruders FT – Animations}
 \label{subsec:vs_ft}
 
 This section presents the additional results of the verification analysis conducted on individual animations using the Full Train (FT) configuration.
 
-\begin{figure}[H]
-    \centering
-    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,HS_SL_BIG,VB_SL_BIG,HS_FA_LIT,HS_FA_BIG}{
-        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single/ft/\anim.png}
-    }
-    \caption{Verification results using the Full Train (FT) configuration.}
-\end{figure}
+\foreach \anim in {VB_SL_LIT,HS_SL_LIT,HS_SL_BIG,VB_SL_BIG,HS_FA_LIT,HS_FA_BIG}{%
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single/ft/\anim.png}\\[2mm]
+        {\small Verification results using the Full Train (FT) configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
+    \end{figure}
+}
 \FloatBarrier
 
-\section{Verification Single intrusers FT – Animations}
+
+\section{Verification Single Intruders FT – Animations}
 \label{subsec:vsi_ft}
 
 This section presents the additional results of the verification analysis conducted on individual animations using the Full Train (FT) configuration.
 
-\begin{figure}[H]
-    \centering
-    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,HS_SL_BIG,VB_SL_BIG,HS_FA_LIT,HS_FA_BIG}{
-        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_intruders/ft/\anim.png}
-    }
-    \caption{Verification results with intruders using the Full Train (FT) configuration.}
-\end{figure}
+\foreach \anim in {VB_SL_LIT,HS_SL_LIT,HS_SL_BIG,VB_SL_BIG,HS_FA_LIT,HS_FA_BIG}{%
+    % Replace _LIT with _SMA for readable caption
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_intruders/ft/\anim.png}\\[2mm]
+        {\small Verification results with intruders using the Full Train (FT) configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
+    \end{figure}
+}
 \FloatBarrier
+
+
 
 \section{Verification Single FT with Reduced Session Duration – Animations}
 \label{subsec:vs_st_ft_rt}
@@ -3473,37 +3467,40 @@ This section presents the additional results of the verification analysis conduc
 This appendix reports the results for all animations evaluated with reduced recording durations of 10 and 5 seconds. 
 The results corresponding to the 10-second recordings are presented first, followed by those obtained with the 5-second recordings.
 
-% --- Ten seconds ---
-\begin{figure}[H]
-    \centering
-    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{
-        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/ft/ten/\anim.png}
-    }
-    \caption{Verification results with 10-second recordings using the FT configuration.}
-\end{figure}
+% --- 10-second FT recordings ---
+\foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{%
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/ft/ten/\anim.png}\\[2mm]
+        {\small Verification results with 10-second recordings using the FT configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
+    \end{figure}
+}
 
-% --- Five seconds ---
-\begin{figure}[H]
-    \centering
-    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{
-        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/ft/five/\anim.png}
-    }
-    \caption{Verification results with 5-second recordings using the FT configuration.}
-\end{figure}
+% --- 5-second FT recordings ---
+\foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{%
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/ft/five/\anim.png}\\[2mm]
+        {\small Verification results with 5-second recordings using the FT configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
+    \end{figure}
+}
 \FloatBarrier
 
-\section{Verification ‘Classic’ Single FT – Animations}
+\section{Verification ‘Classic’ Single without intruders FT – Animations}
 \label{subsec:vsc_ft}
 
 This appendix contains all the results, related to the other animations, omitted from the main chapter due to space limitations.
 
-\begin{figure}[H]
-    \centering
-    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{
-        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_single/ft/\anim.png}
-    }
-    \caption{‘Classic’ verification results using the FT configuration.}
-\end{figure}
+\foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{%
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaption]%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_single/ft/\anim.png}\\[2mm]
+        {\small ‘Classic’ verification results using the FT configuration and \expandafter\detokenize\expandafter{\animCaption} animation.}
+    \end{figure}
+}
 \FloatBarrier
 
 \section{Verification ‘Classic’ FT with Intruders – Animations}
@@ -3511,14 +3508,16 @@ This appendix contains all the results, related to the other animations, omitted
 
 This section contains additional results obtained during the ‘classic’ verification analysis with intruders.
 
-\begin{figure}[H]
-    \centering
-    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{
-        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_intruders/ft/\anim.png}
-    }
-    \caption{‘Classic’ verification with intruders using the FT configuration.}
-\end{figure}
+\foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{%
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_intruders/ft/\anim.png}\\[2mm]
+        {\small ‘Classic’ verification with intruders using the FT configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
+    \end{figure}
+}
 \FloatBarrier
+
 
 \section{Verification ‘Classic’ Single ST with Reduced Session Duration – Animations}
 \label{subsec:vsc_ftr}
@@ -3526,24 +3525,26 @@ This section contains additional results obtained during the ‘classic’ verif
 This appendix presents the results for reduced recording durations, 10 seconds and 5 seconds, that were omitted from the main chapter.
 
 % --- Ten seconds ---
-\begin{figure}[H]
-    \centering
-    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{
-        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/ft/ten/\anim.png}
-    }
-    \caption{Verification 'classic' results with 10-second recordings using the FT configuration.}
-\end{figure}
+\foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{%
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/ft/ten/\anim.png}\\[2mm]
+        {\small Verification 'classic' results with 10-second recordings using the FT configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
+    \end{figure}
+}
 
 % --- Five seconds ---
-\begin{figure}[H]
-    \centering
-    \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{
-        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/ft/five/\anim.png}
-    }
-    \caption{Verification 'classic' results with 5-second recordings using the FT configuration.}
-\end{figure}
-\FloatBarrier
+\foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{%
+    \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/ft/five/\anim.png}\\[2mm]
+        {\small Verification 'classic' results with 5-second recordings using the FT configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
+    \end{figure}
+}
 
+\FloatBarrier
 
 \end{document}
 

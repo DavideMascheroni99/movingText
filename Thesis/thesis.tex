@@ -25,6 +25,8 @@
 \usepackage{pdfpages}
 \usepackage{regexpatch}
 \usepackage{xstring}
+\usepackage{xurl} % allows URL line breaking
+
 
 
 \begin{document}
@@ -204,19 +206,28 @@ The process is similar to that of a fingerprint, with some minor differences in 
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{Images/Theory/Fingerprint_scanner_identification.jpg}
-        \caption{Scanner for fingerprint.}
+        \captionsetup{justification=raggedright, singlelinecheck=false, font=small}
+        \caption{Fingerprint scanner.\\
+        \textit{Source:} \url{https://www.ifsecglobal.com/global/biometric-security-systems-guide-devices-fingerprint-scanners-facial-recognition/}}
         \label{fig:scanner_fingerprint}
     \end{subfigure}
     \hfill
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
         \includegraphics[width=\linewidth]{Images/Theory/eye.png}
-        \caption{Scanner for iris recognition.}
+        \captionsetup{justification=raggedright, singlelinecheck=false, font=small}
+        \caption{Iris recognition scanner.\\
+        \textit{Source:} \url{https://www.irisguard.com/iris-hardware/eyetrust-ii/}}
         \label{fig:scanner_eye}
     \end{subfigure}
-    \caption{Different type of scanner.}
+
+    \vspace{10pt}
+    \captionsetup{justification=centering, font=small}
+    \caption{Examples of biometric scanners used for fingerprint and iris recognition.}
     \label{fig:scanners}
 \end{figure}
+
+
 
 The figure \ref{fig:scanners} shows a real world example of scanners used for fingerprint and iris authentication and identification.
 
@@ -450,7 +461,7 @@ The human eye is approximately spherical, with a diameter of about 24 millimeter
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Theory/occhio.jpg}
-    \caption{Anatomy of the human eye.}
+    \caption{Anatomy of the human eye. Source:\url{https://www.pinpointeyes.com/blog-anatomy-of-the-human-eye/}.}
     \label{fig:ana}
 \end{figure}
 
@@ -475,7 +486,7 @@ Within this thin layer of tissue reside two main types of photoreceptor cells, n
     \centering
     \includegraphics[width = 0.6
     \textwidth]{Images/Theory/rods_cones.jpg}
-    \caption{Rods and Cones.}
+    \caption{Rods and Cones. Source: \url{https://my.clevelandclinic.org/health/body/photoreceptors-rods-and-cones}.}
     \label{fig:rodscones}
 \end{figure}
 
@@ -625,14 +636,14 @@ While this limitation reduces the comfort and naturalness of the setup, it ensur
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=1\textwidth,height=0.6\textwidth]{Images/Theory/eog.png}
-        \caption{Electro-OculoGraphy (EOG) eye tracker.}
+        \caption{Electro-OculoGraphy (EOG) eye tracker. Source: \url{https://www.researchgate.net/figure/Electro-oculography-EOG_fig1_327234488}.}
         \label{fig:eog}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=1\textwidth,height=0.6\textwidth]{Images/Theory/coil.png}
-        \caption{Scleral Contact Lens/Search Coil eye tracker.}
+        \caption{Scleral Contact Lens/Search Coil eye tracker. Source: \url{https://www.mdpi.com/1995-8692/18/5/47}.}
         \label{fig:coil}
     \end{subfigure}
     
@@ -642,14 +653,14 @@ While this limitation reduces the comfort and naturalness of the setup, it ensur
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=0.7\textwidth,height=0.6\textwidth]{Images/Theory/vog.jpeg}
-        \caption{Video-OculoGraphy (VOG) eye tracker.}
+        \caption{Video-OculoGraphy (VOG) eye tracker. Source: \url{https://www.researchgate.net/figure/Video-oculography-VOG-see-through-goggles-used-to-measure-eye-in-head-position-in-the_fig3_8052067}.}
         \label{fig:vog}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=1\textwidth,height=0.6\textwidth]{Images/Theory/corneal.jpg}
-        \caption{Corneal Reflection eye tracker.}
+        \caption{Corneal Reflection eye tracker. Source: \url{https://www.uxshark.com/a-look-into-predictive-eye-tracking-tools/}.}
         \label{fig:corneal}
     \end{subfigure}
 

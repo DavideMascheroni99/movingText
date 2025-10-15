@@ -362,6 +362,8 @@ INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\regexpatch\regexpat
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\xstring\xstring.sty
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\xstring\xstring.sty
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\generic\xstring\xstring.tex
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\xurl\xurl.sty
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\xurl\xurl.sty
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmr.fd
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmr.fd
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmr.fd
@@ -462,6 +464,14 @@ INPUT .\Images\Theory\Fingerprint_scanner_identification.jpg
 INPUT .\Images\Theory\Fingerprint_scanner_identification.jpg
 INPUT .\Images\Theory\Fingerprint_scanner_identification.jpg
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr10.tfm
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmri10.tfm
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmss.fd
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmss.fd
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmss.fd
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmss10.tfm
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmr10.tfm
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\lmmi10.tfm
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\lmsy10.tfm
 INPUT .\Images\Theory\eye.png
 INPUT .\Images\Theory\eye.png
 INPUT .\Images\Theory\eye.png
@@ -485,6 +495,7 @@ INPUT .\Images\Theory\occhio.jpg
 INPUT .\Images\Theory\occhio.jpg
 INPUT .\Images\Theory\occhio.jpg
 INPUT .\Images\Theory\occhio.jpg
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmss12.tfm
 INPUT .\Images\Theory\rods_cones.jpg
 INPUT .\Images\Theory\rods_cones.jpg
 INPUT .\Images\Theory\rods_cones.jpg
@@ -625,9 +636,6 @@ INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmr5.t
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\lmmi5.tfm
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\lmsy5.tfm
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx8.tfm
-INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\rm-lmr10.tfm
-INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\lmmi10.tfm
-INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\lmsy10.tfm
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx10.tfm
 INPUT .\Images\Results\Identification_single\single_id_st.png
 INPUT .\Images\Results\Identification_single\single_id_st.png
@@ -951,10 +959,6 @@ INPUT .\Images\Results\Static_Dynamic\Ver_stat.png
 INPUT .\Images\Results\Static_Dynamic\Ver_stat.png
 INPUT .\Images\Results\Static_Dynamic\Ver_stat.png
 INPUT .\Images\Results\Static_Dynamic\Ver_stat.png
-INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmss.fd
-INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmss.fd
-INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmss.fd
-INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmss12.tfm
 INPUT .\Images\Results\param_grid_nofs.png
 INPUT .\Images\Results\param_grid_nofs.png
 INPUT .\Images\Results\param_grid_nofs.png
@@ -1741,8 +1745,12 @@ INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr12.p
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr12.pfb
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr8.pfb
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr8.pfb
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmri10.pfb
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmri10.pfb
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmri12.pfb
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmri12.pfb
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmss10.pfb
+INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmss10.pfb
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmss12.pfb
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmss12.pfb
 INPUT C:\Users\david\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmsy10.pfb

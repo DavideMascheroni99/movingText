@@ -86,13 +86,13 @@
 \contentsline {chapter}{\numberline {B}Full results}{106}{appendix.B}%
 \contentsline {section}{\numberline {B.1}Verification Single without intruders ST – Animations}{106}{section.B.1}%
 \contentsline {section}{\numberline {B.2}Verification Single with Intruders ST – Animations}{107}{section.B.2}%
-\contentsline {section}{\numberline {B.3}Verification Single ST with Reduced Session Duration – Animations}{108}{section.B.3}%
-\contentsline {section}{\numberline {B.4}Verification ‘Classic’ Single without intruders ST – Animations}{111}{section.B.4}%
-\contentsline {section}{\numberline {B.5}Verification ‘Classic’ ST with Intruders – Animations}{112}{section.B.5}%
-\contentsline {section}{\numberline {B.6}Verification ‘Classic’ Single ST with Reduced Session Duration – Animations}{114}{section.B.6}%
-\contentsline {section}{\numberline {B.7}Verification Single without intruders FT – Animations}{116}{section.B.7}%
-\contentsline {section}{\numberline {B.8}Verification Single Intruders FT – Animations}{118}{section.B.8}%
-\contentsline {section}{\numberline {B.9}Verification Single FT with Reduced Session Duration – Animations}{119}{section.B.9}%
-\contentsline {section}{\numberline {B.10}Verification ‘Classic’ Single without intruders FT – Animations}{122}{section.B.10}%
-\contentsline {section}{\numberline {B.11}Verification ‘Classic’ FT with Intruders – Animations}{123}{section.B.11}%
-\contentsline {section}{\numberline {B.12}Verification ‘Classic’ Single ST with Reduced Session Duration – Animations}{124}{section.B.12}%
+\contentsline {section}{\numberline {B.3}Verification Single ST with Reduced Session Duration – Animations}{109}{section.B.3}%
+\contentsline {section}{\numberline {B.4}Verification ‘Classic’ Single without intruders ST – Animations}{112}{section.B.4}%
+\contentsline {section}{\numberline {B.5}Verification ‘Classic’ ST with Intruders – Animations}{113}{section.B.5}%
+\contentsline {section}{\numberline {B.6}Verification ‘Classic’ Single ST with Reduced Session Duration – Animations}{115}{section.B.6}%
+\contentsline {section}{\numberline {B.7}Verification Single without intruders FT – Animations}{118}{section.B.7}%
+\contentsline {section}{\numberline {B.8}Verification Single Intruders FT – Animations}{119}{section.B.8}%
+\contentsline {section}{\numberline {B.9}Verification Single FT with Reduced Session Duration – Animations}{121}{section.B.9}%
+\contentsline {section}{\numberline {B.10}Verification ‘Classic’ Single without intruders FT – Animations}{124}{section.B.10}%
+\contentsline {section}{\numberline {B.11}Verification ‘Classic’ FT with Intruders – Animations}{125}{section.B.11}%
+\contentsline {section}{\numberline {B.12}Verification ‘Classic’ Single FT with Reduced Session Duration – Animations}{127}{section.B.12}%

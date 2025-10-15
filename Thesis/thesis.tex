@@ -353,8 +353,9 @@ Unlike traditional biometric applications, such as fingerprint or iris recogniti
 Traditional biometric systems, particularly fingerprint and iris recognition, are regarded as highly reliable and relatively strong approaches. 
 They are built upon physical characteristics that an individual permanently possesses, making them highly distinctive and resistant to change. 
 As noted earlier, these two modalities can reach nearly 100\% accuracy in identification tasks, making them capable of reliably authenticating an individual even within large populations.
-
+\sloppy
 By contrast, behavioral biometric technologies can sometimes be applied for identification, but they are generally more suitable for verification tasks. 
+\fussy
 Their typically lower accuracy in identification makes them less suitable as standalone replacements for traditional physiological biometrics. [35]
 This limitation arises from the fact that behavior is inherently variable: the way a person types, writes, speaks, or drives may change depending on mood, fatigue, health, stress, or environmental conditions.
 
@@ -472,7 +473,7 @@ Within this thin layer of tissue reside two main types of photoreceptor cells, n
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width = 0.4
+    \includegraphics[width = 0.6
     \textwidth]{Images/Theory/rods_cones.jpg}
     \caption{Rods and Cones.}
     \label{fig:rodscones}
@@ -586,9 +587,9 @@ Based on Young and Sheena researches [22] the scleral search coil is extremely p
 However, it is also highly invasive. 
 Inserting the lens requires practice and care, and wearing it can be uncomfortable. 
 In addition, this method measures the eye's position relative to the head, so it is generally not suitable for directly determining the point of regard.
-
+\sloppy
 \subsection{Photo-OculoGraphy (POG) or Video-OculoGraphy (VOG)}
-
+\fussy
 This category includes a wide range of eye movement recording techniques that rely on measuring distinct features of the eye during rotation or translation. 
 Examples include the apparent shape of the pupil, the position of the limbus (the boundary between the iris and the sclera), and reflections from a nearby directed light source, often in the infrared spectrum. 
 Although the specific methods differ, they are grouped together because they generally do not provide direct measurements of the point of regard. 
@@ -1031,15 +1032,15 @@ The data collection involved 35 participants, including 22 males and 13 females,
 Of the participants, 17 were aged 25 or younger, 13 were between 26 and 40 years old, and 4 were over 40. 
 Additionally, 18 wore eyeglasses, while only one wore contact lenses.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.6
-    \textwidth]{Images/Experiment/tester.png}
-    \caption{Participants’ data.}
-    \label{fig:test}
-\end{figure}
+    \caption{Participants’ data.} % caption appears above
+    \includegraphics[width=0.6\textwidth]{Images/Experiment/tester.png}
+    \label{tab:test}
+\end{table}
 
-A detailed overview is provided in Figure \ref{fig:test}.
+
+A detailed overview is provided in Table \ref{tab:test}.
 
 All recordings were carried out under identical artificial lighting conditions, with the same light source activated for each session.
 The experiments took place in a quiet environment, free from noise and distractions, using an eye tracker mounted on a monitor to record participants' gaze. 
@@ -1112,15 +1113,14 @@ Specifically, each animation type was implemented with two different font sizes 
 Preliminary experiments were carried out aimed at selecting appropriate text speed and size parameters. 
 To address this question, we conducted a brief exploratory study in the laboratory involving seven participants.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.6
-    \textwidth]{Images/Experiment/tester_speeds.png}
-    \caption{Participants' data.}
-    \label{fig:prel}
-\end{figure}
+    \caption{Participants' data.} % caption appears above
+    \includegraphics[width=0.6\textwidth]{Images/Experiment/tester_speeds.png}
+    \label{tab:prel}
+\end{table}
 
-The demographic data of these participants are presented in Figure \ref{fig:prel}. 
+The demographic data of these participants are presented in Table \ref{tab:prel}. 
 The group consisted of six males and one female and four participants wore eyeglasses. 
 Regarding age distribution, three were between 21 and 30 years old, two between 31 and 40 years old, and two between 51 and 60 years old.
 
@@ -1154,13 +1154,13 @@ Rather than assigning the same speed to both horizontal and vertical text scroll
 This choice was motivated by the fact that the perceptual effort required to follow a moving text depends not only on the kind of movement (horizontal scroll vs. vertical block) and font size. 
 For example, a speed that is comfortable for a large-font vertical block may become unreadable when applied to a small-font horizontal scroll.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.6
-    \textwidth]{Images/Experiment/speeds.png}
-    \caption{Speeds data per animation.}
-    \label{fig:sped}
-\end{figure}
+    \caption{Speeds data per animation.} % table-style caption
+    \includegraphics[width=0.6\textwidth]{Images/Experiment/speeds.png}
+    \label{tab:sped}
+\end{table}
+
 
 In our implementation, the scrolling speed of the text stimulus is defined as the number of pixels by which its position is updated at each frame of the animation.
 A frame represents a single iteration of the display update cycle in a computer-based animation or graphical application. 
@@ -1183,7 +1183,7 @@ Such temporal alignment ensures that each frame of the animation corresponds pre
 To convert the per-frame displacement into a more conventional measure of velocity, namely pixels per second, it is sufficient to multiply the displacement per frame by the number of frames per second. 
 Following this procedure, a speed of 2.38 pixels per frame corresponds to 357 pixels per second, while values of 3.4, 0.58, and 0.94 pixels per frame translate to 510, 87, and 141 pixels per second, respectively. 
 These values provide an interpretable indication of the actual velocity of the stimulus as perceived on the screen.
-All these values are summarized in Figure \ref{fig:sped}, which first presents the speeds chosen by each participant for each animation, and then reports the average of these speeds expressed both in pixels per frame and in pixels per second.
+All these values are summarized in Table \ref{tab:sped}, which first presents the speeds chosen by each participant for each animation, and then reports the average of these speeds expressed both in pixels per frame and in pixels per second.
 
 From the perspective of the participant, these velocities determine the apparent rate at which the text traverses the display from right to left. 
 Higher values, such as 357 or 510 pixels per second, result in a rapid motion where the text crosses the screen in a relatively short amount of time, demanding faster eye movements to track it. 
@@ -1665,7 +1665,7 @@ The second motivation for this setup is methodological: the data from the first 
 A hyperparameter tuning procedure was implemented using a pipeline [103] composed of three main stages.
 The first stage employs the SimpleImputer [105] to handle missing values by replacing them with the mean of the corresponding feature column. 
 The second stage performs feature scaling, tested with three different normalization methods: MinMaxScaler [106], StandardScaler [107], and RobustScaler [108]. 
-Finally, the third stage involves hyperparameter optimization, using the parameter grids reported in Figure \ref{fig:pg_nofs} and GridSearchCV [104]. 
+Finally, the third stage involves hyperparameter optimization, using the parameter grids reported in Table \ref{tab:pg_nofs} and GridSearchCV [104]. 
 It is important to note that each time a GridSearchCV strategy was applied to determine the optimal hyperparameters, the complete pipeline configuration was consistently employed. 
 The hyperparameter optimization was conducted using a 5-fold cross-validation procedure (\texttt{cv = 5}), in which the training data were divided into five equally sized folds. 
 In each iteration, four folds were used for model training and the remaining one for validation. 
@@ -1673,15 +1673,15 @@ This process was repeated five times so that every fold served once as the valid
 
 We're now ready to present the results obtained during this analysis.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.6
-    \textwidth]{Images/Results/Identification/nofs.png}
-    \caption{Identification results without feature selection.}
-    \label{fig:id_nofs}
-\end{figure}
+    \caption{Identification results without feature selection.} % appears above
+    \includegraphics[width=0.6\textwidth]{Images/Results/Identification/nofs.png}
+    \label{tab:id_nofs}
+\end{table}
 
-The figure \ref{fig:id_nofs} illustrates that, for the random split type, the best performance is achieved by the Random Forest classifier, yielding an accuracy of 77.62\%.
+
+The Table \ref{tab:id_nofs} illustrates that, for the random split type, the best performance is achieved by the Random Forest classifier, yielding an accuracy of 77.62\%.
 In contrast, for the session split type, the highest accuracy is obtained by the Multilayer Perceptron (MLP) model, with a value of 66.55\%.
 
 A notable performance drop is observed when transitioning from the random split to the session split. 
@@ -1696,19 +1696,19 @@ This overlap provides the model with indirect information about the test data, t
 We now proceed to perform the identification analysis with an additional step: feature selection.
 The overall procedure and implementation remain identical to those described in Appendix \ref{subsec:id_fs_ch}.
 In particular two data split strategies were used, random and session, together with GridSearchCV for hyperparameter optimization.
-The main difference lies in the inclusion of the feature selection stage, illustrated in Figure \ref{fig:pg_fs}. 
+The main difference lies in the inclusion of the feature selection stage, illustrated in Table \ref{tab:pg_fs}. 
 Specifically, we employed the SelectKBest method[91] to identify the subset of features (k) that yielded the highest mean cross-validation accuracy during the grid search.
 This approach not only enhances model interpretability but also reduces the dimensionality of the feature space, thereby potentially improving generalization performance.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.6
-    \textwidth]{Images/Results/Identification/fs.png}
     \caption{Identification results with feature selection.}
-    \label{fig:id_fs}
-\end{figure}
+    \includegraphics[width=0.6\textwidth]{Images/Results/Identification/fs.png}
+    \label{tab:id_fs}
+\end{table}
 
-The figure \ref{fig:id_fs} presents the results obtained from this analysis.
+
+The Table \ref{tab:id_fs} presents the results obtained from this analysis.
 For the random split type, the Random Forest classifier remains the best performer, achieving an accuracy of 76.69\%.
 This represents a slight decrease compared to the accuracy of 77.62\% obtained without the feature selection step, corresponding to a reduction of 13 features (from 83 to 70).
 Interestingly, the Support Vector Classifier (SVC) achieved the same accuracy of 76.69\% using the reduced feature set of 70 features, matching the performance of the Random Forest under these conditions.
@@ -1817,7 +1817,7 @@ The analysis was conducted through a structured pipeline composed of four sequen
 First, missing values were addressed using an imputation procedure that replaced them with the mean value of each respective feature, ensuring completeness of the dataset. 
 Second, a scaling step was applied to standardize the feature values, bringing them onto a comparable range and preventing scale-related bias in the model. 
 Third, a feature selection process was performed, following the same methodology as in the previous analysis, to identify and retain the most informative features for the model. 
-Finally, hyperparameter tuning was carried out using GridSearchCV with the parameter grid presented in Figure \ref{fig:pg_fs}, optimizing the model's performance.
+Finally, hyperparameter tuning was carried out using GridSearchCV with the parameter grid presented in Table \ref{tab:pg_fs}, optimizing the model's performance.
 
 This analysis serves a dual purpose. 
 Primarily, it evaluates the performance of each animation within the context of an identification task, providing insight into their relative effectiveness. 
@@ -1825,15 +1825,14 @@ Additionally, it establishes the optimal parameters for the subsequent verificat
 By performing parameter tuning within the single-animation identification analysis, this process becomes significantly more efficient. 
 The parameters identified through this analysis, together with the top k features selected, constitute the foundation for the verification analysis, in which feature selection determines the final set of features used for model evaluation.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Identification_single/single_id_st.png}
     \caption{Results for identification with single animation - ST.}
-    \label{fig:id_s_st}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Identification_single/single_id_st.png}
+    \label{tab:id_s_st}
+\end{table}
 
-The figure \ref{fig:id_s_st} presents a comprehensive collection of the results obtained during the analysis. 
+The Table \ref{tab:id_s_st} presents a comprehensive collection of the results obtained during the analysis. 
 For each type of data split, the figure includes a table showing the performance of each animation using the selected classifier.
 
 Considering the random split, the best-performing animations are VB\_SL\_BIG with an accuracy of $81.9\%$ and VB\_FA\_BIG with an accuracy of $81.75\%$.
@@ -1894,7 +1893,7 @@ f80 & Number of movements in the ascending direction & 635.33 \\
 \end{tabular}
 \end{table}
 
-The table \ref{tab:top30_id_s_st} presents the top 30 features identified in this analysis.
+The Table \ref{tab:top30_id_s_st} presents the top 30 features identified in this analysis.
 The ranking was determined by summing the F-scores of each feature across all selections and ordering them from highest to lowest.
 Notably, the leaderboard is largely dominated by pupil size-related features, which appear to be highly descriptive of individual human behavior.
 In contrast, the only two features that were never selected are Feature 30: Kurtosis of Saccade Speed and Feature 61: kurtosis ratio between left and right pupil diameter, suggesting that there are not particularly informative descriptors for the identification task.
@@ -1920,15 +1919,15 @@ Specifically, for each animation, the first two sessions (S1 and S2) are collect
 Then, the test set for each animation is constructed exclusively from the corresponding third session (S3) data. 
 Each of these animation-specific test sets is used to evaluate the model individually, allowing a detailed assessment of performance for each animation under unseen session conditions.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Identification_single/single_id_ft.png}
     \caption{Results for identification with single animation - FT.}
-    \label{fig:id_s_ft}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Identification_single/single_id_ft.png}
+    \label{tab:id_s_ft}
+\end{table}
 
-The figure \ref{fig:id_s_ft} contains the results obtained evaluating the different models during the analysis.
+
+The Table \ref{tab:id_s_ft} contains the results obtained evaluating the different models during the analysis.
 
 The best-performing animation in the random split procedure is VB\_SL\_BIG, which achieves an accuracy of 79.84\%, followed by VB\_FA\_SMA and VB\_FA\_BIG, with accuracies of 79.05\% and 77.14\%, respectively.
 All these results were obtained using the SVC classifier.
@@ -1988,7 +1987,7 @@ f32 & Minimum left pupil diameter & 1348.24 \\
 
 Consistent with the previous results, the ranking presented in Table \ref{tab:top30_id_s_ft} is once again dominated by pupil-related features.
 
-The table \ref{tab:never_selected_features_ft} presents the list of the least informative features that were never selected during the analysis.
+The Table \ref{tab:never_selected_features_ft} presents the list of the least informative features that were never selected during the analysis.
 
 
 \begin{table}[H]
@@ -2073,25 +2072,24 @@ Precision quantifies the proportion of correctly identified genuine samples amon
 Specificity, on the other hand, indicates how effectively the system identifies impostor samples as non-genuine.
 Finally, the Equal Error Rate represents the point at which the false acceptance rate equals the false rejection rate, providing a single, balanced indicator of the system's verification performance.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single/st/VB_FA_BIG.png}
     \caption{Verification results for single animations using the ST configuration and VB\_FA\_BIG animation.}
-    \label{fig:VB_FA_BIG_st}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single/st/VB_FA_BIG.png}
+    \label{tab:VB_FA_BIG_st}
+\end{table}
 
-The figure \ref{fig:VB_FA_BIG_st} illustrates that the best-performing animation, in terms of accuracy, is VB\_FA\_BIG, achieving an accuracy of 92.2\% with the Random Forest classifier and an EER of 3.6\%.
+The Table \ref{tab:VB_FA_BIG_st} illustrates that the best-performing animation, in terms of accuracy, is VB\_FA\_BIG, achieving an accuracy of 92.2\% with the Random Forest classifier and an EER of 3.6\%.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single/st/VB_FA_LIT.png}
     \caption{Verification results for single animations using the ST configuration and VB\_FA\_SMA animation.}
-    \label{fig:VB_FA_LIT_st}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single/st/VB_FA_LIT.png}
+    \label{tab:VB_FA_LIT_st}
+\end{table}
 
-This animation is followed by VB\_FA\_SMA, which, as shown in Figure \ref{fig:VB_FA_LIT_st}, achieves an accuracy of 90.9\% using the SVC classifier and an EER of 4.7\%.
+
+This animation is followed by VB\_FA\_SMA, which, as shown in Table \ref{tab:VB_FA_LIT_st}, achieves an accuracy of 90.9\% using the SVC classifier and an EER of 4.7\%.
 The rest of the animation results are contained in Appendix \ref{subsec:vs_st_a}.
 
 \begin{figure}[ht]
@@ -2102,7 +2100,7 @@ The rest of the animation results are contained in Appendix \ref{subsec:vs_st_a}
     \label{fig:roc_st}
 \end{figure}
 
-The figure \ref{fig:roc_st} presents the ROC curves for each individual animation, obtained using the best-performing classifier based on the Equal Error Rate.
+The Figure \ref{fig:roc_st} presents the ROC curves for each individual animation, obtained using the best-performing classifier based on the Equal Error Rate.
 For each curve and corresponding classifier, the Area Under the Curve (AUC) value is also reported in the legend as a performance indicator.
 \FloatBarrier
 
@@ -2132,39 +2130,37 @@ This unexpected behavior may be attributed to the choice of evaluating all test 
 For this reason, an additional analysis employing the classic one-to-one training and testing approach will be conducted to enable a more direct comparison with the current results.
 In principle, we would expect the best-performing animation to remain consistent between the open-set and closed-set verification analyses.
 For VB\_SL\_SMA, accuracy increases from 85.9\% to 91.9\% when using the SVC classifier, while the EER decreases from 7.0\% to 6.1\%.
-The corresponding results are illustrated in Figure \ref{fig:VB_SL_LIT_sti}.
+The corresponding results are illustrated in Table \ref{tab:VB_SL_LIT_sti}.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_intruders/st/VB_SL_LIT.png}
     \caption{Verification with intruders using the ST configuration and VB\_SL\_SMA animation.}
-    \label{fig:VB_SL_LIT_sti}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single_intruders/st/VB_SL_LIT.png}
+    \label{tab:VB_SL_LIT_sti}
+\end{table}
 
 The best-performing animation from the closed-set analysis, VB\_FA\_BIG, exhibits a decrease in accuracy from 92.2\% to 87.2\% when using the Random Forest classifier, while its EER increases from 3.6\% to 8.3\%.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_intruders/st/VB_FA_BIG.png}
     \caption{Verification with intruders using the ST configuration and VB\_FA\_BIG animation.}
-    \label{fig:VB_FA_BIG_sti}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single_intruders/st/VB_FA_BIG.png}
+    \label{tab:VB_FA_BIG_sti}
+\end{table}
 
 Similarly, VB\_FA\_SMA, the second-best animation in terms of accuracy from the closed-set analysis, shows a slight decrease in accuracy from 90.9\% to 90.5\% when using the SVC classifier.
 At the same time, its EER improves, decreasing from 4.7\% to 3.3\%.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_intruders/st/VB_FA_LIT.png}
     \caption{Verification with intruders using the ST configuration and VB\_FA\_SMA animation.}
-    \label{fig:VB_FA_LIT_sti}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single_intruders/st/VB_FA_LIT.png}
+    \label{tab:VB_FA_LIT_sti}
+\end{table}
 
 All the remaining results are reported in Appendix \ref{subsec:vs_sti_a}.
-To conclude the analysis Figure \ref{fig:roc_sti} illustrates the ROC curves corresponding to each animation, generated using the classifier that achieved the lowest EER.
+To conclude the analysis, Figure \ref{fig:roc_sti} illustrates the ROC curves corresponding to each animation, generated using the classifier that achieved the lowest EER.
+
 
 \begin{figure}[ht]
     \centering
@@ -2187,21 +2183,20 @@ This analysis is particularly important, as it aims to evaluate how the performa
 The objective is to identify an optimal trade-off between accuracy and acquisition time, a factor that will be crucial in real-world applications.
 In practice, if the animation duration is too long, users may lose focus or abandon the procedure, negatively affecting both data quality and system usability.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/ten/VB_FA_BIG_ten_st.png}
     \caption{Verification results with 10-second recordings using the ST configuration and VB\_FA\_BIG animation.}
-    \label{fig:VB_FA_BIG_10_st}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single_five_ten/st/ten/VB_FA_BIG_ten_st.png}
+    \label{tab:VB_FA_BIG_10_st}
+\end{table}
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png}
     \caption{Verification results with 5-second recordings using the ST configuration and VB\_FA\_BIG animation.}
-    \label{fig:VB_FA_BIG_5_st}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single_five_ten/st/five/VB_FA_BIG_five_st.png}
+    \label{tab:VB_FA_BIG_5_st}
+\end{table}
+
 
 As expected, the best-performing animation remains VB\_FA\_BIG, consistent with the results obtained in the 15-second analysis.
 When considering only the first 10 seconds, its accuracy decreases slightly from 92.2\% to 90.2\% using the Random Forest classifier, while the EER increases from 3.6\% to 4.5\%.
@@ -2261,15 +2256,14 @@ Instead, we will focus on presenting the results and comparing them to identify 
 As in the previous analysis, the best-performing animation remains VB\_FA\_BIG, achieving an accuracy of 92.4\% using the NuSVC classifier and an EER of 4.6\%.
 When comparing the two analyses, the results are almost identical, with this configuration showing a slight improvement of 0.2\% in accuracy, but a small increase in EER from 3.6\% to 4.6\%.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_single/st/VB_FA_BIG.png}
-    \caption{Classic’ verification results using the ST configuration and VB\_FA\_BIG animation.}
-    \label{fig:VB_FA_BIG_cst}
-\end{figure}
+    \caption{‘Classic’ verification results using the ST configuration and VB\_FA\_BIG animation.}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Classic_procedure/Verification_single/st/VB_FA_BIG.png}
+    \label{tab:VB_FA_BIG_cst}
+\end{table}
 
-The table \ref{fig:VB_FA_BIG_cst} display the best performing animation, while the additional results regarding the other animations are contained in Appendix \ref{subsec:vsc_st_ft}.
+The Table \ref{tab:VB_FA_BIG_cst} display the best performing animation, while the additional results regarding the other animations are contained in Appendix \ref{subsec:vsc_st_ft}.
 
 As in the previous chapter, this analysis includes the ROC curves for the best-performing animations, selected based on their EER, as shown in Figure \ref{fig:roc_cst}.
 
@@ -2291,15 +2285,15 @@ Following the closed-set analysis, this intruder-based evaluation was carried ou
 The first observation from these results is that the best-performing animation remains consistent with the previous section, regarding the closed set analysis.
 This continuity is particularly important, as it suggests that the anomalous behavior observed earlier was likely due to the evaluation procedure rather than inherent differences in the data or model performance.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_BIG.png}
     \caption{‘Classic’ verification with intruders using the ST configuration and VB\_FA\_BIG animation.}
-    \label{fig:VB_FA_BIG_cist}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/VB_FA_BIG.png}
+    \label{tab:VB_FA_BIG_cist}
+\end{table}
 
-As we observe from figure \ref{fig:VB_FA_BIG_cist} we have a decrease in accuracy from 92.4\% to 91.2\% using nuSVC classifier and an increase of the EER from 4.6\% to 6.2\%.
+
+As we observe from Table \ref{tab:VB_FA_BIG_cist} we have a decrease in accuracy from 92.4\% to 91.2\% using nuSVC classifier and an increase of the EER from 4.6\% to 6.2\%.
 This behavior is expected due to the presence of unseen users in the dataset.
 However, the performance decrease remains relatively small, indicating that the system continues to perform effectively even under this more challenging evaluation scenario.
 
@@ -2332,25 +2326,24 @@ Concurrently, its EER increases modestly from 4.6\% to 5.3\%.
 If recordings are limited to only the first 5 seconds of data, performance further decreases to 90.8\%, and the EER rises to 8\%. 
 These findings indicate a trade-off between recording duration and system performance, with relatively minor degradation for shorter recordings.
 
-The best-performing animation resulst are collected in Figures \ref{fig:VB_FA_BIG_cst_10} and \ref{fig:VB_FA_BIG_cst_5}.
+The best-performing animation resulst are collected in Tables \ref{tab:VB_FA_BIG_cst_10} and \ref{tab:VB_FA_BIG_cst_5}.
 While the ROC  curves of this analysis are presented in figures \ref{fig:roc_cst_10} and \ref{fig:roc_cst_5}.
 All the additional material related to this type of analysis is placed in Appendix \ref{subsec:vsc_rt}.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_BIG.png}
     \caption{Verification ’classic’ results with 10-second recordings using the ST configuration and VB\_FA\_BIG animation.}
-    \label{fig:VB_FA_BIG_cst_10}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/VB_FA_BIG.png}
+    \label{tab:VB_FA_BIG_cst_10}
+\end{table}
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/st/five/VB_FA_BIG.png}
     \caption{Verification ’classic’ results with 5-second recordings using the ST configuration and VB\_FA\_BIG animation.}
-    \label{fig:VB_FA_BIG_cst_5}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Classic_procedure/five_ten/st/five/VB_FA_BIG.png}
+    \label{tab:VB_FA_BIG_cst_5}
+\end{table}
+
 
 \begin{figure}[ht]
     \centering
@@ -2417,25 +2410,24 @@ The evaluation of the models is not limited to classification accuracy.
 To offer a more complete assessment of system performance, several additional metrics are reported. 
 These include precision, recall, specificity, and the EER, each providing distinct insights into the model's behavior.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single/ft/VB_FA_LIT.png}
     \caption{Verification results using the Full Train (FT) configuration and VB\_FA\_SMA animation.}
-    \label{fig:VB_FA_LIT_ft}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single/ft/VB_FA_LIT.png}
+    \label{tab:VB_FA_LIT_ft}
+\end{table}
 
-The figure \ref{fig:VB_FA_LIT_ft} illustrates that the best-performing animation, in terms of accuracy, is VB\_FA\_SMA, achieving an accuracy of 92.6\% with the SVC classifier and an EER of 4\%.
+The Table \ref{tab:VB_FA_LIT_ft} illustrates that the best-performing animation, in terms of accuracy, is VB\_FA\_SMA, achieving an accuracy of 92.6\% with the SVC classifier and an EER of 4\%.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single/ft/VB_FA_BIG.png}
     \caption{Verification results using the Full Train (FT) configuration and VB\_FA\_BIG animation.}
-    \label{fig:VB_FA_BIG_ft}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single/ft/VB_FA_BIG.png}
+    \label{tab:VB_FA_BIG_ft}
+\end{table}
 
 The next best-performing animation is VB\_FA\_BIG. 
-As illustrated in Figure \ref{fig:VB_FA_BIG_ft}, it attains an accuracy of 90.2\% with the SVC classifier and an EER of 7.3\%. 
+As illustrated in Table \ref{tab:VB_FA_BIG_ft}, it attains an accuracy of 90.2\% with the SVC classifier and an EER of 7.3\%. 
 Results for the remaining animations are provided in Appendix \ref{subsec:vs_ft}
 
 \begin{figure}[ht]
@@ -2483,27 +2475,27 @@ The best-performing model is then evaluated on all twenty test sets.
 Finally, we compute the average performance per seed for each user model. 
 Then, we calculate the overall average across all users to determine the general performance of the system.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single_intruders/ft/VB_FA_LIT.png}
     \caption{Verification results with intruders using the Full Train (FT) configuration and VB\_FA\_SMA animation.}
-    \label{fig:VB_FA_LIT_fti}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single_intruders/ft/VB_FA_LIT.png}
+    \label{tab:VB_FA_LIT_fti}
+\end{table}
 
-The figure \ref{fig:VB_FA_LIT_fti} shows that the VB\_FA\_SMA animation yields the highest accuracy among all tested cases, reaching 90.2\% when using the SVC classifier. 
+The Table \ref{tab:VB_FA_LIT_fti} shows that the VB\_FA\_SMA animation yields the highest accuracy among all tested cases, reaching 90.2\% when using the SVC classifier. 
 The corresponding EER for this configuration is 7.2\%.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_intruders/ft/VB_FA_BIG.png}
     \caption{Verification results with intruders using the Full Train (FT) configuration and VB\_FA\_BIG animation.}
-    \label{fig:VB_FA_BIG_fti}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single_intruders/ft/VB_FA_BIG.png}
+    \label{tab:VB_FA_BIG_fti}
+\end{table}
 
 The second-best performance is obtained with the VB\_FA\_BIG animation. 
-As shown in Figure \ref{fig:VB_FA_BIG_fti}, this configuration achieves an accuracy of 87.9\% when using the SVC classifier, along with an EER of 10.1\%. 
+As shown in Table \ref{tab:VB_FA_BIG_fti}, this configuration achieves an accuracy of 87.9\% when using the SVC classifier, along with an EER of 10.1\%. 
 The results for the other animations are reported in Appendix \ref{subsec:vsi_ft}.
+
 
 \begin{figure}[ht]
     \centering
@@ -2538,21 +2530,20 @@ This analysis is particularly significant because it investigates how reducing t
 The objective is to determine an effective balance between accuracy and acquisition time, a critical consideration for practical implementations. 
 In real-world scenarios, excessively long animations may lead to a loss of user attention or disengagement, ultimately degrading both data quality and system usability.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/ft/ten/VB_FA_LIT.png}
     \caption{Verification results with 10-second recordings using the FT configuration and VB\_FA\_SMA animation.}
-    \label{fig:VB_FA_LIT_10_ft}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single_five_ten/ft/ten/VB_FA_LIT.png}
+    \label{tab:VB_FA_LIT_10_ft}
+\end{table}
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Verification_single_five_ten/ft/five/VB_FA_LIT.png}
     \caption{Verification results with 5-second recordings using the FT configuration and VB\_FA\_SMA animation.}
-    \label{fig:VB_FA_LIT_5_ft}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Verification_single_five_ten/ft/five/VB_FA_LIT.png}
+    \label{tab:VB_FA_LIT_5_ft}
+\end{table}
+
 
 In this section, the focus is on evaluating how the performance of the best-performing animation changes as the recording duration is progressively reduced. 
 As anticipated, VB\_FA\_SMA continues to be the top-performing animation, confirming the findings from the 15-second analysis.
@@ -2626,24 +2617,22 @@ The focus instead is on examining the obtained results and comparing them with t
 
 As in the preceding analysis, the best-performing animation continues to be VB\_FA\_SMA, attaining an accuracy of 92.4\% with the NuSVC classifier and an EER of 5\%.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_single/ft/VB_FA_LIT.png}
-    \caption{Classic’ verification results using the FT configuration and VB\_FA\_SMA animation.}
-    \label{fig:VB_FA_LIT_cft}
-\end{figure}
+    \caption{Classic verification results using the FT configuration and VB\_FA\_SMA animation.}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Classic_procedure/Verification_single/ft/VB_FA_LIT.png}
+    \label{tab:VB_FA_LIT_cft}
+\end{table}
 
-The table \ref{fig:VB_FA_LIT_cft} presents the best-performing animation, while the additional results for the remaining animations are provided in Appendix \ref{subsec:vsc_ft}.
-The current analysis also includes the ROC curves of the best-performing animations, selected according to their Equal Error Rate, as shown in Figure \ref{fig:roc_cft}.
+The Table \ref{tab:VB_FA_LIT_cft} presents the best-performing animation, while the additional results for the remaining animations are provided in Appendix \ref{subsec:vsc_ft}.
+The current analysis also includes the ROC curves of the best-performing animations, selected according to their Equal Error Rate, as shown in Table \ref{tab:roc_cft}.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.6
-    \textwidth]{Images/Results/Classic_procedure/Verification_single/ft/Verification_single_roc_classic_ft.png}
     \caption{ROC curves.}
-    \label{fig:roc_cft}
-\end{figure}
+    \includegraphics[width=0.6\textwidth]{Images/Results/Classic_procedure/Verification_single/ft/Verification_single_roc_classic_ft.png}
+    \label{tab:roc_cft}
+\end{table}
 
 When compared to the previous approach (Section \ref{subsec:vft}), which achieved an accuracy of 92.6\% with the SVC classifier and an EER of 4\% on the same animation, the current method shows slightly lower performance in both accuracy and EER.
 \FloatBarrier
@@ -2655,15 +2644,14 @@ This evaluation follows the closed-set analysis and was performed in the same ma
 
 The first notable observation is that the best-performing animation remains the same as in the closed-set analysis, but with a slight decrease in performance due to the presence of the intruders.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/Verification_intruders/ft/VB_FA_LIT.png}
     \caption{‘Classic’ verification with intruders using the FT configuration and VB\_FA\_SMA animation.}
-    \label{fig:VB_FA_LIT_cift}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Classic_procedure/Verification_intruders/ft/VB_FA_LIT.png}
+    \label{tab:VB_FA_LIT_cift}
+\end{table}
 
-As shown in Figure \ref{fig:VB_FA_LIT_cift}, the accuracy decreases from 92.4\% using nuSVC to 89.2\% when using the SVC classifier.
+As shown in Table \ref{tab:VB_FA_LIT_cift}, the accuracy decreases from 92.4\% using nuSVC to 89.2\% when using the SVC classifier.
 While the EER increases from 5\% to 8.2\%. 
 This reduction in performance is expected due to the introduction of unseen users in the test set. 
 Nevertheless, the drop remains relatively modest, indicating that the system continues to operate effectively under this more challenging evaluation scenario.
@@ -2698,25 +2686,24 @@ In contrast, for 15-second recordings, the EER decreases due to the availability
 When recordings are limited to the first 5 seconds, performance decreases to 90.6\%, and the EER rises to 6.4\%. 
 These results highlight a trade-off between recording duration and system performance, with only a modest degradation observed for shorter recordings.
 
-The best-performing animations for the 10- and 5-second conditions are illustrated in Figures \ref{fig:VB_FA_LIT_cft_10} and \ref{fig:VB_FA_LIT_cft_5}, respectively. 
+The best-performing animations for the 10- and 5-second conditions are illustrated in Tables \ref{tab:VB_FA_LIT_cft_10} and \ref{tab:VB_FA_LIT_cft_5}, respectively. 
 The corresponding ROC curves for these conditions are presented in Figures \ref{fig:roc_cft_10} and \ref{fig:roc_cft_5}.
 Additional results and supporting material for this analysis are provided in Appendix \ref{subsec:vsc_ftr}.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/ft/ten/VB_FA_LIT.png}
     \caption{Verification ’classic’ results with 10-second recordings using the FT configuration and VB\_FA\_SMA animation.}
-    \label{fig:VB_FA_LIT_cft_10}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Classic_procedure/five_ten/ft/ten/VB_FA_LIT.png}
+    \label{tab:VB_FA_LIT_cft_10}
+\end{table}
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.8
-    \textwidth]{Images/Results/Classic_procedure/five_ten/ft/five/VB_FA_LIT.png}
     \caption{Verification ’classic’ results with 5-second recordings using the FT configuration and VB\_FA\_SMA animation.}
-    \label{fig:VB_FA_LIT_cft_5}
-\end{figure}
+    \includegraphics[width=0.8\textwidth]{Images/Results/Classic_procedure/five_ten/ft/five/VB_FA_LIT.png}
+    \label{tab:VB_FA_LIT_cft_5}
+\end{table}
+
 
 \begin{figure}[ht]
     \centering
@@ -2752,15 +2739,14 @@ Data collection was conducted with eight participants, comprising seven males an
 Among the participants, three were aged between 20 and 30 years, one between 31 and 40 years, one between 41 and 50 years, two between 51 and 60 years, and one participant was over 60 years old.
 Additionally, five participants wore eyeglasses, while none used contact lenses.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.7
-    \textwidth]{Images/Experiment/static_vs_dynamic.png}
     \caption{Data from Participants Involved in the Experiment.}
-    \label{fig:tester_8}
-\end{figure}
+    \includegraphics[width=0.7\textwidth]{Images/Experiment/static_vs_dynamic.png}
+    \label{tab:tester_8}
+\end{table}
 
-A detailed overview is presented in Table \ref{fig:tester_8}.
+A detailed overview is presented in Table \ref{tab:tester_8}.
 
 The presented stimuli differ in order to represent the characteristics of the two text modalities: static and dynamic.
 The dynamic text consists of two types of animations, Vertical Block and Horizontal Scroll, each combined with two display speeds and two character sizes, resulting in a total of eight animations. 
@@ -2824,26 +2810,25 @@ This configuration allows for assessing the model’s robustness when applied to
 A GridSearchCV procedure was employed for both datasets to optimize hyperparameters, with the feature selection step omitted for simplicity.
 The classifiers and their corresponding parameter grids are presented in Appendix \ref{subsec:param}.
 
-\begin{figure}[htbp]
+\begin{table}[htbp]
     \centering
+    \caption{Identification results}
     \begin{subfigure}[t]{0.49\textwidth}
         \centering
         \includegraphics[width=\linewidth]{Images/Results/Static_Dynamic/id_moving.png}
         \caption{Identification with dynamic text.}
-        \label{fig:dyn_id}
+        \label{tab:dyn_id}
     \end{subfigure}
     \hfill
     \begin{subfigure}[t]{0.49\textwidth}
         \centering
         \includegraphics[width=\linewidth]{Images/Results/Static_Dynamic/id_stat.png}
         \caption{Identification with static text.}
-        \label{fig:stat_id}
+        \label{tab:stat_id}
     \end{subfigure}
-    \caption{Identification results}
-    \label{fig:id_stat_dyn}
-\end{figure}
+\end{table}
 
-The figure \ref{fig:id_stat_dyn} shows the results obtained during the identification analysis. 
+The Tables \ref{tab:dyn_id} and \ref{tab:stat_id} shows the results obtained during the identification analysis. 
 In general, random splits yield higher accuracies compared to the static text stimuli. 
 For instance, the best result with this split is achieved using SVC, reaching an accuracy of 93.1\% for the static variation, whereas dynamic text reaches 90.78\% with an MLP classifier.
 
@@ -2872,23 +2857,21 @@ The model is then evaluated on this configuration, and the results provide the a
 
 For this analysis, in addition to accuracy, precision, recall, specificity, and Equal Error Rate are also reported to provide a comprehensive evaluation of system performance.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.6
-    \textwidth]{Images/Results/Static_Dynamic/Ver_mov.png}
+    \includegraphics[width=0.6\textwidth]{Images/Results/Static_Dynamic/Ver_mov.png}
     \caption{Verification with dynamic text.}
-    \label{fig:ver_dyn}
-\end{figure}
+    \label{tab:ver_dyn}
+\end{table}
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.6
-    \textwidth]{Images/Results/Static_Dynamic/Ver_stat.png}
+    \includegraphics[width=0.6\textwidth]{Images/Results/Static_Dynamic/Ver_stat.png}
     \caption{Verification with static text.}
-    \label{fig:ver_stat}
-\end{figure}
+    \label{tab:ver_stat}
+\end{table}
 
-The results of the verification analysis for dynamic and static text are presented in Table \ref{fig:ver_dyn} and Table \ref{fig:ver_stat}, respectively.
+The results of the verification analysis for dynamic and static text are presented in Table \ref{tab:ver_dyn} and Table \ref{tab:ver_stat}, respectively.
 As shown, under the random split, the static text stimuli achieve slightly better performance, reaching an accuracy of 93.59\% with the Random Forest classifier, compared to 92.5\% for the dynamic text. 
 The Equal Error Rate follows the same trend, with the static text achieving 2.81\% versus 6.36\% for the dynamic variation.
 
@@ -3212,27 +3195,26 @@ Specifically, it provides a subsection presenting the complete parameter grid us
 \section{Parameter grid}
 For every \texttt{GridSearchCV} execution, the cross-validation parameter was set to \texttt{cv = 5}, applying a 5-fold cross-validation procedure.
 The evaluation metric was defined as \texttt{scoring = 'accuracy'} to optimize the models based on classification accuracy.
-The figure \ref{fig:pg_nofs} displays the full parameter grid used whenever hyperparameter tuning was performed without applying a feature selection step.
+The Table \ref{tab:pg_nofs} displays the full parameter grid used whenever hyperparameter tuning was performed without applying a feature selection step.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.9
-    \textwidth]{Images/Results/param_grid_nofs.png}
     \caption{Parameter grid without feature selection step}
-    \label{fig:pg_nofs}
-\end{figure}
+    \includegraphics[width=0.9\textwidth]{Images/Results/param_grid_nofs.png}
+    \label{tab:pg_nofs}
+\end{table}
 
-Conversely, Figure \ref{fig:pg_nofs} presents the parameter grid that includes the additional feature selection step.
+Conversely, Table \ref{tab:pg_fs} presents the parameter grid that includes the additional feature selection step.
 
-\begin{figure}[ht]
+\begin{table}[ht]
     \centering
-    \includegraphics[width = 0.9
-    \textwidth]{Images/Results/fs.png}
     \caption{Parameter grid with feature selection step}
-    \label{fig:pg_fs}
-\end{figure}
+    \includegraphics[width=0.9\textwidth]{Images/Results/fs.png}
+    \label{tab:pg_fs}
+\end{table}
 
 \FloatBarrier
+
 
 \section{Identification with Feature Selection — Best k Features}
 \label{subsec:id_fs_k}
@@ -3295,16 +3277,14 @@ This section presents the additional results of the verification analysis conduc
 \foreach \anim in {VB_SL_LIT,HS_SL_LIT,HS_SL_BIG,VB_SL_BIG,HS_FA_LIT,HS_FA_BIG}{%
     % Replace _LIT with _SMA for the caption
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaption]%
-    \noindent\hfill
-    \begin{minipage}{0.65\textwidth}
+    \begin{table}[H]
         \centering
-        \includegraphics[width=\linewidth]{Images/Results/Verification_single/st/\anim.png}\\[1mm]
-        {\small Verification results for single animations using the ST configuration and \expandafter\detokenize\expandafter{\animCaption} animation.}
-    \end{minipage}%
-    \hfill\par\vspace{0.4cm} % spacing between images
+        \caption{Verification results for single animations using the ST configuration and \expandafter\detokenize\expandafter{\animCaption} animation.}
+        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single/st/\anim.png}\\[1mm]
+    \end{table}
+    \vspace{0.4cm} % spacing between tables/images
 }
 \FloatBarrier
-
 
 %--------------------------------------------------------
 \section{Verification Single with Intruders ST – Animations}
@@ -3315,17 +3295,14 @@ This section presents the additional results of the verification analysis with i
 \foreach \anim in {HS_SL_LIT,HS_SL_BIG,VB_SL_BIG,HS_FA_LIT,HS_FA_BIG}{%
     % Replace _LIT with _SMA for readable captions
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaption]%
-    \noindent\hfill
-    \begin{minipage}{0.65\textwidth}
+    \begin{table}[H]
         \centering
-        \includegraphics[width=\linewidth]{Images/Results/Verification_single_intruders/st/\anim.png}\\[2mm]
-        {\small Verification with intruders using the ST configuration and \expandafter\detokenize\expandafter{\animCaption} animation.}
-    \end{minipage}%
-    \hfill\par\vspace{0.4cm} % space between images, allows flexible page breaks
+        \caption{Verification with intruders using the ST configuration and \expandafter\detokenize\expandafter{\animCaption} animation.}
+        \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_intruders/st/\anim.png}\\[2mm]
+    \end{table}
+    \vspace{0.4cm} % spacing between tables/images
 }
 \FloatBarrier
-
-
 
 %--------------------------------------------------------
 \section{Verification Single ST with Reduced Session Duration – Animations}
@@ -3335,25 +3312,25 @@ This appendix presents the results for all animations under reduced recording du
 
 % --- 10-second recordings ---
 \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{%
-    % Replace _LIT with _SMA for cleaner caption
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaption]%
-    \begin{figure}[H]
+    \begin{table}[H]
         \centering
+        \caption{Verification results with 10-second recordings using the ST configuration and \expandafter\detokenize\expandafter{\animCaption} animation.}
         \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/st/ten/\anim.png}\\[2mm]
-        {\small Verification results with 10-second recordings using the ST configuration and \expandafter\detokenize\expandafter{\animCaption} animation.}
-    \end{figure}
+    \end{table}
+    \vspace{0.4cm} % spacing between tables/images
 }
 \FloatBarrier
 
 % --- 5-second recordings ---
 \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{%
-    % Replace _LIT with _SMA for cleaner caption
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaption]%
-    \begin{figure}[H]
+    \begin{table}[H]
         \centering
+        \caption{Verification results with 5-second recordings using the ST configuration and \expandafter\detokenize\expandafter{\animCaption} animation.}
         \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/st/five/\anim.png}\\[2mm]
-        {\small Verification results with 5-second recordings using the ST configuration and \expandafter\detokenize\expandafter{\animCaption} animation.}
-    \end{figure}
+    \end{table}
+    \vspace{0.4cm} % spacing between tables/images
 }
 \FloatBarrier
 
@@ -3365,14 +3342,13 @@ This appendix presents the results for all animations under reduced recording du
 This appendix contains additional animation results omitted from the main chapter due to space limitations.
 
 \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{%
-    % Create the caption with _LIT replaced by _SMA
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
-    % Each image as a separate flexible figure
-    \begin{figure}[H]
+    \begin{table}[H]
         \centering
+        \caption{‘Classic’ verification results using the ST configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
         \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_single/st/\anim.png}\\[2mm]
-        {\small ‘Classic’ verification results using the ST configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
-    \end{figure}
+    \end{table}
+    \vspace{0.4cm} % spacing between tables/images
 }
 \FloatBarrier
 
@@ -3383,168 +3359,154 @@ This appendix contains additional animation results omitted from the main chapte
 This section contains additional results obtained during the ‘classic’ verification analysis with intruders.
 
 \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{%
-    % Create the caption with _LIT replaced by _SMA
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
-    % Each image as a separate flexible figure
-    \begin{figure}[H]
+    \begin{table}[H]
         \centering
+        \caption{‘Classic’ verification with intruders using the ST configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
         \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_intruders/st/\anim.png}\\[2mm]
-        {\small ‘Classic’ verification with intruders using the ST configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
-    \end{figure}
+    \end{table}
+    \vspace{0.4cm} % spacing between tables/images
 }
 \FloatBarrier
 
 
 %--------------------------------------------------------
+%--------------------------------------------------------
 \section{Verification ‘Classic’ Single ST with Reduced Session Duration – Animations}
 \label{subsec:vsc_rt}
 
-This appendix includes the results for reduced recording durations (10 and 5 seconds) omitted from the main chapter.
-
 % --- Ten seconds ---
 \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{%
-    % Replace _LIT with _SMA for caption
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
-    \begin{figure}[H]
+    \begin{table}[H]
         \centering
+        \caption{Verification 'classic' results with 10-second recordings using the ST configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
         \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/st/ten/\anim.png}\\[2mm]
-        {\small Verification 'classic' results with 10-second recordings using the ST configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
-    \end{figure}
+    \end{table}
+    \vspace{0.4cm}
 }
 
 % --- Five seconds ---
 \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_LIT,HS_FA_BIG,HS_FA_LIT}{%
-    % Replace _LIT with _SMA for caption
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
-    \begin{figure}[H]
+    \begin{table}[H]
         \centering
+        \caption{Verification 'classic' results with 5-second recordings using the ST configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
         \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/st/five/\anim.png}\\[2mm]
-        {\small Verification 'classic' results with 5-second recordings using the ST configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
-    \end{figure}
+    \end{table}
+    \vspace{0.4cm}
 }
-
 \FloatBarrier
-
 
 %--------------------------------------------------------
 \section{Verification Single without intruders FT – Animations}
 \label{subsec:vs_ft}
 
-This section presents the additional results of the verification analysis conducted on individual animations using the Full Train (FT) configuration.
-
 \foreach \anim in {VB_SL_LIT,HS_SL_LIT,HS_SL_BIG,VB_SL_BIG,HS_FA_LIT,HS_FA_BIG}{%
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
-    \begin{figure}[H]
+    \begin{table}[H]
         \centering
+        \caption{Verification results using the Full Train (FT) configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
         \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single/ft/\anim.png}\\[2mm]
-        {\small Verification results using the Full Train (FT) configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
-    \end{figure}
+    \end{table}
+    \vspace{0.4cm}
 }
 \FloatBarrier
 
-
+%--------------------------------------------------------
 \section{Verification Single Intruders FT – Animations}
 \label{subsec:vsi_ft}
 
-This section presents the additional results of the verification analysis conducted on individual animations using the Full Train (FT) configuration.
-
 \foreach \anim in {VB_SL_LIT,HS_SL_LIT,HS_SL_BIG,VB_SL_BIG,HS_FA_LIT,HS_FA_BIG}{%
-    % Replace _LIT with _SMA for readable caption
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
-    \begin{figure}[H]
+    \begin{table}[H]
         \centering
+        \caption{Verification results with intruders using the Full Train (FT) configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
         \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_intruders/ft/\anim.png}\\[2mm]
-        {\small Verification results with intruders using the Full Train (FT) configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
-    \end{figure}
+    \end{table}
+    \vspace{0.4cm}
 }
 \FloatBarrier
 
-
-
+%--------------------------------------------------------
 \section{Verification Single FT with Reduced Session Duration – Animations}
 \label{subsec:vs_st_ft_rt}
-
-This appendix reports the results for all animations evaluated with reduced recording durations of 10 and 5 seconds. 
-The results corresponding to the 10-second recordings are presented first, followed by those obtained with the 5-second recordings.
 
 % --- 10-second FT recordings ---
 \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{%
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
-    \begin{figure}[H]
+    \begin{table}[H]
         \centering
+        \caption{Verification results with 10-second recordings using the FT configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
         \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/ft/ten/\anim.png}\\[2mm]
-        {\small Verification results with 10-second recordings using the FT configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
-    \end{figure}
+    \end{table}
+    \vspace{0.4cm}
 }
 
 % --- 5-second FT recordings ---
 \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{%
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
-    \begin{figure}[H]
+    \begin{table}[H]
         \centering
+        \caption{Verification results with 5-second recordings using the FT configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
         \includegraphics[width=0.65\textwidth]{Images/Results/Verification_single_five_ten/ft/five/\anim.png}\\[2mm]
-        {\small Verification results with 5-second recordings using the FT configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
-    \end{figure}
+    \end{table}
+    \vspace{0.4cm}
 }
 \FloatBarrier
 
 \section{Verification ‘Classic’ Single without intruders FT – Animations}
 \label{subsec:vsc_ft}
 
-This appendix contains all the results, related to the other animations, omitted from the main chapter due to space limitations.
-
 \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{%
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaption]%
-    \begin{figure}[H]
+    \begin{table}[H]
         \centering
+        \caption{‘Classic’ verification results using the FT configuration and \expandafter\detokenize\expandafter{\animCaption} animation.}
         \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_single/ft/\anim.png}\\[2mm]
-        {\small ‘Classic’ verification results using the FT configuration and \expandafter\detokenize\expandafter{\animCaption} animation.}
-    \end{figure}
+    \end{table}
+    \vspace{0.4cm}
 }
 \FloatBarrier
 
 \section{Verification ‘Classic’ FT with Intruders – Animations}
 \label{subsec:vsci_ft}
 
-This section contains additional results obtained during the ‘classic’ verification analysis with intruders.
-
 \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{%
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
-    \begin{figure}[H]
+    \begin{table}[H]
         \centering
+        \caption{‘Classic’ verification with intruders using the FT configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
         \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/Verification_intruders/ft/\anim.png}\\[2mm]
-        {\small ‘Classic’ verification with intruders using the FT configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
-    \end{figure}
+    \end{table}
+    \vspace{0.4cm}
 }
 \FloatBarrier
 
-
-\section{Verification ‘Classic’ Single ST with Reduced Session Duration – Animations}
+\section{Verification ‘Classic’ Single FT with Reduced Session Duration – Animations}
 \label{subsec:vsc_ftr}
-
-This appendix presents the results for reduced recording durations, 10 seconds and 5 seconds, that were omitted from the main chapter.
 
 % --- Ten seconds ---
 \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{%
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
-    \begin{figure}[H]
+    \begin{table}[H]
         \centering
+        \caption{Verification 'classic' results with 10-second recordings using the FT configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
         \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/ft/ten/\anim.png}\\[2mm]
-        {\small Verification 'classic' results with 10-second recordings using the FT configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
-    \end{figure}
+    \end{table}
+    \vspace{0.4cm}
 }
 
 % --- Five seconds ---
 \foreach \anim in {VB_SL_LIT,HS_SL_LIT,VB_SL_BIG,HS_SL_BIG,VB_FA_BIG,HS_FA_BIG,HS_FA_LIT}{%
     \StrSubstitute{\anim}{_LIT}{_SMA}[\animCaptionTemp]%
-    \begin{figure}[H]
+    \begin{table}[H]
         \centering
+        \caption{Verification 'classic' results with 5-second recordings using the FT configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
         \includegraphics[width=0.65\textwidth]{Images/Results/Classic_procedure/five_ten/ft/five/\anim.png}\\[2mm]
-        {\small Verification 'classic' results with 5-second recordings using the FT configuration and \expandafter\detokenize\expandafter{\animCaptionTemp} animation.}
-    \end{figure}
+    \end{table}
+    \vspace{0.4cm}
 }
-
 \FloatBarrier
 
 \end{document}
-
